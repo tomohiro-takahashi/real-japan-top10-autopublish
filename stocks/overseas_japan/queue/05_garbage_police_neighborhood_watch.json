@@ -1,0 +1,78 @@
+{
+  "theme_ja": "ゴミ出し警察とご近所監視網：なぜ日本の街はゴミ箱がなくても世界一清潔なのか、その裏にある『町内会』と相互監視のリアルな恐怖",
+  "title": "The 'Garbage Police': The Unsettling Truth Behind Japan's Spotless Streets",
+  "description": "Every visitor to Japan asks the same question: how can a country with almost no public trash cans have the cleanest streets on Earth? While the world praises Japanese civic pride, Japanese internet forums tell a much more intense story about what happens in residential neighborhoods. From 8 AM garbage collection inspections to anonymous warning notes on apartment doors, we uncover the hidden system of neighborhood surveillance that keeps Japan spotless.",
+  "tags": [
+    "CleanJapan",
+    "JapaneseSociety",
+    "LivingInJapan",
+    "UnwrittenRules",
+    "NeighborhoodWatch",
+    "CultureShock",
+    "VideoEssay",
+    "RealJapan"
+  ],
+  "voice": "en-US-ChristopherNeural",
+  "scenes": [
+    {
+      "narration": "Walk down almost any residential lane in Tokyo, Kyoto, or a quiet provincial town, and the pavement looks as though someone just swept it ten minutes ago. There are no overflowing dumpsters, no stray soda cans, and virtually zero public trash bins for miles. When tourists ask how this miracle is achieved, the standard answer is heartwarming: Japanese children clean their own schools, and citizens simply take pride in keeping their community pure.",
+      "subtitle": "No trash cans for miles, yet the streets\nlook freshly swept.\nTourists are told it's pure civic pride—\nbut locals know there is a second reason.",
+      "image_prompt": "Lo-fi anime style illustration, cinematic lighting, modern Japan, a pristine narrow residential street in Tokyo bathed in golden morning sunlight, potted plants outside wooden houses, spotless asphalt, 16:9 aspect ratio"
+    },
+    {
+      "narration": "That civic pride is certainly real, yet if you ask anyone who has actually rented an apartment in a Japanese neighborhood—Japanese locals included—they will lower their voice and tell you about the other half of the equation. On Japanese real estate forums and social media, there is a dreaded phrase that strikes fear into the hearts of new residents: 'Gomi-dashi Keisatsu'—the neighborhood Garbage Police.",
+      "subtitle": "Ask anyone renting an apartment in Japan,\nand they will tell you about the dreaded\n'Gomi-dashi Keisatsu'—the self-appointed\nneighborhood Garbage Police.",
+      "image_prompt": "Lo-fi anime style illustration, cinematic lighting, modern Japan, a residential garbage collection point covered with a yellow crow-proof net on a quiet street corner, an elderly silhouette watching from a second-floor window, 16:9 aspect ratio"
+    },
+    {
+      "narration": "When you move into a Japanese municipality, city hall hands you a garbage sorting manual that often runs twenty to thirty pages long, complete with an alphabetical encyclopedia of household items. Burnable trash goes out on Tuesdays and Fridays before 8:00 AM; PET bottles go out on alternate Wednesdays with their caps and plastic labels removed, rinsed, and crushed; and a frying pan over thirty centimeters requires buying a special prepaid sticker from a convenience store.",
+      "subtitle": "Moving into a Japanese town comes with a\n30-page garbage manual.\nBottle caps, labels, and rinsing are mandatory,\nand putting trash out at 8:05 AM is a sin.",
+      "image_prompt": "Lo-fi anime style illustration, cinematic lighting, modern Japan, a young resident sitting on a tatami floor surrounded by colorful municipal garbage sorting charts and four different translucent trash bags, 16:9 aspect ratio"
+    },
+    {
+      "narration": "What turns this complex sorting system from a municipal guideline into an ironclad law is the collection point itself. Unlike countries where each house has a private wheelie bin, Japanese neighborhoods share small curbside drop-off spots covered by a blue or yellow crow-proof net, managed by the local 'Chonaikai'—the neighborhood association. Every bag is required to be semi-transparent, meaning your neighbors can literally see the contents of your kitchen trash.",
+      "subtitle": "Trash bags must be semi-transparent and\nplaced at a shared neighborhood spot.\nYour neighbors can literally see\nevery single item you throw away.",
+      "image_prompt": "Lo-fi anime style illustration, cinematic lighting, modern Japan, close-up of neatly tied semi-transparent white garbage bags stacked under a bright blue net on a clean sidewalk, morning light, 16:9 aspect ratio"
+    },
+    {
+      "narration": "If you accidentally toss a plastic soy sauce bottle into the burnable bag, or put your trash out the night before instead of between 6:00 and 8:00 AM, the truck will refuse to take it. Instead, a bright red or yellow 'Violation Sticker' is slapped onto the bag for the entire street to see. Worse still, on anonymous message boards, dozens of Japanese residents confess to witnessing retired neighborhood wardens opening rejected bags with rubber gloves to find an envelope or pharmacy receipt with the culprit's name.",
+      "subtitle": "Make a mistake, and your bag gets slapped\nwith a bright red Violation Sticker.\nIn strict neighborhoods, wardens will even\nsearch the bag for a receipt with your name.",
+      "image_prompt": "Lo-fi anime style illustration, cinematic lighting, modern Japan, a single rejected translucent trash bag left alone on a clean sidewalk with a bright red warning sticker attached to it, dramatic long shadows, 16:9 aspect ratio"
+    },
+    {
+      "narration": "Once the culprit is identified, the rejected bag is sometimes returned directly to their front door with a polite yet bone-chilling handwritten note taped to it: 'Please review our town's rules so we can all live comfortably.' No shouting, no police fines, no courtroom drama—just the crushing psychological weight of knowing that the entire street now views your household as a moral failure.",
+      "subtitle": "Sometimes the rejected bag appears back at\nyour front door with a polite note.\nNo government fine could ever match the\nterror of neighborhood social shame.",
+      "image_prompt": "Lo-fi anime style illustration, cinematic lighting, modern Japan, an apartment hallway door with a neatly handwritten note attached to the mailbox, dim atmospheric hallway lighting, 16:9 aspect ratio"
+    },
+    {
+      "narration": "Historians and sociologists point out that this mutual surveillance is not a modern invention, but the direct descendant of the Edo-period 'Gonin-gumi'—the five-family collective responsibility system. Under the shogunate, every five households were grouped into a unit: if one family failed to pay taxes, broke a law, or neglected fire safety, all five families were punished together. For centuries, watching your neighbor's habits was literally a matter of your own survival.",
+      "subtitle": "This mutual watch dates back to the Edo\nperiod's 'Gonin-gumi' system, where five\nfamilies shared collective punishment if\na single neighbor broke the rules.",
+      "image_prompt": "Lo-fi anime style illustration, cinematic lighting, modern Japan, traditional wooden Edo-style rooftops blending seamlessly into modern Tokyo suburban houses under a twilight sky, historical continuity mood, 16:9 aspect ratio"
+    },
+    {
+      "narration": "In modern high-density apartment buildings, this vigilance extends far beyond garbage into the realm of acoustic and visual conformity. Browse any Japanese Q&A site like Yahoo! Chiebukuro, and you will find thousands of anxious posts from young people asking: 'Is it okay to run my washing machine at 9:15 PM?' or 'My neighbor left an anonymous letter in my mailbox saying my footsteps are too heavy when I walk to the bathroom at night.'",
+      "subtitle": "In thin-walled apartments, vigilance extends\nto every sound. Forums are filled with anxious\nposts asking: 'Is running a washing machine\nat 9:15 PM going to anger my neighbors?'",
+      "image_prompt": "Lo-fi anime style illustration, cinematic lighting, modern Japan, exterior view of a multi-story Japanese apartment building at night with warmly lit windows and silhouettes, quiet suburban street, 16:9 aspect ratio"
+    },
+    {
+      "narration": "Even hanging laundry on your balcony carries unspoken rules of presentation. Many Japanese women admit online that they avoid hanging worn-out towels or certain types of clothing where they might be visible from the street, and families make sure to pull their curtains shut at dusk so passersby cannot judge the tidiness of their living room. In Japan, the concept of 'Seken'—the invisible, all-seeing eye of the community—is always watching.",
+      "subtitle": "Even balcony laundry follows unspoken codes.\nIn Japan, 'Seken'—the invisible, all-seeing\neye of the surrounding community—\nis felt even when no one is looking.",
+      "image_prompt": "Lo-fi anime style illustration, cinematic lighting, modern Japan, neat rows of apartment balconies with white laundry fluttering gently in the afternoon breeze against a soft blue sky, 16:9 aspect ratio"
+    },
+    {
+      "narration": "Yet when younger Japanese residents complain about the suffocating nature of neighborhood associations and garbage rules, many eventually experience a surprising change of heart when they move into buildings without them. In anonymous urban luxury towers or cheap transient apartments where nobody knows their neighbors and 24-hour trash rooms are unmonitored, the garbage room often descends into chaos within months—filled with uncrushed cardboard and abandoned appliances.",
+      "subtitle": "Ironically, when young locals move into\nanonymous buildings without strict watch,\nthe 24-hour trash room often descends\ninto chaos within just a few months.",
+      "image_prompt": "Lo-fi anime style illustration, cinematic lighting, modern Japan, an indoor apartment trash collection room stacked high with uncrushed delivery cardboard boxes under cold fluorescent lights, 16:9 aspect ratio"
+    },
+    {
+      "narration": "Furthermore, that same nosy elderly neighbor who checks the garbage net at 7:55 AM is also the person who notices when an eighty-year-old widow hasn't opened her shutters for two days, or who stands at the crosswalk in a yellow vest guiding six-year-olds safely to elementary school. The invisible web of eyes that makes rule-breakers sweat is the exact same web that allows first-graders to walk across Tokyo alone without their parents.",
+      "subtitle": "The same elderly neighbor who watches the\ngarbage net at 7:55 AM is also the one\nstanding at the crosswalk in a yellow vest,\nkeeping six-year-olds safe on their walk to school.",
+      "image_prompt": "Lo-fi anime style illustration, cinematic lighting, modern Japan, a kind elderly volunteer in a yellow safety vest holding a flag at a sunny crosswalk while elementary school children in yellow hats walk past, 16:9 aspect ratio"
+    },
+    {
+      "narration": "And that is the great paradox at the heart of Japanese daily life. You cannot have the world's safest, cleanest, most orderly streets while simultaneously enjoying total individualistic freedom to ignore your neighbors. Every spotless sidewalk in Japan is paid for not by government police, but by a quiet, relentless bargain: in exchange for living in a sanctuary of peace and order, you agree to let the neighborhood watch you, too.",
+      "subtitle": "Every spotless street in Japan is paid for\nby a relentless bargain: in exchange for\norder and safety, you agree to let the\nneighborhood watch you, too.",
+      "image_prompt": "Lo-fi anime style illustration, cinematic lighting, modern Japan, a peaceful sunset view over a clean Japanese residential neighborhood with power lines, spotless streets, and warm house lights turning on, 16:9 aspect ratio"
+    }
+  ]
+}

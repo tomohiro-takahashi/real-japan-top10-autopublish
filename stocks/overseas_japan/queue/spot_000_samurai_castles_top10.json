@@ -1,0 +1,669 @@
+{
+  "ranking_id": "samurai_castles_002",
+  "prefecture": "Samurai Castles & Warlords TOP 10",
+  "title_en": "Japan Samurai Castles & Sengoku Warlords TOP 10 (Instagram 50pt × Local Reviews 35pt × Original Keep 15pt)",
+  "youtube_title_long": "SKIP OSAKA CASTLE! Japan TOP 10 Real Samurai Castles & Warlord Fortresses Ranked by Locals",
+  "youtube_title_short": "Skip Osaka Castle! Japan's #1 Real 400-Yr Samurai Fortress Ranked by Locals #Shorts #JapanTravel",
+  "voice": "en-US-ChristopherNeural",
+  "thumb_config": {
+    "ribbon_text": "500,000 JAPANESE IG POSTS",
+    "hero_line1": "SKIP OSAKA!",
+    "hero_line2": "REAL CASTLES",
+    "banner_title": "SAMURAI TOP 10",
+    "banner_sub": "400-YR ORIGINAL WOODEN KEEPS",
+    "map_header": "12 WOODEN KEEPS",
+    "map_pill": "400+ YRS",
+    "map_line1": "Original Wooden",
+    "map_line2": "Samurai Fortresses!",
+    "map_footer": "NO FAKE ELEVATORS",
+    "no1_sub_badge": "IG Buzz: 50/50pt  |  Jalan: ★4.4 (4,350)",
+    "highlight_prefs_ja": [
+      "兵庫県",
+      "長野県",
+      "愛知県",
+      "滋賀県",
+      "愛媛県",
+      "熊本県",
+      "岐阜県",
+      "岡山県"
+    ],
+    "route_lonlat": [
+      [
+        139.767,
+        35.681
+      ],
+      [
+        137.972,
+        36.238
+      ],
+      [
+        136.906,
+        35.388
+      ],
+      [
+        136.251,
+        35.276
+      ],
+      [
+        134.693,
+        34.839
+      ]
+    ]
+  },
+  "area_guide": {
+    "target_pref_ja": "兵庫県",
+    "map_badge": "Only 12 Original Wooden Castles Survive",
+    "cards": [
+      {
+        "title": "1. FAKE vs REAL SAMURAI CASTLES",
+        "bullets": [
+          "Out of 25,000 historical castles, only 12 keep original 1600s wood",
+          "Osaka & Nagoya Castles are 1950s concrete museums with elevators",
+          "Japanese locals rank authentic wooden keeps (Genson Tenshu) #1",
+          "Every step creaks with 400-year-old Sengoku warrior history"
+        ]
+      },
+      {
+        "title": "2. DEADLY SAMURAI FORTRESS ENGINEERING",
+        "bullets": [
+          "Not palaces: built as lethal military kill-zones during Sengoku wars",
+          "Ishi-otoshi (stone-drop chutes) & Sama (hidden sniper loopholes)",
+          "Maze-like Masugata gates designed to trap invading armies",
+          "62-degree near-vertical wooden stairs to slow down attackers"
+        ]
+      },
+      {
+        "title": "3. LEGENDARY SENGOKU WARLORDS (SHOGUN ERA)",
+        "bullets": [
+          "Oda Nobunaga (The Demon King): Conquered central Japan from Gifu",
+          "Tokugawa Ieyasu (Real-life Lord Toranaga): Unified Japan in 1603",
+          "Sanada Clan (Crimson Demons): Defeated 38,000 Tokugawa troops twice",
+          "Kato Kiyomasa & Ii Naomasa: Master castle builders & elite generals"
+        ]
+      },
+      {
+        "title": "4. ESSENTIAL VISITOR RULES & ACCESS",
+        "bullets": [
+          "Most top castles are 40–180 mins from Tokyo or Kyoto by Shinkansen",
+          "Shoes MUST be removed inside original wooden keeps (wear thick socks!)",
+          "Steep 55–62° stairs require both hands—avoid heavy suitcases",
+          "Arrive at 8:30 AM opening to beat school tours & photograph empty keeps"
+        ]
+      }
+    ]
+  },
+  "summary_rows": [
+    {
+      "rank": "#1",
+      "score": "96/100pt",
+      "name_en": "Himeji Castle",
+      "name_ja": "姫路城",
+      "dish": "1609 White Heron Fortress (IG 50/50 | ★4.4)",
+      "budget": "Kyoto Shinkansen 45m",
+      "access_short": "Kyoto Shinkansen 45m",
+      "hack": "Buy Himeji Castle + Kokoen Garden combo ticket for ¥1,050",
+      "thumb": "himeji_1.jpg"
+    },
+    {
+      "rank": "#2",
+      "score": "93/100pt",
+      "name_en": "Matsumoto Castle",
+      "name_ja": "松本城",
+      "dish": "1592 Black Crow Keep (IG 48/50 | ★4.3)",
+      "budget": "Shinjuku Azusa 2h 35m",
+      "access_short": "Shinjuku Ltd Exp 2.5h",
+      "hack": "Bring thick socks for freezing timber floors & 61° stairs",
+      "thumb": "matsumoto_1.jpg"
+    },
+    {
+      "rank": "#3",
+      "score": "92/100pt",
+      "name_en": "Kumamoto Castle",
+      "name_ja": "熊本城",
+      "dish": "Anti-Ninja Curved Walls (IG 49/50 | ★4.3)",
+      "budget": "Hakata Shinkansen 38m",
+      "access_short": "Hakata Shinkansen 38m",
+      "hack": "Walk the elevated skywalk to see Musha-gaeshi curved walls",
+      "thumb": "kumamoto_3.jpg"
+    },
+    {
+      "rank": "#4",
+      "score": "89/100pt",
+      "name_en": "Matsuyama Castle",
+      "name_ja": "松山城",
+      "dish": "Hilltop Labyrinth & Chairlift (IG 46/50 | ★4.3)",
+      "budget": "Matsuyama Tram + Ropeway",
+      "access_short": "Single-Seat Chairlift",
+      "hack": "Ride the open-air single chairlift up Mt. Katsuyama",
+      "thumb": "iyomatsuyama_1.jpg"
+    },
+    {
+      "rank": "#5",
+      "score": "88/100pt",
+      "name_en": "Inuyama Castle",
+      "name_ja": "犬山城",
+      "dish": "1537 Oldest Wooden Keep & Cliff (IG 45/50 | ★4.3)",
+      "budget": "Nagoya Meitetsu 25m",
+      "access_short": "Nagoya Train 25m",
+      "hack": "Walk the open-air top balcony overlooking Kiso River",
+      "thumb": "inuyama_1.jpg"
+    },
+    {
+      "rank": "#6",
+      "score": "88/100pt",
+      "name_en": "Takeda Sky Castle",
+      "name_ja": "竹田城跡",
+      "dish": "400-Yr Mountain Ruins in Clouds (IG 45/50 | ★4.2)",
+      "budget": "Himeji Train 90m",
+      "access_short": "Himeji Train 90m",
+      "hack": "Hike Ritsuunkyo viewpoint at 6 AM in Oct–Nov for sea of clouds",
+      "thumb": "takeda_1.jpg"
+    },
+    {
+      "rank": "#7",
+      "score": "87/100pt",
+      "name_en": "Hikone Castle",
+      "name_ja": "彦根城",
+      "dish": "Ii Red Demon Clan Original Keep (IG 45/50 | ★4.2)",
+      "budget": "Kyoto JR Train 48m",
+      "access_short": "Kyoto JR Rapid 48m",
+      "hack": "Time visit for Hikonyan mascot show at 10:30 AM & Genkyuen",
+      "thumb": "hikone_1.jpg"
+    },
+    {
+      "rank": "#8",
+      "score": "86/100pt",
+      "name_en": "Bitchu-Matsuyama",
+      "name_ja": "備中松山城",
+      "dish": "430m Highest Mountain Keep & Cat (IG 41/50 | ★4.3)",
+      "budget": "Okayama Train + Taxi 55m",
+      "access_short": "Okayama Train 55m",
+      "hack": "Meet Sanjuro the official Samurai Cat Lord at the entrance",
+      "thumb": "bitchu_1.jpg"
+    },
+    {
+      "rank": "#9",
+      "score": "85/100pt",
+      "name_en": "Gifu Castle",
+      "name_ja": "岐阜城",
+      "dish": "Oda Nobunaga Demon King Peak (IG 43/50 | ★4.1)",
+      "budget": "Nagoya JR 20m + Ropeway",
+      "access_short": "Nagoya JR 20m",
+      "hack": "Stay for night illumination panoramic view from Mt. Kinka",
+      "thumb": "gifu_1.jpg"
+    },
+    {
+      "rank": "#10",
+      "score": "82/100pt",
+      "name_en": "Ueda Castle",
+      "name_ja": "上田城",
+      "dish": "Sanada Clan Twice Defeated Shogun (IG 38/50 | ★4.1)",
+      "budget": "Tokyo Shinkansen 85m",
+      "access_short": "Tokyo Shinkansen 85m",
+      "hack": "Touch the giant Sanadaishi boulder & visit Sanada Shrine",
+      "thumb": "ueda_1.jpg"
+    }
+  ],
+  "opening": {
+    "promise_catch": "SKIP FAKE CONCRETE CASTLES!",
+    "promise_sub": "ONLY 12 ORIGINAL 1600s SAMURAI FORTRESSES SURVIVE",
+    "promise_Tag": "500K JAPANESE IG POSTS × LOCAL HISTORIAN RANKING",
+    "promise_items": [
+      "1. Top 10 Authentic Wooden Keeps & Unconquered Mountain Castles",
+      "2. Deadly Sengoku Warlord Traps: Stone Drops, Mazes & Sniper Holes",
+      "3. Shinkansen Access from Tokyo/Kyoto + Real Visitor Warnings"
+    ]
+  },
+  "closing": {
+    "headline": "JAPAN SAMURAI CASTLES TOP 10 CHEAT-SHEET",
+    "subheadline": "Save or screenshot this complete Shinkansen & Sengoku Warlord guide for your trip!",
+    "cta_badge": "NEXT EPISODE: KANTO SECRET PARKS & SENGOKU BATTLEFIELDS — SUBSCRIBE!"
+  },
+  "shorts_script": {
+    "hook_badge": "STOP GOING TO FAKE CONCRETE CASTLES!",
+    "hook_title": "SKIP OSAKA CASTLE!\nREAL SAMURAI TOP 10",
+    "hook_sub": "500,000 Japanese IG Posts × Local Reviews",
+    "promise_catch": "SKIP FAKE CASTLES!",
+    "promise_sub": "WHAT YOU GET IN THIS 60-SEC GUIDE:",
+    "promise_items": [
+      "1. Real 400-Yr Wooden Samurai Keeps (No Elevators!)",
+      "2. #3 Kumamoto vs #2 Matsumoto vs #1 Himeji Fortress",
+      "3. Shinkansen Access & Steep 62° Stairs Warning"
+    ],
+    "narration_hook": "Stop wasting your time at fake concrete castles with elevators inside! Out of twenty-five thousand historical castles in Japan, only twelve still keep their original four-hundred-year-old samurai timber. We analyzed five hundred thousand Japanese Instagram posts and local reviews to rank the real Samurai Castles TOP 10! Look at the map: most are an easy bullet train ride from Kyoto or Tokyo.",
+    "narration_rank1": "At number three with ninety-two points is Kumamoto Castle, built by warlord Kato Kiyomasa with curved anti-ninja stone walls. At number two with ninety-three points is Matsumoto Castle in Nagano, a six-story black war fortress from fifteen ninety-two. And at number one with ninety-six points is Himeji Castle, only forty-five minutes from Kyoto by Shinkansen! Its maze of eighty-four gates and hidden sniper loopholes never fell in battle.",
+    "narration_praise": "Across four thousand three hundred Japanese reviews, visitors love walking the creaking four-hundred-year-old wooden weapon racks inside Himeji and Matsumoto.",
+    "narration_warn": "But Japanese locals warn: you must take off your shoes inside original wooden keeps, and the stairs are a terrifying sixty-two degrees steep! Bring thick socks in winter and arrive at 8:30 AM opening.",
+    "narration_outro": "Screenshot this full TOP 10 Samurai Castle cheat-sheet right now, and watch our full nine-minute warlord guide linked below!",
+    "praise_quote_en": "\"Walking up the creaking 400-year-old wooden stairs and seeing real musket racks feels like stepping into SHOGUN!\"",
+    "warn_quote_en": "\"Wooden floors are freezing in winter and stairs are 62° steep like a ladder—wear thick socks and leave big bags in lockers!\"",
+    "top1_photos": [
+      "himeji_1.jpg",
+      "himeji_2.jpg",
+      "matsumoto_1.jpg",
+      "kumamoto_3.jpg"
+    ]
+  },
+  "segments": [
+    {
+      "seg_type": "opening",
+      "rank_badge": "95% OF TOURISTS VISIT FAKE CASTLES!",
+      "place_ja": "「大阪城はコンクリ復元！」日本人が選ぶ本物の名城・戦国要塞 TOP 10",
+      "place_en": "SKIP CONCRETE REPLICAS! What You Get in This Samurai Fortress Guide",
+      "area": "All-Japan Samurai Castles",
+      "budget": "100-Point Original Index",
+      "insider_tip": "FORMULA: Japanese IG Buzz (50pt) + Local Reviews (35pt) + Authentic Fortress (15pt)",
+      "photos": [
+        "himeji_1.jpg",
+        "matsumoto_1.jpg"
+      ],
+      "narration": "Did you know that Osaka Castle and Nagoya Castle are actually 1950s ferro-concrete reconstructions with modern elevators inside? Out of 25,000 castles built in feudal Japan, only 12 still preserve their original 400-year-old wooden samurai keeps! We analyzed 500,000 Japanese Instagram posts and thousands of domestic Japanese reviews to rank the TOP 10 real Samurai Castles and Sengoku warlord fortresses!",
+      "subtitle": "Samurai Castles TOP 10! Skip modern concrete elevator replicas—\ndiscover Japan's real 400-year-old wooden keeps & warlord fortresses."
+    },
+    {
+      "seg_type": "area_guide",
+      "rank_badge": "SAMURAI GUIDE 1/2",
+      "place_ja": "本物の現存12天守マップと東京・京都からの新幹線アクセス",
+      "place_en": "Where Are Japan's Real Castles & How Do You Reach Them?",
+      "area": "Honshu, Shikoku & Kyushu",
+      "budget": "Shinkansen 45m–160m",
+      "insider_tip": "ACCESS TIP: Himeji & Hikone are under 50 mins from Kyoto Station by train!",
+      "photos": [
+        "kumamoto_3.jpg",
+        "inuyama_1.jpg"
+      ],
+      "narration": "Before we start the countdown, how do you tell a real samurai fortress from a concrete replica, and how do you reach them? In Japanese, the twelve surviving original keeps are called Genson Tenshu. From Kyoto Station, Himeji and Hikone take under 50 minutes by train. From Tokyo or Shinjuku, Ueda and Matsumoto are a direct 85 to 155 minute ride, while Inuyama and Gifu sit just 25 minutes from Nagoya!",
+      "subtitle": "Only 12 original wooden keeps (Genson Tenshu) survive across Japan.\nHimeji & Hikone are <50m from Kyoto; Matsumoto & Ueda are direct from Tokyo!"
+    },
+    {
+      "seg_type": "area_guide",
+      "rank_badge": "SAMURAI GUIDE 2/2",
+      "place_ja": "殺人要塞の防衛ギミック（石落とし・鉄砲狭間）と見学時の鉄則",
+      "place_en": "Deadly Samurai Engineering, Sengoku Warlords & Visitor Rules",
+      "area": "Sengoku Period (1467–1615)",
+      "budget": "Admission: ¥500–¥1,000",
+      "insider_tip": "VISITOR RULE: You MUST remove shoes inside original wooden keeps—bring thick socks!",
+      "photos": [
+        "hikone_1.jpg",
+        "takeda_1.jpg"
+      ],
+      "narration": "Unlike European palaces, Japanese castles were built during the Sengoku civil wars as deadly military kill-zones. Watch for curved anti-ninja stone walls, stone-drop chutes called Ishi-otoshi, hidden musket loopholes, and labyrinth gates built by warlords like Oda Nobunaga and Tokugawa Ieyasu. Remember: you must remove your shoes inside original wooden keeps, and climb 60-degree stairs, so wear thick socks and travel light!",
+      "subtitle": "Built as lethal Sengoku kill-zones: stone-drop traps, sniper holes & mazes.\nMust remove shoes inside original wooden keeps—wear thick socks for 60° stairs!"
+    },
+    {
+      "seg_type": "spot",
+      "rank_badge": "#10  82/100 pt",
+      "place_ja": "上田城 (WARLORD LORE: Sanada Masayuki & Yuki...)",
+      "place_en": "#10 Ueda Castle — Authentic Samurai Fortress",
+      "area": "Ueda City, Nagano",
+      "budget": "Free Grounds (Museum ¥500)",
+      "access_info": "🚄 Tokyo Stn -> Hokuriku Shinkansen to Ueda Stn (85m) -> Walk 12m",
+      "insider_tip": "WARLORD LORE: Sanada Masayuki & Yukimura defeated 38,000 Tokugawa troops here TWICE!",
+      "photos": [
+        "ueda_1.jpg",
+        "ueda_2.jpg"
+      ],
+      "narration": "At number 10 with 82 points is Ueda Castle in Ueda City, Nagano. Sanada Masayuki & Yukimura defeated 38,000 Tokugawa troops here TWICE! To get here: Tokyo Stn to Hokuriku Shinkansen to Ueda Stn (85m) to Walk 12m.",
+      "subtitle": "#10 Ueda Castle (82/100 pt): Sanada Masayuki & Yukimura defeated 38,000 Tokugawa troops here TWICE!\nAccess: Tokyo Stn to Hokuriku Shinkansen to Ueda Stn (85m) to Walk 12m"
+    },
+    {
+      "seg_type": "review",
+      "rank_badge": "#10 LOCAL REVIEWS",
+      "place_ja": "上田城のリアルな口コミ（874 Domestic Reviews）",
+      "place_en": "What Japanese Visitors Say About Ueda Castle",
+      "area": "Ueda City, Nagano",
+      "budget": "874 Domestic Reviews",
+      "access_info": "🚄 Tokyo Stn -> Hokuriku Shinkansen to Ueda Stn (85m) -> Walk 12m",
+      "insider_tip": "LOCAL HACK: There is no central keep today, so focus on the original turret gate...",
+      "review_praise_ja": "「真田昌幸・幸村父子が徳川の大軍を二度にわたり撃退した難攻不落の城！真田石の迫力が凄い」",
+      "review_praise_en": "\"The unconquered fortress where the Sanada clan twice crushed Tokugawa's massive army! The giant Sanadaishi boulder is awe-inspiring.\"",
+      "review_warn_ja": "「天守閣は現存していませんが、東虎口櫓門と深い空堀、真田神社の御朱印は戦国ファン必見」",
+      "review_warn_en": "\"There is no central keep today, so focus on the original turret gates, deep dry moats, and Sanada Shrine inside the walls!\"",
+      "photos": [
+        "ueda_3.jpg",
+        "ueda_4.jpg"
+      ],
+      "narration": "Across 874 domestic reviews, Japanese visitors praise Ueda Castle: The unconquered fortress where the Sanada clan twice crushed Tokugawa's massive army! The giant Sanadaishi boulder is awe-inspiring. However, locals warn: There is no central keep today, so focus on the original turret gates, deep dry moats, and Sanada Shrine inside the walls!",
+      "subtitle": "Real Praise: \"The unconquered fortress where the Sanada clan twice crushed Tokugawa's massive a...\nLocal Warning: \"There is no central keep today, so focus on the original turret gates, deep dry m..."
+    },
+    {
+      "seg_type": "spot",
+      "rank_badge": "#9  85/100 pt",
+      "place_ja": "岐阜城 (WARLORD LORE: Oda Nobunaga (The Demo...)",
+      "place_en": "#9 Gifu Castle — Authentic Samurai Fortress",
+      "area": "Gifu City, Gifu",
+      "budget": "Ropeway ¥1,100 + Castle ¥200",
+      "access_info": "🚄 JR Nagoya Stn -> JR Gifu Stn (20m) -> Bus (15m) + Mt. Kinka Ropeway (4m)",
+      "insider_tip": "WARLORD LORE: Oda Nobunaga (The Demon King) launched his conquest of Japan from this 329m peak!",
+      "photos": [
+        "gifu_1.jpg",
+        "gifu_2.jpg"
+      ],
+      "narration": "At number 9 with 85 points is Gifu Castle in Gifu City, Gifu. Oda Nobunaga (The Demon King) launched his conquest of Japan from this 329m peak! To get here: JR Nagoya Stn to JR Gifu Stn (20m) to Bus (15m) + Mt. Kinka Ropeway (4m).",
+      "subtitle": "#9 Gifu Castle (85/100 pt): Oda Nobunaga (The Demon King) launched his conquest of Japan from this 329m peak!\nAccess: JR Nagoya Stn to JR Gifu Stn (20m) to Bus (15m) + Mt. Kinka Ropeway (4m)"
+    },
+    {
+      "seg_type": "review",
+      "rank_badge": "#9 LOCAL REVIEWS",
+      "place_ja": "岐阜城のリアルな口コミ（1,277 Domestic Reviews）",
+      "place_en": "What Japanese Visitors Say About Gifu Castle",
+      "area": "Gifu City, Gifu",
+      "budget": "1,277 Domestic Reviews",
+      "access_info": "🚄 JR Nagoya Stn -> JR Gifu Stn (20m) -> Bus (15m) + Mt. Kinka Ropeway (4m)",
+      "insider_tip": "LOCAL HACK: Even after the ropeway, it's a steep 10-minute rocky mountain climb ...",
+      "review_praise_ja": "「織田信長公が天下布武を掲げた標高329mの稲葉山城！天守からの濃尾平野と長良川の360度パノラマはまさに天下人の視点」",
+      "review_praise_en": "\"Standing on the 329m summit where Oda Nobunaga planned the unification of Japan gives you the exact 360° view of a Sengoku conqueror!\"",
+      "review_warn_ja": "「ロープウェイ降り場から天守まで急な山道と石段を10分ほど登るので、歩きやすいスニーカーが必須」",
+      "review_warn_en": "\"Even after the ropeway, it's a steep 10-minute rocky mountain climb to the keep—wear proper walking shoes!\"",
+      "photos": [
+        "gifu_3.jpg",
+        "gifu_4.jpg"
+      ],
+      "narration": "Across 1,277 domestic reviews, Japanese visitors praise Gifu Castle: Standing on the 329m summit where Oda Nobunaga planned the unification of Japan gives you the exact 360° view of a Sengoku conqueror! However, locals warn: Even after the ropeway, it's a steep 10-minute rocky mountain climb to the keep—wear proper walking shoes!",
+      "subtitle": "Real Praise: \"Standing on the 329m summit where Oda Nobunaga planned the unification of Japan g...\nLocal Warning: \"Even after the ropeway, it's a steep 10-minute rocky mountain climb to the keep—w..."
+    },
+    {
+      "seg_type": "spot",
+      "rank_badge": "#8  86/100 pt",
+      "place_ja": "備中松山城 (HIDDEN GEM: Japan's highest survivin...)",
+      "place_en": "#8 Bitchu-Matsuyama Castle — Authentic Samurai Fortress",
+      "area": "Takahashi City, Okayama",
+      "budget": "¥500 (Shared Taxi ¥1,000)",
+      "access_info": "🚄 JR Okayama Stn -> Bitchu-Takahashi Stn (35m) -> Taxi to Fuigo Pass (15m) + Hike 20m",
+      "insider_tip": "HIDDEN GEM: Japan's highest surviving original wooden keep (430m) + Cat Lord Sanjuro!",
+      "photos": [
+        "bitchu_1.jpg",
+        "bitchu_2.jpg"
+      ],
+      "narration": "At number 8 with 86 points is Bitchu-Matsuyama Castle in Takahashi City, Okayama. Japan's highest surviving original wooden keep (430m) + Cat Lord Sanjuro! To get here: JR Okayama Stn to Bitchu-Takahashi Stn (35m) to Taxi to Fuigo Pass (15m) + Hike 20m.",
+      "subtitle": "#8 Bitchu-Matsuyama Castle (86/100 pt): Japan's highest surviving original wooden keep (430m) + Cat Lord Sanjuro!\nAccess: JR Okayama Stn to Bitchu-Takahashi Stn (35m) to Taxi to Fuigo Pass (15m) + Hike 20m"
+    },
+    {
+      "seg_type": "review",
+      "rank_badge": "#8 LOCAL REVIEWS",
+      "place_ja": "備中松山城のリアルな口コミ（438 Domestic Reviews）",
+      "place_en": "What Japanese Visitors Say About Bitchu-Matsuyama Castle",
+      "area": "Takahashi City, Okayama",
+      "budget": "438 Domestic Reviews",
+      "access_info": "🚄 JR Okayama Stn -> Bitchu-Takahashi Stn (35m) -> Taxi to Fuigo Pass (15m) + Hike 20m",
+      "insider_tip": "LOCAL HACK: From the mountain parking lot, you still hike 20 minutes up steep st...",
+      "review_praise_ja": "「現存12天守で唯一の山の頂にある天空の山城！本丸で迎えてくれる猫城主・さんじゅうろうが可愛すぎる」",
+      "review_praise_en": "\"The only original wooden keep perched on a 430m mountain peak—and Sanjuro, the official resident Cat Castle Lord, greets you at the gate!\"",
+      "review_warn_ja": "「ふいご峠の駐車場からさらに20分ガチの山登りがあります。秋〜冬の早朝は雲海展望台からの絶景もおすすめ」",
+      "review_warn_en": "\"From the mountain parking lot, you still hike 20 minutes up steep stone steps—visit in autumn mornings for the sea of clouds!\"",
+      "photos": [
+        "bitchu_3.jpg",
+        "bitchu_4.jpg"
+      ],
+      "narration": "Across 438 domestic reviews, Japanese visitors praise Bitchu-Matsuyama Castle: The only original wooden keep perched on a 430m mountain peak—and Sanjuro, the official resident Cat Castle Lord, greets you at the gate! However, locals warn: From the mountain parking lot, you still hike 20 minutes up steep stone steps—visit in autumn mornings for the sea of clouds!",
+      "subtitle": "Real Praise: \"The only original wooden keep perched on a 430m mountain peak—and Sanjuro, the of...\nLocal Warning: \"From the mountain parking lot, you still hike 20 minutes up steep stone steps—vis..."
+    },
+    {
+      "seg_type": "spot",
+      "rank_badge": "#7  87/100 pt",
+      "place_ja": "彦根城 (WARLORD LORE: Built by the elite Ii ...)",
+      "place_en": "#7 Hikone Castle — Authentic Samurai Fortress",
+      "area": "Hikone City, Shiga",
+      "budget": "¥800 (with Genkyuen Garden)",
+      "access_info": "🚄 JR Kyoto Stn -> JR Biwako Special Rapid to Hikone Stn (48m) -> Walk 15m",
+      "insider_tip": "WARLORD LORE: Built by the elite Ii Clan (The Red Demons of Tokugawa) with a National Treasure keep!",
+      "photos": [
+        "hikone_1.jpg",
+        "hikone_2.jpg"
+      ],
+      "narration": "At number 7 with 87 points is Hikone Castle in Hikone City, Shiga. Built by the elite Ii Clan (The Red Demons of Tokugawa) with a National Treasure keep! To get here: JR Kyoto Stn to JR Biwako Special Rapid to Hikone Stn (48m) to Walk 15m.",
+      "subtitle": "#7 Hikone Castle (87/100 pt): Built by the elite Ii Clan (The Red Demons of Tokugawa) with a National Treasure keep!\nAccess: JR Kyoto Stn to JR Biwako Special Rapid to Hikone Stn (48m) to Walk 15m"
+    },
+    {
+      "seg_type": "review",
+      "rank_badge": "#7 LOCAL REVIEWS",
+      "place_ja": "彦根城のリアルな口コミ（2,361 Domestic Reviews）",
+      "place_en": "What Japanese Visitors Say About Hikone Castle",
+      "area": "Hikone City, Shiga",
+      "budget": "2,361 Domestic Reviews",
+      "access_info": "🚄 JR Kyoto Stn -> JR Biwako Special Rapid to Hikone Stn (48m) -> Walk 15m",
+      "insider_tip": "LOCAL HACK: The interior stairs are 62 degrees—practically a ladder! Check the s...",
+      "review_praise_ja": "「国宝5城のひとつ！天秤櫓や太鼓門櫓、そして天守の複雑な破風と隠された鉄砲狭間が当時のまま残っていて感動」",
+      "review_praise_en": "\"One of only 5 National Treasure castles! The Balance Turret bridge, hidden sniper loopholes, and Lake Biwa views are 100% authentic.\"",
+      "review_warn_ja": "「天守内の階段は最大62度とほぼハシゴ！ひこにゃんの登場時間（10:30/13:30/15:00）に合わせて行くのがおすすめ」",
+      "review_warn_en": "\"The interior stairs are 62 degrees—practically a ladder! Check the schedule for Hikonyan, Japan's most famous samurai cat mascot.\"",
+      "photos": [
+        "hikone_3.jpg",
+        "hikone_4.jpg"
+      ],
+      "narration": "Across 2,361 domestic reviews, Japanese visitors praise Hikone Castle: One of only 5 National Treasure castles! The Balance Turret bridge, hidden sniper loopholes, and Lake Biwa views are 100% authentic. However, locals warn: The interior stairs are 62 degrees—practically a ladder! Check the schedule for Hikonyan, Japan's most famous samurai cat mascot.",
+      "subtitle": "Real Praise: \"One of only 5 National Treasure castles! The Balance Turret bridge, hidden sniper...\nLocal Warning: \"The interior stairs are 62 degrees—practically a ladder! Check the schedule for H..."
+    },
+    {
+      "seg_type": "spot",
+      "rank_badge": "#6  88/100 pt",
+      "place_ja": "竹田城跡 (INSTAGRAM BUZZ: 89,200 IG Hits! Famo...)",
+      "place_en": "#6 Takeda Sky Castle Ruins — Authentic Samurai Fortress",
+      "area": "Asago City, Hyogo",
+      "budget": "¥500",
+      "access_info": "🚄 JR Himeji Stn -> JR Bantan Line to Takeda Stn (90m) -> Bus/Taxi (15m) + Walk 20m",
+      "insider_tip": "INSTAGRAM BUZZ: 89,200 IG Hits! Famous as the Machu Picchu of Japan floating in morning clouds!",
+      "photos": [
+        "takeda_1.jpg",
+        "takeda_2.jpg"
+      ],
+      "narration": "At number 6 with 88 points is Takeda Sky Castle Ruins in Asago City, Hyogo. 89,200 IG Hits! Famous as the Machu Picchu of Japan floating in morning clouds! To get here: JR Himeji Stn to JR Bantan Line to Takeda Stn (90m) to Bus/Taxi (15m) + Walk 20m.",
+      "subtitle": "#6 Takeda Sky Castle Ruins (88/100 pt): 89,200 IG Hits! Famous as the Machu Picchu of Japan floating in morning clouds!\nAccess: JR Himeji Stn to JR Bantan Line to Takeda Stn (90m) to Bus/Taxi (15m) + Walk 20m"
+    },
+    {
+      "seg_type": "review",
+      "rank_badge": "#6 LOCAL REVIEWS",
+      "place_ja": "竹田城跡のリアルな口コミ（1,003 Domestic Reviews）",
+      "place_en": "What Japanese Visitors Say About Takeda Sky Castle Ruins",
+      "area": "Asago City, Hyogo",
+      "budget": "1,003 Domestic Reviews",
+      "access_info": "🚄 JR Himeji Stn -> JR Bantan Line to Takeda Stn (90m) -> Bus/Taxi (15m) + Walk 20m",
+      "insider_tip": "LOCAL HACK: To photograph the castle floating in clouds from afar, hike Ritsuunk...",
+      "review_praise_ja": "「雲海に浮かぶ天空の城！400年前の野面積みの石垣が山頂の尾根に沿って完璧に残っていて鳥肌が立ちました」",
+      "review_praise_en": "\"Floating above a sea of clouds at dawn! The 400-year-old uncut cyclopean stone walls stretching across the mountain ridge are surreal.\"",
+      "review_warn_ja": "「雲海を見るなら10月〜11月の早朝6時に対面の立雲峡へ登る必要あり。懐中電灯と防寒着を忘れずに」",
+      "review_warn_en": "\"To photograph the castle floating in clouds from afar, hike Ritsuunkyo viewpoint at 6 AM in Oct–Nov with a flashlight and warm coat!\"",
+      "photos": [
+        "takeda_3.jpg",
+        "takeda_4.jpg"
+      ],
+      "narration": "Across 1,003 domestic reviews, Japanese visitors praise Takeda Sky Castle Ruins: Floating above a sea of clouds at dawn! The 400-year-old uncut cyclopean stone walls stretching across the mountain ridge are surreal. However, locals warn: To photograph the castle floating in clouds from afar, hike Ritsuunkyo viewpoint at 6 AM in Oct–Nov with a flashlight and warm coat!",
+      "subtitle": "Real Praise: \"Floating above a sea of clouds at dawn! The 400-year-old uncut cyclopean stone wa...\nLocal Warning: \"To photograph the castle floating in clouds from afar, hike Ritsuunkyo viewpoint ..."
+    },
+    {
+      "seg_type": "spot",
+      "rank_badge": "#5  88/100 pt",
+      "place_ja": "犬山城 (WARLORD LORE: Japan's oldest survivi...)",
+      "place_en": "#5 Inuyama Castle — Authentic Samurai Fortress",
+      "area": "Inuyama City, Aichi",
+      "budget": "¥550",
+      "access_info": "🚄 Meitetsu Nagoya Stn -> Inuyama-Yuen Stn (25m) -> Walk 15m along castle town",
+      "insider_tip": "WARLORD LORE: Japan's oldest surviving wooden keep (1537), fought over by Nobunaga & Ieyasu!",
+      "photos": [
+        "inuyama_1.jpg",
+        "inuyama_2.jpg"
+      ],
+      "narration": "At number 5 with 88 points is Inuyama Castle in Inuyama City, Aichi. Japan's oldest surviving wooden keep (1537), fought over by Nobunaga & Ieyasu! To get here: Meitetsu Nagoya Stn to Inuyama-Yuen Stn (25m) to Walk 15m along castle town.",
+      "subtitle": "#5 Inuyama Castle (88/100 pt): Japan's oldest surviving wooden keep (1537), fought over by Nobunaga & Ieyasu!\nAccess: Meitetsu Nagoya Stn to Inuyama-Yuen Stn (25m) to Walk 15m along castle town"
+    },
+    {
+      "seg_type": "review",
+      "rank_badge": "#5 LOCAL REVIEWS",
+      "place_ja": "犬山城のリアルな口コミ（1,798 Domestic Reviews）",
+      "place_en": "What Japanese Visitors Say About Inuyama Castle",
+      "area": "Inuyama City, Aichi",
+      "budget": "1,798 Domestic Reviews",
+      "access_info": "🚄 Meitetsu Nagoya Stn -> Inuyama-Yuen Stn (25m) -> Walk 15m along castle town",
+      "insider_tip": "LOCAL HACK: The top exterior railing is low and genuinely dizzying—and weekend q...",
+      "review_praise_ja": "「現存最古の国宝天守！最上階の外周ぐるっと回れる廻縁（バルコニー）から見下ろす木曽川の断崖絶壁はスリル満点」",
+      "review_praise_en": "\"Standing on the open-air wooden balcony at the top of a 1537 keep, looking straight down at the Kiso River cliff, is an unforgettable thrill!\"",
+      "review_warn_ja": "「最上階のバルコニーは手すりが低く高所恐怖症の人は足がすくむほど。休日は天守入場に30分以上並ぶので朝一番がベスト」",
+      "review_warn_en": "\"The top exterior railing is low and genuinely dizzying—and weekend queues for the narrow stairs exceed 40 minutes, so arrive at 9 AM!\"",
+      "photos": [
+        "inuyama_3.jpg",
+        "inuyama_4.jpg"
+      ],
+      "narration": "Across 1,798 domestic reviews, Japanese visitors praise Inuyama Castle: Standing on the open-air wooden balcony at the top of a 1537 keep, looking straight down at the Kiso River cliff, is an unforgettable thrill! However, locals warn: The top exterior railing is low and genuinely dizzying—and weekend queues for the narrow stairs exceed 40 minutes, so arrive at 9 AM!",
+      "subtitle": "Real Praise: \"Standing on the open-air wooden balcony at the top of a 1537 keep, looking straig...\nLocal Warning: \"The top exterior railing is low and genuinely dizzying—and weekend queues for the..."
+    },
+    {
+      "seg_type": "spot",
+      "rank_badge": "#4  89/100 pt",
+      "place_ja": "松山城 (FORTRESS DESIGN: Rated by castle his...)",
+      "place_en": "#4 Matsuyama Castle — Authentic Samurai Fortress",
+      "area": "Matsuyama City, Ehime",
+      "budget": "¥520 + Ropeway/Lift ¥520",
+      "access_info": "✈️ Tokyo Haneda -> Matsuyama Airport (85m) -> Bus to Okaido + Single-Seat Chairlift",
+      "insider_tip": "FORTRESS DESIGN: Rated by castle historians as Japan's most complete hilltop defense labyrinth!",
+      "photos": [
+        "iyomatsuyama_1.jpg",
+        "iyomatsuyama_2.jpg"
+      ],
+      "narration": "At number 4 with 89 points is Matsuyama Castle in Matsuyama City, Ehime. Rated by castle historians as Japan's most complete hilltop defense labyrinth! To get here: Tokyo Haneda to Matsuyama Airport (85m) to Bus to Okaido + Single-Seat Chairlift.",
+      "subtitle": "#4 Matsuyama Castle (89/100 pt): Rated by castle historians as Japan's most complete hilltop defense labyrinth!\nAccess: Tokyo Haneda to Matsuyama Airport (85m) to Bus to Okaido + Single-Seat Chairlift"
+    },
+    {
+      "seg_type": "review",
+      "rank_badge": "#4 LOCAL REVIEWS",
+      "place_ja": "松山城のリアルな口コミ（2,760 Domestic Reviews）",
+      "place_en": "What Japanese Visitors Say About Matsuyama Castle",
+      "area": "Matsuyama City, Ehime",
+      "budget": "2,760 Domestic Reviews",
+      "access_info": "✈️ Tokyo Haneda -> Matsuyama Airport (85m) -> Bus to Okaido + Single-Seat Chairlift",
+      "insider_tip": "LOCAL HACK: Combine it with Dogo Onsen just 10 minutes away by vintage streetcar...",
+      "review_praise_ja": "「1人乗りのリフトで風を感じながら山頂へ！筒井門や隠門の二重三重の罠と、天守からの瀬戸内海の眺めが最高」",
+      "review_praise_en": "\"Riding the open-air single chairlift up the mountain is amazing, and the double-ambush Hidden Gate (Kakuremon) shows pure samurai tactical genius!\"",
+      "review_warn_ja": "「敷地が広く山頂の本丸まで坂道も多いですが、道後温泉から路面電車で10分なのでセットで回るのが鉄板コース」",
+      "review_warn_en": "\"Combine it with Dogo Onsen just 10 minutes away by vintage streetcar—and definitely take the single chairlift instead of walking up!\"",
+      "photos": [
+        "iyomatsuyama_3.jpg",
+        "iyomatsuyama_4.jpg"
+      ],
+      "narration": "Across 2,760 domestic reviews, Japanese visitors praise Matsuyama Castle: Riding the open-air single chairlift up the mountain is amazing, and the double-ambush Hidden Gate (Kakuremon) shows pure samurai tactical genius! However, locals warn: Combine it with Dogo Onsen just 10 minutes away by vintage streetcar—and definitely take the single chairlift instead of walking up!",
+      "subtitle": "Real Praise: \"Riding the open-air single chairlift up the mountain is amazing, and the double-a...\nLocal Warning: \"Combine it with Dogo Onsen just 10 minutes away by vintage streetcar—and definite..."
+    },
+    {
+      "seg_type": "spot",
+      "rank_badge": "#3  92/100 pt",
+      "place_ja": "熊本城 (WARLORD LORE: Built by Kato Kiyomasa...)",
+      "place_en": "#3 Kumamoto Castle — Authentic Samurai Fortress",
+      "area": "Kumamoto City, Kyushu",
+      "budget": "¥800",
+      "access_info": "🚄 JR Hakata (Fukuoka) Stn -> Kyushu Shinkansen to Kumamoto Stn (38m) -> Tram 15m",
+      "insider_tip": "WARLORD LORE: Built by Kato Kiyomasa with overhanging Musha-gaeshi walls even ninjas couldn't climb!",
+      "photos": [
+        "kumamoto_1.jpg",
+        "kumamoto_2.jpg"
+      ],
+      "narration": "At number 3 with 92 points is Kumamoto Castle in Kumamoto City, Kyushu. Built by Kato Kiyomasa with overhanging Musha-gaeshi walls even ninjas couldn't climb! To get here: JR Hakata (Fukuoka) Stn to Kyushu Shinkansen to Kumamoto Stn (38m) to Tram 15m.",
+      "subtitle": "#3 Kumamoto Castle (92/100 pt): Built by Kato Kiyomasa with overhanging Musha-gaeshi walls even ninjas couldn't climb!\nAccess: JR Hakata (Fukuoka) Stn to Kyushu Shinkansen to Kumamoto Stn (38m) to Tram 15m"
+    },
+    {
+      "seg_type": "review",
+      "rank_badge": "#3 LOCAL REVIEWS",
+      "place_ja": "熊本城のリアルな口コミ（3,193 Domestic Reviews）",
+      "place_en": "What Japanese Visitors Say About Kumamoto Castle",
+      "area": "Kumamoto City, Kyushu",
+      "budget": "3,193 Domestic Reviews",
+      "access_info": "🚄 JR Hakata (Fukuoka) Stn -> Kyushu Shinkansen to Kumamoto Stn (38m) -> Tram 15m",
+      "insider_tip": "LOCAL HACK: Walk the elevated skywalk to inspect earthquake restoration up close...",
+      "review_praise_ja": "「加藤清正が築いた武者返しの反り返る石垣が圧巻！地震からの復興を見学できる空中回廊（特別見学通路）も素晴らしい」",
+      "review_praise_en": "\"Kato Kiyomasa's concave Musha-gaeshi stone walls curve outward so steeply that neither samurai nor ninja could ever scale them!\"",
+      "review_warn_ja": "「天守閣内部は最新展示とエレベーターで完全復旧済み。すぐ下の桜の馬場 城彩苑で馬刺しやからし蓮根を食べるのがおすすめ」",
+      "review_warn_en": "\"Walk the elevated skywalk to inspect earthquake restoration up close, then eat local specialty dishes at Josaien right below the gate!\"",
+      "photos": [
+        "kumamoto_3.jpg",
+        "kumamoto_4.jpg"
+      ],
+      "narration": "Across 3,193 domestic reviews, Japanese visitors praise Kumamoto Castle: Kato Kiyomasa's concave Musha-gaeshi stone walls curve outward so steeply that neither samurai nor ninja could ever scale them! However, locals warn: Walk the elevated skywalk to inspect earthquake restoration up close, then eat local specialty dishes at Josaien right below the gate!",
+      "subtitle": "Real Praise: \"Kato Kiyomasa's concave Musha-gaeshi stone walls curve outward so steeply that ne...\nLocal Warning: \"Walk the elevated skywalk to inspect earthquake restoration up close, then eat lo..."
+    },
+    {
+      "seg_type": "spot",
+      "rank_badge": "#2  93/100 pt",
+      "place_ja": "松本城 (NATIONAL TREASURE: 1592 six-story pi...)",
+      "place_en": "#2 Matsumoto Castle — Authentic Samurai Fortress",
+      "area": "Matsumoto City, Nagano",
+      "budget": "¥700",
+      "access_info": "🚄 Shinjuku Stn -> JR Limited Express Azusa to Matsumoto Stn (2h 35m) -> Walk 15m",
+      "insider_tip": "NATIONAL TREASURE: 1592 six-story pitch-black warship keep framed by the snow-capped Japanese Alps!",
+      "photos": [
+        "matsumoto_1.jpg",
+        "matsumoto_2.jpg"
+      ],
+      "narration": "At number 2 with 93 points is Matsumoto Castle in Matsumoto City, Nagano. 1592 six-story pitch-black warship keep framed by the snow-capped Japanese Alps! To get here: Shinjuku Stn to JR Limited Express Azusa to Matsumoto Stn (2h 35m) to Walk 15m.",
+      "subtitle": "#2 Matsumoto Castle (93/100 pt): 1592 six-story pitch-black warship keep framed by the snow-capped Japanese Alps!\nAccess: Shinjuku Stn to JR Limited Express Azusa to Matsumoto Stn (2h 35m) to Walk 15m"
+    },
+    {
+      "seg_type": "review",
+      "rank_badge": "#2 LOCAL REVIEWS",
+      "place_ja": "松本城のリアルな口コミ（3,307 Domestic Reviews）",
+      "place_en": "What Japanese Visitors Say About Matsumoto Castle",
+      "area": "Matsumoto City, Nagano",
+      "budget": "3,307 Domestic Reviews",
+      "access_info": "🚄 Shinjuku Stn -> JR Limited Express Azusa to Matsumoto Stn (2h 35m) -> Walk 15m",
+      "insider_tip": "LOCAL HACK: Timber floors are freezing cold in winter—bring thick wool socks! An...",
+      "review_praise_ja": "「北アルプスの雪山を背景に堀に映る漆黒の五重六階天守が美しすぎる！鉄砲狭間や急階段など戦国末期の緊迫感がそのまま」",
+      "review_praise_en": "\"The pitch-black 6-story keep reflecting in the moat against the snow-capped Japanese Alps is breathtaking—pure Sengoku military power!\"",
+      "review_warn_ja": "「冬は板張りの床が氷のように冷たいので分厚い靴下かスリッパ持参が必須！最大61度の階段はスカート厳禁です」",
+      "review_warn_en": "\"Timber floors are freezing cold in winter—bring thick wool socks! And with 61-degree stairs and low beams, watch your head.\"",
+      "photos": [
+        "matsumoto_3.jpg",
+        "matsumoto_4.jpg"
+      ],
+      "narration": "Across 3,307 domestic reviews, Japanese visitors praise Matsumoto Castle: The pitch-black 6-story keep reflecting in the moat against the snow-capped Japanese Alps is breathtaking—pure Sengoku military power! However, locals warn: Timber floors are freezing cold in winter—bring thick wool socks! And with 61-degree stairs and low beams, watch your head.",
+      "subtitle": "Real Praise: \"The pitch-black 6-story keep reflecting in the moat against the snow-capped Japan...\nLocal Warning: \"Timber floors are freezing cold in winter—bring thick wool socks! And with 61-deg..."
+    },
+    {
+      "seg_type": "spot",
+      "rank_badge": "#1  96/100 pt",
+      "place_ja": "姫路城 (NO.1 IN JAPAN: 1.32M IG Posts & 4,35...)",
+      "place_en": "#1 Himeji Castle — Authentic Samurai Fortress",
+      "area": "Himeji City, Hyogo",
+      "budget": "¥1,000 (¥1,050 with Kokoen)",
+      "access_info": "🚄 JR Kyoto Stn (45m) or Shin-Osaka Stn (30m) by Shinkansen to Himeji Stn -> Walk 15m",
+      "insider_tip": "NO.1 IN JAPAN: 1.32M IG Posts & 4,350 Reviews! UNESCO 1609 White Heron Fortress—84 gates, never conquered!",
+      "photos": [
+        "himeji_1.jpg",
+        "himeji_2.jpg"
+      ],
+      "narration": "At number 1 with 96 points is Himeji Castle in Himeji City, Hyogo. 1.32M IG Posts & 4,350 Reviews! UNESCO 1609 White Heron Fortress—84 gates, never conquered! To get here: JR Kyoto Stn (45m) or Shin-Osaka Stn (30m) by Shinkansen to Himeji Stn to Walk 15m.",
+      "subtitle": "#1 Himeji Castle (96/100 pt): 1.32M IG Posts & 4,350 Reviews! UNESCO 1609 White Heron Fortress—84 gates, never conquered!\nAccess: JR Kyoto Stn (45m) or Shin-Osaka Stn (30m) by Shinkansen to Himeji Stn to Walk 15m"
+    },
+    {
+      "seg_type": "review",
+      "rank_badge": "#1 LOCAL REVIEWS",
+      "place_ja": "姫路城のリアルな口コミ（4,350 Domestic Reviews）",
+      "place_en": "What Japanese Visitors Say About Himeji Castle",
+      "area": "Himeji City, Hyogo",
+      "budget": "4,350 Domestic Reviews",
+      "access_info": "🚄 JR Kyoto Stn (45m) or Shin-Osaka Stn (30m) by Shinkansen to Himeji Stn -> Walk 15m",
+      "insider_tip": "LOCAL HACK: Allow 2.5 hours for the full maze and 6-story keep—and always buy th...",
+      "review_praise_ja": "「白鷺城の名の通り青空に輝く白漆喰の大天守が神々しい！迷路のような門と石落とし、千姫ゆかりの西の丸まで見どころ無限」",
+      "review_praise_en": "\"Japan's undisputed #1 castle! The gleaming white plaster keep and labyrinth of 84 gates designed to confuse invaders are a masterpiece of world architecture.\"",
+      "review_warn_ja": "「大天守から西の丸まで全部歩くと2時間半かかります。必ず隣りの好古園との共通券（1,050円、わずか+50円！）を買うべき」",
+      "review_warn_en": "\"Allow 2.5 hours for the full maze and 6-story keep—and always buy the Kokoen Samurai Garden combo ticket for only 50 yen extra!\"",
+      "photos": [
+        "himeji_3.jpg",
+        "himeji_4.jpg"
+      ],
+      "narration": "Across 4,350 domestic reviews, Japanese visitors praise Himeji Castle: Japan's undisputed #1 castle! The gleaming white plaster keep and labyrinth of 84 gates designed to confuse invaders are a masterpiece of world architecture. However, locals warn: Allow 2.5 hours for the full maze and 6-story keep—and always buy the Kokoen Samurai Garden combo ticket for only 50 yen extra!",
+      "subtitle": "Real Praise: \"Japan's undisputed #1 castle! The gleaming white plaster keep and labyrinth of 84...\nLocal Warning: \"Allow 2.5 hours for the full maze and 6-story keep—and always buy the Kokoen Samu..."
+    },
+    {
+      "seg_type": "closing",
+      "rank_badge": "FULL TOP 10 SUMMARY",
+      "place_ja": "日本の名城＆戦国要塞 TOP 10 完全保存版チートシート",
+      "place_en": "Save This Full TOP 10 Samurai Castle Cheat-Sheet!",
+      "area": "All 10 Castles Compared",
+      "budget": "Shinkansen & Hacks",
+      "insider_tip": "SCREENSHOT NOW: All 10 Scores, Nearest Stations & Local Hacks on One Screen!",
+      "photos": [
+        "himeji_1.jpg",
+        "matsumoto_1.jpg"
+      ],
+      "narration": "Here is your complete TOP 10 Samurai Castles cheat-sheet! Pause or screenshot this table right now for scores, bullet train access, and local hacks from number ten Ueda Castle all the way to number one Himeji Castle. Which samurai fortress or Sengoku warlord should we rank next? Subscribe and tell us in the comments!",
+      "subtitle": "Pause & Screenshot! Complete TOP 10 Samurai Castles Cheat-Sheet.\nSubscribe for our next Japanese Instagram × Local Review ranking!"
+    }
+  ]
+}

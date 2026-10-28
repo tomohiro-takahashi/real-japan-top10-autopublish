@@ -1,0 +1,109 @@
+{
+  "battle_id": "battle_003",
+  "card_ja": "クズリ vs ブチハイエナ",
+  "title_long": "【異種最強決定戦】クズリ vs ブチハイエナ！極北の狂戦士か、骨砕きのサバンナ処刑人か？科学で完全シミュレーション",
+  "title_short": "極北の悪魔クズリ vs 骨砕きハイエナ！1対1で戦ったら勝つのは？ #最強生物 #動物バトル #shorts",
+  "description": "オオカミやクマすら追い払うイタチ科最大の狂戦士「クズリ（ウルヴァリン）」と、ライオン以上の咬合力1100PSIでキリンの骨まで噛み砕く「ブチハイエナ」！もし寒冷な針葉樹林と草原の境界地帯で1対1で激突したら勝つのはどちらか？\n\n【5大スペック徹底比較】\n1. 体重：クズリ 22kg vs ブチハイエナ 70kg\n2. 咬合力・武器：凍った骨を割る顎＆5cmの鉤爪 vs 咬合力1100PSIの骨砕き顎\n3. 防御構造：疎水性の分厚い毛皮と緩い皮膚 vs 分厚い首周りの筋肉と強靭な皮膚\n4. 速度・スタミナ：1日40km走る無尽蔵エンジン vs 時速60km＆心臓サイズ特大の持久力\n5. 狩りの習性：下からの喉元噛みつき vs 圧倒的顎パワーによる骨格粉砕\n\n#動物バトル #最強生物 #クズリ #ハイエナ #ウルヴァリン",
+  "tags": [
+    "動物バトル",
+    "最強王",
+    "シミュレーション",
+    "生物解説",
+    "クズリ",
+    "ハイエナ",
+    "異種格闘技"
+  ],
+  "voice": "ja-JP-KeitaNeural",
+  "scenes": [
+    {
+      "scene_id": 1,
+      "is_short_included": true,
+      "narration": "北方のタイガでオオカミやピューマから獲物を強奪するイタチ科最大の狂戦士・クズリと、アフリカのサバンナでライオンと互角に渡り合う最強の骨砕きハンター・ブチハイエナ！もしこの二頭が、気温10度の岩と草が混じるステップ地帯でシカの死骸を巡って1対1で激突したらどちらが勝つのか？イメージに惑わされない冷徹な物理データで検証しよう！",
+      "subtitle": "極北の狂戦士「クズリ（ウルヴァリン）」vs\nサバンナの骨砕き処刑人「ブチハイエナ」！\n1対1のデスマッチ、勝つのはどっちだ！？",
+      "flow_clip_filename": "battle_003_clip1.mp4",
+      "flow_prompt": "Photorealistic National Geographic wildlife footage, 4k, overcast twilight on a rocky grassland border. A fierce thick-furred Wolverine snarls defensively over a carcass as a massive Spotted Hyena with sloping shoulders and powerful jaws approaches menacingly, ears cocked forward. Tense 5-second camera pan.",
+      "fallback_image_prompt": "Dramatic comic book style, intense realistic wildlife illustration, a snarling muscular Wolverine facing off against a huge Spotted Hyena over a carcass on a cold rocky steppe, 16:9 aspect ratio"
+    },
+    {
+      "scene_id": 2,
+      "is_short_included": true,
+      "narration": "まずは5つの科学的スペックを比較するぞ！第一に体重だ。多くの人が誤解しているが、クズリの成獣オスは平均15キロから最大でも25キロ程度の中型獣だ。対するブチハイエナはテレビで見るより遥かに巨大で、メスの大型個体は体重65キロから最大80キロに達し、なんとクズリの3倍以上の質量を誇る！第二に咬合力だ。クズリも凍った骨を割る強い顎を持つが、ブチハイエナの咬合力はライオン（約650PSI）やトラ（約1050PSI）すら凌駕する驚異の1100PSIを記録する！",
+      "subtitle": "①体重：クズリ22kg vs ブチハイエナ70kg（3倍超）！\n②咬合力：ハイエナはライオンを超える1100PSI！\n実はハイエナはオオカミより遥かに巨大な怪物だ！",
+      "flow_clip_filename": null,
+      "flow_prompt": null,
+      "fallback_image_prompt": "Dramatic comic book style, intense realistic wildlife illustration, size and jaw comparison chart showing a 22kg Wolverine next to a 70kg Spotted Hyena with 1100 PSI bone-crushing jaws, 16:9 aspect ratio"
+    },
+    {
+      "scene_id": 3,
+      "is_short_included": false,
+      "narration": "第三に防御構造、第四にスタミナの比較だ！クズリはイタチ科特有のたるんだ分厚い皮膚と密生した剛毛を持ち、自分より大きなオオカミに噛まれても急所を外す防御力と、1日40キロ走り続けるスタミナを持つ。しかしブチハイエナも、同じハイエナ同士の噛み合いやライオンの牙に耐えるため、異常に発達した極太の首の筋肉と分厚い皮膚を持っており、しかも体重に対する心臓の比率が哺乳類トップクラスで、時速60キロで何キロも獲物を追い詰める無尽蔵の心肺機能を備えているんだ！",
+      "subtitle": "③防御：クズリの分厚い毛皮 vs ハイエナの極太の首！\n④スタミナ：ハイエナは哺乳類トップクラスの巨大心臓を持ち、\n持久力でもクズリに一切引けを取らない！",
+      "flow_clip_filename": null,
+      "flow_prompt": null,
+      "fallback_image_prompt": "Dramatic comic book style, intense realistic wildlife illustration, anatomical highlight of the Spotted Hyena's massive neck musculature and oversized heart versus the Wolverine's thick fur coat, 16:9 aspect ratio"
+    },
+    {
+      "scene_id": 4,
+      "is_short_included": false,
+      "narration": "そして第五の項目、狩りの習性とメンタルだ！ハイエナは『死肉あさりの臆病者』という俗説があるが、実際には食べる獲物の70パーセント以上を自らの狩りで仕留める獰猛なトッププレデターだ。一方のクズリが普段タイガでオオカミやクマから獲物を奪えるのは、相手が『怪我をして狩りができなくなるリスク』を嫌って譲るからであり、本気の殺し合いになった場合は話がまったく変わってくる！",
+      "subtitle": "⑤習性：ハイエナは獲物の7割を自ら狩る処刑人！\nクズリが普段クマやオオカミを追い払えるのは\n「威嚇による損得勘定」であり、殺し合いは別次元だ！",
+      "flow_clip_filename": null,
+      "flow_prompt": null,
+      "fallback_image_prompt": "Dramatic comic book style, intense realistic wildlife illustration, a Spotted Hyena baring its massive conical premolars with bloodlust while a Wolverine raises its claws in a low defensive crouch, 16:9 aspect ratio"
+    },
+    {
+      "scene_id": 5,
+      "is_short_included": true,
+      "narration": "さあ、ステップ地帯で戦闘開始だ！恐怖を知らないクズリが唸り声を上げながら先制突撃し、ハイエナの顔面から喉元を狙って下から飛びかかる！クズリの5センチの鉤爪と鋭い犬歯がハイエナの鼻先と頬を切り裂く！普通のイヌ科であるオオカミならこの狂気の奇襲に怯んで後退するが、ライオンと日常的にやり合っている70キロのブチハイエナは痛みに怯むどころか、そのまま上からクズリを押し潰すように前進する！",
+      "subtitle": "【戦闘開始！】クズリがハイエナの顔面へ猛烈な先制攻撃！\nオオカミなら怯む奇襲だが、ライオンと戦う\n70kgのハイエナは血を流しながら前進する！",
+      "flow_clip_filename": "battle_003_clip2.mp4",
+      "flow_prompt": "Photorealistic wildlife combat footage, 4k slow motion. A ferocious Wolverine lunges upward clawing at a Spotted Hyena's snout, and the much larger 70kg Hyena absorbs the hit and slams its heavy chest forward to bowl the Wolverine over in the dirt. Intense 5-second shot.",
+      "fallback_image_prompt": "Dramatic comic book style, intense realistic wildlife illustration, a Wolverine leaping and slashing at a Spotted Hyena's face while the massive 70kg Hyena charges straight through the attack, 16:9 aspect ratio"
+    },
+    {
+      "scene_id": 6,
+      "is_short_included": false,
+      "narration": "クズリはハイエナの喉笛を噛み切ろうと必死に顎を食い込ませる！しかし、ハイエナの首周りは自分の体重と同じ70キロの仲間を振り回すために丸太のような筋肉で覆われており、22キロのクズリの顎のサイズと犬歯の長さでは、ハイエナの太い気管や頸動脈まで物理的に到達できないんだ！",
+      "subtitle": "クズリがハイエナの喉笛を狙って噛みつく！\nしかしハイエナの丸太のような首の筋肉に阻まれ、\n22kgのクズリの牙では気管まで届かない！",
+      "flow_clip_filename": null,
+      "flow_prompt": null,
+      "fallback_image_prompt": "Dramatic comic book style, intense realistic wildlife illustration, the Wolverine biting into the thick muscular ruff of the Spotted Hyena's neck, unable to reach the deep windpipe, 16:9 aspect ratio"
+    },
+    {
+      "scene_id": 7,
+      "is_short_included": false,
+      "narration": "ここで「なぜクズリはハイイロオオカミには勝てる事があるのに、ハイエナには苦戦するのか？」という解剖学的な決定差が現れる！オオカミの顎は肉を切り裂く構造で咬合力は400PSI程度のため、クズリの分厚い毛皮とたるんだ皮膚の上からでは骨を折ることが難しい。しかしブチハイエナの顎は、キリンの太さ7センチの大腿骨を『毛皮や皮膚の上から丸ごと粉砕する』ために特化した1100PSIの油圧プレス機なんだ！",
+      "subtitle": "オオカミ（400PSI）とハイエナ（1100PSI）の決定的な差！\nハイエナの顎は、分厚い毛皮の上からでも\n内部の骨格ごと丸ごと粉砕する油圧プレスだ！",
+      "flow_clip_filename": null,
+      "flow_prompt": null,
+      "fallback_image_prompt": "Dramatic comic book style, intense realistic wildlife illustration, anatomical X-ray style comic panel showing the Spotted Hyena's massive dome skull and bone-crushing premolars generating 1100 PSI, 16:9 aspect ratio"
+    },
+    {
+      "scene_id": 8,
+      "is_short_included": true,
+      "narration": "そして決定打となる瞬間が訪れる！3倍以上の体重を持つブチハイエナが前足でクズリの体を地面に押さえつけ、その巨大な顎でクズリの背中の中央、すなわち胸椎から腰椎にかけてをガブリと咥え込み、1100PSIのフルパワーで噛み締めた！たとえクズリの皮膚がどれほど強靭で貫通しなくとも、外側から加わる圧倒的な圧壊エネルギーが皮膚を通り越して内部の脊椎と肋骨を直接へし折り、さらに70キロの首の力で左右に激しく振り回す！",
+      "subtitle": "【決定打！】70kgのハイエナが上から押さえ込み、\n1100PSIの顎でクズリの背中を丸ごとロック！\n皮膚を貫通せずとも、圧壊力で内部の脊椎をへし折る！",
+      "flow_clip_filename": "battle_003_clip3.mp4",
+      "flow_prompt": "Photorealistic dramatic wildlife cinematography, 4k. The massive 70kg Spotted Hyena clamps its powerful jaws firmly across the back of the smaller 22kg Wolverine, lifting and shaking it violently across the dusty steppe ground. Intense natural lighting, 5-second shot.",
+      "fallback_image_prompt": "Dramatic comic book style, intense realistic wildlife illustration, the giant Spotted Hyena clamping its 1100 PSI jaws across the Wolverine's back and lifting the 22kg predator off the ground with bone-crushing force, 16:9 aspect ratio"
+    },
+    {
+      "scene_id": 9,
+      "is_short_included": false,
+      "narration": "これが『斬撃・刺突防御』に対する『打撃・圧壊攻撃』の物理的相性だ！鎖帷子を着た騎士がナイフでは傷つかなくても、巨大なハンマーで殴られれば中の骨が砕けるのと同じ原理だ。実際に北米でも、20キロのクズリが60キロの大型オオカミやピューマに本気で襲われた際は脊椎損傷で死亡する事例が確認されており、オオカミの2.5倍以上の咬合力を持つ70キロのブチハイエナからこの一撃を受ければ、クズリは下半身麻痺と内臓破裂で戦闘不能に陥る！",
+      "subtitle": "鎖帷子がハンマーの衝撃を防げないのと同じ原理！\nたるんだ皮膚で牙の貫通は防げても、1100PSIの\n圧壊力による脊椎損傷と内臓破裂は防げない！",
+      "flow_clip_filename": null,
+      "flow_prompt": null,
+      "fallback_image_prompt": "Dramatic comic book style, intense realistic wildlife illustration, the dominant Spotted Hyena standing over the defeated Wolverine on the cold windswept plain, heavy dramatic ink shading, 16:9 aspect ratio"
+    },
+    {
+      "scene_id": 10,
+      "is_short_included": true,
+      "narration": "科学シミュレーションの結論を出そう！勝者は勝率90パーセントでブチハイエナだ！クズリの獰猛さとタフネスは体重20キロクラスでは間違いなく世界最強だが、体重70キロ・咬合力1100PSI・無尽蔵の心肺機能を持つブチハイエナは、あらゆる物理パラメータにおいてクズリの3倍スケールの怪物だ！皮膚の上から骨格を粉砕するサバンナの処刑人が、圧倒的な階級差を見せつけた！",
+      "subtitle": "【結論】勝者：ブチハイエナ（勝率90%）！\n3倍以上の体重差と、毛皮の上から背骨を砕く\n1100PSIの圧倒的咬合力が勝負を決定づけた！",
+      "flow_clip_filename": null,
+      "flow_prompt": null,
+      "fallback_image_prompt": "Dramatic comic book style, intense realistic wildlife illustration, a massive battle-scarred Spotted Hyena roaring into the twilight sky atop a rocky mound, powerful comic book style, 16:9 aspect ratio"
+    }
+  ]
+}

@@ -1,0 +1,163 @@
+{
+  "ranking_id": "ranking_001",
+  "theme_ja": "【東京都編】外国人向け観光地（一蘭やロボットレストラン等）は卒業！東京の日本人が本当に週3で通う『ガチ愛用グルメ＆隠れ家エリア』ランキング TOP 5",
+  "prefecture": "Tokyo",
+  "title": "Stop Going to Tourist Traps! Top 5 Places in Tokyo Where Japanese Locals ACTUALLY Eat & Hang Out",
+  "description": "90% of tourists in Tokyo wait in line for 2 hours at overpriced spots that Japanese locals never visit. In this Tokyo Insider Guide, we count down the Top 5 spots, neighborhood alleys, and beloved local dining chains where Tokyoites actually spend their evenings—complete with real prices, nearest stations, and the 'Tabelog 3.5 Rule' every traveler needs to know.\n\n0:00 Why Tourist Ratings in Japan Are Broken\n0:22 #5 Saizeriya & Gyoza no Ohsho (Late-Night Local Icons)\n0:55 #4 Koenji & Nakano Backstreets (The Anti-Shibuya)\n1:28 #3 Standing Sushi Bars (Tachigui Sushi at Major Stations)\n2:02 #2 Shimbashi Guard-Shita Yakitori Alleys\n2:36 #1 Tsukishima Monja Street & Kichijoji Harmonica Yokocho\n\n#JapanTravel #TokyoGuide #TokyoFood #HiddenJapan #JapanRanking",
+  "tags": [
+    "JapanTravel",
+    "TokyoFood",
+    "TokyoGuide",
+    "HiddenGemsJapan",
+    "WhatToEatInTokyo",
+    "JapanTips",
+    "TokyoRanking"
+  ],
+  "voice": "en-US-ChristopherNeural",
+  "segments": [
+    {
+      "seg_id": 1,
+      "rank_badge": "TOKYO INSIDER GUIDE",
+      "place_en": "Why 90% of Tourists Eat at the Wrong Places",
+      "place_ja": "東京・日本人が本当に通う場所 TOP 5",
+      "area": "Tokyo Prefecture",
+      "budget": "Save 50% vs Tourist Spots",
+      "insider_tip": "Secret: Japanese locals use 'Tabelog' (3.5+ is God-tier), NOT Google Maps!",
+      "narration": "If you are relying on Google Maps 4.8-star reviews in Tokyo, you are almost certainly eating at an overpriced tourist trap.",
+      "subtitle": "If you rely on 4.8-star Google Maps reviews in Tokyo,\nyou're almost certainly in a tourist trap.",
+      "wiki_queries": ["Shinjuku night street Tokyo", "Tokyo Shibuya crossing night"]
+    },
+    {
+      "seg_id": 2,
+      "rank_badge": "THE TABELOG RULE",
+      "place_en": "How Japanese Locals Actually Choose Restaurants",
+      "place_ja": "食べログ「3.5以上」の法則",
+      "area": "All Japan",
+      "budget": "¥800 – ¥3,000 ($5–$20)",
+      "insider_tip": "On Japan's Tabelog app, harsh local critics rate anything above 3.5 stars as a masterpiece.",
+      "narration": "Japanese locals rarely use Google Reviews. Instead, they use a ruthless site called Tabelog, where any restaurant scoring above 3.5 out of 5 is considered a culinary masterpiece. Here are the Top 5 places in Tokyo where locals actually go.",
+      "subtitle": "Locals use 'Tabelog'—where a 3.5+ score means a masterpiece.\nHere are the Top 5 spots in Tokyo locals actually love.",
+      "wiki_queries": ["Tokyo izakaya alley lantern", "Yurakucho izakaya night"]
+    },
+    {
+      "seg_id": 3,
+      "rank_badge": "RANK #5",
+      "place_en": " Torikizoku & Gyoza no Ohsho",
+      "place_ja": "第5位：鳥貴族 ＆ 餃子の王将",
+      "area": "Every Major Station in Tokyo",
+      "budget": "¥1,500 – ¥2,500 ($10–$16)",
+      "insider_tip": "At Torikizoku, EVERY single yakitori plate and beer on the menu is a flat ¥370 ($2.40)!",
+      "narration": "Number 5: Torikizoku and Gyoza no Ohsho. While tourists pay triple in flashy neon districts, Japanese office workers and students pack these two legendary chains every single night.",
+      "subtitle": "#5: Torikizoku & Gyoza no Ohsho.\nWhile tourists overpay, locals pack these two chains every night.",
+      "wiki_queries": ["Yakitori skewers Japan", "Gyoza pan fried Japan"]
+    },
+    {
+      "seg_id": 4,
+      "rank_badge": "RANK #5 (INSIDER TIP)",
+      "place_en": "Flat ¥370 Yakitori & Crispy Pan-Fried Gyoza",
+      "place_ja": "全品均一価格の焼鳥と町中華の王様",
+      "area": "Shinjuku / Ikebukuro / Shibuya",
+      "budget": "¥370 ($2.40) per dish",
+      "insider_tip": "Must-Order: 'Momo Kizoku-yaki' (giant chicken thigh skewers) via the English tablet!",
+      "narration": "At Torikizoku, every single dish and drink costs just 370 yen—about two dollars and forty cents—with zero cover charge. Order the giant Kizoku-yaki chicken skewers on the English tablet, and you'll understand why locals worship it.",
+      "subtitle": "Every dish and drink at Torikizoku is flat ¥370 ($2.40) with no cover charge.\nOrder the giant 'Kizoku-yaki' skewers from the tablet!",
+      "wiki_queries": ["Yakitori tare grill", "Japanese draft beer izakaya"]
+    },
+    {
+      "seg_id": 5,
+      "rank_badge": "RANK #4",
+      "place_en": "Tachigui Sushi (Station Standing Sushi Bars)",
+      "place_ja": "第4位：駅ナカ・駅チカの「立ち食い寿司」",
+      "area": "Shinjuku / Shinagawa / Tokyo Station",
+      "budget": "¥1,800 – ¥3,000 ($12–$20)",
+      "insider_tip": "Look for 'Uogashi Nihon-Ichi'—chefs hand-press Toyosu Market fish right in front of you!",
+      "narration": "Number 4: Tachigui Sushi—Tokyo's standing sushi bars. You don't need a 300-dollar Ginza reservation to eat mind-blowing fresh nigiri in Tokyo.",
+      "subtitle": "#4: Tachigui Sushi (Standing Sushi Bars).\nYou don't need a $300 Ginza reservation for incredible nigiri.",
+      "wiki_queries": ["Nigiri sushi counter Japan", "Sushi assortment Japan"]
+    },
+    {
+      "seg_id": 6,
+      "rank_badge": "RANK #4 (INSIDER TIP)",
+      "place_en": "Uogashi Nihon-Ichi & Nemuro Hanamaru",
+      "place_ja": "魚がし日本一 ＆ 根室花まる（立ち食い店）",
+      "area": "Inside Shinagawa, Shinjuku & Ginza",
+      "budget": "¥150 – ¥400 per piece",
+      "insider_tip": "Standing bars have 15-minute lines instead of 3-hour waits at sit-down branches!",
+      "narration": "At spots like Uogashi Nihon-Ichi or the standing branch of Nemuro Hanamaru in Ginza, busy businessmen pop in for twenty minutes, eat ten pieces of melt-in-your-mouth tuna and Hokkaido scallop for under fifteen dollars, and head home.",
+      "subtitle": "At Uogashi Nihon-Ichi or Nemuro Hanamaru's standing bar,\nlocals eat 10 pieces of top-grade sushi in 20 minutes for under $15.",
+      "wiki_queries": ["Maguro nigiri sushi", "Hotate scallop sushi"]
+    },
+    {
+      "seg_id": 7,
+      "rank_badge": "RANK #3",
+      "place_en": "Koenji & Nakano Backstreet Alleys",
+      "place_ja": "第3位：高円寺・中野のディープな路地裏商店街",
+      "area": "6 Mins West of Shinjuku (JR Chuo Line)",
+      "budget": "¥2,000 – ¥3,500 ($13–$23)",
+      "insider_tip": "Just 2 stops from Shinjuku on the orange JR Chuo Line—95% local crowd!",
+      "narration": "Number 3: The backstreets of Koenji and Nakano. While Omoide Yokocho and Golden Gai in Shinjuku are now packed shoulder-to-shoulder with tourists, locals simply hop on the Chuo Line for six minutes.",
+      "subtitle": "#3: Koenji & Nakano Backstreets.\nWhile Golden Gai is packed with tourists, locals ride 6 minutes west.",
+      "wiki_queries": ["Koenji Tokyo street", "Nakano Broadway alley izakaya"]
+    },
+    {
+      "seg_id": 8,
+      "rank_badge": "RANK #3 (INSIDER TIP)",
+      "place_en": "Under the Train Tracks in Koenji",
+      "place_ja": "高円寺ガード下・大将や赤ちょうちん横丁",
+      "area": "Koenji Station (JR Chuo Line)",
+      "budget": "¥2,000 ($13) for drinks & food",
+      "insider_tip": "Walk under the JR train tracks at Koenji at 7 PM for open-air beer crates and smoky yakitori!",
+      "narration": "Step out of Koenji Station at dusk, and you'll find vintage clothing shops, indie rock cafes, and open-air izakayas under the train tracks where locals sit on plastic beer crates clinking glasses over charcoal-grilled skewers.",
+      "subtitle": "Under Koenji's train tracks, locals sit on plastic beer crates\nenjoying smoky charcoal skewers and retro Tokyo vibes.",
+      "wiki_queries": ["Tokyo train tracks izakaya night", "Japanese red lantern izakaya"]
+    },
+    {
+      "seg_id": 9,
+      "rank_badge": "RANK #2",
+      "place_en": "Shimbashi 'Guard-Shita' Salaryman Sanctuary",
+      "place_ja": "第2位：新橋ガード下・サラリーマンの聖地",
+      "area": "Shimbashi Station (Yamanote Line)",
+      "budget": "¥2,500 – ¥4,000 ($16–$26)",
+      "insider_tip": "Also visit the Shimbashi Ekimae Building B1F for tiny 8-seat retro counter bars!",
+      "narration": "Number 2: Shimbashi under the brick railway arches. Known across Japan as the sacred sanctuary of the Tokyo salaryman, Shimbashi is where corporate warriors unwind after work.",
+      "subtitle": "#2: Shimbashi Railway Arches.\nKnown across Japan as the sacred sanctuary of the Tokyo salaryman.",
+      "wiki_queries": ["Shimbashi night Tokyo", "Yurakucho brick arches izakaya"]
+    },
+    {
+      "seg_id": 10,
+      "rank_badge": "RANK #2 (INSIDER TIP)",
+      "place_en": "Shimbashi Ekimae Building Basement (B1F)",
+      "place_ja": "新橋駅前ビル地下1階のレトロ飲み屋街",
+      "area": "1 Min from Shimbashi SL Square",
+      "budget": "¥2,500 ($16)",
+      "insider_tip": "Head down the stairs into Shimbashi Ekimae Building No. 1 for Showa-era time travel!",
+      "narration": "For the ultimate insider experience, walk down the stairs into the basement of the 1960s Shimbashi Ekimae Building. It is a labyrinth of tiny eight-seat counters serving crispy pork cutlets, sashimi, and ice-cold highballs.",
+      "subtitle": "Head into the 1960s Shimbashi Ekimae Building basement—\na labyrinth of tiny 8-seat counters serving sashimi and highballs.",
+      "wiki_queries": ["Tonkatsu Japanese pork cutlet", "Sashimi plate izakaya"]
+    },
+    {
+      "seg_id": 11,
+      "rank_badge": "RANK #1",
+      "place_en": "Kichijoji Harmonica Yokocho & Inokashira Park",
+      "place_ja": "第1位：吉祥寺「ハモニカ横丁」＆メンチカツ食べ歩き",
+      "area": "Kichijoji (Voted #1 Place to Live in Tokyo)",
+      "budget": "¥1,500 – ¥3,500 ($10–$23)",
+      "insider_tip": "Voted #1 neighborhood Tokyoites want to live in for 10+ years straight!",
+      "narration": "And Number 1: Kichijoji and Harmonica Yokocho. Every single year in Japanese real estate surveys, Kichijoji is voted the number one neighborhood Tokyo locals actually want to live in.",
+      "subtitle": "#1: Kichijoji & Harmonica Yokocho.\nVoted the #1 neighborhood Tokyo locals actually want to live in.",
+      "wiki_queries": ["Harmonica Yokocho Kichijoji", "Inokashira Park Tokyo"]
+    },
+    {
+      "seg_id": 12,
+      "rank_badge": "RANK #1 (MUST-EAT)",
+      "place_en": "Satou Wagyu Menchi-Katsu & Lantern Alleys",
+      "place_ja": "吉祥寺さとうの「元祖丸メンチカツ」と横丁ハシゴ酒",
+      "area": "Kichijoji North Exit (1 Min Walk)",
+      "budget": "¥300 ($2) for Wagyu Menchi-Katsu",
+      "insider_tip": "Buy a sizzling Wagyu Menchi-katsu at 'Satou' by day, then bar-hop Harmonica Yokocho at night!",
+      "narration": "By afternoon, locals line up at Satou Butcher Shop for a three-hundred-yen deep-fried Wagyu beef menchi-katsu bursting with juice, stroll through Inokashira Park, and spend the evening bar-hopping through the narrow lantern-lit lanes of Harmonica Yokocho. Which prefecture or neighborhood should we rank next? Let us know in the comments!",
+      "subtitle": "Grab a ¥300 juicy Wagyu Menchi-Katsu by day, then bar-hop\nHarmonica Yokocho by night. Which prefecture should we rank next?",
+      "wiki_queries": ["Menchi katsu fried beef Japan", "Kichijoji Sunroad street"]
+    }
+  ]
+}

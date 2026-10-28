@@ -1,0 +1,109 @@
+{
+  "battle_id": "battle_002",
+  "card_ja": "ヒクイドリ vs ドーベルマン",
+  "title_long": "【異種最強決定戦】ヒクイドリ vs ドーベルマン！世界一危険な恐竜鳥の12cmダガー爪か、最強警察犬の顎か？科学で完全決着",
+  "title_short": "世界一危険な鳥ヒクイドリ vs 最強警備犬ドーベルマン！勝つのはどっち？ #最強生物 #動物バトル #shorts",
+  "description": "ギネス認定「世界一危険な鳥」であり現代に生きる恐竜・ヒクイドリ（カソワリ）と、極限まで鍛え上げられたエリート警備犬「ドーベルマン」！もし開けた熱帯の林縁部で1対1で激突したら勝つのはどちらか？\n\n【5大スペック徹底比較】\n1. 体重：ヒクイドリ 65kg vs ドーベルマン 42kg\n2. 咬合力・打撃力：12cmの短剣爪による跳び蹴り vs 咬合力305PSIの噛みつき\n3. 防御構造：硬質な針状羽毛と頭部のトサカ（カスク） vs 引き締まった短毛皮膚\n4. 速度・スタミナ：時速50km＆1.5m垂直ジャンプ vs 時速50km＆高い持久力\n5. 狩りの習性：正面からの開腹キック vs 急所を噛み 고정するホールド戦術\n\n#動物バトル #最強生物 #ヒクイドリ #ドーベルマン #恐竜",
+  "tags": [
+    "動物バトル",
+    "最強王",
+    "シミュレーション",
+    "生物解説",
+    "ヒクイドリ",
+    "ドーベルマン",
+    "異種格闘技"
+  ],
+  "voice": "ja-JP-KeitaNeural",
+  "scenes": [
+    {
+      "scene_id": 1,
+      "is_short_included": true,
+      "narration": "現代に生き残ったヴェロキラプトルとも呼ばれる世界一危険な鳥・ヒクイドリと、人間が護衛と戦闘のために生み出したエリート警備犬・ドーベルマン！もしこの二頭が、障害物の少ない熱帯の開けた林縁部で真正面から激突したら一体どちらが勝つのか？5つの物理・解剖学データから完全シミュレーションしていこう！",
+      "subtitle": "世界一危険な恐竜鳥「ヒクイドリ」vs\n最強のエリート警備犬「ドーベルマン」！\n熱帯の林縁部で激突したら勝つのはどっちだ！？",
+      "flow_clip_filename": "battle_002_clip1.mp4",
+      "flow_prompt": "Photorealistic National Geographic wildlife footage, 4k, dappled sunlight at the edge of a tropical rainforest clearing. A tall Southern Cassowary with vivid blue neck skin and a helmet-like casque stares down a muscular black-and-tan Doberman Pinscher barking fiercely with bared teeth. Tense 5-second camera tracking shot.",
+      "fallback_image_prompt": "Dramatic comic book style, intense realistic wildlife illustration, a giant Southern Cassowary with bright blue neck facing off against a muscular snarling Doberman Pinscher in a jungle clearing, 16:9 aspect ratio"
+    },
+    {
+      "scene_id": 2,
+      "is_short_included": true,
+      "narration": "まずはスペックの比較だ！第一に体重と体格。ドーベルマンの成犬オスは体高約70センチ、体重40キロから45キロの引き締まった筋肉塊だ。しかし対するオオヒクイドリの大型個体は全高180センチに達し、体重は60キロから最大75キロと、ドーベルマンより約1.6倍も重い！第二に攻撃力だ。ドーベルマンの武器は約305PSIの咬合力と鋭い犬歯なのに対し、ヒクイドリは恐竜そのものの太い脚から繰り出されるキックと、内側の指に生えた『長さ12センチの短剣のような鉤爪』を備えている！",
+      "subtitle": "①体重：ヒクイドリ65kg vs ドーベルマン42kg！\n②武器：長さ12cmの短剣爪による跳び蹴り vs\n咬合力305PSIの顎！体格はヒクイドリが圧倒！",
+      "flow_clip_filename": null,
+      "flow_prompt": null,
+      "fallback_image_prompt": "Dramatic comic book style, intense realistic wildlife illustration, anatomical comparison showing a 180cm 65kg Cassowary and its 12cm dagger claw next to a 42kg Doberman Pinscher, 16:9 aspect ratio"
+    },
+    {
+      "scene_id": 3,
+      "is_short_included": false,
+      "narration": "第三に皮膚と防御構造の決定的な違いを見てみよう！鳥類は骨がスカスカで脆いと思われがちだが、飛ばない走鳥類であるヒクイドリの脚の骨と骨盤は哺乳類並みに高密度で分厚い！さらに胴体は硬い針金のような羽毛で厚く覆われており、頭部には衝撃を吸収するスポンジ状のケラチン構造『カスク（兜）』を被っている。一方ドーベルマンは俊敏性を高めるために皮下脂肪が極限まで削ぎ落とされ、短毛の下はすぐ皮膚と筋肉、そして無防備な肋骨と腹部が露出しているんだ！",
+      "subtitle": "③防御構造：ヒクイドリは高密度の脚骨と\nワイヤー状の剛毛で胴体をガード！\nドーベルマンは短毛で皮下脂肪が薄く斬撃に弱い！",
+      "flow_clip_filename": null,
+      "flow_prompt": null,
+      "fallback_image_prompt": "Dramatic comic book style, intense realistic wildlife illustration, close-up diagram of the Cassowary's helmet casque and dense quill-like feathers versus the Doberman's sleek short-haired muscular chest, 16:9 aspect ratio"
+    },
+    {
+      "scene_id": 4,
+      "is_short_included": false,
+      "narration": "第四に機動力とスタミナ、第五に戦闘習性だ！両者とも最高速度は時速50キロで互角だが、ヒクイドリはその場から垂直に1.5メートルも跳び上がる驚異の脚力を持つ。そして最も重要なのが戦闘スタイルの相性だ。ドーベルマンなどの護衛犬は人間の腕や獲物の首元に飛びついて噛みつき、ぶら下がって引き倒す訓練を受けているが、その『正面から胸元へ飛び込む動き』こそ、ヒクイドリの跳び蹴りの絶好の射線上に入ってしまうんだ！",
+      "subtitle": "④機動力：両者とも時速50kmだが、ヒクイドリは\n垂直1.5mジャンプが可能！\n⑤相性：正面から飛びつく犬の習性が最大の罠に！",
+      "flow_clip_filename": null,
+      "flow_prompt": null,
+      "fallback_image_prompt": "Dramatic comic book style, intense realistic wildlife illustration, a Cassowary leaping 1.5 meters high in the air with both clawed feet extended forward like spears, 16:9 aspect ratio"
+    },
+    {
+      "scene_id": 5,
+      "is_short_included": true,
+      "narration": "さあ、開けた林縁部で戦闘開始だ！ドーベルマンが時速50キロの弾丸ダッシュで距離を詰め、ヒクイドリの長い首筋を狙って地上から跳躍する！だが、上空180センチに頭があるヒクイドリは首をスッと後ろに引いて犬の牙をかわすと同時に、強靭な両脚のバネを爆発させて空中で前蹴りを放つ！",
+      "subtitle": "【戦闘開始！】ドーベルマンが首を狙って跳躍！\nだが全高180cmのヒクイドリは首を引いてかわし、\n空中からカウンターの双脚キックを放つ！",
+      "flow_clip_filename": "battle_002_clip2.mp4",
+      "flow_prompt": "Photorealistic high-speed wildlife cinematography, 4k slow motion. A Doberman lunges forward to bite, and a giant Southern Cassowary leaps vertically into the air, thrusting both powerful scaly legs forward into the dog's chest in mid-air. Dirt and leaves flying, intense 5-second shot.",
+      "fallback_image_prompt": "Dramatic comic book style, intense realistic wildlife illustration, mid-air clash as a leaping Doberman is met by a Cassowary's powerful double-foot kick to the chest, shockwave lines, 16:9 aspect ratio"
+    },
+    {
+      "scene_id": 6,
+      "is_short_included": false,
+      "narration": "ヒクイドリの蹴りは人間の太ももほどの太さがある脚の筋肉と65キロの体重が乗っており、その衝撃力は小型車の衝突にも匹敵する！まともに胸板へ前蹴りを食らった42キロのドーベルマンは3メートル後方へ吹き飛ばされる！もしドーベルマンが側面へ回り込んでヒクイドリの胴体に噛みついたとしても、分厚い針状の羽毛がクッションとなり、一撃で内臓や背骨に達するほどの深手を与えられない！",
+      "subtitle": "65kgの体重が乗った前蹴りがドーベルマンを吹き飛ばす！\n仮に胴体へ噛みついても、分厚い針状の羽毛に阻まれ\n致命傷となる内臓まで牙が届かない！",
+      "flow_clip_filename": null,
+      "flow_prompt": null,
+      "fallback_image_prompt": "Dramatic comic book style, intense realistic wildlife illustration, the Doberman biting onto the thick coarse feathers of the Cassowary's flank while the giant bird pivots powerfully on its muscular legs, 16:9 aspect ratio"
+    },
+    {
+      "scene_id": 7,
+      "is_short_included": false,
+      "narration": "それでも勇敢なドーベルマンは怯まず、再び低い姿勢からヒクイドリの脚元へタックルを仕掛けようとする！しかし、実際にオーストラリアで起きている野生イヌ（ディンゴ）や狩猟犬とヒクイドリの遭遇記録が、この局面の残酷な結末を証明している。ヒクイドリにとって、自分の足元や胸の高さにある40キロ前後の標的は、最も力を乗せて『上から下へ踏み抜きながら切り裂く』ことができる理想的な位置なんだ！",
+      "subtitle": "勇敢に再突撃するドーベルマン！\nだが、足元へ飛び込む40kg前後の標的は、\nヒクイドリが上から踏み抜く絶好の射程圏内だ！",
+      "flow_clip_filename": null,
+      "flow_prompt": null,
+      "fallback_image_prompt": "Dramatic comic book style, intense realistic wildlife illustration, high angle view of the towering Cassowary raising its lethal clawed foot high above the charging Doberman, 16:9 aspect ratio"
+    },
+    {
+      "scene_id": 8,
+      "is_short_included": true,
+      "narration": "ここで勝敗を決める致命の一撃が炸裂する！飛び込んできたドーベルマンに対し、ヒクイドリが1.5メートル跳び上がり、65キロの全体重を乗せて長さ12センチの『ダガー（短剣）爪』を上から下へと振り下ろした！皮下脂肪の薄いドーベルマンの胸郭から腹部にかけて、12センチの鋭利な爪が槍のように突き刺さり、そのまま下方向へ引き裂くことで肋骨の損傷と動脈断裂、および開腹による致命的な大量出血を引き起こす！",
+      "subtitle": "【決定打！】65kgの全体重を乗せた12cmの短剣爪が\n上から下へドーベルマンの胸郭と腹部を切り裂く！\n脂肪の薄い犬の体は、この槍の一撃を防げない！",
+      "flow_clip_filename": "battle_002_clip3.mp4",
+      "flow_prompt": "Photorealistic dramatic wildlife shot, 4k. The giant Southern Cassowary slams its massive three-toed foot with the 12cm inner dagger claw forcefully downward, pinning the Doberman to the forest floor in a cloud of dust. Intense cinematic lighting, 5-second shot.",
+      "fallback_image_prompt": "Dramatic comic book style, intense realistic wildlife illustration, the Cassowary delivering a devastating downward stomp kick with its 12cm dagger claw glowing with impact lines against the Doberman, 16:9 aspect ratio"
+    },
+    {
+      "scene_id": 9,
+      "is_short_included": false,
+      "narration": "これこそがヒクイドリが『世界一危険な鳥』としてギネスに登録されている物理的理由だ！犬科の動物は群れで囲んで後ろからアキレス腱を噛み切る戦法なら大型鳥類を倒せるが、1対1のタイマンでは正面の蹴りの間合いを突破できない。12センチの爪による刺突と打撃を同時に食らったドーベルマンは、肺挫傷と急激な失血性ショックによって戦闘継続が不可能となる！",
+      "subtitle": "群れでの包囲ならともかく、1対1の正面対決では\n間合いを突破できない！12cmの爪による刺突と\n打撃が同時に襲いかかり、失血ショックに至る！",
+      "flow_clip_filename": null,
+      "flow_prompt": null,
+      "fallback_image_prompt": "Dramatic comic book style, intense realistic wildlife illustration, close-up of the Cassowary's terrifying scaly foot and 12cm inner claw planted firmly on the ground, intense dramatic shadows, 16:9 aspect ratio"
+    },
+    {
+      "scene_id": 10,
+      "is_short_included": true,
+      "narration": "科学シミュレーションの結論を出そう！1対1の決戦なら、勝率85パーセントでヒクイドリの勝利だ！ドーベルマンがいかに勇敢で噛む力が強くとも、1.6倍の体重差、高い頭の位置による急所防衛、そして脂肪の薄い犬の腹部を一撃で貫通する『12センチの短剣爪＋65キロの跳び蹴り』という物理兵器の威力は圧倒的！現代に生きる恐竜・ヒクイドリの恐ろしさが証明された一戦だ！",
+      "subtitle": "【結論】勝者：ヒクイドリ（勝率85%）！\n1.6倍の体重差と頭部の高さで噛みつきを防ぎ、\n12cmの短剣爪の跳び蹴りが一撃で勝負を決めた！",
+      "flow_clip_filename": null,
+      "flow_prompt": null,
+      "fallback_image_prompt": "Dramatic comic book style, intense realistic wildlife illustration, the victorious Southern Cassowary standing tall in a sunbeam in the tropical forest, vivid blue neck and helmet casque shining, 16:9 aspect ratio"
+    }
+  ]
+}

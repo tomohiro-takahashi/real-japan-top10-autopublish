@@ -1,0 +1,581 @@
+{
+  "ranking_id": "akita_kankou_001",
+  "prefecture": "Akita Sightseeing TOP 10 (秋田 観光)",
+  "title_en": "Akita Japan TOP 10 Sightseeing Ranking (Instagram 50pt × Local Reviews 35pt × Hidden Gem 15pt)",
+  "voice": "en-US-ChristopherNeural",
+  "area_guide": {
+    "map_badge": "450km North of Tokyo",
+    "cards": [
+      {
+        "title": "1. WHERE IS AKITA? (秋田の位置・地理)",
+        "bullets": [
+          "Northern Tohoku (Sea of Japan coast)",
+          "450 km north of Tokyo (west of Iwate)",
+          "Volcanic mountains & deep calderas",
+          "Zero overtourism (95% local visitors)"
+        ]
+      },
+      {
+        "title": "2. ACCESS FROM TOKYO (東京からのアクセス)",
+        "bullets": [
+          "Bullet Train: Akita Shinkansen 'Komachi' direct from Tokyo",
+          "3h 15m to Kakunodate / Tazawako Stn | 3h 50m to Akita Stn",
+          "Flight: Tokyo Haneda (HND) -> Akita Airport (AXT) in 65 mins",
+          "Local Move: Shinkansen + buses for hubs; rental car for gorges"
+        ]
+      },
+      {
+        "title": "3. CLIMATE & 4 SEASONS (気候・ベストシーズン)",
+        "bullets": [
+          "Spring (Late Apr–May, 15°C): Samurai street weeping sakura",
+          "Summer (Jun–Aug, 26°C): Cool emerald moss waterfalls & gorges",
+          "Autumn (Oct, 14°C): Fiery volcanic canyon紅葉 (foliage) peak",
+          "Winter (Dec–Mar, -3°C): Deep powder snow & milky snow Onsen"
+        ]
+      },
+      {
+        "title": "4. AKITA'S 3 SIGNATURES (秋田の3大特徴)",
+        "bullets": [
+          "World-class volcanic Onsen (Tamagawa pH 1.2 & Nyuto milky baths)",
+          "Preserved Edo-period Samurai towns & UNESCO Namahage folklore",
+          "Famous local cuisine: Kiritanpo hotpot, Inaniwa Udon & Hinai chicken",
+          "Important Warning: Many mountain roads close Nov–Apr for snow!"
+        ]
+      }
+    ]
+  },
+  "summary_rows": [
+    {
+      "rank": "#1",
+      "score": "96/100pt",
+      "name_en": "Tamagawa Onsen",
+      "name_ja": "玉川温泉",
+      "dish": "pH 1.2 Acidic Volcanic Onsen (IG 50/50 | ★4.4)",
+      "budget": "Tazawako Stn + Bus 70m",
+      "access_short": "Tazawako Bus 70m",
+      "hack": "Start in 50% bath; bring straw mat to fumaroles",
+      "thumb": "tamagawa_1.jpg"
+    },
+    {
+      "rank": "#2",
+      "score": "90/100pt",
+      "name_en": "Nyuto Onsen Village",
+      "name_ja": "乳頭温泉郷",
+      "dish": "7 Milky Forest Hot Springs (IG 43/50 | ★4.4)",
+      "budget": "Tazawako Stn + Bus 50m",
+      "access_short": "Tazawako Bus 50m",
+      "hack": "Stay 1 night to buy ¥2,500 Yumeguri Pass + bus",
+      "thumb": "nyuto_1.jpg"
+    },
+    {
+      "rank": "#3",
+      "score": "88/100pt",
+      "name_en": "Lake Tazawa",
+      "name_ja": "田沢湖",
+      "dish": "Japan's Deepest Cobalt Lake (IG 48/50 | ★4.1)",
+      "budget": "Tazawako Stn + Bus 12m",
+      "access_short": "Tazawako Bus 12m",
+      "hack": "Visit Goza-no-Ishi Shrine red torii on north shore",
+      "thumb": "tazawako_1.jpg"
+    },
+    {
+      "rank": "#4",
+      "score": "86/100pt",
+      "name_en": "Oyasukyo Gorge",
+      "name_ja": "小安峡 大噴湯",
+      "dish": "98°C Steam Canyon Geyser (IG 41/50 | ★4.4)",
+      "budget": "Yuzawa Stn + Bus/Car 50m",
+      "access_short": "Yuzawa Car 50m",
+      "hack": "Wear grippy sneakers for 300 wet canyon stairs",
+      "thumb": "oyasukyo_1.jpg"
+    },
+    {
+      "rank": "#5",
+      "score": "85/100pt",
+      "name_en": "Mototaki Waterfall",
+      "name_ja": "元滝伏流水",
+      "dish": "Emerald Moss Spring Falls (IG 39/50 | ★4.5)",
+      "budget": "Kisakata Stn + Car 15m",
+      "access_short": "Kisakata Car 15m",
+      "hack": "Go at 8 AM for mystical morning mist & zero crowds",
+      "thumb": "mototaki_1.jpg"
+    },
+    {
+      "rank": "#6",
+      "score": "83/100pt",
+      "name_en": "Namahage Museum",
+      "name_ja": "なまはげ館",
+      "dish": "150 Demon Masks & Live Ritual (IG 40/50 | ★4.2)",
+      "budget": "Oga Stn + Shuttle 25m",
+      "access_short": "Oga Shuttle 25m",
+      "hack": "Pre-book Namahage Shuttle taxi from JR Oga Station",
+      "thumb": "namahage_1.jpg"
+    },
+    {
+      "rank": "#7",
+      "score": "82/100pt",
+      "name_en": "Dakigaeri Gorge",
+      "name_ja": "抱返り渓谷",
+      "dish": "Turquoise Stream & Red Bridge (IG 40/50 | ★4.2)",
+      "budget": "Kakunodate Stn + Car 15m",
+      "access_short": "Kakunodate 15m",
+      "hack": "Walk 30m to Mikaeri Falls; carry a bear bell",
+      "thumb": "dakigaeri_1.jpg"
+    },
+    {
+      "rank": "#8",
+      "score": "81/100pt",
+      "name_en": "Kakunodate Samurai St",
+      "name_ja": "角館武家屋敷通り",
+      "dish": "Edo Samurai Black Fences (IG 39/50 | ★4.2)",
+      "budget": "Kakunodate Stn Walk 18m",
+      "access_short": "Kakunodate Wk 18m",
+      "hack": "Arrive before 3 PM; samurai interiors close at 4:30 PM",
+      "thumb": "kakunodate_1.jpg"
+    },
+    {
+      "rank": "#9",
+      "score": "81/100pt",
+      "name_en": "Senshu Park",
+      "name_ja": "千秋公園",
+      "dish": "Kubota Castle Moat & Foliage (IG 43/50 | ★4.0)",
+      "budget": "Akita Stn Walk 10m",
+      "access_short": "Akita Stn Wk 10m",
+      "hack": "Climb Osumi Turret for panoramic views of Akita City",
+      "thumb": "senshu_park_1.jpg"
+    },
+    {
+      "rank": "#10",
+      "score": "80/100pt",
+      "name_en": "Cape Nyudozaki",
+      "name_ja": "入道崎",
+      "dish": "40th Parallel Lighthouse & Sunset (IG 41/50 | ★4.1)",
+      "budget": "Hadachi Stn + Bus 50m",
+      "access_short": "Hadachi Bus 50m",
+      "hack": "Time visit for Sea of Japan sunset & hot stone soup",
+      "thumb": "nyudozaki_1.jpg"
+    }
+  ],
+  "segments": [
+    {
+      "seg_type": "opening",
+      "rank_badge": "99% OF TOURISTS MISS THIS!",
+      "place_ja": "「混雑する京都は卒業！」日本人が隠す秘境・秋田",
+      "place_en": "SKIP CROWDED KYOTO! What You Get in This 9-Min Guide",
+      "area": "Akita Prefecture, Japan",
+      "budget": "100-Point Original Index",
+      "insider_tip": "FORMULA: Instagram Buzz (50pt) + Japanese Reviews (35pt) + Non-Chain Gem (15pt)",
+      "photos": [
+        "tamagawa_1.jpg",
+        "nyuto_1.jpg"
+      ],
+      "narration": "What are the absolute best places to visit in Akita, Japan, according to real Japanese travelers? We analyzed Japanese Instagram post volume and domestic review ratings to build an original 100-point TOP 10 ranking! By weighting Instagram visual buzz at 50 points and filtering out every commercial chain store, only authentic nature, samurai towns, and secret hot springs made the cut!",
+      "subtitle": "Akita Sightseeing TOP 10! Ranked by our 100-Point Index:\nInstagram Buzz (50pt) + Local Reviews (35pt) + Non-Chain Gem (15pt)."
+    },
+    {
+      "seg_type": "area_guide",
+      "rank_badge": "AKITA GUIDE 1/2",
+      "place_ja": "そもそも秋田県ってどこ？東京からの新幹線・飛行機アクセス完全ガイド",
+      "place_en": "Before We Start: Where is Akita & How Do You Get There?",
+      "area": "Northern Tohoku Region",
+      "budget": "Shinkansen 3h 15m / Flight 65m",
+      "insider_tip": "JR PASS TIP: Take the Akita Shinkansen 'Komachi' direct from Tokyo Station!",
+      "photos": [
+        "tazawako_1.jpg",
+        "kakunodate_1.jpg"
+      ],
+      "narration": "Before we count down from number ten, where exactly is Akita, and how do you get there? Akita sits in northern Tohoku along the Sea of Japan coast, about 450 kilometers north of Tokyo. From Tokyo Station, you can ride the direct Akita Shinkansen Komachi bullet train to Kakunodate or Lake Tazawa in just 3 hours and 15 minutes, or fly from Tokyo Haneda Airport to Akita Airport in 65 minutes!",
+      "subtitle": "Where is Akita? 450 km north of Tokyo on the Sea of Japan coast.\nDirect Akita Shinkansen 'Komachi' takes 3h 15m, or a 65-min flight from Haneda!"
+    },
+    {
+      "seg_type": "area_guide",
+      "rank_badge": "AKITA GUIDE 2/2",
+      "place_ja": "秋田の気候・四季のベストシーズンと移動手段の注意点",
+      "place_en": "Akita's Climate, Four Seasons & Local Transport Strategy",
+      "area": "4 Distinct Seasons",
+      "budget": "Train + Bus or Rental Car",
+      "insider_tip": "SEASON WARNING: Heavy snow closes some high mountain passes from Nov to April!",
+      "photos": [
+        "oyasukyo_1.jpg",
+        "mototaki_1.jpg"
+      ],
+      "narration": "Akita has four dramatic seasons: weeping cherry blossoms in late April, cool 26-degree emerald gorges in summer, fiery volcanic canyon foliage in October, and deep powder snow in winter for snow-view hot springs. While bullet train stations connect easily by local bus to top hubs, renting a car unlocks Akita's deepest waterfalls and coastal capes. Now, let's start the TOP 10 countdown!",
+      "subtitle": "4 Seasons: April Sakura, Cool Summer Gorges, October Foliage & Winter Snow Onsen.\nBullet train + buses reach main hubs; a rental car unlocks remote gorges!"
+    },
+    {
+      "seg_type": "spot",
+      "rank_badge": "#10  80/100 pt",
+      "place_ja": "入道崎 (IG:41/50 | 口コミ:26/35 ★4.1 | 穴場:13/15)",
+      "place_en": "#10 Cape Nyudozaki — Oga Peninsula's 40th Parallel Lighthouse",
+      "area": "Oga City, Akita",
+      "budget": "Free (Lighthouse: ¥300)",
+      "access_info": "🚄 JR Akita Stn -> JR Oga Line to Hadachi Stn (55m) -> Bus (50m) or Car (70m)",
+      "insider_tip": "SCORE BREAKDOWN: 16,200 IG Hits + 70 Page-1 IG Links (41pt) + ★4.1 Local Rating (26pt)",
+      "photos": [
+        "nyudozaki_1.jpg",
+        "nyudozaki_2.jpg"
+      ],
+      "narration": "Starting at number ten with 80 points is Cape Nyudozaki, at the northern tip of the Oga Peninsula. Marked by a striking black-and-white striped lighthouse right on the 40th parallel north, its sweeping green headlands meet the cobalt Sea of Japan. To get here, take the JR Oga Line from Akita Station to Hadachi Station, then ride the local bus for 50 minutes, or drive 70 minutes from Akita City.",
+      "subtitle": "#10 Cape Nyudozaki (80/100 pt): Oga Peninsula's iconic striped lighthouse.\nAccess: JR Oga Line to Hadachi Stn + 50m bus, or 70m rental car from Akita City."
+    },
+    {
+      "seg_type": "review",
+      "rank_badge": "#10 LOCAL REVIEWS",
+      "place_ja": "入道崎のリアルな口コミ（夕日の絶景と石焼料理）",
+      "place_en": "What Japanese Visitors Say About Cape Nyudozaki",
+      "area": "Oga Peninsula",
+      "budget": "396 Domestic Reviews",
+      "access_info": "🚄 JR Hadachi Stn + 50m Bus | Free Parking on site | Best at Sunset",
+      "insider_tip": "FOOD TIP: Try 'Ishiyaki' fisherman's soup cooked with red-hot volcanic rocks!",
+      "review_praise_ja": "「海に沈む夕日が最高！白黒の灯台と北緯40度のモニュメントが写真映えします」",
+      "review_praise_en": "\"The sunset over the Sea of Japan with the black-and-white lighthouse and 40°N monument is breathtaking!\"",
+      "review_warn_ja": "「海風がかなり強いので羽織るものが必須。路線バスは本数が少ないので時刻表確認を」",
+      "review_warn_en": "\"Sea winds are strong even in summer—bring a windbreaker, and check bus return times carefully!\"",
+      "photos": [
+        "nyudozaki_3.jpg",
+        "nyudozaki_4.jpg"
+      ],
+      "narration": "Across 396 Japanese reviews, travelers rave about watching the sun sink directly into the Sea of Japan beside the 40-degree-north stone monument. Local diners right by the parking lot serve Ishiyaki—fresh sea bream soup boiled instantly by dropping glowing red-hot volcanic stones into a wooden tub. Just bring a windbreaker, as the coastal breeze is strong year-round!",
+      "subtitle": "Real Reviews: Unbeatable Sea of Japan sunsets & volcanic stone-boiled soup.\nLocal Warning: Strong coastal winds—bring a jacket and check bus schedules!"
+    },
+    {
+      "seg_type": "spot",
+      "rank_badge": "#9  81/100 pt",
+      "place_ja": "千秋公園 (IG:43/50 | 口コミ:25/35 ★4.0 | 穴場:13/15)",
+      "place_en": "#9 Senshu Park — Kubota Castle Ruins in Central Akita City",
+      "area": "Akita City Center",
+      "budget": "Park: Free (Turret: ¥150)",
+      "access_info": "🚄 Akita Shinkansen to JR Akita Station -> 10-minute walk from West Exit!",
+      "insider_tip": "SCORE BREAKDOWN: 39,500 IG Hits (43/50pt) | Easiest Zero-Transfer Access in Akita!",
+      "photos": [
+        "senshu_park_1.jpg",
+        "senshu_park_2.jpg"
+      ],
+      "narration": "At number nine with 81 points is Senshu Park, built on the hilltop ruins of 17th-century Kubota Castle, home of the Satake Samurai Clan. With 39,500 Instagram hits, it is the easiest spot to reach in all of Akita—just a 10-minute walk straight from the West Exit of JR Akita Shinkansen Station! Lotus-filled moats and ancient stone walls frame the park.",
+      "subtitle": "#9 Senshu Park (81/100 pt): Historic Kubota Castle ruins in central Akita.\nAccess: Just a 10-minute walk straight from JR Akita Shinkansen Station!"
+    },
+    {
+      "seg_type": "review",
+      "rank_badge": "#9 LOCAL REVIEWS",
+      "place_ja": "千秋公園のリアルな口コミ（御隅櫓の展望と四季の花）",
+      "place_en": "What Japanese Visitors Say About Senshu Park",
+      "area": "10m Walk from Akita Stn",
+      "budget": "527 Domestic Reviews",
+      "access_info": "🚄 10-min walk from JR Akita Station West Exit (pass Akita Museum of Art)",
+      "insider_tip": "LOCAL HACK: Pay ¥150 to climb Osumi Yagura Turret for a 360° view of Akita City!",
+      "review_praise_ja": "「秋田駅から徒歩10分で緑豊かなお城跡！春は桜とツツジ、秋は紅葉が見事です」",
+      "review_praise_en": "\"Only 10 minutes on foot from Akita Station! Gorgeous cherry blossoms, azaleas, and autumn foliage.\"",
+      "review_warn_ja": "「本丸までは緩やかな坂と階段を登るので、スーツケースは駅のコインロッカーへ」",
+      "review_warn_en": "\"You climb stone slopes to the upper baileys—leave heavy luggage in Akita Station lockers first!\"",
+      "photos": [
+        "senshu_park_3.jpg",
+        "senshu_park_4.jpg"
+      ],
+      "narration": "Japanese reviewers love stopping here right before or after catching the bullet train. For just 150 yen, you can climb the reconstructed Osumi Yagura castle turret for a panoramic view across Akita City out to the Sea of Japan. Because the upper castle grounds sit on a hill with stone stairs, locals advise stashing your suitcases in Akita Station's coin lockers first.",
+      "subtitle": "Real Reviews: Perfect 1-hour stop before or after your bullet train.\nLocal Hack: Stash luggage at Akita Station lockers before climbing the castle hill!"
+    },
+    {
+      "seg_type": "spot",
+      "rank_badge": "#8  81/100 pt",
+      "place_ja": "角館武家屋敷通り (IG:39/50 | 口コミ:29/35 ★4.2 | 穴場:13/15)",
+      "place_en": "#8 Kakunodate Samurai District — Little Kyoto of Tohoku",
+      "area": "Semboku City, Akita",
+      "budget": "Street: Free (Manors: ¥500)",
+      "access_info": "🚄 Akita Shinkansen direct to JR Kakunodate Stn (3h 15m from Tokyo) -> 18m walk",
+      "insider_tip": "SCORE BREAKDOWN: 1,114 Reviews ★4.2 (29pt) + 13,000 IG Hits (39pt)",
+      "photos": [
+        "kakunodate_1.jpg",
+        "kakunodate_2.jpg"
+      ],
+      "narration": "Edging into number eight with 81 points and a higher 4.2-star rating across 1,114 reviews is the Kakunodate Samurai District. Founded in 1620, its wide streets and black wooden fences remain untouchedsince the Edo era. Best of all, the Akita Shinkansen stops directly at JR Kakunodate Station, and the samurai boulevard is an easy 18-minute walk from the ticket gates!",
+      "subtitle": "#8 Kakunodate Samurai District (81/100 pt, ★4.2 across 1,114 reviews).\nAccess: Direct Akita Shinkansen to JR Kakunodate Stn + 18-minute walk!"
+    },
+    {
+      "seg_type": "review",
+      "rank_badge": "#8 LOCAL REVIEWS",
+      "place_ja": "角館武家屋敷通りのリアルな口コミ（青柳家と閉館時間）",
+      "place_en": "What Japanese Visitors Say About Kakunodate",
+      "area": "18m Walk from Kakunodate Stn",
+      "budget": "1,114 Domestic Reviews",
+      "access_info": "🚄 JR Kakunodate Stn -> 18m walk (or 5m taxi / rental bike at station)",
+      "insider_tip": "TIMING WARNING: Samurai manor interiors close at 4:30 PM—arrive by early afternoon!",
+      "review_praise_ja": "「黒板塀の重厚な街並みが圧巻！青柳家では本物の刀や兜に触れる体験もできます」",
+      "review_praise_en": "\"The black fences are magnificent! Inside the Aoyagi Manor, you can even lift real samurai swords.\"",
+      "review_warn_ja": "「夕方16時半には屋敷の内部公開が閉まり周辺のお店も早く閉まるので午前〜昼訪問が鉄則」",
+      "review_warn_en": "\"Samurai houses and cafes close around 4:30 PM—visit in the morning or early afternoon!\"",
+      "photos": [
+        "kakunodate_3.jpg",
+        "kakunodate_4.jpg"
+      ],
+      "narration": "Japanese visitors highlight the Aoyagi and Ishiguro Samurai Manors, where you can step inside authentic thatched-roof residences and even test the weight of real iron helmets and swords. However, reviewers warn that all manor interiors and local Inaniwa Udon shops close around 4:30 PM, so make sure to arrive in the morning or early afternoon!",
+      "subtitle": "Real Reviews: Step inside Aoyagi Manor to hold real samurai armor & swords.\nLocal Warning: Manors and shops close by 4:30 PM—do not arrive late!"
+    },
+    {
+      "seg_type": "spot",
+      "rank_badge": "#7  82/100 pt",
+      "place_ja": "抱返り渓谷 (IG:40/50 | 口コミ:27/35 ★4.2 | 穴場:15/15)",
+      "place_en": "#7 Dakigaeri Gorge — Milky Turquoise Stream & Red Bridge",
+      "area": "Semboku City (Near Kakunodate)",
+      "budget": "Free Admission",
+      "access_info": "🚄 JR Kakunodate Stn -> 15m by Taxi / On-Demand Van 'Yobunoru' (Free Gorge Bus in Autumn)",
+      "insider_tip": "SCORE BREAKDOWN: Full 15/15 Hidden Gem Score + 40/50 Instagram Visual Score!",
+      "photos": [
+        "dakigaeri_1.jpg",
+        "dakigaeri_2.jpg"
+      ],
+      "narration": "At number seven with 82 points is Dakigaeri Gorge, located just 15 minutes from Kakunodate Station! Japanese Instagram photographers are obsessed with the contrast between its vivid red Kami-no-Iwahashi suspension bridge and the glowing, milky-turquoise river water below. You can combine it with Kakunodate on the same day using a 15-minute taxi or the local Yobunoru shared van.",
+      "subtitle": "#7 Dakigaeri Gorge (82/100 pt): Crimson suspension bridge over turquoise water.\nAccess: Just 15 minutes by car or shared taxi from JR Kakunodate Station!"
+    },
+    {
+      "seg_type": "review",
+      "rank_badge": "#7 LOCAL REVIEWS",
+      "place_ja": "抱返り渓谷のリアルな口コミ（回顧の滝までの遊歩道）",
+      "place_en": "What Japanese Visitors Say About Dakigaeri Gorge",
+      "area": "15m from Kakunodate Stn",
+      "budget": "273 Domestic Reviews",
+      "access_info": "🚄 JR Kakunodate Stn -> 15m car/taxi (Free shuttle bus runs during Oct–Nov foliage)",
+      "insider_tip": "TRAIL TIP: Flat 30-minute forest walk to Mikaeri Waterfall; ring the bear pipes!",
+      "review_praise_ja": "「エメラルドグリーンの渓流と赤い吊り橋のコントラストが最高！回顧の滝も迫力満点」",
+      "review_praise_en": "\"The contrast of the emerald river and red bridge is stunning! Mikaeri Falls is well worth the walk.\"",
+      "review_warn_ja": "「片道30分歩くので歩きやすい靴で。熊よけの鉄パイプが設置されているので鳴らして歩こう」",
+      "review_warn_en": "\"It's a 30-minute walk each way to the waterfall—clang the trailside iron bear-bells as you walk!\"",
+      "photos": [
+        "dakigaeri_3.jpg",
+        "dakigaeri_4.jpg"
+      ],
+      "narration": "Reviewers love the flat, scenic 30-minute cliffside trail leading to Mikaeri Waterfall—literally meaning the waterfall so beautiful you cannot help looking back over your shoulder. Along the trail, you will see hanging iron pipes installed by locals: give them a clang with the metal rod to echo through the canyon and keep wild mountain bears away!",
+      "subtitle": "Real Reviews: Easy 30-minute flat canyon trail to Mikaeri Waterfall.\nLocal Quirk: Clang the hanging iron pipes along the trail as bear bells!"
+    },
+    {
+      "seg_type": "spot",
+      "rank_badge": "#6  83/100 pt",
+      "place_en": "#6 Namahage Museum & Shinzan Folklore Center",
+      "place_ja": "なまはげ館・男鹿真山伝承館 (IG:40/50 | 口コミ:28/35 ★4.2 | 穴場:15/15)",
+      "area": "Oga Peninsula, Akita",
+      "budget": "Combined Ticket: ¥1,100",
+      "access_info": "🚄 JR Akita Stn -> JR Oga Stn (60m) -> Pre-booked 'Namahage Shuttle' Shared Taxi (25m)",
+      "insider_tip": "SCORE BREAKDOWN: 16,300 IG Hits (40pt) + ★4.2 across 488 Reviews (28pt)",
+      "photos": [
+        "namahage_1.jpg",
+        "namahage_2.jpg"
+      ],
+      "narration": "Ranking number six with 83 points is the Namahage Museum and Oga Shinzan Folklore Center. Recognized by UNESCO as Intangible Cultural Heritage, the Namahage are fierce straw-cloaked mountain deities who visit Oga homes on New Year's Eve. Inside the museum, over 150 real hand-carved masks from every village in Oga surround you in a dramatic illuminated hall!",
+      "subtitle": "#6 Namahage Museum (83/100 pt): UNESCO folklore hall with 150 real demon masks.\nAccess: JR Oga Station + 25m pre-booked 'Namahage Shuttle' shared taxi."
+    },
+    {
+      "seg_type": "review",
+      "rank_badge": "#6 LOCAL REVIEWS",
+      "place_ja": "なまはげ館のリアルな口コミ（真山伝承館の実演が圧巻）",
+      "place_en": "What Japanese Visitors Say About the Namahage Experience",
+      "area": "Oga City, Akita",
+      "budget": "488 Domestic Reviews",
+      "access_info": "🚄 JR Oga Stn + 25m Namahage Shuttle | 55m drive from Akita City",
+      "insider_tip": "MUST DO: Buy the ¥1,100 combo ticket to watch the live stomping ritual next door!",
+      "review_praise_ja": "「150体並ぶなまはげ面は圧巻！隣の伝承館での実演は迫力とユーモアがあって大感動」",
+      "review_praise_en": "\"Seeing 150 masks side by side is jaw-dropping, and the live performance next door is thrilling and funny!\"",
+      "review_warn_ja": "「なまはげ館だけでなく必ず隣の真山伝承館のセット券を買うべき！実演の開始時間を先に確認」",
+      "review_warn_en": "\"Never skip the Shinzan Folklore House next door—check the live show schedule as soon as you arrive!\"",
+      "photos": [
+        "namahage_3.jpg",
+        "namahage_4.jpg"
+      ],
+      "narration": "Across 488 Japanese reviews, every single visitor insists on one rule: buy the 1,100-yen combo ticket that includes the Shinzan Folklore House right next door. Inside an authentic thatched farmhouse, performers in straw coats burst through the sliding doors roaring 'Are there any crying children here?' in a thrilling, surprisingly humorous ritual!",
+      "subtitle": "Real Reviews: The live farmhouse ritual next door is both thrilling and hilarious.\nLocal Rule: Always buy the combo ticket and check showtimes upon arrival!"
+    },
+    {
+      "seg_type": "spot",
+      "rank_badge": "#5  85/100 pt",
+      "place_ja": "元滝伏流水 (IG:39/50 | 口コミ:31/35 ★4.5 | 穴場:15/15)",
+      "place_en": "#5 Mototaki Underground Spring Waterfall — Moss Wonderland",
+      "area": "Nikaho City (Mt. Chokai Foot)",
+      "budget": "Free Admission",
+      "access_info": "🚄 JR Uetsu Line to Kisakata Stn -> 15m Taxi/Car + 15m flat forest walk",
+      "insider_tip": "SCORE BREAKDOWN: Highest Rating in Akita ★4.5 (31/35pt) + Full 15/15 Gem Score!",
+      "photos": [
+        "mototaki_1.jpg",
+        "mototaki_2.jpg"
+      ],
+      "narration": "Cracking the top five with 85 points and the highest domestic rating in our entire ranking—4.5 stars—is Mototaki Underground Spring Waterfall in Nikaho City! Snowmelt from Mount Chokai filters underground for decades before gushing straight out of a mossy lava cliff wall. Fifty thousand tons of ice-cold spring water cascade over velvety green moss every single day!",
+      "subtitle": "#5 Mototaki Waterfall (85/100 pt, ★4.5 Rating): Spring water gushing from moss cliffs.\nAccess: JR Kisakata Station + 15m car/taxi, then a 15-minute forest walk."
+    },
+    {
+      "seg_type": "review",
+      "rank_badge": "#5 LOCAL REVIEWS",
+      "place_ja": "元滝伏流水のリアルな口コミ（ジブリのような苔と朝霧）",
+      "place_en": "What Japanese Visitors Say About Mototaki Waterfall",
+      "area": "Nikaho City, Southern Akita",
+      "budget": "121 Domestic Reviews (★4.5)",
+      "access_info": "🚄 JR Kisakata Stn + 15m taxi | Free parking lot -> 750m (15m) forest path",
+      "insider_tip": "PHOTO HACK: Visit on a warm summer morning when cold water creates natural mist!",
+      "review_praise_ja": "「苔むした岩肌から湧き出る水と霧がまさにジブリの世界！夏でも天然のクーラーのように涼しい」",
+      "review_praise_en": "\"Water bursting from emerald moss in the mist looks straight out of Studio Ghibli! Ice-cool in summer.\"",
+      "review_warn_ja": "「駐車場から徒歩15分、水辺の石は濡れて滑りやすいのでスニーカー必須。トイレは駐車場で済ませて」",
+      "review_warn_en": "\"It's a 15-minute walk from parking on damp stones—wear grippy shoes and use the restroom at the lot!\"",
+      "photos": [
+        "mototaki_3.jpg",
+        "mototaki_4.jpg"
+      ],
+      "narration": "Japanese photographers call this Akita's real-life Studio Ghibli forest. Because the spring water stays at a constant 10 degrees Celsius year-round, visiting on a warm summer morning creates an ethereal layer of natural fog over the emerald moss. It is an easy 15-minute forest walk from the free parking lot, just wear non-slip shoes!",
+      "subtitle": "Real Reviews: 10°C spring water creates magical natural fog on summer mornings.\nLocal Tip: Use the restroom at the parking lot before the 15-minute forest walk!"
+    },
+    {
+      "seg_type": "spot",
+      "rank_badge": "#4  86/100 pt",
+      "place_ja": "小安峡 大噴湯 (IG:41/50 | 口コミ:30/35 ★4.4 | 穴場:15/15)",
+      "place_en": "#4 Oyasukyo Gorge & Daifunto Geyser — 98°C Steam Canyon",
+      "area": "Yuzawa City, Southern Akita",
+      "budget": "Free Canyon Trail",
+      "access_info": "🚄 JR Ou Line Yuzawa Stn -> 50m Bus/Car (or 55m drive from Yokote/Kurikoma)",
+      "insider_tip": "SCORE BREAKDOWN: 53 Page-1 IG Reel Links (41pt) + ★4.4 Rating (30pt) + 15pt Gem!",
+      "photos": [
+        "oyasukyo_1.jpg",
+        "oyasukyo_2.jpg"
+      ],
+      "narration": "At number four with 86 points is Oyasukyo Gorge and its Daifunto Geyser in Yuzawa City! Deep at the bottom of a 60-meter V-shaped canyon carved by the Minase River, 98-degree boiling volcanic water and roaring white steam blast horizontally out of the rock crevices right beside the walking path! It is reachable in 50 minutes by bus or car from JR Yuzawa Station.",
+      "subtitle": "#4 Oyasukyo Gorge (86/100 pt, ★4.4): 98°C steam blasting from a 60m canyon wall!\nAccess: 50 minutes by bus or rental car from JR Yuzawa Station."
+    },
+    {
+      "seg_type": "review",
+      "rank_badge": "#4 LOCAL REVIEWS",
+      "place_ja": "小安峡のリアルな口コミ（シューッという轟音と300段の階段）",
+      "place_en": "What Japanese Visitors Say About Oyasukyo Gorge",
+      "area": "Yuzawa City, Akita",
+      "budget": "267 Domestic Reviews (★4.4)",
+      "access_info": "🚄 JR Yuzawa Stn + 50m Bus | Note: Canyon stairs close mid-Nov to mid-April for snow",
+      "insider_tip": "FITNESS WARNING: 300 steep stairs down and up! View from Kawarayu Bridge if tired.",
+      "review_praise_ja": "「地の底からシューッと噴き出す熱湯と白い蒸気の迫力が凄まじい！紅葉とのコントラストも最高」",
+      "review_praise_en": "\"The roaring hiss of boiling steam blasting out of the canyon floor is unreal, especially during autumn foliage!\"",
+      "review_warn_ja": "「渓谷の底まで約300段の急な階段を上り下りします。蒸気で足元が濡れて滑るのでヒールやサンダル厳禁」",
+      "review_warn_en": "\"You must climb 300 steep stairs down and back up, and steam makes the steps wet—never wear sandals!\"",
+      "photos": [
+        "oyasukyo_3.jpg",
+        "oyasukyo_4.jpg"
+      ],
+      "narration": "Japanese visitors are blown away by the thunderous hiss echoing off the canyon walls, especially in October when fiery red maple leaves frame the white steam. However, reviewers share two critical warnings: reaching the canyon floor requires climbing 300 steep stairs wet with volcanic mist, and the bottom trail closes from mid-November to mid-April due to deep snow!",
+      "subtitle": "Real Reviews: Unforgettable volcanic roar & fiery October autumn leaves.\nLocal Warning: 300 steep wet stairs—and the lower trail closes Nov to April!"
+    },
+    {
+      "seg_type": "spot",
+      "rank_badge": "#3  88/100 pt",
+      "place_ja": "田沢湖 (IG:48/50 | 口コミ:27/35 ★4.1 | 穴場:13/15)",
+      "place_en": "#3 Lake Tazawa — Japan's Deepest Cobalt-Blue Caldera Lake",
+      "area": "Semboku City, Akita",
+      "budget": "Free (Sightseeing Boat: ¥1,400)",
+      "access_info": "🚄 Akita Shinkansen direct to JR Tazawako Stn -> 12-minute Ugo Kotsu Bus!",
+      "insider_tip": "TOP 3 CLIMAX! 263,000 Instagram Hits (48/50pt) — Direct Bullet Train + 12m Bus!",
+      "photos": [
+        "tazawako_1.jpg",
+        "tazawako_2.jpg"
+      ],
+      "narration": "Entering the Top 3 at number three with 88 points is Lake Tazawa! Plunging 423.4 meters deep, it is the deepest lake in all of Japan—so deep that it never freezes even in the dead of an Akita winter. With 263,000 Instagram hits, its surreal cobalt-blue water is just a 12-minute bus ride from JR Tazawako Shinkansen Station!",
+      "subtitle": "#3 Lake Tazawa (88/100 pt): Japan's deepest lake (423.4m) glowing cobalt blue.\nAccess: Direct Akita Shinkansen to JR Tazawako Stn + 12-minute local bus!"
+    },
+    {
+      "seg_type": "review",
+      "rank_badge": "#3 LOCAL REVIEWS",
+      "place_ja": "田沢湖のリアルな口コミ（たつこ像と御座石神社の鳥居）",
+      "place_en": "What Japanese Visitors Say About Lake Tazawa",
+      "area": "12m Bus from Tazawako Stn",
+      "budget": "1,031 Domestic Reviews",
+      "access_info": "🚄 JR Tazawako Stn -> Buy 'Tazawako Loop Bus Ticket' (¥1,220) with sightseeing stops!",
+      "insider_tip": "INSTAGRAM HACK: Don't just see Tatsuko Statue—stop at Goza-no-Ishi Shrine red torii!",
+      "review_praise_ja": "「晴れた日のルリ色の湖面と黄金のたつこ像が本当に美しい！御座石神社の湖畔の赤い鳥居も必見」",
+      "review_praise_en": "\"On a sunny day, the lapis-lazuli water against the golden Tatsuko statue and lakeside red torii is magical!\"",
+      "review_warn_ja": "「バスで一周するなら、たつこ像と御座石神社で散策時間がついた『田沢湖一周線』の乗車券が圧倒的に便利」",
+      "review_warn_en": "\"If taking the bus, buy the Lake Loop Bus pass—it pauses 20 minutes at Tatsuko Statue and 10 minutes at the shrine!\"",
+      "photos": [
+        "tazawako_3.jpg",
+        "tazawako_4.jpg"
+      ],
+      "narration": "While foreign guidebooks only mention the golden Tatsuko Statue, Japanese Instagrammers flock to Goza-no-Ishi Shrine on the north shore, where a vermilion torii gate stands right on the rocky edge of the sapphire water. If you don't have a car, reviewers recommend the Lake Loop Bus from Tazawako Station, which pauses right at both photo spots!",
+      "subtitle": "Real Reviews: Combine the golden Tatsuko Statue with Goza-no-Ishi Shrine's red torii.\nBus Hack: The Lake Loop Bus pauses 20m at the statue & 10m at the shrine!"
+    },
+    {
+      "seg_type": "spot",
+      "rank_badge": "#2  90/100 pt",
+      "place_ja": "乳頭温泉郷 (IG:43/50 | 口コミ:32/35 ★4.4 | 穴場:15/15)",
+      "place_en": "#2 Nyuto Onsen Village — Seven Secret Forest Hot Springs",
+      "area": "Towada-Hachimantai National Park",
+      "budget": "Day Bath: ¥800–¥1,000",
+      "access_info": "🚄 Akita Shinkansen to JR Tazawako Stn -> 50-minute Ugo Kotsu Bus to Nyuto Onsen!",
+      "insider_tip": "SCORE BREAKDOWN: ★4.4 across 646 Reviews (32/35pt) + 44,100 IG Hits (43/50pt)",
+      "photos": [
+        "nyuto_1.jpg",
+        "nyuto_2.jpg"
+      ],
+      "narration": "Taking runner-up at number two with 90 points is the legendary Nyuto Onsen Village! Tucked deep inside a beech forest at the foot of Mount Nyuto, seven independent hot spring inns each draw from their own distinct volcanic source. Flagship Tsuru-no-Yu dates back over 350 years, famous for its thatched wooden longhouses and milky-blue open-air baths. Ride the bus 50 minutes directly from JR Tazawako Station!",
+      "subtitle": "#2 Nyuto Onsen Village (90/100 pt, ★4.4): 7 historic forest hot spring inns.\nAccess: Direct 50-minute Ugo Kotsu bus from JR Tazawako Shinkansen Station!"
+    },
+    {
+      "seg_type": "review",
+      "rank_badge": "#2 LOCAL REVIEWS",
+      "place_ja": "乳頭温泉郷のリアルな口コミ（湯めぐり手形と鶴の湯の注意点）",
+      "place_en": "What Japanese Visitors Say About Nyuto Onsen Village",
+      "area": "50m Bus from Tazawako Stn",
+      "budget": "646 Domestic Reviews (★4.4)",
+      "access_info": "🚄 JR Tazawako Stn -> 50m Bus | Shuttle 'Yumeguri-go' connects all 7 inns",
+      "insider_tip": "INSIDER HACK: Stay 1 night at ANY of the 7 inns to unlock the ¥2,500 Yumeguri Pass!",
+      "review_praise_ja": "「鶴の湯の乳白色の露天風呂は一生に一度は入るべき風情！湯めぐり手形で7湯すべて制覇しました」",
+      "review_praise_en": "\"Tsuru-no-Yu's milky open-air bath is once-in-a-lifetime! We used the wooden Yumeguri Pass to hop all 7 inns.\"",
+      "review_warn_ja": "「鶴の湯の日帰り入浴は月曜定休で10時〜15時のみ。混浴露天は湯船に入る前の通路が丸見えなので女性は注意」",
+      "review_warn_en": "\"Tsuru-no-Yu day bathing is 10 AM–3 PM (closed Mondays), and dedicated women-only outdoor baths are also available!\"",
+      "photos": [
+        "nyuto_3.jpg",
+        "nyuto_4.jpg"
+      ],
+      "narration": "Across 646 glowing reviews, Japanese guests share the ultimate insider hack: even if Tsuru-no-Yu is booked out six months ahead, staying overnight at any of the seven inns lets you buy the 2,500-yen wooden Yumeguri Tegata pass. It gives you entry to all seven hot springs plus unlimited rides on the forest shuttle bus! Just remember Tsuru-no-Yu day bathing closes on Mondays.",
+      "subtitle": "Real Reviews: Stay at any of the 7 inns to buy the ¥2,500 Yumeguri Pass + bus!\nLocal Warning: Tsuru-no-Yu day bathing is 10 AM–3 PM and closed on Mondays."
+    },
+    {
+      "seg_type": "spot",
+      "rank_badge": "#1  96/100 pt",
+      "place_ja": "玉川温泉 (IG:50/50 | 口コミ:31/35 ★4.4 | 穴場:15/15)",
+      "place_en": "#1 Tamagawa Onsen — Japan's Strongest Acidic Hot Spring & Fumaroles",
+      "area": "Semboku City (Hachimantai)",
+      "budget": "Day Bath: ¥800 (Trail: Free)",
+      "access_info": "🚄 JR Tazawako Stn -> 70m Express Bus (Apr–Nov) | Winter: Bus to Shin-Tamagawa + Snowcat",
+      "insider_tip": "NO.1 OVERALL (96/100pt): Full 50/50 IG Score (493,000 Hits) + ★4.4 Rating!",
+      "photos": [
+        "tamagawa_1.jpg",
+        "tamagawa_2.jpg"
+      ],
+      "narration": "And claiming the number one crown in Akita with a massive 96 out of 100 points is Tamagawa Onsen! Scoring a perfect 50 out of 50 on Instagram with 493,000 hits and a 4.4-star domestic rating, its volcanic valley looks like another planet. Its main spring, Obuki, blasts out 9,000 liters per minute of boiling 98-degree water at pH 1.2—the most acidic hot spring in all of Japan!",
+      "subtitle": "#1 Tamagawa Onsen (96/100 pt): Perfect 50/50 IG Score & pH 1.2 volcanic valley!\nAccess: 70-minute direct bus from JR Tazawako Shinkansen Station (Apr–Nov)."
+    },
+    {
+      "seg_type": "review",
+      "rank_badge": "#1 LOCAL REVIEWS",
+      "place_ja": "玉川温泉のリアルな口コミ（50%浴槽と天然岩盤浴のゴザ）",
+      "place_en": "What Japanese Visitors Say About #1 Tamagawa Onsen",
+      "area": "70m Bus from Tazawako Stn",
+      "budget": "351 Domestic Reviews (★4.4)",
+      "access_info": "🚄 Apr–Nov: 70m bus from Tazawako Stn | Dec–Mar: Road closed—stay at Shin-Tamagawa Onsen!",
+      "insider_tip": "BATHING RULE: Start in the '50% Diluted Bath' first, and rent a straw mat for the fumaroles!",
+      "review_praise_ja": "「噴気孔が轟音を立てる地獄谷と天然岩盤浴は唯一無二！ピリピリする強酸性の湯は効能を肌で感じます」",
+      "review_praise_en": "\"Lying on warm volcanic bedrock beside roaring fumaroles is unlike anywhere on Earth! You feel the pH 1.2 power instantly.\"",
+      "review_warn_ja": "「最初は必ず源泉50%の浴槽から慣らすこと！100%源泉は傷口にしみるので5分以内、目に入らないよう注意」",
+      "review_warn_en": "\"Always acclimate in the 50% diluted tub first! Keep 100% pH 1.2 water out of your eyes and soak under 5 minutes.\"",
+      "photos": [
+        "tamagawa_3.jpg",
+        "tamagawa_4.jpg"
+      ],
+      "narration": "Japanese visitors carry woven straw mats up into the steaming volcanic valley to lie directly on the warm geothermal bedrock—Japan's original natural Ganbanyoku stone sauna! Inside the wooden bathhouse, reviewers warn that 100-percent pH 1.2 water stings like lemon juice: always start in the 50-percent diluted bath first, keep it out of your eyes, and rinse thoroughly before leaving!",
+      "subtitle": "Real Reviews: Lie on warm geothermal bedrock mats in the steaming valley!\nLocal Rule: Start in the 50% diluted tub first, and keep pH 1.2 water out of your eyes!"
+    },
+    {
+      "seg_type": "summary",
+      "rank_badge": "TOP 10 CHEAT-SHEET",
+      "place_ja": "【保存版】「秋田 観光」独自集計ランキング TOP10 完全まとめ＆アクセス一覧表",
+      "place_en": "Save This Chart: Akita Sightseeing TOP 10 Complete Cheat-Sheet",
+      "area": "All 10 Spots Compared",
+      "budget": "Pause & Screenshot",
+      "insider_tip": "NEXT KEYWORD: Tell us in the comments which prefecture or theme we should analyze next!",
+      "photos": [
+        "tamagawa_1.jpg",
+        "nyuto_1.jpg"
+      ],
+      "narration": "Pause and screenshot this complete TOP 10 Akita Sightseeing cheat-sheet with our 100-point scores, bullet train access times, and local Japanese review hacks! Whether you ride the Akita Shinkansen to Kakunodate and Lake Tazawa or soak in Nyuto and Tamagawa Onsen, these ten spots represent the true heart of Akita. Tell us in the comments what keyword we should rank next!",
+      "subtitle": "Pause & Screenshot! Complete TOP 10 Akita Sightseeing Cheat-Sheet.\nComment below which Japanese prefecture or keyword we should analyze next!"
+    }
+  ]
+}

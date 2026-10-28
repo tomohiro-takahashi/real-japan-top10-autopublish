@@ -1,0 +1,86 @@
+name: Daily Japan Ranking YouTube Auto Publish
+
+on:
+  schedule:
+    # 毎日 深夜 02:30 JST (17:30 UTC) にクラウド上で自動生成＆海外時間予約公開
+    - cron: "30 17 * * *"
+  workflow_dispatch:
+    inputs:
+      script:
+        description: "特定の台本JSONを指定する場合 (空欄で自動3セット予約公開)"
+        required: false
+        default: ""
+        type: string
+      privacy:
+        description: "公開設定 (public / unlisted / private)"
+        required: false
+        default: "public"
+        type: choice
+        options:
+          - public
+          - unlisted
+          - private
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daily-youtube-publish
+  cancel-in-progress: false
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install FFmpeg and Fonts
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg fonts-noto-cjk fonts-dejavu-core fonts-liberation fontconfig
+          fc-cache -fv
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Build Long + Shorts + Custom Thumbnails & Upload to YouTube
+        env:
+          YOUTUBE_CLIENT_ID: ${{ secrets.YOUTUBE_CLIENT_ID }}
+          YOUTUBE_CLIENT_SECRET: ${{ secrets.YOUTUBE_CLIENT_SECRET }}
+          YOUTUBE_REFRESH_TOKEN: ${{ secrets.YOUTUBE_REFRESH_TOKEN }}
+          YOUTUBE_CLIENT_ID_OVERSEAS_JAPAN: ${{ secrets.YOUTUBE_CLIENT_ID_OVERSEAS_JAPAN }}
+          YOUTUBE_CLIENT_SECRET_OVERSEAS_JAPAN: ${{ secrets.YOUTUBE_CLIENT_SECRET_OVERSEAS_JAPAN }}
+          YOUTUBE_REFRESH_TOKEN_OVERSEAS_JAPAN: ${{ secrets.YOUTUBE_CLIENT_TOKEN_OVERSEAS_JAPAN || secrets.YOUTUBE_REFRESH_TOKEN_OVERSEAS_JAPAN }}
+          YOUTUBE_PRIVACY_STATUS: ${{ inputs.privacy || vars.YOUTUBE_PRIVACY_STATUS || 'public' }}
+        run: |
+          if [ -n "${{ inputs.script }}" ]; then
+            python auto_publish_japan_ranking.py --script "${{ inputs.script }}" --privacy "${YOUTUBE_PRIVACY_STATUS}"
+          else
+            python auto_publish_japan_ranking.py --midnight-batch --daily-sets 3
+          fi
+
+      - name: Commit and push moved queue/done stock files & upload history
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add stocks/ output/upload_history.json || true
+          if git diff --cached --quiet; then
+            echo "No stock state changes to commit."
+          else
+            git commit -m "chore(stocks): mark uploaded ranking script as done [skip ci]"
+            git pull --rebase origin "${GITHUB_REF_NAME}"
+            git push origin "HEAD:${GITHUB_REF_NAME}"
+          fi

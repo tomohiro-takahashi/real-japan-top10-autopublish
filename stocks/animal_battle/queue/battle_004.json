@@ -1,0 +1,109 @@
+{
+  "battle_id": "battle_004",
+  "card_ja": "ホッキョクグマ vs ナイルワニ",
+  "title_long": "【異種最強決定戦】ホッキョクグマ vs ナイルワニ！地上最大の肉食獣と水辺の絶対死神が水深30cmの河口で激突したら？",
+  "title_short": "ホッキョクグマ vs ナイルワニ！浅瀬で戦ったら勝つのはどっち？ #最強生物 #動物バトル #shorts",
+  "description": "地上最大の肉食哺乳類「ホッキョクグマ」と、アフリカの水辺でシマウマやバッファローを狩る巨大爬虫類「ナイルワニ」！もし水深30cmの砂州が広がる河口付近で1対1で激突したら勝つのはどちらか？\n\n【5大スペック徹底比較】\n1. 体重：ホッキョクグマ 600kg vs ナイルワニ 550kg\n2. 咬合力・打撃力：1200PSIの顎＆シロイルカを引き上げる剛腕 vs 咬合力4000PSIの顎\n3. 防御構造：厚さ10cmの皮下脂肪と密生剛毛 vs 背中の皮骨（オステオダーム）装甲\n4. 速度・スタミナ：無尽蔵の有酸素持久力 vs 瞬発特化の変温動物\n5. 狩りの習性：頭上からの拘束と延髄噛み砕き vs 噛みつきからのデスロール\n\n#動物バトル #最強生物 #ホッキョクグマ #ナイルワニ #シミュレーション",
+  "tags": [
+    "動物バトル",
+    "最強王",
+    "シミュレーション",
+    "生物解説",
+    "ホッキョクグマ",
+    "ナイルワニ",
+    "異種格闘技"
+  ],
+  "voice": "ja-JP-KeitaNeural",
+  "scenes": [
+    {
+      "scene_id": 1,
+      "is_short_included": true,
+      "narration": "北極圏の氷原に君臨する地上最大の肉食哺乳類ホッキョクグマと、アフリカの大河を血に染める水辺の死神ナイルワニ！決して交わるはずのないこの600キロ級の二大モンスターが、もし『水深30センチの浅瀬が広がる涼しい河口の砂州』で激突したら一体どちらが勝つのか？物理と解剖学の視点から完全シミュレーションしていこう！",
+      "subtitle": "地上最大の肉食獣「ホッキョクグマ」vs\nアフリカ水辺の死神「ナイルワニ」！\n水深30cmの河口で激突したら勝つのはどっちだ！？",
+      "flow_clip_filename": "battle_004_clip1.mp4",
+      "flow_prompt": "Photorealistic National Geographic wildlife footage, 4k, dramatic misty morning light at a shallow 30cm river estuary sandbar. A colossal white Polar Bear stands in ankle-deep water roaring down at a massive 4.5-meter Nile Crocodile hissing with its armored jaws wide open. Water ripples and mist, 5-second cinematic shot.",
+      "fallback_image_prompt": "Dramatic comic book style, intense realistic wildlife illustration, a massive 600kg Polar Bear facing off against a giant 4.5-meter Nile Crocodile in 30cm shallow estuary water, splashing ripples, 16:9 aspect ratio"
+    },
+    {
+      "scene_id": 2,
+      "is_short_included": true,
+      "narration": "まずは5つの科学的スペックを比較するぞ！第一に体重だ。ホッキョクグマの成獣オスは平均500キロから650キロ、対するナイルワニの大型オスも全長4.5メートル、体重500キロから600キロに達し、質量はほぼ互角の600キロ級超ヘビー級対決だ！第二に攻撃力だ。ナイルワニは地球最強クラスの咬合力4000PSIを誇る巨大な顎を持ち、一方のホッキョクグマは咬合力1200PSIに加え、氷の穴から1トンのシロイルカを力づくで引きずり上げる規格外の前腕筋力と、長さ10センチの分厚い鉤爪を備えている！",
+      "subtitle": "①体重：クマ600kg vs ワニ550kgの超ヘビー級！\n②武器：ワニの4000PSIの顎 vs クマの1200PSIの顎＋\n1トンのシロイルカを水中から引き上げる剛腕！",
+      "flow_clip_filename": null,
+      "flow_prompt": null,
+      "fallback_image_prompt": "Dramatic comic book style, intense realistic wildlife illustration, size and power comparison showing a 600kg Polar Bear rearing up next to a 4.5m 550kg Nile Crocodile, 16:9 aspect ratio"
+    },
+    {
+      "scene_id": 3,
+      "is_short_included": false,
+      "narration": "第三に防御構造を見てみよう！ナイルワニの背中は硬い骨の板『皮骨（オステオダーム）』で覆われており、ライオンの牙すら弾き返す重装甲を誇るが、地面に接している腹部は柔らかく無防備だ。対するホッキョクグマは、全身が分厚い剛毛と最大10センチに達する極厚の皮下脂肪で覆われており、多少の噛みつきや切り傷では筋肉や大血管まで到達しないクッション装甲を持っている！",
+      "subtitle": "③防御構造：ワニは背中に硬い「皮骨」の装甲を持つが\n腹部は無防備！クマは全身10cmの脂肪層が急所を守る！",
+      "flow_clip_filename": null,
+      "flow_prompt": null,
+      "fallback_image_prompt": "Dramatic comic book style, intense realistic wildlife illustration, split anatomical diagram of the Nile Crocodile's dorsal osteoderm armor versus the Polar Bear's 10cm blubber layer and dense fur, 16:9 aspect ratio"
+    },
+    {
+      "scene_id": 4,
+      "is_short_included": false,
+      "narration": "第四にスタミナと運動構造、第五に戦場の水深30センチという条件だ！これが決定的な意味を持つ。もし水深2メートル以上の深場なら、ナイルワニがクマの脚に噛みついて水中へ引きずり込み、溺死させることができる。しかし水深30センチの浅瀬ではワニは相手を溺れさせることができず、しかも変温動物であるワニは全力で暴れるとわずか数分で急速に乳酸が溜まって動けなくなるのに対し、恒温動物のホッキョクグマは無尽蔵の心肺機能と、上から立体的に攻撃できる『二足立ちと前足の自由度』を持っている！",
+      "subtitle": "④スタミナ：変温動物のワニは数分でガス欠するが、\nクマは無尽蔵！\n⑤地形：水深30cmではワニの「水没溺死戦法」が使えない！",
+      "flow_clip_filename": null,
+      "flow_prompt": null,
+      "fallback_image_prompt": "Dramatic comic book style, intense realistic wildlife illustration, the towering Polar Bear rising high on its hind legs in ankle-deep water, looking down vertically at the low-slung Nile Crocodile, 16:9 aspect ratio"
+    },
+    {
+      "scene_id": 5,
+      "is_short_included": true,
+      "narration": "さあ、水深30センチの河口で戦闘開始だ！ナイルワニが驚異的な初速で水面を割って飛び出し、4000PSIの巨大な顎でホッキョクグマの右前腕にガッチリと喰らいついた！ワニはそのまま全身をひねって必殺の『デスロール』でクマの腕をねじり切ろうとする！しかし、自分の体重を上回る600キロのホッキョクグマは浅瀬の底を太い後ろ足でしっかりと踏みしめ、もう片方の左前足でワニの吻部（鼻先）を上から地面へ強く押さえつけた！",
+      "subtitle": "【戦闘開始！】ワニの4000PSIの顎が前腕に炸裂！\nデスロールを仕掛けるが、600kgのクマは底を踏みしめ\n丸太のような左腕でワニの頭を上から押さえ込む！",
+      "flow_clip_filename": "battle_004_clip2.mp4",
+      "flow_prompt": "Photorealistic wildlife combat footage, 4k slow motion. A giant Nile Crocodile lunges in shallow water, clamping its jaws onto a Polar Bear's forearm, and the massive Polar Bear plants its hind legs and slams its other huge paw down onto the crocodile's snout, water splashing violently, 5-second shot.",
+      "fallback_image_prompt": "Dramatic comic book style, intense realistic wildlife illustration, a Nile Crocodile biting a Polar Bear's right arm while the massive bear slams its left paw down onto the crocodile's head in shallow water, 16:9 aspect ratio"
+    },
+    {
+      "scene_id": 6,
+      "is_short_included": false,
+      "narration": "ワニのデスロールは水中で体が浮いている状態でこそ最大の回転トルクを生むが、水深30センチで底に擦れ、さらに上から600キロのクマに頭を押さえつけられた状態では回転することができない！もちろん4000PSIの咬合力によってクマの右前腕は深い裂傷を負うが、分厚い脂肪層と極太の橈骨・尺骨が切断を防ぎ、激痛によってホッキョクグマのアドレナリンが全開になる！",
+      "subtitle": "浅瀬ではワニのデスロールが回転力を生めない！\n4000PSIの顎で傷を負うも、クマの極太の骨と\n10cmの脂肪が切断を防ぎ、クマの怒りが爆発する！",
+      "flow_clip_filename": null,
+      "flow_prompt": null,
+      "fallback_image_prompt": "Dramatic comic book style, intense realistic wildlife illustration, the Polar Bear roaring in fury as it wrenches its massive muscular arm against the crocodile's grip in shallow splashing water, 16:9 aspect ratio"
+    },
+    {
+      "scene_id": 7,
+      "is_short_included": false,
+      "narration": "ここから哺乳類最強の『前肢の格闘性能』がワニの構造的弱点を暴き出す！ワニは四肢が胴体の横から張り出した爬虫類構造のため、自分の真上や背後・側面へ回り込まれたときに素早く旋回することができない。ホッキョクグマはワニが口を開け直した瞬間に前腕を抜き、すぐさまワニの側面から背中の上へと600キロの巨体で馬乗りになった！",
+      "subtitle": "ワニの最大の弱点は「真上からのマウント」！\n短い四肢が横に張り出したワニは、背中の上に\n600kgのクマに乗られると振り払う手段がない！",
+      "flow_clip_filename": null,
+      "flow_prompt": null,
+      "fallback_image_prompt": "Dramatic comic book style, intense realistic wildlife illustration, the 600kg Polar Bear straddling and pinning the Nile Crocodile from above in shallow water, locking the reptile's neck with both paws, 16:9 aspect ratio"
+    },
+    {
+      "scene_id": 8,
+      "is_short_included": true,
+      "narration": "そして決定打となる瞬間が訪れる！ホッキョクグマは普段セイウチやアザラシの硬い頭蓋骨を上から噛み砕くハンターだ！1トンのシロイルカを引き上げる両腕のパワーでナイルワニの上顎を掴んで強引に横へねじり上げて無防備な喉元を露出させるか、あるいは後頭部のすぐ後ろ、皮骨の隙間にある『延髄と頸椎の接合部』へ真上から1200PSIの顎と巨大な犬歯を垂直に叩き込み、テコの原理でワニの頸椎と神経束を破壊する！",
+      "subtitle": "【決定打！】クマが600kgのマウントからワニの首を固定！\n真上から後頭部の付け根（延髄・頸椎）へ\n1200PSIの顎を垂直に叩き込み、中枢神経を破壊する！",
+      "flow_clip_filename": "battle_004_clip3.mp4",
+      "flow_prompt": "Photorealistic dramatic wildlife shot, 4k. The colossal 600kg Polar Bear pins the Nile Crocodile down in shallow water with both massive paws holding the reptile's head and neck, driving its powerful jaws straight down into the back of the crocodile's neck. Heavy water spray, 5-second shot.",
+      "fallback_image_prompt": "Dramatic comic book style, intense realistic wildlife illustration, the Polar Bear mounted on top of the Nile Crocodile's back, clamping its powerful jaws down onto the base of the crocodile's skull and neck, 16:9 aspect ratio"
+    },
+    {
+      "scene_id": 9,
+      "is_short_included": false,
+      "narration": "これこそが南米でジャガーがカイマン（ワニ）を狩るときに使う『後頭部・延髄噛み砕き』の超巨大スケール版だ！体重100キロのジャガーですら中型ワニの頭蓋骨の後部を上から噛み砕いて即死させるのだから、その6倍の体重600キロと1200PSIの咬合力を持つホッキョクグマが上から全体重を乗せて噛みつけば、ナイルワニの頭蓋骨後部と頸椎は耐えきれずに粉砕され、中枢神経の損傷によってワニは瞬時に全身が麻痺する！",
+      "subtitle": "ジャガーがワニを仕留める「延髄砕き」の600kg版！\n真上からの圧倒的な質量と1200PSIの咬合力により\nワニの頸椎と延髄が破壊され、即座に無力化される！",
+      "flow_clip_filename": null,
+      "flow_prompt": null,
+      "fallback_image_prompt": "Dramatic comic book style, intense realistic wildlife illustration, X-ray impact illustration showing the Polar Bear's canine teeth crushing the cervical vertebrae at the base of the crocodile's skull, 16:9 aspect ratio"
+    },
+    {
+      "scene_id": 10,
+      "is_short_included": true,
+      "narration": "科学シミュレーションの結論を出そう！水深30センチの河口という舞台設定なら、勝率80パーセントでホッキョクグマの勝利だ！もし深い水中ならナイルワニが勝つが、足のつく浅瀬ではワニのデスロールと溺死戦法が封じられ、立体的に上からマウントを取れる哺乳類の骨格構造、無尽蔵の心肺機能、そして頭上から延髄を砕くホッキョクグマの圧倒的パワーが勝負を決めた！",
+      "subtitle": "【結論】勝者：ホッキョクグマ（浅瀬で勝率80%）！\n水深30cmではワニの溺死戦法とデスロールが封じられ、\n上からのマウントと延髄粉砕が勝負を決定づけた！",
+      "flow_clip_filename": null,
+      "flow_prompt": null,
+      "fallback_image_prompt": "Dramatic comic book style, intense realistic wildlife illustration, the victorious Polar Bear standing over the defeated Nile Crocodile on the misty river sandbar, roaring powerfully, 16:9 aspect ratio"
+    }
+  ]
+}

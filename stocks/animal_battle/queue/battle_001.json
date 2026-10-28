@@ -1,0 +1,109 @@
+{
+  "battle_id": "battle_001",
+  "card_ja": "ラーテル vs コモドオオトカゲ",
+  "title_long": "【異種最強決定戦】ラーテル vs コモドドラゴン！猛毒か、絶対防御か？科学的に勝敗を完全シミュレーション",
+  "title_short": "ラーテル vs コモドドラゴン！実際に戦ったら勝つのはどっち？ #最強生物 #動物バトル #shorts",
+  "description": "ギネス公認「世界一怖いもの知らず」の狂獣ラーテル（ミツアナグマ）と、現生最大の毒トカゲ「コモドオオトカゲ（コモドドラゴン）」がもし乾燥サバンナの岩場で激突したら？\n\n【5大スペック徹底比較】\n1. 体重：ラーテル 14kg vs コモドオオトカゲ 80kg\n2. 咬合力・武器：亀の甲羅を砕く顎＆3cmの爪 vs 鋸状の歯60本＆抗血液凝固毒\n3. 防御構造：厚さ6mmの遊離皮膚 vs 鎖帷子状の皮骨（オステオダーム）\n4. 速度・スタミナ：無尽蔵の恒温動物エンジン vs 瞬発型・変温動物\n5. 狩りの習性：急所（顔面・股間）狙い vs 噛み裂きによる失血待ち\n\n#動物バトル #最強生物 #ラーテル #コモドドラゴン #生物解説",
+  "tags": [
+    "動物バトル",
+    "最強王",
+    "シミュレーション",
+    "生物解説",
+    "ラーテル",
+    "コモドドラゴン",
+    "異種格闘技"
+  ],
+  "voice": "ja-JP-KeitaNeural",
+  "scenes": [
+    {
+      "scene_id": 1,
+      "is_short_included": true,
+      "narration": "サバンナの不死身の狂戦士ラーテルと、インドネシアに君臨する現生最大のトカゲ・コモドドラゴン！生息域の異なるこの二大モンスターが、もし気温35度の乾燥した岩場のステップ地帯で鉢合わせたら一体どちらが生き残るのか？感覚やロマンを一切排除し、物理と解剖学の視点から完全決着をつけよう！",
+      "subtitle": "不死身の狂戦士「ラーテル」vs\n現生最大の毒竜「コモドドラゴン」！\n気温35度の岩場で激突したら勝つのはどっちだ！？",
+      "flow_clip_filename": "battle_001_clip1.mp4",
+      "flow_prompt": "Photorealistic National Geographic wildlife cinematography, 4k, harsh midday sunlight on a dry rocky savanna steppes. A honey badger with black and white fur stands in a low aggressive stance, snarling up at a massive 3-meter Komodo dragon flicking its yellow forked tongue. Low camera angle slowly pushing in, dust blowing across rocks, intense 5-second shot.",
+      "fallback_image_prompt": "Dramatic comic book style, intense realistic wildlife illustration, a fearless Honey Badger snarling face-to-face against a giant 3-meter Komodo Dragon on a dry rocky steppe, flicking forked tongue, 16:9 aspect ratio"
+    },
+    {
+      "scene_id": 2,
+      "is_short_included": true,
+      "narration": "まずは5つの科学的スペックを比較するぞ！第一に体重だ。ラーテルの成獣オスが平均12キロから最大16キロなのに対し、コモドオオトカゲの成獣オスは全長2.8メートル、体重70キロから最大90キロに達し、実に5倍以上の質量差がある！第二に攻撃力だ。ラーテルはリクガメの甲羅を噛み砕く強力な顎と穴掘り用の4センチの鉤爪を持ち、対するコモドドラゴンは咬合力こそ約500PSIと見た目より低いが、サメのように肉をを引き裂く60本の鋸歯と、血液の凝固を妨げて血圧を急降下させる毒腺を下顎に備えている！",
+      "subtitle": "①体重：ラーテル14kg vs コモド80kg（約5.5倍差）\n②武器：亀の甲羅を砕く顎 vs 60本のノコギリ歯＋出血毒\n体格差は5倍以上だが、単純な咬合力は意外にも拮抗！",
+      "flow_clip_filename": null,
+      "flow_prompt": null,
+      "fallback_image_prompt": "Dramatic comic book style, intense realistic wildlife illustration, anatomical comparison chart showing a 14kg Honey Badger next to an 80kg Komodo Dragon with highlighted serrated teeth and venom glands, 16:9 aspect ratio"
+    },
+    {
+      "scene_id": 3,
+      "is_short_included": false,
+      "narration": "第三の項目、防御構造が最大のカギを握る！ラーテルの背中の皮膚は厚さが6ミリもあり、しかも筋肉と皮膚の結合がゆるい『遊離皮膚』になっているため、噛みつかれても皮の中で体を180度ねじって反撃できるうえ、神経毒に対する特殊な受容体変異まで持っている。しかしコモドドラゴンの防御も負けていない！全身の鱗の下に『皮骨（オステオダーム）』と呼ばれる小さな骨の板が鎖帷子のようにびっしりと埋め込まれており、生半可な牙や爪は一切通さない天然のメイルアーマーなんだ！",
+      "subtitle": "③防御構造の徹底比較：\nラーテル：厚さ6mmのブカブカ皮膚＋毒耐性！\nコモド：全身を覆う骨の鎖帷子「皮骨（オステオダーム）」！",
+      "flow_clip_filename": null,
+      "flow_prompt": null,
+      "fallback_image_prompt": "Dramatic comic book style, intense realistic wildlife illustration, split close-up showing the Honey Badger's 6mm loose rubbery hide and the Komodo Dragon's chainmail-like osteoderm armored scales, 16:9 aspect ratio"
+    },
+    {
+      "scene_id": 4,
+      "is_short_included": false,
+      "narration": "第四に最高速度とスタミナ、そして第五に狩りの習性だ！コモドドラゴンは瞬間的に時速20キロで突進できるが、変温動物であるため全力運動を数分続けると乳酸が蓄積して急激に動きが鈍る。一方恒温動物のラーテルは時速30キロで走り、何十分でも格闘し続ける無尽蔵の心肺機能を持ち、しかも大型獣と戦う際は相手の顔面や股間といった皮膚の薄い急所を執拗に狙う高い戦闘知能を持っている！",
+      "subtitle": "④スタミナ：変温動物のコモドは短期決戦型、\n恒温動物のラーテルは無尽蔵の心肺機能！\n⑤知能：ラーテルは相手の急所を正確に狙う！",
+      "flow_clip_filename": null,
+      "flow_prompt": null,
+      "fallback_image_prompt": "Dramatic comic book style, intense realistic wildlife illustration, a Honey Badger circling swiftly around a heavy Komodo Dragon under the scorching sun, dynamic motion lines, 16:9 aspect ratio"
+    },
+    {
+      "scene_id": 5,
+      "is_short_included": true,
+      "narration": "さあ、気温35度の岩場で戦闘開始だ！先に仕掛けるのはコモドドラゴン！80キロの巨体から時速20キロの踏み込みで突進し、丸太のような尻尾のなぎ払いでラーテルを吹き飛ばそうとする！尻尾の一撃を食らったラーテルは岩場まで弾き飛ばされるが、強靭な骨格と分厚い皮膚が衝撃を吸収し、0.5秒で起き上がって即座にコモドの懐へと飛び込んだ！",
+      "subtitle": "【戦闘開始！】コモドの強烈な尻尾攻撃が炸裂！\nだがラーテルはノーダメージで即座に起き上がり、\n恐れを知らずコモドの懐へと飛び込む！",
+      "flow_clip_filename": "battle_001_clip2.mp4",
+      "flow_prompt": "Photorealistic wildlife action shot, 4k cinematic slow motion. A giant Komodo dragon whips its thick muscular tail across dry dirt, knocking a honey badger sideways, and the honey badger immediately scrambles back up and charges straight at the dragon's open jaws. Dust clouds exploding, 5-second dynamic shot.",
+      "fallback_image_prompt": "Dramatic comic book style, intense realistic wildlife illustration, a giant Komodo Dragon swinging its massive tail into a Honey Badger, dust exploding as the badger immediately leaps back to attack, 16:9 aspect ratio"
+    },
+    {
+      "scene_id": 6,
+      "is_short_included": false,
+      "narration": "懐に入られたコモドドラゴンが、頭を上から振り下ろしてラーテルの肩口から背中にガブリと喰らいついた！ここでコモドの必殺技『プル・アンド・ティア』、すなわち顎で固定したまま首を後ろに引いて鋸歯で肉を引き裂く動きが発動する！シカやイノシシならこの一撃で筋肉が裂けて大出血するが、ラーテルの厚さ6ミリのゴムのような遊離皮膚は鋸歯の食い込みを滑らせ、致命傷となる深部の血管まで歯が届かない！",
+      "subtitle": "コモドの60本のノコギリ歯が背中に食い込む！\nしかしラーテルの厚さ6mmの遊離皮膚が歯を滑らせ、\n深部の太い血管への致命傷を防ぐ！",
+      "flow_clip_filename": null,
+      "flow_prompt": null,
+      "fallback_image_prompt": "Dramatic comic book style, intense realistic wildlife illustration, the Komodo Dragon biting down on the Honey Badger's loose back skin while the badger twists around inside its skin to counter-attack, 16:9 aspect ratio"
+    },
+    {
+      "scene_id": 7,
+      "is_short_included": false,
+      "narration": "噛みつかれたまま皮の中で体を反転させたラーテルが、コモドドラゴンの下顎と首元に猛烈なカウンターの噛みつきを浴びせる！だが、ここでラーテルも予想外の壁にぶつかる！コモドドラゴンの首周りを覆う硬い『皮骨』の鎖帷子がラーテルの犬歯を弾き返し、ラーテルの顎の力をもってしても、80キロの巨竜の太い頸椎や気管を噛み砕くことができないんだ！",
+      "subtitle": "ラーテルが反転してコモドの首元に噛みつく！\nだが、コモドの全身を覆う「皮骨」の鎖帷子が\nラーテルの牙を阻み、気管まで届かない！",
+      "flow_clip_filename": null,
+      "flow_prompt": null,
+      "fallback_image_prompt": "Dramatic comic book style, intense realistic wildlife illustration, the Honey Badger biting furiously into the armored neck scales of the Komodo Dragon, unable to pierce the osteoderm armor, 16:9 aspect ratio"
+    },
+    {
+      "scene_id": 8,
+      "is_short_included": true,
+      "narration": "膠着状態の中、勝敗を分ける物理的な決定打が訪れる！ラーテルが耐性を持つのはヘビなどの『神経毒』であり、コモドドラゴンが持つ『抗血液凝固毒と血圧降下毒素』はまったく別系統の化学兵器だ！しかも5.5倍の体重差を活かしたコモドドラゴンが80キロの全体重でラーテルを上から地面にプレスし、皮膚が薄く遊離していないラーテルの『顔面と腹部』へ狙いを変えて鋸歯を何度も引き메り込ませる！",
+      "subtitle": "【決定打！】ラーテルの毒耐性は「神経毒」用！\nコモドが80kgの体重で上からプレスし、\n皮膚の薄い顔面と腹部をノコギリ歯で引き裂く！",
+      "flow_clip_filename": "battle_001_clip3.mp4",
+      "flow_prompt": "Photorealistic National Geographic footage, 4k intense close-up. The massive 80kg Komodo dragon uses its heavy body and clawed forelegs to pin the smaller 14kg honey badger firmly against the rocky ground, shaking its head powerfully as dust rises around them. Cinematic natural lighting, 5-second shot.",
+      "fallback_image_prompt": "Dramatic comic book style, intense realistic wildlife illustration, the massive 80kg Komodo Dragon pinning the 14kg Honey Badger under its heavy clawed foot and clamping its serrated jaws down with overwhelming weight, 16:9 aspect ratio"
+    },
+    {
+      "scene_id": 9,
+      "is_short_included": false,
+      "narration": "どれほど闘争心が無限でも、物理法則はごまかせない！体重14キロのラーテルが80キロのコモドドラゴンに前足で踏みつけられながら首を振られれば、頸椎へのダメージと顔面からの裂傷は避けられない。さらに傷口から流し込まれた抗凝固毒によって止血機能が失われ、激しい運動で心拍数が上がっているラーテルほど全身に毒が早く回り、血圧低下によるショックと失血で徐々に意識を奪われていく！",
+      "subtitle": "5.5倍の質量プレスと、止血を妨げるコモドの毒！\n激しく動くほど毒と失血が全身に回り、\nさしもの不死身の狂戦士も血圧低下で力尽きる！",
+      "flow_clip_filename": null,
+      "flow_prompt": null,
+      "fallback_image_prompt": "Dramatic comic book style, intense realistic wildlife illustration, the exhausted and wounded Honey Badger struggling to stand on the hot rocks as the giant Komodo Dragon looms over it victoriously, 16:9 aspect ratio"
+    },
+    {
+      "scene_id": 10,
+      "is_short_included": true,
+      "narration": "科学シミュレーションの結論を出そう！勝者は勝率85パーセントでコモドオオトカゲだ！ラーテルの厚さ6ミリの皮膚と狂気のスタミナは間違いなくコモドを苦しめるが、相手が鎖帷子の『皮骨』をまとって急所を通さない以上、5.5倍の体重差によるプレス拘束と、神経毒耐性が効かない『出血・血圧降下毒』による失血ショックが最終的な決定打となる！物理と生化学の壁を制したのは現生最大の竜、コモドドラゴンだ！",
+      "subtitle": "【結論】勝者：コモドオオトカゲ（勝率85%）！\n鎖帷子の皮骨でラーテルの反撃を防ぎきり、\n5.5倍の質量プレスと出血毒で失血死へ追い込んだ！",
+      "flow_clip_filename": null,
+      "flow_prompt": null,
+      "fallback_image_prompt": "Dramatic comic book style, intense realistic wildlife illustration, the victorious giant Komodo Dragon standing atop a sun-bleached rock in the savanna, tongue flicking out, epic heroic angle, 16:9 aspect ratio"
+    }
+  ]
+}

@@ -1,0 +1,109 @@
+{
+  "battle_id": "battle_006",
+  "card_ja": "オオカワウソ vs デンキウナギ",
+  "title_long": "【閲覧注意級の逆転劇】可愛い顔したワニ殺し「オオカワウソ」vs 860Vの生体兵器「デンキウナギ」！勝ったと思った瞬間に発動する死の物理トラップとは？",
+  "title_short": "ワニを喰う巨大カワウソ vs 860Vデンキウナギ！勝った瞬間に大逆転する理由がヤバい #最強生物 #動物バトル #shorts",
+  "description": "水族館の人気者「カワウソ」の仲間に、現地アマゾンでジャガー以上に恐れられる全長1.8mの怪物『オオカワウソ』がいるのをご存知だろうか？その狂獣がもし、860ボルトの超高圧電流を放つ『デンキウナギ』と浅瀬で激突したら…？前半は一方が圧倒するものの、トドメを刺した瞬間に「ある物理法則」によって衝撃の大逆転が起きる！\n\n#動物バトル #最強生物 #オオカワウソ #デンキウナギ #特殊能力 #科学シミュレーション",
+  "tags": [
+    "動物バトル",
+    "最強王",
+    "シミュレーション",
+    "生物解説",
+    "オオカワウソ",
+    "デンキウナギ",
+    "どんでん返し"
+  ],
+  "voice": "ja-JP-KeitaNeural",
+  "scenes": [
+    {
+      "scene_id": 1,
+      "is_short_included": true,
+      "narration": "南米アマゾンの川岸で、全身の鱗を噛み砕かれた『体長2メートルのワニの死体』が発見された。犯人はジャガーでもアナコンダでもない。私たちが日本の水族館で『可愛い！』と写真を撮っている、あのカワウソの仲間だったとしたら信じられるだろうか？だが、そんなアマゾン最凶の見た目詐欺モンスターですら、川底から不気味な黒い影が浮上した瞬間、ピタリと動きを止める。今回の主役は、川のオオカミ『オオカワウソ』と、860ボルトの電流を操る生体兵器『デンキウナギ』だ！",
+      "subtitle": "アマゾンで発見された「噛み砕かれたワニの死体」。\n犯人は、可愛い顔をした全長1.8mの怪物カワウソだった——。\nその狂獣が「860Vの電撃兵器」と出会ったら何が起きるのか？",
+      "flow_clip_filename": "battle_006_clip1.mp4",
+      "flow_prompt": "Photorealistic National Geographic mystery wildlife footage, 4k, eerie mist over a shallow Amazon river bank. A massive 1.8-meter Giant River Otter with wet dark fur and fierce intelligent eyes stands over the riverbank, suddenly freezing as a 2.4-meter dark shadow of an Electric Eel glides beneath the murky water surface. Cinematic 5-second shot.",
+      "fallback_image_prompt": "Dramatic comic book style, intense realistic wildlife illustration, a massive 1.8m Giant River Otter standing fiercely on a misty Amazon riverbank, looking down at a glowing ominous shadow of a 2.4m Electric Eel beneath the water surface, 16:9 aspect ratio"
+    },
+    {
+      "scene_id": 2,
+      "is_short_included": true,
+      "narration": "まず、あなたが知っている『3キロの可愛いコツメカワウソ』の記憶は今すぐ捨ててほしい。アマゾンに君臨するオオカワウソは、全長1.8メートル、体重32キロという成人女性並みのサイズを誇る巨大な肉食獣だ！現地では『アルラニャ（川のジャガー）』と恐れられ、鋭い犬歯と強靭な顎でカメの甲羅やワニの頭蓋骨をポテトチップスのようにバリバリと噛み砕く。しかも1平方センチに10万本という地球最高密度の毛皮を持ち、毛の間に分厚い『空気のバリア』を閉じ込めているんだ！",
+      "subtitle": "あなたが知る可愛いカワウソではない！\n全長1.8m・体重32kgの怪物「オオカワウソ」は、\nワニの頭骨を砕く顎と「1㎠に10万本の空気バリア毛皮」を持つ！",
+      "flow_clip_filename": null,
+      "flow_prompt": null,
+      "fallback_image_prompt": "Dramatic comic book style, intense realistic wildlife illustration, a ferocious 1.8-meter Giant River Otter roaring with bared bone-crushing fangs, comparison silhouette next to a tiny pet otter, 16:9 aspect ratio"
+    },
+    {
+      "scene_id": 3,
+      "is_short_included": false,
+      "narration": "しかし、対する相手は物理法則そのものを武器にする規格外の怪物だ！近年の調査で発見されたデンキウナギの最強種『ボルタイ』は、全長2.4メートル、体重22キロの細長い体のなんと80パーセントが『発電用の内蔵バッテリー』でできている！その電圧は家庭用の100ボルトコンセントの8.6倍にあたる『860ボルト』！昔の研究記録では、川を渡ろうとした巨大な馬ですらこの電撃を食らってその場で昏倒して溺れたという、文字通り自然界の歩くスタンガンだ！",
+      "subtitle": "対するは全長2.4mの生体発電兵器「デンキウナギ」！\n体の80%がバッテリーでできており、家庭用電源の8.6倍、\n馬すら一撃で昏倒させる「860ボルト」の電流を放つ！",
+      "flow_clip_filename": null,
+      "flow_prompt": null,
+      "fallback_image_prompt": "Dramatic comic book style, intense realistic wildlife illustration, X-ray anatomical view of a 2.4-meter Electric Eel showing 80% of its body filled with glowing bio-electric battery organs generating 860V, 16:9 aspect ratio"
+    },
+    {
+      "scene_id": 4,
+      "is_short_included": false,
+      "narration": "さあ、ここであなたに予想してほしい！戦いの舞台は『水深40センチの浅瀬と砂州』。電気を通さない空気のバリアを毛皮にまとい、時速15キロの超高速で動き回る知能犯オオカワウソか？それとも一撃必殺の860ボルトを持つデンキウナギか？実はこの戦い、前半は誰もが予想しないほど一方的な展開になり、そして最後の1秒で『ある残酷な物理法則』によって勝敗が180度ひっくり返る！あなたの予想を心に決めて、衝撃の結末を目撃してほしい！",
+      "subtitle": "【あなたの予想はどっち？】\n空気の絶縁毛皮とスピードを持つ「オオカワウソ」か？\n一撃860ボルトの特殊能力「デンキウナギ」か？\n実は最後の1秒で「残酷な物理トラップ」が発動する——！",
+      "flow_clip_filename": null,
+      "flow_prompt": null,
+      "fallback_image_prompt": "Dramatic comic book style, intense realistic wildlife illustration, split screen confrontation of the snarling Giant River Otter and the crackling 860V Electric Eel with a glowing question mark between them, 16:9 aspect ratio"
+    },
+    {
+      "scene_id": 5,
+      "is_short_included": true,
+      "narration": "浅瀬でついに激突が始まった！オオカワウソが目にも止まらぬ速さでウナギの尻尾に鋭い爪で奇襲を仕掛ける！直後、デンキウナギが怒りの860ボルトを水中へ一気に放電した！これでカワウソは即死かと思われた次の瞬間——なんとカワウソはピンピンして砂州へ飛び退いた！なぜか？実はアマゾンの真水は海水と違って電気抵抗が高く、水中に広がった電流はすぐに減衰するうえ、カワウソの毛皮に閉じ込められた『空気の層』がゴム合羽のように電気をブロックしてしまったんだ！",
+      "subtitle": "【前半戦】860Vの水中放電が炸裂！\n…だが、オオカワウソはピンピンして飛び退いた！？\n真水での電流拡散と「毛皮の空気バリア」が電撃を防いだのだ！",
+      "flow_clip_filename": "battle_006_clip2.mp4",
+      "flow_prompt": "Photorealistic wildlife action shot, 4k slow motion. A Giant River Otter slashes at an Electric Eel in shallow water and leaps agilely backward onto a sandbar through a massive splash of water, completely unharmed as the eel's underwater shockwave dissipates. 5-second shot.",
+      "fallback_image_prompt": "Dramatic comic book style, intense realistic wildlife illustration, the Giant River Otter leaping agilely out of splashing shallow water, protected by its air-insulated fur as the Electric Eel's underwater shockwave misses, 16:9 aspect ratio"
+    },
+    {
+      "scene_id": 6,
+      "is_short_included": false,
+      "narration": "ここから高い知能を持つオオカワウソのワンサイドゲームが始まる！ウナギの電撃が距離を取れば効かないと見抜いたカワウソは、浅瀬の周りを時速15キロで旋回しながら泥水を蹴り上げ、ウナギに何度も空撃ちの放電を誘発させる！実はデンキウナギには2つの致命的な弱点がある。1つは連続で放電すると体内のエネルギーがすぐガス欠になること、そしてもう1つは、魚なのにエラ呼吸だけでは生きられず『10分に1回、水面に顔を出して息を吸わなければ溺れ死ぬ』ことだ！",
+      "subtitle": "オオカワウソが頭脳戦でウナギを圧倒！\n実はデンキウナギは「連続放電でガス欠」になるうえ、\n10分に1回、水面で息を吸わないと溺れる弱点があった！",
+      "flow_clip_filename": null,
+      "flow_prompt": null,
+      "fallback_image_prompt": "Dramatic comic book style, intense realistic wildlife illustration, the clever Giant River Otter circling at high speed in muddy water, exhausting the gasping Electric Eel as its battery gauge drops, 16:9 aspect ratio"
+    },
+    {
+      "scene_id": 7,
+      "is_short_included": false,
+      "narration": "焦ったデンキウナギは水面から上半身を跳び上がらせて直接体を押し当てる『リーピング・アタック』を繰り出すが、俊敏なカワウソはこれも紙一重でかわす！ついに酸素が切れたデンキウナギが、苦しそうに水面へ頭を出してパクッと空気を吸い込んだ！その無防備なコンマ5秒の隙を、川のオオカミは見逃さない！「勝った！」と確信したオオカワウソが死角から飛びかかり、ワニの頭骨すら砕く自慢の顎で、デンキウナギの首の後ろにガブリと深く噛みついた！",
+      "subtitle": "息継ぎのために浮上したウナギの隙を突き、\nついにオオカワウソが勝利の噛みつきを決めた！\n「カワウソの圧勝だ！」——誰もがそう思った次の瞬間だった。",
+      "flow_clip_filename": null,
+      "flow_prompt": null,
+      "fallback_image_prompt": "Dramatic comic book style, intense realistic wildlife illustration, the Giant River Otter lunging triumphantly from behind to sink its fangs into the surfacing Electric Eel's neck, dramatic action lines, 16:9 aspect ratio"
+    },
+    {
+      "scene_id": 8,
+      "is_short_included": true,
+      "narration": "しかし、ウナギに牙を突き立てたその刹那、戦慄の大逆転が起きる！どれほど外側の毛皮が空気のバリアで絶縁されていようと、獲物に噛みついた『口の中の濡れた歯茎と舌』には毛が1本も生えていない！歯がウナギの皮膚を貫いた瞬間、ウナギの体内に残っていた860ボルトの高圧電流が、もっとも電気を通しやすいカワウソの『口の中の粘膜』から、数センチ先にある脳幹と心臓へダイレクトに逆流したのだ！さらにウナギが長い胴体をカワウソの濡れた体にグルリと巻きつけ、プラス極とマイナス極を完全に直結させた！",
+      "subtitle": "【衝撃の大逆転】勝ったと思った噛みつきが「死の罠」だった！\n毛皮は電気を防げても「口の中の濡れた粘膜」は無防備！\n牙を通じて860Vが口から脳幹へダイレクトに逆流した！",
+      "flow_clip_filename": "battle_006_clip3.mp4",
+      "flow_prompt": "Photorealistic dramatic wildlife cinematography, 4k. The exact moment the Giant River Otter bites the Electric Eel's neck, the 2.4-meter eel whips its tail around the otter's wet body, and the otter freezes completely stiff in mid-bite, collapsing motionless into the shallow water. 5-second shot.",
+      "fallback_image_prompt": "Dramatic comic book style, intense realistic wildlife illustration, shocking plot twist as 860V electricity surges directly from the Electric Eel into the biting Giant Otter's mouth and brain, freezing the otter stiff, 16:9 aspect ratio"
+    },
+    {
+      "scene_id": 9,
+      "is_short_included": false,
+      "narration": "「危ないと思ったら口を離して逃げればいいじゃないか！」と思うかもしれない。だが、それすら許さないのが高圧電流の本当の恐ろしさだ！顎の筋肉に強い電流が流れると『強直（テタヌス）麻痺』と呼ばれる強制収縮が起き、自分の意思では1ミリも口を開けることができなくなる！人間が裸の高圧電線を握ると手が開かなくなって離れられなくなるのとまったく同じ現象が起き、カワウソはウナギを咥えたまま全身の呼吸筋が麻痺し、わずか水深40センチの浅瀬で意識を失ってしまうんだ！",
+      "subtitle": "なぜ口を離して逃げないのか？\n高圧電流で顎の筋肉が「強直（ロック）麻痺」を起こし、\n自分の意思では口を開けることすらできなくなるのだ！",
+      "flow_clip_filename": null,
+      "flow_prompt": null,
+      "fallback_image_prompt": "Dramatic comic book style, intense realistic wildlife illustration, anatomical close-up showing the otter's jaw muscles locked in tetanic contraction unable to let go of the electrified eel, 16:9 aspect ratio"
+    },
+    {
+      "scene_id": 10,
+      "is_short_included": true,
+      "narration": "衝撃の結論だ！1対1のタイマン勝負なら、最後の最後で発動する『口腔粘膜ショート』の罠によって、勝率80パーセントでデンキウナギが大逆転勝利を収める！いかにオオカワウソが身体能力と知能で圧倒しても、道具を使えない野生動物が最後に『自分の口で噛みついてトドメを刺す』しかない以上、860ボルトの発電生物を噛む行為そのものが自爆スイッチになるのだ！ただし、もしオオカワウソが本来の『5頭の家族の群れ』で戦い、交代でウナギを乾いた砂浜へ引きずり出していたら結末は逆転していたはずだ。あなたの事前の予想は当たっただろうか？ぜひコメント欄で教えてほしい！",
+      "subtitle": "【結論】勝者：デンキウナギ（大逆転の勝率80%）！\n「最後に口で噛みつくしかない」肉食獣の宿命が自爆スイッチに！\nあなたの予想は当たった？ぜひコメント欄で教えてくれ！",
+      "flow_clip_filename": null,
+      "flow_prompt": null,
+      "fallback_image_prompt": "Dramatic comic book style, intense realistic wildlife illustration, the victorious 2.4-meter Electric Eel swimming away through misty Amazon waters while a pack of Giant Otters watches cautiously from the high bank, 16:9 aspect ratio"
+    }
+  ]
+}

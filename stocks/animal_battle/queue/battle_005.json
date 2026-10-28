@@ -1,0 +1,109 @@
+{
+  "battle_id": "battle_005",
+  "card_ja": "体重100kgに巨大化したオオスズメバチ vs シベリアトラ",
+  "title_long": "【空想科学バトル】体重100kgに巨大化したオオスズメバチ vs シベリアトラ！外骨格の装甲と毒針は300kgの帝王を倒せるか？",
+  "title_short": "もしオオスズメバチが100kgに巨大化してトラと戦ったら？科学で検証！ #最強生物 #動物バトル #shorts",
+  "description": "昆虫界最凶の戦闘兵器「オオスズメバチ」がもし体長1.8m・体重100kgに巨大化し、ネコ科最大の「シベリアトラ（体重300kg）」と森林の開けた草地で激突したらどうなるのか？（※二乗三乗の法則による自重崩壊・窒息は免除し、100kgスケールで昆虫の筋力・外骨格が機能する前提で物理計算！）\n\n【5大スペック徹底比較】\n1. 体重：100kgオオスズメバチ vs 300kgシベリアトラ\n2. 咬合力・武器：鉄板を噛み切る大顎＆長さ18cmの毒針 vs 咬合力1050PSI＆10cmの鉤爪\n3. 防御構造：厚さ1.5cmのキチン質外骨格アーマー vs 筋肉と毛皮（外骨格なし）\n4. 速度・スタミナ：立体機動と無尽蔵の持久力 vs 時速60kmの瞬発型\n5. 狩りの習性：大顎による拘束＋連続毒針刺突 vs 頸椎への噛みつき\n\n#動物バトル #最強生物 #オオスズメバチ #シベリアトラ #空想科学",
+  "tags": [
+    "動物バトル",
+    "最強王",
+    "シミュレーション",
+    "生物解説",
+    "オオスズメバチ",
+    "シベリアトラ",
+    "空想科学"
+  ],
+  "voice": "ja-JP-KeitaNeural",
+  "scenes": [
+    {
+      "scene_id": 1,
+      "is_short_included": true,
+      "narration": "昆虫界最凶の殺戮兵器オオスズメバチが、もしそのままの戦闘能力を保って『体長1.8メートル・体重100キロ』に巨大化し、極東の密林の帝王・体重300キロのシベリアトラと激突したら一体どうなるのか？「ハチの方が3倍軽いからトラが圧勝するのでは？」と思うかもしれないが、昆虫の構造を100キロスケールに物理換算すると、背筋が凍るような怪物スペックが浮かび上がってくるんだ！",
+      "subtitle": "【禁断の空想科学】体長1.8m・体重100kgに\n巨大化した「オオスズメバチ」vs 300kgの「シベリアトラ」！\n昆虫の構造が100kgになったら何が起きるのか！？",
+      "flow_clip_filename": "battle_005_clip1.mp4",
+      "flow_prompt": "Photorealistic cinematic creature feature & National Geographic style, 4k, sunlit forest clearing. A terrifying giant 100kg Asian Giant Hornet, 1.8 meters long with glossy orange-and-black chitin armor and vibrating wings, hovers low above the grass facing a massive 300kg Siberian Tiger crouching and roaring fiercely. Dust and grass blowing from wing wash, 5-second shot.",
+      "fallback_image_prompt": "Dramatic comic book style, intense realistic wildlife illustration, a terrifying 1.8-meter 100kg Giant Asian Hornet hovering menacingly face-to-face against a massive 300kg roaring Siberian Tiger in a forest clearing, 16:9 aspect ratio"
+    },
+    {
+      "scene_id": 2,
+      "is_short_included": true,
+      "narration": "まずは5つの科学的スペックを比較しよう！第一に体重だ。オオスズメバチが100キロ、シベリアトラが300キロで、質量はトラが3倍上回る。だが第二の項目、武器の威力が異常だ！本来のオオスズメバチが持つ6ミリの毒針は、100キロスケールでは『長さ18センチ・太さ1.5センチの超硬質注射針』となり、しかもミツバチと違って返しがないため何十回でも連続で突き刺せる！さらに一度の刺突で注入される毒液の量は数ミリリットルから一気に『約150ミリリットル（コップ1杯分）』へと跳ね上がるんだ！",
+      "subtitle": "①体重：ハチ100kg vs トラ300kg（3倍差）\n②武器：ハチの毒針は「長さ18cmの槍」に巨大化し、\n1刺しでコップ1杯分（150ml）の猛毒カクテルを注入！",
+      "flow_clip_filename": null,
+      "flow_prompt": null,
+      "fallback_image_prompt": "Dramatic comic book style, intense realistic wildlife illustration, anatomical scale diagram of the 100kg Giant Hornet showing its 18cm venom stinger and massive mandibles compared to a 300kg Siberian Tiger, 16:9 aspect ratio"
+    },
+    {
+      "scene_id": 3,
+      "is_short_included": false,
+      "narration": "第三の項目、防御構造こそが哺乳類にとって最大の悪夢となる！哺乳類であるトラは骨が内側にある『内骨格』で外側は柔らかい毛皮と肉だが、昆虫は全身が硬いキチン質の『外骨格』で覆われたフルプレートアーマーの騎士だ！100キロサイズになったオオスズメバチの胸部や頭部の外骨格は、厚さ1センチから1.5センチの強化プラスチック複合材（FRP）や防弾ヘルメットに匹敵する硬度と弾性を持ち、爪で引っ掻いた程度では傷一つ付かない！",
+      "subtitle": "③防御構造：トラは柔らかい毛皮と肉（内骨格）だが、\n100kgのハチは厚さ1.5cmの防弾ヘルメット並みの\n「キチン質外骨格アーマー」で全身を覆っている！",
+      "flow_clip_filename": null,
+      "flow_prompt": null,
+      "fallback_image_prompt": "Dramatic comic book style, intense realistic wildlife illustration, close-up of a Siberian Tiger's claws sparking harmlessly off the glossy 1.5cm thick chitin exoskeleton armor of the giant hornet, 16:9 aspect ratio"
+    },
+    {
+      "scene_id": 4,
+      "is_short_included": false,
+      "narration": "第四に機動力とスタミナ、第五に狩りの習性だ！シベリアトラは地上を時速60キロで走るが、二次元（平面）の動きしかできず、全力疾走は1分しか持たない。対してオオスズメバチは上空から時速40キロ以上で三次元の立体機動を行い、1日に100キロ以上飛び続ける驚異のスタミナを持つ！しかもハチの狩りの習性は、6本の鉤爪の脚で獲物に張り付き、強靭な大顎で固定しながら腹部を曲げて確実に急所へ毒針を突き立てるというものだ！",
+      "subtitle": "④機動力：平面しか動けないトラに対し、ハチは三次元飛行！\n⑤習性：6本の鉤爪脚で対象にロックオンし、\n大顎で固定したまま確実に18cmの毒針を突き立てる！",
+      "flow_clip_filename": null,
+      "flow_prompt": null,
+      "fallback_image_prompt": "Dramatic comic book style, intense realistic wildlife illustration, the 100kg Giant Hornet diving from mid-air like an attack helicopter toward the Siberian Tiger below, 16:9 aspect ratio"
+    },
+    {
+      "scene_id": 5,
+      "is_short_included": true,
+      "narration": "さあ、開けた草地で戦闘開始だ！100キロのオオスズメバチがヘリコプターのような凄まじい羽音を響かせながら低空で突進する！シベリアトラが驚異の反射神経で跳び上がり、300キロの体重を乗せた右前足の張り手でハチを空中で叩き落とそうとする！トラの強烈なフックがハチの胸部外骨格に直撃し、100キロのハチは地面へと叩きつけられた！だが、丸みを帯びたドーム状のキチン質外骨格が打撃の衝撃を分散し、ハチの装甲は割れない！",
+      "subtitle": "【戦闘開始！】トラの300kgの張り手がハチを叩き落とす！\nだが、ドーム状の分厚いキチン質外骨格が衝撃を分散し、\nハチは無傷のまま即座にトラの顔面へ飛びつく！",
+      "flow_clip_filename": "battle_005_clip2.mp4",
+      "flow_prompt": "Photorealistic cinematic action shot, 4k slow motion. The massive 300kg Siberian Tiger leaps and swipes its huge paw, slamming the 100kg Giant Hornet onto the grassy ground, and the armored hornet immediately buzzes its wings and latches its six hooked legs onto the tiger's shoulders. 5-second shot.",
+      "fallback_image_prompt": "Dramatic comic book style, intense realistic wildlife illustration, the Siberian Tiger swatting the 100kg Giant Hornet with a massive paw, shockwaves in the air as the armored hornet survives the blow unbroken, 16:9 aspect ratio"
+    },
+    {
+      "scene_id": 6,
+      "is_short_included": false,
+      "narration": "地面に落ちた瞬間、ハチは羽ばたきで跳ね起き、トラの肩口から首筋へと6本の脚の鋭い鉤爪をガッチリと引っ掛けてロックオンした！驚いたトラは首を回して1050PSIの顎でハチの胴体を噛み砕こうとする！もしトラの犬歯がハチの『首や腹部の関節の繋ぎ目』に運良く突き刺さればハチを真っ二つにできるが、ハチはトラの頭の真後ろ、すなわちトラ自身の口が届かない『うなじから背中の死角』にピタリと張り付いて離れない！",
+      "subtitle": "トラは1050PSIの顎で噛み砕こうとするが、\nハチはトラの口が届かない「背中の死角」に\n6本の鉤爪脚でガッチリと張り付いて離れない！",
+      "flow_clip_filename": null,
+      "flow_prompt": null,
+      "fallback_image_prompt": "Dramatic comic book style, intense realistic wildlife illustration, the 100kg Giant Hornet grappling tightly onto the back and shoulders of the thrashing Siberian Tiger with its six spiked legs, 16:9 aspect ratio"
+    },
+    {
+      "scene_id": 7,
+      "is_short_included": false,
+      "narration": "トラが背中からハチを振り落とそうと地面に転がろうとしたその瞬間、ハチの巨大化した『大顎（マンディブル）』がトラの首の後ろの肉を鉄のペンチのように深く挟み込んで固定する！そして昆虫特有の柔軟に折れ曲がる腹部がグニャリと湾曲し、先端から長さ18センチの黒光りする毒針がトラの脇腹と首筋へ狙いを定めた！",
+      "subtitle": "ハチの鋼鉄のような大顎がトラの首の肉を固定！\n柔軟に曲がる腹部がしなり、長さ18cmの毒針が\nトラの急所へと狙いを定める！",
+      "flow_clip_filename": null,
+      "flow_prompt": null,
+      "fallback_image_prompt": "Dramatic comic book style, intense realistic wildlife illustration, close-up of the Giant Hornet's massive mandibles clamping onto the Tiger's neck fur while its abdomen curves to aim its 18cm stinger, 16:9 aspect ratio"
+    },
+    {
+      "scene_id": 8,
+      "is_short_included": true,
+      "narration": "そして決定打となる戦慄の一撃が炸裂する！100キロのハチの腹部の筋肉から繰り出された長さ18センチの毒針が、トラの毛皮と皮膚をやすやすと貫通し、深さ15センチにある肺と太い血管、そして首の筋肉へと深々と突き刺さった！ズブリ、ズブリと3回連続で突き刺される18センチの槍！その内部の管から、細胞膜を直接破壊して肉を溶かす『マストパラン』と、神経を麻痺させる『マンダラトキシン』を含む猛毒カクテルが合計300ミリリットル以上、トラの体内へと直接ポンプ注入される！",
+      "subtitle": "【決定打！】長さ18cmの毒針がトラの胸郭を15cm貫通！\n細胞を溶かすマストパランと神経毒マンダラトキシンが\n300ml以上も体内に直接ポンプ注入される！",
+      "flow_clip_filename": "battle_005_clip3.mp4",
+      "flow_prompt": "Photorealistic dramatic creature combat shot, 4k. Clinging to the Siberian Tiger's back, the 100kg Giant Hornet arches its striped abdomen and drives its long stinger repeatedly into the roaring tiger's shoulder and flank as the tiger collapses onto the grass. Intense cinematic lighting, 5-second shot.",
+      "fallback_image_prompt": "Dramatic comic book style, intense realistic wildlife illustration, the 100kg Giant Hornet driving its 18cm stinger deep into the Siberian Tiger's shoulder with glowing venom impact lines, 16:9 aspect ratio"
+    },
+    {
+      "scene_id": 9,
+      "is_short_included": false,
+      "narration": "物理的にも生化学的にも、これは完全なるオーバーキルだ！第一に物理ダメージとして、長さ18センチの太い針で胸郭を複数回刺し貫かれた時点で、トラは肺に穴が開く『外傷性気胸』と内出血を引き起こす。第二に生化学ダメージとして、300ミリリットルもの高濃度スズメバチ毒が血流に入れば、体重300キロのトラであっても数分以内に赤血球の破壊（溶血）、心筋への毒性、そして急激な血圧低下と呼吸筋麻痺が同時に発生し、立ち上がることすらできなくなる！",
+      "subtitle": "18cmの針による「気胸・内臓穿孔」の物理ダメージに加え、\n大量の神経毒・細胞溶解毒による「呼吸麻痺と溶血」！\n300kgのトラであっても数分以内に全身が麻痺する！",
+      "flow_clip_filename": null,
+      "flow_prompt": null,
+      "fallback_image_prompt": "Dramatic comic book style, intense realistic wildlife illustration, the mighty Siberian Tiger collapsing onto the forest floor paralyzed by venom while the 100kg Giant Hornet hovers above unscathed, 16:9 aspect ratio"
+    },
+    {
+      "scene_id": 10,
+      "is_short_included": true,
+      "narration": "空想科学シミュレーションの結論を出そう！昆虫の筋力と外骨格が100キロサイズで機能するという前提なら、勝率90パーセントで巨大化オオスズメバチの圧勝だ！トラが勝つには最初の一撃でハチの関節の隙間を正確に噛み砕くしかないが、三次元の飛行で死角に回り込まれ、防弾アーマーの外骨格で爪を弾かれ、長さ18センチの毒針で内臓穿孔と致死量の神経毒を注入されれば、いかに300キロの百獣の帝王といえども為す術がない！昆虫のスペックがいかにチートであるかが証明された結果だ！",
+      "subtitle": "【結論】勝者：100kgオオスズメバチ（勝率90%）！\n外骨格アーマーで爪を防ぎ、18cmの毒針による\n内臓穿孔と300mlの猛毒注入が300kgの帝王を沈めた！",
+      "flow_clip_filename": null,
+      "flow_prompt": null,
+      "fallback_image_prompt": "Dramatic comic book style, intense realistic wildlife illustration, the 100kg Giant Asian Hornet standing victoriously atop a fallen tree trunk in the dark forest, wings buzzing powerfully, epic comic art, 16:9 aspect ratio"
+    }
+  ]
+}

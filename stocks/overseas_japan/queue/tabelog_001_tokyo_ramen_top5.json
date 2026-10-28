@@ -1,0 +1,151 @@
+{
+  "ranking_id": "tabelog_001",
+  "theme_ja": "【食べログ日本全国＆東京TOP5完全翻訳】外国人が並ぶ一蘭は圏外！日本の食べログ（tabelog.com）で日本人がガチ評価した『東京の最高峰ラーメンTOP 5（★3.94〜★4.13）』と、日本語でしか書かれていない予約・整理券（TableCheck / AirWAIT）突破法",
+  "prefecture": "Tokyo (Tabelog Official Top 5)",
+  "title": "Forget Ichiran! Tokyo's REAL Top 5 Ramen Ranked by Japanese Foodies on Tabelog (2026 Insider Guide)",
+  "description": "Foreign tourists wait 2 hours at Ichiran because they use English Google Maps. Meanwhile, Japanese foodies use Tabelog (tabelog.com), where anything over 3.5 is elite and 4.0+ is legendary. Here are the REAL Top 5 highest-rated ramen shops in Tokyo straight from Japanese Tabelog—plus the secret Japanese-only reservation and digital ticket rules (TableCheck & AirWAIT) you MUST know so you don't get turned away at the door!\n\n0:00 Why English Google Maps Fails in Tokyo (The Tabelog 4.0+ Standard)\n0:22 #5 Ginza Hachigo (★3.94) - Michelin French Consomme Ramen\n0:50 #4 Homemade Ramen Muginae (★3.95) - House-Milled Noodle Masterpiece\n1:18 #3 Japanese Ramen Gokan (★3.98) - Ikebukuro's Charcoal & Clam Broth\n1:46 #2 Chukasoba Shibata (★4.03) - Legendary Duck & Raw Shoyu Bowl\n2:14 #1 Ramenya Shima (★4.13) - Ranked #1 in All of Tokyo\n\n#TokyoRamen #Tabelog #JapanTravel #TokyoFoodGuide #BestRamenTokyo",
+  "tags": [
+    "TokyoRamen",
+    "Tabelog",
+    "JapanTravel",
+    "TokyoFood",
+    "RamenyaShima",
+    "GinzaHachigo",
+    "JapanInsiderGuide"
+  ],
+  "voice": "en-US-ChristopherNeural",
+  "segments": [
+    {
+      "seg_id": 1,
+      "rank_badge": "TABELOG JAPAN DATA",
+      "place_en": "Why Foreigners Never Find Tokyo's Real Top 5 Ramen",
+      "place_ja": "食べログ東京ラーメン総合ランキング TOP 5",
+      "area": "Source: tabelog.com (2026)",
+      "budget": "¥1,400 – ¥1,900 ($9–$13)",
+      "insider_tip": "All 5 shops have strict Japanese-only entry rules (TableCheck / AirWAIT). Watch closely!",
+      "subtitle": "Tourists wait 2 hours at Ichiran using Google Maps.\nHere are Tokyo's REAL Top 5 ramen shops from Japanese Tabelog.",
+      "narration": "Every day in Tokyo, tourists wait two hours in line at Ichiran because it has five stars on English Google Maps. Meanwhile, Japanese locals use a domestic site called Tabelog—where critics are so strict that only two ramen shops in all of Tokyo score above four point zero. Even worse, if you just walk up to these top five shops at noon, you will be turned away because their reservation and ticket rules are only written in Japanese. Here are Tokyo's real top five ramen shops, and exactly how to get inside.",
+      "photos": ["shima_food_1.jpg", "hachigo_food_1.jpg"]
+    },
+    {
+      "seg_id": 2,
+      "rank_badge": "RANK #5  ★3.94",
+      "place_en": "Ginza Hachigo — French Consomme Broth with Zero Tare",
+      "place_ja": "第5位：銀座 八五（食べログ ★3.94・百名店）",
+      "area": "Higashi-Ginza Sta. (3 min)",
+      "budget": "¥1,600 ($10.50) | 6 Counter Seats",
+      "insider_tip": "ENTRY RULE: Book via TableCheck (released Sat 9:00 AM JST) or line up before 8:30 AM!",
+      "subtitle": "#5: Ginza Hachigo (Tabelog ★3.94).\nA former French chef makes golden consomme broth with zero soy tare.",
+      "narration": "At number five, scoring an incredible three point nine four on Tabelog, is Ginza Hachigo. Run by a former executive French chef, this six-seat counter looks like a high-end sushi bar. Amazingly, the chef uses zero traditional soy tare sauce. Instead, he simmers Nagoya Cochin chicken, duck, cured prosciutto, and dried scallops into a crystal-clear golden consomme, finished with a touch of French sea salt.",
+      "photos": ["hachigo_ext_1.jpg", "hachigo_food_1.jpg"]
+    },
+    {
+      "seg_id": 3,
+      "rank_badge": "RANK #5  HOW TO ORDER",
+      "place_en": "Order: Tokusei Chukasoba (¥1,600) + Meat Gohan",
+      "place_ja": "看板メニュー：特製中華そば（1,600円）",
+      "area": "Shintomicho / Higashi-Ginza",
+      "budget": "Cashless / TableCheck FastPass",
+      "insider_tip": "MUST-KNOW: Sip the soup first—it changes flavor as the peppery menma and chashu melt in!",
+      "subtitle": "Book your slot on TableCheck every Saturday at 9 AM JST,\nand order the ¥1,600 Tokusei Chukasoba.",
+      "narration": "How do you get in? Don't show up at lunchtime. Ginza Hachigo releases online reservations on TableCheck every Saturday at nine A M Japan time for the following week. Order the Tokusei Chukasoba for sixteen hundred yen, and finish the broth with their complimentary cold roasted green tea.",
+      "photos": ["hachigo_food_2.jpg", "hachigo_food_3.jpg"]
+    },
+    {
+      "seg_id": 4,
+      "rank_badge": "RANK #4  ★3.95",
+      "place_en": "Homemade Ramen Muginae — House-Milled Noodles",
+      "place_ja": "第4位：Homemade Ramen 麦苗（食べログ ★3.95）",
+      "area": "Omori Sta. North Exit (6 min)",
+      "budget": "¥1,600 ($10.50) | No MSG",
+      "insider_tip": "ENTRY RULE: Reserve online on TableCheck or grab a morning door ticket at 9:00 AM!",
+      "subtitle": "#4: Homemade Ramen Muginae (Tabelog ★3.95).\nSilky noodles milled fresh in-house every morning in Omori.",
+      "narration": "Number four is Homemade Ramen Muginae in Omori, rated three point nine five. While tourists never visit Omori station, Japanese ramen fanatics pilgrimage here for the noodles—milled and hand-cut inside the shop every single morning from domestic Hokkaido wheat. The broth blends Yamagata chicken with fragrant niboshi sardines and zero artificial seasonings.",
+      "photos": ["muginae_ext_1.jpg", "muginae_food_1.jpg"]
+    },
+    {
+      "seg_id": 5,
+      "rank_badge": "RANK #4  HOW TO ORDER",
+      "place_en": "Order: Tokujo Shoyu Ramen + Side 'Nikumeshi' Bowl",
+      "place_ja": "必食：特上醤油らあめん ＆ 実家の魚屋直仕入れのご飯物",
+      "area": "Minami-Oi, Shinagawa-ku",
+      "budget": "¥1,600 – ¥2,000 ($11–$13)",
+      "insider_tip": "LOCAL SECRET: The owner's family runs a fish market—always order the daily seafood rice bowl!",
+      "subtitle": "Order the Tokujo Shoyu Ramen plus the daily seafood side bowl\nsourced from the owner's family fish shop.",
+      "narration": "Here is the local secret from Japanese Tabelog reviews: the chef's parents run a traditional fish shop, so Muginae's daily mini seafood bowls are sushi-grade. Book your seat on TableCheck in advance, and order the Tokujo Shoyu Ramen with the daily fish or grilled pork rice bowl.",
+      "photos": ["muginae_food_2.jpg", "muginae_food_3.jpg"]
+    },
+    {
+      "seg_id": 6,
+      "rank_badge": "RANK #3  ★3.98",
+      "place_en": "Japanese Ramen Gokan — Ikebukuro's Clam & Chicken Dashi",
+      "place_ja": "第3位：ジャパニーズ ラーメン 五感（食べログ ★3.98）",
+      "area": "Ikebukuro East Exit (7 min)",
+      "budget": "¥1,700 – ¥1,900 ($11–$12.50)",
+      "insider_tip": "WARNING: 100% Reservation Only via TableCheck! Walk-ins without a booking cannot enter.",
+      "subtitle": "#3: Japanese Ramen Gokan (Tabelog ★3.98).\nIkebukuro's Michelin Bib Gourmand sensation with clam and chicken dashi.",
+      "narration": "At number three, scoring three point nine eight in Ikebukuro, is Japanese Ramen Gokan. This shop layers domestic clams and oysters with rich chicken broth and four types of wooden-barrel soy sauce. On top sits smoky charcoal-grilled Iwanaka pork, tender chicken breast, and delicate shrimp wontons.",
+      "photos": ["gokan_ext_1.jpg", "gokan_food_1.jpg"]
+    },
+    {
+      "seg_id": 7,
+      "rank_badge": "RANK #3  HOW TO ORDER",
+      "place_en": "Strict Rule: 100% TableCheck Reservation Required",
+      "place_ja": "入店ルール：TableCheck完全予約制（店頭並び不可）",
+      "area": "Higashi-Ikebukuro, Toshima-ku",
+      "budget": "TableCheck Fee: ¥550 per seat",
+      "insider_tip": "BOOKING TIP: Reservations open on TableCheck every Sunday at 11:00 AM JST for the week ahead!",
+      "subtitle": "Gokan is 100% reservation-only via TableCheck.\nOrder the Tokujo Shoyu or Tokujo Shio Ramen (¥1,700).",
+      "narration": "Pay close attention: Japanese Ramen Gokan is one hundred percent reservation-only through TableCheck. If you walk up to the door without a reservation, you cannot eat there. Slots open on Sunday mornings Japan time, and for a five-hundred-fifty-yen booking fee, you skip the wait completely and walk straight in at your reserved time.",
+      "photos": ["gokan_food_2.jpg", "gokan_food_3.jpg"]
+    },
+    {
+      "seg_id": 8,
+      "rank_badge": "RANK #2  ★4.03",
+      "place_en": "Chukasoba Shibata — Duck, Clam & Raw Shoyu Legend",
+      "place_ja": "第2位：中華そば しば田（食べログ ★4.03・狛江駅徒歩1分）",
+      "area": "Komae Sta. North Exit (1 min)",
+      "budget": "¥1,680 ($11) | 16 Seats",
+      "insider_tip": "NEW LOCATION RULE: Buy your meal ticket INSIDE first, THEN join the outside line (食券先買い制)!",
+      "subtitle": "#2: Chukasoba Shibata (Tabelog ★4.03).\nOnly 2 ramen shops in Tokyo break 4.0 on Tabelog—this is one of them.",
+      "narration": "Breaking the legendary four point zero barrier at number two is Chukasoba Shibata, scoring four point zero three. Recently relocated right outside Komae Station on the Odakyu line from Shinjuku, Shibata's aromatic broth combines wild duck, spot-billed duck, and clams with eight varieties of unpasteurized raw soy sauce.",
+      "photos": ["shibata_ext_1.jpg", "shibata_food_1.jpg"]
+    },
+    {
+      "seg_id": 9,
+      "rank_badge": "RANK #2  HOW TO ORDER",
+      "place_en": "Order: Tokusei Chukasoba (¥1,680) + Niboshi Ramen",
+      "place_ja": "看板メニュー：特製中華そば（1,680円）※食券先買い制",
+      "area": "25 Min from Shinjuku via Odakyu Line",
+      "budget": "Bring ¥1,000 Bills / Coins",
+      "insider_tip": "JAPANESE RULE: Enter the shop to buy your ticket FIRST before lining up outside!",
+      "subtitle": "Buy your ticket at the vending machine BEFORE joining the line,\nand choose hand-massaged thick noodles (Futomen)!",
+      "narration": "Unlike the others, Shibata requires no online reservation—and with sixteen seats at the new Komae station shop, the line moves fast. Just remember the golden Japanese rule written on the door: step inside to buy your vending machine ticket first before joining the outside queue, and ask the staff for their chewy hand-massaged thick noodles.",
+      "photos": ["shibata_food_2.jpg", "shibata_food_3.jpg"]
+    },
+    {
+      "seg_id": 10,
+      "rank_badge": "RANK #1  ★4.13",
+      "place_en": "Ramenya Shima — Ranked #1 Ramen in All of Tokyo",
+      "place_ja": "第1位：らぁ麺や 嶋（食べログ ★4.13・東京ラーメン最高峰）",
+      "area": "Nishi-Shinjuku-Gochome Sta. (5 min)",
+      "budget": "¥1,650 – ¥1,950 ($11–$13)",
+      "insider_tip": "ENTRY RULE: Morning AirWAIT tablet registration at the door (~9:00 AM) or TableCheck FastPass!",
+      "subtitle": "#1: Ramenya Shima (Tabelog ★4.13).\nThe undisputed #1 highest-rated ramen shop in Tokyo, just west of Shinjuku.",
+      "narration": "And at number one, reigning supreme over every ramen shop in Tokyo with an astonishing four point one three score on Tabelog, is Ramenya Shima in Nishi-Shinjuku. Trained at the legendary Sugari and Tsuta, the master chef crafts a transcendent bowl topped with smoky charcoal-roasted pork, plump shrimp and pork wontons, and a broth of thirty premium natural ingredients.",
+      "photos": ["shima_ext_1.jpg", "shima_food_1.jpg"]
+    },
+    {
+      "seg_id": 11,
+      "rank_badge": "RANK #1  HOW TO ORDER",
+      "place_en": "Order: Tokusei Shoyu or Shio Ramen + Aburi Chashu Rice",
+      "place_ja": "必食：特製醤油らぁ麺 / 特製塩らぁ麺（AirWAIT整理券制）",
+      "area": "Honmachi, Shibuya-ku (Near Shinjuku)",
+      "budget": "6 Counter Seats | Weekdays Only",
+      "insider_tip": "HOW TO GET IN: Register on the AirWAIT iPad at the shop entrance around 8:30–9:30 AM for a QR call ticket!",
+      "subtitle": "Register on the morning AirWAIT tablet at the door for a QR ticket.\nWhich Japanese prefecture or food genre should we translate next?",
+      "narration": "Because Ramenya Shima has only six seats, waiting on the street is prohibited. Instead, head to the shop entrance around nine A M on weekdays and enter your number on the AirWAIT tablet to get a digital QR ticket that calls you when your seat is ready—or grab one of the limited TableCheck slots online. Which Japanese prefecture or Tabelog ranking should we decode next? Let us know in the comments!",
+      "photos": ["shima_food_2.jpg", "shima_food_3.jpg"]
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+# Virtual environment & Python cache
+.venv/
+venv/
+__pycache__/
+*.pyc
+
+# OAuth & API Secrets (NEVER commit)
+client_secret*.json
+.youtube_token*.json
+youtube_token*.json
+.env
+
+# Heavy local rendered media & temp files
+output/*.mp4
+output/*.wav
+output/*.aac
+output/_tmp*/
+output/launchd_*.log
+_tmp*/
+
+# OS metadata
+.DS_Store

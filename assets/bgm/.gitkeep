@@ -1,0 +1,5 @@
+# Place Suno BGM files (.mp3 / .wav / .m4a) in this directory.
+# Optional channel-specific naming:
+# - overseas_japan_*.mp3
+# - animal_battle_*.mp3
+# Or any general *.mp3 file to be used across channels.
