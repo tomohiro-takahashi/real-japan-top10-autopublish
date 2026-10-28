@@ -714,14 +714,14 @@ def run_midnight_batch_pipeline(
     daily_sets: int = 3,
     reuse_existing_media: bool = True,
     dry_run: bool = False,
+    schedule_prime_time: bool = False,
+    privacy_status: str = "public",
 ) -> List[Dict[str, Any]]:
     """
     Midnight Batch Mode (designed to run at 02:30 AM JST while the user sleeps):
     - Generates & uploads up to `daily_sets` (default 3 sets = 6 videos = 9,900 / 10,000 free API quota units).
-    - Schedules each set using YouTube's `publishAt` to hit the 3 Overseas Golden-Time Windows:
-      * Slot 1 (04:00 JST Long / 05:00 JST Shorts) -> UK & Europe Prime Time (20:00 London / 21:00 Paris / 15:00 NY)
-      * Slot 2 (09:00 JST Long / 10:00 JST Shorts) -> US East Coast Prime Time (20:00 New York / 17:00 LA)
-      * Slot 3 (13:00 JST Long / 14:00 JST Shorts) -> US West Coast Prime Time (21:00 Los Angeles / 15:00 Sydney)
+    - Publishes immediately as `public` by default (`schedule_prime_time=False`), or schedules across
+      3 Overseas Golden-Time Windows if `--schedule-prime-time` is enabled.
     """
     overseas_slots_jst = [
         (4, 0, 5, 0, "UK & Europe Prime Time (London 20:00 / Paris 21:00 / NY 15:00)"),
@@ -733,7 +733,7 @@ def run_midnight_batch_pipeline(
     for idx in range(daily_sets):
         now_jst = datetime.datetime.now(jst)
         is_daytime = 9 <= now_jst.hour <= 22
-        if is_daytime and not dry_run:
+        if is_daytime and not dry_run and not os.environ.get("GITHUB_ACTIONS"):
             # Check if there is an already-rendered MP4 ready in queue (0% CPU upload only)
             pending_spots = sorted(QUEUE_DIR.glob("spot_*.json"))
             has_prerendered = False
@@ -753,19 +753,28 @@ def run_midnight_batch_pipeline(
                 break
 
         lh, lm, sh, sm, label = overseas_slots_jst[idx % len(overseas_slots_jst)]
-        pub_long_iso = compute_jst_slot_iso(lh, lm)
-        pub_short_iso = compute_jst_slot_iso(sh, sm)
-        logger.info(
-            f"\n>>> [Midnight Batch Set {idx + 1}/{daily_sets}] Target: {label}\n"
-            f"    Scheduled Long : {pub_long_iso} ({lh:02d}:{lm:02d} JST)\n"
-            f"    Scheduled Short: {pub_short_iso} ({sh:02d}:{sm:02d} JST)"
-        )
+        if schedule_prime_time:
+            pub_long_iso: Optional[str] = compute_jst_slot_iso(lh, lm)
+            pub_short_iso: Optional[str] = compute_jst_slot_iso(sh, sm)
+            eff_privacy = "private"
+            logger.info(
+                f"\n>>> [Midnight Batch Set {idx + 1}/{daily_sets}] Target: {label}\n"
+                f"    Scheduled Long : {pub_long_iso} ({lh:02d}:{lm:02d} JST)\n"
+                f"    Scheduled Short: {pub_short_iso} ({sh:02d}:{sm:02d} JST)"
+            )
+        else:
+            pub_long_iso = None
+            pub_short_iso = None
+            eff_privacy = privacy_status
+            logger.info(
+                f"\n>>> [Batch Set {idx + 1}/{daily_sets}] Immediate {eff_privacy.upper()} Publish ({label})"
+            )
         try:
             res = run_daily_pipeline(
                 specific_script=None,
                 reuse_existing_media=reuse_existing_media,
                 dry_run=dry_run,
-                privacy_status="private",
+                privacy_status=eff_privacy,
                 publish_at_long_iso=pub_long_iso,
                 publish_at_short_iso=pub_short_iso,
             )
@@ -788,7 +797,12 @@ def main() -> None:
     parser.add_argument(
         "--midnight-batch",
         action="store_true",
-        help="Run midnight batch generation & schedule sets across overseas golden-time slots.",
+        help="Run batch generation & upload sets.",
+    )
+    parser.add_argument(
+        "--schedule-prime-time",
+        action="store_true",
+        help="When used with --midnight-batch, schedule videos for future US/EU prime time via publishAt instead of immediate public.",
     )
     parser.add_argument(
         "--daily-sets",
@@ -848,6 +862,8 @@ def main() -> None:
             daily_sets=args.daily_sets,
             reuse_existing_media=reuse,
             dry_run=args.dry_run,
+            schedule_prime_time=args.schedule_prime_time,
+            privacy_status=args.privacy,
         )
         return
 

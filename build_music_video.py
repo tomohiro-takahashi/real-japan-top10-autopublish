@@ -715,14 +715,14 @@ def build_1hour_video(
     - Loops the high-speed highway driving video (`bg_loop_mp4`) seamlessly for `duration_sec`.
     - Overlays the retro HUD (`hud_png`) and real-time audio spectrum (`showwaves=s=1200x95:mode=cline`).
     """
-    logger.info(f"Rendering 16:9 highway driving music video ({duration_sec}s): {out_mp4} ...")
+    logger.info(f"Rendering 16:9 1080p Full HD highway driving music video ({duration_sec}s): {out_mp4} ...")
     fps = 24
     filter_complex = (
         f"[0:v]setpts=PTS-STARTPTS[bg];"
         f"[bg][1:v]overlay=0:0[bghud];"
         f"[2:a]showwaves=s=1200x95:mode=cline:rate={fps}:colors=0x38bdf8|0xf472b6|0xfde047,format=rgba,"
         f"colorchannelmixer=aa=0.88[sw];"
-        f"[bghud][sw]overlay=40:580:shortest=1,format=yuv420p[vout]"
+        f"[bghud][sw]overlay=40:580:shortest=1,scale=1920:1080:flags=lanczos,unsharp=3:3:0.5:3:3:0.0,format=yuv420p[vout]"
     )
 
     cmd = [
@@ -751,7 +751,11 @@ def build_1hour_video(
         "-preset",
         "veryfast",
         "-crf",
-        "23",
+        "18",
+        "-maxrate",
+        "6M",
+        "-bufsize",
+        "12M",
         "-pix_fmt",
         "yuv420p",
         "-c:a",
@@ -762,7 +766,7 @@ def build_1hour_video(
         str(out_mp4),
     ]
     subprocess.run(cmd, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-    logger.info(f"Completed 16:9 video: {out_mp4} ({out_mp4.stat().st_size / (1024*1024):.1f} MB)")
+    logger.info(f"Completed 16:9 1080p video: {out_mp4} ({out_mp4.stat().st_size / (1024*1024):.1f} MB)")
     return out_mp4
 
 
@@ -842,12 +846,12 @@ def build_short_video(
     font_path: str,
 ) -> Path:
     """
-    Synthesize `output_short.mp4` (720x1280, 9:16, 30 seconds):
+    Synthesize `output_short.mp4` (1080x1920 Full HD 9:16, 30 seconds):
     - Extracts the 30s..60s climax slice of `src_mp3`.
     - Plays the moving highway driving video (`bg_loop_mp4`) inside the center window (`y=282..780`).
-    - Overlays the large real-time audio spectrum (`showwaves=s=636x190:mode=cline`) at `y=822`.
+    - Overlays the large real-time audio spectrum (`showwaves=s=636x190:mode=cline`) at `y=822` and upscales to 1080x1920 Full HD.
     """
-    logger.info(f"Rendering 9:16 Shorts highway driving video (30s): {out_short_mp4} ...")
+    logger.info(f"Rendering 9:16 1080p Full HD Shorts highway driving video (30s): {out_short_mp4} ...")
     mp3_dur = get_audio_duration(src_mp3)
     start_sec = 30.0 if mp3_dur >= 62.0 else max(0.0, mp3_dur * 0.2)
     clip_dur = min(30.0, max(10.0, mp3_dur - start_sec))
@@ -867,7 +871,7 @@ def build_short_video(
             f"afade=t=in:st=0:d=1.0,afade=t=out:st={max(1.0, clip_dur - 1.5):.2f}:d=1.5[aud];"
             f"[aud]asplit=2[a_out][a_viz];"
             f"[a_viz]showwaves=s=636x190:mode=cline:rate={fps}:colors=0x38bdf8|0xf472b6|0xfde047,format=rgba[sw];"
-            f"[v2][sw]overlay=42:822:shortest=1,format=yuv420p[vout]"
+            f"[v2][sw]overlay=42:822:shortest=1,scale=1080:1920:flags=lanczos,unsharp=3:3:0.5:3:3:0.0,format=yuv420p[vout]"
         )
 
         cmd = [
@@ -896,7 +900,11 @@ def build_short_video(
             "-preset",
             "veryfast",
             "-crf",
-            "21",
+            "18",
+            "-maxrate",
+            "8M",
+            "-bufsize",
+            "16M",
             "-pix_fmt",
             "yuv420p",
             "-c:a",
@@ -913,7 +921,7 @@ def build_short_video(
         ]
         subprocess.run(cmd, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
-    logger.info(f"Completed 9:16 Shorts video: {out_short_mp4} ({out_short_mp4.stat().st_size / (1024*1024):.1f} MB)")
+    logger.info(f"Completed 9:16 1080p Shorts video: {out_short_mp4} ({out_short_mp4.stat().st_size / (1024*1024):.1f} MB)")
     return out_short_mp4
 
 
