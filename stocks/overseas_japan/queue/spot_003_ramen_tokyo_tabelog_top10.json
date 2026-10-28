@@ -1,0 +1,30 @@
+{
+  "ranking_id": "ramen_tokyo_tabelog_top10",
+  "prefecture": "Tokyo Ramen TOP 10 (東京 ラーメン 名店 行列)",
+  "title_en": "SKIP ICHIRAN! Tokyo TOP 10 Real Ramen Shops Ranked by Japanese Tabelog Reviewers",
+  "youtube_title_long": "SKIP ICHIRAN! Tokyo TOP 10 Real Ramen Shops Ranked by Japanese Tabelog Reviewers",
+  "youtube_title_short": "Stop Waiting 2 Hours at Ichiran! Tokyo's #1 Real Local Ramen #Shorts #JapanFood",
+  "voice": "en-US-ChristopherNeural",
+  "thumb_config": {
+    "ribbon_text": "500,000 JAPANESE IG POSTS",
+    "hero_line1": "SKIP KYOTO!",
+    "hero_line2": "REAL JAPAN",
+    "banner_title": "TOKYO RAME TOP 10",
+    "banner_sub": "HIDDEN GEMS VOTED BY LOCALS",
+    "map_header": "WHERE IS TOKYO RA?",
+    "map_pill": "DIRECT",
+    "map_line1": "Shinkansen / Train",
+    "map_line2": "from Tokyo Station!",
+    "map_footer": "95% LOCAL GUESTS",
+    "highlight_prefs_ja": [
+      "東京都"
+    ]
+  },
+  "area_guide": {
+    "target_pref_ja": "東京都",
+    "map_badge": "Tokyo Ramen Local Guide",
+    "cards": []
+  },
+  "summary_rows": [],
+  "segments": []
+}

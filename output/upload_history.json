@@ -1,0 +1,36 @@
+[
+  {
+    "timestamp": "2026-10-28T17:57:27.217396+00:00",
+    "ranking_id": "samurai_castles_002",
+    "script": "spot_000_samurai_castles_top10.json",
+    "long_mp4": "/home/runner/work/real-japan-top10-autopublish/real-japan-top10-autopublish/output/overseas_japan_samurai_castles_002.mp4",
+    "short_mp4": "/home/runner/work/real-japan-top10-autopublish/real-japan-top10-autopublish/output/overseas_japan_samurai_castles_002_short.mp4",
+    "thumb_main": "/home/runner/work/real-japan-top10-autopublish/real-japan-top10-autopublish/output/overseas_japan_samurai_castles_002_thumb.jpg",
+    "thumb_ab_alt": "/home/runner/work/real-japan-top10-autopublish/real-japan-top10-autopublish/output/overseas_japan_samurai_castles_002_thumb_alt.jpg",
+    "thumb_short": "/home/runner/work/real-japan-top10-autopublish/real-japan-top10-autopublish/output/overseas_japan_samurai_castles_002_short_thumb.jpg",
+    "title_long": "SKIP OSAKA CASTLE! Japan TOP 10 Real Samurai Castles & Warlord Fortresses Ranked by Locals",
+    "title_short": "Skip Osaka Castle! Japan's #1 Real 400-Yr Samurai Fortress Ranked by Locals #Shorts #JapanTravel",
+    "publish_at_long_iso": "2026-10-28T19:00:00Z",
+    "publish_at_short_iso": "2026-10-28T20:00:00Z",
+    "dry_run": false,
+    "long_video_url": "https://youtu.be/KKrJrXgrgrc",
+    "short_video_url": "https://youtube.com/shorts/S3cMV4oJgzA"
+  },
+  {
+    "timestamp": "2026-10-28T18:03:43.997124+00:00",
+    "ranking_id": "akita_kankou_001",
+    "script": "spot_001_akita_sightseeing.json",
+    "long_mp4": "/home/runner/work/real-japan-top10-autopublish/real-japan-top10-autopublish/output/overseas_japan_akita_kankou_001.mp4",
+    "short_mp4": "/home/runner/work/real-japan-top10-autopublish/real-japan-top10-autopublish/output/overseas_japan_akita_kankou_001_short.mp4",
+    "thumb_main": "/home/runner/work/real-japan-top10-autopublish/real-japan-top10-autopublish/output/overseas_japan_akita_kankou_001_thumb.jpg",
+    "thumb_ab_alt": "/home/runner/work/real-japan-top10-autopublish/real-japan-top10-autopublish/output/overseas_japan_akita_kankou_001_thumb_alt.jpg",
+    "thumb_short": "/home/runner/work/real-japan-top10-autopublish/real-japan-top10-autopublish/output/overseas_japan_akita_kankou_001_short_thumb.jpg",
+    "title_long": "SKIP KYOTO! Akita Japan TOP 10 Hidden Gems (Ranked by 500,000 Japanese IG Posts)",
+    "title_short": "Skip Kyoto?! Real Japanese Ranked Akita's #1 Secret Onsen (500K IG Posts) #Shorts #JapanTravel",
+    "publish_at_long_iso": "2026-10-29T00:00:00Z",
+    "publish_at_short_iso": "2026-10-29T01:00:00Z",
+    "dry_run": false,
+    "long_video_url": "https://youtu.be/4QRvgUfAg7c",
+    "short_video_url": "https://youtube.com/shorts/_7tfEgNFL6M"
+  }
+]
