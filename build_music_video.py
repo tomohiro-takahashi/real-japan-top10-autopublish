@@ -802,7 +802,7 @@ def render_short_vertical_hud(
     tb1 = draw.textbbox((0, 0), line1, font=f_h1)
     tb2 = draw.textbbox((0, 0), line2, font=f_h2)
     draw.text(((SW - (tb1[2] - tb1[0])) // 2, 114), line1, font=f_h1, fill=(255, 255, 255, 255), stroke_width=2, stroke_fill=(0, 0, 0, 240))
-    draw.text(((SW - (tb2[2] - tb2[0])) // 2, 178), f"▶ {line2}", font=f_h2, fill=(253, 224, 71, 255), stroke_width=2, stroke_fill=(0, 0, 0, 240))
+    draw.text(((SW - (tb2[2] - tb2[0])) // 2, 178), f">> {line2} <<", font=f_h2, fill=(253, 224, 71, 255), stroke_width=2, stroke_fill=(0, 0, 0, 240))
 
     # 2. Punch a transparent window at (x=28..692, y=282..780) where the live highway driving video will play
     fx0, fy0, fx1, fy1 = 28, 282, SW - 28, 780
@@ -819,9 +819,9 @@ def render_short_vertical_hud(
     draw.rounded_rectangle((28, 808, SW - 28, 1028), radius=18, fill=(8, 12, 24, 215), outline=(244, 114, 182, 220), width=2)
 
     # 4. Bottom Track Title & Channel CTA (y=1058..1185)
-    f_bot = load_font(font_path, 22)
+    f_bot = load_font(font_path, 21)
     f_cta = load_font(font_path, 20)
-    short_title = meta.get("title", "").split("|")[0].strip()[:38]
+    short_title = meta.get("title", "").split("|")[0].strip()[:50]
     tb_bt = draw.textbbox((0, 0), short_title, font=f_bot)
     draw.text(((SW - (tb_bt[2] - tb_bt[0])) // 2, 1068), short_title, font=f_bot, fill=(255, 255, 255, 255), stroke_width=2, stroke_fill=(0, 0, 0, 240))
 
