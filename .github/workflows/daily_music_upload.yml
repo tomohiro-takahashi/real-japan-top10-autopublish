@@ -54,6 +54,8 @@ jobs:
           YOUTUBE_CLIENT_ID: ${{ secrets.YOUTUBE_CLIENT_ID }}
           YOUTUBE_CLIENT_SECRET: ${{ secrets.YOUTUBE_CLIENT_SECRET }}
           YOUTUBE_REFRESH_TOKEN: ${{ secrets.YOUTUBE_REFRESH_TOKEN }}
+          SUNO_COOKIE: ${{ secrets.SUNO_COOKIE }}
+          SUNO_API_BASE_URL: ${{ secrets.SUNO_API_BASE_URL }}
         run: |
           PRIVACY="${{ github.event.inputs.privacy || 'public' }}"
           DURATION="${{ github.event.inputs.duration || '3600' }}"
