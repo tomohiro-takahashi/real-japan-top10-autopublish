@@ -20,3 +20,7 @@ _tmp*/
 
 # OS metadata
 .DS_Store
+
+output/*.jpg
+output/*.png
+output/*_seo_metadata.json
