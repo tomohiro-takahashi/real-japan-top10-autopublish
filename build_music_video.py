@@ -680,7 +680,7 @@ def _extract_ja_parts(meta: Dict[str, Any]) -> Tuple[str, str, str, str]:
     catch_txt = meta.get("thumb_catch") or "聴くだけで、当時の記憶がよみがえる——"
     main_txt = meta.get("thumb_main") or "深夜の首都高・青春BGMアーカイブ"
     sub_txt = meta.get("thumb_sub") or "MIDNIGHT COCKPIT  ｜  あの頃の夜と音楽"
-    if meta.get("_under_15m"):
+    if meta.get("_under_15m") and ("60分" in sub_txt or "16曲" in sub_txt):
         sub_txt = "MIDNIGHT COCKPIT  ｜  あの頃の夜と音楽"
     return era_label, catch_txt, main_txt, sub_txt
 
@@ -1625,8 +1625,8 @@ def main() -> int:
     parser.add_argument(
         "--duration",
         type=int,
-        default=0,
-        help="Target duration in seconds for output_1hour.mp4 (default: 0 = auto-detect 3600s 1-hour when phone-verified, or 885s before verification).",
+        default=3600,
+        help="Target duration in seconds for output_1hour.mp4 (default: 3600 = 1-Hour full length).",
     )
     parser.add_argument(
         "--privacy",
@@ -1654,19 +1654,10 @@ def main() -> int:
     DONE_DIR.mkdir(parents=True, exist_ok=True)
     BG_VIDEOS_DIR.mkdir(parents=True, exist_ok=True)
 
-    long_allowed, is_monetized = detect_channel_long_uploads_allowed()
-    target_duration = args.duration
-    if target_duration <= 0:
-        if long_allowed:
-            target_duration = 3600
-            if os.environ.get("SUNO_BATCHES_PER_VIDEO") in (None, "", "2", "auto"):
-                os.environ["SUNO_BATCHES_PER_VIDEO"] = "8"
-            logger.info("Phone verification detected (longUploadsStatus=allowed)! Auto-selecting 1-Hour (3600s, 16 tracks) mode.")
-        else:
-            target_duration = 885
-            if os.environ.get("SUNO_BATCHES_PER_VIDEO") in (None, "", "auto"):
-                os.environ["SUNO_BATCHES_PER_VIDEO"] = "2"
-            logger.info("Channel not yet phone-verified (longUploadsStatus!=allowed). Auto-selecting 14m45s (885s) safe mode.")
+    _, is_monetized = detect_channel_long_uploads_allowed()
+    target_duration = args.duration if args.duration > 0 else 3600
+    if os.environ.get("SUNO_BATCHES_PER_VIDEO") in (None, "", "2", "auto"):
+        os.environ["SUNO_BATCHES_PER_VIDEO"] = "8" if target_duration > 900 else "2"
 
     chosen_mp3, chosen_meta, pool = pick_mp3_and_metadata(auto_suno=True)
 

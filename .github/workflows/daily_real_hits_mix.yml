@@ -1,0 +1,69 @@
+name: Real 80s-90s Western Legend 12-Song Full Mix Auto-Upload
+
+on:
+  schedule:
+    # Runs 2x daily at 03:00 UTC (12:00 JST Noon) and 13:30 UTC (22:30 JST Late Night)
+    # Completely separate from the 20:00 JST Suno workflow & uses 0 Suno credits!
+    - cron: '0 3 * * *'
+    - cron: '30 13 * * *'
+  workflow_dispatch:
+    inputs:
+      mix_id:
+        description: 'Optional Mix ID (e.g. real_mix_001 .. real_mix_012; leave blank for next unused)'
+        required: false
+        default: ''
+      privacy:
+        description: 'YouTube Privacy Status (public / unlisted / private)'
+        required: false
+        default: 'public'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daily-real-hits-mix
+  cancel-in-progress: false
+
+jobs:
+  build-and-upload-real-hits-mix:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install FFmpeg and CJK Fonts
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg fonts-dejavu-core fonts-liberation fonts-noto-cjk
+
+      - name: Install Python Dependencies (including latest yt-dlp)
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install -U yt-dlp
+
+      - name: Build Full-Length 12-Song Western Hit Mix + Short & Upload
+        env:
+          YOUTUBE_CLIENT_ID: ${{ secrets.YOUTUBE_CLIENT_ID }}
+          YOUTUBE_CLIENT_SECRET: ${{ secrets.YOUTUBE_CLIENT_SECRET }}
+          YOUTUBE_CLIENT_ID_MUSIC: ${{ secrets.YOUTUBE_CLIENT_ID_MUSIC }}
+          YOUTUBE_CLIENT_SECRET_MUSIC: ${{ secrets.YOUTUBE_CLIENT_SECRET_MUSIC }}
+          YOUTUBE_REFRESH_TOKEN_MUSIC: ${{ secrets.YOUTUBE_REFRESH_TOKEN_MUSIC }}
+        run: |
+          PRIVACY="${{ github.event.inputs.privacy || 'public' }}"
+          MIX_ID="${{ github.event.inputs.mix_id || '' }}"
+          if [ -n "$MIX_ID" ]; then
+            python real_hits_mix_builder.py --privacy "$PRIVACY" --mix-id "$MIX_ID"
+          else
+            python real_hits_mix_builder.py --privacy "$PRIVACY"
+          fi
