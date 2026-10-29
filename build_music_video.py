@@ -64,6 +64,7 @@ OUTPUT_THUMB = BASE_DIR / "output_music_thumb.jpg"
 
 TOKEN_FILE_MUSIC = BASE_DIR / ".youtube_token_music.json"
 TOKEN_FILE_FALLBACK = BASE_DIR / ".youtube_token_overseas_japan.json"
+CLIENT_SECRET_FILE_MUSIC = BASE_DIR / "client_secret_music.json"
 CLIENT_SECRET_FILE = BASE_DIR / "client_secret.json"
 
 
@@ -1191,9 +1192,11 @@ def run_music_oauth_setup() -> None:
         "https://www.googleapis.com/auth/youtube.upload",
         "https://www.googleapis.com/auth/youtube",
     ]
-    if not CLIENT_SECRET_FILE.exists():
-        raise FileNotFoundError(f"Missing {CLIENT_SECRET_FILE}")
-    flow = InstalledAppFlow.from_client_secrets_file(str(CLIENT_SECRET_FILE), scopes)
+    secret_path = CLIENT_SECRET_FILE_MUSIC if CLIENT_SECRET_FILE_MUSIC.exists() else CLIENT_SECRET_FILE
+    if not secret_path.exists():
+        raise FileNotFoundError(f"Missing {secret_path}")
+    logger.info(f"Using OAuth client secret file: {secret_path}")
+    flow = InstalledAppFlow.from_client_secrets_file(str(secret_path), scopes)
     creds = flow.run_local_server(port=0)
     TOKEN_FILE_MUSIC.write_text(creds.to_json(), encoding="utf-8")
     logger.info(f"Saved Music Channel OAuth token to {TOKEN_FILE_MUSIC}")
