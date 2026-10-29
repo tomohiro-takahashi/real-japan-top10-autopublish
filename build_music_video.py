@@ -672,9 +672,9 @@ def _extract_ja_parts(meta: Dict[str, Any]) -> Tuple[str, str, str, str]:
     era_label = meta.get("thumb_era_label") or "40代・50代に捧ぐ  ｜  1980s-90s ARCHIVE"
     catch_txt = meta.get("thumb_catch") or "聴くだけで、当時の記憶がよみがえる——"
     main_txt = meta.get("thumb_main") or "深夜の首都高・青春BGMアーカイブ"
-    sub_txt = meta.get("thumb_sub") or "作業・ドライブ・晩酌用  ｜  全16曲ノンストップ（60分）"
+    sub_txt = meta.get("thumb_sub") or "MIDNIGHT COCKPIT  ｜  あの頃の夜と音楽"
     if meta.get("_under_15m"):
-        sub_txt = sub_txt.replace("全16曲ノンストップ（60分）", "厳選ノンストップMIX").replace("（60分）", "")
+        sub_txt = "MIDNIGHT COCKPIT  ｜  あの頃の夜と音楽"
     return era_label, catch_txt, main_txt, sub_txt
 
 
@@ -1058,7 +1058,7 @@ def render_short_vertical_hud(
 
     # 4. Bottom Japanese Spec & Channel CTA (y=1054..1168)
     bot_spec = (
-        "作業・ドライブ・晩酌用  ｜  厳選ノンストップMIX"
+        "MIDNIGHT COCKPIT  ｜  あの頃の夜と音楽"
         if meta.get("_under_15m")
         else "作業・ドライブ・晩酌用  ｜  全16曲ノンストップ（60分）"
     )
@@ -1072,7 +1072,7 @@ def render_short_vertical_hud(
     )
 
     cta_ja = (
-        "本編ノンストップMIXはチャンネルから"
+        "本編フル音源はチャンネルから"
         if meta.get("_under_15m")
         else "本編フルアルバム（1時間耐久）はチャンネルから"
     )
@@ -1474,9 +1474,9 @@ def main() -> int:
         f"{chosen_meta.get('target_badge', '【40代・50代必見】')}{chosen_meta.get('thumb_main', '青春BGM')} 🎧本編はチャンネルへ！ #Shorts",
     )
     if args.duration <= 900:
-        long_title = long_title.replace("1時間耐久", "作業・ドライブ用ノンストップMIX").replace("1時間", "厳選MIX")
-        short_title = short_title.replace("本編1時間は", "本編MIXは").replace("1時間耐久", "厳選MIX")
-        full_description = full_description.replace("1時間耐久", "ノンストップMIX").replace("全16曲（60分）", "厳選ノンストップメドレー")
+        long_title = long_title.replace("1時間耐久", "").strip()
+        short_title = short_title.replace("本編1時間は", "本編は").replace("1時間耐久", "").strip()
+        full_description = full_description.replace("・1時間耐久", "").replace("1時間耐久", "").replace("全16曲（60分）", "")
 
     if args.dry_run:
         logger.info("Dry-run complete! Videos generated at:")
@@ -1499,7 +1499,7 @@ def main() -> int:
         )
 
         short_desc = (
-            f"🎧 本編（ノンストップMIXフル動画）はこちら 👉 https://youtu.be/{long_id}\n\n"
+            f"🎧 本編フル動画はこちら 👉 https://youtu.be/{long_id}\n\n"
             f"{full_description}"
         )
         short_id = upload_video_to_youtube(
