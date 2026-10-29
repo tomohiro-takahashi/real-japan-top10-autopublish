@@ -286,18 +286,22 @@ class SunoUnofficialClient:
         ordered_models = [m for m in model_candidates if not (m in seen_mv or seen_mv.add(m))]
 
         self._authenticate_clerk()
+        turnstile_token = self._acquire_turnstile_token()
         gen_resp = None
         used_mv = ordered_models[0]
         for candidate_mv in ordered_models:
             logger.info(f"Authenticating with Suno Clerk & generating '{title}' [model={candidate_mv}]...")
-            gen_payload = {
+            gen_payload: Dict[str, Any] = {
                 "gpt_description_prompt": "",
                 "mv": candidate_mv,
-                "prompt": structure_prompt,
+                "prompt": "" if make_instrumental else structure_prompt,
                 "make_instrumental": make_instrumental,
                 "tags": style,
                 "title": title,
+                "generation_type": "TEXT",
             }
+            if turnstile_token:
+                gen_payload["token"] = turnstile_token
             try:
                 gen_resp = self._studio_request("/api/generate/v2/", payload=gen_payload)
                 if gen_resp and gen_resp.get("clips"):
@@ -320,20 +324,34 @@ class SunoUnofficialClient:
             time.sleep(8.0)
             self._refresh_jwt()
             ids_param = ",".join(clip_ids)
-            feed = self._studio_request(f"/api/feed/?ids={urllib.parse.quote(ids_param)}")
-            if isinstance(feed, list):
-                for item in feed:
-                    cid = item.get("id", "track")
-                    status = item.get("status", "")
-                    audio_url = item.get("audio_url", "")
-                    if status == "error":
-                        raise RuntimeError(f"Suno clip generation errored: {item}")
-                    # Wait for status == "complete" so we get the full-length high-bitrate MP3 file
-                    if status == "complete" and audio_url and cid not in downloaded_paths:
-                        dest = out_dir / f"suno_{meta.get('id', 'track')}_{cid[:8]}.mp3"
-                        downloaded_paths[cid] = self._download_file(audio_url, dest)
-                if len(downloaded_paths) >= len(clip_ids):
-                    break
+            feed_items: List[Dict[str, Any]] = []
+            try:
+                feed_v2 = self._studio_request(f"/api/feed/v2?ids={urllib.parse.quote(ids_param)}")
+                if isinstance(feed_v2, dict) and isinstance(feed_v2.get("clips"), list):
+                    feed_items = feed_v2["clips"]
+            except Exception:
+                pass
+            if not feed_items:
+                feed_v1 = self._studio_request(f"/api/feed/?ids={urllib.parse.quote(ids_param)}")
+                if isinstance(feed_v1, list):
+                    feed_items = feed_v1
+
+            for item in feed_items:
+                cid = item.get("id", "track")
+                status = item.get("status", "")
+                audio_url = item.get("audio_url", "")
+                media_urls = item.get("media_urls") or []
+                if (not audio_url or "forbidden" in audio_url) and media_urls:
+                    audio_url = media_urls[0].get("url", "")
+                if status == "error":
+                    raise RuntimeError(f"Suno clip generation errored: {item}")
+                logger.info(f"  [Poll] Clip {cid[:8]} status={status} media_ready={bool(audio_url and 'forbidden' not in audio_url)}")
+                # Wait for status == "complete" so we get the full-length Pro Plan Studio Master WAV -> 320kbps MP3
+                if status == "complete" and cid not in downloaded_paths:
+                    mp3_dest = out_dir / f"suno_{meta.get('id', 'track')}_{cid[:8]}.mp3"
+                    downloaded_paths[cid] = self._download_pro_wav_as_mp3(cid, mp3_dest, fallback_url=audio_url)
+            if len(downloaded_paths) >= len(clip_ids):
+                break
 
         if downloaded_paths:
             tracks = list(downloaded_paths.values())
@@ -351,7 +369,7 @@ class SunoUnofficialClient:
                             "-i", str(tracks[1]),
                             "-filter_complex", "[0:a][1:a]acrossfade=d=3.0:c1=tri:c2=tri[aout]",
                             "-map", "[aout]",
-                            "-c:a", "libmp3lame", "-b:a", "192k",
+                            "-c:a", "libmp3lame", "-b:a", "320k",
                             str(master_mp3),
                         ],
                         check=True,
@@ -370,6 +388,158 @@ class SunoUnofficialClient:
 
         raise TimeoutError(f"Timed out waiting for Suno clips {clip_ids} after {timeout_sec}s.")
 
+    def _download_pro_wav_as_mp3(self, clip_id: str, mp3_dest: Path, fallback_url: str = "") -> Path:
+        """Export lossless Studio Master WAV via Pro Plan endpoint (/api/gen/{id}/convert_wav/ -> /wav_file/) and encode to 320kbps MP3."""
+        import subprocess
+
+        self._refresh_jwt()
+        try:
+            self._studio_request(f"/api/gen/{clip_id}/convert_wav/", payload={})
+        except Exception:
+            pass
+
+        wav_url = ""
+        for _ in range(24):
+            time.sleep(2.5)
+            try:
+                w_info = self._studio_request(f"/api/gen/{clip_id}/wav_file/")
+                if isinstance(w_info, dict) and w_info.get("wav_file_url"):
+                    wav_url = w_info["wav_file_url"]
+                    break
+            except Exception:
+                pass
+
+        if wav_url:
+            wav_tmp = mp3_dest.with_suffix(".wav")
+            self._download_file(wav_url, wav_tmp)
+            subprocess.run(
+                ["ffmpeg", "-y", "-i", str(wav_tmp), "-c:a", "libmp3lame", "-b:a", "320k", str(mp3_dest)],
+                check=True,
+                stdout=subprocess.DEVNULL,
+                stderr=subprocess.DEVNULL,
+            )
+            wav_tmp.unlink(missing_ok=True)
+            logger.info(f"Converted lossless Pro WAV -> 320kbps MP3: {mp3_dest}")
+            return mp3_dest
+
+        if fallback_url and "forbidden" not in fallback_url:
+            return self._download_file(fallback_url, mp3_dest)
+        raise RuntimeError(f"Could not obtain WAV or MP3 download URL for clip {clip_id}")
+
+    def _acquire_turnstile_token(self, sitekey: str = "0x4AAAAAADI7xDNyj-3LcIbi", timeout_sec: int = 25) -> Optional[str]:
+        """Acquire a Cloudflare Turnstile token on https://suno.com/create via Chrome CDP."""
+        import shutil
+        import subprocess
+        import sys
+
+        chrome_candidates = [
+            "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+            shutil.which("google-chrome") or "",
+            shutil.which("google-chrome-stable") or "",
+            shutil.which("chromium") or "",
+            shutil.which("chromium-browser") or "",
+        ]
+        chrome_bin = next((c for c in chrome_candidates if c and os.path.exists(c)), None)
+        if not chrome_bin:
+            logger.warning("Google Chrome not found for Turnstile token acquisition.")
+            return None
+
+        profile_dir = Path(__file__).resolve().parent / ".suno_chrome_profile"
+        profile_dir.mkdir(parents=True, exist_ok=True)
+        port = 9249
+        cmd = [
+            chrome_bin,
+            "--disable-blink-features=AutomationControlled",
+            f"--remote-debugging-port={port}",
+            "--remote-allow-origins=*",
+            f"--user-data-dir={profile_dir}",
+            "--window-size=1280,800",
+            "--no-first-run",
+            "--no-default-browser-check",
+            "about:blank",
+        ]
+        if os.name == "posix" and sys.platform.startswith("linux") and not os.environ.get("DISPLAY"):
+            xvfb = shutil.which("xvfb-run")
+            if xvfb:
+                cmd = [xvfb, "-a"] + cmd
+
+        cookie_list = []
+        for part in self.cookie.split(";"):
+            if "=" in part:
+                k, v = part.strip().split("=", 1)
+                if k.startswith("__client"):
+                    cookie_list.append(
+                        {"name": k, "value": v, "domain": "auth.suno.com", "path": "/", "secure": True, "httpOnly": k == "__client", "sameSite": "None"}
+                    )
+                else:
+                    cookie_list.append({"name": k, "value": v, "domain": ".suno.com", "path": "/", "secure": True})
+
+        proc = subprocess.Popen(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        try:
+            tabs = []
+            for _ in range(20):
+                time.sleep(0.5)
+                try:
+                    with urllib.request.urlopen(f"http://127.0.0.1:{port}/json/list", timeout=2) as r:
+                        tabs = json.loads(r.read().decode("utf-8"))
+                    if [t for t in tabs if t.get("type") == "page"]:
+                        break
+                except Exception:
+                    pass
+            page_tabs = [t for t in tabs if t.get("type") == "page"]
+            if not page_tabs:
+                return None
+            ws_url = page_tabs[0]["webSocketDebuggerUrl"]
+            _cdp_send_command(ws_url, "Network.setCookies", {"cookies": cookie_list}, 1)
+            _cdp_send_command(ws_url, "Page.navigate", {"url": "https://suno.com/create"}, 2)
+
+            for _ in range(25):
+                time.sleep(1.0)
+                chk = _cdp_send_command(
+                    ws_url,
+                    "Runtime.evaluate",
+                    {"expression": 'JSON.stringify({url: location.href, hasTs: typeof window.turnstile !== "undefined"})', "returnByValue": True},
+                    3,
+                )
+                val_str = chk.get("result", {}).get("result", {}).get("value", "{}")
+                v = json.loads(val_str) if val_str else {}
+                if v.get("url") == "https://suno.com/create" and v.get("hasTs"):
+                    break
+
+            setup_js = f"""(() => {{
+                window.__tsToken = null;
+                const div = document.createElement('div');
+                div.style.cssText = 'position:fixed;top:10px;left:10px;z-index:999999;background:#fff;width:300px;height:65px;';
+                document.body.appendChild(div);
+                window.turnstile.render(div, {{
+                    sitekey: '{sitekey}',
+                    callback: (token) => {{ window.__tsToken = token; }},
+                }});
+                return 'rendered';
+            }})()"""
+            _cdp_send_command(ws_url, "Runtime.evaluate", {"expression": setup_js, "returnByValue": True}, 4)
+
+            t0 = time.time()
+            msg_id = 10
+            while time.time() - t0 < timeout_sec:
+                time.sleep(1.0)
+                msg_id += 1
+                res = _cdp_send_command(
+                    ws_url,
+                    "Runtime.evaluate",
+                    {"expression": "window.__tsToken || ''", "returnByValue": True},
+                    msg_id,
+                )
+                tok = res.get("result", {}).get("result", {}).get("value", "")
+                if tok:
+                    logger.info(f"Acquired Cloudflare Turnstile token ({len(tok)} chars) in {time.time() - t0:.1f}s.")
+                    return tok
+        except Exception as exc:
+            logger.warning(f"Turnstile token acquisition failed ({exc}).")
+        finally:
+            proc.terminate()
+        return None
+
     def get_billing_info(self) -> Dict[str, Any]:
         """Fetch Suno account billing/credits info using the active Clerk session."""
         self._authenticate_clerk()
@@ -381,8 +551,60 @@ class SunoUnofficialClient:
         with urllib.request.urlopen(req, timeout=60) as resp:
             data = resp.read()
         dest.write_bytes(data)
-        logger.info(f"Downloaded Suno MP3 ({len(data) / (1024*1024):.2f} MB) -> {dest}")
+        logger.info(f"Downloaded Suno audio ({len(data) / (1024*1024):.2f} MB) -> {dest}")
         return dest
+
+
+def _cdp_send_command(ws_url: str, method: str, params: Optional[Dict[str, Any]] = None, msg_id: int = 1) -> Dict[str, Any]:
+    """Minimal zero-dependency RFC 6455 WebSocket client to send a single CDP command and return its JSON response."""
+    import base64
+    import socket
+    import struct
+
+    parsed = urllib.parse.urlparse(ws_url)
+    host = parsed.hostname or "127.0.0.1"
+    port = parsed.port or 9249
+    path = parsed.path or "/"
+
+    with socket.create_connection((host, port), timeout=15) as sock:
+        key = base64.b64encode(os.urandom(16)).decode("ascii")
+        handshake = (
+            f"GET {path} HTTP/1.1\r\n"
+            f"Host: {host}:{port}\r\n"
+            "Upgrade: websocket\r\n"
+            "Connection: Upgrade\r\n"
+            f"Sec-WebSocket-Key: {key}\r\n"
+            "Sec-WebSocket-Version: 13\r\n\r\n"
+        )
+        sock.sendall(handshake.encode("ascii"))
+        sock.recv(4096)
+
+        payload = json.dumps({"id": msg_id, "method": method, "params": params or {}}).encode("utf-8")
+        mask_key = os.urandom(4)
+        plen = len(payload)
+        if plen < 126:
+            header = bytearray([0x81, 0x80 | plen]) + mask_key
+        else:
+            header = bytearray([0x81, 0x80 | 126]) + struct.pack(">H", plen) + mask_key
+        masked = bytearray(payload[i] ^ mask_key[i % 4] for i in range(plen))
+        sock.sendall(header + masked)
+
+        buf = b""
+        sock.settimeout(12.0)
+        target = f'"id":{msg_id}'.encode("ascii")
+        try:
+            while target not in buf:
+                c = sock.recv(65536)
+                if not c:
+                    break
+                buf += c
+        except Exception:
+            pass
+
+        idx = buf.find(b'{"id":')
+        if idx != -1:
+            return json.loads(buf[idx:].decode("utf-8", errors="ignore"))
+        return {}
 
 
 def _cdp_get_all_cookies(ws_url: str) -> List[Dict[str, Any]]:
