@@ -2,13 +2,18 @@
 """
 real_hits_mix_builder.py
 ========================
-Builds and uploads Full-Length "Real 80s/90s Western Legend 12-Track Hit Mixes" (起爆剤モード)
+Builds and uploads 2-Hour+ Full-Length "Real 80s/90s Western Legend 24-Track Masterpiece Mixes" (起爆剤モード)
 for `MIDNIGHT COCKPIT / あの頃の夜と音楽`.
-- Zero Suno credits required! Can run on its own independent schedule (e.g. 2x/day).
-- Features 12 distinct situational/instrument angles ("夜に聴く", "ピアノが落ち着く", "サックスが沁みる",
-  "アコギが心地よい", "雨の夜", "仕事帰りドライブ", "六本木ディスコ", "ハイウェイロック", "休日の朝珈琲",
-  "90sメガヒット", "泣きのギターバラード", "深夜2時のアーバンメロウ") × 12 full-length songs each (~52-60 minutes)!
-- Renders a 2-column 12-track Setlist card directly onto the 1080p video HUD (`hud_png`).
+- Runs 1x daily (22:00 JST) alongside the 1x daily (20:00 JST) Suno original upload.
+- Each mix is a deeply curated ~2-Hour (24 full-length iconic songs, ~105-125 minutes) definitive compilation:
+  1. `real_mix_001`: 【名画メドレー】80s-90s 映画主題歌＆サウンドトラック永久保存版（全24曲・約2時間）
+  2. `real_mix_002`: 【夜に聴きたい洋楽】一日の終わりに心がほどける80s-90s AOR＆極上メロウバラード（全24曲・約2時間）
+  3. `real_mix_003`: 【ピアノが落ち着く洋楽】静かな夜に聴きたい70s-90s ピアノ名曲バラード決定版（全24曲・約2時間）
+  4. `real_mix_004`: 【サックスが沁みる夜】ウイスキー片手に聴きたい80s-90s サックス＆アーバンナイト名曲選（全24曲・約2時間）
+  5. `real_mix_005`: 【アコギが心地よい洋楽】休日の午後や夕暮れに聴きたいアコースティック＆ソフトロック決定版（全24曲・約2時間）
+  6. `real_mix_006`: 【雨の夜に聴きたい洋楽】窓を打つ雨音と聴く80s-90s 泣けるラブバラード名曲集（全24曲・約2時間）
+  7. `real_mix_007`: 【バブル世代必見】1986年六本木・マハラジャ洋楽ディスコ＆ハイエナジー大全集（全24曲・約2時間）
+  8. `real_mix_008`: 【夜のハイウェイ洋楽】深夜の高速道路で聴きたい80s-90s アメリカンロック＆ドライブ大全集（全24曲・約2時間）
 """
 
 from __future__ import annotations
@@ -57,18 +62,58 @@ REAL_HITS_POOL_PATH = MUSIC_DIR / "real_hits_pool.json"
 
 
 DEFAULT_REAL_HIT_MIXES: List[Dict[str, Any]] = [
-    # 01: 夜に聴く・週末のリラックスAOR
+    # 01: 80s-90s 名画主題歌＆サウンドトラック永久保存版（2時間・全24曲）
     {
         "id": "real_mix_001",
         "used": False,
         "genre": "80s City Pop & Sax AOR",
         "artwork_file": "citypop80s.jpg",
-        "title": "【夜に聴きたい洋楽】疲れた夜に心がほどける80年代AOR＆名曲バラード全12曲フルメドレー｜Bobby Caldwell / Boz Scaggs / Chicago / Toto",
-        "short_title": "【夜に聴きたい洋楽】疲れた夜に心がほどける80年代AOR＆名曲バラード全12曲 🎧本編はチャンネルへ！ #Shorts #80s洋楽",
-        "thumb_era_label": "40代・50代に捧ぐ  ｜  NIGHT RELAX AOR — FULL 12 SONGS",
+        "title": "【名画メドレー】イントロで名シーンが蘇る！80年代・90年代「映画主題歌＆サントラ」洋楽名曲集【2時間・全24曲フル】トップガン / BTTF / スタンド・バイ・ミー / アルマゲドン",
+        "short_title": "【名画メドレー】イントロで映画の名シーンが蘇る！80s-90s映画主題歌24選 🎧本編2時間はチャンネルへ！ #Shorts #映画音楽",
+        "thumb_era_label": "40代・50代 永久保存版  ｜  80s-90s MOVIE SOUNDTRACKS — 2 HOURS / 24 SONGS",
+        "thumb_catch": "イントロが流れた瞬間、あの頃の銀幕と青春の記憶がよみがえる——",
+        "thumb_main": "80s-90s 名画主題歌メドレー【2時間】",
+        "thumb_sub": "トップガン / BTTF / スタンド・バイ・ミー / フラッシュダンス / ボディガード / アルマゲドン 他 全24曲",
+        "tracks": [
+            {"artist": "Kenny Loggins", "title": "Danger Zone", "ja_title": "映画『トップガン』", "query": "Kenny Loggins Danger Zone official audio"},
+            {"artist": "Berlin", "title": "Take My Breath Away", "ja_title": "映画『トップガン』愛のテーマ", "query": "Berlin Take My Breath Away official audio"},
+            {"artist": "Huey Lewis & The News", "title": "The Power of Love", "ja_title": "映画『バック・トゥ・ザ・フューチャー』", "query": "Huey Lewis and the News The Power of Love official audio"},
+            {"artist": "Ben E. King", "title": "Stand by Me", "ja_title": "映画『スタンド・バイ・ミー』", "query": "Ben E King Stand by Me official audio"},
+            {"artist": "Irene Cara", "title": "Flashdance... What a Feeling", "ja_title": "映画『フラッシュダンス』", "query": "Irene Cara Flashdance What a Feeling official audio"},
+            {"artist": "Michael Sembello", "title": "Maniac", "ja_title": "映画『フラッシュダンス』", "query": "Michael Sembello Maniac official audio"},
+            {"artist": "Kenny Loggins", "title": "Footloose", "ja_title": "映画『フットルース』", "query": "Kenny Loggins Footloose official audio"},
+            {"artist": "Survivor", "title": "Eye of the Tiger", "ja_title": "映画『ロッキー3』", "query": "Survivor Eye of the Tiger official audio"},
+            {"artist": "Ray Parker Jr.", "title": "Ghostbusters", "ja_title": "映画『ゴーストバスターズ』", "query": "Ray Parker Jr Ghostbusters official audio"},
+            {"artist": "Limahl", "title": "The NeverEnding Story", "ja_title": "映画『ネバーエンディング・ストーリー』", "query": "Limahl The NeverEnding Story official audio"},
+            {"artist": "Joe Cocker & Jennifer Warnes", "title": "Up Where We Belong", "ja_title": "映画『愛と青春の旅だち』", "query": "Joe Cocker Jennifer Warnes Up Where We Belong official audio"},
+            {"artist": "Lionel Richie", "title": "Say You, Say Me", "ja_title": "映画『ホワイトナイツ／白夜』", "query": "Lionel Richie Say You Say Me official audio"},
+            {"artist": "Christopher Cross", "title": "Arthur's Theme (Best That You Can Do)", "ja_title": "映画『ミスター・アーサー』", "query": "Christopher Cross Arthur's Theme Best That You Can Do official audio"},
+            {"artist": "Starship", "title": "Nothing's Gonna Stop Us Now", "ja_title": "映画『マネキン』", "query": "Starship Nothing's Gonna Stop Us Now official audio"},
+            {"artist": "The Beach Boys", "title": "Kokomo", "ja_title": "映画『カクテル』", "query": "Beach Boys Kokomo official audio"},
+            {"artist": "Roy Orbison", "title": "Oh, Pretty Woman", "ja_title": "映画『プリティ・ウーマン』", "query": "Roy Orbison Oh Pretty Woman official audio"},
+            {"artist": "Roxette", "title": "It Must Have Been Love", "ja_title": "映画『プリティ・ウーマン』", "query": "Roxette It Must Have Been Love official audio"},
+            {"artist": "The Righteous Brothers", "title": "Unchained Melody", "ja_title": "映画『ゴースト／ニューヨークの幻』", "query": "Righteous Brothers Unchained Melody official audio"},
+            {"artist": "Whitney Houston", "title": "I Will Always Love You", "ja_title": "映画『ボディガード』", "query": "Whitney Houston I Will Always Love You official audio"},
+            {"artist": "Bryan Adams", "title": "(Everything I Do) I Do It for You", "ja_title": "映画『ロビン・フッド』", "query": "Bryan Adams Everything I Do I Do It for You official audio"},
+            {"artist": "Celine Dion", "title": "My Heart Will Go On", "ja_title": "映画『タイタニック』", "query": "Celine Dion My Heart Will Go On official audio"},
+            {"artist": "Aerosmith", "title": "I Don't Want to Miss a Thing", "ja_title": "映画『アルマゲドン』", "query": "Aerosmith I Don't Want to Miss a Thing official audio"},
+            {"artist": "Sting", "title": "Shape of My Heart", "ja_title": "映画『レオン』", "query": "Sting Shape of My Heart official audio"},
+            {"artist": "Simon & Garfunkel", "title": "The Sound of Silence", "ja_title": "映画『卒業』", "query": "Simon and Garfunkel The Sound of Silence official audio"},
+        ],
+        "tags": ["映画音楽", "名画メドレー", "80年代洋楽", "90年代洋楽", "トップガン", "バックトゥザフューチャー", "スタンドバイミー", "アルマゲドン", "40代", "50代", "洋楽メドレー", "作業用BGM", "ドライブBGM", "2時間"],
+    },
+    # 02: 夜に聴く・極上の80s-90s AOR＆メロウバラード（2時間・全24曲）
+    {
+        "id": "real_mix_002",
+        "used": False,
+        "genre": "80s City Pop & Sax AOR",
+        "artwork_file": "citypop80s.jpg",
+        "title": "【夜に聴きたい洋楽】一日の終わりに心がほどける80年代・90年代AOR＆極上バラード【2時間・全24曲フル】Bobby Caldwell / Boz Scaggs / Sade / Toto",
+        "short_title": "【夜に聴きたい洋楽】疲れた夜に心がほどける80s-90s AOR＆バラード24選 🎧本編2時間はチャンネルへ！ #Shorts #80s洋楽",
+        "thumb_era_label": "40代・50代 永久保存版  ｜  NIGHT RELAX AOR — 2 HOURS / 24 SONGS",
         "thumb_catch": "一日の終わりに、あの頃の優しい洋楽が心を解きほぐす——",
-        "thumb_main": "夜に聴きたい大人の洋楽AOR 12選",
-        "thumb_sub": "Bobby Caldwell / Boz Scaggs / Chicago / Toto / Billy Joel 他 全12曲フル尺",
+        "thumb_main": "夜に聴きたい大人の洋楽AOR【2時間】",
+        "thumb_sub": "Bobby Caldwell / Boz Scaggs / Sade / Toto / Chicago / Billy Joel 他 全24曲",
         "tracks": [
             {"artist": "Bobby Caldwell", "title": "What You Won't Do for Love", "ja_title": "風のシルエット", "query": "Bobby Caldwell What You Won't Do for Love official audio"},
             {"artist": "Boz Scaggs", "title": "We're All Alone", "ja_title": "ウィ・アー・オール・アローン", "query": "Boz Scaggs We're All Alone official audio"},
@@ -82,21 +127,33 @@ DEFAULT_REAL_HIT_MIXES: List[Dict[str, Any]] = [
             {"artist": "Sade", "title": "Smooth Operator", "ja_title": "スムース・オペレーター", "query": "Sade Smooth Operator official audio"},
             {"artist": "Richard Marx", "title": "Right Here Waiting", "ja_title": "ライト・ヒア・ウェイティング", "query": "Richard Marx Right Here Waiting official audio"},
             {"artist": "Toto", "title": "Rosanna", "ja_title": "ロザーナ", "query": "Toto Rosanna official audio"},
+            {"artist": "Steely Dan", "title": "Peg", "ja_title": "ペグ", "query": "Steely Dan Peg official audio"},
+            {"artist": "The Doobie Brothers", "title": "What a Fool Believes", "ja_title": "ホワット・ア・フール・ビリーヴス", "query": "Doobie Brothers What a Fool Believes official audio"},
+            {"artist": "Hall & Oates", "title": "I Can't Go for That (No Can Do)", "ja_title": "アイ・キャント・ゴー・フォー・ザット", "query": "Hall and Oates I Can't Go for That official audio"},
+            {"artist": "Boz Scaggs", "title": "Jojo", "ja_title": "ジョジョ", "query": "Boz Scaggs Jojo official audio"},
+            {"artist": "Bobby Caldwell", "title": "Heart of Mine", "ja_title": "ハート・オブ・マイン", "query": "Bobby Caldwell Heart of Mine official audio"},
+            {"artist": "Simply Red", "title": "Holding Back the Years", "ja_title": "ホールディング・バック・ザ・イヤーズ", "query": "Simply Red Holding Back the Years official audio"},
+            {"artist": "Anita Baker", "title": "Sweet Love", "ja_title": "スウィート・ラヴ", "query": "Anita Baker Sweet Love official audio"},
+            {"artist": "Earth, Wind & Fire", "title": "After the Love Has Gone", "ja_title": "アフター・ザ・ラヴ・ハズ・ゴーン", "query": "Earth Wind and Fire After the Love Has Gone official audio"},
+            {"artist": "Player", "title": "Baby Come Back", "ja_title": "ベイビー・カム・バック", "query": "Player Baby Come Back official audio"},
+            {"artist": "Ambrosia", "title": "Biggest Part of Me", "ja_title": "ビゲスト・パート・オブ・ミー", "query": "Ambrosia Biggest Part of Me official audio"},
+            {"artist": "Christopher Cross", "title": "Sailing", "ja_title": "セイリング", "query": "Christopher Cross Sailing official audio"},
+            {"artist": "Toto", "title": "Georgy Porgy", "ja_title": "ジョージー・ポージー", "query": "Toto Georgy Porgy official audio"},
         ],
-        "tags": ["夜に聴きたい洋楽", "80年代洋楽", "AOR", "洋楽メドレー", "40代", "50代", "Bobby Caldwell", "Boz Scaggs", "Chicago", "Toto", "懐かしい洋楽", "洋楽バラード", "夜のドライブBGM", "作業用BGM"],
+        "tags": ["夜に聴きたい洋楽", "80年代洋楽", "AOR", "洋楽メドレー", "40代", "50代", "Bobby Caldwell", "Boz Scaggs", "Chicago", "Toto", "懐かしい洋楽", "洋楽バラード", "作業用BGM", "2時間"],
     },
-    # 02: ピアノが落ち着く・静かな夜の洋楽ピアノバラード
+    # 03: ピアノが落ち着く・静かな夜の洋楽ピアノバラード（2時間・全24曲）
     {
-        "id": "real_mix_002",
+        "id": "real_mix_003",
         "used": False,
         "genre": "90s Urban Mellow & Shibuya Groove",
         "artwork_file": "urban90s.jpg",
-        "title": "【ピアノが落ち着く洋楽】静かな夜に聴きたい80年代・90年代ピアノ名曲バラード全12曲フルメドレー｜Billy Joel / Elton John / Chicago / Journey",
-        "short_title": "【ピアノが落ち着く洋楽】静かな夜に聴きたい80s-90sピアノ名曲バラード全12曲 🎧本編はチャンネルへ！ #Shorts #80s洋楽",
-        "thumb_era_label": "40代・50代に捧ぐ  ｜  MELLOW PIANO BALLADS — FULL 12 SONGS",
+        "title": "【ピアノが落ち着く洋楽】静かな夜に心が安らぐ70s・80s・90sピアノ名曲バラード決定版【2時間・全24曲フル】Billy Joel / Elton John / Carpenters / Chicago",
+        "short_title": "【ピアノが落ち着く洋楽】静かな夜に聴きたいピアノ名曲バラード全24曲 🎧本編2時間はチャンネルへ！ #Shorts #洋楽バラード",
+        "thumb_era_label": "40代・50代 永久保存版  ｜  MELLOW PIANO BALLADS — 2 HOURS / 24 SONGS",
         "thumb_catch": "美しいピアノのイントロだけで、あの頃の記憶がよみがえる——",
-        "thumb_main": "ピアノが落ち着く洋楽バラード12選",
-        "thumb_sub": "Billy Joel / Elton John / Chicago / Journey / Carpenters 他 全12曲フル尺",
+        "thumb_main": "ピアノが落ち着く洋楽バラード【2時間】",
+        "thumb_sub": "Billy Joel / Elton John / Carpenters / Chicago / Journey / Queen 他 全24曲",
         "tracks": [
             {"artist": "Billy Joel", "title": "Honesty", "ja_title": "オネスティ", "query": "Billy Joel Honesty official audio"},
             {"artist": "Billy Joel", "title": "Piano Man", "ja_title": "ピアノ・マン", "query": "Billy Joel Piano Man official audio"},
@@ -110,21 +167,33 @@ DEFAULT_REAL_HIT_MIXES: List[Dict[str, Any]] = [
             {"artist": "Styx", "title": "Babe", "ja_title": "ベイブ", "query": "Styx Babe official audio"},
             {"artist": "Carpenters", "title": "I Need to Be in Love", "ja_title": "青春の輝き", "query": "Carpenters I Need to Be in Love official audio"},
             {"artist": "Billy Joel", "title": "Just the Way You Are", "ja_title": "素顔のままで", "query": "Billy Joel Just the Way You Are official audio"},
+            {"artist": "Billy Joel", "title": "New York State of Mind", "ja_title": "ニューヨークの想い", "query": "Billy Joel New York State of Mind official audio"},
+            {"artist": "Elton John", "title": "Sorry Seems to Be the Hardest Word", "ja_title": "悲しみのバラード", "query": "Elton John Sorry Seems to Be the Hardest Word official audio"},
+            {"artist": "Carpenters", "title": "Rainy Days and Mondays", "ja_title": "雨の日と月曜日は", "query": "Carpenters Rainy Days and Mondays official audio"},
+            {"artist": "Chicago", "title": "You're the Inspiration", "ja_title": "유・アー・ジ・インスピレーション", "query": "Chicago You're the Inspiration official audio"},
+            {"artist": "Journey", "title": "Faithfully", "ja_title": "時への誓い", "query": "Journey Faithfully official audio"},
+            {"artist": "Commodores", "title": "Easy", "ja_title": "イージー", "query": "Commodores Easy official audio"},
+            {"artist": "Gilbert O'Sullivan", "title": "Alone Again (Naturally)", "ja_title": "アローン・アゲイン", "query": "Gilbert O'Sullivan Alone Again Naturally official audio"},
+            {"artist": "10cc", "title": "I'm Not in Love", "ja_title": "アイム・ノット・イン・ラヴ", "query": "10cc I'm Not in Love official audio"},
+            {"artist": "Roberta Flack", "title": "Killing Me Softly with His Song", "ja_title": "やさしく歌って", "query": "Roberta Flack Killing Me Softly with His Song official audio"},
+            {"artist": "Vanessa Williams", "title": "Save the Best for Last", "ja_title": "セイヴ・ザ・ベスト・フォー・ラスト", "query": "Vanessa Williams Save the Best for Last official audio"},
+            {"artist": "Bruce Hornsby & The Range", "title": "The Way It Is", "ja_title": "ザ・ウェイ・イット・イズ", "query": "Bruce Hornsby The Way It Is official audio"},
+            {"artist": "Billy Joel", "title": "She's Always a Woman", "ja_title": "シーズ・オールウェイズ・ア・ウーマン", "query": "Billy Joel She's Always a Woman official audio"},
         ],
         "tags": ["ピアノが落ち着く", "洋楽バラード", "80年代洋楽", "Billy Joel", "Honesty", "Elton John", "Chicago", "Journey", "Carpenters", "40代", "50代", "夜に聴きたい洋楽", "作業用BGM", "睡眠用BGM"],
     },
-    # 03: サックスが沁みる・ウイスキー片手に聴く深夜バー
+    # 04: サックスが沁みる夜・ウイスキーと聴く深夜バー（2時間・全24曲）
     {
-        "id": "real_mix_003",
+        "id": "real_mix_004",
         "used": False,
         "genre": "80s City Pop & Sax AOR",
         "artwork_file": "citypop80s.jpg",
-        "title": "【サックスが沁みる夜】ウイスキー片手に聴きたい80s-90s洋楽サックス＆AOR名曲全12曲フルメドレー｜Wham! / Sade / Grover Washington Jr.",
-        "short_title": "【サックスが沁みる夜】ウイスキー片手に聴きたい80s-90s洋楽名曲全12曲 🎧本編はチャンネルへ！ #Shorts #AOR",
-        "thumb_era_label": "40代・50代に捧ぐ  ｜  MIDNIGHT SAXOPHONE & AOR — FULL 12 SONGS",
+        "title": "【サックスが沁みる夜】ウイスキー片手に聴きたい80s-90s洋楽サックス＆アーバンナイト名曲選【2時間・全24曲フル】Wham! / Sade / Grover Washington Jr.",
+        "short_title": "【サックスが沁みる夜】ウイスキー片手に聴きたい80s-90s洋楽名曲全24曲 🎧本編2時間はチャンネルへ！ #Shorts #AOR",
+        "thumb_era_label": "40代・50代 永久保存版  ｜  MIDNIGHT SAXOPHONE & AOR — 2 HOURS / 24 SONGS",
         "thumb_catch": "琥珀色のグラスと、夜の静寂に響くむせび泣くサックス——",
-        "thumb_main": "サックスが沁みる夜の洋楽12選",
-        "thumb_sub": "Wham! / Sade / Grover Washington Jr. / Glenn Frey / Kenny G 他 全12曲フル尺",
+        "thumb_main": "サックスが沁みる夜の洋楽【2時間】",
+        "thumb_sub": "Wham! / Sade / Grover Washington Jr. / Glenn Frey / Kenny G 他 全24曲",
         "tracks": [
             {"artist": "Wham!", "title": "Careless Whisper", "ja_title": "ケアレス・ウィスパー", "query": "Wham Careless Whisper official audio"},
             {"artist": "Sade", "title": "Smooth Operator", "ja_title": "スムース・オペレーター", "query": "Sade Smooth Operator official audio"},
@@ -138,21 +207,33 @@ DEFAULT_REAL_HIT_MIXES: List[Dict[str, Any]] = [
             {"artist": "Kenny G", "title": "Songbird", "ja_title": "ソングバード", "query": "Kenny G Songbird official audio"},
             {"artist": "Simply Red", "title": "Holding Back the Years", "ja_title": "ホールディング・バック・ザ・イヤーズ", "query": "Simply Red Holding Back the Years official audio"},
             {"artist": "Sade", "title": "Your Love Is King", "ja_title": "ユア・ラヴ・イズ・キング", "query": "Sade Your Love Is King official audio"},
+            {"artist": "Candy Dulfer & Dave Stewart", "title": "Lily Was Here", "ja_title": "リリー・ワズ・ヒア", "query": "Candy Dulfer Dave Stewart Lily Was Here official audio"},
+            {"artist": "Kenny G", "title": "Silhouette", "ja_title": "シルエット", "query": "Kenny G Silhouette official audio"},
+            {"artist": "Supertramp", "title": "The Logical Song", "ja_title": "ロジカル・ソング", "query": "Supertramp The Logical Song official audio"},
+            {"artist": "Al Stewart", "title": "Year of the Cat", "ja_title": "イヤー・オブ・ザ・キャット", "query": "Al Stewart Year of the Cat official audio"},
+            {"artist": "Dire Straits", "title": "Your Latest Trick", "ja_title": "ユア・レイテスト・トリック", "query": "Dire Straits Your Latest Trick official audio"},
+            {"artist": "Roxy Music", "title": "Avalon", "ja_title": "アヴァロン", "query": "Roxy Music Avalon official audio"},
+            {"artist": "Foreigner", "title": "Urgent", "ja_title": "アージェント", "query": "Foreigner Urgent official audio"},
+            {"artist": "Men at Work", "title": "Who Can It Be Now?", "ja_title": "ノックは夜中に", "query": "Men at Work Who Can It Be Now official audio"},
+            {"artist": "INXS", "title": "Never Tear Us Apart", "ja_title": "ネヴァー・ティア・アス・アパート", "query": "INXS Never Tear Us Apart official audio"},
+            {"artist": "Tina Turner", "title": "The Best", "ja_title": "ザ・ベスト", "query": "Tina Turner The Best official audio"},
+            {"artist": "Sade", "title": "The Sweetest Taboo", "ja_title": "スウィーテスト・タブー", "query": "Sade The Sweetest Taboo official audio"},
+            {"artist": "Double", "title": "The Captain of Her Heart", "ja_title": "キャプテン・オブ・ハー・ハート", "query": "Double The Captain of Her Heart official audio"},
         ],
         "tags": ["サックス", "夜に聴きたい洋楽", "80年代洋楽", "AOR", "Careless Whisper", "Sade", "ウイスキーに合う曲", "40代", "50代", "大人BGM", "バーBGM", "作業用BGM"],
     },
-    # 04: アコギが心地よい・休日の午後＆夕暮れソフトロック
+    # 05: アコギが心地よい・休日の午後＆夕暮れソフトロック（2時間・全24曲）
     {
-        "id": "real_mix_004",
+        "id": "real_mix_005",
         "used": False,
         "genre": "90s Urban Mellow & Shibuya Groove",
         "artwork_file": "urban90s.jpg",
-        "title": "【アコギが心地よい洋楽】休日の午後や夕暮れに聴きたいアコースティック＆ソフトロック名曲全12曲フルメドレー｜Eric Clapton / America / Extreme",
-        "short_title": "【アコギが心地よい洋楽】休日の夕暮れに聴きたいアコースティック名曲全12曲 🎧本編はチャンネルへ！ #Shorts #洋楽",
-        "thumb_era_label": "40代・50代に捧ぐ  ｜  ACOUSTIC & SOFT ROCK — FULL 12 SONGS",
+        "title": "【アコギが心地よい洋楽】休日の午後や夕暮れに聴きたいアコースティック＆ソフトロック決定版【2時間・全24曲フル】Eric Clapton / America / Extreme / Eagles",
+        "short_title": "【アコギが心地よい洋楽】休日の夕暮れに聴きたいアコースティック名曲24選 🎧本編2時間はチャンネルへ！ #Shorts #洋楽",
+        "thumb_era_label": "40代・50代 永久保存版  ｜  ACOUSTIC & SOFT ROCK — 2 HOURS / 24 SONGS",
         "thumb_catch": "優しいアコースティックギターの弦音が、心を穏やかに整える——",
-        "thumb_main": "アコギが心地よい大人の洋楽12選",
-        "thumb_sub": "Eric Clapton / Extreme / America / Kansas / Bread / James Taylor 他 全12曲",
+        "thumb_main": "アコギが心地よい大人の洋楽【2時間】",
+        "thumb_sub": "Eric Clapton / Extreme / America / Kansas / Bread / James Taylor 他 全24曲",
         "tracks": [
             {"artist": "Eric Clapton", "title": "Tears in Heaven", "ja_title": "ティアーズ・イン・ヘヴン", "query": "Eric Clapton Tears in Heaven official audio"},
             {"artist": "Extreme", "title": "More Than Words", "ja_title": "モア・ザン・ワーズ", "query": "Extreme More Than Words official audio"},
@@ -166,21 +247,33 @@ DEFAULT_REAL_HIT_MIXES: List[Dict[str, Any]] = [
             {"artist": "Christopher Cross", "title": "Sailing", "ja_title": "セイリング", "query": "Christopher Cross Sailing official audio"},
             {"artist": "Lobo", "title": "I'd Love You to Want Me", "ja_title": "片想いと僕", "query": "Lobo I'd Love You to Want Me official audio"},
             {"artist": "Eric Clapton", "title": "Wonderful Tonight", "ja_title": "ワンダフル・トゥナイト", "query": "Eric Clapton Wonderful Tonight official audio"},
+            {"artist": "America", "title": "Ventura Highway", "ja_title": "ヴェンチュラ・ハイウェイ", "query": "America Ventura Highway official audio"},
+            {"artist": "America", "title": "Sister Golden Hair", "ja_title": "金色の髪の少女", "query": "America Sister Golden Hair official audio"},
+            {"artist": "Eagles", "title": "Take It Easy", "ja_title": "テイク・イット・イージー", "query": "Eagles Take It Easy official audio"},
+            {"artist": "Eagles", "title": "Tequila Sunrise", "ja_title": "テキーラ・サンライズ", "query": "Eagles Tequila Sunrise official audio"},
+            {"artist": "Bread", "title": "Make It with You", "ja_title": "二人の架け橋", "query": "Bread Make It with You official audio"},
+            {"artist": "Dan Fogelberg", "title": "Longer", "ja_title": "ロンガー", "query": "Dan Fogelberg Longer official audio"},
+            {"artist": "Jim Croce", "title": "Time in a Bottle", "ja_title": "タイム・イン・ア・ボトル", "query": "Jim Croce Time in a Bottle official audio"},
+            {"artist": "John Denver", "title": "Take Me Home, Country Roads", "ja_title": "カントリー・ロード", "query": "John Denver Take Me Home Country Roads official audio"},
+            {"artist": "Cat Stevens", "title": "Wild World", "ja_title": "ワイルド・ワールド", "query": "Cat Stevens Wild World official audio"},
+            {"artist": "Seals and Crofts", "title": "Summer Breeze", "ja_title": "サマー・ブリーズ", "query": "Seals and Crofts Summer Breeze official audio"},
+            {"artist": "Orleans", "title": "Dance with Me", "ja_title": "ダンス・ウィズ・ミー", "query": "Orleans Dance with Me official audio"},
+            {"artist": "Eric Clapton", "title": "Change the World", "ja_title": "チェンジ・ザ・ワールド", "query": "Eric Clapton Change the World official audio"},
         ],
-        "tags": ["アコギ", "アコースティック", "ソフトロック", "80年代洋楽", "90年代洋楽", "Eric Clapton", "More Than Words", "40代", "50代", "休日BGM", "カフェBGM", "作業用BGM"],
+        "tags": ["アコギ", "アコースティック", "ソフトロック", "80年代洋楽", "90年代洋楽", "Eric Clapton", "More Than Words", "40代", "50代", "休日BGM", "カフェBGM", "作業用BGM", "2時間"],
     },
-    # 05: 雨の夜に聴きたい・心を癒やすスローバラード
+    # 06: 雨の夜に聴きたい・心を癒やすスローバラード（2時間・全24曲）
     {
-        "id": "real_mix_005",
+        "id": "real_mix_006",
         "used": False,
         "genre": "90s Urban Mellow & Shibuya Groove",
         "artwork_file": "urban90s.jpg",
-        "title": "【雨の夜に聴きたい洋楽】窓を打つ雨音と聴く80年代・90年代スローバラード名曲全12曲フルメドレー｜Cyndi Lauper / Whitney Houston / Air Supply",
-        "short_title": "【雨の夜に聴きたい洋楽】心にしみる80s-90sスローバラード名曲全12曲 🎧本編はチャンネルへ！ #Shorts #洋楽バラード",
-        "thumb_era_label": "40代・50代に捧ぐ  ｜  RAINY NIGHT BALLADS — FULL 12 SONGS",
+        "title": "【雨の夜に聴きたい洋楽】窓を打つ雨音と聴く80年代・90年代スローバラード名曲大全集【2時間・全24曲フル】Whitney Houston / Cyndi Lauper / Celine Dion",
+        "short_title": "【雨の夜に聴きたい洋楽】心にしみる80s-90sスローバラード名曲24選 🎧本編2時間はチャンネルへ！ #Shorts #洋楽バラード",
+        "thumb_era_label": "40代・50代 永久保存版  ｜  RAINY NIGHT BALLADS — 2 HOURS / 24 SONGS",
         "thumb_catch": "静かな雨の夜、あの頃の甘いラブバラードに身を委ねる——",
-        "thumb_main": "雨の夜に聴きたい洋楽バラード12選",
-        "thumb_sub": "Cyndi Lauper / Whitney Houston / Air Supply / Atlantic Starr 他 全12曲",
+        "thumb_main": "雨の夜に聴きたい洋楽バラード【2時間】",
+        "thumb_sub": "Cyndi Lauper / Whitney Houston / Air Supply / Celine Dion 他 全24曲",
         "tracks": [
             {"artist": "Cyndi Lauper", "title": "Time After Time", "ja_title": "タイム・アフター・タイム", "query": "Cyndi Lauper Time After Time official audio"},
             {"artist": "Air Supply", "title": "Even the Nights Are Better", "ja_title": "さよならロンリー・ラヴ", "query": "Air Supply Even the Nights Are Better official audio"},
@@ -194,49 +287,33 @@ DEFAULT_REAL_HIT_MIXES: List[Dict[str, Any]] = [
             {"artist": "Boyz II Men", "title": "End of the Road", "ja_title": "エンド・オブ・ザ・ロード", "query": "Boyz II Men End of the Road official audio"},
             {"artist": "Toni Braxton", "title": "Un-Break My Heart", "ja_title": "アンブレイク・マイ・ハート", "query": "Toni Braxton Un-Break My Heart official audio"},
             {"artist": "Lionel Richie & Diana Ross", "title": "Endless Love", "ja_title": "エンドレス・ラヴ", "query": "Lionel Richie Diana Ross Endless Love official audio"},
+            {"artist": "Whitney Houston", "title": "Greatest Love of All", "ja_title": "グレイテスト・ラヴ・オブ・オール", "query": "Whitney Houston Greatest Love of All official audio"},
+            {"artist": "Mariah Carey", "title": "Without You", "ja_title": "ウィズアウト・ユー", "query": "Mariah Carey Without You official audio"},
+            {"artist": "Celine Dion", "title": "Because You Loved Me", "ja_title": "ビコーズ・ユー・ラヴド・ミー", "query": "Celine Dion Because You Loved Me official audio"},
+            {"artist": "Air Supply", "title": "Lost in Love", "ja_title": "ロスト・イン・ラヴ", "query": "Air Supply Lost in Love official audio"},
+            {"artist": "Air Supply", "title": "The One That You Love", "ja_title": "シー・イズ・ザ・ワン", "query": "Air Supply The One That You Love official audio"},
+            {"artist": "pretenders", "title": "I'll Stand by You", "ja_title": "アイル・スタンド・バイ・ユー", "query": "Pretenders I'll Stand by You official audio"},
+            {"artist": "Cyndi Lauper", "title": "True Colors", "ja_title": "トゥルー・カラーズ", "query": "Cyndi Lauper True Colors official audio"},
+            {"artist": "Madonna", "title": "Crazy for You", "ja_title": "クレイジー・フォー・ユー", "query": "Madonna Crazy for You official audio"},
+            {"artist": "Janet Jackson", "title": "Again", "ja_title": "アゲイン", "query": "Janet Jackson Again official audio"},
+            {"artist": "Babyface", "title": "Every Time I Close My Eyes", "ja_title": "エヴリ・タイム・アイ・クローズ・マイ・アイズ", "query": "Babyface Every Time I Close My Eyes official audio"},
+            {"artist": "Surface", "title": "Shower Me with Your Love", "ja_title": "シャワー・ミー・ウィズ・ユア・ラヴ", "query": "Surface Shower Me with Your Love official audio"},
+            {"artist": "Champaign", "title": "How 'Bout Us", "ja_title": "ハウ・バウト・アス", "query": "Champaign How Bout Us official audio"},
         ],
-        "tags": ["雨の夜に聴きたい", "洋楽バラード", "80年代洋楽", "90年代洋楽", "Cyndi Lauper", "Whitney Houston", "Air Supply", "40代", "50代", "睡眠用BGM", "リラックスBGM"],
+        "tags": ["雨の夜に聴きたい", "洋楽バラード", "80年代洋楽", "90年代洋楽", "Cyndi Lauper", "Whitney Houston", "Air Supply", "40代", "50代", "睡眠用BGM", "2時間"],
     },
-    # 06: 仕事帰りの夜間ドライブ・ウエストコーストAOR
-    {
-        "id": "real_mix_006",
-        "used": False,
-        "genre": "80s City Pop & Sax AOR",
-        "artwork_file": "citypop80s.jpg",
-        "title": "【夜のドライブ洋楽】仕事帰りの車内で聴きたい80年代ウエストコーストAOR＆ソフトロック全12曲フルメドレー｜Toto / Steely Dan / Doobie Brothers",
-        "short_title": "【夜のドライブ洋楽】仕事帰りに聴きたい80年代ウエストコーストAOR全12曲 🎧本編はチャンネルへ！ #Shorts #AOR",
-        "thumb_era_label": "40代・50代に捧ぐ  ｜  WEST COAST NIGHT DRIVE AOR — FULL 12 SONGS",
-        "thumb_catch": "テールランプが流れる夜の湾岸線、極上のAORグルーヴ——",
-        "thumb_main": "夜のドライブで聴きたい洋楽AOR 12選",
-        "thumb_sub": "Toto / Steely Dan / Doobie Brothers / Hall & Oates / Ned Doheny 他 全12曲",
-        "tracks": [
-            {"artist": "Toto", "title": "Georgy Porgy", "ja_title": "ジョージー・ポージー", "query": "Toto Georgy Porgy official audio"},
-            {"artist": "Steely Dan", "title": "Peg", "ja_title": "ペグ", "query": "Steely Dan Peg official audio"},
-            {"artist": "The Doobie Brothers", "title": "What a Fool Believes", "ja_title": "ホワット・ア・フール・ビリーヴス", "query": "Doobie Brothers What a Fool Believes official audio"},
-            {"artist": "Hall & Oates", "title": "I Can't Go for That (No Can Do)", "ja_title": "アイ・キャント・ゴー・フォー・ザット", "query": "Hall and Oates I Can't Go for That official audio"},
-            {"artist": "Michael McDonald", "title": "I Keep Forgettin'", "ja_title": "アイ・キープ・フォゲッティン", "query": "Michael McDonald I Keep Forgettin official audio"},
-            {"artist": "Ned Doheny", "title": "Get It Up for Love", "ja_title": "ゲット・イット・アップ・フォー・ラヴ", "query": "Ned Doheny Get It Up for Love official audio"},
-            {"artist": "Player", "title": "Baby Come Back", "ja_title": "ベイビー・カム・バック", "query": "Player Baby Come Back official audio"},
-            {"artist": "Ambrosia", "title": "Biggest Part of Me", "ja_title": "ビゲスト・パート・オブ・ミー", "query": "Ambrosia Biggest Part of Me official audio"},
-            {"artist": "Rupert Holmes", "title": "Escape (The Pina Colada Song)", "ja_title": "エスケイプ", "query": "Rupert Holmes Escape The Pina Colada Song official audio"},
-            {"artist": "Christopher Cross", "title": "Ride Like the Wind", "ja_title": "風立ちぬ", "query": "Christopher Cross Ride Like the Wind official audio"},
-            {"artist": "Boz Scaggs", "title": "Lowdown", "ja_title": "ロウダウン", "query": "Boz Scaggs Lowdown official audio"},
-            {"artist": "Steely Dan", "title": "Hey Nineteen", "ja_title": "ヘイ・ナインティーン", "query": "Steely Dan Hey Nineteen official audio"},
-        ],
-        "tags": ["夜のドライブBGM", "AOR", "ウエストコースト", "80年代洋楽", "Toto", "Steely Dan", "Doobie Brothers", "40代", "50代", "車内BGM", "作業用BGM"],
-    },
-    # 07: バブル期の六本木・マハラジャ80sディスコ
+    # 07: バブル期の六本木・マハラジャ80sディスコ大全集（2時間・全24曲）
     {
         "id": "real_mix_007",
         "used": False,
         "genre": "80s Japanese Boogie Disco",
         "artwork_file": "disco.jpg",
-        "title": "【バブル世代必見】イントロで六本木が蘇る！80年代ディスコ洋楽ヒット曲全12曲ノンストップフルメドレー｜Earth, Wind & Fire / Boys Town Gang 他",
-        "short_title": "【バブル世代必見】イントロで六本木が蘇る！80年代ディスコ洋楽全12曲メドレー 🎧本編はチャンネルへ！ #Shorts #80sディスコ",
-        "thumb_era_label": "40代・50代に捧ぐ  ｜  1980s ROPPONGI DISCO — FULL 12 SONGS",
+        "title": "【バブル世代必見】イントロで六本木が蘇る！80年代ディスコ＆ユーロビート洋楽ヒット大全集【2時間・全24曲フル】Earth, Wind & Fire / Boys Town Gang 他",
+        "short_title": "【バブル世代必見】イントロで六本木が蘇る！80年代ディスコ洋楽全24曲 🎧本編2時間はチャンネルへ！ #Shorts #80sディスコ",
+        "thumb_era_label": "40代・50代 永久保存版  ｜  1980s ROPPONGI DISCO — 2 HOURS / 24 SONGS",
         "thumb_catch": "ミラーボールの輝きと、あの頃の週末の熱狂がよみがえる——",
-        "thumb_main": "80年代 六本木ディスコ洋楽12選",
-        "thumb_sub": "Earth, Wind & Fire / Boys Town Gang / Dead Or Alive / Bananarama 他 全12曲",
+        "thumb_main": "80年代 六本木ディスコ洋楽【2時間】",
+        "thumb_sub": "Earth, Wind & Fire / Boys Town Gang / Dead Or Alive / Bananarama 他 全24曲",
         "tracks": [
             {"artist": "Earth, Wind & Fire", "title": "September", "ja_title": "セプテンバー", "query": "Earth Wind and Fire September official audio"},
             {"artist": "Boys Town Gang", "title": "Can't Take My Eyes Off You", "ja_title": "君の瞳に恋してる", "query": "Boys Town Gang Can't Take My Eyes Off You official audio"},
@@ -250,148 +327,60 @@ DEFAULT_REAL_HIT_MIXES: List[Dict[str, Any]] = [
             {"artist": "Irene Cara", "title": "Flashdance... What a Feeling", "ja_title": "ホワット・ア・フィーリング", "query": "Irene Cara Flashdance What a Feeling official audio"},
             {"artist": "Chaka Khan", "title": "I Feel for You", "ja_title": "アイ・フィール・フォー・ユー", "query": "Chaka Khan I Feel for You official audio"},
             {"artist": "Earth, Wind & Fire", "title": "Let's Groove", "ja_title": "レッツ・グルーヴ", "query": "Earth Wind and Fire Let's Groove official audio"},
+            {"artist": "Donna Summer", "title": "Hot Stuff", "ja_title": "ホット・スタッフ", "query": "Donna Summer Hot Stuff official audio"},
+            {"artist": "Gloria Gaynor", "title": "I Will Survive", "ja_title": "恋のサバイバル", "query": "Gloria Gaynor I Will Survive official audio"},
+            {"artist": "Village People", "title": "Y.M.C.A.", "ja_title": "Y.M.C.A.", "query": "Village People YMCA official audio"},
+            {"artist": "ABBA", "title": "Dancing Queen", "ja_title": "ダンシング・クイーン", "query": "ABBA Dancing Queen official audio"},
+            {"artist": "Bee Gees", "title": "Stayin' Alive", "ja_title": "ステイン・アライヴ", "query": "Bee Gees Stayin Alive official audio"},
+            {"artist": "Chic", "title": "Le Freak", "ja_title": "おしゃれフリーク", "query": "Chic Le Freak official audio"},
+            {"artist": "Sister Sledge", "title": "We Are Family", "ja_title": "ウィ・アー・ファミリー", "query": "Sister Sledge We Are Family official audio"},
+            {"artist": "kc and the Sunshine Band", "title": "That's the Way (I Like It)", "ja_title": "ザッツ・ザ・ウェイ", "query": "KC and the Sunshine Band That's the Way I Like It official audio"},
+            {"artist": "Boney M.", "title": "Sunny", "ja_title": "サニー", "query": "Boney M Sunny official audio"},
+            {"artist": "Arabesque", "title": "Hello Mr. Monkey", "ja_title": "ハロー・ミスター・モンキー", "query": "Arabesque Hello Mr Monkey official audio"},
+            {"artist": "The Nolans", "title": "I'm in the Mood for Dancing", "ja_title": "ダンシング・シスター", "query": "The Nolans I'm in the Mood for Dancing official audio"},
+            {"artist": "Wham!", "title": "Wake Me Up Before You Go-Go", "ja_title": "ウキウキ・ウェイク・ミー・アップ", "query": "Wham Wake Me Up Before You Go-Go official audio"},
         ],
-        "tags": ["80年代ディスコ", "80年代洋楽", "バブル世代", "マハラジャ", "六本木ディスコ", "40代", "50代", "Earth Wind and Fire", "君の瞳に恋してる", "洋楽メドレー", "ドライブBGM", "作業用BGM"],
+        "tags": ["80年代ディスコ", "80年代洋楽", "バブル世代", "マハラジャ", "六本木ディスコ", "40代", "50代", "Earth Wind and Fire", "君の瞳に恋してる", "洋楽メドレー", "ドライブBGM", "2時間"],
     },
-    # 08: 夜の高速道路・80sハイウェイ＆映画主題歌ロック
+    # 08: 夜の高速道路・80sハイウェイ＆アメリカンロック大全集（2時間・全24曲）
     {
         "id": "real_mix_008",
         "used": False,
         "genre": "90s Eurobeat",
         "artwork_file": "eurobeat.jpg",
-        "title": "【40代・50代必見】夜の高速道路で聴いた80年代洋楽ロック＆映画主題歌全12曲フルメドレー｜Kenny Loggins / Journey / Bon Jovi / Van Halen",
-        "short_title": "【40代・50代必見】夜の高速道路で聴いた80年代洋楽ロック全12曲メドレー 🎧本編はチャンネルへ！ #Shorts #80s洋楽",
-        "thumb_era_label": "40代・50代に捧ぐ  ｜  1980s HIGHWAY ROCK — FULL 12 SONGS",
+        "title": "【夜のハイウェイ洋楽】深夜の高速道路で聴いた80年代・90年代アメリカンロック名曲大全集【2時間・全24曲フル】Journey / Bon Jovi / Van Halen / Foreigner",
+        "short_title": "【夜のハイウェイ洋楽】夜の高速道路で聴いた80s-90sロック名曲24選 🎧本編2時間はチャンネルへ！ #Shorts #80s洋楽",
+        "thumb_era_label": "40代・50代 永久保存版  ｜  1980s HIGHWAY ROCK — 2 HOURS / 24 SONGS",
         "thumb_catch": "アクセルを踏み込んだ瞬間、あの頃のハイウェイが蘇る——",
-        "thumb_main": "80年代 夜のハイウェイ洋楽ロック12選",
-        "thumb_sub": "Kenny Loggins / Journey / Bon Jovi / Van Halen / Survivor 他 全12曲",
+        "thumb_main": "夜のハイウェイ洋楽ロック【2時間】",
+        "thumb_sub": "Journey / Bon Jovi / Van Halen / Foreigner / REO Speedwagon 他 全24曲",
         "tracks": [
-            {"artist": "Kenny Loggins", "title": "Danger Zone", "ja_title": "デンジャー・ゾーン (トップガン)", "query": "Kenny Loggins Danger Zone official audio"},
             {"artist": "Journey", "title": "Separate Ways (Worlds Apart)", "ja_title": "セパレイト・ウェイズ", "query": "Journey Separate Ways Worlds Apart official audio"},
             {"artist": "Bon Jovi", "title": "Livin' on a Prayer", "ja_title": "リヴィン・オン・ア・プレイヤー", "query": "Bon Jovi Livin on a Prayer official audio"},
             {"artist": "Van Halen", "title": "Jump", "ja_title": "ジャンプ", "query": "Van Halen Jump official audio"},
-            {"artist": "Survivor", "title": "Eye of the Tiger", "ja_title": "アイ・オブ・ザ・タイガー (ロッキー3)", "query": "Survivor Eye of the Tiger official audio"},
+            {"artist": "Survivor", "title": "Eye of the Tiger", "ja_title": "アイ・オブ・ザ・タイガー", "query": "Survivor Eye of the Tiger official audio"},
             {"artist": "Europe", "title": "The Final Countdown", "ja_title": "ファイナル・カウントダウン", "query": "Europe The Final Countdown official audio"},
             {"artist": "Journey", "title": "Don't Stop Believin'", "ja_title": "ドント・ストップ・ビリーヴィン", "query": "Journey Don't Stop Believin official audio"},
-            {"artist": "Starship", "title": "Nothing's Gonna Stop Us Now", "ja_title": "愛はとまらない", "query": "Starship Nothing's Gonna Stop Us Now official audio"},
+            {"artist": "Starship", "title": "We Built This City", "ja_title": "シスコはロック・シティ", "query": "Starship We Built This City official audio"},
             {"artist": "Bryan Adams", "title": "Summer of '69", "ja_title": "想い出のサマー", "query": "Bryan Adams Summer of 69 official audio"},
-            {"artist": "Huey Lewis & The News", "title": "The Power of Love", "ja_title": "パワー・オブ・ラヴ (BTTF)", "query": "Huey Lewis and the News The Power of Love official audio"},
-            {"artist": "Kenny Loggins", "title": "Footloose", "ja_title": "フットルース", "query": "Kenny Loggins Footloose official audio"},
-            {"artist": "Berlin", "title": "Take My Breath Away", "ja_title": "愛は吐息のように (トップガン)", "query": "Berlin Take My Breath Away official audio"},
-        ],
-        "tags": ["80年代洋楽", "洋楽ロック", "ドライブBGM", "トップガン", "Journey", "Bon Jovi", "Van Halen", "40代", "50代", "懐かしい洋楽", "高速道路BGM", "作業用BGM"],
-    },
-    # 09: 休日の朝・珈琲の香りと聴く優しい70s-80s洋楽ポップス
-    {
-        "id": "real_mix_009",
-        "used": False,
-        "genre": "80s City Pop & Sax AOR",
-        "artwork_file": "citypop80s.jpg",
-        "title": "【休日に聴きたい洋楽】珈琲の香りと聴く70年代・80年代の優しい洋楽ポップス名曲全12曲フルメドレー｜Carpenters / Billy Joel / Bee Gees",
-        "short_title": "【休日に聴きたい洋楽】珈琲と聴く70s-80s優しい洋楽ポップス全12曲 🎧本編はチャンネルへ！ #Shorts #懐かしの洋楽",
-        "thumb_era_label": "40代・50代に捧ぐ  ｜  WEEKEND COFFEE & GENTLE POP — FULL 12 SONGS",
-        "thumb_catch": "穏やかな休日のひとときに、時代を超えて愛される優しい歌声を——",
-        "thumb_main": "珈琲と聴く優しい洋楽ポップス12選",
-        "thumb_sub": "Carpenters / Gilbert O'Sullivan / Billy Joel / Bee Gees / ABBA 他 全12曲",
-        "tracks": [
-            {"artist": "Carpenters", "title": "Yesterday Once More", "ja_title": "イエスタデイ・ワンス・モア", "query": "Carpenters Yesterday Once More official audio"},
-            {"artist": "Gilbert O'Sullivan", "title": "Alone Again (Naturally)", "ja_title": "アローン・アゲイン", "query": "Gilbert O'Sullivan Alone Again Naturally official audio"},
-            {"artist": "Carpenters", "title": "Close to You", "ja_title": "遙かなる影", "query": "Carpenters Close to You official audio"},
-            {"artist": "Bee Gees", "title": "How Deep Is Your Love", "ja_title": "愛はきらめきの中に", "query": "Bee Gees How Deep Is Your Love official audio"},
-            {"artist": "Billy Joel", "title": "She's Always a Woman", "ja_title": "シーズ・オールウェイズ・ア・ウーマン", "query": "Billy Joel She's Always a Woman official audio"},
-            {"artist": "Olivia Newton-John", "title": "Have You Never Been Mellow", "ja_title": "そよ風の誘惑", "query": "Olivia Newton-John Have You Never Been Mellow official audio"},
-            {"artist": "ABBA", "title": "Chiquitita", "ja_title": "チキチータ", "query": "ABBA Chiquitita official audio"},
-            {"artist": "The Nolans", "title": "I'm in the Mood for Dancing", "ja_title": "ダンシング・シスター", "query": "The Nolans I'm in the Mood for Dancing official audio"},
-            {"artist": "Stevie Wonder", "title": "I Just Called to Say I Love You", "ja_title": "心の愛", "query": "Stevie Wonder I Just Called to Say I Love You official audio"},
-            {"artist": "10cc", "title": "I'm Not in Love", "ja_title": "アイム・ノット・イン・ラヴ", "query": "10cc I'm Not in Love official audio"},
-            {"artist": "Albert Hammond", "title": "It Never Rains in Southern California", "ja_title": "カリフォルニアの青い空", "query": "Albert Hammond It Never Rains in Southern California official audio"},
-            {"artist": "Carpenters", "title": "Top of the World", "ja_title": "トップ・オブ・ザ・ワールド", "query": "Carpenters Top of the World official audio"},
-        ],
-        "tags": ["Carpenters", "70年代洋楽", "80年代洋楽", "休日BGM", "カフェBGM", "40代", "50代", "懐かしい洋楽", "優しい洋楽", "作業用BGM"],
-    },
-    # 10: 90年代青春の洋楽メガヒット・タワレコ＆FM世代
-    {
-        "id": "real_mix_010",
-        "used": False,
-        "genre": "90s TK Rave & Synth Dance",
-        "artwork_file": "tkrave.jpg",
-        "title": "【90年代洋楽メドレー】青春時代にCDが擦り切れるほど聴いた90s洋楽メガヒット全12曲フルメドレー｜Oasis / Aerosmith / Backstreet Boys / Celine Dion",
-        "short_title": "【90年代洋楽メドレー】CDが擦り切れるほど聴いた90s洋楽メガヒット全12曲 🎧本編はチャンネルへ！ #Shorts #90s洋楽",
-        "thumb_era_label": "40代・50代に捧ぐ  ｜  1990s MEGA HITS ARCHIVE — FULL 12 SONGS",
-        "thumb_catch": "タワレコで試聴して買った、あの90年代の輝きが蘇る——",
-        "thumb_main": "90年代 青春の洋楽メガヒット12選",
-        "thumb_sub": "Oasis / Aerosmith / Backstreet Boys / Celine Dion / Eric Clapton 他 全12曲",
-        "tracks": [
-            {"artist": "Aerosmith", "title": "I Don't Want to Miss a Thing", "ja_title": "ミス・ア・シング (アルマゲドン)", "query": "Aerosmith I Don't Want to Miss a Thing official audio"},
-            {"artist": "Oasis", "title": "Don't Look Back in Anger", "ja_title": "ドント・ルック・バック・イン・アンガー", "query": "Oasis Don't Look Back in Anger official audio"},
-            {"artist": "Backstreet Boys", "title": "I Want It That Way", "ja_title": "アイ・ウォント・イット・ザット・ウェイ", "query": "Backstreet Boys I Want It That Way official audio"},
-            {"artist": "Celine Dion", "title": "My Heart Will Go On", "ja_title": "マイ・ハート・ウィル・ゴー・オン (タイタニック)", "query": "Celine Dion My Heart Will Go On official audio"},
-            {"artist": "Eric Clapton", "title": "Change the World", "ja_title": "チェンジ・ザ・ワールド", "query": "Eric Clapton Change the World official audio"},
-            {"artist": "Jamiroquai", "title": "Virtual Insanity", "ja_title": "ヴァーチャル・インサニティ", "query": "Jamiroquai Virtual Insanity official audio"},
-            {"artist": "Sheryl Crow", "title": "If It Makes You Happy", "ja_title": "イフ・イット・メイクス・ユー・ハッピー", "query": "Sheryl Crow If It Makes You Happy official audio"},
-            {"artist": "Des'ree", "title": "You Gotta Be", "ja_title": "ユー・ガッタ・ビー", "query": "Des'ree You Gotta Be official audio"},
-            {"artist": "Shanice", "title": "I Love Your Smile", "ja_title": "アイ・ラヴ・ユア・スマイル", "query": "Shanice I Love Your Smile official audio"},
-            {"artist": "Simply Red", "title": "Stars", "ja_title": "スターズ", "query": "Simply Red Stars official audio"},
-            {"artist": "Bryan Adams", "title": "(Everything I Do) I Do It for You", "ja_title": "アイ・ドゥ・イット・フォー・ユー", "query": "Bryan Adams Everything I Do I Do It for You official audio"},
-            {"artist": "Oasis", "title": "Wonderwall", "ja_title": "ワンダーウォール", "query": "Oasis Wonderwall official audio"},
-        ],
-        "tags": ["90年代洋楽", "90s洋楽", "Oasis", "Aerosmith", "Backstreet Boys", "Jamiroquai", "40代", "50代", "青春の洋楽", "洋楽メドレー", "作業用BGM", "ドライブBGM"],
-    },
-    # 11: 泣きのギターソロ・夜更けのロックバラード
-    {
-        "id": "real_mix_011",
-        "used": False,
-        "genre": "90s Eurobeat",
-        "artwork_file": "eurobeat.jpg",
-        "title": "【泣きのギターバラード】夜更けに聴きたい80年代・90年代洋楽ロックバラード名曲全12曲フルメドレー｜Journey / Scorpions / Bon Jovi / Whitesnake",
-        "short_title": "【泣きのギターバラード】夜更けに聴きたい80s-90s洋楽ロックバラード全12曲 🎧本編はチャンネルへ！ #Shorts #洋楽ロック",
-        "thumb_era_label": "40代・50代に捧ぐ  ｜  EMOTIONAL GUITAR ROCK BALLADS — FULL 12 SONGS",
-        "thumb_catch": "魂を揺さぶる泣きのギターソロと、胸を締めつけるメロディ——",
-        "thumb_main": "夜更けの洋楽ロックバラード12選",
-        "thumb_sub": "Journey / Scorpions / Bon Jovi / Whitesnake / Guns N' Roses 他 全12曲",
-        "tracks": [
-            {"artist": "Journey", "title": "Faithfully", "ja_title": "時への誓い", "query": "Journey Faithfully official audio"},
-            {"artist": "Bon Jovi", "title": "Always", "ja_title": "オールウェイズ", "query": "Bon Jovi Always official audio"},
-            {"artist": "Scorpions", "title": "Wind of Change", "ja_title": "ウィンド・オブ・チェンジ", "query": "Scorpions Wind of Change official audio"},
+            {"artist": "Bon Jovi", "title": "You Give Love a Bad Name", "ja_title": "禁じられた愛", "query": "Bon Jovi You Give Love a Bad Name official audio"},
+            {"artist": "Bon Jovi", "title": "It's My Life", "ja_title": "イッツ・マイ・ライフ", "query": "Bon Jovi It's My Life official audio"},
             {"artist": "Foreigner", "title": "I Want to Know What Love Is", "ja_title": "アイ・ウォント・トゥ・ノウ・ホワット・ラヴ・イズ", "query": "Foreigner I Want to Know What Love Is official audio"},
+            {"artist": "REO Speedwagon", "title": "Keep On Loving You", "ja_title": "キープ・オン・ラヴィング・ユー", "query": "REO Speedwagon Keep On Loving You official audio"},
             {"artist": "REO Speedwagon", "title": "Can't Fight This Feeling", "ja_title": "涙のフィーリング", "query": "REO Speedwagon Can't Fight This Feeling official audio"},
-            {"artist": "Whitesnake", "title": "Is This Love", "ja_title": "イズ・ディス・ラヴ", "query": "Whitesnake Is This Love official audio"},
-            {"artist": "Cheap Trick", "title": "The Flame", "ja_title": "永遠の愛の炎", "query": "Cheap Trick The Flame official audio"},
-            {"artist": "Sheriff", "title": "When I'm with You", "ja_title": "ホエン・アイム・ウィズ・ユー", "query": "Sheriff When I'm with You official audio"},
-            {"artist": "Heart", "title": "Alone", "ja_title": "アローン", "query": "Heart Alone official audio"},
-            {"artist": "Night Ranger", "title": "Sister Christian", "ja_title": "シスター・クリスチャン", "query": "Night Ranger Sister Christian official audio"},
-            {"artist": "Poison", "title": "Every Rose Has Its Thorn", "ja_title": "エヴリ・ローズ・ハズ・イッツ・ソーン", "query": "Poison Every Rose Has Its Thorn official audio"},
-            {"artist": "Gary Moore", "title": "Still Got the Blues", "ja_title": "スティル・ゴット・ザ・ブルーズ", "query": "Gary Moore Still Got the Blues official audio"},
+            {"artist": "Toto", "title": "Hold the Line", "ja_title": "ホールド・ザ・ライン", "query": "Toto Hold the Line official audio"},
+            {"artist": "Boston", "title": "More Than a Feeling", "ja_title": "宇宙の彼方へ", "query": "Boston More Than a Feeling official audio"},
+            {"artist": "Kansas", "title": "Carry On Wayward Son", "ja_title": "伝承", "query": "Kansas Carry On Wayward Son official audio"},
+            {"artist": "Styx", "title": "Mr. Roboto", "ja_title": "ミスター・ロボット", "query": "Styx Mr Roboto official audio"},
+            {"artist": "Yes", "title": "Owner of a Lonely Heart", "ja_title": "ロンリー・ハート", "query": "Yes Owner of a Lonely Heart official audio"},
+            {"artist": "Asia", "title": "Heat of the Moment", "ja_title": "ヒート・オブ・ザ・モーメント", "query": "Asia Heat of the Moment official audio"},
+            {"artist": "Mr. Mister", "title": "Broken Wings", "ja_title": "ブロークン・ウィングス", "query": "Mr Mister Broken Wings official audio"},
+            {"artist": "Cutting Crew", "title": "(I Just) Died in Your Arms", "ja_title": "愛に抱かれた夜", "query": "Cutting Crew I Just Died in Your Arms official audio"},
+            {"artist": "Whitesnake", "title": "Here I Go Again", "ja_title": "ヒア・アイ・ゴー・アゲイン", "query": "Whitesnake Here I Go Again official audio"},
+            {"artist": "Scorpions", "title": "Rock You Like a Hurricane", "ja_title": "ハリケーン", "query": "Scorpions Rock You Like a Hurricane official audio"},
+            {"artist": "Def Leppard", "title": "Pour Some Sugar on Me", "ja_title": "シュガー・オン・ミー", "query": "Def Leppard Pour Some Sugar on Me official audio"},
         ],
-        "tags": ["ロックバラード", "ギターソロ", "80年代洋楽", "90年代洋楽", "Journey", "Bon Jovi", "Gary Moore", "40代", "50代", "夜に聴きたい洋楽", "ドライブBGM"],
-    },
-    # 12: 眠れない深夜2時・極上のアーバンメロウ＆ブラコン
-    {
-        "id": "real_mix_012",
-        "used": False,
-        "genre": "90s Urban Mellow & Shibuya Groove",
-        "artwork_file": "urban90s.jpg",
-        "title": "【深夜2時の洋楽】眠れない夜に心を包む80s-90sアーバンメロウ＆ブラコン名曲全12曲フルメドレー｜Anita Baker / Babyface / Sade / Luther Vandross",
-        "short_title": "【深夜2時の洋楽】眠れない夜に聴きたい80s-90sアーバンメロウ名曲全12曲 🎧本編はチャンネルへ！ #Shorts #AOR",
-        "thumb_era_label": "40代・50代に捧ぐ  ｜  2AM URBAN MELLOW & QUIET STORM — FULL 12 SONGS",
-        "thumb_catch": "午前2時の静寂に溶ける、甘く洗練された大人のR&BとAOR——",
-        "thumb_main": "深夜2時に聴きたいアーバン洋楽12選",
-        "thumb_sub": "Anita Baker / Babyface / Sade / Luther Vandross / Earth, Wind & Fire 他 全12曲",
-        "tracks": [
-            {"artist": "Anita Baker", "title": "Sweet Love", "ja_title": "スウィート・ラヴ", "query": "Anita Baker Sweet Love official audio"},
-            {"artist": "Sade", "title": "Kiss of Life", "ja_title": "キス・オブ・ライフ", "query": "Sade Kiss of Life official audio"},
-            {"artist": "Luther Vandross", "title": "Never Too Much", "ja_title": "ネヴァー・トゥー・マッチ", "query": "Luther Vandross Never Too Much official audio"},
-            {"artist": "Earth, Wind & Fire", "title": "After the Love Has Gone", "ja_title": "アフター・ザ・ラヴ・ハズ・ゴーン", "query": "Earth Wind and Fire After the Love Has Gone official audio"},
-            {"artist": "Babyface", "title": "Every Time I Close My Eyes", "ja_title": "エヴリ・タイム・アイ・クローズ・マイ・アイズ", "query": "Babyface Every Time I Close My Eyes official audio"},
-            {"artist": "Commodores", "title": "Easy", "ja_title": "イージー", "query": "Commodores Easy official audio"},
-            {"artist": "The Isley Brothers", "title": "Between the Sheets", "ja_title": "ビトウィーン・ザ・シーツ", "query": "Isley Brothers Between the Sheets official audio"},
-            {"artist": "Kool & The Gang", "title": "Cherish", "ja_title": "チェリッシュ", "query": "Kool and the Gang Cherish official audio"},
-            {"artist": "Champaign", "title": "How 'Bout Us", "ja_title": "ハウ・バウト・アス", "query": "Champaign How Bout Us official audio"},
-            {"artist": "Surface", "title": "Shower Me with Your Love", "ja_title": "シャワー・ミー・ウィズ・ユア・ラヴ", "query": "Surface Shower Me with Your Love official audio"},
-            {"artist": "Karyn White", "title": "Superwoman", "ja_title": "スーパーウーマン", "query": "Karyn White Superwoman official audio"},
-            {"artist": "swing Out Sister", "title": "Breakout", "ja_title": "ブレイクアウト", "query": "Swing Out Sister Breakout official audio"},
-        ],
-        "tags": ["深夜BGM", "ブラコン", "AOR", "80年代洋楽", "90年代洋楽", "Anita Baker", "Sade", "Babyface", "40代", "50代", "眠れない夜に", "大人BGM"],
+        "tags": ["80年代洋楽", "洋楽ロック", "ドライブBGM", "Journey", "Bon Jovi", "Van Halen", "40代", "50代", "懐かしい洋楽", "高速道路BGM", "作業用BGM", "2時間"],
     },
 ]
 
@@ -406,19 +395,12 @@ def ensure_real_hits_pool() -> List[Dict[str, Any]]:
         return DEFAULT_REAL_HIT_MIXES
     raw = json.loads(REAL_HITS_POOL_PATH.read_text(encoding="utf-8"))
     items = raw["items"] if isinstance(raw, dict) and "items" in raw else raw
-    if len(items) < len(DEFAULT_REAL_HIT_MIXES):
-        existing_used = {it["id"]: it for it in items if it.get("used")}
-        merged: List[Dict[str, Any]] = []
-        for d_item in DEFAULT_REAL_HIT_MIXES:
-            if d_item["id"] in existing_used:
-                merged.append(existing_used[d_item["id"]])
-            else:
-                merged.append(d_item)
+    if not items or len(items[0].get("tracks", [])) < 20:
         REAL_HITS_POOL_PATH.write_text(
-            json.dumps({"total": len(merged), "items": merged}, ensure_ascii=False, indent=2) + "\n",
+            json.dumps({"total": len(DEFAULT_REAL_HIT_MIXES), "items": DEFAULT_REAL_HIT_MIXES}, ensure_ascii=False, indent=2) + "\n",
             encoding="utf-8",
         )
-        return merged
+        return DEFAULT_REAL_HIT_MIXES
     return items
 
 
@@ -446,20 +428,30 @@ def save_real_hits_pool(pool: List[Dict[str, Any]], chosen_id: str, auto_git_pus
             logger.warning(f"Git commit/push warning: {exc}")
 
 
+def _fmt_hhmmss(seconds: float) -> str:
+    total = int(seconds)
+    hh = total // 3600
+    mm = (total % 3600) // 60
+    ss = total % 60
+    if hh > 0:
+        return f"{hh:d}:{mm:02d}:{ss:02d}"
+    return f"{mm:02d}:{ss:02d}"
+
+
 def download_and_mix_real_tracks(
     tracks: List[Dict[str, str]],
     out_m4a: Path,
     out_mp3_for_short: Path,
-    max_total_duration_sec: int = 4200,
+    max_total_duration_sec: int = 10800,
 ) -> Tuple[str, float]:
     """
-    Download all 12 tracks via `yt-dlp` at full length (up to 480s per track so full songs play completely!),
-    normalize loudness (`loudnorm`), apply smooth 2.5s fade-in/out per track, concatenate into `out_m4a`,
+    Download all 24 tracks via `yt-dlp` at full length (up to 480s per song so every song plays completely!),
+    normalize loudness (`loudnorm`), apply smooth 2.5s fade-in/out per track, concatenate into `out_m4a` (~2 hours),
     and return `(formatted_timestamps, actual_duration)`.
     """
     import yt_dlp
 
-    per_track_max = 480 if max_total_duration_sec >= 1800 else int((max_total_duration_sec - 5) / max(1, len(tracks)))
+    per_track_max = 480 if max_total_duration_sec >= 3600 else int((max_total_duration_sec - 5) / max(1, len(tracks)))
 
     with tempfile.TemporaryDirectory(prefix="real_hits_dl_") as tmp_s:
         tmp_dir = Path(tmp_s)
@@ -517,10 +509,9 @@ def download_and_mix_real_tracks(
             )
 
             actual_seg_dur = get_audio_duration(norm_m4a)
-            mm = int(cursor_sec) // 60
-            ss = int(cursor_sec) % 60
+            ts_str = _fmt_hhmmss(cursor_sec)
             timestamp_lines.append(
-                f"{mm:02d}:{ss:02d} {idx:02d}. {tr['artist']} — {tr['title']} （{tr['ja_title']}）"
+                f"{ts_str} {idx:02d}. {tr['artist']} — {tr['title']} （{tr['ja_title']}）"
             )
             cursor_sec += actual_seg_dur
             norm_segments.append(norm_m4a)
@@ -555,7 +546,7 @@ def download_and_mix_real_tracks(
         )
 
     total_dur = get_audio_duration(out_m4a)
-    logger.info(f"Built Full-Length 12-Track Real Hits Mix audio: {out_m4a.name} ({total_dur:.1f}s / {total_dur/60:.1f}m across {len(tracks)} tracks)")
+    logger.info(f"Built 2-Hour Full-Length 24-Track Real Hits Mix audio: {out_m4a.name} ({total_dur:.1f}s / {total_dur/60:.1f}m across {len(tracks)} tracks)")
     return "\n".join(timestamp_lines), total_dur
 
 
@@ -566,8 +557,8 @@ def decorate_hud_and_thumb_with_setlist(
     font_path: str,
 ) -> None:
     """
-    Overlay a sleek 2-column 12-track SETLIST card onto `hud_png` (1920x1080) and replace the `NO ADS` pill
-    with `FULL 12 SONGS MIX` so viewers immediately see all 12 famous artist & song names on screen.
+    Overlay a sleek 3-column 24-track SETLIST card onto `hud_png` (1920x1080) and replace the `NO ADS` pill
+    with `2 HOURS / 24 SONGS` so viewers immediately see all 24 famous artist & song names on screen.
     """
     cjk_reg_path = find_cjk_font() or font_path
     cjk_mincho_path = find_cjk_mincho_font() or cjk_reg_path
@@ -575,43 +566,42 @@ def decorate_hud_and_thumb_with_setlist(
     hud = Image.open(hud_png).convert("RGBA")
     draw = ImageDraw.Draw(hud, "RGBA")
 
-    lx0, ly0, lx1, ly1 = 72, 142, 1848, 492
+    lx0, ly0, lx1, ly1 = 72, 134, 1848, 520
     draw.rounded_rectangle(
         (lx0, ly0, lx1, ly1),
         radius=22,
-        fill=(8, 12, 22, 176),
+        fill=(8, 12, 22, 182),
         outline=(217, 179, 108, 150),
         width=2,
     )
-    f_head = load_font(cjk_reg_path, 22)
+    f_head = load_font(cjk_reg_path, 21)
     draw.text(
-        (lx0 + 28, ly0 + 16),
-        f"♪ FULL-LENGTH {len(tracks)} TRACKS SETLIST  ｜  収録名曲リスト（概要欄チャプターから各曲へジャンプ可能）",
+        (lx0 + 28, ly0 + 14),
+        f"♪ 2-HOUR FULL-LENGTH {len(tracks)} TRACKS SETLIST  ｜  収録名曲リスト（概要欄チャプターから全24曲へジャンプ可能）",
         font=f_head,
         fill=(217, 179, 108, 245),
     )
-    draw.line([(lx0 + 28, ly0 + 50), (lx1 - 28, ly0 + 50)], fill=(217, 179, 108, 95), width=1)
+    draw.line([(lx0 + 28, ly0 + 46), (lx1 - 28, ly0 + 46)], fill=(217, 179, 108, 95), width=1)
 
-    col_w = ((lx1 - lx0) - 84) // 2
-    for idx, tr in enumerate(tracks[:12]):
-        col = 0 if idx < 6 else 1
-        row = idx % 6
-        col_x = (lx0 + 28) if col == 0 else (lx0 + 48 + col_w)
-        row_y = ly0 + 62 + row * 46
-        line_txt = f"{idx+1:02d}. {tr['artist']} — {tr['title']} （{tr['ja_title']}）"
-        f_row = fit_font_for_width(draw, line_txt, cjk_mincho_path, 22, 16, col_w - 10)
+    col_w = ((lx1 - lx0) - 84) // 3
+    for idx, tr in enumerate(tracks[:24]):
+        col = idx // 8
+        row = idx % 8
+        col_x = lx0 + 28 + col * (col_w + 18)
+        row_y = ly0 + 56 + row * 40
+        line_txt = f"{idx+1:02d}. {tr['artist']} - {tr['title']}"
+        f_row = fit_font_for_width(draw, line_txt, cjk_mincho_path, 19, 14, col_w - 8)
         _draw_soft_shadow_text(
             hud,
             (col_x, row_y),
             line_txt,
             font=f_row,
             fill=(250, 248, 242, 248),
-            blur_radius=4,
+            blur_radius=3,
         )
 
-    # Replace bottom-right pill on HUD with "FULL 12 SONGS MIX"
     draw = ImageDraw.Draw(hud, "RGBA")
-    stamp_txt = f"FULL {len(tracks)} SONGS MIX"
+    stamp_txt = f"2 HOURS / {len(tracks)} SONGS"
     f_stamp = load_font(font_path, 23)
     tb_st = draw.textbbox((0, 0), stamp_txt, font=f_stamp)
     st_w = (tb_st[2] - tb_st[0]) + 64
@@ -633,26 +623,26 @@ def decorate_hud_and_thumb_with_setlist(
 
 
 def build_real_hits_description(meta: Dict[str, Any], formatted_timestamps: str) -> str:
-    tracks_summary = " / ".join([f"{t['artist']}「{t['title']}」" for t in meta["tracks"][:8]]) + " ほか全12曲フル尺収録"
+    tracks_summary = " / ".join([f"{t['artist']}「{t['title']}」" for t in meta["tracks"][:10]]) + f" ほか全{len(meta['tracks'])}曲フル尺収録"
     return (
         f"🎧 {meta['title']}\n\n"
-        f"1980年代〜1990年代にFMラジオや夜のドライブ、ディスコ、カフェバーで流れていた本物の洋楽レジェンド名曲全12曲（{tracks_summary}）を、"
-        "1曲ずつフル尺でじっくり聴けるノンストップ・メドレーでお届けします。\n\n"
+        f"1980年代〜1990年代の映画主題歌やFMラジオ、夜のドライブで流れていた本物の洋楽レジェンド名曲全{len(meta['tracks'])}曲（{tracks_summary}）を、"
+        "1曲ずつフル尺・約2時間ノンストップでお届けする永久保存版メドレーです。\n\n"
         "━━━━━━━━━━━━━━━━━━━━━━\n"
-        "⏱️ 収録曲トラックリスト / チャプター (全12曲フル尺):\n"
+        f"⏱️ 収録曲トラックリスト / チャプター (全{len(meta['tracks'])}曲フル尺・約2時間):\n"
         f"{formatted_timestamps}\n"
         "━━━━━━━━━━━━━━━━━━━━━━\n\n"
-        "🌙 途中に広告が入らない【広告なし】の深夜ドライブ・80s/90s AORプレイリストシリーズも\n"
-        "👇 チャンネルトップから毎日公開中です！ぜひチャンネル登録してお楽しみください。\n"
+        "🌙 途中に広告が入らない【広告なし】の深夜ドライブ・80s/90s AORプレイリスト（毎日20時公開）も\n"
+        "👇 チャンネルトップからぜひチャンネル登録してお楽しみください。\n"
         "https://www.youtube.com/@midnight_cockpit\n\n"
-        "#80年代洋楽 #AOR #洋楽メドレー #40代 #50代 #懐かしい洋楽 #夜に聴きたい洋楽 #作業用BGM"
+        "#80年代洋楽 #90年代洋楽 #映画音楽 #名画メドレー #AOR #洋楽メドレー #40代 #50代 #懐かしい洋楽 #作業用BGM #ドライブBGM"
     )
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Build & upload Full-Length Real 80s/90s Western Legend 12-Song Hit Mix.")
+    parser = argparse.ArgumentParser(description="Build & upload 2-Hour Full-Length Real 80s/90s Western Legend 24-Song Hit Mix.")
     parser.add_argument("--mix-id", default="", help="Specific mix id from real_hits_pool.json (default: first unused).")
-    parser.add_argument("--max-duration", type=int, default=4200, help="Max total duration in seconds (default: 4200 = full length for all 12 songs).")
+    parser.add_argument("--max-duration", type=int, default=10800, help="Max total duration in seconds (default: 10800 = up to 3 hours).")
     parser.add_argument("--privacy", default="public", choices=["public", "unlisted", "private"])
     parser.add_argument("--dry-run", action="store_true")
     args = parser.parse_args()
@@ -718,7 +708,7 @@ def main() -> int:
             privacy_status=args.privacy,
             thumbnail_path=OUTPUT_THUMB,
         )
-        short_desc = f"🎧 本編フルメドレー動画（全12曲フル尺）はこちら 👉 https://youtu.be/{long_id}\n\n{full_desc}"
+        short_desc = f"🎧 本編2時間フルメドレー動画（全24曲フル尺）はこちら 👉 https://youtu.be/{long_id}\n\n{full_desc}"
         short_id = upload_video_to_youtube(
             youtube=youtube,
             video_path=OUTPUT_SHORT,
@@ -740,7 +730,7 @@ def main() -> int:
             item["youtube_short_id"] = short_id
             break
     save_real_hits_pool(pool, chosen_meta["id"], auto_git_push=True)
-    logger.info(f"Published Full-Length 12-Track Real Hits Mix [{chosen_meta['id']}]: Long={long_id}, Short={short_id}")
+    logger.info(f"Published 2-Hour Full-Length 24-Track Real Hits Mix [{chosen_meta['id']}]: Long={long_id}, Short={short_id}")
     return 0
 
 

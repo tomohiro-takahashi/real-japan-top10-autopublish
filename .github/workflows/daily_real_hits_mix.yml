@@ -1,15 +1,14 @@
-name: Real 80s-90s Western Legend 12-Song Full Mix Auto-Upload
+name: Real 80s-90s Western Legend 2-Hour Full Mix Auto-Upload
 
 on:
   schedule:
-    # Runs 2x daily at 03:00 UTC (12:00 JST Noon) and 13:30 UTC (22:30 JST Late Night)
-    # Completely separate from the 20:00 JST Suno workflow & uses 0 Suno credits!
-    - cron: '0 3 * * *'
-    - cron: '30 13 * * *'
+    # Runs 1x daily at 13:00 UTC (22:00 JST Late Night)
+    # 1x Suno Original (20:00 JST) + 1x 2-Hour Real Western Masterpiece Mix (22:00 JST)
+    - cron: '0 13 * * *'
   workflow_dispatch:
     inputs:
       mix_id:
-        description: 'Optional Mix ID (e.g. real_mix_001 .. real_mix_012; leave blank for next unused)'
+        description: 'Optional Mix ID (e.g. real_mix_001 .. real_mix_008; leave blank for next unused)'
         required: false
         default: ''
       privacy:
@@ -27,7 +26,7 @@ concurrency:
 jobs:
   build-and-upload-real-hits-mix:
     runs-on: ubuntu-latest
-    timeout-minutes: 120
+    timeout-minutes: 180
 
     steps:
       - name: Checkout Repository
