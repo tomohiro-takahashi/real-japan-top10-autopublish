@@ -222,16 +222,17 @@ def render_opening_flash_frames(
         pick_indices = [0]
 
     flash_labels = [
-        ("RAPID PREVIEW  |  RANK #10", (30, 58, 138, 245)),
-        ("RAPID PREVIEW  |  RANK #7", (2, 132, 199, 245)),
-        ("TOP 5 HIDDEN GEM  |  RANK #5", (16, 185, 129, 245)),
-        ("BRONZE MEDAL  |  RANK #3", (220, 38, 38, 248)),
-        ("RUNNER-UP  |  RANK #2", (220, 38, 38, 248)),
+        ("ZERO PAID PROMO  |  RANK #10", (220, 38, 38, 250)),
+        ("JAPANESE IG ANALYZED  |  RANK #7", (2, 132, 199, 248)),
+        ("100% UNSPONSORED  |  RANK #5", (16, 185, 129, 248)),
+        ("REAL LOCAL VOICES  |  RANK #3", (220, 38, 38, 250)),
+        ("NO TOURIST TRAPS  |  RANK #2", (220, 38, 38, 250)),
         ("WAIT UNTIL YOU SEE #1!", (217, 119, 6, 252)),
     ]
 
     f_pill = ImageFont.truetype(font_path, 21)
     f_sub = ImageFont.truetype(font_path, 20)
+    f_stamp = ImageFont.truetype(font_path, 20)
 
     out_paths: List[Path] = []
     for i, r_idx in enumerate(pick_indices):
@@ -247,6 +248,15 @@ def render_opening_flash_frames(
         canvas = im.convert("RGBA")
         draw = ImageDraw.Draw(canvas, "RGBA")
 
+        # Top-Center Catchy Verification Stamp (y=116..162) so the first 5 seconds scream "100% NO PAID PROMO • JAPANESE IG ANALYZED"
+        stamp_txt = "100% NO PAID PROMOTION  •  500,000+ JAPANESE INSTAGRAM POSTS ANALYZED  •  REAL LOCAL VOICES ONLY"
+        f_st_fit = fit_font_for_width(draw, stamp_txt, font_path, 20, 15, W - 180)
+        tb_st = draw.textbbox((0, 0), stamp_txt, font=f_st_fit)
+        st_w = (tb_st[2] - tb_st[0]) + 44
+        st_x0 = (W - st_w) // 2
+        draw.rounded_rectangle((st_x0, 114, st_x0 + st_w, 158), radius=22, fill=(185, 28, 28, 246), outline=(253, 224, 71, 255), width=3)
+        draw.text((st_x0 + 22, 125), stamp_txt, font=f_st_fit, fill=(255, 255, 255, 255))
+
         pill_txt, pill_col = flash_labels[i % len(flash_labels)]
         rank_str = row.get("rank", f"#{10 - i}")
         score_str = row.get("score", "95/100pt")
@@ -257,25 +267,28 @@ def render_opening_flash_frames(
         # Zoom-safe centered lower card (bx0=96..W-96, by0=362..482 so 1.06x zoom never touches HUD)
         bx0, by0, bx1, by1 = 96, 362, W - 96, 482
         max_card_tw = (bx1 - bx0) - 48
-        draw.rounded_rectangle((bx0, by0, bx1, by1), radius=16, fill=(8, 12, 24, 228), outline=(253, 224, 71, 245), width=3)
+        draw.rounded_rectangle((bx0, by0, bx1, by1), radius=16, fill=(8, 12, 24, 232), outline=(253, 224, 71, 245), width=3)
 
         tb_p = draw.textbbox((0, 0), pill_txt, font=f_pill)
         pw = (tb_p[2] - tb_p[0]) + 34
         draw.rounded_rectangle((bx0 + 16, by0 - 20, bx0 + 16 + pw, by0 + 20), radius=10, fill=pill_col, outline=(255, 255, 255, 245), width=2)
         draw.text((bx0 + 33, by0 - 11), pill_txt, font=f_pill, fill=(255, 255, 255, 255))
 
-        prog_txt = f"HIGHLIGHT {i + 1}/{len(pick_indices)}  >>  COUNTDOWN"
+        prog_txt = f"REAL IG VOICE {i + 1}/{len(pick_indices)}  >>  0% SPONSORED"
         tb_pr = draw.textbbox((0, 0), prog_txt, font=f_sub)
-        draw.text((bx1 - (tb_pr[2] - tb_pr[0]) - 22, by0 + 8), prog_txt, font=f_sub, fill=(125, 211, 252, 255))
+        draw.text((bx1 - (tb_pr[2] - tb_pr[0]) - 22, by0 + 8), prog_txt, font=f_sub, fill=(167, 243, 208, 255))
 
-        if i == len(pick_indices) - 1:
-            headline = f"#1 SPOT SCORED {score_str.upper()} — CAN YOU GUESS WHICH ONE?"
+        if i == 0:
+            headline = "STOP FALLING FOR PAID INFLUENCER TOURIST TRAPS!"
+            subline = f"We analyzed 500,000+ real Japanese Instagram posts — Preview #{10 - i}: {name_en}"
+        elif i == len(pick_indices) - 1:
+            headline = f"#1 UNSPONSORED SPOT SCORED {score_str.upper()} — CAN YOU GUESS IT?"
             subline = f"Hint: {dish_en}  |  Access: {acc_en}"
         else:
             headline = f"{rank_str}  {name_en}  ({score_str})"
             subline = f"{dish_en}  |  Access: {acc_en}"
 
-        f_spot_fit = fit_font_for_width(draw, headline, font_path, 32, 22, max_card_tw)
+        f_spot_fit = fit_font_for_width(draw, headline, font_path, 32, 20, max_card_tw)
         f_sub_fit = fit_font_for_width(draw, subline, font_path, 20, 15, max_card_tw)
         clean_sub = smart_truncate(draw, subline, f_sub_fit, max_card_tw)
 
@@ -797,8 +810,26 @@ def render_ranking_hud_png(
     )
     draw.text((W - rw - 32, 19), info_right, font=f_tag, fill=(253, 224, 71, 255))
 
+    # Top-Center Permanent "100% NO PAID PROMO • JAPANESE IG ANALYZED | SUBSCRIBE" Badge on Row 1
+    avail_mid_w = right_box_x0 - (24 + bw) - 24
+    if avail_mid_w >= 260:
+        f_np = ImageFont.truetype(font_path, 15)
+        np_txt = "100% NO PAID PROMO • JAPANESE IG ANALYZED  |  ▶ SUBSCRIBE"
+        f_np_fit = fit_font_for_width(draw, np_txt, font_path, 15, 11, avail_mid_w - 24)
+        tb_np = draw.textbbox((0, 0), np_txt, font=f_np_fit)
+        np_w = (tb_np[2] - tb_np[0]) + 24
+        np_x0 = (24 + bw) + (avail_mid_w - np_w) // 2
+        draw.rounded_rectangle(
+            (np_x0, 12, np_x0 + np_w, 46),
+            radius=8,
+            fill=(15, 23, 42, 248),
+            outline=(16, 185, 129, 245),
+            width=2,
+        )
+        draw.text((np_x0 + 12, 20), np_txt, font=f_np_fit, fill=(167, 243, 208, 255))
+
     # Main English Place Title on Row 2 (Large 26px bold with dark stroke)
-    title_en = strip_cjk(seg["place_en"].strip()).replace("What You Get in This 9-Min Guide", "TOP 10 COUNTDOWN PREVIEW — WATCH UNTIL #1!")
+    title_en = strip_cjk(seg["place_en"].strip()).replace("What You Get in This 9-Min Guide", "100% UNSPONSORED TOP 10 — ANALYZED FROM JAPANESE IG!")
     f_title_fit = fit_font_for_width(draw, title_en, font_path, 26, 18, W - 48)
     draw.text(
         (24, 56),
@@ -833,7 +864,7 @@ def render_ranking_hud_png(
         max_rw = (card_x1 - card_x0) - 32
 
         c1_y0, c1_y1 = 336, 430
-        lbl1 = "WHAT JAPANESE LOCALS LOVE (PRAISE)"
+        lbl1 = "REAL JAPANESE INSTAGRAM VOICE (100% NO PROMO)"
         tb_l1 = draw.textbbox((0, 0), lbl1, font=f_rhead)
         l1_w = (tb_l1[2] - tb_l1[0]) + 28
         praise_txt = strip_cjk(seg["review_praise_en"])
@@ -844,7 +875,7 @@ def render_ranking_hud_png(
         draw.text((card_x0 + 16, c1_y0 + 46), praise_txt, font=f_ren1, fill=(255, 255, 255, 255), stroke_width=2, stroke_fill=(0, 0, 0, 230))
 
         c2_y0, c2_y1 = 440, 534
-        lbl2 = "LOCAL WARNING & INSIDER HACK"
+        lbl2 = "UNFILTERED LOCAL WARNING & INSIDER HACK"
         tb_l2 = draw.textbbox((0, 0), lbl2, font=f_rhead)
         l2_w = (tb_l2[2] - tb_l2[0]) + 28
         warn_txt = strip_cjk(seg["review_warn_en"])
@@ -1894,6 +1925,15 @@ def render_short_hud_png(
     f_pill = ImageFont.truetype(font_path, 25)
     f_rhead = ImageFont.truetype(font_path, 22)
     f_ren = ImageFont.truetype(font_path, 26)
+    f_top_v = ImageFont.truetype(font_path, 20)
+
+    # 0. Permanent Top Verification Banner (y=52..106) — "100% NO PAID PROMO • JAPANESE IG ANALYZED"
+    top_v_txt = "100% NO PAID PROMO  •  JAPANESE IG ANALYZED"
+    tb_tv = draw.textbbox((0, 0), top_v_txt, font=f_top_v)
+    tv_w = (tb_tv[2] - tb_tv[0]) + 48
+    tv_x0 = (SW - tv_w) // 2
+    draw.rounded_rectangle((tv_x0, 52, tv_x0 + tv_w, 104), radius=26, fill=(15, 23, 42, 245), outline=(16, 185, 129, 250), width=3)
+    draw.text((tv_x0 + 24, 67), top_v_txt, font=f_top_v, fill=(167, 243, 208, 255))
 
     # 1. Floating Centered Rank Pill (y=118..178)
     pill_txt = strip_cjk(scene["badge"])
@@ -2002,7 +2042,7 @@ def build_shorts_video(script_path: Path) -> Path:
     r1_row = summary_rows[0] if len(summary_rows) >= 1 else {"name_en": sp1["place_en"], "score": "96/100pt", "dish": sp1["area"], "budget": sp1["budget"], "hack": sp1["insider_tip"]}
 
     short_region = prefecture.replace("Sightseeing", "").replace("TOP 10", "").strip() or "Japan"
-    hook_title = strip_cjk(shorts_cfg.get("promise_catch", f"SKIP TOURIST TRAPS! {short_region} TOP 10"))
+    hook_title = strip_cjk(shorts_cfg.get("promise_catch", f"NO PAID PROMO! {short_region} TOP 10"))
 
     def _short_punch(raw_text: str, prefix: str = "", max_words: int = 9) -> str:
         clean = " ".join(strip_cjk(raw_text).split())
@@ -2023,19 +2063,19 @@ def build_shorts_video(script_path: Path) -> Path:
     r1_short_name = strip_cjk(r1_row["name_en"].split("(")[0].strip())
 
     hook_narration = (
-        f"Skip the tourist traps! Top 3 {short_region} spots ranked by Japanese locals!"
+        f"Zero paid promos! We analyzed real Japanese Instagram posts to rank the top 3 {short_region} spots locals actually love!"
     )
 
     short_scenes = [
         {
             "mode": "hook",
             "se_type": "area_chime",
-            "badge": shorts_cfg.get("hook_badge", "95% OF FOREIGN TOURISTS MISS THIS!"),
+            "badge": "ZERO PAID PROMO! REAL JAPANESE IG DATA",
             "title_en": hook_title,
-            "sub_en": "500,000 Japanese IG Posts × Local Reviews",
-            "access": "IN THIS VIDEO: 1. 100pt Ranking  2. Train Access  3. Local Hacks",
+            "sub_en": "500,000+ Japanese IG Posts • 100% Unsponsored",
+            "access": "NO INFLUENCER ADS — ONLY REAL JAPANESE LOCAL VOICES!",
             "narration": hook_narration,
-            "pop_lines": [hook_title, "Top 3 Ranked by Japanese Locals!"],
+            "pop_lines": ["ZERO PAID PROMOS! REAL IG DATA!", f"Top 3 {short_region} Ranked by Locals!"],
         },
         {
             "mode": "cinema",
@@ -2045,9 +2085,9 @@ def build_shorts_video(script_path: Path) -> Path:
             "sub_en": r3_row["dish"].split("(")[0].strip(),
             "access": f"ACCESS: {sp3.get('access_info', r3_row['budget'])}",
             "photos": [sp3["photos"][0], sp3["photos"][1]],
-            "photo_tags": ["HIGH-RES PHOTO (1/4)", "HIGH-RES PHOTO (2/4)"],
+            "photo_tags": ["REAL JAPANESE IG VOICE (1/4)", "REAL JAPANESE IG VOICE (2/4)"],
             "card_style": "praise",
-            "card_title": "LOCAL PRAISE & HIGHLIGHT",
+            "card_title": "REAL JAPANESE IG VOICE (NO PROMO)",
             "card_body_en": rv3.get("review_praise_en", sp3["insider_tip"]),
             "narration": _short_punch(r3_row["dish"], f"Number 3: {r3_short_name}!", 9),
             "pop_lines": [f"#3 {r3_short_name.upper()} ({r3_row['score']})", r3_row["dish"].split("(")[0].strip()],
@@ -2055,17 +2095,17 @@ def build_shorts_video(script_path: Path) -> Path:
         {
             "mode": "cinema",
             "se_type": "review_pop",
-            "badge": "NO.3  |  INSIDER HACK",
+            "badge": "NO.3  |  UNSPONSORED HACK",
             "title_en": r3_short_name,
             "sub_en": f"PRO TIP: {r3_row['hack']}",
             "access": f"TIP: {sp3.get('insider_tip', r3_row['hack'])}",
             "photos": [rv3["photos"][0], rv3["photos"][1]],
-            "photo_tags": ["HIGH-RES PHOTO (3/4)", "HIGH-RES PHOTO (4/4)"],
+            "photo_tags": ["REAL JAPANESE IG VOICE (3/4)", "REAL JAPANESE IG VOICE (4/4)"],
             "card_style": "warn",
-            "card_title": "LOCAL HACK & WARNING",
+            "card_title": "UNFILTERED LOCAL WARNING",
             "card_body_en": rv3.get("review_warn_en", r3_row["hack"]),
             "narration": _short_punch(r3_row["hack"], "Local hack:", 9),
-            "pop_lines": ["LOCAL INSIDER WARNING!", r3_row["hack"]],
+            "pop_lines": ["UNFILTERED LOCAL WARNING!", r3_row["hack"]],
         },
         {
             "mode": "cinema",
@@ -2075,9 +2115,9 @@ def build_shorts_video(script_path: Path) -> Path:
             "sub_en": r2_row["dish"].split("(")[0].strip(),
             "access": f"ACCESS: {sp2.get('access_info', r2_row['budget'])}",
             "photos": [sp2["photos"][0], sp2["photos"][1]],
-            "photo_tags": ["HIGH-RES PHOTO (1/4)", "HIGH-RES PHOTO (2/4)"],
+            "photo_tags": ["REAL JAPANESE IG VOICE (1/4)", "REAL JAPANESE IG VOICE (2/4)"],
             "card_style": "praise",
-            "card_title": "LOCAL PRAISE & HIGHLIGHT",
+            "card_title": "REAL JAPANESE IG VOICE (NO PROMO)",
             "card_body_en": rv2.get("review_praise_en", sp2["insider_tip"]),
             "narration": _short_punch(r2_row["dish"], f"Number 2: {r2_short_name}!", 9),
             "pop_lines": [f"#2 {r2_short_name.upper()} ({r2_row['score']})", r2_row["dish"].split("(")[0].strip()],
@@ -2085,17 +2125,17 @@ def build_shorts_video(script_path: Path) -> Path:
         {
             "mode": "cinema",
             "se_type": "review_pop",
-            "badge": "NO.2  |  INSIDER HACK",
+            "badge": "NO.2  |  UNSPONSORED HACK",
             "title_en": r2_short_name,
             "sub_en": f"PRO TIP: {r2_row['hack']}",
             "access": f"TIP: {sp2.get('insider_tip', r2_row['hack'])}",
             "photos": [rv2["photos"][0], rv2["photos"][1]],
-            "photo_tags": ["HIGH-RES PHOTO (3/4)", "HIGH-RES PHOTO (4/4)"],
+            "photo_tags": ["REAL JAPANESE IG VOICE (3/4)", "REAL JAPANESE IG VOICE (4/4)"],
             "card_style": "warn",
-            "card_title": "LOCAL HACK & WARNING",
+            "card_title": "UNFILTERED LOCAL WARNING",
             "card_body_en": rv2.get("review_warn_en", r2_row["hack"]),
             "narration": _short_punch(r2_row["hack"], "Insider tip:", 9),
-            "pop_lines": ["LOCAL INSIDER WARNING!", r2_row["hack"]],
+            "pop_lines": ["UNFILTERED LOCAL WARNING!", r2_row["hack"]],
         },
         {
             "mode": "cinema",
@@ -2105,9 +2145,9 @@ def build_shorts_video(script_path: Path) -> Path:
             "sub_en": r1_row["dish"].split("(")[0].strip(),
             "access": f"ACCESS: {sp1.get('access_info', r1_row['budget'])}",
             "photos": [sp1["photos"][0], sp1["photos"][1]],
-            "photo_tags": ["HIGH-RES PHOTO (1/4)", "HIGH-RES PHOTO (2/4)"],
+            "photo_tags": ["REAL JAPANESE IG VOICE (1/4)", "REAL JAPANESE IG VOICE (2/4)"],
             "card_style": "praise",
-            "card_title": "LOCAL PRAISE & HIGHLIGHT",
+            "card_title": "REAL JAPANESE IG VOICE (NO PROMO)",
             "card_body_en": rv1.get("review_praise_en", sp1["insider_tip"]),
             "narration": _short_punch(r1_row["dish"], f"And Number 1: {r1_short_name}!", 9),
             "pop_lines": [f"#1 {r1_short_name.upper()} ({r1_row['score']})", r1_row["dish"].split("(")[0].strip()],
@@ -2120,9 +2160,9 @@ def build_shorts_video(script_path: Path) -> Path:
             "sub_en": f"PRO TIP: {r1_row['hack']}",
             "access": f"TIP: {sp1.get('insider_tip', r1_row['hack'])}",
             "photos": [rv1["photos"][0], rv1["photos"][1]],
-            "photo_tags": ["HIGH-RES PHOTO (3/4)", "HIGH-RES PHOTO (4/4)"],
+            "photo_tags": ["REAL JAPANESE IG VOICE (3/4)", "REAL JAPANESE IG VOICE (4/4)"],
             "card_style": "warn",
-            "card_title": "LOCAL HACK & WARNING",
+            "card_title": "UNFILTERED LOCAL WARNING",
             "card_body_en": rv1.get("review_warn_en", r1_row["hack"]),
             "narration": _short_punch(r1_row["hack"], "Must-know rule:", 9),
             "pop_lines": ["MUST-KNOW LOCAL RULE!", r1_row["hack"]],
@@ -2132,10 +2172,10 @@ def build_shorts_video(script_path: Path) -> Path:
             "se_type": "area_chime",
             "badge": "FULL TOP 10 CHEAT-SHEET",
             "title_en": "Screenshot & Subscribe!",
-            "sub_en": f"{prefecture} — Daily Local Japan Guides",
+            "sub_en": f"{prefecture} — 100% Unsponsored Local Guides",
             "access": "SUBSCRIBE + TAP CHANNEL BELOW FOR FULL TOP 10 VIDEO!",
-            "narration": "Screenshot this list, subscribe for daily Japan guides, and tap our channel for the full video!",
-            "pop_lines": ["SCREENSHOT THIS TOP 10 LIST!", "SUBSCRIBE FOR DAILY JAPAN GUIDES!"],
+            "narration": "Screenshot this list, subscribe for daily unsponsored Japan guides, and tap our channel for the full video!",
+            "pop_lines": ["SCREENSHOT THIS TOP 10 LIST!", "SUBSCRIBE FOR REAL JAPAN DATA!"],
         },
     ]
 
@@ -2484,8 +2524,8 @@ def render_custom_thumbnails(script_path: Path) -> Tuple[Path, Path, Path]:
     highlight_prefs = set(tc.get("highlight_prefs_ja", [target_pref_ja]))
 
     d_a.rounded_rectangle((28, 20, 512, 76), radius=12, fill=(220, 38, 38, 255), outline=(253, 224, 71, 255), width=3)
-    f_rib = ImageFont.truetype(w9_path, 23)
-    rib_txt = tc.get("ribbon_text", "500,000 JAPANESE IG POSTS")
+    f_rib = ImageFont.truetype(w9_path, 22)
+    rib_txt = tc.get("ribbon_text", "ZERO PAID PROMO • JAPANESE IG")
     tb_rb = d_a.textbbox((0, 0), rib_txt, font=f_rib)
     d_a.text((28 + (484 - (tb_rb[2] - tb_rb[0])) // 2, 36), rib_txt, font=f_rib, fill=(255, 255, 255, 255))
 
@@ -2555,7 +2595,7 @@ def render_custom_thumbnails(script_path: Path) -> Tuple[Path, Path, Path]:
     f_c1 = ImageFont.truetype(w9_path, 22)
     f_c2 = ImageFont.truetype(w9_path, 18)
     tc1 = f"#1 {rows[0]['name_en'].upper()} ({rows[0]['score'].split('/')[0].strip()} PT)"
-    tc2 = tc.get("no1_sub_badge", "IG Buzz: 50/50pt  |  Jalan: ★4.4")
+    tc2 = tc.get("no1_sub_badge", "100% NO PAID PROMO  |  JAPANESE IG #1")
     w_c = max(d_a.textbbox((0, 0), tc1, font=f_c1)[2], d_a.textbbox((0, 0), tc2, font=f_c2)[2]) + 36
     cx0_b = 466
     d_a.rounded_rectangle((cx0_b, 608, cx0_b + w_c, 696), radius=18, fill=(12, 18, 32, 242), outline=(245, 158, 11, 255), width=3)
@@ -2609,7 +2649,7 @@ def render_custom_thumbnails(script_path: Path) -> Tuple[Path, Path, Path]:
     d_b.line([(805, 0), (725, H)], fill=(253, 224, 71, 255), width=5)
 
     f_sub_b = ImageFont.truetype(w9_path, 22)
-    t_sub_b = "RANKED BY 500,000 JAPANESE IG POSTS & REVIEWS"
+    t_sub_b = "100% NO PAID PROMO  •  ANALYZED FROM JAPANESE IG"
     tb_sb = d_b.textbbox((0, 0), t_sub_b, font=f_sub_b)
     w_sb = (tb_sb[2] - tb_sb[0]) + 40
     d_b.rounded_rectangle((28, 18, 28 + w_sb, 68), radius=10, fill=(220, 38, 38, 255), outline=(253, 224, 71, 255), width=3)
@@ -2688,11 +2728,11 @@ def render_custom_thumbnails(script_path: Path) -> Tuple[Path, Path, Path]:
 
     f_lb = ImageFont.truetype(w9_path, 24)
     f_ls = ImageFont.truetype(w9_path, 19)
-    d3.text((28, 595), tc.get("trap_title", "OVERCROWDED TRAP"), font=f_lb, fill=(252, 165, 165, 255), stroke_width=3, stroke_fill=(0, 0, 0, 255))
-    d3.text((28, 632), tc.get("trap_sub", "90% of Foreign Tourists Go Here"), font=f_ls, fill=(255, 255, 255, 255), stroke_width=3, stroke_fill=(0, 0, 0, 255))
+    d3.text((28, 595), tc.get("trap_title", "PAID INFLUENCER TRAP"), font=f_lb, fill=(252, 165, 165, 255), stroke_width=3, stroke_fill=(0, 0, 0, 255))
+    d3.text((28, 632), tc.get("trap_sub", "90% of Foreign Tourists Fall For This"), font=f_ls, fill=(255, 255, 255, 255), stroke_width=3, stroke_fill=(0, 0, 0, 255))
 
     d3.rounded_rectangle((540, 180, 1020, 254), radius=14, fill=(5, 150, 105, 250), outline=(253, 224, 71, 255), width=4)
-    rl_stamp = tc.get("real_stamp", "REAL LOCAL #1")
+    rl_stamp = tc.get("real_stamp", "JAPANESE IG #1")
     tb_rl = d3.textbbox((0, 0), rl_stamp, font=f_st)
     d3.text((540 + (480 - (tb_rl[2] - tb_rl[0])) // 2, 194), rl_stamp, font=f_st, fill=(255, 255, 255, 255))
 
@@ -2704,7 +2744,7 @@ def render_custom_thumbnails(script_path: Path) -> Tuple[Path, Path, Path]:
     f_w1 = ImageFont.truetype(black_path, 36)
     f_w2 = ImageFont.truetype(w9_path, 19)
     d3.text((514, 584), f"#1 {rows[0]['name_en'].upper()} ({rows[0]['score'].split('/')[0]} PT)", font=f_w1, fill=(253, 224, 71, 255))
-    d3.text((514, 644), f"{rows[0]['dish'].split('(')[0].strip()}  |  500K IG Posts Analyzed", font=f_w2, fill=(167, 243, 208, 255))
+    d3.text((514, 644), f"{rows[0]['dish'].split('(')[0].strip()}  |  100% No Paid Promo", font=f_w2, fill=(167, 243, 208, 255))
 
     # =========================================================================
     # Design 4 (1280x720): 4-Photo Bento Magazine Grid + Center Shield Emblem
@@ -2750,7 +2790,7 @@ def render_custom_thumbnails(script_path: Path) -> Tuple[Path, Path, Path]:
     d4.rounded_rectangle((ex0, ey0, ex1, ey1), radius=28, fill=(10, 16, 32, 248), outline=(253, 224, 71, 255), width=5)
     d4.rounded_rectangle((ex0 + 50, ey0 - 24, ex1 - 50, ey0 + 26), radius=18, fill=(220, 38, 38, 255), outline=(253, 224, 71, 255), width=3)
     f_em_sub = ImageFont.truetype(w9_path, 21)
-    t_em = "RANKED BY 500,000 JAPANESE IG POSTS"
+    t_em = "ZERO PAID PROMO • JAPANESE IG ANALYZED"
     tb_em = d4.textbbox((0, 0), t_em, font=f_em_sub)
     d4.text(((W - (tb_em[2] - tb_em[0])) // 2, ey0 - 10), t_em, font=f_em_sub, fill=(255, 255, 255, 255))
     f_em_main = ImageFont.truetype(black_path, 78)
@@ -2779,7 +2819,7 @@ def render_custom_thumbnails(script_path: Path) -> Tuple[Path, Path, Path]:
     canvas_5.alpha_composite(ov5)
 
     d5 = ImageDraw.Draw(canvas_5)
-    t_r5 = "500K JAPANESE IG POSTS × LOCAL REVIEW RANKING"
+    t_r5 = "100% NO PAID PROMO • JAPANESE IG VOICE RANKING"
     tb_r5 = d5.textbbox((0, 0), t_r5, font=f_em_sub)
     rw5 = (tb_r5[2] - tb_r5[0]) + 60
     d5.rounded_rectangle(((W - rw5) // 2, 16, (W + rw5) // 2, 64), radius=24, fill=(220, 38, 38, 255), outline=(253, 224, 71, 255), width=3)
@@ -2841,8 +2881,8 @@ def render_custom_thumbnails(script_path: Path) -> Tuple[Path, Path, Path]:
 
     d_s = ImageDraw.Draw(canvas_s)
     d_s.rounded_rectangle((110, 56, 970, 130), radius=37, fill=(220, 38, 38, 255), outline=(253, 224, 71, 255), width=4)
-    f_sr = ImageFont.truetype(w9_path, 34)
-    t_sr = "500K JAPANESE IG POSTS ANALYZED"
+    f_sr = ImageFont.truetype(w9_path, 32)
+    t_sr = "ZERO PAID PROMO • JAPANESE IG DATA"
     tb_sr = d_s.textbbox((0, 0), t_sr, font=f_sr)
     d_s.text(((SW_T - (tb_sr[2] - tb_sr[0])) // 2, 74), t_sr, font=f_sr, fill=(255, 255, 255, 255))
 

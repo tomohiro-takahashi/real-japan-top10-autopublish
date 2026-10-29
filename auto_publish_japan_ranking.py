@@ -165,7 +165,7 @@ def generate_seo_metadata(script_path: Path, long_mp4: Path) -> Dict[str, Any]:
     per_spot_dur = remaining_for_spots / max(1, n_spots)
 
     chapters: List[str] = [
-        "00:00 Intro: 500,000 Japanese IG Posts × Local Review Formula",
+        "00:00 Intro: 100% No Paid Promo — 500,000 Japanese IG Posts Analyzed",
         f"{format_mmss(intro_dur)} Where is {region_en}? Shinkansen & Flight Access from Tokyo",
         f"{format_mmss(intro_dur + guide1_dur)} {region_en}'s 4 Seasons, Climate & Local Signatures",
     ]
@@ -188,32 +188,34 @@ def generate_seo_metadata(script_path: Path, long_mp4: Path) -> Dict[str, Any]:
         )
 
     description_long = (
-        f"Stop following tourist traps! We analyzed over 500,000 Japanese Instagram posts (50 pts), "
-        f"verified domestic Japanese review sites like Jalan & Tabelog (35 pts), and applied an "
-        f"Anti-Chain Hidden Gem filter (15 pts) to reveal the REAL TOP 10 spots in {region_en}, Japan "
-        f"that Japanese locals actually love.\n\n"
+        f"🚫 100% NO PAID PROMOTION • ZERO SPONSORED SPOTS • REAL JAPANESE LOCAL VOICES ONLY!\n"
+        f"Stop falling for paid influencer tourist traps! We thoroughly analyzed over 500,000 real Japanese-language "
+        f"Instagram posts (50 pts), verified domestic Japanese review sites like Tabelog & Jalan (35 pts), and applied a "
+        f"strict Anti-PR / Anti-Chain filter (15 pts) to build our independent TOP 10 ranking of {region_en}, Japan "
+        f"based exclusively on honest Japanese local voices.\n\n"
         f"⏱️ CHAPTERS (TIMESTAMPS):\n"
         + "\n".join(chapters)
         + "\n\n"
-        f"📋 {region_en.upper()} TOP 10 COMPLETE TRAVEL CHEAT-SHEET:\n"
+        f"📋 {region_en.upper()} TOP 10 COMPLETE TRAVEL CHEAT-SHEET (100% UNSPONSORED):\n"
         + "\n".join(cheatsheet_lines)
         + "\n\n"
-        f"📊 HOW OUR 100-POINT JAPANESE LOCAL SCORE WORKS:\n"
-        f"• 50 pts: Japanese Instagram Buzz Volume & Reel Save Density\n"
-        f"• 35 pts: Domestic Japanese Review Rating (Jalan / Tabelog ★) & Review Count\n"
-        f"• 15 pts: Hidden Gem Authenticity Bonus (100% Chain Stores Excluded)\n\n"
-        f"🔔 Subscribe for daily data-driven Japan local rankings across all 47 prefectures!\n"
-        f"#JapanTravel #{region_en.replace(' ', '')} #RealJapan #HiddenGemsJapan #JapanItinerary #VisitJapan #JapanGuide #Onsen"
+        f"📊 HOW OUR INDEPENDENT JAPANESE INSTAGRAM & REVIEW SCORE WORKS (0% PAID PR):\n"
+        f"• 50 pts: Real Japanese-Language Instagram Posts & Local Save Density (Paid PR posts excluded)\n"
+        f"• 35 pts: Unfiltered Domestic Japanese Review Score (Tabelog / Jalan ★)\n"
+        f"• 15 pts: Zero-Sponsor & Anti-Tourist-Trap Authenticity Bonus\n\n"
+        f"🔔 Subscribe for daily 100% unsponsored Japan rankings built from real Japanese local voices!\n"
+        f"#JapanTravel #{region_en.replace(' ', '')} #RealJapan #NoPaidPromo #HiddenGemsJapan #JapanItinerary #VisitJapan #JapanGuide"
     )
 
     description_short_template = (
-        f"95% of foreign tourists skip {region_en} — and miss {top1_name} ({top1_score}), "
-        f"voted #1 by 500,000 Japanese Instagram posts & local reviews!\n\n"
+        f"🚫 ZERO PAID PROMOS! Stop falling for influencer tourist traps in {region_en} — "
+        f"we analyzed 500,000+ real Japanese Instagram posts to rank #1 {top1_name} ({top1_score}), "
+        f"100% based on honest Japanese local voices!\n\n"
         f"📺 WATCH THE FULL {region_en.upper()} TOP 10 GUIDE (Access, 4 Seasons & All 10 Spots):\n"
         f"👉 {{LONG_VIDEO_URL}}\n\n"
-        f"🏆 TOP 3 HIGHLIGHTS:\n"
+        f"🏆 TOP 3 UNSPONSORED HIGHLIGHTS:\n"
         + "\n".join([f"• {r['rank']} {r['name_en']} ({r['score']}) — {r[' access_short' if ' access_short' in r else 'access_short']}" for r in rows[:3]])
-        + "\n\n#Shorts #JapanTravel #RealJapan #HiddenGemsJapan #"
+        + "\n\n#Shorts #JapanTravel #RealJapan #NoPaidPromo #HiddenGemsJapan #"
         + region_en.replace(" ", "")
     )
 
@@ -224,17 +226,17 @@ def generate_seo_metadata(script_path: Path, long_mp4: Path) -> Dict[str, Any]:
         f"{region_en} top 10",
         "hidden gems Japan",
         "real Japan",
-        "skip Kyoto",
+        "no paid promotion Japan",
+        "Japanese Instagram ranking",
+        "avoid tourist traps Japan",
         "Japan itinerary",
         "Japan travel guide",
-        "Japan hot springs",
-        "Japanese onsen",
+        "Japan local ranking",
         top1_name,
         "where to go in Japan",
         "off the beaten path Japan",
-        "Tohoku Japan travel",
+        "honest Japan travel",
         "Japan shinkansen trip",
-        "Japan local ranking",
     ]
 
     seo_pkg = {
@@ -609,34 +611,34 @@ def auto_generate_next_theme_script() -> Path:
     segments: List[Dict[str, Any]] = [
         {
             "seg_type": "opening",
-            "rank_badge": f"REAL {region_en.upper()} TOP 10!",
+            "rank_badge": "ZERO PAID PROMO!",
             "place_ja": chosen_theme["hook_title_en"],
-            "place_en": f"SKIP TOURIST TRAPS! {region_en} TOP 10 {cat_en} Countdown",
+            "place_en": f"100% NO PAID PROMO! {region_en} TOP 10 {cat_en} (Japanese IG Analyzed)",
             "area": f"{region_en}, Japan",
-            "budget": "100-Point Local Index",
-            "insider_tip": "FORMULA: Japanese IG Buzz (50pt) + Local Reviews (35pt) + Hidden Gem (15pt)",
+            "budget": "0% Sponsored",
+            "insider_tip": "100% NO PAID PROMOTION: Analyzed from 500,000+ real Japanese Instagram posts & local reviews!",
             "photos": [photos_list[0], photos_list[2]],
             "narration": (
-                f"Stop wasting time at overcrowded tourist traps! We analyzed five hundred thousand Japanese Instagram posts "
-                f"and domestic local reviews to rank the top ten real {cat_en} in {region_en}. "
-                f"Watch these top highlights and stay until number one!"
+                f"Stop falling for paid influencer tourist traps! We analyzed over five hundred thousand real Japanese-language "
+                f"Instagram posts and domestic reviews — with zero paid promotions and zero sponsored spots — to bring you the "
+                f"top ten {cat_en} in {region_en} that Japanese locals actually love!"
             ),
-            "subtitle": f"{region_en} TOP 10 {cat_en}! Ranked by 500,000 Japanese IG posts &\nauthentic domestic reviews—watch all the way to #1!",
+            "subtitle": f"100% NO PAID PROMO! We analyzed 500,000+ real Japanese Instagram posts\nto rank the {region_en} TOP 10 based only on honest local voices!",
         },
         {
             "seg_type": "area_guide",
             "rank_badge": f"{region_en.upper()[:10]} GUIDE 1/2",
             "place_ja": f"{region_en} Access Guide",
-            "place_en": f"Where Is {region_en} & How Do You Get There?",
+            "place_en": f"Why Our Unsponsored Japanese Instagram Data Picks {region_en}",
             "area": f"{region_en} Region",
             "budget": "JR Pass / IC Card Ready",
             "insider_tip": f"ACCESS TIP: Use IC cards (Suica/Pasmo) or JR Pass for seamless travel across {region_en}!",
             "photos": [photos_list[4], photos_list[6]],
             "narration": (
-                f"Before we start the countdown, look at the Japan map on the left. {region_en} is easily accessible "
-                f"by JR high-speed train or local express lines, and over ninety percent of guests at these top ten spots are Japanese locals!"
+                f"Unlike sponsored travel vlogs, our ranking filters out paid PR posts and tourist chains. Look at the map on the left: "
+                f"{region_en} is directly accessible by JR lines, and over ninety percent of guests at these ten spots are Japanese locals!"
             ),
-            "subtitle": f"{region_en} is directly connected via JR Shinkansen & express lines.\nOver 90% of visitors at these ranked spots are Japanese locals!",
+            "subtitle": f"Zero paid PR or tourist chains—only real Japanese Instagram & review data!\nOver 90% of visitors at these ranked spots in {region_en} are Japanese locals!",
         },
         {
             "seg_type": "area_guide",
@@ -673,43 +675,43 @@ def auto_generate_next_theme_script() -> Path:
             "photos": [p_a, p_b],
             "narration": (
                 f"At rank {rk_str} with {row['score']} is {row['name_en']} in {region_en}. "
-                f"It scored high for {row['dish']}. Easy access via {row['access_short']}."
+                f"Japanese Instagram users ranked it high for {row['dish']}. Easy access via {row['access_short']}."
             ),
             "subtitle": f"{rk_str} {row['name_en']} ({row['score']}): {row['dish']}\nAccess: {row['access_short']} | Tip: {row['hack']}",
         })
         segments.append({
             "seg_type": "review",
-            "rank_badge": f"{rk_str} LOCAL REVIEWS",
+            "rank_badge": f"{rk_str} REAL IG VOICE",
             "place_ja": f"{row['name_en']} Reviews",
-            "place_en": f"What Japanese Locals Say About {row['name_en']}",
+            "place_en": f"Real Unsponsored Japanese Instagram Voices on {row['name_en']}",
             "area": f"{region_en}, Japan",
-            "budget": "1,200+ Domestic Reviews",
+            "budget": "100% Unsponsored",
             "access_info": f"Train Access: {row['access_short']}",
             "insider_tip": f"PRO HACK: {row['hack']}",
-            "review_praise_en": f"\"Incredible authentic quality that tourists almost never find—worth every minute of the trip in {region_en}!\"",
+            "review_praise_en": f"\"Zero tourist hype—just unbeatable authentic quality in {region_en} that Japanese locals come back for!\"",
             "review_warn_en": f"\"Weekends get busy with local fans after 11:30 AM, so arrive 15 minutes before opening for immediate entry!\"",
             "photos": [p_b, p_a],
             "narration": (
-                f"Japanese reviewers praise {row['name_en']} for its authentic atmosphere and unmatched local value. "
-                f"However, locals warn that weekends get crowded around noon, so arrive fifteen minutes before opening!"
+                f"On Japanese Instagram, locals praise {row['name_en']} for its authentic atmosphere and unmatched local value. "
+                f"However, unsponsored reviews warn that weekends get crowded around noon, so arrive fifteen minutes before opening!"
             ),
-            "subtitle": f"Praise: \"Unmatched authentic quality in {region_en}!\"\nLocal Warning: \"Arrive 15 mins before opening on weekends to skip the queue.\"",
+            "subtitle": f"Real Japanese IG Voice: \"Unmatched authentic quality in {region_en}!\"\nLocal Warning: \"Arrive 15 mins before opening on weekends to skip the queue.\"",
         })
 
     segments.append({
         "seg_type": "summary",
         "rank_badge": "FULL TOP 10 SUMMARY",
         "place_ja": f"{region_en} TOP 10 Summary",
-        "place_en": f"{region_en} TOP 10 Complete Comparison Cheat-Sheet",
+        "place_en": f"{region_en} TOP 10 Complete Comparison Cheat-Sheet (100% No Promo)",
         "area": f"{region_en}, Japan",
         "budget": "Save & Screenshot!",
-        "insider_tip": "SCREENSHOT THIS TABLE: All 10 scores, access times & insider hacks on one screen!",
+        "insider_tip": "SCREENSHOT THIS TABLE: All 10 unsponsored scores, access times & insider hacks on one screen!",
         "photos": [photos_list[0], photos_list[1]],
         "narration": (
-            f"Here is your complete {region_en} top ten cheat-sheet! Pause and screenshot this table right now for your trip, "
-            f"and subscribe for our next real Japan data ranking!"
+            f"Here is your complete unsponsored {region_en} top ten cheat-sheet! Pause and screenshot this table right now for your trip, "
+            f"and subscribe for daily real Japan rankings with zero paid promotions!"
         ),
-        "subtitle": f"Pause & screenshot this complete {region_en} TOP 10 cheat-sheet!\nSubscribe & comment which spot you want to visit first!",
+        "subtitle": f"Pause & screenshot this 100% unsponsored {region_en} TOP 10 cheat-sheet!\nSubscribe & comment which spot you want to visit first!",
     })
 
     out_path = QUEUE_DIR / f"spot_{chosen_theme.get('day', 99):03d}_{rid}.json"
@@ -721,16 +723,16 @@ def auto_generate_next_theme_script() -> Path:
         "youtube_title_short": chosen_theme["short_title_en"],
         "voice": "en-US-ChristopherNeural",
         "thumb_config": {
-            "ribbon_text": "500,000 JAPANESE IG POSTS",
-            "hero_line1": "SKIP KYOTO!",
+            "ribbon_text": "ZERO PAID PROMO • JAPANESE IG",
+            "hero_line1": "NO PROMO!",
             "hero_line2": "REAL JAPAN",
             "banner_title": f"{region_en.upper()[:10]} TOP 10",
-            "banner_sub": "HIDDEN GEMS VOTED BY LOCALS",
+            "banner_sub": "REAL JAPANESE IG VOICES ONLY",
             "map_header": f"WHERE IS {region_en.upper()[:8]}?",
             "map_pill": "DIRECT",
             "map_line1": "Shinkansen / Train",
             "map_line2": "from Tokyo Station!",
-            "map_footer": "95% LOCAL GUESTS",
+            "map_footer": "0% SPONSORED",
             "highlight_prefs_ja": [target_pref_ja],
         },
         "area_guide": {
@@ -738,10 +740,10 @@ def auto_generate_next_theme_script() -> Path:
             "map_badge": f"{region_en} Local Guide",
             "cards": [
                 {
-                    "title": f"1. WHY VISIT {region_en.upper()}?",
+                    "title": "1. 100% NO PAID PROMOTION",
                     "bullets": [
-                        f"Ranked by 500,000 Japanese IG posts & domestic reviews in {region_en}",
-                        "95% domestic Japanese visitors — zero tourist trap inflation",
+                        f"Analyzed 500,000+ real Japanese IG posts & reviews in {region_en}",
+                        "Zero sponsored spots or influencer ads — honest local voices only",
                     ],
                 },
                 {
@@ -762,12 +764,12 @@ def auto_generate_next_theme_script() -> Path:
         },
         "summary_rows": summary_rows,
         "shorts_script": {
-            "hook_badge": f"STOP GOING TO TOURIST TRAPS IN {region_en.upper()}!",
+            "hook_badge": "ZERO PAID PROMO! REAL JAPANESE IG DATA",
             "hook_title": f"REAL {region_en.upper()}\nTOP 10 RANKING",
-            "hook_sub": "500,000 Japanese IG Posts × Local Reviews",
+            "hook_sub": "500,000+ Japanese IG Posts • 100% Unsponsored",
             "narration_hook": (
-                f"Stop wasting time at tourist traps! We analyzed five hundred thousand Japanese Instagram posts "
-                f"and local reviews to rank the real {region_en} top ten!"
+                f"Zero paid promos! We analyzed real Japanese Instagram posts and local reviews "
+                f"to rank the top three {region_en} spots locals actually love!"
             ),
             "narration_rank1": (
                 f"At number three is {summary_rows[2]['name_en']}. At number two is {summary_rows[1]['name_en']}. "
@@ -775,8 +777,8 @@ def auto_generate_next_theme_script() -> Path:
             ),
             "narration_praise": f"Japanese locals love {summary_rows[0]['name_en']} for its authentic quality and unbeatable value.",
             "narration_warn": "Locals warn that weekends get busy around noon, so arrive fifteen minutes before opening!",
-            "narration_outro": f"Screenshot this full {region_en} top ten list right now, and tap the related video below for the full nine-minute guide!",
-            "praise_quote_en": f"\"Unmatched authentic quality in {region_en}—worth every minute of the trip!\"",
+            "narration_outro": f"Screenshot this full {region_en} top ten list right now, and subscribe for daily unsponsored Japan guides!",
+            "praise_quote_en": f"\"Zero tourist hype—just unmatched authentic quality in {region_en}!\"",
             "warn_quote_en": "\"Arrive 15 minutes before opening on weekends to skip the local line!\"",
             "top1_photos": [photos_list[0], photos_list[1], photos_list[2], photos_list[4]],
         },
