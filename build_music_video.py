@@ -1207,7 +1207,7 @@ def run_music_oauth_setup() -> None:
         raise FileNotFoundError(f"Missing {secret_path}")
     logger.info(f"Using OAuth client secret file: {secret_path}")
     flow = InstalledAppFlow.from_client_secrets_file(str(secret_path), scopes)
-    creds = flow.run_local_server(port=0)
+    creds = flow.run_local_server(port=0, prompt="select_account consent")
     TOKEN_FILE_MUSIC.write_text(creds.to_json(), encoding="utf-8")
     logger.info(f"Saved Music Channel OAuth token to {TOKEN_FILE_MUSIC}")
 
