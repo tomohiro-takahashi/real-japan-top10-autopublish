@@ -1336,7 +1336,7 @@ def build_ranking_video(script_path: Path) -> Path:
                     concat_ins += f"[vf{fi}]"
                 fc_parts.append(f"{concat_ins}concat=n={n_fl}:v=1:a=0[bg]")
                 fc_parts.append(
-                    f"[bg][{n_fl}:v]overlay=0:0,scale=1920:1080:flags=lanczos,unsharp=3:3:0.6:3:3:0.0,scale=in_range=pc:out_range=tv,format=yuv420p[vout]"
+                    f"[bg][{n_fl}:v]overlay=0:0,scale=1920:1080:flags=lanczos,unsharp=5:5:0.75:3:3:0.0,noise=c0s=2:c0f=t+u,scale=in_range=pc:out_range=tv,format=yuv420p[vout]"
                 )
                 filter_complex = ";".join(fc_parts)
 
@@ -1351,7 +1351,7 @@ def build_ranking_video(script_path: Path) -> Path:
                     "-map", f"{n_fl + 1}:a",
                     "-t", f"{dur:.3f}",
                     "-r", str(FPS),
-                    "-c:v", "libx264", "-preset", "veryfast", "-crf", "17", "-maxrate", "8M", "-bufsize", "16M", "-pix_fmt", "yuv420p",
+                    "-c:v", "libx264", "-preset", "veryfast", "-profile:v", "high", "-level", "4.2", "-crf", "15", "-maxrate", "12M", "-bufsize", "24M", "-pix_fmt", "yuv420p",
                     "-c:a", "aac", "-b:a", "192k", "-ar", "44100", "-ac", "2",
                     "-shortest", str(seg_mp4),
                 ])
@@ -1359,7 +1359,7 @@ def build_ranking_video(script_path: Path) -> Path:
                 if seg_type == "summary" or (seg_type == "area_guide" and "2/2" in badge):
                     filter_complex = (
                         f"[0:v]loop=loop=-1:size=1:start=0,trim=duration={dur},setpts=PTS-STARTPTS,fps={FPS},setsar=1[bg];"
-                        f"[bg][2:v]overlay=0:0,scale=1920:1080:flags=lanczos,unsharp=3:3:0.6:3:3:0.0,scale=in_range=pc:out_range=tv,format=yuv420p[vout]"
+                        f"[bg][2:v]overlay=0:0,scale=1920:1080:flags=lanczos,unsharp=5:5:0.75:3:3:0.0,noise=c0s=2:c0f=t+u,scale=in_range=pc:out_range=tv,format=yuv420p[vout]"
                     )
                 else:
                     zp_a = f"zoompan=z='min(zoom+0.0018,1.16)':x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':d={half_frames}:s={W}x{H}:fps={FPS}"
@@ -1368,7 +1368,7 @@ def build_ranking_video(script_path: Path) -> Path:
                         f"[0:v]scale={W*2}:{H*2}:force_original_aspect_ratio=increase,crop={W*2}:{H*2},{zp_a},trim=duration={half_dur},setpts=PTS-STARTPTS,setsar=1[va];"
                         f"[1:v]scale={W*2}:{H*2}:force_original_aspect_ratio=increase,crop={W*2}:{H*2},{zp_b},trim=duration={dur - half_dur + 0.1},setpts=PTS-STARTPTS,setsar=1[vb];"
                         f"[va][vb]concat=n=2:v=1:a=0[bg];"
-                        f"[bg][2:v]overlay=0:0,scale=1920:1080:flags=lanczos,unsharp=3:3:0.6:3:3:0.0,scale=in_range=pc:out_range=tv,format=yuv420p[vout]"
+                        f"[bg][2:v]overlay=0:0,scale=1920:1080:flags=lanczos,unsharp=5:5:0.75:3:3:0.0,noise=c0s=2:c0f=t+u,scale=in_range=pc:out_range=tv,format=yuv420p[vout]"
                     )
 
                 cmd = [
@@ -1396,12 +1396,16 @@ def build_ranking_video(script_path: Path) -> Path:
                     "libx264",
                     "-preset",
                     "veryfast",
+                    "-profile:v",
+                    "high",
+                    "-level",
+                    "4.2",
                     "-crf",
-                    "17",
+                    "15",
                     "-maxrate",
-                    "8M",
+                    "12M",
                     "-bufsize",
-                    "16M",
+                    "24M",
                     "-pix_fmt",
                     "yuv420p",
                     "-c:a",
@@ -2196,7 +2200,7 @@ def build_shorts_video(script_path: Path) -> Path:
                     fc_s.append(f"[{sfi}:v]loop=loop=-1:size=1:start=0,trim=duration={d_s},setpts=PTS-STARTPTS,fps={FPS},setsar=1[sv{sfi}]")
                     c_in += f"[sv{sfi}]"
                 fc_s.append(f"{c_in}concat=n={n_sf}:v=1:a=0[bg]")
-                fc_s.append(f"[bg][{n_sf}:v]overlay=0:0,unsharp=3:3:0.6:3:3:0.0,scale=in_range=pc:out_range=tv,format=yuv420p[vout]")
+                fc_s.append(f"[bg][{n_sf}:v]overlay=0:0,unsharp=5:5:0.75:3:3:0.0,noise=c0s=2:c0f=t+u,scale=in_range=pc:out_range=tv,format=yuv420p[vout]")
                 filter_complex = ";".join(fc_s)
 
                 s_cmd = ["ffmpeg", "-y"]
@@ -2210,7 +2214,7 @@ def build_shorts_video(script_path: Path) -> Path:
                     "-map", f"{n_sf + 1}:a",
                     "-t", f"{dur:.3f}",
                     "-r", str(FPS),
-                    "-c:v", "libx264", "-preset", "veryfast", "-crf", "17", "-maxrate", "8M", "-bufsize", "16M", "-pix_fmt", "yuv420p",
+                    "-c:v", "libx264", "-preset", "veryfast", "-profile:v", "high", "-level", "4.2", "-crf", "15", "-maxrate", "12M", "-bufsize", "24M", "-pix_fmt", "yuv420p",
                     "-c:a", "aac", "-b:a", "192k", "-ar", "44100", "-ac", "2",
                     "-shortest", str(seg_mp4),
                 ])
@@ -2219,7 +2223,7 @@ def build_shorts_video(script_path: Path) -> Path:
                 if sc["mode"] == "outro":
                     filter_complex = (
                         f"[0:v]loop=loop=-1:size=1:start=0,trim=duration={dur},setpts=PTS-STARTPTS,fps={FPS},setsar=1[bg];"
-                        f"[bg][2:v]overlay=0:0,unsharp=3:3:0.6:3:3:0.0,scale=in_range=pc:out_range=tv,format=yuv420p[vout]"
+                        f"[bg][2:v]overlay=0:0,unsharp=5:5:0.75:3:3:0.0,noise=c0s=2:c0f=t+u,scale=in_range=pc:out_range=tv,format=yuv420p[vout]"
                     )
                 else:
                     # Rapid 2-cut transition (Cut 1A -> Cut 1B for every Cinema scene!)
@@ -2227,7 +2231,7 @@ def build_shorts_video(script_path: Path) -> Path:
                         f"[0:v]loop=loop=-1:size=1:start=0,trim=duration={half_dur},setpts=PTS-STARTPTS,fps={FPS},setsar=1[va];"
                         f"[1:v]loop=loop=-1:size=1:start=0,trim=duration={dur - half_dur + 0.1},setpts=PTS-STARTPTS,fps={FPS},setsar=1[vb];"
                         f"[va][vb]concat=n=2:v=1:a=0[bg];"
-                        f"[bg][2:v]overlay=0:0,unsharp=3:3:0.6:3:3:0.0,scale=in_range=pc:out_range=tv,format=yuv420p[vout]"
+                        f"[bg][2:v]overlay=0:0,unsharp=5:5:0.75:3:3:0.0,noise=c0s=2:c0f=t+u,scale=in_range=pc:out_range=tv,format=yuv420p[vout]"
                     )
 
                 subprocess.run(
@@ -2242,7 +2246,7 @@ def build_shorts_video(script_path: Path) -> Path:
                         "-map", "3:a",
                         "-t", f"{dur:.3f}",
                         "-r", str(FPS),
-                        "-c:v", "libx264", "-preset", "veryfast", "-crf", "17", "-maxrate", "8M", "-bufsize", "16M", "-pix_fmt", "yuv420p",
+                        "-c:v", "libx264", "-preset", "veryfast", "-profile:v", "high", "-level", "4.2", "-crf", "15", "-maxrate", "12M", "-bufsize", "24M", "-pix_fmt", "yuv420p",
                         "-c:a", "aac", "-b:a", "192k", "-ar", "44100", "-ac", "2",
                         "-shortest", str(seg_mp4),
                     ],

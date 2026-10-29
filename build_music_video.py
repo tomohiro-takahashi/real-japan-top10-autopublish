@@ -415,9 +415,10 @@ def download_background_image(meta: Dict[str, Any], out_jpg: Path) -> Path:
     curated = resolve_curated_artwork_path(meta)
     if curated is not None and curated.exists():
         im = Image.open(curated).convert("RGB")
-        im = im.resize((1280, 720), Image.Resampling.LANCZOS)
-        im.save(out_jpg, "JPEG", quality=96)
-        logger.info(f"Loaded curated Japanese retro master illustration: {curated.name} -> {out_jpg.name}")
+        im = im.resize((1920, 1080), Image.Resampling.LANCZOS)
+        im = ImageEnhance.Sharpness(im).enhance(1.25)
+        im.save(out_jpg, "JPEG", quality=97)
+        logger.info(f"Loaded curated Japanese retro master illustration (1920x1080): {curated.name} -> {out_jpg.name}")
         return out_jpg
 
     prompt = meta.get(
@@ -425,7 +426,7 @@ def download_background_image(meta: Dict[str, Any], out_jpg: Path) -> Path:
         "90s retro anime style aesthetic, lo-fi vintage illustration, midnight Tokyo highway, sports car, neon lights, 16:9",
     )
     encoded_prompt = urllib.parse.quote(prompt)
-    url = f"https://image.pollinations.ai/prompt/{encoded_prompt}?width=1280&height=720&nologo=true"
+    url = f"https://image.pollinations.ai/prompt/{encoded_prompt}?width=1920&height=1080&nologo=true"
     logger.info(f"Downloading background image from Pollinations.ai: {url[:95]}...")
 
     headers = {
@@ -440,8 +441,8 @@ def download_background_image(meta: Dict[str, Any], out_jpg: Path) -> Path:
             x0, y0 = int(im.width * 0.03), int(im.height * 0.03)
             x1, y1 = int(im.width * 0.97), int(im.height * 0.90)
             im = im.crop((x0, y0, x1, y1))
-            im = im.resize((1280, 720), Image.Resampling.LANCZOS)
-            im.save(out_jpg, "JPEG", quality=95)
+            im = im.resize((1920, 1080), Image.Resampling.LANCZOS)
+            im.save(out_jpg, "JPEG", quality=96)
             logger.info(f"Downloaded Pollinations background image: {out_jpg} ({im.size})")
             return out_jpg
         except Exception as exc:
@@ -449,7 +450,7 @@ def download_background_image(meta: Dict[str, Any], out_jpg: Path) -> Path:
             time.sleep(2.0)
 
     logger.info("Using procedural 90s Retro Anime / Synthwave background illustration fallback.")
-    return render_procedural_retro_artwork(meta, out_jpg, 1280, 720)
+    return render_procedural_retro_artwork(meta, out_jpg, 1920, 1080)
 
 
 def find_matching_flow_video(meta: Dict[str, Any]) -> Optional[Path]:
@@ -492,18 +493,18 @@ def build_highway_driving_loop_mp4(
     fps: int = 24,
 ) -> Path:
     """
-    Build a seamless 1280x720 motion loop MP4:
+    Build a seamless native 1920x1080 motion loop MP4:
     - Priority 1: If `stocks/music/bg_videos/` has a Flow `.mp4` video, converts it into a seamless
-      Ping-Pong (forward + reverse) 1280x720@24fps loop so there is zero jump cut!
-    - Priority 2: Preserves 100% of the curated master illustration (`bg_jpg`) and animates it at 24fps
+      Ping-Pong (forward + reverse) 1920x1080@24fps loop so there is zero jump cut!
+    - Priority 2: Preserves 100% of the curated master illustration (`bg_jpg`) and animates it at native 1920x1080@24fps
       (96 frames / 4.0s seamless cycle) with smooth breathing camera drift, pulsing neon highlight bloom,
-      and atmospheric drifting light trails / bokeh particles so the artwork shines without any crude polygon overwrite.
+      and atmospheric drifting light trails / bokeh particles.
     """
     flow_mp4 = find_matching_flow_video(meta)
     if flow_mp4 is not None:
-        logger.info(f"Building seamless 24fps master loop from Google Flow video: {flow_mp4.name} ...")
+        logger.info(f"Building seamless 24fps master loop (1920x1080) from Google Flow video: {flow_mp4.name} ...")
         vf = (
-            f"[0:v]scale=1280:720:force_original_aspect_ratio=increase,crop=1280:720,fps={fps},setsar=1,"
+            f"[0:v]scale=1920:1080:force_original_aspect_ratio=increase:flags=lanczos,crop=1920:1080,fps={fps},setsar=1,"
             f"vignette=PI/7,format=yuv420p[vout]"
         )
         subprocess.run(
@@ -520,8 +521,12 @@ def build_highway_driving_loop_mp4(
                 "libx264",
                 "-preset",
                 "veryfast",
+                "-profile:v",
+                "high",
+                "-level",
+                "4.2",
                 "-crf",
-                "19",
+                "16",
                 str(out_loop_mp4),
             ],
             check=True,
@@ -534,24 +539,24 @@ def build_highway_driving_loop_mp4(
     if "Eurobeat" in genre or "Arcade" in genre or "Fusion" in genre:
         motion_mode = "driving"  # Rhythmic highway driving drift + passing warm sodium streetlight sweep
         total_frames = 96        # 4.0s cycle @ 24fps
-        pan_x, pan_y = 16.0, 6.0
+        pan_x, pan_y = 24.0, 9.0
         pulse_amp, pulse_freq = 0.042, 2.0
     elif "Disco" in genre or "Rave" in genre or "Dance" in genre:
         motion_mode = "groove"   # Lounge / Car-stereo groove sway + warm VU meter / backlight pulse
         total_frames = 108       # 4.5s cycle @ 24fps
-        pan_x, pan_y = 12.0, 5.0
+        pan_x, pan_y = 18.0, 7.5
         pulse_amp, pulse_freq = 0.036, 2.0
     else:
         motion_mode = "mellow"   # Ultra-slow meditative breath for City Pop / AOR / Study cassette
         total_frames = 144       # 6.0s cycle @ 24fps
-        pan_x, pan_y = 9.0, 4.0
+        pan_x, pan_y = 13.5, 6.0
         pulse_amp, pulse_freq = 0.022, 1.0
 
     logger.info(
-        f"Synthesizing 24fps Calm 35mm Film Motion Loop [{motion_mode}] ({total_frames} frames / {total_frames/fps:.1f}s cycle)..."
+        f"Synthesizing 24fps Native 1080p Calm 35mm Film Motion Loop [{motion_mode}] ({total_frames} frames / {total_frames/fps:.1f}s cycle)..."
     )
-    W, H = 1280, 720
-    OW, OH = 1336, 752
+    W, H = 1920, 1080
+    OW, OH = 2004, 1128
     overscan_im = Image.open(bg_jpg).convert("RGB").resize((OW, OH), Image.Resampling.LANCZOS)
 
     with tempfile.TemporaryDirectory(prefix="calm_frames_") as tmp_s:
@@ -571,35 +576,33 @@ def build_highway_driving_loop_mp4(
             frame = ImageEnhance.Brightness(frame).enhance(pulse)
             frame = ImageEnhance.Color(frame).enhance(1.0 + (pulse_amp * 0.6) * math.cos(theta))
 
-            # 3. Genre-specific subtle atmospheric light reflection (no cartoon dots!)
+            # 3. Genre-specific subtle atmospheric light reflection
             if motion_mode == "driving":
-                # Passing warm amber highway sodium streetlight reflection sweeping softly across windshield
                 overlay = Image.new("RGBA", (W, H), (0, 0, 0, 0))
                 od = ImageDraw.Draw(overlay, "RGBA")
                 band_cx = int(W * (1.15 - 1.30 * t_norm))
-                for b_off in range(-90, 91, 6):
-                    dist = abs(b_off) / 90.0
+                for b_off in range(-135, 136, 9):
+                    dist = abs(b_off) / 135.0
                     a_band = int(16 * (1.0 - dist) ** 2)
                     if a_band > 0:
-                        x0_b = band_cx + b_off - 70
-                        x1_b = band_cx + b_off + 70
-                        od.line([(x0_b, 0), (x1_b, int(H * 0.68))], fill=(245, 195, 110, a_band), width=6)
+                        x0_b = band_cx + b_off - 105
+                        x1_b = band_cx + b_off + 105
+                        od.line([(x0_b, 0), (x1_b, int(H * 0.68))], fill=(245, 195, 110, a_band), width=9)
                 frame_rgba = frame.convert("RGBA")
                 frame_rgba.alpha_composite(overlay)
                 frame = frame_rgba.convert("RGB")
             elif motion_mode == "groove":
-                # Subtle warm amber lounge / stereo glow breathing in the center-lower instrument zone
                 overlay = Image.new("RGBA", (W, H), (0, 0, 0, 0))
                 od = ImageDraw.Draw(overlay, "RGBA")
                 g_alpha = int(14 * (0.5 + 0.5 * math.sin(2.0 * theta)))
                 if g_alpha > 0:
                     od.ellipse((int(W * 0.22), int(H * 0.35), int(W * 0.78), int(H * 0.82)), fill=(235, 185, 95, g_alpha))
-                    overlay = overlay.filter(ImageFilter.GaussianBlur(radius=36))
+                    overlay = overlay.filter(ImageFilter.GaussianBlur(radius=54))
                     frame_rgba = frame.convert("RGBA")
                     frame_rgba.alpha_composite(overlay)
                     frame = frame_rgba.convert("RGB")
 
-            frame.save(frames_dir / f"f_{f_idx:04d}.jpg", "JPEG", quality=95)
+            frame.save(frames_dir / f"f_{f_idx:04d}.jpg", "JPEG", quality=96)
 
         subprocess.run(
             [
@@ -615,8 +618,12 @@ def build_highway_driving_loop_mp4(
                 "libx264",
                 "-preset",
                 "veryfast",
+                "-profile:v",
+                "high",
+                "-level",
+                "4.2",
                 "-crf",
-                "18",
+                "16",
                 str(out_loop_mp4),
             ],
             check=True,
@@ -697,91 +704,92 @@ def render_16x9_hud_and_thumb(
     era_label, catch_txt, main_txt, sub_txt = _extract_ja_parts(meta)
 
     # =========================================================================
-    # 1) 16:9 VIDEO OVERLAY HUD (`hud_png`) — Calm Adult Lounge / Record-Jacket Style
+    # 1) 16:9 VIDEO OVERLAY HUD (`hud_png`, Native 1920x1080 Full HD)
     #    NOTE: Also serves as the auto-captured YouTube thumbnail frame on unverified channels!
     # =========================================================================
-    hud = Image.new("RGBA", (1280, 720), (0, 0, 0, 0))
+    HW, HH = 1920, 1080
+    hud = Image.new("RGBA", (HW, HH), (0, 0, 0, 0))
     draw = ImageDraw.Draw(hud, "RGBA")
 
-    # Subtle top vignette (y=0..105)
-    for y in range(0, 105):
-        u = 1.0 - (y / 105.0)
+    # Subtle top vignette (y=0..158)
+    for y in range(0, 158):
+        u = 1.0 - (y / 158.0)
         alpha = int(110 * (u ** 1.6))
-        draw.line([(0, y), (1280, y)], fill=(4, 6, 12, alpha))
+        draw.line([(0, y), (HW, y)], fill=(4, 6, 12, alpha))
 
-    # Smooth dark gradient at the bottom (y=360..720) so large Mincho title & waveform are crisp
-    for y in range(360, 720):
-        u = (y - 360) / 360.0
+    # Smooth dark gradient at the bottom (y=540..1080) so large Mincho title & waveform are crisp
+    for y in range(540, HH):
+        u = (y - 540) / 540.0
         alpha = int(235 * (u ** 1.35))
-        draw.line([(0, y), (1280, y)], fill=(4, 6, 12, alpha))
+        draw.line([(0, y), (HW, y)], fill=(4, 6, 12, alpha))
 
     # Top-left understated editorial label (warm amber vertical bar + crisp text)
-    f_hud_top = load_font(cjk_reg_path, 19)
-    draw.rectangle((48, 38, 52, 66), fill=(217, 179, 108, 245))
+    f_hud_top = load_font(cjk_reg_path, 29)
+    draw.rectangle((72, 57, 78, 99), fill=(217, 179, 108, 245))
     _draw_soft_shadow_text(
         hud,
-        (66, 40),
+        (99, 60),
         era_label,
         font=f_hud_top,
         fill=(226, 214, 185, 245),
-        blur_radius=4,
+        blur_radius=6,
     )
 
-    max_text_w = 1160
+    max_text_w = 1740
     draw = ImageDraw.Draw(hud, "RGBA")
 
     # 1. Emotional Catchphrase (Mincho in warm champagne gold)
-    f_hud_catch = fit_font_for_width(draw, catch_txt, cjk_mincho_path, 28, 20, max_text_w)
+    f_hud_catch = fit_font_for_width(draw, catch_txt, cjk_mincho_path, 42, 30, max_text_w)
     _draw_soft_shadow_text(
         hud,
-        (48, 474),
+        (72, 711),
         catch_txt,
         font=f_hud_catch,
         fill=(235, 213, 160, 255),
-        blur_radius=5,
+        blur_radius=7,
     )
 
-    # 2. Main Japanese Headline (Refined Mincho in warm ivory-white — readable as YouTube auto-thumbnail!)
+    # 2. Main Japanese Headline (Refined Mincho in warm ivory-white — native 1080p!)
     draw = ImageDraw.Draw(hud, "RGBA")
-    f_hud_main = fit_font_for_width(draw, main_txt, cjk_mincho_path, 58, 36, max_text_w)
+    f_hud_main = fit_font_for_width(draw, main_txt, cjk_mincho_path, 87, 54, max_text_w)
     _draw_soft_shadow_text(
         hud,
-        (46, 518),
+        (69, 777),
         main_txt,
         font=f_hud_main,
         fill=(252, 250, 245, 255),
-        blur_radius=7,
-        stroke_width=1,
+        blur_radius=10,
+        stroke_width=2,
         stroke_fill=(8, 10, 16, 225),
     )
 
-    # 3. Bottom Album Spec Line & Minimalist Spec Pill (below waveform y=604..640)
+    # 3. Bottom Album Spec Line & Minimalist Spec Pill (below waveform y=906..954)
     draw = ImageDraw.Draw(hud, "RGBA")
-    f_hud_sub = fit_font_for_width(draw, sub_txt, cjk_reg_path, 20, 15, 900)
+    f_hud_sub = fit_font_for_width(draw, sub_txt, cjk_reg_path, 30, 22, 1350)
     _draw_soft_shadow_text(
         hud,
-        (48, 654),
+        (72, 981),
         sub_txt,
         font=f_hud_sub,
         fill=(203, 213, 225, 238),
-        blur_radius=3,
+        blur_radius=4,
     )
 
     draw = ImageDraw.Draw(hud, "RGBA")
     stamp_txt = "NON-STOP ARCHIVE MIX" if meta.get("_under_15m") else "60 MIN / 16 TRACKS"
-    f_stamp = load_font(font_path, 16)
+    f_stamp = load_font(font_path, 24)
     tb_st = draw.textbbox((0, 0), stamp_txt, font=f_stamp)
-    st_w = (tb_st[2] - tb_st[0]) + 36
-    st_x0 = 1280 - 48 - st_w
+    st_w = (tb_st[2] - tb_st[0]) + 54
+    st_x0 = HW - 72 - st_w
     draw.rounded_rectangle(
-        (st_x0, 646, st_x0 + st_w, 682),
-        radius=18,
+        (st_x0, 969, st_x0 + st_w, 1023),
+        radius=27,
         fill=(10, 12, 18, 175),
         outline=(217, 179, 108, 145),
-        width=1,
+        width=2,
     )
     draw.text(
-        (st_x0 + 18, 656),
+        (st_x0 + 27, 984),
         stamp_txt,
         font=f_stamp,
         fill=(226, 214, 185, 240),
@@ -962,18 +970,19 @@ def build_1hour_video(
     duration_sec: int = 3600,
 ) -> Path:
     """
-    Synthesize the 16:9 1-Hour Endurance Video (`output_1hour.mp4`, 1920x1080 Full HD):
-    - Loops the calm 35mm film motion video (`bg_loop_mp4`) seamlessly for `duration_sec`.
-    - Overlays the understated HUD (`hud_png`) and a slim, eye-friendly champagne-gold waveform (`0xd9b36c`, opacity `0.40`).
+    Synthesize the 16:9 Video (`output_1hour.mp4`, Native 1920x1080 Full HD):
+    - Loops the native 1920x1080 35mm film motion video (`bg_loop_mp4`) seamlessly for `duration_sec`.
+    - Overlays the native 1920x1080 HUD (`hud_png`) and a slim champagne-gold waveform (`0xd9b36c`, opacity `0.40`).
+    - Adds subtle 35mm film grain (`noise=c0s=3:c0f=t+u`) + High Profile CRF 15 so YouTube never crushes dark areas or drops Auto quality.
     """
-    logger.info(f"Rendering 16:9 1080p Full HD calm adult music video ({duration_sec}s): {out_mp4} ...")
+    logger.info(f"Rendering native 16:9 1080p Full HD calm adult music video ({duration_sec}s): {out_mp4} ...")
     fps = 24
     filter_complex = (
         f"[0:v]setpts=PTS-STARTPTS[bg];"
         f"[bg][1:v]overlay=0:0[bghud];"
-        f"[2:a]showwaves=s=1192x32:mode=cline:rate={fps}:scale=sqrt:colors=0xd9b36c,format=rgba,"
-        f"colorchannelmixer=aa=0.40[sw];"
-        f"[bghud][sw]overlay=44:604:shortest=1,scale=1920:1080:flags=lanczos,unsharp=3:3:0.5:3:3:0.0,format=yuv420p[vout]"
+        f"[2:a]showwaves=s=1788x48:mode=cline:rate={fps}:scale=sqrt:colors=0xd9b36c,format=rgba,"
+        f"colorchannelmixer=aa=0.42[sw];"
+        f"[bghud][sw]overlay=66:906:shortest=1,noise=c0s=3:c0f=t+u,unsharp=3:3:0.45:3:3:0.0,format=yuv420p[vout]"
     )
 
     cmd = [
@@ -1001,12 +1010,16 @@ def build_1hour_video(
         "libx264",
         "-preset",
         "veryfast",
+        "-profile:v",
+        "high",
+        "-level",
+        "4.2",
         "-crf",
-        "18",
+        "15",
         "-maxrate",
-        "6M",
+        "10M",
         "-bufsize",
-        "12M",
+        "20M",
         "-pix_fmt",
         "yuv420p",
         "-c:a",
@@ -1017,7 +1030,7 @@ def build_1hour_video(
         str(out_mp4),
     ]
     subprocess.run(cmd, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-    logger.info(f"Completed 16:9 1080p video: {out_mp4} ({out_mp4.stat().st_size / (1024*1024):.1f} MB)")
+    logger.info(f"Completed native 16:9 1080p video: {out_mp4} ({out_mp4.stat().st_size / (1024*1024):.1f} MB)")
     return out_mp4
 
 
@@ -1028,10 +1041,10 @@ def render_short_vertical_hud(
     font_path: str,
 ) -> Path:
     """
-    Build the 720x1280 (9:16) RGBA overlay for `output_short.mp4` in a calm Japanese Mincho / Record-Jacket
-    layout with a transparent center window (`x=28..692, y=282..780`) where the 35mm film visual plays live!
+    Build the native 1080x1920 (9:16) RGBA overlay for `output_short.mp4` in a calm Japanese Mincho / Record-Jacket
+    layout with a transparent center window (`x=42..1038, y=423..1170`) where the 35mm film visual plays live!
     """
-    SW, SH = 720, 1280
+    SW, SH = 1080, 1920
     raw = Image.open(bg_jpg).convert("RGB")
 
     scale = max(SW / raw.width, SH / raw.height)
@@ -1039,7 +1052,7 @@ def render_short_vertical_hud(
     bg_crop = raw.resize((nw, nh), Image.Resampling.LANCZOS).crop(
         ((nw - SW) // 2, (nh - SH) // 2, (nw - SW) // 2 + SW, (nh - SH) // 2 + SH)
     )
-    bg_blur = bg_crop.filter(ImageFilter.GaussianBlur(radius=32))
+    bg_blur = bg_crop.filter(ImageFilter.GaussianBlur(radius=48))
     bg_blur = ImageEnhance.Brightness(bg_blur).enhance(0.24).convert("RGBA")
 
     cjk_reg_path = find_cjk_font() or font_path
@@ -1049,77 +1062,77 @@ def render_short_vertical_hud(
     era_label, catch_txt, main_txt, _ = _extract_ja_parts(meta)
     draw = ImageDraw.Draw(bg_blur, "RGBA")
 
-    # 1. Top Japanese Editorial Header (y=76..258)
-    f_era = fit_font_for_width(draw, era_label, cjk_reg_path, 17, 13, SW - 96)
+    # 1. Top Japanese Editorial Header (y=114..387)
+    f_era = fit_font_for_width(draw, era_label, cjk_reg_path, 26, 20, SW - 144)
     tb_e = draw.textbbox((0, 0), era_label, font=f_era)
-    ew = (tb_e[2] - tb_e[0]) + 36
+    ew = (tb_e[2] - tb_e[0]) + 54
     ex0 = (SW - ew) // 2
     draw.rounded_rectangle(
-        (ex0, 78, ex0 + ew, 112),
-        radius=17,
+        (ex0, 117, ex0 + ew, 168),
+        radius=26,
         fill=(10, 14, 24, 195),
         outline=(217, 179, 108, 160),
-        width=1,
+        width=2,
     )
-    draw.text(((SW - (tb_e[2] - tb_e[0])) // 2, 86), era_label, font=f_era, fill=(226, 214, 185, 245))
+    draw.text(((SW - (tb_e[2] - tb_e[0])) // 2, 129), era_label, font=f_era, fill=(226, 214, 185, 245))
 
     # Catchphrase (Mincho)
-    f_catch = fit_font_for_width(draw, catch_txt, cjk_mincho_path, 22, 16, SW - 64)
+    f_catch = fit_font_for_width(draw, catch_txt, cjk_mincho_path, 33, 24, SW - 96)
     tb_c = draw.textbbox((0, 0), catch_txt, font=f_catch)
     _draw_soft_shadow_text(
         bg_blur,
-        ((SW - (tb_c[2] - tb_c[0])) // 2, 134),
+        ((SW - (tb_c[2] - tb_c[0])) // 2, 201),
         catch_txt,
         font=f_catch,
         fill=(235, 213, 160, 255),
-        blur_radius=4,
+        blur_radius=6,
     )
 
     # Main Title (Mincho)
     draw = ImageDraw.Draw(bg_blur, "RGBA")
-    f_main = fit_font_for_width(draw, main_txt, cjk_mincho_path, 40, 24, SW - 56)
+    f_main = fit_font_for_width(draw, main_txt, cjk_mincho_path, 60, 36, SW - 84)
     tb_m = draw.textbbox((0, 0), main_txt, font=f_main)
     _draw_soft_shadow_text(
         bg_blur,
-        ((SW - (tb_m[2] - tb_m[0])) // 2, 178),
+        ((SW - (tb_m[2] - tb_m[0])) // 2, 267),
         main_txt,
         font=f_main,
         fill=(252, 250, 245, 255),
-        blur_radius=6,
-        stroke_width=1,
+        blur_radius=9,
+        stroke_width=2,
         stroke_fill=(6, 8, 14, 225),
     )
 
-    # 2. Punch a transparent window at (x=28..692, y=282..780) where the live 35mm film visual plays
+    # 2. Punch a transparent window at (x=42..1038, y=423..1170) where the live 35mm film visual plays
     draw = ImageDraw.Draw(bg_blur, "RGBA")
-    fx0, fy0, fx1, fy1 = 28, 282, SW - 28, 780
+    fx0, fy0, fx1, fy1 = 42, 423, SW - 42, 1170
     draw.rounded_rectangle(
         (fx0, fy0, fx1, fy1),
-        radius=16,
+        radius=24,
         fill=(0, 0, 0, 0),
         outline=(217, 179, 108, 175),
-        width=1,
+        width=2,
     )
 
-    # 3. Understated Spectrum Equalizer Frame Box (y=808..1028)
+    # 3. Understated Spectrum Equalizer Frame Box (y=1212..1542)
     draw.rounded_rectangle(
-        (28, 808, SW - 28, 1028),
-        radius=16,
+        (42, 1212, SW - 42, 1542),
+        radius=24,
         fill=(6, 8, 16, 195),
         outline=(217, 179, 108, 85),
-        width=1,
+        width=2,
     )
 
-    # 4. Bottom Japanese Spec & Channel CTA (y=1054..1168)
+    # 4. Bottom Japanese Spec & Channel CTA (y=1581..1752)
     bot_spec = (
         "MIDNIGHT COCKPIT  ｜  あの頃の夜と音楽"
         if meta.get("_under_15m")
         else "作業・ドライブ・晩酌用  ｜  全16曲ノンストップ（60分）"
     )
-    f_bs = fit_font_for_width(draw, bot_spec, cjk_reg_path, 20, 15, SW - 56)
+    f_bs = fit_font_for_width(draw, bot_spec, cjk_reg_path, 30, 22, SW - 84)
     tb_bs = draw.textbbox((0, 0), bot_spec, font=f_bs)
     draw.text(
-        ((SW - (tb_bs[2] - tb_bs[0])) // 2, 1058),
+        ((SW - (tb_bs[2] - tb_bs[0])) // 2, 1587),
         bot_spec,
         font=f_bs,
         fill=(226, 232, 240, 240),
@@ -1130,26 +1143,26 @@ def render_short_vertical_hud(
         if meta.get("_under_15m")
         else "▼ 下のアイコンから本編フルアルバムへ"
     )
-    f_cta = fit_font_for_width(draw, cta_ja, cjk_heavy_path, 20, 15, SW - 96)
+    f_cta = fit_font_for_width(draw, cta_ja, cjk_heavy_path, 30, 22, SW - 144)
     tb_cta = draw.textbbox((0, 0), cta_ja, font=f_cta)
     text_w = tb_cta[2] - tb_cta[0]
-    cw = text_w + 68
+    cw = text_w + 102
     cx0 = (SW - cw) // 2
     draw.rounded_rectangle(
-        (cx0, 1104, cx0 + cw, 1152),
-        radius=24,
+        (cx0, 1656, cx0 + cw, 1728),
+        radius=36,
         fill=(12, 16, 28, 225),
         outline=(217, 179, 108, 195),
-        width=1,
+        width=2,
     )
-    tri_x = cx0 + 24
-    tri_cy = 1128
+    tri_x = cx0 + 36
+    tri_cy = 1692
     draw.polygon(
-        [(tri_x, tri_cy - 7), (tri_x, tri_cy + 7), (tri_x + 12, tri_cy)],
+        [(tri_x, tri_cy - 10), (tri_x, tri_cy + 10), (tri_x + 18, tri_cy)],
         fill=(235, 213, 160, 255),
     )
     draw.text(
-        (tri_x + 22, 1117),
+        (tri_x + 33, 1675),
         cta_ja,
         font=f_cta,
         fill=(235, 213, 160, 255),
@@ -1168,12 +1181,12 @@ def build_short_video(
     font_path: str,
 ) -> Path:
     """
-    Synthesize `output_short.mp4` (1080x1920 Full HD 9:16, 30 seconds):
+    Synthesize `output_short.mp4` (Native 1080x1920 Full HD 9:16, 30 seconds):
     - Extracts the 30s..60s climax slice of `src_mp3`.
-    - Plays the calm 35mm film motion video (`bg_loop_mp4`) inside the center window (`y=282..780`).
-    - Overlays a refined warm champagne-gold audio waveform (`showwaves=s=636x140:mode=cline:colors=0xd9b36c`) at `y=848`.
+    - Plays the native 1080p 35mm film motion video (`bg_loop_mp4`) inside the center window (`y=423..1170`).
+    - Overlays a refined warm champagne-gold audio waveform (`showwaves=s=954x210:mode=cline:colors=0xd9b36c`) at `y=1272`.
     """
-    logger.info(f"Rendering 9:16 1080p Full HD Shorts video (30s): {out_short_mp4} ...")
+    logger.info(f"Rendering native 9:16 1080p Full HD Shorts video (30s): {out_short_mp4} ...")
     mp3_dur = get_audio_duration(src_mp3)
     start_sec = 30.0 if mp3_dur >= 62.0 else max(0.0, mp3_dur * 0.2)
     clip_dur = min(30.0, max(10.0, mp3_dur - start_sec))
@@ -1185,16 +1198,16 @@ def build_short_video(
 
         fps = 24
         filter_complex = (
-            f"color=c=0x060810:s=720x1280:r={fps}[base];"
-            f"[0:v]scale=886:498,crop=664:498:(iw-664)/2:0,setpts=PTS-STARTPTS[vid];"
-            f"[base][vid]overlay=28:282:shortest=1[v1];"
+            f"color=c=0x060810:s=1080x1920:r={fps}[base];"
+            f"[0:v]scale=1329:747:flags=lanczos,crop=996:747:(iw-996)/2:0,setpts=PTS-STARTPTS[vid];"
+            f"[base][vid]overlay=42:423:shortest=1[v1];"
             f"[v1][1:v]overlay=0:0[v2];"
             f"[2:a]atrim=start={start_sec:.2f}:duration={clip_dur:.2f},asetpts=PTS-STARTPTS,"
             f"afade=t=in:st=0:d=1.0,afade=t=out:st={max(1.0, clip_dur - 1.5):.2f}:d=1.5[aud];"
             f"[aud]asplit=2[a_out][a_viz];"
-            f"[a_viz]showwaves=s=636x140:mode=cline:rate={fps}:scale=sqrt:colors=0xd9b36c,format=rgba,"
+            f"[a_viz]showwaves=s=954x210:mode=cline:rate={fps}:scale=sqrt:colors=0xd9b36c,format=rgba,"
             f"colorchannelmixer=aa=0.65[sw];"
-            f"[v2][sw]overlay=42:848:shortest=1,scale=1080:1920:flags=lanczos,unsharp=3:3:0.5:3:3:0.0,format=yuv420p[vout]"
+            f"[v2][sw]overlay=63:1272:shortest=1,noise=c0s=3:c0f=t+u,unsharp=3:3:0.45:3:3:0.0,format=yuv420p[vout]"
         )
 
         cmd = [
@@ -1222,12 +1235,16 @@ def build_short_video(
             "libx264",
             "-preset",
             "veryfast",
+            "-profile:v",
+            "high",
+            "-level",
+            "4.2",
             "-crf",
-            "18",
+            "15",
             "-maxrate",
-            "8M",
+            "12M",
             "-bufsize",
-            "16M",
+            "24M",
             "-pix_fmt",
             "yuv420p",
             "-c:a",
