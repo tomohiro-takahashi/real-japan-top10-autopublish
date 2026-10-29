@@ -104,6 +104,62 @@ def strip_cjk(text: str) -> str:
     return cleaned
 
 
+def smart_truncate(
+    draw: ImageDraw.ImageDraw,
+    text: str,
+    font: ImageFont.FreeTypeFont,
+    max_w: int,
+) -> str:
+    """
+    Truncate `text` to fit within `max_w` pixels strictly on whole-clause or whole-word boundaries.
+    NEVER cuts a word in half (e.g. never produces 'Sightsee', 'Villag', 'Yumeguri Pa', or 'Bus 50').
+    """
+    s = strip_cjk(text)
+    if not s:
+        return ""
+    tb = draw.textbbox((0, 0), s, font=font)
+    if (tb[2] - tb[0]) <= max_w:
+        return s
+
+    # Try dropping secondary clauses after ';', '|', or '—' first
+    for sep in (";", "|", "—", " - "):
+        if sep in s:
+            first_part = s.split(sep)[0].strip()
+            if len(first_part) >= 10:
+                tb_fp = draw.textbbox((0, 0), first_part, font=font)
+                if (tb_fp[2] - tb_fp[0]) <= max_w:
+                    return first_part
+
+    # Otherwise drop whole words from the end
+    words = s.split(" ")
+    while len(words) > 1:
+        words.pop()
+        candidate = " ".join(words).rstrip(",;:|—-")
+        tb_c = draw.textbbox((0, 0), candidate, font=font)
+        if (tb_c[2] - tb_c[0]) <= max_w:
+            return candidate
+    return s
+
+
+def fit_font_for_width(
+    draw: ImageDraw.ImageDraw,
+    text: str,
+    font_path: str,
+    start_size: int,
+    min_size: int,
+    max_w: int,
+) -> ImageFont.FreeTypeFont:
+    """Return the largest font size (from `start_size` down to `min_size`) where `text` fits in `max_w`."""
+    sz = start_size
+    while sz > min_size:
+        f = ImageFont.truetype(font_path, sz)
+        tb = draw.textbbox((0, 0), text, font=f)
+        if (tb[2] - tb[0]) <= max_w:
+            return f
+        sz -= 1
+    return ImageFont.truetype(font_path, min_size)
+
+
 def resolve_prefecture_and_route(
     area_guide: Dict[str, Any],
     hint_text: str,
@@ -118,14 +174,12 @@ def resolve_prefecture_and_route(
 
     target_pref = explicit
     if not target_pref:
-        # 1. Check Japanese prefecture names in hint_text
         for pf in prefs_data:
             nja = pf.get("nam_ja", "")
             if nja and nja in search_blob:
                 target_pref = nja
                 break
     if not target_pref:
-        # 2. Check English keywords
         for kw_en, pref_ja in PREF_EN_TO_JA.items():
             if re.search(rf"\b{re.escape(kw_en)}\b", search_blob):
                 target_pref = pref_ja
@@ -133,11 +187,9 @@ def resolve_prefecture_and_route(
     if not target_pref:
         target_pref = "兵庫県"
 
-    # Compute centroid of target_pref from prefs_data polygons
     dest_lon, dest_lat = 134.690, 34.839
     for pf in prefs_data:
         if pf.get("nam_ja") == target_pref and pf.get("polys"):
-            # Pick the ring with the most points (mainland polygon)
             best_ring = max(pf["polys"], key=lambda r: len(r))
             if best_ring:
                 dest_lon = sum(pt[0] for pt in best_ring) / len(best_ring)
@@ -161,14 +213,10 @@ def render_opening_flash_frames(
     work_dir: Path,
 ) -> List[Path]:
     """
-    Render 6 Full-Screen High-Impact Rapid-Fire Photo Slides (`flash_00.jpg` .. `flash_05.jpg`)
-    for the First 10 Seconds (`opening` segment) of the 16:9 Long Video:
-    - Eliminates text-heavy tables at the start of the video!
-    - Rapidly flashes 6 vibrant full-screen spot photographs (#10, #7, #5, #3, #2, and #1 Teaser)
-      every ~1.6 seconds to immediately hook the viewer into watching the countdown.
+    Render 6 Full-Screen High-Impact Rapid-Fire Photo Slides (`open_flash_00.jpg` .. `open_flash_05.jpg`)
+    for the First 10 Seconds (`opening` segment) of the 16:9 Long Video.
     """
     cache_dir = BASE_DIR / "assets" / "images" / ranking_id
-    # summary_rows is ordered #1 .. #10 (index 0 is #1, index 9 is #10)
     pick_indices = [9, 6, 4, 2, 1, 0] if len(summary_rows) >= 10 else list(range(min(6, len(summary_rows))))
     if not pick_indices:
         pick_indices = [0]
@@ -182,9 +230,8 @@ def render_opening_flash_frames(
         ("WAIT UNTIL YOU SEE #1!", (217, 119, 6, 252)),
     ]
 
-    f_pill = ImageFont.truetype(font_path, 22)
-    f_spot = ImageFont.truetype(font_path, 34)
-    f_sub = ImageFont.truetype(font_path, 21)
+    f_pill = ImageFont.truetype(font_path, 21)
+    f_sub = ImageFont.truetype(font_path, 20)
 
     out_paths: List[Path] = []
     for i, r_idx in enumerate(pick_indices):
@@ -207,20 +254,19 @@ def render_opening_flash_frames(
         dish_en = strip_cjk(row.get("dish", "Voted by Japanese Locals"))
         acc_en = strip_cjk(row.get("access_short", row.get("budget", "Direct Train Access")))
 
-        # Sleek lower-middle cinema teaser card (y=404..528, above the subtitle bar)
-        bx0, by0, bx1, by1 = 36, 402, W - 36, 526
-        draw.rounded_rectangle((bx0, by0, bx1, by1), radius=16, fill=(8, 12, 24, 224), outline=(253, 224, 71, 245), width=3)
+        # Zoom-safe centered lower card (bx0=96..W-96, by0=362..482 so 1.06x zoom never touches HUD)
+        bx0, by0, bx1, by1 = 96, 362, W - 96, 482
+        max_card_tw = (bx1 - bx0) - 48
+        draw.rounded_rectangle((bx0, by0, bx1, by1), radius=16, fill=(8, 12, 24, 228), outline=(253, 224, 71, 245), width=3)
 
-        # Pill badge on top-left of the teaser card
         tb_p = draw.textbbox((0, 0), pill_txt, font=f_pill)
-        pw = (tb_p[2] - tb_p[0]) + 36
-        draw.rounded_rectangle((bx0 + 16, by0 - 20, bx0 + 16 + pw, by0 + 22), radius=10, fill=pill_col, outline=(255, 255, 255, 245), width=2)
-        draw.text((bx0 + 34, by0 - 11), pill_txt, font=f_pill, fill=(255, 255, 255, 255))
+        pw = (tb_p[2] - tb_p[0]) + 34
+        draw.rounded_rectangle((bx0 + 16, by0 - 20, bx0 + 16 + pw, by0 + 20), radius=10, fill=pill_col, outline=(255, 255, 255, 245), width=2)
+        draw.text((bx0 + 33, by0 - 11), pill_txt, font=f_pill, fill=(255, 255, 255, 255))
 
-        # Step progress dots on top-right of the teaser card (e.g. [1/6 .. 6/6])
-        prog_txt = f"HIGHLIGHT {i + 1}/{len(pick_indices)}  >>  COUNTDOWN STARTS NOW"
+        prog_txt = f"HIGHLIGHT {i + 1}/{len(pick_indices)}  >>  COUNTDOWN"
         tb_pr = draw.textbbox((0, 0), prog_txt, font=f_sub)
-        draw.text((bx1 - (tb_pr[2] - tb_pr[0]) - 22, by0 + 10), prog_txt, font=f_sub, fill=(125, 211, 252, 255))
+        draw.text((bx1 - (tb_pr[2] - tb_pr[0]) - 22, by0 + 8), prog_txt, font=f_sub, fill=(125, 211, 252, 255))
 
         if i == len(pick_indices) - 1:
             headline = f"#1 SPOT SCORED {score_str.upper()} — CAN YOU GUESS WHICH ONE?"
@@ -229,8 +275,12 @@ def render_opening_flash_frames(
             headline = f"{rank_str}  {name_en}  ({score_str})"
             subline = f"{dish_en}  |  Access: {acc_en}"
 
-        draw.text((bx0 + 24, by0 + 36), headline[:58], font=f_spot, fill=(253, 224, 71, 255), stroke_width=3, stroke_fill=(0, 0, 0, 245))
-        draw.text((bx0 + 24, by0 + 84), subline[:78], font=f_sub, fill=(255, 255, 255, 255), stroke_width=2, stroke_fill=(0, 0, 0, 230))
+        f_spot_fit = fit_font_for_width(draw, headline, font_path, 32, 22, max_card_tw)
+        f_sub_fit = fit_font_for_width(draw, subline, font_path, 20, 15, max_card_tw)
+        clean_sub = smart_truncate(draw, subline, f_sub_fit, max_card_tw)
+
+        draw.text((bx0 + 24, by0 + 34), headline, font=f_spot_fit, fill=(253, 224, 71, 255), stroke_width=3, stroke_fill=(0, 0, 0, 245))
+        draw.text((bx0 + 24, by0 + 80), clean_sub, font=f_sub_fit, fill=(255, 255, 255, 255), stroke_width=2, stroke_fill=(0, 0, 0, 230))
 
         out_p = work_dir / f"open_flash_{i:02d}.jpg"
         canvas.convert("RGB").save(out_p, "JPEG", quality=95)
@@ -340,14 +390,17 @@ def render_area_map_overlay_png(
     mx0, my0, mx1, my1 = 32, 118, 522, 530
     draw_rounded_box(draw, (mx0, my0, mx1, my1), radius=14, fill=(10, 18, 34, 236), outline=(56, 189, 248, 220), width=2)
 
-    draw_rounded_box(draw, (mx0 + 14, my0 + 12, mx0 + 310, my0 + 44), radius=6, fill=(14, 116, 144, 245))
-    f_mhead = ImageFont.truetype(font_path, 16)
-    draw.text((mx0 + 26, my0 + 19), "JAPAN LOCATOR & SHINKANSEN MAP", font=f_mhead, fill=(255, 255, 255, 255))
+    f_mhead = ImageFont.truetype(font_path, 15)
+    mhead_txt = "JAPAN LOCATOR & SHINKANSEN MAP"
+    tb_mh = draw.textbbox((0, 0), mhead_txt, font=f_mhead)
+    mhw = (tb_mh[2] - tb_mh[0]) + 28
+    draw_rounded_box(draw, (mx0 + 14, my0 + 12, mx0 + 14 + mhw, my0 + 44), radius=6, fill=(14, 116, 144, 245))
+    draw.text((mx0 + 28, my0 + 19), mhead_txt, font=f_mhead, fill=(255, 255, 255, 255))
 
     map_json = BASE_DIR / "assets" / "maps" / "japan_prefectures.json"
-    lon_min, lon_max = 129.8, 145.6
-    lat_min, lat_max = 31.2, 44.2
-    pad_x0, pad_y0, pad_x1, pad_y1 = mx0 + 20, my0 + 48, mx1 - 20, my1 - 24
+    lon_min, lon_max = 129.5, 145.8
+    lat_min, lat_max = 31.0, 45.6
+    pad_x0, pad_y0, pad_x1, pad_y1 = mx0 + 22, my0 + 54, mx1 - 24, my1 - 30
 
     def project(lon: float, lat: float) -> Tuple[int, int]:
         px = pad_x0 + (lon - lon_min) / (lon_max - lon_min) * (pad_x1 - pad_x0)
@@ -365,12 +418,16 @@ def render_area_map_overlay_png(
             fill_c = (56, 189, 248, 210) if is_tokyo else (51, 65, 85, 200)
             out_c = (148, 163, 184, 150)
             for ring in pf["polys"]:
+                if any(pt[0] < lon_min or pt[0] > lon_max or pt[1] < lat_min or pt[1] > lat_max for pt in ring):
+                    continue
                 pts = [project(pt[0], pt[1]) for pt in ring]
                 if len(pts) >= 3:
                     draw.polygon(pts, fill=fill_c, outline=out_c)
         for pf in prefs:
             if pf["nam_ja"] == target_pref:
                 for ring in pf["polys"]:
+                    if any(pt[0] < lon_min or pt[0] > lon_max or pt[1] < lat_min or pt[1] > lat_max for pt in ring):
+                        continue
                     pts = [project(pt[0], pt[1]) for pt in ring]
                     if len(pts) >= 3:
                         draw.polygon(pts, fill=(239, 68, 68, 255), outline=(253, 224, 71, 255))
@@ -386,9 +443,9 @@ def render_area_map_overlay_png(
 
     f_pin = ImageFont.truetype(font_path, 15)
     f_subpin = ImageFont.truetype(font_path, 13)
-    map_badge = strip_cjk(area_guide.get("map_badge", "TOP RANKED DESTINATIONS"))[:34]
+    map_badge = smart_truncate(draw, area_guide.get("map_badge", "TOP RANKED DESTINATIONS"), f_subpin, 245)
 
-    draw_rounded_box(draw, (mx0 + 18, my0 + 54, mx0 + 290, my0 + 102), radius=6, fill=(185, 28, 28, 245), outline=(253, 224, 71, 255), width=2)
+    draw_rounded_box(draw, (mx0 + 18, my0 + 54, mx0 + 286, my0 + 102), radius=6, fill=(185, 28, 28, 245), outline=(253, 224, 71, 255), width=2)
     draw.text((mx0 + 28, my0 + 60), "TARGET REGION", font=f_pin, fill=(255, 255, 255, 255))
     draw.text((mx0 + 28, my0 + 80), map_badge, font=f_subpin, fill=(253, 224, 71, 255))
 
@@ -404,7 +461,6 @@ def render_area_map_overlay_png(
     f_big = ImageFont.truetype(font_path, 20)
     f_unit = ImageFont.truetype(font_path, 14)
     f_ctitle = ImageFont.truetype(font_path, 20)
-    f_cdesc = ImageFont.truetype(font_path, 16)
 
     raw_cards = area_guide.get("cards", [])
     palettes = [
@@ -443,13 +499,17 @@ def render_area_map_overlay_png(
 
         tx = bx1 + 18
         max_w = rx1 - tx - 14
-        draw.text((tx, cy0 + 14), c_title[:42], font=f_ctitle, fill=(253, 224, 71, 255))
-        l1_wrapped = wrap_text_lines(draw, line1, f_cdesc, max_w)
-        l2_wrapped = wrap_text_lines(draw, line2, f_cdesc, max_w)
-        if l1_wrapped:
-            draw.text((tx, cy0 + 48), l1_wrapped[0], font=f_cdesc, fill=(255, 255, 255, 255))
-        if l2_wrapped:
-            draw.text((tx, cy0 + 80), l2_wrapped[0], font=f_cdesc, fill=(186, 230, 253, 255))
+        clean_ct = smart_truncate(draw, c_title, f_ctitle, max_w)
+        draw.text((tx, cy0 + 14), clean_ct, font=f_ctitle, fill=(253, 224, 71, 255))
+
+        if line1:
+            f_l1 = fit_font_for_width(draw, line1, font_path, 16, 13, max_w)
+            c_l1 = smart_truncate(draw, line1, f_l1, max_w)
+            draw.text((tx, cy0 + 48), c_l1, font=f_l1, fill=(255, 255, 255, 255))
+        if line2:
+            f_l2 = fit_font_for_width(draw, line2, font_path, 16, 13, max_w)
+            c_l2 = smart_truncate(draw, line2, f_l2, max_w)
+            draw.text((tx, cy0 + 80), c_l2, font=f_l2, fill=(186, 230, 253, 255))
 
     overlay.save(out_png, "PNG")
 
@@ -463,55 +523,11 @@ def render_area_seasons_jpg(
 ) -> None:
     """
     Render a stunning 4-Column Full-Bleed Visual Showcase for GUIDE 2/2 (100% English):
-    Uses the actual top 4 spot photos from summary_rows so every theme (Castles, Ramen, Onsen, etc.)
-    displays its own high-resolution photography!
+    Uses the actual top 4 spot photos from summary_rows with zero mid-word truncation!
     """
     cache_dir = BASE_DIR / "assets" / "images" / ranking_id
     canvas = Image.new("RGB", (W, H), (10, 14, 24))
     draw = ImageDraw.Draw(canvas, "RGBA")
-
-    thumbs = [r["thumb"] for r in summary_rows[:4]] if len(summary_rows) >= 4 else ["", "", "", ""]
-    names = [r["name_en"].split("(")[0].strip()[:22] for r in summary_rows[:4]] if len(summary_rows) >= 4 else ["Spring", "Summer", "Autumn", "Winter"]
-    hacks = [r.get("hack", "")[:38] for r in summary_rows[:4]] if len(summary_rows) >= 4 else ["", "", "", ""]
-
-    seasons = [
-        {
-            "label": "SPRING",
-            "months": "MAR–MAY  |  SAKURA SEASON",
-            "color": (219, 39, 119, 240),
-            "border": (244, 114, 182, 255),
-            "photo": thumbs[0],
-            "title": names[0],
-            "sub": hacks[0] or "Peak cherry blossoms & mild weather",
-        },
-        {
-            "label": "SUMMER",
-            "months": "JUN–AUG  |  LUSH GREEN",
-            "color": (5, 150, 105, 240),
-            "border": (52, 211, 153, 255),
-            "photo": thumbs[1],
-            "title": names[1],
-            "sub": hacks[1] or "Early morning visits & summer festivals",
-        },
-        {
-            "label": "AUTUMN",
-            "months": "OCT–NOV  |  CRIMSON LEAVES",
-            "color": (217, 119, 6, 240),
-            "border": (251, 191, 36, 255),
-            "photo": thumbs[2],
-            "title": names[2],
-            "sub": hacks[2] or "Crisp clear skies & autumn foliage",
-        },
-        {
-            "label": "WINTER",
-            "months": "DEC–FEB  |  SNOW SCENERY",
-            "color": (2, 132, 199, 240),
-            "border": (125, 211, 252, 255),
-            "photo": thumbs[3],
-            "title": names[3],
-            "sub": hacks[3] or "Fewer crowds & dramatic winter views",
-        },
-    ]
 
     top_y = 106
     bot_y = H - 176
@@ -520,8 +536,57 @@ def render_area_seasons_jpg(
 
     f_shead = ImageFont.truetype(font_path, 22)
     f_smon = ImageFont.truetype(font_path, 14)
-    f_stitle = ImageFont.truetype(font_path, 20)
+    f_stitle = ImageFont.truetype(font_path, 19)
     f_ssub = ImageFont.truetype(font_path, 14)
+
+    thumbs = [r["thumb"] for r in summary_rows[:4]] if len(summary_rows) >= 4 else ["", "", "", ""]
+    names = [
+        smart_truncate(draw, r["name_en"].split("(")[0].strip(), f_stitle, col_w - 16)
+        for r in summary_rows[:4]
+    ] if len(summary_rows) >= 4 else ["Spring", "Summer", "Autumn", "Winter"]
+    subs = [
+        smart_truncate(draw, r.get("dish", "").split("(")[0].strip() or r.get("access_short", ""), f_ssub, col_w - 16)
+        for r in summary_rows[:4]
+    ] if len(summary_rows) >= 4 else ["", "", "", ""]
+
+    seasons = [
+        {
+            "label": "TOP PICK #1",
+            "months": "SPRING–SUMMER  |  PEAK SEASON",
+            "color": (219, 39, 119, 240),
+            "border": (244, 114, 182, 255),
+            "photo": thumbs[0],
+            "title": names[0],
+            "sub": subs[0] or "Peak cherry blossoms & mild weather",
+        },
+        {
+            "label": "TOP PICK #2",
+            "months": "ALL SEASONS  |  LOCAL FAVORITE",
+            "color": (5, 150, 105, 240),
+            "border": (52, 211, 153, 255),
+            "photo": thumbs[1],
+            "title": names[1],
+            "sub": subs[1] or "Early morning visits & summer festivals",
+        },
+        {
+            "label": "TOP PICK #3",
+            "months": "AUTUMN  |  SCENIC FOLIAGE",
+            "color": (217, 119, 6, 240),
+            "border": (251, 191, 36, 255),
+            "photo": thumbs[2],
+            "title": names[2],
+            "sub": subs[2] or "Crisp clear skies & autumn foliage",
+        },
+        {
+            "label": "TOP PICK #4",
+            "months": "WINTER–SPRING  |  HIDDEN GEM",
+            "color": (2, 132, 199, 240),
+            "border": (125, 211, 252, 255),
+            "photo": thumbs[3],
+            "title": names[3],
+            "sub": subs[3] or "Fewer crowds & dramatic winter views",
+        },
+    ]
 
     for i, s in enumerate(seasons):
         x0 = i * col_w
@@ -733,11 +798,12 @@ def render_ranking_hud_png(
     draw.text((W - rw - 32, 19), info_right, font=f_tag, fill=(253, 224, 71, 255))
 
     # Main English Place Title on Row 2 (Large 26px bold with dark stroke)
-    title_en = seg["place_en"].strip()
+    title_en = strip_cjk(seg["place_en"].strip()).replace("What You Get in This 9-Min Guide", "TOP 10 COUNTDOWN PREVIEW — WATCH UNTIL #1!")
+    f_title_fit = fit_font_for_width(draw, title_en, font_path, 26, 18, W - 48)
     draw.text(
         (24, 56),
         title_en,
-        font=f_title,
+        font=f_title_fit,
         fill=(255, 255, 255, 255),
         stroke_width=3,
         stroke_fill=(0, 0, 0, 245),
@@ -746,14 +812,15 @@ def render_ranking_hud_png(
     # 1b. Optional Dedicated ACCESS Pill Strip right below Top Header (y=106..146)
     if seg.get("access_info") and seg.get("seg_type") in ("spot", "review"):
         acc_y0, acc_y1 = 106, 146
-        clean_acc = seg["access_info"].replace("🚄", "").strip()
+        clean_acc = strip_cjk(seg["access_info"].replace("🚄", "").strip())
+        f_acc_fit = fit_font_for_width(draw, clean_acc, font_path, 18, 13, W - 220)
         draw.rectangle([(0, acc_y0), (W, acc_y1)], fill=(8, 47, 73, 235))
         draw.rectangle([(0, acc_y0), (190, acc_y1)], fill=(2, 132, 199, 250))
         draw.text((18, acc_y0 + 10), "TRAIN & ACCESS", font=f_acc, fill=(255, 255, 255, 255))
         draw.text(
             (206, acc_y0 + 10),
             clean_acc,
-            font=f_acc,
+            font=f_acc_fit,
             fill=(224, 242, 254, 255),
             stroke_width=2,
             stroke_fill=(0, 0, 0, 220),
@@ -762,26 +829,30 @@ def render_ranking_hud_png(
     # 2. Optional Real Local Review Card (when seg_type == "review" — 100% English, Large 20px font)
     if seg.get("seg_type") == "review" and seg.get("review_praise_en"):
         f_rhead = ImageFont.truetype(font_path, 17)
-        f_ren = ImageFont.truetype(font_path, 20)
-
         card_x0, card_x1 = 24, W - 24
+        max_rw = (card_x1 - card_x0) - 32
+
         c1_y0, c1_y1 = 336, 430
         lbl1 = "WHAT JAPANESE LOCALS LOVE (PRAISE)"
         tb_l1 = draw.textbbox((0, 0), lbl1, font=f_rhead)
         l1_w = (tb_l1[2] - tb_l1[0]) + 28
+        praise_txt = strip_cjk(seg["review_praise_en"])
+        f_ren1 = fit_font_for_width(draw, praise_txt, font_path, 20, 14, max_rw)
         draw.rectangle([(card_x0, c1_y0), (card_x1, c1_y1)], fill=(12, 19, 34, 238), outline=(16, 185, 129, 250), width=2)
         draw.rectangle([(card_x0, c1_y0), (card_x0 + l1_w, c1_y0 + 32)], fill=(16, 185, 129, 250))
         draw.text((card_x0 + 14, c1_y0 + 7), lbl1, font=f_rhead, fill=(255, 255, 255, 255))
-        draw.text((card_x0 + 16, c1_y0 + 46), seg["review_praise_en"], font=f_ren, fill=(255, 255, 255, 255), stroke_width=2, stroke_fill=(0, 0, 0, 230))
+        draw.text((card_x0 + 16, c1_y0 + 46), praise_txt, font=f_ren1, fill=(255, 255, 255, 255), stroke_width=2, stroke_fill=(0, 0, 0, 230))
 
         c2_y0, c2_y1 = 440, 534
         lbl2 = "LOCAL WARNING & INSIDER HACK"
         tb_l2 = draw.textbbox((0, 0), lbl2, font=f_rhead)
         l2_w = (tb_l2[2] - tb_l2[0]) + 28
+        warn_txt = strip_cjk(seg["review_warn_en"])
+        f_ren2 = fit_font_for_width(draw, warn_txt, font_path, 20, 14, max_rw)
         draw.rectangle([(card_x0, c2_y0), (card_x1, c2_y1)], fill=(12, 19, 34, 238), outline=(245, 158, 11, 250), width=2)
         draw.rectangle([(card_x0, c2_y0), (card_x0 + l2_w, c2_y0 + 32)], fill=(217, 119, 6, 250))
         draw.text((card_x0 + 14, c2_y0 + 7), lbl2, font=f_rhead, fill=(255, 255, 255, 255))
-        draw.text((card_x0 + 16, c2_y0 + 46), seg["review_warn_en"], font=f_ren, fill=(253, 224, 71, 255), stroke_width=2, stroke_fill=(0, 0, 0, 230))
+        draw.text((card_x0 + 16, c2_y0 + 46), warn_txt, font=f_ren2, fill=(253, 224, 71, 255), stroke_width=2, stroke_fill=(0, 0, 0, 230))
 
     # 3. Bottom Insider Tip Bar + Subtitle Bar
     sub_bar_h = 132
@@ -792,33 +863,36 @@ def render_ranking_hud_png(
     sec_label = "INSIDER TIP"
     tb_sec = draw.textbbox((0, 0), sec_label, font=f_tag)
     sec_w = (tb_sec[2] - tb_sec[0]) + 36
+    tip_txt = strip_cjk(seg["insider_tip"])
+    f_tip_fit = fit_font_for_width(draw, tip_txt, font_path, 19, 14, W - sec_w - 32)
     draw.rectangle([(0, tip_y0), (W, sub_y0)], fill=(15, 23, 42, 238))
     draw.rectangle([(0, tip_y0), (sec_w, sub_y0)], fill=(16, 185, 129, 250))
     draw.text((18, tip_y0 + 12), sec_label, font=f_tag, fill=(255, 255, 255, 255), stroke_width=1, stroke_fill=(0, 0, 0, 180))
     draw.text(
         (sec_w + 18, tip_y0 + 11),
-        seg["insider_tip"],
-        font=f_tip,
+        tip_txt,
+        font=f_tip_fit,
         fill=(167, 243, 208, 255),
         stroke_width=2,
         stroke_fill=(0, 0, 0, 230),
     )
 
-    # Subtitle Box
+    # Subtitle Box (auto-fits font size per line so no subtitle ever clips at left/right screen edges)
     draw.rectangle([(0, sub_y0), (W, H)], fill=(6, 9, 15, 228))
-    lines = seg["subtitle"].split("\n")
+    lines = [strip_cjk(ln) for ln in seg["subtitle"].split("\n") if strip_cjk(ln)]
     line_spacing = 10
-    total_h = len(lines) * 34 + (len(lines) - 1) * line_spacing
+    total_h = len(lines) * 34 + max(0, len(lines) - 1) * line_spacing
     cur_y = sub_y0 + (sub_bar_h - total_h) // 2
 
     for line in lines:
-        tb_l = draw.textbbox((0, 0), line, font=f_sub)
+        f_line = fit_font_for_width(draw, line, font_path, 27, 17, W - 48)
+        tb_l = draw.textbbox((0, 0), line, font=f_line)
         lw = tb_l[2] - tb_l[0]
-        x = (W - lw) // 2
+        x = max(24, (W - lw) // 2)
         draw.text(
             (x, cur_y),
             line,
-            font=f_sub,
+            font=f_line,
             fill=(255, 255, 255, 255),
             stroke_width=3,
             stroke_fill=(0, 0, 0, 245),
@@ -1255,7 +1329,7 @@ def build_ranking_video(script_path: Path) -> Path:
                 concat_ins = ""
                 for fi in range(n_fl):
                     d_this = slice_dur if fi < n_fl - 1 else round(max(0.5, dur - slice_dur * (n_fl - 1) + 0.1), 3)
-                    zp_f = f"zoompan=z='min(zoom+0.0028,1.14)':x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':d={slice_frames}:s={W}x{H}:fps={FPS}"
+                    zp_f = f"zoompan=z='min(zoom+0.0007,1.03)':x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':d={slice_frames}:s={W}x{H}:fps={FPS}"
                     fc_parts.append(
                         f"[{fi}:v]scale={W*2}:{H*2}:force_original_aspect_ratio=increase,crop={W*2}:{H*2},{zp_f},trim=duration={d_this},setpts=PTS-STARTPTS,setsar=1[vf{fi}]"
                     )
@@ -1572,14 +1646,17 @@ def render_short_hook_jpg(
     mx0, my0, mx1, my1 = 36, 384, SW - 36, 940
     draw.rounded_rectangle((mx0, my0, mx1, my1), radius=24, fill=(10, 18, 34, 240), outline=(56, 189, 248, 240), width=3)
 
-    f_mhead = ImageFont.truetype(font_path, 22)
-    draw.rounded_rectangle((mx0 + 22, my0 + 20, mx0 + 480, my0 + 64), radius=12, fill=(14, 116, 144, 250))
-    draw.text((mx0 + 38, my0 + 30), "JAPAN SHINKANSEN & ACCESS MAP", font=f_mhead, fill=(255, 255, 255, 255))
+    f_mhead = ImageFont.truetype(font_path, 21)
+    mhead_txt = "JAPAN SHINKANSEN & ACCESS MAP"
+    tb_mh = draw.textbbox((0, 0), mhead_txt, font=f_mhead)
+    mhw = (tb_mh[2] - tb_mh[0]) + 34
+    draw.rounded_rectangle((mx0 + 22, my0 + 18, mx0 + 22 + mhw, my0 + 60), radius=12, fill=(14, 116, 144, 250))
+    draw.text((mx0 + 39, my0 + 28), mhead_txt, font=f_mhead, fill=(255, 255, 255, 255))
 
     map_json = BASE_DIR / "assets" / "maps" / "japan_prefectures.json"
-    lon_min, lon_max = 130.0, 145.5
-    lat_min, lat_max = 31.2, 44.2
-    pad_x0, pad_y0, pad_x1, pad_y1 = mx0 + 28, my0 + 72, mx0 + 530, my1 - 22
+    lon_min, lon_max = 129.5, 145.8
+    lat_min, lat_max = 31.0, 45.6
+    pad_x0, pad_y0, pad_x1, pad_y1 = mx0 + 28, my0 + 78, mx0 + 518, my1 - 24
 
     def project(lon: float, lat: float) -> Tuple[int, int]:
         px = pad_x0 + (lon - lon_min) / (lon_max - lon_min) * (pad_x1 - pad_x0)
@@ -1595,12 +1672,16 @@ def render_short_hook_jpg(
             is_tokyo = pf["nam_ja"] == "東京都"
             fill_c = (56, 189, 248, 210) if is_tokyo else (51, 65, 85, 200)
             for ring in pf["polys"]:
+                if any(pt[0] < lon_min or pt[0] > lon_max or pt[1] < lat_min or pt[1] > lat_max for pt in ring):
+                    continue
                 pts = [project(pt[0], pt[1]) for pt in ring]
                 if len(pts) >= 3:
                     draw.polygon(pts, fill=fill_c, outline=(148, 163, 184, 150))
         for pf in prefs:
             if pf["nam_ja"] == target_pref:
                 for ring in pf["polys"]:
+                    if any(pt[0] < lon_min or pt[0] > lon_max or pt[1] < lat_min or pt[1] > lat_max for pt in ring):
+                        continue
                     pts = [project(pt[0], pt[1]) for pt in ring]
                     if len(pts) >= 3:
                         draw.polygon(pts, fill=(239, 68, 68, 255), outline=(253, 224, 71, 255))
@@ -1617,12 +1698,12 @@ def render_short_hook_jpg(
     f_sub = ImageFont.truetype(font_path, 17)
     sx0, sx1 = mx0 + 538, mx1 - 22
 
-    top1_acc = summary_rows[0].get("access_short", "Direct Shinkansen") if summary_rows else "Direct Shinkansen"
-    top2_acc = summary_rows[1].get("access_short", "JR Express Train") if len(summary_rows) > 1 else "JR Express Train"
+    top1_acc = smart_truncate(draw, summary_rows[0].get("access_short", "Direct Shinkansen").upper(), f_lbl, sx1 - sx0 - 36) if summary_rows else "DIRECT SHINKANSEN"
+    top2_acc = smart_truncate(draw, summary_rows[1].get("access_short", "JR Express Train").upper(), f_lbl, sx1 - sx0 - 36) if len(summary_rows) > 1 else "JR EXPRESS TRAIN"
 
     stat_boxes = [
-        ("TOP #1", top1_acc.upper()[:22], "Easy Day Trip via JR Pass", (16, 185, 129, 245)),
-        ("TOP #2", top2_acc.upper()[:22], "100% Authentic Local Ranking", (217, 119, 6, 245)),
+        ("TOP #1", top1_acc, "Easy Day Trip via JR Pass", (16, 185, 129, 245)),
+        ("TOP #2", top2_acc, "100% Authentic Local Ranking", (217, 119, 6, 245)),
     ]
     for idx, (big_t, l1, l2, col) in enumerate(stat_boxes):
         by0 = my0 + 82 + idx * 224
@@ -1638,7 +1719,6 @@ def render_short_hook_jpg(
     gy0, gy1 = 966, 1418
     col_w = (SW - 72 - 24) // 3
     f_rk = ImageFont.truetype(font_path, 23)
-    f_nm = ImageFont.truetype(font_path, 21)
     f_acc_sm = ImageFont.truetype(font_path, 16)
 
     top3 = [summary_rows[2], summary_rows[1], summary_rows[0]] if len(summary_rows) >= 3 else summary_rows
@@ -1659,9 +1739,13 @@ def render_short_hook_jpg(
         draw.text((cx0 + ((cx1 - cx0) - (tb_r[2] - tb_r[0])) // 2, gy0 + 22), r_lbl, font=f_rk, fill=(255, 255, 255, 255))
 
         draw.rounded_rectangle((cx0 + 4, gy1 - 84, cx1 - 4, gy1 - 4), radius=12, fill=(8, 12, 22, 238))
-        tb_n = draw.textbbox((0, 0), row["name_en"][:18], font=f_nm)
-        draw.text((cx0 + ((cx1 - cx0) - (tb_n[2] - tb_n[0])) // 2, gy1 - 72), row["name_en"][:18], font=f_nm, fill=(253, 224, 71, 255))
-        acc_short = row.get("access_short", row.get("budget", ""))[:22]
+        raw_nm = strip_cjk(row["name_en"].split("(")[0].strip())
+        f_nm_fit = fit_font_for_width(draw, raw_nm, font_path, 21, 15, col_w - 20)
+        clean_nm = smart_truncate(draw, raw_nm, f_nm_fit, col_w - 20)
+        tb_n = draw.textbbox((0, 0), clean_nm, font=f_nm_fit)
+        draw.text((cx0 + ((cx1 - cx0) - (tb_n[2] - tb_n[0])) // 2, gy1 - 72), clean_nm, font=f_nm_fit, fill=(253, 224, 71, 255))
+
+        acc_short = smart_truncate(draw, row.get("access_short", row.get("budget", "")), f_acc_sm, col_w - 20)
         tb_j = draw.textbbox((0, 0), acc_short, font=f_acc_sm)
         draw.text((cx0 + ((cx1 - cx0) - (tb_j[2] - tb_j[0])) // 2, gy1 - 36), acc_short, font=f_acc_sm, fill=(255, 255, 255, 255))
 
@@ -1692,9 +1776,9 @@ def render_short_outro_jpg(
     draw = ImageDraw.Draw(canvas, "RGBA")
 
     f_rk = ImageFont.truetype(font_path, 22)
-    f_title = ImageFont.truetype(font_path, 26)
+    f_title = ImageFont.truetype(font_path, 25)
     f_sub = ImageFont.truetype(font_path, 19)
-    f_mini = ImageFont.truetype(font_path, 19)
+    f_mini = ImageFont.truetype(font_path, 18)
 
     y0_base = 384
     card_h = 156
@@ -1717,17 +1801,22 @@ def render_short_outro_jpg(
 
         tx = 44 + tw + 18
         b_col = (217, 119, 6, 255) if is_no1 else ((220, 38, 38, 255) if is_top3 else (30, 58, 138, 255))
-        draw.rounded_rectangle((tx, ry0 + 12, tx + 158, ry0 + 54), radius=10, fill=b_col)
         r_txt = f"{row['rank']}  {row['score']}"
         tb_r = draw.textbbox((0, 0), r_txt, font=f_rk)
-        draw.text((tx + (158 - (tb_r[2] - tb_r[0])) // 2, ry0 + 21), r_txt, font=f_rk, fill=(255, 255, 255, 255))
+        badge_w = max(172, (tb_r[2] - tb_r[0]) + 28)
+        draw.rounded_rectangle((tx, ry0 + 12, tx + badge_w, ry0 + 54), radius=10, fill=b_col)
+        draw.text((tx + (badge_w - (tb_r[2] - tb_r[0])) // 2, ry0 + 21), r_txt, font=f_rk, fill=(255, 255, 255, 255))
 
-        full_title = row["name_en"]
-        clean_dish = row["dish"].split("(")[0].strip()
-        clean_hack = row["hack"].strip()
-        draw.text((tx + 172, ry0 + 18), full_title, font=f_title, fill=(255, 255, 255, 255))
-        draw.text((tx, ry0 + 68), f"ACCESS: {row['budget']}  |  {clean_dish}", font=f_sub, fill=(125, 211, 252, 255))
-        draw.text((tx, ry0 + 106), f"HACK: {clean_hack[:52]}", font=f_sub, fill=(167, 243, 208, 255))
+        max_title_w = (SW - 52) - (tx + badge_w + 14)
+        full_title = smart_truncate(draw, row["name_en"], f_title, max_title_w)
+        clean_dish = strip_cjk(row["dish"].split("(")[0].strip())
+        clean_hack = strip_cjk(row["hack"].strip())
+        max_line_w = (SW - 52) - tx
+        acc_line = smart_truncate(draw, f"ACCESS: {row['budget']}  |  {clean_dish}", f_sub, max_line_w)
+        hack_line = smart_truncate(draw, f"HACK: {clean_hack}", f_sub, max_line_w)
+        draw.text((tx + badge_w + 14, ry0 + 18), full_title, font=f_title, fill=(255, 255, 255, 255))
+        draw.text((tx, ry0 + 68), acc_line, font=f_sub, fill=(125, 211, 252, 255))
+        draw.text((tx, ry0 + 106), hack_line, font=f_sub, fill=(167, 243, 208, 255))
 
     if len(summary_rows) >= 10:
         by0, by1 = 1226, 1418
@@ -1736,7 +1825,7 @@ def render_short_outro_jpg(
         for j, r_row in enumerate(summary_rows[5:10]):
             col_x = 58 if j < 3 else 548
             row_y = by0 + 54 + (j % 3) * 42
-            txt = f"{r_row['rank']} ({r_row['score']}): {r_row['name_en']}"
+            txt = smart_truncate(draw, f"{r_row['rank']} ({r_row['score']}): {r_row['name_en']}", f_mini, 470)
             draw.text((col_x, row_y), txt, font=f_mini, fill=(241, 245, 249, 255))
 
     canvas.convert("RGB").save(out_jpg, "JPEG", quality=95)
@@ -1778,10 +1867,11 @@ def render_short_cinema_frame_jpg(
     draw.rounded_rectangle((fx0, fy0, fx1, fy1), radius=24, fill=None, outline=(255, 255, 255, 240), width=4)
 
     f_tag = ImageFont.truetype(font_path, 20)
-    tb_t = draw.textbbox((0, 0), photo_label, font=f_tag)
+    clean_lbl = smart_truncate(draw, photo_label, f_tag, fw - 72)
+    tb_t = draw.textbbox((0, 0), clean_lbl, font=f_tag)
     tw = (tb_t[2] - tb_t[0]) + 34
     draw.rounded_rectangle((fx0 + 18, fy0 + 18, fx0 + 18 + tw, fy0 + 62), radius=12, fill=(10, 14, 24, 225), outline=(253, 224, 71, 235), width=2)
-    draw.text((fx0 + 35, fy0 + 29), photo_label, font=f_tag, fill=(253, 224, 71, 255))
+    draw.text((fx0 + 35, fy0 + 29), clean_lbl, font=f_tag, fill=(253, 224, 71, 255))
 
     canvas.convert("RGB").save(out_jpg, "JPEG", quality=95)
 
@@ -1792,24 +1882,17 @@ def render_short_hud_png(
     out_png: Path,
 ) -> None:
     """
-    Render the sleek mobile-first floating HUD (100% English, High-Contrast Large Fonts):
-    - Floating centered Top Pill + Bold Title + English Sub-line + Compact Access Pill (y=115..360)
-    - ONE clean Social Review or Insider Hack Bubble below the Cinema Window (y=1168..1418)
-    - CapCut / Hormozi-style Floating Outline Pop Captions (y=1465..1650)
+    Render the sleek mobile-first floating HUD (100% English, High-Contrast Large Fonts, Zero Mid-Word Truncation).
     """
     overlay = Image.new("RGBA", (SW, SH), (0, 0, 0, 0))
     draw = ImageDraw.Draw(overlay, "RGBA")
 
     f_pill = ImageFont.truetype(font_path, 25)
-    f_title = ImageFont.truetype(font_path, 42)
-    f_sub = ImageFont.truetype(font_path, 24)
-    f_acc = ImageFont.truetype(font_path, 22)
     f_rhead = ImageFont.truetype(font_path, 22)
     f_ren = ImageFont.truetype(font_path, 26)
-    f_pop = ImageFont.truetype(font_path, 40)
 
     # 1. Floating Centered Rank Pill (y=118..178)
-    pill_txt = scene["badge"]
+    pill_txt = strip_cjk(scene["badge"])
     is_gold = "NO.1" in pill_txt or "#1 " in pill_txt
     p_col = (217, 119, 6, 250) if is_gold else (220, 38, 38, 250)
     tb_p = draw.textbbox((0, 0), pill_txt, font=f_pill)
@@ -1819,18 +1902,24 @@ def render_short_hud_png(
     draw.text((px0 + 28, 134), pill_txt, font=f_pill, fill=(255, 255, 255, 255))
 
     # 2. Bold Centered English Title + English Sub-line (y=194..290)
-    t_en = scene["title_en"]
+    t_en = strip_cjk(scene["title_en"])
+    f_title = fit_font_for_width(draw, t_en, font_path, 42, 26, SW - 56)
+    t_en = smart_truncate(draw, t_en, f_title, SW - 56)
     tb_t = draw.textbbox((0, 0), t_en, font=f_title)
     draw.text(((SW - (tb_t[2] - tb_t[0])) // 2, 192), t_en, font=f_title, fill=(255, 255, 255, 255), stroke_width=4, stroke_fill=(0, 0, 0, 255))
 
-    t_sub = scene.get("sub_en", "")
+    t_sub = strip_cjk(scene.get("sub_en", ""))
     if t_sub:
+        f_sub = fit_font_for_width(draw, t_sub, font_path, 24, 17, SW - 56)
+        t_sub = smart_truncate(draw, t_sub, f_sub, SW - 56)
         tb_j = draw.textbbox((0, 0), t_sub, font=f_sub)
         draw.text(((SW - (tb_j[2] - tb_j[0])) // 2, 252), t_sub, font=f_sub, fill=(253, 224, 71, 255), stroke_width=3, stroke_fill=(0, 0, 0, 240))
 
     # 3. Floating Centered Access Pill (y=302..356)
     if scene.get("access"):
-        acc_txt = scene["access"].replace("🚄", "").split("|")[0].strip()[:68]
+        acc_txt = strip_cjk(scene["access"].replace("🚄", "").split("|")[0].strip())
+        f_acc = fit_font_for_width(draw, acc_txt, font_path, 22, 16, SW - 88)
+        acc_txt = smart_truncate(draw, acc_txt, f_acc, SW - 88)
         tb_a = draw.textbbox((0, 0), acc_txt, font=f_acc)
         aw = (tb_a[2] - tb_a[0]) + 48
         ax0 = (SW - aw) // 2
@@ -1845,19 +1934,22 @@ def render_short_hud_png(
         c_tag_bg = (217, 119, 6, 255) if is_warn else (16, 185, 129, 255)
 
         draw.rounded_rectangle((cx0, cy0, cx1, cy1), radius=20, fill=(12, 20, 36, 242), outline=c_border, width=3)
-        ct_lbl = scene["card_title"]
+        ct_lbl = strip_cjk(scene["card_title"])
         tb_ct = draw.textbbox((0, 0), ct_lbl, font=f_rhead)
         ct_w = (tb_ct[2] - tb_ct[0]) + 36
         draw.rounded_rectangle((cx0 + 20, cy0 + 18, cx0 + 20 + ct_w, cy0 + 64), radius=10, fill=c_tag_bg)
         draw.text((cx0 + 38, cy0 + 29), ct_lbl, font=f_rhead, fill=(255, 255, 255, 255))
 
-        q_lines = wrap_text_lines(draw, scene["card_body_en"], f_ren, cx1 - cx0 - 56)
+        q_lines = wrap_text_lines(draw, strip_cjk(scene["card_body_en"]), f_ren, cx1 - cx0 - 56)
         for li, ql in enumerate(q_lines[:3]):
             draw.text((cx0 + 28, cy0 + 82 + li * 42), ql, font=f_ren, fill=(255, 255, 255, 255))
 
     # 5. CapCut / Hormozi-Style Floating Outline Pop Captions (y=1460..1655)
     pop_lines = scene.get("pop_lines", [])
-    for li, pl in enumerate(pop_lines[:2]):
+    for li, raw_pl in enumerate(pop_lines[:2]):
+        pl = strip_cjk(raw_pl)
+        f_pop = fit_font_for_width(draw, pl, font_path, 38, 22, SW - 56)
+        pl = smart_truncate(draw, pl, f_pop, SW - 56)
         tb_l = draw.textbbox((0, 0), pl, font=f_pop)
         lx = (SW - (tb_l[2] - tb_l[0])) // 2
         ly = 1465 + li * 62
@@ -1876,7 +1968,7 @@ def build_shorts_video(script_path: Path) -> Path:
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
     data = json.loads(script_path.read_text(encoding="utf-8"))
     ranking_id = data["ranking_id"]
-    prefecture = data.get("prefecture", "Japan")
+    prefecture = strip_cjk(data.get("prefecture", "Japan"))
     voice = data.get("voice", "en-US-ChristopherNeural")
     segments = data["segments"]
     summary_rows = data.get("summary_rows", [])
@@ -1905,10 +1997,11 @@ def build_shorts_video(script_path: Path) -> Path:
     r2_row = summary_rows[1] if len(summary_rows) >= 2 else {"name_en": sp2["place_en"], "score": "93/100pt", "dish": sp2["area"], "budget": sp2["budget"], "hack": sp2["insider_tip"]}
     r1_row = summary_rows[0] if len(summary_rows) >= 1 else {"name_en": sp1["place_en"], "score": "96/100pt", "dish": sp1["area"], "budget": sp1["budget"], "hack": sp1["insider_tip"]}
 
-    hook_title = shorts_cfg.get("promise_catch", f"SKIP TOURIST TRAPS! {prefecture[:20]}")
+    short_region = prefecture.replace("Sightseeing", "").replace("TOP 10", "").strip() or "Japan"
+    hook_title = strip_cjk(shorts_cfg.get("promise_catch", f"SKIP TOURIST TRAPS! {short_region} TOP 10"))
     hook_narration = shorts_cfg.get(
         "narration_hook",
-        f"Stop going to crowded tourist traps! In the next 60 seconds, here are the Top 3 spots in {prefecture} ranked from 500,000 Japanese Instagram posts and local reviews!",
+        f"Stop going to crowded tourist traps! In the next 60 seconds, here are the Top 3 spots in {short_region} ranked from 500,000 Japanese Instagram posts and local reviews!",
     )
 
     short_scenes = [
@@ -1916,18 +2009,18 @@ def build_shorts_video(script_path: Path) -> Path:
             "mode": "hook",
             "se_type": "area_chime",
             "badge": shorts_cfg.get("hook_badge", "95% OF FOREIGN TOURISTS MISS THIS!"),
-            "title_en": hook_title[:34],
+            "title_en": hook_title,
             "sub_en": "500,000 Japanese IG Posts × Local Reviews",
             "access": "IN THIS VIDEO: 1. 100pt Ranking  2. Train Access  3. Local Hacks",
             "narration": hook_narration,
-            "pop_lines": [hook_title[:32], "Top 3 Ranked by Japanese Locals!"],
+            "pop_lines": [hook_title, "Top 3 Ranked by Japanese Locals!"],
         },
         {
             "mode": "cinema",
             "se_type": "top3_hit",
             "badge": f"NO.3  |  SCORE: {r3_row['score'].upper()}",
-            "title_en": r3_row["name_en"][:28],
-            "sub_en": r3_row["dish"][:46],
+            "title_en": r3_row["name_en"].split("(")[0].strip(),
+            "sub_en": r3_row["dish"].split("(")[0].strip(),
             "access": f"ACCESS: {sp3.get('access_info', r3_row['budget'])}",
             "photos": [sp3["photos"][0], sp3["photos"][1]],
             "photo_tags": ["HIGH-RES PHOTO (1/4)", "HIGH-RES PHOTO (2/4)"],
@@ -1935,29 +2028,29 @@ def build_shorts_video(script_path: Path) -> Path:
             "card_title": "LOCAL PRAISE & HIGHLIGHT",
             "card_body_en": rv3.get("review_praise_en", sp3["insider_tip"]),
             "narration": sp3["narration"],
-            "pop_lines": [f"#3 {r3_row['name_en'].upper()[:22]} ({r3_row['score']})", r3_row["dish"].split("(")[0].strip()[:34]],
+            "pop_lines": [f"#3 {r3_row['name_en'].split('(')[0].strip().upper()} ({r3_row['score']})", r3_row["dish"].split("(")[0].strip()],
         },
         {
             "mode": "cinema",
             "se_type": "review_pop",
-            "badge": f"NO.3  |  INSIDER HACK",
-            "title_en": r3_row["name_en"][:28],
-            "sub_en": f"PRO TIP: {r3_row['hack'][:40]}",
-            "access": f"TIP: {sp3.get('insider_tip', r3_row['hack'])[:58]}",
+            "badge": "NO.3  |  INSIDER HACK",
+            "title_en": r3_row["name_en"].split("(")[0].strip(),
+            "sub_en": f"PRO TIP: {r3_row['hack']}",
+            "access": f"TIP: {sp3.get('insider_tip', r3_row['hack'])}",
             "photos": [rv3["photos"][0], rv3["photos"][1]],
             "photo_tags": ["HIGH-RES PHOTO (3/4)", "HIGH-RES PHOTO (4/4)"],
             "card_style": "warn",
             "card_title": "LOCAL HACK & WARNING",
             "card_body_en": rv3.get("review_warn_en", r3_row["hack"]),
             "narration": rv3["narration"],
-            "pop_lines": ["LOCAL INSIDER WARNING!", r3_row["hack"][:34]],
+            "pop_lines": ["LOCAL INSIDER WARNING!", r3_row["hack"]],
         },
         {
             "mode": "cinema",
             "se_type": "top3_hit",
             "badge": f"NO.2  |  SCORE: {r2_row['score'].upper()}",
-            "title_en": r2_row["name_en"][:28],
-            "sub_en": r2_row["dish"][:46],
+            "title_en": r2_row["name_en"].split("(")[0].strip(),
+            "sub_en": r2_row["dish"].split("(")[0].strip(),
             "access": f"ACCESS: {sp2.get('access_info', r2_row['budget'])}",
             "photos": [sp2["photos"][0], sp2["photos"][1]],
             "photo_tags": ["HIGH-RES PHOTO (1/4)", "HIGH-RES PHOTO (2/4)"],
@@ -1965,29 +2058,29 @@ def build_shorts_video(script_path: Path) -> Path:
             "card_title": "LOCAL PRAISE & HIGHLIGHT",
             "card_body_en": rv2.get("review_praise_en", sp2["insider_tip"]),
             "narration": sp2["narration"],
-            "pop_lines": [f"#2 {r2_row['name_en'].upper()[:22]} ({r2_row['score']})", r2_row["dish"].split("(")[0].strip()[:34]],
+            "pop_lines": [f"#2 {r2_row['name_en'].split('(')[0].strip().upper()} ({r2_row['score']})", r2_row["dish"].split("(")[0].strip()],
         },
         {
             "mode": "cinema",
             "se_type": "review_pop",
-            "badge": f"NO.2  |  INSIDER HACK",
-            "title_en": r2_row["name_en"][:28],
-            "sub_en": f"PRO TIP: {r2_row['hack'][:40]}",
-            "access": f"TIP: {sp2.get('insider_tip', r2_row['hack'])[:58]}",
+            "badge": "NO.2  |  INSIDER HACK",
+            "title_en": r2_row["name_en"].split("(")[0].strip(),
+            "sub_en": f"PRO TIP: {r2_row['hack']}",
+            "access": f"TIP: {sp2.get('insider_tip', r2_row['hack'])}",
             "photos": [rv2["photos"][0], rv2["photos"][1]],
             "photo_tags": ["HIGH-RES PHOTO (3/4)", "HIGH-RES PHOTO (4/4)"],
             "card_style": "warn",
             "card_title": "LOCAL HACK & WARNING",
             "card_body_en": rv2.get("review_warn_en", r2_row["hack"]),
             "narration": rv2["narration"],
-            "pop_lines": ["LOCAL INSIDER WARNING!", r2_row["hack"][:34]],
+            "pop_lines": ["LOCAL INSIDER WARNING!", r2_row["hack"]],
         },
         {
             "mode": "cinema",
             "se_type": "top3_hit",
             "badge": f"NO.1  |  SCORE: {r1_row['score'].upper()}",
-            "title_en": r1_row["name_en"][:28],
-            "sub_en": r1_row["dish"][:46],
+            "title_en": r1_row["name_en"].split("(")[0].strip(),
+            "sub_en": r1_row["dish"].split("(")[0].strip(),
             "access": f"ACCESS: {sp1.get('access_info', r1_row['budget'])}",
             "photos": [sp1["photos"][0], sp1["photos"][1]],
             "photo_tags": ["HIGH-RES PHOTO (1/4)", "HIGH-RES PHOTO (2/4)"],
@@ -1995,29 +2088,29 @@ def build_shorts_video(script_path: Path) -> Path:
             "card_title": "LOCAL PRAISE & HIGHLIGHT",
             "card_body_en": rv1.get("review_praise_en", sp1["insider_tip"]),
             "narration": sp1["narration"],
-            "pop_lines": [f"#1 {r1_row['name_en'].upper()[:22]} ({r1_row['score']})", r1_row["dish"].split("(")[0].strip()[:34]],
+            "pop_lines": [f"#1 {r1_row['name_en'].split('(')[0].strip().upper()} ({r1_row['score']})", r1_row["dish"].split("(")[0].strip()],
         },
         {
             "mode": "cinema",
             "se_type": "review_pop",
-            "badge": f"NO.1  |  LOCAL RULE & HACK",
-            "title_en": r1_row["name_en"][:28],
-            "sub_en": f"PRO TIP: {r1_row['hack'][:40]}",
-            "access": f"TIP: {sp1.get('insider_tip', r1_row['hack'])[:58]}",
+            "badge": "NO.1  |  LOCAL RULE & HACK",
+            "title_en": r1_row["name_en"].split("(")[0].strip(),
+            "sub_en": f"PRO TIP: {r1_row['hack']}",
+            "access": f"TIP: {sp1.get('insider_tip', r1_row['hack'])}",
             "photos": [rv1["photos"][0], rv1["photos"][1]],
             "photo_tags": ["HIGH-RES PHOTO (3/4)", "HIGH-RES PHOTO (4/4)"],
             "card_style": "warn",
             "card_title": "LOCAL HACK & WARNING",
             "card_body_en": rv1.get("review_warn_en", r1_row["hack"]),
             "narration": rv1["narration"],
-            "pop_lines": ["MUST-KNOW LOCAL RULE!", r1_row["hack"][:34]],
+            "pop_lines": ["MUST-KNOW LOCAL RULE!", r1_row["hack"]],
         },
         {
             "mode": "outro",
             "se_type": "area_chime",
             "badge": "FULL TOP 10 CHEAT-SHEET",
             "title_en": "Screenshot This TOP 10 List!",
-            "sub_en": f"{prefecture[:36]} — Complete Guide",
+            "sub_en": f"{prefecture} — Complete Guide",
             "access": "TAP RELATED VIDEO BELOW FOR FULL 9-MIN GUIDE!",
             "narration": shorts_cfg.get("narration_outro", "Screenshot this full Top 10 list right now, and tap the related video below for our full 9-minute insider guide!"),
             "pop_lines": ["PAUSE & SCREENSHOT THIS LIST!", "Tap Below for Full 9-Min Video!"],
@@ -2054,7 +2147,7 @@ def build_shorts_video(script_path: Path) -> Path:
                     r_row = summary_rows[r_i]
                     render_short_cinema_frame_jpg(
                         cache_dir / r_row["thumb"],
-                        f"RAPID PREVIEW: {r_row['rank']} {strip_cjk(r_row['name_en'])[:18]}",
+                        f"RAPID PREVIEW: {r_row['rank']} {strip_cjk(r_row['name_en'])}",
                         font_path,
                         sf_p,
                     )

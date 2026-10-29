@@ -923,40 +923,51 @@ def run_daily_pipeline(
 
     youtube = get_youtube_client()
 
-    # 1. Upload Long 16:9 Video + Set Custom Thumbnail A
-    long_video_id = upload_video_with_custom_thumbnail(
-        youtube=youtube,
-        video_path=long_mp4,
-        thumbnail_path=thumb_a,
-        title=seo_pkg["title_long"],
-        description=seo_pkg["description_long"],
-        tags=seo_pkg["tags"],
-        category_id=seo_pkg["category_id"],
-        privacy_status=privacy_status,
-        publish_at_iso=publish_at_long_iso,
-    )
-    long_url = f"https://youtu.be/{long_video_id}"
+    try:
+        # 1. Upload Long 16:9 Video + Set Custom Thumbnail A
+        long_video_id = upload_video_with_custom_thumbnail(
+            youtube=youtube,
+            video_path=long_mp4,
+            thumbnail_path=thumb_a,
+            title=seo_pkg["title_long"],
+            description=seo_pkg["description_long"],
+            tags=seo_pkg["tags"],
+            category_id=seo_pkg["category_id"],
+            privacy_status=privacy_status,
+            publish_at_iso=publish_at_long_iso,
+        )
+        long_url = f"https://youtu.be/{long_video_id}"
 
-    # 2. Prepare Shorts Description with direct link to the uploaded Long Video
-    short_description = seo_pkg["description_short_template"].replace("{LONG_VIDEO_URL}", long_url)
+        # 2. Prepare Shorts Description with direct link to the uploaded Long Video
+        short_description = seo_pkg["description_short_template"].replace("{LONG_VIDEO_URL}", long_url)
 
-    effective_short_iso = publish_at_short_iso
-    if not effective_short_iso and schedule_shorts_hours > 0:
-        dt_pub = datetime.datetime.now(datetime.timezone.utc) + datetime.timedelta(hours=schedule_shorts_hours)
-        effective_short_iso = dt_pub.strftime("%Y-%m-%dT%H:%M:%SZ")
+        effective_short_iso = publish_at_short_iso
+        if not effective_short_iso and schedule_shorts_hours > 0:
+            dt_pub = datetime.datetime.now(datetime.timezone.utc) + datetime.timedelta(hours=schedule_shorts_hours)
+            effective_short_iso = dt_pub.strftime("%Y-%m-%dT%H:%M:%SZ")
 
-    short_video_id = upload_video_with_custom_thumbnail(
-        youtube=youtube,
-        video_path=short_mp4,
-        thumbnail_path=thumb_s,
-        title=seo_pkg["title_short"],
-        description=short_description,
-        tags=seo_pkg["tags"] + ["Shorts", "YouTubeShorts"],
-        category_id=seo_pkg["category_id"],
-        privacy_status=privacy_status,
-        publish_at_iso=effective_short_iso,
-    )
-    short_url = f"https://youtube.com/shorts/{short_video_id}"
+        short_video_id = upload_video_with_custom_thumbnail(
+            youtube=youtube,
+            video_path=short_mp4,
+            thumbnail_path=thumb_s,
+            title=seo_pkg["title_short"],
+            description=short_description,
+            tags=seo_pkg["tags"] + ["Shorts", "YouTubeShorts"],
+            category_id=seo_pkg["category_id"],
+            privacy_status=privacy_status,
+            publish_at_iso=effective_short_iso,
+        )
+        short_url = f"https://youtube.com/shorts/{short_video_id}"
+    except Exception as exc:
+        err_str = str(exc)
+        if "uploadLimitExceeded" in err_str or "quotaExceeded" in err_str:
+            logger.warning(
+                f"YouTube rolling 24-hour upload limit / quota reached ({err_str}). "
+                f"Keeping '{script_path.name}' in queue/ so it uploads automatically on the next scheduled run."
+            )
+            result_summary["deferred_reason"] = "uploadLimitExceeded"
+            return result_summary
+        raise
 
     result_summary["long_video_url"] = long_url
     result_summary["short_video_url"] = short_url
@@ -1039,6 +1050,9 @@ def run_midnight_batch_pipeline(
                 publish_at_short_iso=pub_short_iso,
             )
             results.append(res)
+            if res.get("deferred_reason") == "uploadLimitExceeded":
+                logger.info("Stopping midnight batch early because YouTube 24h rolling upload limit was reached.")
+                break
         except Exception as exc:
             logger.error(f"Midnight batch stopped at Set {idx + 1}/{daily_sets} (likely API quota limit reached): {exc}")
             break
