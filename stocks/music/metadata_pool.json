@@ -102,13 +102,17 @@
         "1 Hour BGM",
         "Suno v6"
       ],
-      "used": false,
+      "used": true,
       "description": "🎧 【50代必見】あの頃の六本木が蘇る…1986年バブル期ディスコ＆和モノブギー1時間耐久\n\n【50代必見】 1980年代〜1990年代の青春時代の空気がよみがえる、高音質スタジオマスター（320kbps）で制作した全16曲ノンストップ・1時間耐久フルアルバムです。\n深夜のドライブ、デスクワーク、勉強、作業集中のBGMとしてお楽しみください。\n\n⏱️ トラックリスト / チャプター (全16曲ノンストップ):\n{TIMESTAMPS}\n\nチャンネル登録＆高評価で、毎日の作業・ドライブのお供にぜひどうぞ！\n\n#50代 #40代 #80年代ディスコ #バブル時代 #六本木 #マハラジャ世代 #和モノブギー #ファンク #懐かしいBGM #作業用BGM",
       "thumb_era_label": "50代に捧ぐ  ｜  1986 ROPPONGI NIGHT ARCHIVE",
       "thumb_catch": "あの頃の六本木の夜が、今よみがえる——",
       "thumb_main": "1986 六本木バブルディスコ",
       "thumb_sub": "作業・ドライブ用BGM  ｜  全16曲ノンストップ・フルアルバム（60分耐久）",
-      "artwork_file": "disco.jpg"
+      "artwork_file": "disco.jpg",
+      "_under_15m": true,
+      "published_at": "2026-10-29T17:34:48.012198+00:00",
+      "youtube_long_id": "t_EzNW9rL6U",
+      "youtube_short_id": "gKGFTGu5eJc"
     },
     {
       "id": "music_003",

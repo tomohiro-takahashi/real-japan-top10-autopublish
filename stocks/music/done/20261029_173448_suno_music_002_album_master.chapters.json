@@ -1,0 +1,40 @@
+{
+  "id": "music_002",
+  "track_count": 4,
+  "total_duration_sec": 792.98,
+  "chapters": [
+    {
+      "index": 1,
+      "timestamp": "00:00",
+      "start_sec": 0.0,
+      "duration_sec": 218.18,
+      "title": "1986 Roppongi Neon Fever",
+      "line": "00:00 Track 01 — 1986 Roppongi Neon Fever"
+    },
+    {
+      "index": 2,
+      "timestamp": "03:38",
+      "start_sec": 218.18,
+      "duration_sec": 193.22,
+      "title": "Slap Bass on the Dancefloor",
+      "line": "03:38 Track 02 — Slap Bass on the Dancefloor"
+    },
+    {
+      "index": 3,
+      "timestamp": "06:51",
+      "start_sec": 411.41,
+      "duration_sec": 181.58,
+      "title": "Champagne Mirrorball",
+      "line": "06:51 Track 03 — Champagne Mirrorball"
+    },
+    {
+      "index": 4,
+      "timestamp": "09:52",
+      "start_sec": 592.99,
+      "duration_sec": 199.99,
+      "title": "Midnight Maharaja Groove",
+      "line": "09:52 Track 04 — Midnight Maharaja Groove"
+    }
+  ],
+  "formatted_timestamps": "00:00 Track 01 — 1986 Roppongi Neon Fever\n03:38 Track 02 — Slap Bass on the Dancefloor\n06:51 Track 03 — Champagne Mirrorball\n09:52 Track 04 — Midnight Maharaja Groove"
+}
