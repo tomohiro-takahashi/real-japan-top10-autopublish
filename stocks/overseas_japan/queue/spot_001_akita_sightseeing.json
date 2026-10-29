@@ -7,7 +7,7 @@
     "map_badge": "450km North of Tokyo",
     "cards": [
       {
-        "title": "1. WHERE IS AKITA? (秋田の位置・地理)",
+        "title": "1. WHERE IS AKITA?",
         "bullets": [
           "Northern Tohoku (Sea of Japan coast)",
           "450 km north of Tokyo (west of Iwate)",
@@ -16,7 +16,7 @@
         ]
       },
       {
-        "title": "2. ACCESS FROM TOKYO (東京からのアクセス)",
+        "title": "2. ACCESS FROM TOKYO",
         "bullets": [
           "Bullet Train: Akita Shinkansen 'Komachi' direct from Tokyo",
           "3h 15m to Kakunodate / Tazawako Stn | 3h 50m to Akita Stn",
@@ -25,16 +25,16 @@
         ]
       },
       {
-        "title": "3. CLIMATE & 4 SEASONS (気候・ベストシーズン)",
+        "title": "3. CLIMATE & 4 SEASONS",
         "bullets": [
           "Spring (Late Apr–May, 15°C): Samurai street weeping sakura",
           "Summer (Jun–Aug, 26°C): Cool emerald moss waterfalls & gorges",
-          "Autumn (Oct, 14°C): Fiery volcanic canyon紅葉 (foliage) peak",
+          "Autumn (Oct, 14°C): Fiery volcanic canyon (foliage) peak",
           "Winter (Dec–Mar, -3°C): Deep powder snow & milky snow Onsen"
         ]
       },
       {
-        "title": "4. AKITA'S 3 SIGNATURES (秋田の3大特徴)",
+        "title": "4. AKITA'S 3 SIGNATURES (3)",
         "bullets": [
           "World-class volcanic Onsen (Tamagawa pH 1.2 & Nyuto milky baths)",
           "Preserved Edo-period Samurai towns & UNESCO Namahage folklore",
@@ -42,7 +42,8 @@
           "Important Warning: Many mountain roads close Nov–Apr for snow!"
         ]
       }
-    ]
+    ],
+    "target_pref_ja": "秋田県"
   },
   "summary_rows": [
     {

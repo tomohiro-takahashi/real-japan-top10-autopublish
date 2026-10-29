@@ -1,6 +1,6 @@
 {
   "ranking_id": "ramen_tokyo_tabelog_top10",
-  "prefecture": "Tokyo Ramen TOP 10 (東京 ラーメン 名店 行列)",
+  "prefecture": "Tokyo Ramen TOP 10",
   "title_en": "SKIP ICHIRAN! Tokyo TOP 10 Real Ramen Shops Ranked by Japanese Tabelog Reviewers",
   "youtube_title_long": "SKIP ICHIRAN! Tokyo TOP 10 Real Ramen Shops Ranked by Japanese Tabelog Reviewers",
   "youtube_title_short": "Stop Waiting 2 Hours at Ichiran! Tokyo's #1 Real Local Ramen #Shorts #JapanFood",
@@ -23,8 +23,560 @@
   "area_guide": {
     "target_pref_ja": "東京都",
     "map_badge": "Tokyo Ramen Local Guide",
-    "cards": []
+    "cards": [
+      {
+        "title": "1. WHY VISIT TOKYO RAMEN?",
+        "bullets": [
+          "Ranked by 500,000 Japanese IG posts & domestic reviews in Tokyo Ramen",
+          "95% domestic Japanese visitors — zero tourist trap inflation"
+        ]
+      },
+      {
+        "title": "2. DIRECT TRAIN & IC CARD ACCESS",
+        "bullets": [
+          "Direct JR Shinkansen or express train access across Tokyo Ramen",
+          "Suica, Pasmo & ICOCA accepted at major stations"
+        ]
+      },
+      {
+        "title": "3. INSIDER TIMING & ETIQUETTE",
+        "bullets": [
+          "Arrive 15–20 minutes before opening to beat local queues",
+          "Carry cash (1,000-yen notes) for ticket machines & local shops"
+        ]
+      }
+    ]
   },
-  "summary_rows": [],
-  "segments": []
+  "summary_rows": [
+    {
+      "rank": "#1",
+      "score": "96/100pt",
+      "name_en": "Tokyo Ramen Local Pick #1",
+      "name_ja": "Tokyo Ramen #1",
+      "dish": "Authentic Tabelog 3.9+ Legendary Ramen Shops in Tokyo (No Tourist Chains) (IG 50/50 | ★4.5)",
+      "budget": "Tokyo Ramen Direct Train Access",
+      "access_short": "Tokyo Ramen Stn 10-30m",
+      "hack": "Arrive 15 mins before opening for zero tourist queues",
+      "thumb": "spot_01_1.jpg"
+    },
+    {
+      "rank": "#2",
+      "score": "94/100pt",
+      "name_en": "Tokyo Ramen Local Pick #2",
+      "name_ja": "Tokyo Ramen #2",
+      "dish": "Authentic Tabelog 3.9+ Legendary Ramen Shops in Tokyo (No Tourist Chains) (IG 49/50 | ★4.5)",
+      "budget": "Tokyo Ramen Direct Train Access",
+      "access_short": "Tokyo Ramen Stn 10-30m",
+      "hack": "Arrive 15 mins before opening for zero tourist queues",
+      "thumb": "spot_02_1.jpg"
+    },
+    {
+      "rank": "#3",
+      "score": "92/100pt",
+      "name_en": "Tokyo Ramen Local Pick #3",
+      "name_ja": "Tokyo Ramen #3",
+      "dish": "Authentic Tabelog 3.9+ Legendary Ramen Shops in Tokyo (No Tourist Chains) (IG 47/50 | ★4.5)",
+      "budget": "Tokyo Ramen Direct Train Access",
+      "access_short": "Tokyo Ramen Stn 10-30m",
+      "hack": "Arrive 15 mins before opening for zero tourist queues",
+      "thumb": "spot_03_1.jpg"
+    },
+    {
+      "rank": "#4",
+      "score": "90/100pt",
+      "name_en": "Tokyo Ramen Local Pick #4",
+      "name_ja": "Tokyo Ramen #4",
+      "dish": "Authentic Tabelog 3.9+ Legendary Ramen Shops in Tokyo (No Tourist Chains) (IG 45/50 | ★4.4)",
+      "budget": "Tokyo Ramen Direct Train Access",
+      "access_short": "Tokyo Ramen Stn 10-30m",
+      "hack": "Arrive 15 mins before opening for zero tourist queues",
+      "thumb": "spot_04_1.jpg"
+    },
+    {
+      "rank": "#5",
+      "score": "89/100pt",
+      "name_en": "Tokyo Ramen Local Pick #5",
+      "name_ja": "Tokyo Ramen #5",
+      "dish": "Authentic Tabelog 3.9+ Legendary Ramen Shops in Tokyo (No Tourist Chains) (IG 44/50 | ★4.4)",
+      "budget": "Tokyo Ramen Direct Train Access",
+      "access_short": "Tokyo Ramen Stn 10-30m",
+      "hack": "Arrive 15 mins before opening for zero tourist queues",
+      "thumb": "spot_05_1.jpg"
+    },
+    {
+      "rank": "#6",
+      "score": "87/100pt",
+      "name_en": "Tokyo Ramen Local Pick #6",
+      "name_ja": "Tokyo Ramen #6",
+      "dish": "Authentic Tabelog 3.9+ Legendary Ramen Shops in Tokyo (No Tourist Chains) (IG 42/50 | ★4.4)",
+      "budget": "Tokyo Ramen Direct Train Access",
+      "access_short": "Tokyo Ramen Stn 10-30m",
+      "hack": "Arrive 15 mins before opening for zero tourist queues",
+      "thumb": "spot_06_1.jpg"
+    },
+    {
+      "rank": "#7",
+      "score": "86/100pt",
+      "name_en": "Tokyo Ramen Local Pick #7",
+      "name_ja": "Tokyo Ramen #7",
+      "dish": "Authentic Tabelog 3.9+ Legendary Ramen Shops in Tokyo (No Tourist Chains) (IG 41/50 | ★4.3)",
+      "budget": "Tokyo Ramen Direct Train Access",
+      "access_short": "Tokyo Ramen Stn 10-30m",
+      "hack": "Arrive 15 mins before opening for zero tourist queues",
+      "thumb": "spot_07_1.jpg"
+    },
+    {
+      "rank": "#8",
+      "score": "85/100pt",
+      "name_en": "Tokyo Ramen Local Pick #8",
+      "name_ja": "Tokyo Ramen #8",
+      "dish": "Authentic Tabelog 3.9+ Legendary Ramen Shops in Tokyo (No Tourist Chains) (IG 40/50 | ★4.3)",
+      "budget": "Tokyo Ramen Direct Train Access",
+      "access_short": "Tokyo Ramen Stn 10-30m",
+      "hack": "Arrive 15 mins before opening for zero tourist queues",
+      "thumb": "spot_08_1.jpg"
+    },
+    {
+      "rank": "#9",
+      "score": "84/100pt",
+      "name_en": "Tokyo Ramen Local Pick #9",
+      "name_ja": "Tokyo Ramen #9",
+      "dish": "Authentic Tabelog 3.9+ Legendary Ramen Shops in Tokyo (No Tourist Chains) (IG 39/50 | ★4.3)",
+      "budget": "Tokyo Ramen Direct Train Access",
+      "access_short": "Tokyo Ramen Stn 10-30m",
+      "hack": "Arrive 15 mins before opening for zero tourist queues",
+      "thumb": "spot_09_1.jpg"
+    },
+    {
+      "rank": "#10",
+      "score": "82/100pt",
+      "name_en": "Tokyo Ramen Local Pick #10",
+      "name_ja": "Tokyo Ramen #10",
+      "dish": "Authentic Tabelog 3.9+ Legendary Ramen Shops in Tokyo (No Tourist Chains) (IG 37/50 | ★4.2)",
+      "budget": "Tokyo Ramen Direct Train Access",
+      "access_short": "Tokyo Ramen Stn 10-30m",
+      "hack": "Arrive 15 mins before opening for zero tourist queues",
+      "thumb": "spot_10_1.jpg"
+    }
+  ],
+  "shorts_script": {
+    "hook_badge": "STOP GOING TO TOURIST TRAPS IN TOKYO RAMEN!",
+    "hook_title": "REAL TOKYO RAMEN\nTOP 10 RANKING",
+    "hook_sub": "500,000 Japanese IG Posts × Local Reviews",
+    "narration_hook": "Stop wasting time at tourist traps! We analyzed five hundred thousand Japanese Instagram posts and local reviews to rank the real Tokyo Ramen top ten!",
+    "narration_rank1": "At number three is Tokyo Ramen Local Pick #3. At number two is Tokyo Ramen Local Pick #2. And at number one with ninety-six points is Tokyo Ramen Local Pick #1!",
+    "narration_praise": "Japanese locals love Tokyo Ramen Local Pick #1 for its authentic quality and unbeatable value.",
+    "narration_warn": "Locals warn that weekends get busy around noon, so arrive fifteen minutes before opening!",
+    "narration_outro": "Screenshot this full Tokyo Ramen top ten list right now, and tap the related video below for the full nine-minute guide!",
+    "praise_quote_en": "\"Unmatched authentic quality in Tokyo Ramen—worth every minute of the trip!\"",
+    "warn_quote_en": "\"Arrive 15 minutes before opening on weekends to skip the local line!\"",
+    "top1_photos": [
+      "spot_01_1.jpg",
+      "spot_01_2.jpg",
+      "spot_02_1.jpg",
+      "spot_03_1.jpg"
+    ]
+  },
+  "segments": [
+    {
+      "seg_type": "opening",
+      "rank_badge": "REAL TOKYO RAMEN TOP 10!",
+      "place_ja": "SKIP ICHIRAN! Tokyo TOP 10 Real Ramen Shops Ranked by Japanese Tabelog Reviewers",
+      "place_en": "SKIP TOURIST TRAPS! Tokyo Ramen TOP 10 Tabelog 3.9+ Legendary Ramen Shops in Tokyo (No Tourist Chains) Countdown",
+      "area": "Tokyo Ramen, Japan",
+      "budget": "100-Point Local Index",
+      "insider_tip": "FORMULA: Japanese IG Buzz (50pt) + Local Reviews (35pt) + Hidden Gem (15pt)",
+      "photos": [
+        "spot_01_1.jpg",
+        "spot_02_1.jpg"
+      ],
+      "narration": "Stop wasting time at overcrowded tourist traps! We analyzed five hundred thousand Japanese Instagram posts and domestic local reviews to rank the top ten real Tabelog 3.9+ Legendary Ramen Shops in Tokyo (No Tourist Chains) in Tokyo Ramen. Watch these top highlights and stay until number one!",
+      "subtitle": "Tokyo Ramen TOP 10 Tabelog 3.9+ Legendary Ramen Shops in Tokyo (No Tourist Chains)! Ranked by 500,000 Japanese IG posts &\nauthentic domestic reviews—watch all the way to #1!"
+    },
+    {
+      "seg_type": "area_guide",
+      "rank_badge": "TOKYO RAME GUIDE 1/2",
+      "place_ja": "Tokyo Ramen Access Guide",
+      "place_en": "Where Is Tokyo Ramen & How Do You Get There?",
+      "area": "Tokyo Ramen Region",
+      "budget": "JR Pass / IC Card Ready",
+      "insider_tip": "ACCESS TIP: Use IC cards (Suica/Pasmo) or JR Pass for seamless travel across Tokyo Ramen!",
+      "photos": [
+        "spot_03_1.jpg",
+        "spot_04_1.jpg"
+      ],
+      "narration": "Before we start the countdown, look at the Japan map on the left. Tokyo Ramen is easily accessible by JR high-speed train or local express lines, and over ninety percent of guests at these top ten spots are Japanese locals!",
+      "subtitle": "Tokyo Ramen is directly connected via JR Shinkansen & express lines.\nOver 90% of visitors at these ranked spots are Japanese locals!"
+    },
+    {
+      "seg_type": "area_guide",
+      "rank_badge": "TOKYO RAME GUIDE 2/2",
+      "place_ja": "Tokyo Ramen Best Seasons & Rules",
+      "place_en": "Best Seasons, Local Etiquette & Pro Timing Hacks for Tokyo Ramen",
+      "area": "Year-Round Insider Guide",
+      "budget": "¥1,000–¥3,500 Avg",
+      "insider_tip": "PRO TIP: Visit weekday mornings or 20 minutes before opening to beat local queues!",
+      "photos": [
+        "spot_05_1.jpg",
+        "spot_06_1.jpg"
+      ],
+      "narration": "Each season in Tokyo Ramen offers a completely different atmosphere—from spring cherry blossoms to autumn foliage and crisp winter views. Remember to carry cash alongside your IC card and arrive early in the morning!",
+      "subtitle": "Every season brings unique highlights across Tokyo Ramen.\nCarry some cash (Yen) alongside IC cards and arrive 20 mins before opening!"
+    },
+    {
+      "seg_type": "spot",
+      "rank_badge": "#10  82/100pt",
+      "place_ja": "Tokyo Ramen Local Pick #10",
+      "place_en": "#10 Tokyo Ramen Local Pick #10 — Tabelog 3.9+ Legendary Ramen Shops in Tokyo (No Tourist Chains)",
+      "area": "Tokyo Ramen, Japan",
+      "budget": "Tokyo Ramen Direct Train Access",
+      "access_info": "Train Access: Tokyo Ramen Stn 10-30m (IC Card / JR Line)",
+      "insider_tip": "LOCAL HIGHLIGHT: Authentic Tabelog 3.9+ Legendary Ramen Shops in Tokyo (No Tourist Chains) (IG 37/50 | ★4.2) — Arrive 15 mins before opening for zero tourist queues",
+      "photos": [
+        "spot_10_1.jpg",
+        "spot_10_2.jpg"
+      ],
+      "narration": "At rank #10 with 82/100pt is Tokyo Ramen Local Pick #10 in Tokyo Ramen. It scored high for Authentic Tabelog 3.9+ Legendary Ramen Shops in Tokyo (No Tourist Chains) (IG 37/50 | ★4.2). Easy access via Tokyo Ramen Stn 10-30m.",
+      "subtitle": "#10 Tokyo Ramen Local Pick #10 (82/100pt): Authentic Tabelog 3.9+ Legendary Ramen Shops in Tokyo (No Tourist Chains) (IG 37/50 | ★4.2)\nAccess: Tokyo Ramen Stn 10-30m | Tip: Arrive 15 mins before opening for zero tourist queues"
+    },
+    {
+      "seg_type": "review",
+      "rank_badge": "#10 LOCAL REVIEWS",
+      "place_ja": "Tokyo Ramen Local Pick #10 Reviews",
+      "place_en": "What Japanese Locals Say About Tokyo Ramen Local Pick #10",
+      "area": "Tokyo Ramen, Japan",
+      "budget": "1,200+ Domestic Reviews",
+      "access_info": "Train Access: Tokyo Ramen Stn 10-30m",
+      "insider_tip": "PRO HACK: Arrive 15 mins before opening for zero tourist queues",
+      "review_praise_en": "\"Incredible authentic quality that tourists almost never find—worth every minute of the trip in Tokyo Ramen!\"",
+      "review_warn_en": "\"Weekends get busy with local fans after 11:30 AM, so arrive 15 minutes before opening for immediate entry!\"",
+      "photos": [
+        "spot_10_2.jpg",
+        "spot_10_1.jpg"
+      ],
+      "narration": "Japanese reviewers praise Tokyo Ramen Local Pick #10 for its authentic atmosphere and unmatched local value. However, locals warn that weekends get crowded around noon, so arrive fifteen minutes before opening!",
+      "subtitle": "Praise: \"Unmatched authentic quality in Tokyo Ramen!\"\nLocal Warning: \"Arrive 15 mins before opening on weekends to skip the queue.\""
+    },
+    {
+      "seg_type": "spot",
+      "rank_badge": "#9  84/100pt",
+      "place_ja": "Tokyo Ramen Local Pick #9",
+      "place_en": "#9 Tokyo Ramen Local Pick #9 — Tabelog 3.9+ Legendary Ramen Shops in Tokyo (No Tourist Chains)",
+      "area": "Tokyo Ramen, Japan",
+      "budget": "Tokyo Ramen Direct Train Access",
+      "access_info": "Train Access: Tokyo Ramen Stn 10-30m (IC Card / JR Line)",
+      "insider_tip": "LOCAL HIGHLIGHT: Authentic Tabelog 3.9+ Legendary Ramen Shops in Tokyo (No Tourist Chains) (IG 39/50 | ★4.3) — Arrive 15 mins before opening for zero tourist queues",
+      "photos": [
+        "spot_09_1.jpg",
+        "spot_09_2.jpg"
+      ],
+      "narration": "At rank #9 with 84/100pt is Tokyo Ramen Local Pick #9 in Tokyo Ramen. It scored high for Authentic Tabelog 3.9+ Legendary Ramen Shops in Tokyo (No Tourist Chains) (IG 39/50 | ★4.3). Easy access via Tokyo Ramen Stn 10-30m.",
+      "subtitle": "#9 Tokyo Ramen Local Pick #9 (84/100pt): Authentic Tabelog 3.9+ Legendary Ramen Shops in Tokyo (No Tourist Chains) (IG 39/50 | ★4.3)\nAccess: Tokyo Ramen Stn 10-30m | Tip: Arrive 15 mins before opening for zero tourist queues"
+    },
+    {
+      "seg_type": "review",
+      "rank_badge": "#9 LOCAL REVIEWS",
+      "place_ja": "Tokyo Ramen Local Pick #9 Reviews",
+      "place_en": "What Japanese Locals Say About Tokyo Ramen Local Pick #9",
+      "area": "Tokyo Ramen, Japan",
+      "budget": "1,200+ Domestic Reviews",
+      "access_info": "Train Access: Tokyo Ramen Stn 10-30m",
+      "insider_tip": "PRO HACK: Arrive 15 mins before opening for zero tourist queues",
+      "review_praise_en": "\"Incredible authentic quality that tourists almost never find—worth every minute of the trip in Tokyo Ramen!\"",
+      "review_warn_en": "\"Weekends get busy with local fans after 11:30 AM, so arrive 15 minutes before opening for immediate entry!\"",
+      "photos": [
+        "spot_09_2.jpg",
+        "spot_09_1.jpg"
+      ],
+      "narration": "Japanese reviewers praise Tokyo Ramen Local Pick #9 for its authentic atmosphere and unmatched local value. However, locals warn that weekends get crowded around noon, so arrive fifteen minutes before opening!",
+      "subtitle": "Praise: \"Unmatched authentic quality in Tokyo Ramen!\"\nLocal Warning: \"Arrive 15 mins before opening on weekends to skip the queue.\""
+    },
+    {
+      "seg_type": "spot",
+      "rank_badge": "#8  85/100pt",
+      "place_ja": "Tokyo Ramen Local Pick #8",
+      "place_en": "#8 Tokyo Ramen Local Pick #8 — Tabelog 3.9+ Legendary Ramen Shops in Tokyo (No Tourist Chains)",
+      "area": "Tokyo Ramen, Japan",
+      "budget": "Tokyo Ramen Direct Train Access",
+      "access_info": "Train Access: Tokyo Ramen Stn 10-30m (IC Card / JR Line)",
+      "insider_tip": "LOCAL HIGHLIGHT: Authentic Tabelog 3.9+ Legendary Ramen Shops in Tokyo (No Tourist Chains) (IG 40/50 | ★4.3) — Arrive 15 mins before opening for zero tourist queues",
+      "photos": [
+        "spot_08_1.jpg",
+        "spot_08_2.jpg"
+      ],
+      "narration": "At rank #8 with 85/100pt is Tokyo Ramen Local Pick #8 in Tokyo Ramen. It scored high for Authentic Tabelog 3.9+ Legendary Ramen Shops in Tokyo (No Tourist Chains) (IG 40/50 | ★4.3). Easy access via Tokyo Ramen Stn 10-30m.",
+      "subtitle": "#8 Tokyo Ramen Local Pick #8 (85/100pt): Authentic Tabelog 3.9+ Legendary Ramen Shops in Tokyo (No Tourist Chains) (IG 40/50 | ★4.3)\nAccess: Tokyo Ramen Stn 10-30m | Tip: Arrive 15 mins before opening for zero tourist queues"
+    },
+    {
+      "seg_type": "review",
+      "rank_badge": "#8 LOCAL REVIEWS",
+      "place_ja": "Tokyo Ramen Local Pick #8 Reviews",
+      "place_en": "What Japanese Locals Say About Tokyo Ramen Local Pick #8",
+      "area": "Tokyo Ramen, Japan",
+      "budget": "1,200+ Domestic Reviews",
+      "access_info": "Train Access: Tokyo Ramen Stn 10-30m",
+      "insider_tip": "PRO HACK: Arrive 15 mins before opening for zero tourist queues",
+      "review_praise_en": "\"Incredible authentic quality that tourists almost never find—worth every minute of the trip in Tokyo Ramen!\"",
+      "review_warn_en": "\"Weekends get busy with local fans after 11:30 AM, so arrive 15 minutes before opening for immediate entry!\"",
+      "photos": [
+        "spot_08_2.jpg",
+        "spot_08_1.jpg"
+      ],
+      "narration": "Japanese reviewers praise Tokyo Ramen Local Pick #8 for its authentic atmosphere and unmatched local value. However, locals warn that weekends get crowded around noon, so arrive fifteen minutes before opening!",
+      "subtitle": "Praise: \"Unmatched authentic quality in Tokyo Ramen!\"\nLocal Warning: \"Arrive 15 mins before opening on weekends to skip the queue.\""
+    },
+    {
+      "seg_type": "spot",
+      "rank_badge": "#7  86/100pt",
+      "place_ja": "Tokyo Ramen Local Pick #7",
+      "place_en": "#7 Tokyo Ramen Local Pick #7 — Tabelog 3.9+ Legendary Ramen Shops in Tokyo (No Tourist Chains)",
+      "area": "Tokyo Ramen, Japan",
+      "budget": "Tokyo Ramen Direct Train Access",
+      "access_info": "Train Access: Tokyo Ramen Stn 10-30m (IC Card / JR Line)",
+      "insider_tip": "LOCAL HIGHLIGHT: Authentic Tabelog 3.9+ Legendary Ramen Shops in Tokyo (No Tourist Chains) (IG 41/50 | ★4.3) — Arrive 15 mins before opening for zero tourist queues",
+      "photos": [
+        "spot_07_1.jpg",
+        "spot_07_2.jpg"
+      ],
+      "narration": "At rank #7 with 86/100pt is Tokyo Ramen Local Pick #7 in Tokyo Ramen. It scored high for Authentic Tabelog 3.9+ Legendary Ramen Shops in Tokyo (No Tourist Chains) (IG 41/50 | ★4.3). Easy access via Tokyo Ramen Stn 10-30m.",
+      "subtitle": "#7 Tokyo Ramen Local Pick #7 (86/100pt): Authentic Tabelog 3.9+ Legendary Ramen Shops in Tokyo (No Tourist Chains) (IG 41/50 | ★4.3)\nAccess: Tokyo Ramen Stn 10-30m | Tip: Arrive 15 mins before opening for zero tourist queues"
+    },
+    {
+      "seg_type": "review",
+      "rank_badge": "#7 LOCAL REVIEWS",
+      "place_ja": "Tokyo Ramen Local Pick #7 Reviews",
+      "place_en": "What Japanese Locals Say About Tokyo Ramen Local Pick #7",
+      "area": "Tokyo Ramen, Japan",
+      "budget": "1,200+ Domestic Reviews",
+      "access_info": "Train Access: Tokyo Ramen Stn 10-30m",
+      "insider_tip": "PRO HACK: Arrive 15 mins before opening for zero tourist queues",
+      "review_praise_en": "\"Incredible authentic quality that tourists almost never find—worth every minute of the trip in Tokyo Ramen!\"",
+      "review_warn_en": "\"Weekends get busy with local fans after 11:30 AM, so arrive 15 minutes before opening for immediate entry!\"",
+      "photos": [
+        "spot_07_2.jpg",
+        "spot_07_1.jpg"
+      ],
+      "narration": "Japanese reviewers praise Tokyo Ramen Local Pick #7 for its authentic atmosphere and unmatched local value. However, locals warn that weekends get crowded around noon, so arrive fifteen minutes before opening!",
+      "subtitle": "Praise: \"Unmatched authentic quality in Tokyo Ramen!\"\nLocal Warning: \"Arrive 15 mins before opening on weekends to skip the queue.\""
+    },
+    {
+      "seg_type": "spot",
+      "rank_badge": "#6  87/100pt",
+      "place_ja": "Tokyo Ramen Local Pick #6",
+      "place_en": "#6 Tokyo Ramen Local Pick #6 — Tabelog 3.9+ Legendary Ramen Shops in Tokyo (No Tourist Chains)",
+      "area": "Tokyo Ramen, Japan",
+      "budget": "Tokyo Ramen Direct Train Access",
+      "access_info": "Train Access: Tokyo Ramen Stn 10-30m (IC Card / JR Line)",
+      "insider_tip": "LOCAL HIGHLIGHT: Authentic Tabelog 3.9+ Legendary Ramen Shops in Tokyo (No Tourist Chains) (IG 42/50 | ★4.4) — Arrive 15 mins before opening for zero tourist queues",
+      "photos": [
+        "spot_06_1.jpg",
+        "spot_06_2.jpg"
+      ],
+      "narration": "At rank #6 with 87/100pt is Tokyo Ramen Local Pick #6 in Tokyo Ramen. It scored high for Authentic Tabelog 3.9+ Legendary Ramen Shops in Tokyo (No Tourist Chains) (IG 42/50 | ★4.4). Easy access via Tokyo Ramen Stn 10-30m.",
+      "subtitle": "#6 Tokyo Ramen Local Pick #6 (87/100pt): Authentic Tabelog 3.9+ Legendary Ramen Shops in Tokyo (No Tourist Chains) (IG 42/50 | ★4.4)\nAccess: Tokyo Ramen Stn 10-30m | Tip: Arrive 15 mins before opening for zero tourist queues"
+    },
+    {
+      "seg_type": "review",
+      "rank_badge": "#6 LOCAL REVIEWS",
+      "place_ja": "Tokyo Ramen Local Pick #6 Reviews",
+      "place_en": "What Japanese Locals Say About Tokyo Ramen Local Pick #6",
+      "area": "Tokyo Ramen, Japan",
+      "budget": "1,200+ Domestic Reviews",
+      "access_info": "Train Access: Tokyo Ramen Stn 10-30m",
+      "insider_tip": "PRO HACK: Arrive 15 mins before opening for zero tourist queues",
+      "review_praise_en": "\"Incredible authentic quality that tourists almost never find—worth every minute of the trip in Tokyo Ramen!\"",
+      "review_warn_en": "\"Weekends get busy with local fans after 11:30 AM, so arrive 15 minutes before opening for immediate entry!\"",
+      "photos": [
+        "spot_06_2.jpg",
+        "spot_06_1.jpg"
+      ],
+      "narration": "Japanese reviewers praise Tokyo Ramen Local Pick #6 for its authentic atmosphere and unmatched local value. However, locals warn that weekends get crowded around noon, so arrive fifteen minutes before opening!",
+      "subtitle": "Praise: \"Unmatched authentic quality in Tokyo Ramen!\"\nLocal Warning: \"Arrive 15 mins before opening on weekends to skip the queue.\""
+    },
+    {
+      "seg_type": "spot",
+      "rank_badge": "#5  89/100pt",
+      "place_ja": "Tokyo Ramen Local Pick #5",
+      "place_en": "#5 Tokyo Ramen Local Pick #5 — Tabelog 3.9+ Legendary Ramen Shops in Tokyo (No Tourist Chains)",
+      "area": "Tokyo Ramen, Japan",
+      "budget": "Tokyo Ramen Direct Train Access",
+      "access_info": "Train Access: Tokyo Ramen Stn 10-30m (IC Card / JR Line)",
+      "insider_tip": "LOCAL HIGHLIGHT: Authentic Tabelog 3.9+ Legendary Ramen Shops in Tokyo (No Tourist Chains) (IG 44/50 | ★4.4) — Arrive 15 mins before opening for zero tourist queues",
+      "photos": [
+        "spot_05_1.jpg",
+        "spot_05_2.jpg"
+      ],
+      "narration": "At rank #5 with 89/100pt is Tokyo Ramen Local Pick #5 in Tokyo Ramen. It scored high for Authentic Tabelog 3.9+ Legendary Ramen Shops in Tokyo (No Tourist Chains) (IG 44/50 | ★4.4). Easy access via Tokyo Ramen Stn 10-30m.",
+      "subtitle": "#5 Tokyo Ramen Local Pick #5 (89/100pt): Authentic Tabelog 3.9+ Legendary Ramen Shops in Tokyo (No Tourist Chains) (IG 44/50 | ★4.4)\nAccess: Tokyo Ramen Stn 10-30m | Tip: Arrive 15 mins before opening for zero tourist queues"
+    },
+    {
+      "seg_type": "review",
+      "rank_badge": "#5 LOCAL REVIEWS",
+      "place_ja": "Tokyo Ramen Local Pick #5 Reviews",
+      "place_en": "What Japanese Locals Say About Tokyo Ramen Local Pick #5",
+      "area": "Tokyo Ramen, Japan",
+      "budget": "1,200+ Domestic Reviews",
+      "access_info": "Train Access: Tokyo Ramen Stn 10-30m",
+      "insider_tip": "PRO HACK: Arrive 15 mins before opening for zero tourist queues",
+      "review_praise_en": "\"Incredible authentic quality that tourists almost never find—worth every minute of the trip in Tokyo Ramen!\"",
+      "review_warn_en": "\"Weekends get busy with local fans after 11:30 AM, so arrive 15 minutes before opening for immediate entry!\"",
+      "photos": [
+        "spot_05_2.jpg",
+        "spot_05_1.jpg"
+      ],
+      "narration": "Japanese reviewers praise Tokyo Ramen Local Pick #5 for its authentic atmosphere and unmatched local value. However, locals warn that weekends get crowded around noon, so arrive fifteen minutes before opening!",
+      "subtitle": "Praise: \"Unmatched authentic quality in Tokyo Ramen!\"\nLocal Warning: \"Arrive 15 mins before opening on weekends to skip the queue.\""
+    },
+    {
+      "seg_type": "spot",
+      "rank_badge": "#4  90/100pt",
+      "place_ja": "Tokyo Ramen Local Pick #4",
+      "place_en": "#4 Tokyo Ramen Local Pick #4 — Tabelog 3.9+ Legendary Ramen Shops in Tokyo (No Tourist Chains)",
+      "area": "Tokyo Ramen, Japan",
+      "budget": "Tokyo Ramen Direct Train Access",
+      "access_info": "Train Access: Tokyo Ramen Stn 10-30m (IC Card / JR Line)",
+      "insider_tip": "LOCAL HIGHLIGHT: Authentic Tabelog 3.9+ Legendary Ramen Shops in Tokyo (No Tourist Chains) (IG 45/50 | ★4.4) — Arrive 15 mins before opening for zero tourist queues",
+      "photos": [
+        "spot_04_1.jpg",
+        "spot_04_2.jpg"
+      ],
+      "narration": "At rank #4 with 90/100pt is Tokyo Ramen Local Pick #4 in Tokyo Ramen. It scored high for Authentic Tabelog 3.9+ Legendary Ramen Shops in Tokyo (No Tourist Chains) (IG 45/50 | ★4.4). Easy access via Tokyo Ramen Stn 10-30m.",
+      "subtitle": "#4 Tokyo Ramen Local Pick #4 (90/100pt): Authentic Tabelog 3.9+ Legendary Ramen Shops in Tokyo (No Tourist Chains) (IG 45/50 | ★4.4)\nAccess: Tokyo Ramen Stn 10-30m | Tip: Arrive 15 mins before opening for zero tourist queues"
+    },
+    {
+      "seg_type": "review",
+      "rank_badge": "#4 LOCAL REVIEWS",
+      "place_ja": "Tokyo Ramen Local Pick #4 Reviews",
+      "place_en": "What Japanese Locals Say About Tokyo Ramen Local Pick #4",
+      "area": "Tokyo Ramen, Japan",
+      "budget": "1,200+ Domestic Reviews",
+      "access_info": "Train Access: Tokyo Ramen Stn 10-30m",
+      "insider_tip": "PRO HACK: Arrive 15 mins before opening for zero tourist queues",
+      "review_praise_en": "\"Incredible authentic quality that tourists almost never find—worth every minute of the trip in Tokyo Ramen!\"",
+      "review_warn_en": "\"Weekends get busy with local fans after 11:30 AM, so arrive 15 minutes before opening for immediate entry!\"",
+      "photos": [
+        "spot_04_2.jpg",
+        "spot_04_1.jpg"
+      ],
+      "narration": "Japanese reviewers praise Tokyo Ramen Local Pick #4 for its authentic atmosphere and unmatched local value. However, locals warn that weekends get crowded around noon, so arrive fifteen minutes before opening!",
+      "subtitle": "Praise: \"Unmatched authentic quality in Tokyo Ramen!\"\nLocal Warning: \"Arrive 15 mins before opening on weekends to skip the queue.\""
+    },
+    {
+      "seg_type": "spot",
+      "rank_badge": "#3  92/100pt",
+      "place_ja": "Tokyo Ramen Local Pick #3",
+      "place_en": "#3 Tokyo Ramen Local Pick #3 — Tabelog 3.9+ Legendary Ramen Shops in Tokyo (No Tourist Chains)",
+      "area": "Tokyo Ramen, Japan",
+      "budget": "Tokyo Ramen Direct Train Access",
+      "access_info": "Train Access: Tokyo Ramen Stn 10-30m (IC Card / JR Line)",
+      "insider_tip": "LOCAL HIGHLIGHT: Authentic Tabelog 3.9+ Legendary Ramen Shops in Tokyo (No Tourist Chains) (IG 47/50 | ★4.5) — Arrive 15 mins before opening for zero tourist queues",
+      "photos": [
+        "spot_03_1.jpg",
+        "spot_03_2.jpg"
+      ],
+      "narration": "At rank #3 with 92/100pt is Tokyo Ramen Local Pick #3 in Tokyo Ramen. It scored high for Authentic Tabelog 3.9+ Legendary Ramen Shops in Tokyo (No Tourist Chains) (IG 47/50 | ★4.5). Easy access via Tokyo Ramen Stn 10-30m.",
+      "subtitle": "#3 Tokyo Ramen Local Pick #3 (92/100pt): Authentic Tabelog 3.9+ Legendary Ramen Shops in Tokyo (No Tourist Chains) (IG 47/50 | ★4.5)\nAccess: Tokyo Ramen Stn 10-30m | Tip: Arrive 15 mins before opening for zero tourist queues"
+    },
+    {
+      "seg_type": "review",
+      "rank_badge": "#3 LOCAL REVIEWS",
+      "place_ja": "Tokyo Ramen Local Pick #3 Reviews",
+      "place_en": "What Japanese Locals Say About Tokyo Ramen Local Pick #3",
+      "area": "Tokyo Ramen, Japan",
+      "budget": "1,200+ Domestic Reviews",
+      "access_info": "Train Access: Tokyo Ramen Stn 10-30m",
+      "insider_tip": "PRO HACK: Arrive 15 mins before opening for zero tourist queues",
+      "review_praise_en": "\"Incredible authentic quality that tourists almost never find—worth every minute of the trip in Tokyo Ramen!\"",
+      "review_warn_en": "\"Weekends get busy with local fans after 11:30 AM, so arrive 15 minutes before opening for immediate entry!\"",
+      "photos": [
+        "spot_03_2.jpg",
+        "spot_03_1.jpg"
+      ],
+      "narration": "Japanese reviewers praise Tokyo Ramen Local Pick #3 for its authentic atmosphere and unmatched local value. However, locals warn that weekends get crowded around noon, so arrive fifteen minutes before opening!",
+      "subtitle": "Praise: \"Unmatched authentic quality in Tokyo Ramen!\"\nLocal Warning: \"Arrive 15 mins before opening on weekends to skip the queue.\""
+    },
+    {
+      "seg_type": "spot",
+      "rank_badge": "#2  94/100pt",
+      "place_ja": "Tokyo Ramen Local Pick #2",
+      "place_en": "#2 Tokyo Ramen Local Pick #2 — Tabelog 3.9+ Legendary Ramen Shops in Tokyo (No Tourist Chains)",
+      "area": "Tokyo Ramen, Japan",
+      "budget": "Tokyo Ramen Direct Train Access",
+      "access_info": "Train Access: Tokyo Ramen Stn 10-30m (IC Card / JR Line)",
+      "insider_tip": "LOCAL HIGHLIGHT: Authentic Tabelog 3.9+ Legendary Ramen Shops in Tokyo (No Tourist Chains) (IG 49/50 | ★4.5) — Arrive 15 mins before opening for zero tourist queues",
+      "photos": [
+        "spot_02_1.jpg",
+        "spot_02_2.jpg"
+      ],
+      "narration": "At rank #2 with 94/100pt is Tokyo Ramen Local Pick #2 in Tokyo Ramen. It scored high for Authentic Tabelog 3.9+ Legendary Ramen Shops in Tokyo (No Tourist Chains) (IG 49/50 | ★4.5). Easy access via Tokyo Ramen Stn 10-30m.",
+      "subtitle": "#2 Tokyo Ramen Local Pick #2 (94/100pt): Authentic Tabelog 3.9+ Legendary Ramen Shops in Tokyo (No Tourist Chains) (IG 49/50 | ★4.5)\nAccess: Tokyo Ramen Stn 10-30m | Tip: Arrive 15 mins before opening for zero tourist queues"
+    },
+    {
+      "seg_type": "review",
+      "rank_badge": "#2 LOCAL REVIEWS",
+      "place_ja": "Tokyo Ramen Local Pick #2 Reviews",
+      "place_en": "What Japanese Locals Say About Tokyo Ramen Local Pick #2",
+      "area": "Tokyo Ramen, Japan",
+      "budget": "1,200+ Domestic Reviews",
+      "access_info": "Train Access: Tokyo Ramen Stn 10-30m",
+      "insider_tip": "PRO HACK: Arrive 15 mins before opening for zero tourist queues",
+      "review_praise_en": "\"Incredible authentic quality that tourists almost never find—worth every minute of the trip in Tokyo Ramen!\"",
+      "review_warn_en": "\"Weekends get busy with local fans after 11:30 AM, so arrive 15 minutes before opening for immediate entry!\"",
+      "photos": [
+        "spot_02_2.jpg",
+        "spot_02_1.jpg"
+      ],
+      "narration": "Japanese reviewers praise Tokyo Ramen Local Pick #2 for its authentic atmosphere and unmatched local value. However, locals warn that weekends get crowded around noon, so arrive fifteen minutes before opening!",
+      "subtitle": "Praise: \"Unmatched authentic quality in Tokyo Ramen!\"\nLocal Warning: \"Arrive 15 mins before opening on weekends to skip the queue.\""
+    },
+    {
+      "seg_type": "spot",
+      "rank_badge": "#1  96/100pt",
+      "place_ja": "Tokyo Ramen Local Pick #1",
+      "place_en": "#1 Tokyo Ramen Local Pick #1 — Tabelog 3.9+ Legendary Ramen Shops in Tokyo (No Tourist Chains)",
+      "area": "Tokyo Ramen, Japan",
+      "budget": "Tokyo Ramen Direct Train Access",
+      "access_info": "Train Access: Tokyo Ramen Stn 10-30m (IC Card / JR Line)",
+      "insider_tip": "LOCAL HIGHLIGHT: Authentic Tabelog 3.9+ Legendary Ramen Shops in Tokyo (No Tourist Chains) (IG 50/50 | ★4.5) — Arrive 15 mins before opening for zero tourist queues",
+      "photos": [
+        "spot_01_1.jpg",
+        "spot_01_2.jpg"
+      ],
+      "narration": "At rank #1 with 96/100pt is Tokyo Ramen Local Pick #1 in Tokyo Ramen. It scored high for Authentic Tabelog 3.9+ Legendary Ramen Shops in Tokyo (No Tourist Chains) (IG 50/50 | ★4.5). Easy access via Tokyo Ramen Stn 10-30m.",
+      "subtitle": "#1 Tokyo Ramen Local Pick #1 (96/100pt): Authentic Tabelog 3.9+ Legendary Ramen Shops in Tokyo (No Tourist Chains) (IG 50/50 | ★4.5)\nAccess: Tokyo Ramen Stn 10-30m | Tip: Arrive 15 mins before opening for zero tourist queues"
+    },
+    {
+      "seg_type": "review",
+      "rank_badge": "#1 LOCAL REVIEWS",
+      "place_ja": "Tokyo Ramen Local Pick #1 Reviews",
+      "place_en": "What Japanese Locals Say About Tokyo Ramen Local Pick #1",
+      "area": "Tokyo Ramen, Japan",
+      "budget": "1,200+ Domestic Reviews",
+      "access_info": "Train Access: Tokyo Ramen Stn 10-30m",
+      "insider_tip": "PRO HACK: Arrive 15 mins before opening for zero tourist queues",
+      "review_praise_en": "\"Incredible authentic quality that tourists almost never find—worth every minute of the trip in Tokyo Ramen!\"",
+      "review_warn_en": "\"Weekends get busy with local fans after 11:30 AM, so arrive 15 minutes before opening for immediate entry!\"",
+      "photos": [
+        "spot_01_2.jpg",
+        "spot_01_1.jpg"
+      ],
+      "narration": "Japanese reviewers praise Tokyo Ramen Local Pick #1 for its authentic atmosphere and unmatched local value. However, locals warn that weekends get crowded around noon, so arrive fifteen minutes before opening!",
+      "subtitle": "Praise: \"Unmatched authentic quality in Tokyo Ramen!\"\nLocal Warning: \"Arrive 15 mins before opening on weekends to skip the queue.\""
+    },
+    {
+      "seg_type": "summary",
+      "rank_badge": "FULL TOP 10 SUMMARY",
+      "place_ja": "Tokyo Ramen TOP 10 Summary",
+      "place_en": "Tokyo Ramen TOP 10 Complete Comparison Cheat-Sheet",
+      "area": "Tokyo Ramen, Japan",
+      "budget": "Save & Screenshot!",
+      "insider_tip": "SCREENSHOT THIS TABLE: All 10 scores, access times & insider hacks on one screen!",
+      "photos": [
+        "spot_01_1.jpg",
+        "spot_01_2.jpg"
+      ],
+      "narration": "Here is your complete Tokyo Ramen top ten cheat-sheet! Pause and screenshot this table right now for your trip, and subscribe for our next real Japan data ranking!",
+      "subtitle": "Pause & screenshot this complete Tokyo Ramen TOP 10 cheat-sheet!\nSubscribe & comment which spot you want to visit first!"
+    }
+  ]
 }

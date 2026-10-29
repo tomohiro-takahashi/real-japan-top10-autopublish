@@ -230,31 +230,41 @@ class SunoUnofficialClient:
                         downloaded.append(self._download_file(audio_url, out_dir / f"suno_{clip_id}.mp3"))
             return downloaded[0] if downloaded else None
 
-        # Mode B: Direct Suno Studio API with Clerk Cookie (Suno Paid Plan `chirp-v4`)
-        preferred_mv = os.environ.get("SUNO_MODEL_VERSION", "chirp-v4")
-        logger.info(f"Authenticating with Suno Clerk & generating '{title}' [model={preferred_mv}]...")
+        # Mode B: Direct Suno Studio API with Clerk Cookie (Suno Paid Plan: chirp-v5 / chirp-v4-5 / chirp-auk / chirp-v4)
+        env_mv = os.environ.get("SUNO_MODEL_VERSION", "").strip()
+        model_candidates = [m for m in [env_mv, "chirp-v5", "chirp-v4-5", "chirp-auk", "chirp-v4", "chirp-v3-5"] if m]
+        # Deduplicate while preserving order
+        seen_mv = set()
+        ordered_models = [m for m in model_candidates if not (m in seen_mv or seen_mv.add(m))]
+
         self._authenticate_clerk()
-        gen_payload = {
-            "gpt_description_prompt": "",
-            "mv": preferred_mv,
-            "prompt": structure_prompt,
-            "make_instrumental": make_instrumental,
-            "tags": style,
-            "title": title,
-        }
-        try:
-            gen_resp = self._studio_request("/api/generate/v2/", payload=gen_payload)
-        except Exception as exc:
-            logger.warning(f"Suno model '{preferred_mv}' failed ({exc}); falling back to 'chirp-v3-5'...")
-            gen_payload["mv"] = "chirp-v3-5"
-            gen_resp = self._studio_request("/api/generate/v2/", payload=gen_payload)
+        gen_resp = None
+        used_mv = ordered_models[0]
+        for candidate_mv in ordered_models:
+            logger.info(f"Authenticating with Suno Clerk & generating '{title}' [model={candidate_mv}]...")
+            gen_payload = {
+                "gpt_description_prompt": "",
+                "mv": candidate_mv,
+                "prompt": structure_prompt,
+                "make_instrumental": make_instrumental,
+                "tags": style,
+                "title": title,
+            }
+            try:
+                gen_resp = self._studio_request("/api/generate/v2/", payload=gen_payload)
+                if gen_resp and gen_resp.get("clips"):
+                    used_mv = candidate_mv
+                    logger.info(f"Suno accepted model '{used_mv}'!")
+                    break
+            except Exception as exc:
+                logger.warning(f"Suno model '{candidate_mv}' not available ({exc}); trying next model...")
+
+        if not gen_resp or not gen_resp.get("clips"):
+            raise RuntimeError(f"Suno generate/v2 returned no clips across models {ordered_models}: {gen_resp}")
 
         clips = gen_resp.get("clips", [])
-        if not clips:
-            raise RuntimeError(f"Suno generate/v2 returned no clips: {gen_resp}")
-
         clip_ids = [c["id"] for c in clips if "id" in c]
-        logger.info(f"Suno Paid Plan generation started! Clip IDs: {clip_ids}. Polling until audio is complete...")
+        logger.info(f"Suno Paid Plan ({used_mv}) generation started! Clip IDs: {clip_ids}. Polling until audio is complete...")
 
         downloaded_paths: Dict[str, Path] = {}
         start_t = time.time()
@@ -278,7 +288,37 @@ class SunoUnofficialClient:
                     break
 
         if downloaded_paths:
-            return list(downloaded_paths.values())[0]
+            tracks = list(downloaded_paths.values())
+            if len(tracks) >= 2:
+                # 1 Suno generation call ALWAYS creates 2 variations for a single 10-credit charge.
+                # Combine Variation A + Variation B into ONE 7-8 min master MP3 for THIS video,
+                # so tomorrow's video generates a fresh song matching tomorrow's theme!
+                master_mp3 = out_dir / f"suno_{meta.get('id', 'track')}_dual_master.mp3"
+                try:
+                    import subprocess
+                    subprocess.run(
+                        [
+                            "ffmpeg", "-y",
+                            "-i", str(tracks[0]),
+                            "-i", str(tracks[1]),
+                            "-filter_complex", "[0:a][1:a]acrossfade=d=3.0:c1=tri:c2=tri[aout]",
+                            "-map", "[aout]",
+                            "-c:a", "libmp3lame", "-b:a", "192k",
+                            str(master_mp3),
+                        ],
+                        check=True,
+                        stdout=subprocess.DEVNULL,
+                        stderr=subprocess.DEVNULL,
+                    )
+                    for t_p in tracks:
+                        t_p.unlink(missing_ok=True)
+                    logger.info(f"Merged both Suno variations from 1 generation into master track: {master_mp3}")
+                    return master_mp3
+                except Exception as exc:
+                    logger.warning(f"Could not merge dual Suno tracks ({exc}); keeping primary track.")
+                    for t_p in tracks[1:]:
+                        t_p.unlink(missing_ok=True)
+            return tracks[0]
 
         raise TimeoutError(f"Timed out waiting for Suno clips {clip_ids} after {timeout_sec}s.")
 

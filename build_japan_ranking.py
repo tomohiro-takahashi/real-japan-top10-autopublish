@@ -19,6 +19,7 @@ import logging
 import math
 import os
 import random
+import re
 import shutil
 import subprocess
 import sys
@@ -72,6 +73,172 @@ def fit_crop(im: Image.Image, target_w: int, target_h: int) -> Image.Image:
     return im.crop((left, top, left + target_w, top + target_h))
 
 
+PREF_EN_TO_JA = {
+    "hokkaido": "北海道", "sapporo": "北海道", "hakodate": "北海道",
+    "aomori": "青森県", "iwate": "岩手県", "miyagi": "宮城県", "sendai": "宮城県",
+    "akita": "秋田県", "yamagata": "山形県", "fukushima": "福島県",
+    "ibaraki": "茨城県", "tochigi": "栃木県", "nikko": "栃木県", "gunma": "群馬県",
+    "saitama": "埼玉県", "chiba": "千葉県", "tokyo": "東京都", "shinjuku": "東京都", "shibuya": "東京都", "asakusa": "東京都",
+    "kanagawa": "神奈川県", "yokohama": "神奈川県", "kamakura": "神奈川県", "hakone": "神奈川県",
+    "niigata": "新潟県", "toyama": "富山県", "ishikawa": "石川県", "kanazawa": "石川県",
+    "fukui": "福井県", "yamanashi": "山梨県", "fuji": "山梨県", "nagano": "長野県", "matsumoto": "長野県",
+    "gifu": "岐阜県", "takayama": "岐阜県", "shirakawago": "岐阜県", "shizuoka": "静岡県",
+    "aichi": "愛知県", "nagoya": "愛知県", "mie": "三重県", "ise": "三重県",
+    "shiga": "滋賀県", "hikone": "滋賀県", "kyoto": "京都府", "osaka": "大阪府",
+    "hyogo": "兵庫県", "himeji": "兵庫県", "kobe": "兵庫県", "kinosaki": "兵庫県",
+    "nara": "奈良県", "wakayama": "和歌山県", "koyasan": "和歌山県",
+    "tottori": "鳥取県", "shimane": "島根県", "izumo": "島根県", "okayama": "岡山県",
+    "hiroshima": "広島県", "miyajima": "広島県", "yamaguchi": "山口県",
+    "tokushima": "徳島県", "kagawa": "香川県", "ehime": "愛媛県", "matsuyama": "愛媛県", "kochi": "高知県",
+    "fukuoka": "福岡県", "hakata": "福岡県", "saga": "佐賀県", "nagasaki": "長崎県",
+    "kumamoto": "熊本県", "oita": "大分県", "beppu": "大分県", "yufuin": "大分県",
+    "miyazaki": "宮崎県", "kagoshima": "鹿児島県", "okinawa": "沖縄県",
+}
+
+
+def strip_cjk(text: str) -> str:
+    """Remove any Japanese/CJK characters and empty parentheses so all rendered slides stay 100% English."""
+    cleaned = re.sub(r"[\u3000-\u9fff\uff00-\uffef]+", "", text or "")
+    cleaned = re.sub(r"\(\s*\)", "", cleaned)
+    cleaned = re.sub(r"\s{2,}", " ", cleaned).strip()
+    return cleaned
+
+
+def resolve_prefecture_and_route(
+    area_guide: Dict[str, Any],
+    hint_text: str,
+    prefs_data: List[Dict[str, Any]],
+) -> Tuple[str, List[Tuple[float, float]]]:
+    """
+    Dynamically resolve the Japanese prefecture name (`nam_ja`) and compute the exact
+    geographic route from Tokyo Station `(139.767, 35.681)` to that prefecture's polygon centroid!
+    """
+    explicit = area_guide.get("target_pref_ja", "").strip()
+    search_blob = f"{hint_text} {area_guide.get('map_badge', '')} {json.dumps(area_guide.get('cards', []), ensure_ascii=False)}".lower()
+
+    target_pref = explicit
+    if not target_pref:
+        # 1. Check Japanese prefecture names in hint_text
+        for pf in prefs_data:
+            nja = pf.get("nam_ja", "")
+            if nja and nja in search_blob:
+                target_pref = nja
+                break
+    if not target_pref:
+        # 2. Check English keywords
+        for kw_en, pref_ja in PREF_EN_TO_JA.items():
+            if re.search(rf"\b{re.escape(kw_en)}\b", search_blob):
+                target_pref = pref_ja
+                break
+    if not target_pref:
+        target_pref = "兵庫県"
+
+    # Compute centroid of target_pref from prefs_data polygons
+    dest_lon, dest_lat = 134.690, 34.839
+    for pf in prefs_data:
+        if pf.get("nam_ja") == target_pref and pf.get("polys"):
+            # Pick the ring with the most points (mainland polygon)
+            best_ring = max(pf["polys"], key=lambda r: len(r))
+            if best_ring:
+                dest_lon = sum(pt[0] for pt in best_ring) / len(best_ring)
+                dest_lat = sum(pt[1] for pt in best_ring) / len(best_ring)
+            break
+
+    tokyo_lon, tokyo_lat = 139.767, 35.681
+    if target_pref == "東京都":
+        route_pts = [(tokyo_lon, tokyo_lat), (tokyo_lon + 0.05, tokyo_lat + 0.05)]
+    else:
+        route_pts = [(tokyo_lon, tokyo_lat), (dest_lon, dest_lat)]
+
+    return target_pref, route_pts
+
+
+def render_opening_flash_frames(
+    ranking_id: str,
+    seg: Dict[str, Any],
+    summary_rows: List[Dict[str, Any]],
+    font_path: str,
+    work_dir: Path,
+) -> List[Path]:
+    """
+    Render 6 Full-Screen High-Impact Rapid-Fire Photo Slides (`flash_00.jpg` .. `flash_05.jpg`)
+    for the First 10 Seconds (`opening` segment) of the 16:9 Long Video:
+    - Eliminates text-heavy tables at the start of the video!
+    - Rapidly flashes 6 vibrant full-screen spot photographs (#10, #7, #5, #3, #2, and #1 Teaser)
+      every ~1.6 seconds to immediately hook the viewer into watching the countdown.
+    """
+    cache_dir = BASE_DIR / "assets" / "images" / ranking_id
+    # summary_rows is ordered #1 .. #10 (index 0 is #1, index 9 is #10)
+    pick_indices = [9, 6, 4, 2, 1, 0] if len(summary_rows) >= 10 else list(range(min(6, len(summary_rows))))
+    if not pick_indices:
+        pick_indices = [0]
+
+    flash_labels = [
+        ("RAPID PREVIEW  |  RANK #10", (30, 58, 138, 245)),
+        ("RAPID PREVIEW  |  RANK #7", (2, 132, 199, 245)),
+        ("TOP 5 HIDDEN GEM  |  RANK #5", (16, 185, 129, 245)),
+        ("BRONZE MEDAL  |  RANK #3", (220, 38, 38, 248)),
+        ("RUNNER-UP  |  RANK #2", (220, 38, 38, 248)),
+        ("WAIT UNTIL YOU SEE #1!", (217, 119, 6, 252)),
+    ]
+
+    f_pill = ImageFont.truetype(font_path, 22)
+    f_spot = ImageFont.truetype(font_path, 34)
+    f_sub = ImageFont.truetype(font_path, 21)
+
+    out_paths: List[Path] = []
+    for i, r_idx in enumerate(pick_indices):
+        row = summary_rows[r_idx] if r_idx < len(summary_rows) else {}
+        p_path = cache_dir / row.get("thumb", "")
+        if p_path.exists() and p_path.is_file():
+            im = fit_crop(Image.open(p_path), W, H)
+            im = ImageEnhance.Color(im).enhance(1.22)
+            im = ImageEnhance.Contrast(im).enhance(1.12)
+        else:
+            im = Image.new("RGB", (W, H), (14, 20, 34))
+
+        canvas = im.convert("RGBA")
+        draw = ImageDraw.Draw(canvas, "RGBA")
+
+        pill_txt, pill_col = flash_labels[i % len(flash_labels)]
+        rank_str = row.get("rank", f"#{10 - i}")
+        score_str = row.get("score", "95/100pt")
+        name_en = strip_cjk(row.get("name_en", "Secret Local Spot"))
+        dish_en = strip_cjk(row.get("dish", "Voted by Japanese Locals"))
+        acc_en = strip_cjk(row.get("access_short", row.get("budget", "Direct Train Access")))
+
+        # Sleek lower-middle cinema teaser card (y=404..528, above the subtitle bar)
+        bx0, by0, bx1, by1 = 36, 402, W - 36, 526
+        draw.rounded_rectangle((bx0, by0, bx1, by1), radius=16, fill=(8, 12, 24, 224), outline=(253, 224, 71, 245), width=3)
+
+        # Pill badge on top-left of the teaser card
+        tb_p = draw.textbbox((0, 0), pill_txt, font=f_pill)
+        pw = (tb_p[2] - tb_p[0]) + 36
+        draw.rounded_rectangle((bx0 + 16, by0 - 20, bx0 + 16 + pw, by0 + 22), radius=10, fill=pill_col, outline=(255, 255, 255, 245), width=2)
+        draw.text((bx0 + 34, by0 - 11), pill_txt, font=f_pill, fill=(255, 255, 255, 255))
+
+        # Step progress dots on top-right of the teaser card (e.g. [1/6 .. 6/6])
+        prog_txt = f"HIGHLIGHT {i + 1}/{len(pick_indices)}  >>  COUNTDOWN STARTS NOW"
+        tb_pr = draw.textbbox((0, 0), prog_txt, font=f_sub)
+        draw.text((bx1 - (tb_pr[2] - tb_pr[0]) - 22, by0 + 10), prog_txt, font=f_sub, fill=(125, 211, 252, 255))
+
+        if i == len(pick_indices) - 1:
+            headline = f"#1 SPOT SCORED {score_str.upper()} — CAN YOU GUESS WHICH ONE?"
+            subline = f"Hint: {dish_en}  |  Access: {acc_en}"
+        else:
+            headline = f"{rank_str}  {name_en}  ({score_str})"
+            subline = f"{dish_en}  |  Access: {acc_en}"
+
+        draw.text((bx0 + 24, by0 + 36), headline[:58], font=f_spot, fill=(253, 224, 71, 255), stroke_width=3, stroke_fill=(0, 0, 0, 245))
+        draw.text((bx0 + 24, by0 + 84), subline[:78], font=f_sub, fill=(255, 255, 255, 255), stroke_width=2, stroke_fill=(0, 0, 0, 230))
+
+        out_p = work_dir / f"open_flash_{i:02d}.jpg"
+        canvas.convert("RGB").save(out_p, "JPEG", quality=95)
+        out_paths.append(out_p)
+
+    return out_paths
+
+
 def render_opening_collage_jpg(
     ranking_id: str,
     seg: Dict[str, Any],
@@ -81,12 +248,8 @@ def render_opening_collage_jpg(
     out_jpg_b: Path,
 ) -> None:
     """
-    Render Segment 1 (Opening) for the 16:9 Long Video (100% English, High-Contrast Large Fonts):
-    - out_jpg_a (Cut 1A): Bold Catchphrase + 'WHAT YOU GET IN THIS 9-MINUTE INSIDER GUIDE' Hero Board!
-    - out_jpg_b (Cut 1B): Full 2x5 10-Tile Visual Collage of Ranks #1 to #10!
+    Render 2x5 Visual Grid for legacy callers, and use a 4-Panel Full-Bleed Highlight Split for Cut 1A.
     """
-    from PIL import ImageFilter
-
     cache_dir = BASE_DIR / "assets" / "images" / ranking_id
     canvas = Image.new("RGB", (W, H), (12, 16, 26))
     draw = ImageDraw.Draw(canvas)
@@ -130,89 +293,17 @@ def render_opening_collage_jpg(
 
             strip_y0 = y1 - 50
             draw.rectangle([(x0 + 1, strip_y0), (x1 - 1, y1 - 1)], fill=(10, 14, 24))
-            short_en = row["name_en"].split("(")[0].strip()[:20]
+            short_en = strip_cjk(row["name_en"].split("(")[0].strip())[:20]
             tb_n = draw.textbbox((0, 0), short_en, font=f_name)
             nw = tb_n[2] - tb_n[0]
             draw.text((x0 + max(4, ((x1 - x0) - nw) // 2), strip_y0 + 5), short_en, font=f_name, fill=(253, 224, 71))
-            acc_en = row.get("access_short", row.get("budget", ""))[:24]
+            acc_en = strip_cjk(row.get("access_short", row.get("budget", "")))[:24]
             tb_j = draw.textbbox((0, 0), acc_en, font=f_sub)
             jw = tb_j[2] - tb_j[0]
             draw.text((x0 + max(4, ((x1 - x0) - jw) // 2), strip_y0 + 28), acc_en, font=f_sub, fill=(226, 232, 240))
 
-    # Save Cut 1B (full 10-tile grid)
     canvas.save(out_jpg_b, "JPEG", quality=95)
-
-    # Build Cut 1A: Blurred collage backdrop + Catchphrase & 4 Content Value Cards (100% English)
-    bg_blur = canvas.filter(ImageFilter.GaussianBlur(radius=14))
-    bg_blur = ImageEnhance.Brightness(bg_blur).enhance(0.36).convert("RGBA")
-    draw_a = ImageDraw.Draw(bg_blur, "RGBA")
-
-    # Hero Catchphrase Banner (y=114..216)
-    draw_a.rounded_rectangle((36, 114, W - 36, 214), radius=14, fill=(185, 28, 28, 248), outline=(253, 224, 71, 255), width=3)
-    f_catch = ImageFont.truetype(font_path, 25)
-    f_subc = ImageFont.truetype(font_path, 20)
-    c1 = seg.get("place_en", "SKIP TOURIST TRAPS!  |  WHAT YOU GET IN THIS INSIDER GUIDE").upper()
-    while len(c1) > 10:
-        tb_tmp = draw_a.textbbox((0, 0), c1, font=f_catch)
-        if (tb_tmp[2] - tb_tmp[0]) <= (W - 110):
-            break
-        c1 = c1.rsplit(" ", 1)[0]
-    c2 = "500,000 JAPANESE IG POSTS × LOCAL REVIEWS — 100% AUTHENTIC SPOTS"
-    tb_c1 = draw_a.textbbox((0, 0), c1, font=f_catch)
-    tb_c2 = draw_a.textbbox((0, 0), c2, font=f_subc)
-    draw_a.text(((W - (tb_c1[2] - tb_c1[0])) // 2, 126), c1, font=f_catch, fill=(255, 255, 255, 255))
-    draw_a.text(((W - (tb_c2[2] - tb_c2[0])) // 2, 170), c2, font=f_subc, fill=(253, 224, 71, 255))
-
-    # 2x2 Grid of "What Content You Get" Cards (y=226..534) — 100% English & Bold
-    cards = [
-        (
-            "CONTENT 01  |  100-PT REAL LOCAL RANKING",
-            "500K Japanese IG Posts × Local Reviews",
-            "Scored out of 100pt (IG 50pt + Reviews 35pt + Authenticity 15pt) — zero tourist traps!",
-            (16, 185, 129, 245),
-        ),
-        (
-            "CONTENT 02  |  MAP & SHINKANSEN ACCESS",
-            "Exact Bullet Train & Local Station Guide",
-            "Complete Japan locator map, Shinkansen routes from Tokyo/Kyoto, and exact travel times!",
-            (2, 132, 199, 245),
-        ),
-        (
-            "CONTENT 03  |  HONEST LOCAL REVIEWS & HACKS",
-            "Real Japanese Visitor Praise & Warnings",
-            "High-res photography, honest visitor warnings, and insider ticket/timing hacks!",
-            (217, 119, 6, 245),
-        ),
-        (
-            "CONTENT 04  |  TOP 10 COMPARISON CHEAT-SHEET",
-            "Screenshot-Ready Full TOP 10 Summary Table",
-            "Compare scores, highlights, train access, and local pro-tips for all 10 spots at a glance!",
-            (147, 51, 234, 245),
-        ),
-    ]
-    f_b = ImageFont.truetype(font_path, 16)
-    f_head = ImageFont.truetype(font_path, 21)
-    f_en = ImageFont.truetype(font_path, 16)
-
-    cw = (W - 72 - 20) // 2
-    ch = 144
-    for i, (b_txt, head_t, en_t, col) in enumerate(cards):
-        r, c = i // 2, i % 2
-        cx0 = 36 + c * (cw + 20)
-        cy0 = 228 + r * (ch + 14)
-        cx1, cy1 = cx0 + cw, cy0 + ch
-        tb_b = draw_a.textbbox((0, 0), b_txt, font=f_b)
-        bw = (tb_b[2] - tb_b[0]) + 28
-        draw_a.rounded_rectangle((cx0, cy0, cx1, cy1), radius=12, fill=(12, 20, 36, 244), outline=col, width=2)
-        draw_a.rounded_rectangle((cx0 + 14, cy0 + 10, cx0 + 14 + bw, cy0 + 38), radius=6, fill=col)
-        draw_a.text((cx0 + 28, cy0 + 16), b_txt, font=f_b, fill=(255, 255, 255, 255))
-        draw_a.text((cx0 + 16, cy0 + 48), head_t, font=f_head, fill=(253, 224, 71, 255))
-        w_lines = wrap_text_lines(draw_a, en_t, f_en, cw - 32)
-        for li, wl in enumerate(w_lines[:2]):
-            col_l = (241, 245, 249, 255) if li == 0 else (167, 243, 208, 255)
-            draw_a.text((cx0 + 16, cy0 + 82 + li * 24), wl, font=f_en, fill=col_l)
-
-    bg_blur.convert("RGB").save(out_jpg_a, "JPEG", quality=95)
+    canvas.save(out_jpg_a, "JPEG", quality=95)
 
 
 def draw_rounded_box(
@@ -230,11 +321,13 @@ def render_area_map_overlay_png(
     area_guide: Dict[str, Any],
     font_path: str,
     out_png: Path,
+    hint_text: str = "",
 ) -> None:
     """
     Render a sleek, broadcast-grade transparent overlay for AREA GUIDE 1/2 (100% English):
-    - Left side: Real 47-prefecture geographic map of Japan highlighting the target prefecture(s)
-    - Right side: 3 Bold Hero Cards driven dynamically from area_guide['cards']!
+    - Left side: Real 47-prefecture geographic map of Japan highlighting the exact target prefecture(s)
+      and drawing the route line from Tokyo to that prefecture's exact coordinates!
+    - Right side: 3 Bold Hero Cards driven dynamically from area_guide['cards'] (with CJK auto-stripped)!
     """
     overlay = Image.new("RGBA", (W, H), (0, 0, 0, 0))
     draw = ImageDraw.Draw(overlay)
@@ -261,9 +354,10 @@ def render_area_map_overlay_png(
         py = pad_y1 - (lat - lat_min) / (lat_max - lat_min) * (pad_y1 - pad_y0)
         return int(round(px)), int(round(py))
 
-    target_pref = area_guide.get("target_pref_ja", "兵庫県")
-    if map_json.exists():
-        prefs = json.loads(map_json.read_text(encoding="utf-8"))
+    prefs = json.loads(map_json.read_text(encoding="utf-8")) if map_json.exists() else []
+    target_pref, route_pts = resolve_prefecture_and_route(area_guide, hint_text, prefs)
+
+    if prefs:
         for pf in prefs:
             if pf["nam_ja"] == target_pref:
                 continue
@@ -282,39 +376,32 @@ def render_area_map_overlay_png(
                         draw.polygon(pts, fill=(239, 68, 68, 255), outline=(253, 224, 71, 255))
                         draw.line(pts + [pts[0]], fill=(253, 224, 71, 255), width=2)
 
-    # Shinkansen Golden Corridor (Tokyo -> Nagoya -> Kyoto -> Himeji/West)
-    route_pts = [
-        (139.767, 35.681),  # Tokyo
-        (136.906, 35.181),  # Nagoya
-        (135.768, 35.011),  # Kyoto
-        (134.690, 34.839),  # Himeji
-    ]
     proj_route = [project(lon, lat) for lon, lat in route_pts]
     draw.line(proj_route, fill=(253, 224, 71, 255), width=4)
 
-    tx_p, ty_p = project(139.767, 35.681)
-    hx_p, hy_p = project(134.690, 34.839)
+    tx_p, ty_p = project(route_pts[0][0], route_pts[0][1])
+    hx_p, hy_p = project(route_pts[-1][0], route_pts[-1][1])
     draw.ellipse([(tx_p - 6, ty_p - 6), (tx_p + 6, ty_p + 6)], fill=(56, 189, 248, 255), outline=(255, 255, 255, 255), width=2)
     draw.ellipse([(hx_p - 8, hy_p - 8), (hx_p + 8, hy_p + 8)], fill=(239, 68, 68, 255), outline=(253, 224, 71, 255), width=2)
 
     f_pin = ImageFont.truetype(font_path, 15)
     f_subpin = ImageFont.truetype(font_path, 13)
-    map_badge = area_guide.get("map_badge", "TOP RANKED DESTINATIONS")[:34]
+    map_badge = strip_cjk(area_guide.get("map_badge", "TOP RANKED DESTINATIONS"))[:34]
 
     draw_rounded_box(draw, (mx0 + 18, my0 + 54, mx0 + 290, my0 + 102), radius=6, fill=(185, 28, 28, 245), outline=(253, 224, 71, 255), width=2)
-    draw.text((mx0 + 28, my0 + 60), "HIGHLIGHTED CORRIDOR", font=f_pin, fill=(255, 255, 255, 255))
+    draw.text((mx0 + 28, my0 + 60), "TARGET REGION", font=f_pin, fill=(255, 255, 255, 255))
     draw.text((mx0 + 28, my0 + 80), map_badge, font=f_subpin, fill=(253, 224, 71, 255))
 
     draw_rounded_box(draw, (tx_p + 10, ty_p - 14, tx_p + 142, ty_p + 26), radius=6, fill=(15, 23, 42, 240), outline=(56, 189, 248, 240), width=1)
     draw.text((tx_p + 18, ty_p - 9), "TOKYO HUB", font=f_pin, fill=(56, 189, 248, 255))
-    draw.text((tx_p + 18, ty_p + 9), "Shinkansen Start", font=f_subpin, fill=(226, 232, 240, 255))
+    draw.text((tx_p + 18, ty_p + 9), "Direct Rail / Air", font=f_subpin, fill=(226, 232, 240, 255))
 
     draw.line([(mx0 + 20, my1 - 24), (mx0 + 54, my1 - 24)], fill=(253, 224, 71, 255), width=4)
-    draw.text((mx0 + 62, my1 - 31), "JR Shinkansen High-Speed Rail Corridor", font=f_subpin, fill=(253, 224, 71, 255))
+    draw.text((mx0 + 62, my1 - 31), "Direct Shinkansen / Express Route from Tokyo", font=f_subpin, fill=(253, 224, 71, 255))
 
     # 2. Right Side: 3 Sleek Hero-Metric Glass Cards driven dynamically by area_guide['cards'] (x=546..1248)
     rx0, rx1 = 546, W - 32
-    f_big = ImageFont.truetype(font_path, 26)
+    f_big = ImageFont.truetype(font_path, 20)
     f_unit = ImageFont.truetype(font_path, 14)
     f_ctitle = ImageFont.truetype(font_path, 20)
     f_cdesc = ImageFont.truetype(font_path, 16)
@@ -332,8 +419,8 @@ def render_area_map_overlay_png(
         m_lbl, s_lbl, b_fill, b_bord = palettes[i]
         if i < len(raw_cards):
             rc = raw_cards[i]
-            c_title = rc.get("title", f"INSIDER POINT {i+1}")
-            bullets = rc.get("bullets", [])
+            c_title = strip_cjk(rc.get("title", f"INSIDER POINT {i+1}"))
+            bullets = [strip_cjk(b) for b in rc.get("bullets", []) if strip_cjk(b)]
             line1 = bullets[0] if len(bullets) > 0 else ""
             line2 = bullets[1] if len(bullets) > 1 else ""
         else:
@@ -1133,7 +1220,9 @@ def build_ranking_video(script_path: Path) -> Path:
             hud_png = work_dir / f"hud_{idx:02d}.png"
             render_ranking_hud_png(seg, prefecture, font_path, hud_png)
 
+            flash_frames: List[Path] = []
             if seg_type == "opening" and summary_rows:
+                flash_frames = render_opening_flash_frames(ranking_id, seg, summary_rows, font_path, work_dir)
                 render_opening_collage_jpg(ranking_id, seg, summary_rows, font_path, p1, p2)
             elif seg_type == "area_guide" and "2/2" in badge:
                 render_area_seasons_jpg(ranking_id, summary_rows, font_path, p1, p2)
@@ -1142,8 +1231,8 @@ def build_ranking_video(script_path: Path) -> Path:
                 shutil.copyfile(cache_dir / photos[0], p1)
                 shutil.copyfile(cache_dir / photos[1], p2)
                 map_ov_png = work_dir / f"map_ov_{idx:02d}.png"
-                render_area_map_overlay_png(area_guide, font_path, map_ov_png)
-                base_ov = Image.open( map_ov_png).convert("RGBA")
+                render_area_map_overlay_png(area_guide, font_path, map_ov_png, hint_text=f"{ranking_id} {prefecture}")
+                base_ov = Image.open(map_ov_png).convert("RGBA")
                 top_hud = Image.open(hud_png).convert("RGBA")
                 Image.alpha_composite(base_ov, top_hud).save(hud_png, "PNG")
             elif seg_type == "summary" and summary_rows:
@@ -1156,73 +1245,102 @@ def build_ranking_video(script_path: Path) -> Path:
             half_dur = round(dur / 2.0, 3)
             half_frames = max(int(math.ceil(half_dur * FPS)), FPS)
 
-            if seg_type == "summary" or (seg_type == "area_guide" and "2/2" in badge):
-                filter_complex = (
-                    f"[0:v]loop=loop=-1:size=1:start=0,trim=duration={dur},setpts=PTS-STARTPTS,fps={FPS},setsar=1[bg];"
-                    f"[bg][2:v]overlay=0:0,scale=1920:1080:flags=lanczos,unsharp=3:3:0.6:3:3:0.0,scale=in_range=pc:out_range=tv,format=yuv420p[vout]"
-                )
-            elif seg_type == "opening":
-                filter_complex = (
-                    f"[0:v]loop=loop=-1:size=1:start=0,trim=duration={half_dur},setpts=PTS-STARTPTS,fps={FPS},setsar=1[va];"
-                    f"[1:v]loop=loop=-1:size=1:start=0,trim=duration={dur - half_dur + 0.1},setpts=PTS-STARTPTS,fps={FPS},setsar=1[vb];"
-                    f"[va][vb]concat=n=2:v=1:a=0[bg];"
-                    f"[bg][2:v]overlay=0:0,scale=1920:1080:flags=lanczos,unsharp=3:3:0.6:3:3:0.0,scale=in_range=pc:out_range=tv,format=yuv420p[vout]"
-                )
-            else:
-                zp_a = f"zoompan=z='min(zoom+0.0018,1.16)':x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':d={half_frames}:s={W}x{H}:fps={FPS}"
-                zp_b = f"zoompan=z='1.14':x='(iw-iw/zoom)*(on/{half_frames})':y='ih/2-(ih/zoom/2)':d={half_frames}:s={W}x{H}:fps={FPS}"
-                filter_complex = (
-                    f"[0:v]scale={W*2}:{H*2}:force_original_aspect_ratio=increase,crop={W*2}:{H*2},{zp_a},trim=duration={half_dur},setpts=PTS-STARTPTS,setsar=1[va];"
-                    f"[1:v]scale={W*2}:{H*2}:force_original_aspect_ratio=increase,crop={W*2}:{H*2},{zp_b},trim=duration={dur - half_dur + 0.1},setpts=PTS-STARTPTS,setsar=1[vb];"
-                    f"[va][vb]concat=n=2:v=1:a=0[bg];"
-                    f"[bg][2:v]overlay=0:0,scale=1920:1080:flags=lanczos,unsharp=3:3:0.6:3:3:0.0,scale=in_range=pc:out_range=tv,format=yuv420p[vout]"
-                )
-
             seg_mp4 = work_dir / f"seg_{idx:02d}.mp4"
-            cmd = [
-                "ffmpeg",
-                "-y",
-                "-i",
-                str(p1),
-                "-i",
-                str(p2),
-                "-i",
-                str(hud_png),
-                "-i",
-                str(seg_wav),
-                "-filter_complex",
-                filter_complex,
-                "-map",
-                "[vout]",
-                "-map",
-                "3:a",
-                "-t",
-                f"{dur:.3f}",
-                "-r",
-                str(FPS),
-                "-c:v",
-                "libx264",
-                "-preset",
-                "veryfast",
-                "-crf",
-                "17",
-                "-maxrate",
-                "8M",
-                "-bufsize",
-                "16M",
-                "-pix_fmt",
-                "yuv420p",
-                "-c:a",
-                "aac",
-                "-b:a",
-                "192k",
-                "-ar",
-                "44100",
-                "-ac",
-                "2",
-                "-shortest",
-                str(seg_mp4),
-            ]
+            if seg_type == "opening" and len(flash_frames) >= 2:
+                # 6-Cut Rapid-Fire Full-Screen Photo Flash Montage (~1.6s per photo with punchy zoom!)
+                n_fl = len(flash_frames)
+                slice_dur = round(dur / n_fl, 3)
+                slice_frames = max(int(math.ceil(slice_dur * FPS)), FPS)
+                fc_parts: List[str] = []
+                concat_ins = ""
+                for fi in range(n_fl):
+                    d_this = slice_dur if fi < n_fl - 1 else round(max(0.5, dur - slice_dur * (n_fl - 1) + 0.1), 3)
+                    zp_f = f"zoompan=z='min(zoom+0.0028,1.14)':x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':d={slice_frames}:s={W}x{H}:fps={FPS}"
+                    fc_parts.append(
+                        f"[{fi}:v]scale={W*2}:{H*2}:force_original_aspect_ratio=increase,crop={W*2}:{H*2},{zp_f},trim=duration={d_this},setpts=PTS-STARTPTS,setsar=1[vf{fi}]"
+                    )
+                    concat_ins += f"[vf{fi}]"
+                fc_parts.append(f"{concat_ins}concat=n={n_fl}:v=1:a=0[bg]")
+                fc_parts.append(
+                    f"[bg][{n_fl}:v]overlay=0:0,scale=1920:1080:flags=lanczos,unsharp=3:3:0.6:3:3:0.0,scale=in_range=pc:out_range=tv,format=yuv420p[vout]"
+                )
+                filter_complex = ";".join(fc_parts)
+
+                cmd = ["ffmpeg", "-y"]
+                for fp in flash_frames:
+                    cmd.extend(["-i", str(fp)])
+                cmd.extend([
+                    "-i", str(hud_png),
+                    "-i", str(seg_wav),
+                    "-filter_complex", filter_complex,
+                    "-map", "[vout]",
+                    "-map", f"{n_fl + 1}:a",
+                    "-t", f"{dur:.3f}",
+                    "-r", str(FPS),
+                    "-c:v", "libx264", "-preset", "veryfast", "-crf", "17", "-maxrate", "8M", "-bufsize", "16M", "-pix_fmt", "yuv420p",
+                    "-c:a", "aac", "-b:a", "192k", "-ar", "44100", "-ac", "2",
+                    "-shortest", str(seg_mp4),
+                ])
+            else:
+                if seg_type == "summary" or (seg_type == "area_guide" and "2/2" in badge):
+                    filter_complex = (
+                        f"[0:v]loop=loop=-1:size=1:start=0,trim=duration={dur},setpts=PTS-STARTPTS,fps={FPS},setsar=1[bg];"
+                        f"[bg][2:v]overlay=0:0,scale=1920:1080:flags=lanczos,unsharp=3:3:0.6:3:3:0.0,scale=in_range=pc:out_range=tv,format=yuv420p[vout]"
+                    )
+                else:
+                    zp_a = f"zoompan=z='min(zoom+0.0018,1.16)':x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':d={half_frames}:s={W}x{H}:fps={FPS}"
+                    zp_b = f"zoompan=z='1.14':x='(iw-iw/zoom)*(on/{half_frames})':y='ih/2-(ih/zoom/2)':d={half_frames}:s={W}x{H}:fps={FPS}"
+                    filter_complex = (
+                        f"[0:v]scale={W*2}:{H*2}:force_original_aspect_ratio=increase,crop={W*2}:{H*2},{zp_a},trim=duration={half_dur},setpts=PTS-STARTPTS,setsar=1[va];"
+                        f"[1:v]scale={W*2}:{H*2}:force_original_aspect_ratio=increase,crop={W*2}:{H*2},{zp_b},trim=duration={dur - half_dur + 0.1},setpts=PTS-STARTPTS,setsar=1[vb];"
+                        f"[va][vb]concat=n=2:v=1:a=0[bg];"
+                        f"[bg][2:v]overlay=0:0,scale=1920:1080:flags=lanczos,unsharp=3:3:0.6:3:3:0.0,scale=in_range=pc:out_range=tv,format=yuv420p[vout]"
+                    )
+
+                cmd = [
+                    "ffmpeg",
+                    "-y",
+                    "-i",
+                    str(p1),
+                    "-i",
+                    str(p2),
+                    "-i",
+                    str(hud_png),
+                    "-i",
+                    str(seg_wav),
+                    "-filter_complex",
+                    filter_complex,
+                    "-map",
+                    "[vout]",
+                    "-map",
+                    "3:a",
+                    "-t",
+                    f"{dur:.3f}",
+                    "-r",
+                    str(FPS),
+                    "-c:v",
+                    "libx264",
+                    "-preset",
+                    "veryfast",
+                    "-crf",
+                    "17",
+                    "-maxrate",
+                    "8M",
+                    "-bufsize",
+                    "16M",
+                    "-pix_fmt",
+                    "yuv420p",
+                    "-c:a",
+                    "aac",
+                    "-b:a",
+                    "192k",
+                    "-ar",
+                    "44100",
+                    "-ac",
+                    "2",
+                    "-shortest",
+                    str(seg_mp4),
+                ]
             subprocess.run(cmd, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
             seg_videos.append(seg_mp4)
 
@@ -1468,9 +1586,9 @@ def render_short_hook_jpg(
         py = pad_y1 - (lat - lat_min) / (lat_max - lat_min) * (pad_y1 - pad_y0)
         return int(round(px)), int(round(py))
 
-    target_pref = area_guide.get("target_pref_ja", "兵庫県")
-    if map_json.exists():
-        prefs = json.loads(map_json.read_text(encoding="utf-8"))
+    prefs = json.loads(map_json.read_text(encoding="utf-8")) if map_json.exists() else []
+    target_pref, shinkansen_pts = resolve_prefecture_and_route(area_guide, ranking_id, prefs)
+    if prefs:
         for pf in prefs:
             if pf["nam_ja"] == target_pref:
                 continue
@@ -1488,15 +1606,9 @@ def render_short_hook_jpg(
                         draw.polygon(pts, fill=(239, 68, 68, 255), outline=(253, 224, 71, 255))
                         draw.line(pts + [pts[0]], fill=(253, 224, 71, 255), width=2)
 
-    shinkansen_pts = [
-        (139.767, 35.681),
-        (136.906, 35.181),
-        (135.768, 35.011),
-        (134.690, 34.839),
-    ]
     draw.line([project(lon, lat) for lon, lat in shinkansen_pts], fill=(253, 224, 71, 255), width=5)
-    tx_p, ty_p = project(139.767, 35.681)
-    hx_p, hy_p = project(134.690, 34.839)
+    tx_p, ty_p = project(shinkansen_pts[0][0], shinkansen_pts[0][1])
+    hx_p, hy_p = project(shinkansen_pts[-1][0], shinkansen_pts[-1][1])
     draw.ellipse([(tx_p - 7, ty_p - 7), (tx_p + 7, ty_p + 7)], fill=(56, 189, 248, 255), outline=(255, 255, 255, 255), width=2)
     draw.ellipse([(hx_p - 9, hy_p - 9), (hx_p + 9, hy_p + 9)], fill=(239, 68, 68, 255), outline=(253, 224, 71, 255), width=2)
 
@@ -1933,9 +2045,23 @@ def build_shorts_video(script_path: Path) -> Path:
 
             p1 = work_dir / f"sp_{idx:02d}_a.jpg"
             p2 = work_dir / f"sp_{idx:02d}_b.jpg"
+            short_flash: List[Path] = []
             if sc["mode"] == "hook":
-                render_short_promise_jpg(ranking_id, summary_rows, font_path, p1)
+                # Rapid 4-Cut Visual Flash for the first ~8s of Shorts (zero text-table screen!)
+                pick_r = [4, 2, 1] if len(summary_rows) >= 5 else list(range(min(3, len(summary_rows))))
+                for sfi, r_i in enumerate(pick_r):
+                    sf_p = work_dir / f"shook_flash_{sfi}.jpg"
+                    r_row = summary_rows[r_i]
+                    render_short_cinema_frame_jpg(
+                        cache_dir / r_row["thumb"],
+                        f"RAPID PREVIEW: {r_row['rank']} {strip_cjk(r_row['name_en'])[:18]}",
+                        font_path,
+                        sf_p,
+                    )
+                    short_flash.append(sf_p)
                 render_short_hook_jpg(ranking_id, area_guide, summary_rows, font_path, p2)
+                short_flash.append(p2)
+                shutil.copyfile(short_flash[0], p1)
             elif sc["mode"] == "outro":
                 render_short_outro_jpg(ranking_id, summary_rows, font_path, p1)
                 shutil.copyfile(p1, p2)
@@ -1948,41 +2074,71 @@ def build_shorts_video(script_path: Path) -> Path:
 
             half_dur = round(dur / 2.0, 3)
 
-            if sc["mode"] == "outro":
-                filter_complex = (
-                    f"[0:v]loop=loop=-1:size=1:start=0,trim=duration={dur},setpts=PTS-STARTPTS,fps={FPS},setsar=1[bg];"
-                    f"[bg][2:v]overlay=0:0,unsharp=3:3:0.6:3:3:0.0,scale=in_range=pc:out_range=tv,format=yuv420p[vout]"
-                )
-            else:
-                # Rapid 2-cut transition (Cut 1A -> Cut 1B for Hook AND for every Cinema scene!)
-                filter_complex = (
-                    f"[0:v]loop=loop=-1:size=1:start=0,trim=duration={half_dur},setpts=PTS-STARTPTS,fps={FPS},setsar=1[va];"
-                    f"[1:v]loop=loop=-1:size=1:start=0,trim=duration={dur - half_dur + 0.1},setpts=PTS-STARTPTS,fps={FPS},setsar=1[vb];"
-                    f"[va][vb]concat=n=2:v=1:a=0[bg];"
-                    f"[bg][2:v]overlay=0:0,unsharp=3:3:0.6:3:3:0.0,scale=in_range=pc:out_range=tv,format=yuv420p[vout]"
-                )
-
             seg_mp4 = work_dir / f"sseg_{idx:02d}.mp4"
-            subprocess.run(
-                [
-                    "ffmpeg", "-y",
-                    "-i", str(p1),
-                    "-i", str(p2),
+            if sc["mode"] == "hook" and len(short_flash) >= 2:
+                n_sf = len(short_flash)
+                sl_d = round(dur / n_sf, 3)
+                fc_s = []
+                c_in = ""
+                for sfi in range(n_sf):
+                    d_s = sl_d if sfi < n_sf - 1 else round(max(0.4, dur - sl_d * (n_sf - 1) + 0.1), 3)
+                    fc_s.append(f"[{sfi}:v]loop=loop=-1:size=1:start=0,trim=duration={d_s},setpts=PTS-STARTPTS,fps={FPS},setsar=1[sv{sfi}]")
+                    c_in += f"[sv{sfi}]"
+                fc_s.append(f"{c_in}concat=n={n_sf}:v=1:a=0[bg]")
+                fc_s.append(f"[bg][{n_sf}:v]overlay=0:0,unsharp=3:3:0.6:3:3:0.0,scale=in_range=pc:out_range=tv,format=yuv420p[vout]")
+                filter_complex = ";".join(fc_s)
+
+                s_cmd = ["ffmpeg", "-y"]
+                for sfp in short_flash:
+                    s_cmd.extend(["-i", str(sfp)])
+                s_cmd.extend([
                     "-i", str(hud_png),
                     "-i", str(seg_wav),
                     "-filter_complex", filter_complex,
                     "-map", "[vout]",
-                    "-map", "3:a",
+                    "-map", f"{n_sf + 1}:a",
                     "-t", f"{dur:.3f}",
                     "-r", str(FPS),
                     "-c:v", "libx264", "-preset", "veryfast", "-crf", "17", "-maxrate", "8M", "-bufsize", "16M", "-pix_fmt", "yuv420p",
                     "-c:a", "aac", "-b:a", "192k", "-ar", "44100", "-ac", "2",
                     "-shortest", str(seg_mp4),
-                ],
-                check=True,
-                stdout=subprocess.DEVNULL,
-                stderr=subprocess.DEVNULL,
-            )
+                ])
+                subprocess.run(s_cmd, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            else:
+                if sc["mode"] == "outro":
+                    filter_complex = (
+                        f"[0:v]loop=loop=-1:size=1:start=0,trim=duration={dur},setpts=PTS-STARTPTS,fps={FPS},setsar=1[bg];"
+                        f"[bg][2:v]overlay=0:0,unsharp=3:3:0.6:3:3:0.0,scale=in_range=pc:out_range=tv,format=yuv420p[vout]"
+                    )
+                else:
+                    # Rapid 2-cut transition (Cut 1A -> Cut 1B for every Cinema scene!)
+                    filter_complex = (
+                        f"[0:v]loop=loop=-1:size=1:start=0,trim=duration={half_dur},setpts=PTS-STARTPTS,fps={FPS},setsar=1[va];"
+                        f"[1:v]loop=loop=-1:size=1:start=0,trim=duration={dur - half_dur + 0.1},setpts=PTS-STARTPTS,fps={FPS},setsar=1[vb];"
+                        f"[va][vb]concat=n=2:v=1:a=0[bg];"
+                        f"[bg][2:v]overlay=0:0,unsharp=3:3:0.6:3:3:0.0,scale=in_range=pc:out_range=tv,format=yuv420p[vout]"
+                    )
+
+                subprocess.run(
+                    [
+                        "ffmpeg", "-y",
+                        "-i", str(p1),
+                        "-i", str(p2),
+                        "-i", str(hud_png),
+                        "-i", str(seg_wav),
+                        "-filter_complex", filter_complex,
+                        "-map", "[vout]",
+                        "-map", "3:a",
+                        "-t", f"{dur:.3f}",
+                        "-r", str(FPS),
+                        "-c:v", "libx264", "-preset", "veryfast", "-crf", "17", "-maxrate", "8M", "-bufsize", "16M", "-pix_fmt", "yuv420p",
+                        "-c:a", "aac", "-b:a", "192k", "-ar", "44100", "-ac", "2",
+                        "-shortest", str(seg_mp4),
+                    ],
+                    check=True,
+                    stdout=subprocess.DEVNULL,
+                    stderr=subprocess.DEVNULL,
+                )
             seg_videos.append(seg_mp4)
 
         concat_txt = work_dir / "sconcat.txt"
@@ -2038,7 +2194,11 @@ def render_custom_thumbnails(script_path: Path) -> Tuple[Path, Path, Path]:
     rid = data["ranking_id"]
     rows = data.get("summary_rows", [])
     area_guide = data.get("area_guide", {})
-    target_pref_ja = area_guide.get("target_pref_ja", "秋田県")
+    map_json = BASE_DIR / "assets" / "maps" / "japan_prefectures.json"
+    prefs = json.loads(map_json.read_text(encoding="utf-8")) if map_json.exists() else []
+    target_pref_ja, auto_route_pts = resolve_prefecture_and_route(
+        area_guide, f"{rid} {data.get('prefecture', '')}", prefs
+    )
     img_dir = BASE_DIR / "assets" / "images" / rid
 
     w9_path = "/System/Library/Fonts/ヒラギノ角ゴシック W9.ttc"
@@ -2227,7 +2387,6 @@ def render_custom_thumbnails(script_path: Path) -> Tuple[Path, Path, Path]:
 
     mx0, my0, mx1, my1 = 28, 414, 452, 696
     d_a.rounded_rectangle((mx0, my0, mx1, my1), radius=20, fill=(10, 18, 34, 245), outline=(56, 189, 248, 250), width=3)
-    map_json = BASE_DIR / "assets" / "maps" / "japan_prefectures.json"
     lon_min, lon_max = 130.2, 145.4
     lat_min, lat_max = 31.4, 44.2
     px0, py0, px1, py1 = mx0 + 10, my0 + 14, mx0 + 202, my1 - 12
@@ -2237,8 +2396,7 @@ def render_custom_thumbnails(script_path: Path) -> Tuple[Path, Path, Path]:
         py = py1 - (lat - lat_min) / (lat_max - lat_min) * (py1 - py0)
         return int(round(px)), int(round(py))
 
-    if map_json.exists():
-        prefs = json.loads(map_json.read_text(encoding="utf-8"))
+    if prefs:
         for pf in prefs:
             if pf["nam_ja"] in highlight_prefs:
                 continue
@@ -2255,10 +2413,7 @@ def render_custom_thumbnails(script_path: Path) -> Tuple[Path, Path, Path]:
                         d_a.polygon(pts, fill=(239, 68, 68, 255), outline=(253, 224, 71, 255))
                         d_a.line(pts + [pts[0]], fill=(253, 224, 71, 255), width=2)
 
-    s_pts = tc.get(
-        "route_lonlat",
-        [(139.767, 35.681), (140.882, 38.260), (141.135, 39.701), (140.562, 39.592), (140.128, 39.717)],
-    )
+    s_pts = tc.get("route_lonlat", auto_route_pts)
     if len(s_pts) >= 2:
         d_a.line([proj_a(lo, la) for lo, la in s_pts], fill=(253, 224, 71, 255), width=4)
         tx_p, ty_p = proj_a(s_pts[0][0], s_pts[0][1])
