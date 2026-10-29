@@ -25,7 +25,7 @@ concurrency:
 jobs:
   build-and-upload-music:
     runs-on: ubuntu-latest
-    timeout-minutes: 90
+    timeout-minutes: 120
 
     steps:
       - name: Checkout Repository
@@ -39,10 +39,10 @@ jobs:
           python-version: '3.11'
           cache: 'pip'
 
-      - name: Install FFmpeg and Fonts
+      - name: Install FFmpeg, Xvfb, and CJK Fonts
         run: |
           sudo apt-get update
-          sudo apt-get install -y ffmpeg fonts-dejavu-core fonts-liberation
+          sudo apt-get install -y ffmpeg xvfb fonts-dejavu-core fonts-liberation fonts-noto-cjk
 
       - name: Install Python Dependencies
         run: |
@@ -58,6 +58,7 @@ jobs:
           YOUTUBE_REFRESH_TOKEN_MUSIC: ${{ secrets.YOUTUBE_REFRESH_TOKEN_MUSIC }}
           SUNO_COOKIE: ${{ secrets.SUNO_COOKIE }}
           SUNO_API_BASE_URL: ${{ secrets.SUNO_API_BASE_URL }}
+          SUNO_BATCHES_PER_VIDEO: '8'
         run: |
           PRIVACY="${{ github.event.inputs.privacy || 'public' }}"
           DURATION="${{ github.event.inputs.duration || '3600' }}"

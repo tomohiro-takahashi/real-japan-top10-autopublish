@@ -81,6 +81,21 @@ def find_bold_font() -> str:
     return ""
 
 
+def find_cjk_font() -> str:
+    """Find a bold Japanese CJK font on macOS or Ubuntu (GitHub Actions)."""
+    candidates = [
+        "/System/Library/Fonts/ヒラギノ角ゴシック W6.ttc",
+        "/System/Library/Fonts/ヒラギノ角ゴシック W3.ttc",
+        "/System/Library/Fonts/Hiragino Sans GB.ttc",
+        "/usr/share/fonts/opentype/noto/NotoSansCJK-Bold.ttc",
+        "/usr/share/fonts/truetype/noto/NotoSansCJK-Bold.ttc",
+    ]
+    for c in candidates:
+        if os.path.exists(c):
+            return c
+    return ""
+
+
 def load_font(font_path: str, size: int) -> ImageFont.FreeTypeFont | ImageFont.ImageFont:
     if font_path and os.path.exists(font_path):
         try:
@@ -689,7 +704,8 @@ def render_16x9_hud_and_thumb(
     draw.ellipse((44, 37, 56, 49), fill=(239, 68, 68, 255))
     draw.text((66, 33), badge_txt, font=f_badge, fill=(253, 224, 71, 255))
 
-    clean_title = clean_ascii_text(meta.get("title", "").split("|")[0].strip())
+    raw_en = meta.get("en_title") or meta.get("title", "").split("|")[-1].strip()
+    clean_title = clean_ascii_text(raw_en)
     now_playing_str = f"NOW PLAYING: {clean_title}"
     f_title = fit_font_for_width(draw, now_playing_str, font_path, 22, 16, 1280 - 64)
     now_playing_str = smart_truncate(draw, now_playing_str, f_title, 1280 - 64)
@@ -705,6 +721,32 @@ def render_16x9_hud_and_thumb(
 
     base = Image.open(bg_jpg).convert("RGBA")
     t_draw = ImageDraw.Draw(base, "RGBA")
+
+    # Top-left Japanese target generation badge (e.g. 【40代・50代必見】【50代必見】) when CJK font is available
+    cjk_font_path = find_cjk_font()
+    target_badge = meta.get("target_badge", "").strip()
+    if target_badge and cjk_font_path:
+        badge_clean = target_badge.strip("【】")
+        f_cjk = load_font(cjk_font_path, 40)
+        tb_b = t_draw.textbbox((0, 0), badge_clean, font=f_cjk)
+        bw_cjk = (tb_b[2] - tb_b[0]) + 56
+        bh_cjk = 76
+        t_draw.rounded_rectangle(
+            (36, 28, 36 + bw_cjk, 28 + bh_cjk),
+            radius=16,
+            fill=(220, 38, 38, 245),
+            outline=(253, 224, 71, 255),
+            width=4,
+        )
+        t_draw.text(
+            (64, 42),
+            badge_clean,
+            font=f_cjk,
+            fill=(255, 255, 255, 255),
+            stroke_width=2,
+            stroke_fill=(0, 0, 0, 240),
+        )
+
     t_draw.rounded_rectangle((36, 480, 1244, 684), radius=20, fill=(8, 12, 24, 232), outline=(56, 189, 248, 240), width=3)
 
     th_title = clean_title.upper()
@@ -712,7 +754,7 @@ def render_16x9_hud_and_thumb(
     f_th_big = fit_font_for_width(t_draw, th_title, font_path, 36, 20, max_th_w)
     th_title = smart_truncate(t_draw, th_title, f_th_big, max_th_w)
 
-    sub_line1 = f"{genre}  |  1 HOUR ENDURANCE WORK & DRIVE BGM"
+    sub_line1 = f"{genre}  |  16-TRACK NON-STOP 1 HOUR ALBUM"
     f_th_sub1 = fit_font_for_width(t_draw, sub_line1, font_path, 25, 18, max_th_w)
     sub_line2 = short_hook.replace("//", "|")
     f_th_sub2 = fit_font_for_width(t_draw, sub_line2, font_path, 24, 18, max_th_w)
@@ -911,7 +953,8 @@ def render_short_vertical_hud(
     draw.rounded_rectangle((28, 808, SW - 28, 1028), radius=18, fill=(8, 12, 24, 215), outline=(244, 114, 182, 220), width=2)
 
     # 4. Bottom Track Title & Channel CTA (y=1058..1185) — zero mid-word cutoff
-    short_title = clean_ascii_text(meta.get("title", "").split("|")[0].strip())
+    raw_en = meta.get("en_title") or meta.get("title", "").split("|")[-1].strip()
+    short_title = clean_ascii_text(raw_en)
     f_bot = fit_font_for_width(draw, short_title, font_path, 22, 15, SW - 48)
     short_title = smart_truncate(draw, short_title, f_bot, SW - 48)
     tb_bt = draw.textbbox((0, 0), short_title, font=f_bot)
@@ -1144,14 +1187,19 @@ def mark_done_and_git_push(
     auto_git_push: bool = True,
 ) -> None:
     """
-    Move the used MP3 to `stocks/music/done/`, mark the metadata item as `"used": true`
-    in `stocks/music/metadata_pool.json`, and commit/push when running in CI.
+    Move the used MP3 (and any companion `.chapters.json`) to `stocks/music/done/`,
+    mark the metadata item as `"used": true` in `stocks/music/metadata_pool.json`,
+    and commit/push when running in CI.
     """
     DONE_DIR.mkdir(parents=True, exist_ok=True)
     ts = datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S")
     dest_mp3 = DONE_DIR / f"{ts}_{mp3_path.name}"
     shutil.move(str(mp3_path), str(dest_mp3))
     logger.info(f"Moved MP3 to done: {dest_mp3}")
+
+    chapters_file = mp3_path.with_suffix(".chapters.json")
+    if chapters_file.exists():
+        shutil.move(str(chapters_file), str(DONE_DIR / f"{ts}_{chapters_file.name}"))
 
     for item in pool:
         if item.get("id") == chosen_meta.get("id"):
@@ -1185,6 +1233,21 @@ def mark_done_and_git_push(
             logger.info("Committed and pushed updated music queue & metadata_pool.json to GitHub.")
         except Exception as exc:
             logger.warning(f"Git commit/push warning: {exc}")
+
+
+def resolve_description_with_chapters(chosen_mp3: Path, chosen_meta: Dict[str, Any]) -> str:
+    """Replace {{TIMESTAMPS}} in chosen_meta['description'] with exact chapter timestamps from .chapters.json."""
+    desc = chosen_meta.get("description", "")
+    chapters_file = chosen_mp3.with_suffix(".chapters.json")
+    ts_block = chosen_meta.get("default_timestamps", "00:00 Track 01")
+    if chapters_file.exists():
+        try:
+            cdata = json.loads(chapters_file.read_text(encoding="utf-8"))
+            if cdata.get("formatted_timestamps"):
+                ts_block = cdata["formatted_timestamps"]
+        except Exception:
+            pass
+    return desc.replace("{{TIMESTAMPS}}", ts_block)
 
 
 def main() -> int:
@@ -1262,6 +1325,8 @@ def main() -> int:
         # Step 5: Build 9:16 vertical Short (`output_short.mp4`) from 30s..60s of the MP3 with live highway motion
         build_short_video(bg_jpg, bg_loop_mp4, chosen_mp3, chosen_meta, OUTPUT_SHORT, font_path)
 
+    full_description = resolve_description_with_chapters(chosen_mp3, chosen_meta)
+
     if args.dry_run:
         logger.info("Dry-run complete! Videos generated at:")
         logger.info(f"  - 1-Hour Video : {OUTPUT_1HOUR}")
@@ -1276,7 +1341,7 @@ def main() -> int:
             youtube=youtube,
             video_path=OUTPUT_1HOUR,
             title=chosen_meta["title"],
-            description=chosen_meta["description"],
+            description=full_description,
             tags=chosen_meta.get("tags", []),
             privacy_status=args.privacy,
             thumbnail_path=OUTPUT_THUMB,
@@ -1288,7 +1353,7 @@ def main() -> int:
         )
         short_desc = (
             f"🎧 Listen to the full 1-Hour {chosen_meta['genre']} Mix here: https://youtu.be/{long_id}\n\n"
-            f"{chosen_meta['description']}"
+            f"{full_description}"
         )
         short_id = upload_video_to_youtube(
             youtube=youtube,
