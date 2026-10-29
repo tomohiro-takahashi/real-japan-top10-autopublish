@@ -697,40 +697,94 @@ def render_16x9_hud_and_thumb(
     era_label, catch_txt, main_txt, sub_txt = _extract_ja_parts(meta)
 
     # =========================================================================
-    # 1) 16:9 VIDEO OVERLAY HUD (`hud_png`) — Calm Adult Lounge / Night Drive Style
+    # 1) 16:9 VIDEO OVERLAY HUD (`hud_png`) — Calm Adult Lounge / Record-Jacket Style
+    #    NOTE: Also serves as the auto-captured YouTube thumbnail frame on unverified channels!
     # =========================================================================
     hud = Image.new("RGBA", (1280, 720), (0, 0, 0, 0))
     draw = ImageDraw.Draw(hud, "RGBA")
 
-    # Smooth dark gradient at the bottom (y=550..720) for understated waveform + track caption
-    for y in range(550, 720):
-        u = (y - 550) / 170.0
-        alpha = int(195 * (u ** 1.4))
+    # Subtle top vignette (y=0..105)
+    for y in range(0, 105):
+        u = 1.0 - (y / 105.0)
+        alpha = int(110 * (u ** 1.6))
         draw.line([(0, y), (1280, y)], fill=(4, 6, 12, alpha))
 
-    # Top-left understated editorial label (warm amber vertical bar + soft text)
-    f_hud_top = load_font(cjk_reg_path, 16)
-    draw.rectangle((44, 32, 48, 56), fill=(217, 179, 108, 220))
+    # Smooth dark gradient at the bottom (y=360..720) so large Mincho title & waveform are crisp
+    for y in range(360, 720):
+        u = (y - 360) / 360.0
+        alpha = int(235 * (u ** 1.35))
+        draw.line([(0, y), (1280, y)], fill=(4, 6, 12, alpha))
+
+    # Top-left understated editorial label (warm amber vertical bar + crisp text)
+    f_hud_top = load_font(cjk_reg_path, 19)
+    draw.rectangle((48, 38, 52, 66), fill=(217, 179, 108, 245))
     _draw_soft_shadow_text(
         hud,
-        (60, 33),
+        (66, 40),
         era_label,
         font=f_hud_top,
-        fill=(226, 214, 185, 210),
+        fill=(226, 214, 185, 245),
+        blur_radius=4,
+    )
+
+    max_text_w = 1160
+    draw = ImageDraw.Draw(hud, "RGBA")
+
+    # 1. Emotional Catchphrase (Mincho in warm champagne gold)
+    f_hud_catch = fit_font_for_width(draw, catch_txt, cjk_mincho_path, 28, 20, max_text_w)
+    _draw_soft_shadow_text(
+        hud,
+        (48, 474),
+        catch_txt,
+        font=f_hud_catch,
+        fill=(235, 213, 160, 255),
+        blur_radius=5,
+    )
+
+    # 2. Main Japanese Headline (Refined Mincho in warm ivory-white — readable as YouTube auto-thumbnail!)
+    draw = ImageDraw.Draw(hud, "RGBA")
+    f_hud_main = fit_font_for_width(draw, main_txt, cjk_mincho_path, 58, 36, max_text_w)
+    _draw_soft_shadow_text(
+        hud,
+        (46, 518),
+        main_txt,
+        font=f_hud_main,
+        fill=(252, 250, 245, 255),
+        blur_radius=7,
+        stroke_width=1,
+        stroke_fill=(8, 10, 16, 225),
+    )
+
+    # 3. Bottom Album Spec Line & Minimalist Spec Pill (below waveform y=604..640)
+    draw = ImageDraw.Draw(hud, "RGBA")
+    f_hud_sub = fit_font_for_width(draw, sub_txt, cjk_reg_path, 20, 15, 900)
+    _draw_soft_shadow_text(
+        hud,
+        (48, 654),
+        sub_txt,
+        font=f_hud_sub,
+        fill=(203, 213, 225, 238),
         blur_radius=3,
     )
 
-    # Bottom caption in refined Mincho under the slim champagne-gold waveform (y=672)
-    hud_bot_txt = f"♪  {main_txt}   —   {sub_txt}"
     draw = ImageDraw.Draw(hud, "RGBA")
-    f_hud_bot = fit_font_for_width(draw, hud_bot_txt, cjk_mincho_path, 20, 15, 1280 - 96)
-    _draw_soft_shadow_text(
-        hud,
-        (44, 672),
-        hud_bot_txt,
-        font=f_hud_bot,
-        fill=(235, 225, 205, 230),
-        blur_radius=3,
+    stamp_txt = "NON-STOP ARCHIVE MIX" if meta.get("_under_15m") else "60 MIN / 16 TRACKS"
+    f_stamp = load_font(font_path, 16)
+    tb_st = draw.textbbox((0, 0), stamp_txt, font=f_stamp)
+    st_w = (tb_st[2] - tb_st[0]) + 36
+    st_x0 = 1280 - 48 - st_w
+    draw.rounded_rectangle(
+        (st_x0, 646, st_x0 + st_w, 682),
+        radius=18,
+        fill=(10, 12, 18, 175),
+        outline=(217, 179, 108, 145),
+        width=1,
+    )
+    draw.text(
+        (st_x0 + 18, 656),
+        stamp_txt,
+        font=f_stamp,
+        fill=(226, 214, 185, 240),
     )
     hud.save(hud_png, "PNG")
 
@@ -917,9 +971,9 @@ def build_1hour_video(
     filter_complex = (
         f"[0:v]setpts=PTS-STARTPTS[bg];"
         f"[bg][1:v]overlay=0:0[bghud];"
-        f"[2:a]showwaves=s=1192x36:mode=cline:rate={fps}:scale=sqrt:colors=0xd9b36c,format=rgba,"
+        f"[2:a]showwaves=s=1192x32:mode=cline:rate={fps}:scale=sqrt:colors=0xd9b36c,format=rgba,"
         f"colorchannelmixer=aa=0.40[sw];"
-        f"[bghud][sw]overlay=44:624:shortest=1,scale=1920:1080:flags=lanczos,unsharp=3:3:0.5:3:3:0.0,format=yuv420p[vout]"
+        f"[bghud][sw]overlay=44:604:shortest=1,scale=1920:1080:flags=lanczos,unsharp=3:3:0.5:3:3:0.0,format=yuv420p[vout]"
     )
 
     cmd = [
@@ -1072,9 +1126,9 @@ def render_short_vertical_hud(
     )
 
     cta_ja = (
-        "本編フル音源はチャンネルから"
+        "▼ 下のアイコンから本編フル音源へ"
         if meta.get("_under_15m")
-        else "本編フルアルバム（1時間耐久）はチャンネルから"
+        else "▼ 下のアイコンから本編フルアルバムへ"
     )
     f_cta = fit_font_for_width(draw, cta_ja, cjk_heavy_path, 20, 15, SW - 96)
     tb_cta = draw.textbbox((0, 0), cta_ja, font=f_cta)
