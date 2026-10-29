@@ -46,13 +46,16 @@
         "1 Hour BGM",
         "Suno v6"
       ],
-      "used": false,
+      "used": true,
       "description": "🎧 【40代・50代必見】聴くだけで当時の血が騒ぐ！90年代 深夜の首都高・峠ユーロビート1時間耐久\n\n【40代・50代必見】 1980年代〜1990年代の青春時代の空気がよみがえる、高音質スタジオマスター（320kbps）で制作した全16曲ノンストップ・1時間耐久フルアルバムです。\n深夜のドライブ、デスクワーク、勉強、作業集中のBGMとしてお楽しみください。\n\n⏱️ トラックリスト / チャプター (全16曲ノンストップ):\n{TIMESTAMPS}\n\nチャンネル登録＆高評価で、毎日の作業・ドライブのお供にぜひどうぞ！\n\n#40代 #50代 #ユーロビート #頭文字D風 #湾岸ミッドナイト #90年代 #ドライブBGM #作業用BGM #首都高 #峠ドリフト",
       "thumb_era_label": "40代・50代に捧ぐ  ｜  1990s SHUTO EXPWY ARCHIVE",
       "thumb_catch": "聴くだけで、当時の血が騒ぐ——",
       "thumb_main": "深夜の首都高・峠ユーロビート",
       "thumb_sub": "作業・ドライブ用BGM  ｜  全16曲ノンストップ・フルアルバム（60分耐久）",
-      "artwork_file": "eurobeat.jpg"
+      "artwork_file": "eurobeat.jpg",
+      "published_at": "2026-10-29T12:26:15.247478+00:00",
+      "youtube_long_id": "oOmdsZXuK8Y",
+      "youtube_short_id": "wMRhX9D7LAE"
     },
     {
       "id": "music_002",
