@@ -97,14 +97,31 @@ def build_suno_style_and_title(meta: Dict[str, Any]) -> Tuple[str, str, bool, st
     return style, raw_title[:60], True, structure_prompt
 
 
+LOCAL_COOKIE_FILE = Path(__file__).resolve().parent / ".suno_cookie.txt"
+
+
+def normalize_suno_cookie(raw_cookie: str) -> str:
+    """Accept either a full Cookie header ('__client=eyJ...') or a raw JWT value ('eyJ...') and normalize it."""
+    val = raw_cookie.strip().strip('"').strip("'")
+    if not val:
+        return ""
+    if "=" not in val or val.startswith("eyJ"):
+        return f"__client={val}"
+    return val
+
+
 class SunoUnofficialClient:
     """
     Lightweight zero-dependency client for Suno's web studio API using the user's `SUNO_COOKIE`
-    (or an optional `SUNO_API_BASE_URL` proxy). Optimized for Suno Pro/Premier paid plans (`chirp-v4`).
+    (or `.suno_cookie.txt` / optional `SUNO_API_BASE_URL` proxy).
+    Optimized for Suno Pro/Premier paid plans (v5 `chirp-crow` -> v4.5+ `chirp-bluejay` / `chirp-auk` -> v4 `chirp-v4`).
     """
 
     def __init__(self, cookie: Optional[str] = None, api_base_url: Optional[str] = None) -> None:
-        self.cookie = (cookie or os.environ.get("SUNO_COOKIE") or "").strip()
+        raw_c = cookie or os.environ.get("SUNO_COOKIE") or ""
+        if not raw_c and LOCAL_COOKIE_FILE.exists():
+            raw_c = LOCAL_COOKIE_FILE.read_text(encoding="utf-8").strip()
+        self.cookie = normalize_suno_cookie(raw_c)
         self.api_base_url = (api_base_url or os.environ.get("SUNO_API_BASE_URL") or "").strip().rstrip("/")
         self.session_id: Optional[str] = None
         self.jwt_token: Optional[str] = None
@@ -230,9 +247,27 @@ class SunoUnofficialClient:
                         downloaded.append(self._download_file(audio_url, out_dir / f"suno_{clip_id}.mp3"))
             return downloaded[0] if downloaded else None
 
-        # Mode B: Direct Suno Studio API with Clerk Cookie (Suno Paid Plan: chirp-v5 / chirp-v4-5 / chirp-auk / chirp-v4)
+        # Mode B: Direct Suno Studio API with Clerk Cookie
+        # Suno Paid Plan internal model codenames:
+        #   v5     : chirp-crow / chirp-v5
+        #   v4.5+  : chirp-bluejay / chirp-v4-5 / chirp-auk
+        #   v4     : chirp-v4
+        #   v3.5   : chirp-v3-5
         env_mv = os.environ.get("SUNO_MODEL_VERSION", "").strip()
-        model_candidates = [m for m in [env_mv, "chirp-v5", "chirp-v4-5", "chirp-auk", "chirp-v4", "chirp-v3-5"] if m]
+        model_candidates = [
+            m
+            for m in [
+                env_mv,
+                "chirp-crow",
+                "chirp-v5",
+                "chirp-bluejay",
+                "chirp-v4-5",
+                "chirp-auk",
+                "chirp-v4",
+                "chirp-v3-5",
+            ]
+            if m
+        ]
         # Deduplicate while preserving order
         seen_mv = set()
         ordered_models = [m for m in model_candidates if not (m in seen_mv or seen_mv.add(m))]
@@ -322,6 +357,11 @@ class SunoUnofficialClient:
 
         raise TimeoutError(f"Timed out waiting for Suno clips {clip_ids} after {timeout_sec}s.")
 
+    def get_billing_info(self) -> Dict[str, Any]:
+        """Fetch Suno account billing/credits info using the active Clerk session."""
+        self._authenticate_clerk()
+        return self._studio_request("/api/billing/info/")
+
     @staticmethod
     def _download_file(url: str, dest: Path) -> Path:
         req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
@@ -330,3 +370,58 @@ class SunoUnofficialClient:
         dest.write_bytes(data)
         logger.info(f"Downloaded Suno MP3 ({len(data) / (1024*1024):.2f} MB) -> {dest}")
         return dest
+
+
+def main() -> int:
+    import argparse
+
+    logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
+    parser = argparse.ArgumentParser(description="Suno Paid Plan (v5/v4.5+/v4) Automated Track Generator & Cookie Setup")
+    parser.add_argument(
+        "--set-cookie",
+        default=None,
+        help="Save your Suno __client cookie to .suno_cookie.txt (and optionally sync to GitHub Secrets).",
+    )
+    parser.add_argument(
+        "--check-credits",
+        action="store_true",
+        help="Verify Suno cookie authentication and print remaining credits / active plan.",
+    )
+    parser.add_argument(
+        "--generate-next",
+        action="store_true",
+        help="Generate the next unused track from stocks/music/metadata_pool.json into stocks/music/queue/.",
+    )
+    args = parser.parse_args()
+
+    base_dir = Path(__file__).resolve().parent
+    if args.set_cookie:
+        norm = normalize_suno_cookie(args.set_cookie)
+        LOCAL_COOKIE_FILE.write_text(norm + "\n", encoding="utf-8")
+        logger.info(f"Saved normalized Suno cookie to {LOCAL_COOKIE_FILE}")
+
+    client = SunoUnofficialClient()
+    if args.check_credits:
+        if not client.is_configured():
+            logger.error("No SUNO_COOKIE configured. Pass --set-cookie '<__client value>' or set SUNO_COOKIE.")
+            return 1
+        info = client.get_billing_info()
+        logger.info(f"Suno Account Verified! Credits left: {info.get('total_credits_left')} | Monthly limit: {info.get('monthly_limit')}")
+        return 0
+
+    if args.generate_next:
+        pool_path = base_dir / "stocks" / "music" / "metadata_pool.json"
+        queue_dir = base_dir / "stocks" / "music" / "queue"
+        raw_pool = json.loads(pool_path.read_text(encoding="utf-8"))
+        items = raw_pool["items"] if isinstance(raw_pool, dict) and "items" in raw_pool else raw_pool
+        unused = [x for x in items if not x.get("used", False)] or items
+        out_mp3 = client.generate_and_download_mp3(unused[0], queue_dir)
+        logger.info(f"Generated MP3 ready in queue: {out_mp3}")
+        return 0
+
+    parser.print_help()
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

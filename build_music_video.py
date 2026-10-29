@@ -61,7 +61,9 @@ OUTPUT_1HOUR = BASE_DIR / "output_1hour.mp4"
 OUTPUT_SHORT = BASE_DIR / "output_short.mp4"
 OUTPUT_THUMB = BASE_DIR / "output_music_thumb.jpg"
 
-TOKEN_FILE = BASE_DIR / ".youtube_token_overseas_japan.json"
+TOKEN_FILE_MUSIC = BASE_DIR / ".youtube_token_music.json"
+TOKEN_FILE_FALLBACK = BASE_DIR / ".youtube_token_overseas_japan.json"
+CLIENT_SECRET_FILE = BASE_DIR / "client_secret.json"
 
 
 def find_bold_font() -> str:
@@ -86,6 +88,74 @@ def load_font(font_path: str, size: int) -> ImageFont.FreeTypeFont | ImageFont.I
         except Exception:
             pass
     return ImageFont.load_default()
+
+
+def clean_ascii_text(text: str) -> str:
+    """Replace emojis with clean separators and strip non-ASCII symbols so missing glyph boxes (□) never appear."""
+    import re as _re
+
+    t = (
+        text.replace("🎧", " // ")
+        .replace("🪩", " // ")
+        .replace("🏎️", "")
+        .replace("🏎", "")
+        .replace("✨", "")
+        .replace("🔥", "")
+        .replace("🌃", "")
+        .replace("—", " - ")
+        .replace("–", "-")
+    )
+    t = _re.sub(r"[^\x20-\x7E]", " ", t)
+    t = _re.sub(r"\s{2,}", " ", t).strip(" |-")
+    return t
+
+
+def fit_font_for_width(
+    draw: ImageDraw.ImageDraw,
+    text: str,
+    font_path: str,
+    max_size: int,
+    min_size: int,
+    max_w: int,
+) -> ImageFont.FreeTypeFont | ImageFont.ImageFont:
+    """Pick the largest font size in [min_size, max_size] where `text` fits within `max_w` pixels."""
+    for sz in range(max_size, min_size - 1, -1):
+        f = load_font(font_path, sz)
+        tb = draw.textbbox((0, 0), text, font=f)
+        if (tb[2] - tb[0]) <= max_w:
+            return f
+    return load_font(font_path, min_size)
+
+
+def smart_truncate(
+    draw: ImageDraw.ImageDraw,
+    text: str,
+    font: ImageFont.FreeTypeFont | ImageFont.ImageFont,
+    max_w: int,
+) -> str:
+    """Truncate strictly at whole-word or clause boundaries so words are never cut mid-word."""
+    clean = " ".join(text.split())
+    if not clean:
+        return ""
+    tb = draw.textbbox((0, 0), clean, font=font)
+    if (tb[2] - tb[0]) <= max_w:
+        return clean
+
+    for sep in (" | ", " // ", " - ", ": ", "; ", ", "):
+        if sep in clean:
+            head = clean.split(sep)[0].strip()
+            tb_h = draw.textbbox((0, 0), head, font=font)
+            if len(head) >= 10 and (tb_h[2] - tb_h[0]) <= max_w:
+                return head
+
+    words = clean.split(" ")
+    while len(words) > 1:
+        words.pop()
+        cand = " ".join(words).rstrip(",;:-—|/")
+        tb_c = draw.textbbox((0, 0), cand, font=font)
+        if (tb_c[2] - tb_c[0]) <= max_w:
+            return cand
+    return clean
 
 
 def get_audio_duration(media_path: Path) -> float:
@@ -281,8 +351,9 @@ def download_background_image(meta: Dict[str, Any], out_jpg: Path) -> Path:
             with urllib.request.urlopen(req, timeout=35) as resp:
                 raw = resp.read()
             im = Image.open(io.BytesIO(raw)).convert("RGB")
-            cw, ch = int(im.width * 0.94), int(im.height * 0.92)
-            im = im.crop(((im.width - cw) // 2, (im.height - ch) // 2, (im.width - cw) // 2 + cw, (im.height - ch) // 2 + ch))
+            x0, y0 = int(im.width * 0.03), int(im.height * 0.03)
+            x1, y1 = int(im.width * 0.97), int(im.height * 0.90)
+            im = im.crop((x0, y0, x1, y1))
             im = im.resize((1280, 720), Image.Resampling.LANCZOS)
             im.save(out_jpg, "JPEG", quality=95)
             logger.info(f"Downloaded Pollinations background image: {out_jpg} ({im.size})")
@@ -597,10 +668,10 @@ def render_16x9_hud_and_thumb(
     """
     Create:
     1) A subtle retro VHS / Aesthetic HUD overlay (`hud_png`, 1280x720 RGBA) for the 1-hour video
-    2) A high-CTR 1280x720 YouTube thumbnail (`thumb_jpg`)
+    2) A high-CTR 1280x720 YouTube thumbnail (`thumb_jpg`) with zero mid-word cutoffs or border overflow
     """
-    genre = meta.get("genre", "90s Retro Mix").upper()
-    short_hook = meta.get("short_hook_text", "90s Retro Vibes 🎧 Full 1 Hour in Channel")
+    genre = clean_ascii_text(meta.get("genre", "90s Retro Mix")).upper()
+    short_hook = clean_ascii_text(meta.get("short_hook_text", "90s Retro Vibes // Full 1 Hour in Channel"))
 
     hud = Image.new("RGBA", (1280, 720), (0, 0, 0, 0))
     draw = ImageDraw.Draw(hud, "RGBA")
@@ -610,18 +681,21 @@ def render_16x9_hud_and_thumb(
         draw.line([(0, y), (1280, y)], fill=(6, 8, 18, alpha))
 
     f_badge = load_font(font_path, 18)
-    f_title = load_font(font_path, 22)
 
-    badge_txt = f"● REC  |  {genre}  |  1-HOUR MIDNIGHT HIGHWAY MIX"
+    badge_txt = f"REC  |  {genre}  |  1-HOUR MIDNIGHT HIGHWAY MIX"
     tb = draw.textbbox((0, 0), badge_txt, font=f_badge)
-    bw = (tb[2] - tb[0]) + 36
+    bw = (tb[2] - tb[0]) + 56
     draw.rounded_rectangle((28, 24, 28 + bw, 62), radius=10, fill=(12, 16, 30, 210), outline=(253, 224, 71, 220), width=2)
-    draw.text((46, 33), badge_txt, font=f_badge, fill=(253, 224, 71, 255))
+    draw.ellipse((44, 37, 56, 49), fill=(239, 68, 68, 255))
+    draw.text((66, 33), badge_txt, font=f_badge, fill=(253, 224, 71, 255))
 
-    clean_title = meta.get("title", "").split("|")[0].strip()[:62]
+    clean_title = clean_ascii_text(meta.get("title", "").split("|")[0].strip())
+    now_playing_str = f"NOW PLAYING: {clean_title}"
+    f_title = fit_font_for_width(draw, now_playing_str, font_path, 22, 16, 1280 - 64)
+    now_playing_str = smart_truncate(draw, now_playing_str, f_title, 1280 - 64)
     draw.text(
         (32, 682),
-        f"NOW PLAYING: {clean_title}",
+        now_playing_str,
         font=f_title,
         fill=(241, 245, 249, 235),
         stroke_width=2,
@@ -631,12 +705,22 @@ def render_16x9_hud_and_thumb(
 
     base = Image.open(bg_jpg).convert("RGBA")
     t_draw = ImageDraw.Draw(base, "RGBA")
-    t_draw.rounded_rectangle((36, 480, 1244, 684), radius=20, fill=(8, 12, 24, 228), outline=(56, 189, 248, 240), width=3)
-    f_th_big = load_font(font_path, 38)
-    f_th_sub = load_font(font_path, 25)
-    t_draw.text((64, 505), clean_title.upper()[:52], font=f_th_big, fill=(255, 255, 255, 255), stroke_width=3, stroke_fill=(0, 0, 0, 255))
-    t_draw.text((64, 575), f"{genre}  •  1 HOUR ENDURANCE WORK & DRIVE BGM", font=f_th_sub, fill=(253, 224, 71, 255))
-    t_draw.text((64, 622), short_hook.replace("🎧", "|").replace("🪩", "|"), font=f_th_sub, fill=(125, 211, 252, 255))
+    t_draw.rounded_rectangle((36, 480, 1244, 684), radius=20, fill=(8, 12, 24, 232), outline=(56, 189, 248, 240), width=3)
+
+    th_title = clean_title.upper()
+    max_th_w = 1244 - 64 - 28  # 1152px safe width inside card
+    f_th_big = fit_font_for_width(t_draw, th_title, font_path, 36, 20, max_th_w)
+    th_title = smart_truncate(t_draw, th_title, f_th_big, max_th_w)
+
+    sub_line1 = f"{genre}  |  1 HOUR ENDURANCE WORK & DRIVE BGM"
+    f_th_sub1 = fit_font_for_width(t_draw, sub_line1, font_path, 25, 18, max_th_w)
+    sub_line2 = short_hook.replace("//", "|")
+    f_th_sub2 = fit_font_for_width(t_draw, sub_line2, font_path, 24, 18, max_th_w)
+    sub_line2 = smart_truncate(t_draw, sub_line2, f_th_sub2, max_th_w)
+
+    t_draw.text((64, 505), th_title, font=f_th_big, fill=(255, 255, 255, 255), stroke_width=3, stroke_fill=(0, 0, 0, 255))
+    t_draw.text((64, 575), sub_line1, font=f_th_sub1, fill=(253, 224, 71, 255))
+    t_draw.text((64, 622), sub_line2, font=f_th_sub2, fill=(125, 211, 252, 255))
     base.convert("RGB").save(thumb_jpg, "JPEG", quality=95)
 
 
@@ -711,7 +795,7 @@ def build_1hour_video(
     duration_sec: int = 3600,
 ) -> Path:
     """
-    Synthesize the 16:9 1-Hour Endurance Video (`output_1hour.mp4`, 1280x720):
+    Synthesize the 16:9 1-Hour Endurance Video (`output_1hour.mp4`, 1920x1080 Full HD):
     - Loops the high-speed highway driving video (`bg_loop_mp4`) seamlessly for `duration_sec`.
     - Overlays the retro HUD (`hud_png`) and real-time audio spectrum (`showwaves=s=1200x95:mode=cline`).
     """
@@ -720,7 +804,7 @@ def build_1hour_video(
     filter_complex = (
         f"[0:v]setpts=PTS-STARTPTS[bg];"
         f"[bg][1:v]overlay=0:0[bghud];"
-        f"[2:a]showwaves=s=1200x95:mode=cline:rate={fps}:colors=0x38bdf8|0xf472b6|0xfde047,format=rgba,"
+        f"[2:a]showwaves=s=1200x95:mode=cline:rate={fps}:scale=sqrt:colors=0x38bdf8|0xf472b6|0xfde047,format=rgba,"
         f"colorchannelmixer=aa=0.88[sw];"
         f"[bghud][sw]overlay=40:580:shortest=1,scale=1920:1080:flags=lanczos,unsharp=3:3:0.5:3:3:0.0,format=yuv420p[vout]"
     )
@@ -793,26 +877,30 @@ def render_short_vertical_hud(
 
     draw = ImageDraw.Draw(bg_blur, "RGBA")
 
-    # 1. Top Hook Banner (y=88..248)
+    # 1. Top Hook Banner (y=88..248) — 100% clean ASCII, zero missing glyph boxes (□)
     draw.rounded_rectangle((28, 88, SW - 28, 248), radius=20, fill=(12, 18, 36, 238), outline=(253, 224, 71, 250), width=3)
-    hook_raw = meta.get("short_hook_text", "90s Retro Vibes 🎧 Full 1 Hour in Channel")
-    clean_hook = hook_raw.replace("🎧", " // ").replace("🪩", " // ").replace("✨", "").strip()
+    hook_raw = meta.get("short_hook_text", "90s Retro Vibes // Full 1 Hour in Channel")
+    clean_hook = clean_ascii_text(hook_raw)
     parts = [p.strip() for p in clean_hook.split("//") if p.strip()]
     line1 = parts[0].upper() if parts else "90S RETRO VIBES"
-    line2 = parts[1].upper() if len(parts) > 1 else "FULL 1 HOUR IN CHANNEL"
+    line2 = f">> {(parts[1].upper() if len(parts) > 1 else 'FULL 1 HOUR IN CHANNEL')} <<"
 
-    f_h1 = load_font(font_path, 33)
-    f_h2 = load_font(font_path, 24)
+    max_banner_w = SW - 56 - 32
+    f_h1 = fit_font_for_width(draw, line1, font_path, 33, 20, max_banner_w)
+    line1 = smart_truncate(draw, line1, f_h1, max_banner_w)
+    f_h2 = fit_font_for_width(draw, line2, font_path, 24, 16, max_banner_w)
+    line2 = smart_truncate(draw, line2, f_h2, max_banner_w)
+
     tb1 = draw.textbbox((0, 0), line1, font=f_h1)
     tb2 = draw.textbbox((0, 0), line2, font=f_h2)
     draw.text(((SW - (tb1[2] - tb1[0])) // 2, 114), line1, font=f_h1, fill=(255, 255, 255, 255), stroke_width=2, stroke_fill=(0, 0, 0, 240))
-    draw.text(((SW - (tb2[2] - tb2[0])) // 2, 178), f">> {line2} <<", font=f_h2, fill=(253, 224, 71, 255), stroke_width=2, stroke_fill=(0, 0, 0, 240))
+    draw.text(((SW - (tb2[2] - tb2[0])) // 2, 178), line2, font=f_h2, fill=(253, 224, 71, 255), stroke_width=2, stroke_fill=(0, 0, 0, 240))
 
     # 2. Punch a transparent window at (x=28..692, y=282..780) where the live highway driving video will play
     fx0, fy0, fx1, fy1 = 28, 282, SW - 28, 780
     draw.rounded_rectangle((fx0, fy0, fx1, fy1), radius=22, fill=(0, 0, 0, 0), outline=(56, 189, 248, 245), width=4)
 
-    genre = meta.get("genre", "90s Retro Mix").upper()
+    genre = clean_ascii_text(meta.get("genre", "90s Retro Mix")).upper()
     f_g = load_font(font_path, 19)
     tb_g = draw.textbbox((0, 0), genre, font=f_g)
     gw = (tb_g[2] - tb_g[0]) + 32
@@ -822,14 +910,15 @@ def render_short_vertical_hud(
     # 3. Spectrum Frame Box (y=808..1028)
     draw.rounded_rectangle((28, 808, SW - 28, 1028), radius=18, fill=(8, 12, 24, 215), outline=(244, 114, 182, 220), width=2)
 
-    # 4. Bottom Track Title & Channel CTA (y=1058..1185)
-    f_bot = load_font(font_path, 21)
-    f_cta = load_font(font_path, 20)
-    short_title = meta.get("title", "").split("|")[0].strip()[:50]
+    # 4. Bottom Track Title & Channel CTA (y=1058..1185) — zero mid-word cutoff
+    short_title = clean_ascii_text(meta.get("title", "").split("|")[0].strip())
+    f_bot = fit_font_for_width(draw, short_title, font_path, 22, 15, SW - 48)
+    short_title = smart_truncate(draw, short_title, f_bot, SW - 48)
     tb_bt = draw.textbbox((0, 0), short_title, font=f_bot)
     draw.text(((SW - (tb_bt[2] - tb_bt[0])) // 2, 1068), short_title, font=f_bot, fill=(255, 255, 255, 255), stroke_width=2, stroke_fill=(0, 0, 0, 240))
 
     cta_str = "TAP CHANNEL FOR FULL 1-HOUR WORK & DRIVE BGM"
+    f_cta = fit_font_for_width(draw, cta_str, font_path, 20, 15, SW - 48)
     tb_c = draw.textbbox((0, 0), cta_str, font=f_cta)
     draw.text(((SW - (tb_c[2] - tb_c[0])) // 2, 1116), cta_str, font=f_cta, fill=(125, 211, 252, 255))
 
@@ -849,7 +938,7 @@ def build_short_video(
     Synthesize `output_short.mp4` (1080x1920 Full HD 9:16, 30 seconds):
     - Extracts the 30s..60s climax slice of `src_mp3`.
     - Plays the moving highway driving video (`bg_loop_mp4`) inside the center window (`y=282..780`).
-    - Overlays the large real-time audio spectrum (`showwaves=s=636x190:mode=cline`) at `y=822` and upscales to 1080x1920 Full HD.
+    - Overlays the large real-time audio spectrum (`showwaves=s=636x190:mode=p2p:scale=sqrt`) at `y=822` and upscales to 1080x1920 Full HD.
     """
     logger.info(f"Rendering 9:16 1080p Full HD Shorts highway driving video (30s): {out_short_mp4} ...")
     mp3_dur = get_audio_duration(src_mp3)
@@ -870,7 +959,7 @@ def build_short_video(
             f"[2:a]atrim=start={start_sec:.2f}:duration={clip_dur:.2f},asetpts=PTS-STARTPTS,"
             f"afade=t=in:st=0:d=1.0,afade=t=out:st={max(1.0, clip_dur - 1.5):.2f}:d=1.5[aud];"
             f"[aud]asplit=2[a_out][a_viz];"
-            f"[a_viz]showwaves=s=636x190:mode=cline:rate={fps}:colors=0x38bdf8|0xf472b6|0xfde047,format=rgba[sw];"
+            f"[a_viz]showwaves=s=636x190:mode=cline:rate={fps}:scale=sqrt:colors=0xfde047|0x38bdf8,format=rgba[sw];"
             f"[v2][sw]overlay=42:822:shortest=1,scale=1080:1920:flags=lanczos,unsharp=3:3:0.5:3:3:0.0,format=yuv420p[vout]"
         )
 
@@ -925,11 +1014,27 @@ def build_short_video(
     return out_short_mp4
 
 
+def run_music_oauth_setup() -> None:
+    """Run one-time interactive browser OAuth2 login for the Retro Music BGM YouTube Channel and save .youtube_token_music.json."""
+    from google_auth_oauthlib.flow import InstalledAppFlow
+
+    scopes = [
+        "https://www.googleapis.com/auth/youtube.upload",
+        "https://www.googleapis.com/auth/youtube",
+    ]
+    if not CLIENT_SECRET_FILE.exists():
+        raise FileNotFoundError(f"Missing {CLIENT_SECRET_FILE}")
+    flow = InstalledAppFlow.from_client_secrets_file(str(CLIENT_SECRET_FILE), scopes)
+    creds = flow.run_local_server(port=0)
+    TOKEN_FILE_MUSIC.write_text(creds.to_json(), encoding="utf-8")
+    logger.info(f"Saved Music Channel OAuth token to {TOKEN_FILE_MUSIC}")
+
+
 def get_youtube_service():
     """
-    Build an authenticated YouTube Data API v3 client using either:
-    1) Environment variables (`YOUTUBE_CLIENT_ID`, `YOUTUBE_CLIENT_SECRET`, `YOUTUBE_REFRESH_TOKEN`) on GitHub Actions
-    2) Local `.youtube_token_overseas_japan.json` token file
+    Build an authenticated YouTube Data API v3 client for the Music Channel using:
+    1) `YOUTUBE_CLIENT_ID_MUSIC` / `YOUTUBE_CLIENT_SECRET_MUSIC` / `YOUTUBE_REFRESH_TOKEN_MUSIC` on GitHub Actions
+    2) Local `.youtube_token_music.json` token file (or fallback if explicitly desired locally)
     """
     from google.auth.transport.requests import Request
     from google.oauth2.credentials import Credentials
@@ -941,9 +1046,9 @@ def get_youtube_service():
     ]
     creds = None
 
-    client_id = os.environ.get("YOUTUBE_CLIENT_ID")
-    client_secret = os.environ.get("YOUTUBE_CLIENT_SECRET")
-    refresh_token = os.environ.get("YOUTUBE_REFRESH_TOKEN")
+    client_id = os.environ.get("YOUTUBE_CLIENT_ID_MUSIC") or os.environ.get("YOUTUBE_CLIENT_ID")
+    client_secret = os.environ.get("YOUTUBE_CLIENT_SECRET_MUSIC") or os.environ.get("YOUTUBE_CLIENT_SECRET")
+    refresh_token = os.environ.get("YOUTUBE_REFRESH_TOKEN_MUSIC")
 
     if client_id and client_secret and refresh_token:
         creds = Credentials(
@@ -955,15 +1060,20 @@ def get_youtube_service():
             scopes=scopes,
         )
         creds.refresh(Request())
-    elif TOKEN_FILE.exists():
-        creds = Credentials.from_authorized_user_file(str(TOKEN_FILE), scopes)
+    elif TOKEN_FILE_MUSIC.exists():
+        creds = Credentials.from_authorized_user_file(str(TOKEN_FILE_MUSIC), scopes)
         if creds and creds.expired and creds.refresh_token:
             creds.refresh(Request())
-            TOKEN_FILE.write_text(creds.to_json(), encoding="utf-8")
+            TOKEN_FILE_MUSIC.write_text(creds.to_json(), encoding="utf-8")
+    elif not os.environ.get("GITHUB_ACTIONS") and TOKEN_FILE_FALLBACK.exists():
+        creds = Credentials.from_authorized_user_file(str(TOKEN_FILE_FALLBACK), scopes)
+        if creds and creds.expired and creds.refresh_token:
+            creds.refresh(Request())
+            TOKEN_FILE_FALLBACK.write_text(creds.to_json(), encoding="utf-8")
     else:
         raise RuntimeError(
-            "No YouTube credentials found. Set YOUTUBE_CLIENT_ID / YOUTUBE_CLIENT_SECRET / YOUTUBE_REFRESH_TOKEN "
-            f"or provide {TOKEN_FILE}."
+            "Music Channel YouTube credentials not configured yet. "
+            "Run `python build_music_video.py --auth-setup` or set YOUTUBE_REFRESH_TOKEN_MUSIC in GitHub Secrets."
         )
 
     return build("youtube", "v3", credentials=creds)
@@ -1080,6 +1190,11 @@ def mark_done_and_git_push(
 def main() -> int:
     parser = argparse.ArgumentParser(description="Build & upload 1-Hour Retro Music Video + 9:16 Short from Suno MP3.")
     parser.add_argument(
+        "--auth-setup",
+        action="store_true",
+        help="Run one-time interactive Google OAuth2 browser login for the Music BGM YouTube Channel (.youtube_token_music.json).",
+    )
+    parser.add_argument(
         "--duration",
         type=int,
         default=3600,
@@ -1102,6 +1217,10 @@ def main() -> int:
         help="If stocks/music/queue/ is empty and SUNO_COOKIE is not set, synthesize a sample retro MP3 for testing.",
     )
     args = parser.parse_args()
+
+    if args.auth_setup:
+        run_music_oauth_setup()
+        return 0
 
     QUEUE_DIR.mkdir(parents=True, exist_ok=True)
     DONE_DIR.mkdir(parents=True, exist_ok=True)
@@ -1151,34 +1270,41 @@ def main() -> int:
         return 0
 
     # Step 6: Upload both videos to YouTube & move MP3 to done/
-    youtube = get_youtube_service()
-    long_id = upload_video_to_youtube(
-        youtube=youtube,
-        video_path=OUTPUT_1HOUR,
-        title=chosen_meta["title"],
-        description=chosen_meta["description"],
-        tags=chosen_meta.get("tags", []),
-        privacy_status=args.privacy,
-        thumbnail_path=OUTPUT_THUMB,
-    )
+    try:
+        youtube = get_youtube_service()
+        long_id = upload_video_to_youtube(
+            youtube=youtube,
+            video_path=OUTPUT_1HOUR,
+            title=chosen_meta["title"],
+            description=chosen_meta["description"],
+            tags=chosen_meta.get("tags", []),
+            privacy_status=args.privacy,
+            thumbnail_path=OUTPUT_THUMB,
+        )
 
-    short_title = chosen_meta.get(
-        "short_title",
-        f"{chosen_meta.get('short_hook_text', '90s Retro Vibes')} | {chosen_meta['genre']} #Shorts",
-    )
-    short_desc = (
-        f"🎧 Listen to the full 1-Hour {chosen_meta['genre']} Mix here: https://youtu.be/{long_id}\n\n"
-        f"{chosen_meta['description']}"
-    )
-    short_id = upload_video_to_youtube(
-        youtube=youtube,
-        video_path=OUTPUT_SHORT,
-        title=short_title,
-        description=short_desc,
-        tags=chosen_meta.get("tags", []) + ["Shorts", "YouTubeShorts"],
-        privacy_status=args.privacy,
-        thumbnail_path=None,
-    )
+        short_title = chosen_meta.get(
+            "short_title",
+            f"{clean_ascii_text(chosen_meta.get('short_hook_text', '90s Retro Vibes'))} | {chosen_meta['genre']} #Shorts",
+        )
+        short_desc = (
+            f"🎧 Listen to the full 1-Hour {chosen_meta['genre']} Mix here: https://youtu.be/{long_id}\n\n"
+            f"{chosen_meta['description']}"
+        )
+        short_id = upload_video_to_youtube(
+            youtube=youtube,
+            video_path=OUTPUT_SHORT,
+            title=short_title,
+            description=short_desc,
+            tags=chosen_meta.get("tags", []) + ["Shorts", "YouTubeShorts"],
+            privacy_status=args.privacy,
+            thumbnail_path=None,
+        )
+    except Exception as exc:
+        err_s = str(exc)
+        if "uploadLimitExceeded" in err_s or "quotaExceeded" in err_s or "credentials not configured" in err_s:
+            logger.warning(f"Deferring YouTube upload ({err_s}); keeping '{chosen_mp3.name}' in stocks/music/queue/ for next run.")
+            return 0
+        raise
 
     mark_done_and_git_push(
         mp3_path=chosen_mp3,
