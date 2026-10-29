@@ -1,0 +1,582 @@
+{
+  "ranking_id": "tokyo_daytrip_oldtown_003",
+  "prefecture": "Near Tokyo (Kanto) TOP 10",
+  "title_en": "1 HOUR FROM TOKYO! TOP 10 Old Edo Towns & Kominka Streets Japanese Locals Love",
+  "youtube_title_long": "1 HOUR FROM TOKYO! TOP 10 Old Edo Towns & Kominka Streets Japanese Locals Love",
+  "youtube_title_short": "Just 45 Mins from Shinjuku?! Tokyo's #1 Edo Samurai Merchant Town #Shorts #TokyoTravel",
+  "voice": "en-US-ChristopherNeural",
+  "thumb_config": {
+    "ribbon_text": "500,000 JAPANESE IG POSTS",
+    "hero_line1": "SKIP KYOTO!",
+    "hero_line2": "REAL JAPAN",
+    "banner_title": "NEAR TOKYO TOP 10",
+    "banner_sub": "HIDDEN GEMS VOTED BY LOCALS",
+    "map_header": "WHERE IS NEAR TOK?",
+    "map_pill": "DIRECT",
+    "map_line1": "Shinkansen / Train",
+    "map_line2": "from Tokyo Station!",
+    "map_footer": "95% LOCAL GUESTS",
+    "highlight_prefs_ja": [
+      "埼玉県"
+    ]
+  },
+  "area_guide": {
+    "target_pref_ja": "埼玉県",
+    "map_badge": "Near Tokyo (Kanto) Local Guide",
+    "cards": [
+      {
+        "title": "1. WHY VISIT NEAR TOKYO (KANTO)?",
+        "bullets": [
+          "Ranked by 500,000 Japanese IG posts & domestic reviews in Near Tokyo (Kanto)",
+          "95% domestic Japanese visitors — zero tourist trap inflation"
+        ]
+      },
+      {
+        "title": "2. DIRECT TRAIN & IC CARD ACCESS",
+        "bullets": [
+          "Direct JR Shinkansen or express train access across Near Tokyo (Kanto)",
+          "Suica, Pasmo & ICOCA accepted at major stations"
+        ]
+      },
+      {
+        "title": "3. INSIDER TIMING & ETIQUETTE",
+        "bullets": [
+          "Arrive 15–20 minutes before opening to beat local queues",
+          "Carry cash (1,000-yen notes) for ticket machines & local shops"
+        ]
+      }
+    ]
+  },
+  "summary_rows": [
+    {
+      "rank": "#1",
+      "score": "96/100pt",
+      "name_en": "Kawagoe Kurazukuri Old Warehouse Street",
+      "name_ja": "Kawagoe Kurazukuri Old Warehouse Street",
+      "dish": "17th-Century Clay-Wall Edo Merchant Houses & Bell of Time (Toki no Kane)",
+      "budget": "¥500 Train from Ikebukuro",
+      "access_short": "Ikebukuro Stn 30m (Tobu Tojo)",
+      "hack": "Arrive by 9:30 AM and try freshly grilled unagi & sweet potato chips",
+      "thumb": "spot_01_1.jpg"
+    },
+    {
+      "rank": "#2",
+      "score": "94/100pt",
+      "name_en": "Sawara Historic Canal District (Chiba)",
+      "name_ja": "Sawara Historic Canal District (Chiba)",
+      "dish": "Little Edo Willow-Lined Canal Boats & 200-Yr Sake Breweries",
+      "budget": "¥1,600 Boat & JR Access",
+      "access_short": "Tokyo Stn 85m (JR Express)",
+      "hack": "Ride the wooden flat-bottom boat along the Ono River at 10:00 AM",
+      "thumb": "spot_02_1.jpg"
+    },
+    {
+      "rank": "#3",
+      "score": "92/100pt",
+      "name_en": "Tochigi Kura no Machi (Uzuma River Town)",
+      "name_ja": "Tochigi Kura no Machi (Uzuma River Town)",
+      "dish": "200 Black-and-White Edo Warehouses & Carp Streamer Canal Boats",
+      "budget": "¥1,200 Tobu Line from Asakusa",
+      "access_short": "Asakusa Stn 70m (Spacia)",
+      "hack": "Visit theYokoyama Kyodokan merchant estate right beside the canal",
+      "thumb": "spot_03_1.jpg"
+    },
+    {
+      "rank": "#4",
+      "score": "90/100pt",
+      "name_en": "Shibamata Taishakuten Approach (Katsushika)",
+      "name_ja": "Shibamata Taishakuten Approach (Katsushika)",
+      "dish": "1920s Showa Retro Wooden Sweet Shops & Intricate Wood-Carved Temple",
+      "budget": "¥300 Keisei Line Access",
+      "access_short": "Ueno Stn 28m (Keisei Line)",
+      "hack": "Eat freshly pounded Kusa-dango mugwort mochi and ride the Yagiri Ferry",
+      "thumb": "spot_04_1.jpg"
+    },
+    {
+      "rank": "#5",
+      "score": "89/100pt",
+      "name_en": "Naritasan Omotesando Merchant Street",
+      "name_ja": "Naritasan Omotesando Merchant Street",
+      "dish": "800m Edo Pilgrimage Street with Charcoal-Grilled Unagi & Pagodas",
+      "budget": "¥900 Keisei Main Line",
+      "access_short": "Ueno Stn 55m / Narita 10m",
+      "hack": "Pick up a numbered ticket at Kawatoyo Honten before visiting the temple",
+      "thumb": "spot_05_1.jpg"
+    },
+    {
+      "rank": "#6",
+      "score": "87/100pt",
+      "name_en": "Yanaka Ginza & Nezu Shrine Old Quarter",
+      "name_ja": "Yanaka Ginza & Nezu Shrine Old Quarter",
+      "dish": "Pre-War Wooden Shitamachi Alleys, 70+ Historic Temples & Torii Tunnel",
+      "budget": "¥200 JR Yamanote Line",
+      "access_short": "Nippori Stn 5m",
+      "hack": "Walk the Yuyake Dandan steps at sunset with a freshly fried menchi-katsu",
+      "thumb": "spot_06_1.jpg"
+    },
+    {
+      "rank": "#7",
+      "score": "86/100pt",
+      "name_en": "Chichibu Shrine & Banba Street (Saitama)",
+      "name_ja": "Chichibu Shrine & Banba Street (Saitama)",
+      "dish": "Early-1900s Timber-Frame Cafes, Sake Cellars & Night Festival Floats",
+      "budget": "¥1,500 Seibu Laview Express",
+      "access_short": "Ikebukuro Stn 77m (Laview)",
+      "hack": "Try Waraji Katsu-don (giant pork cutlets) and Ichiro's Malt whisky bars",
+      "thumb": "spot_07_1.jpg"
+    },
+    {
+      "rank": "#8",
+      "score": "85/100pt",
+      "name_en": "Mashiko Pottery Village & Kominka Cafes",
+      "name_ja": "Mashiko Pottery Village & Kominka Cafes",
+      "dish": "400+ Ceramic Kilns, Thatched-Roof Farmhouse Studios & Climbing Kilns",
+      "budget": "¥2,200 Direct Highway Bus",
+      "access_short": "Akihabara Stn 95m",
+      "hack": "Rent an e-bike at Mashiko Station to tour Starnet and local kiln alleys",
+      "thumb": "spot_08_1.jpg"
+    },
+    {
+      "rank": "#9",
+      "score": "84/100pt",
+      "name_en": "Kamakura Hase & Kominka Backstreets",
+      "name_ja": "Kamakura Hase & Kominka Backstreets",
+      "dish": "100-Yr-Old Wooden Villas Turned Matcha Teahouses Along the Enoden Line",
+      "budget": "¥950 JR Yokosuka Line",
+      "access_short": "Tokyo Stn 55m (JR Direct)",
+      "hack": "Skip Komachi-dori crowds and explore the quiet alleys around Gokurakuji",
+      "thumb": "spot_09_1.jpg"
+    },
+    {
+      "rank": "#10",
+      "score": "82/100pt",
+      "name_en": "Edo-Tokyo Open Air Architectural Museum (Koganei)",
+      "name_ja": "Edo-Tokyo Open Air Architectural Museum (Koganei)",
+      "dish": "30 Authentic Relocated Edo & Meiji Buildings (Spirited Away Inspiration!)",
+      "budget": "¥400 Admission",
+      "access_short": "Shinjuku Stn 25m (JR Chuo)",
+      "hack": "Step inside the Kodakara-yu bathhouse and武居三省堂 stationery shop",
+      "thumb": "spot_10_1.jpg"
+    }
+  ],
+  "shorts_script": {
+    "hook_badge": "STOP GOING TO TOURIST TRAPS IN NEAR TOKYO (KANTO)!",
+    "hook_title": "REAL NEAR TOKYO (KANTO)\nTOP 10 RANKING",
+    "hook_sub": "500,000 Japanese IG Posts × Local Reviews",
+    "narration_hook": "Stop wasting time at tourist traps! We analyzed five hundred thousand Japanese Instagram posts and local reviews to rank the real Near Tokyo (Kanto) top ten!",
+    "narration_rank1": "At number three is Tochigi Kura no Machi (Uzuma River Town). At number two is Sawara Historic Canal District (Chiba). And at number one with ninety-six points is Kawagoe Kurazukuri Old Warehouse Street!",
+    "narration_praise": "Japanese locals love Kawagoe Kurazukuri Old Warehouse Street for its authentic quality and unbeatable value.",
+    "narration_warn": "Locals warn that weekends get busy around noon, so arrive fifteen minutes before opening!",
+    "narration_outro": "Screenshot this full Near Tokyo (Kanto) top ten list right now, and tap the related video below for the full nine-minute guide!",
+    "praise_quote_en": "\"Unmatched authentic quality in Near Tokyo (Kanto)—worth every minute of the trip!\"",
+    "warn_quote_en": "\"Arrive 15 minutes before opening on weekends to skip the local line!\"",
+    "top1_photos": [
+      "spot_01_1.jpg",
+      "spot_01_2.jpg",
+      "spot_02_1.jpg",
+      "spot_03_1.jpg"
+    ]
+  },
+  "segments": [
+    {
+      "seg_type": "opening",
+      "rank_badge": "REAL NEAR TOKYO (KANTO) TOP 10!",
+      "place_ja": "1 HOUR FROM TOKYO! TOP 10 Old Edo Towns & Kominka Streets Japanese Locals Love",
+      "place_en": "SKIP TOURIST TRAPS! Near Tokyo (Kanto) TOP 10 Preserved Edo Merchant Streets & Kominka Old Towns 1 Hr from Tokyo Countdown",
+      "area": "Near Tokyo (Kanto), Japan",
+      "budget": "100-Point Local Index",
+      "insider_tip": "FORMULA: Japanese IG Buzz (50pt) + Local Reviews (35pt) + Hidden Gem (15pt)",
+      "photos": [
+        "spot_01_1.jpg",
+        "spot_02_1.jpg"
+      ],
+      "narration": "Stop wasting time at overcrowded tourist traps! We analyzed five hundred thousand Japanese Instagram posts and domestic local reviews to rank the top ten real Preserved Edo Merchant Streets & Kominka Old Towns 1 Hr from Tokyo in Near Tokyo (Kanto). Watch these top highlights and stay until number one!",
+      "subtitle": "Near Tokyo (Kanto) TOP 10 Preserved Edo Merchant Streets & Kominka Old Towns 1 Hr from Tokyo! Ranked by 500,000 Japanese IG posts &\nauthentic domestic reviews—watch all the way to #1!"
+    },
+    {
+      "seg_type": "area_guide",
+      "rank_badge": "NEAR TOKYO GUIDE 1/2",
+      "place_ja": "Near Tokyo (Kanto) Access Guide",
+      "place_en": "Where Is Near Tokyo (Kanto) & How Do You Get There?",
+      "area": "Near Tokyo (Kanto) Region",
+      "budget": "JR Pass / IC Card Ready",
+      "insider_tip": "ACCESS TIP: Use IC cards (Suica/Pasmo) or JR Pass for seamless travel across Near Tokyo (Kanto)!",
+      "photos": [
+        "spot_03_1.jpg",
+        "spot_04_1.jpg"
+      ],
+      "narration": "Before we start the countdown, look at the Japan map on the left. Near Tokyo (Kanto) is easily accessible by JR high-speed train or local express lines, and over ninety percent of guests at these top ten spots are Japanese locals!",
+      "subtitle": "Near Tokyo (Kanto) is directly connected via JR Shinkansen & express lines.\nOver 90% of visitors at these ranked spots are Japanese locals!"
+    },
+    {
+      "seg_type": "area_guide",
+      "rank_badge": "NEAR TOKYO GUIDE 2/2",
+      "place_ja": "Near Tokyo (Kanto) Best Seasons & Rules",
+      "place_en": "Best Seasons, Local Etiquette & Pro Timing Hacks for Near Tokyo (Kanto)",
+      "area": "Year-Round Insider Guide",
+      "budget": "¥1,000–¥3,500 Avg",
+      "insider_tip": "PRO TIP: Visit weekday mornings or 20 minutes before opening to beat local queues!",
+      "photos": [
+        "spot_05_1.jpg",
+        "spot_06_1.jpg"
+      ],
+      "narration": "Each season in Near Tokyo (Kanto) offers a completely different atmosphere—from spring cherry blossoms to autumn foliage and crisp winter views. Remember to carry cash alongside your IC card and arrive early in the morning!",
+      "subtitle": "Every season brings unique highlights across Near Tokyo (Kanto).\nCarry some cash (Yen) alongside IC cards and arrive 20 mins before opening!"
+    },
+    {
+      "seg_type": "spot",
+      "rank_badge": "#10  82/100pt",
+      "place_ja": "Edo-Tokyo Open Air Architectural Museum (Koganei)",
+      "place_en": "#10 Edo-Tokyo Open Air Architectural Museum (Koganei) — Preserved Edo Merchant Streets & Kominka Old Towns 1 Hr from Tokyo",
+      "area": "Near Tokyo (Kanto), Japan",
+      "budget": "¥400 Admission",
+      "access_info": "Train Access: Shinjuku Stn 25m (JR Chuo) (IC Card / JR Line)",
+      "insider_tip": "LOCAL HIGHLIGHT: 30 Authentic Relocated Edo & Meiji Buildings (Spirited Away Inspiration!) — Step inside the Kodakara-yu bathhouse and武居三省堂 stationery shop",
+      "photos": [
+        "spot_10_1.jpg",
+        "spot_10_2.jpg"
+      ],
+      "narration": "At rank #10 with 82/100pt is Edo-Tokyo Open Air Architectural Museum (Koganei) in Near Tokyo (Kanto). It scored high for 30 Authentic Relocated Edo & Meiji Buildings (Spirited Away Inspiration!). Easy access via Shinjuku Stn 25m (JR Chuo).",
+      "subtitle": "#10 Edo-Tokyo Open Air Architectural Museum (Koganei) (82/100pt): 30 Authentic Relocated Edo & Meiji Buildings (Spirited Away Inspiration!)\nAccess: Shinjuku Stn 25m (JR Chuo) | Tip: Step inside the Kodakara-yu bathhouse and武居三省堂 stationery shop"
+    },
+    {
+      "seg_type": "review",
+      "rank_badge": "#10 LOCAL REVIEWS",
+      "place_ja": "Edo-Tokyo Open Air Architectural Museum (Koganei) Reviews",
+      "place_en": "What Japanese Locals Say About Edo-Tokyo Open Air Architectural Museum (Koganei)",
+      "area": "Near Tokyo (Kanto), Japan",
+      "budget": "1,200+ Domestic Reviews",
+      "access_info": "Train Access: Shinjuku Stn 25m (JR Chuo)",
+      "insider_tip": "PRO HACK: Step inside the Kodakara-yu bathhouse and武居三省堂 stationery shop",
+      "review_praise_en": "\"Incredible authentic quality that tourists almost never find—worth every minute of the trip in Near Tokyo (Kanto)!\"",
+      "review_warn_en": "\"Weekends get busy with local fans after 11:30 AM, so arrive 15 minutes before opening for immediate entry!\"",
+      "photos": [
+        "spot_10_2.jpg",
+        "spot_10_1.jpg"
+      ],
+      "narration": "Japanese reviewers praise Edo-Tokyo Open Air Architectural Museum (Koganei) for its authentic atmosphere and unmatched local value. However, locals warn that weekends get crowded around noon, so arrive fifteen minutes before opening!",
+      "subtitle": "Praise: \"Unmatched authentic quality in Near Tokyo (Kanto)!\"\nLocal Warning: \"Arrive 15 mins before opening on weekends to skip the queue.\""
+    },
+    {
+      "seg_type": "spot",
+      "rank_badge": "#9  84/100pt",
+      "place_ja": "Kamakura Hase & Kominka Backstreets",
+      "place_en": "#9 Kamakura Hase & Kominka Backstreets — Preserved Edo Merchant Streets & Kominka Old Towns 1 Hr from Tokyo",
+      "area": "Near Tokyo (Kanto), Japan",
+      "budget": "¥950 JR Yokosuka Line",
+      "access_info": "Train Access: Tokyo Stn 55m (JR Direct) (IC Card / JR Line)",
+      "insider_tip": "LOCAL HIGHLIGHT: 100-Yr-Old Wooden Villas Turned Matcha Teahouses Along the Enoden Line — Skip Komachi-dori crowds and explore the quiet alleys around Gokurakuji",
+      "photos": [
+        "spot_09_1.jpg",
+        "spot_09_2.jpg"
+      ],
+      "narration": "At rank #9 with 84/100pt is Kamakura Hase & Kominka Backstreets in Near Tokyo (Kanto). It scored high for 100-Yr-Old Wooden Villas Turned Matcha Teahouses Along the Enoden Line. Easy access via Tokyo Stn 55m (JR Direct).",
+      "subtitle": "#9 Kamakura Hase & Kominka Backstreets (84/100pt): 100-Yr-Old Wooden Villas Turned Matcha Teahouses Along the Enoden Line\nAccess: Tokyo Stn 55m (JR Direct) | Tip: Skip Komachi-dori crowds and explore the quiet alleys around Gokurakuji"
+    },
+    {
+      "seg_type": "review",
+      "rank_badge": "#9 LOCAL REVIEWS",
+      "place_ja": "Kamakura Hase & Kominka Backstreets Reviews",
+      "place_en": "What Japanese Locals Say About Kamakura Hase & Kominka Backstreets",
+      "area": "Near Tokyo (Kanto), Japan",
+      "budget": "1,200+ Domestic Reviews",
+      "access_info": "Train Access: Tokyo Stn 55m (JR Direct)",
+      "insider_tip": "PRO HACK: Skip Komachi-dori crowds and explore the quiet alleys around Gokurakuji",
+      "review_praise_en": "\"Incredible authentic quality that tourists almost never find—worth every minute of the trip in Near Tokyo (Kanto)!\"",
+      "review_warn_en": "\"Weekends get busy with local fans after 11:30 AM, so arrive 15 minutes before opening for immediate entry!\"",
+      "photos": [
+        "spot_09_2.jpg",
+        "spot_09_1.jpg"
+      ],
+      "narration": "Japanese reviewers praise Kamakura Hase & Kominka Backstreets for its authentic atmosphere and unmatched local value. However, locals warn that weekends get crowded around noon, so arrive fifteen minutes before opening!",
+      "subtitle": "Praise: \"Unmatched authentic quality in Near Tokyo (Kanto)!\"\nLocal Warning: \"Arrive 15 mins before opening on weekends to skip the queue.\""
+    },
+    {
+      "seg_type": "spot",
+      "rank_badge": "#8  85/100pt",
+      "place_ja": "Mashiko Pottery Village & Kominka Cafes",
+      "place_en": "#8 Mashiko Pottery Village & Kominka Cafes — Preserved Edo Merchant Streets & Kominka Old Towns 1 Hr from Tokyo",
+      "area": "Near Tokyo (Kanto), Japan",
+      "budget": "¥2,200 Direct Highway Bus",
+      "access_info": "Train Access: Akihabara Stn 95m (IC Card / JR Line)",
+      "insider_tip": "LOCAL HIGHLIGHT: 400+ Ceramic Kilns, Thatched-Roof Farmhouse Studios & Climbing Kilns — Rent an e-bike at Mashiko Station to tour Starnet and local kiln alleys",
+      "photos": [
+        "spot_08_1.jpg",
+        "spot_08_2.jpg"
+      ],
+      "narration": "At rank #8 with 85/100pt is Mashiko Pottery Village & Kominka Cafes in Near Tokyo (Kanto). It scored high for 400+ Ceramic Kilns, Thatched-Roof Farmhouse Studios & Climbing Kilns. Easy access via Akihabara Stn 95m.",
+      "subtitle": "#8 Mashiko Pottery Village & Kominka Cafes (85/100pt): 400+ Ceramic Kilns, Thatched-Roof Farmhouse Studios & Climbing Kilns\nAccess: Akihabara Stn 95m | Tip: Rent an e-bike at Mashiko Station to tour Starnet and local kiln alleys"
+    },
+    {
+      "seg_type": "review",
+      "rank_badge": "#8 LOCAL REVIEWS",
+      "place_ja": "Mashiko Pottery Village & Kominka Cafes Reviews",
+      "place_en": "What Japanese Locals Say About Mashiko Pottery Village & Kominka Cafes",
+      "area": "Near Tokyo (Kanto), Japan",
+      "budget": "1,200+ Domestic Reviews",
+      "access_info": "Train Access: Akihabara Stn 95m",
+      "insider_tip": "PRO HACK: Rent an e-bike at Mashiko Station to tour Starnet and local kiln alleys",
+      "review_praise_en": "\"Incredible authentic quality that tourists almost never find—worth every minute of the trip in Near Tokyo (Kanto)!\"",
+      "review_warn_en": "\"Weekends get busy with local fans after 11:30 AM, so arrive 15 minutes before opening for immediate entry!\"",
+      "photos": [
+        "spot_08_2.jpg",
+        "spot_08_1.jpg"
+      ],
+      "narration": "Japanese reviewers praise Mashiko Pottery Village & Kominka Cafes for its authentic atmosphere and unmatched local value. However, locals warn that weekends get crowded around noon, so arrive fifteen minutes before opening!",
+      "subtitle": "Praise: \"Unmatched authentic quality in Near Tokyo (Kanto)!\"\nLocal Warning: \"Arrive 15 mins before opening on weekends to skip the queue.\""
+    },
+    {
+      "seg_type": "spot",
+      "rank_badge": "#7  86/100pt",
+      "place_ja": "Chichibu Shrine & Banba Street (Saitama)",
+      "place_en": "#7 Chichibu Shrine & Banba Street (Saitama) — Preserved Edo Merchant Streets & Kominka Old Towns 1 Hr from Tokyo",
+      "area": "Near Tokyo (Kanto), Japan",
+      "budget": "¥1,500 Seibu Laview Express",
+      "access_info": "Train Access: Ikebukuro Stn 77m (Laview) (IC Card / JR Line)",
+      "insider_tip": "LOCAL HIGHLIGHT: Early-1900s Timber-Frame Cafes, Sake Cellars & Night Festival Floats — Try Waraji Katsu-don (giant pork cutlets) and Ichiro's Malt whisky bars",
+      "photos": [
+        "spot_07_1.jpg",
+        "spot_07_2.jpg"
+      ],
+      "narration": "At rank #7 with 86/100pt is Chichibu Shrine & Banba Street (Saitama) in Near Tokyo (Kanto). It scored high for Early-1900s Timber-Frame Cafes, Sake Cellars & Night Festival Floats. Easy access via Ikebukuro Stn 77m (Laview).",
+      "subtitle": "#7 Chichibu Shrine & Banba Street (Saitama) (86/100pt): Early-1900s Timber-Frame Cafes, Sake Cellars & Night Festival Floats\nAccess: Ikebukuro Stn 77m (Laview) | Tip: Try Waraji Katsu-don (giant pork cutlets) and Ichiro's Malt whisky bars"
+    },
+    {
+      "seg_type": "review",
+      "rank_badge": "#7 LOCAL REVIEWS",
+      "place_ja": "Chichibu Shrine & Banba Street (Saitama) Reviews",
+      "place_en": "What Japanese Locals Say About Chichibu Shrine & Banba Street (Saitama)",
+      "area": "Near Tokyo (Kanto), Japan",
+      "budget": "1,200+ Domestic Reviews",
+      "access_info": "Train Access: Ikebukuro Stn 77m (Laview)",
+      "insider_tip": "PRO HACK: Try Waraji Katsu-don (giant pork cutlets) and Ichiro's Malt whisky bars",
+      "review_praise_en": "\"Incredible authentic quality that tourists almost never find—worth every minute of the trip in Near Tokyo (Kanto)!\"",
+      "review_warn_en": "\"Weekends get busy with local fans after 11:30 AM, so arrive 15 minutes before opening for immediate entry!\"",
+      "photos": [
+        "spot_07_2.jpg",
+        "spot_07_1.jpg"
+      ],
+      "narration": "Japanese reviewers praise Chichibu Shrine & Banba Street (Saitama) for its authentic atmosphere and unmatched local value. However, locals warn that weekends get crowded around noon, so arrive fifteen minutes before opening!",
+      "subtitle": "Praise: \"Unmatched authentic quality in Near Tokyo (Kanto)!\"\nLocal Warning: \"Arrive 15 mins before opening on weekends to skip the queue.\""
+    },
+    {
+      "seg_type": "spot",
+      "rank_badge": "#6  87/100pt",
+      "place_ja": "Yanaka Ginza & Nezu Shrine Old Quarter",
+      "place_en": "#6 Yanaka Ginza & Nezu Shrine Old Quarter — Preserved Edo Merchant Streets & Kominka Old Towns 1 Hr from Tokyo",
+      "area": "Near Tokyo (Kanto), Japan",
+      "budget": "¥200 JR Yamanote Line",
+      "access_info": "Train Access: Nippori Stn 5m (IC Card / JR Line)",
+      "insider_tip": "LOCAL HIGHLIGHT: Pre-War Wooden Shitamachi Alleys, 70+ Historic Temples & Torii Tunnel — Walk the Yuyake Dandan steps at sunset with a freshly fried menchi-katsu",
+      "photos": [
+        "spot_06_1.jpg",
+        "spot_06_2.jpg"
+      ],
+      "narration": "At rank #6 with 87/100pt is Yanaka Ginza & Nezu Shrine Old Quarter in Near Tokyo (Kanto). It scored high for Pre-War Wooden Shitamachi Alleys, 70+ Historic Temples & Torii Tunnel. Easy access via Nippori Stn 5m.",
+      "subtitle": "#6 Yanaka Ginza & Nezu Shrine Old Quarter (87/100pt): Pre-War Wooden Shitamachi Alleys, 70+ Historic Temples & Torii Tunnel\nAccess: Nippori Stn 5m | Tip: Walk the Yuyake Dandan steps at sunset with a freshly fried menchi-katsu"
+    },
+    {
+      "seg_type": "review",
+      "rank_badge": "#6 LOCAL REVIEWS",
+      "place_ja": "Yanaka Ginza & Nezu Shrine Old Quarter Reviews",
+      "place_en": "What Japanese Locals Say About Yanaka Ginza & Nezu Shrine Old Quarter",
+      "area": "Near Tokyo (Kanto), Japan",
+      "budget": "1,200+ Domestic Reviews",
+      "access_info": "Train Access: Nippori Stn 5m",
+      "insider_tip": "PRO HACK: Walk the Yuyake Dandan steps at sunset with a freshly fried menchi-katsu",
+      "review_praise_en": "\"Incredible authentic quality that tourists almost never find—worth every minute of the trip in Near Tokyo (Kanto)!\"",
+      "review_warn_en": "\"Weekends get busy with local fans after 11:30 AM, so arrive 15 minutes before opening for immediate entry!\"",
+      "photos": [
+        "spot_06_2.jpg",
+        "spot_06_1.jpg"
+      ],
+      "narration": "Japanese reviewers praise Yanaka Ginza & Nezu Shrine Old Quarter for its authentic atmosphere and unmatched local value. However, locals warn that weekends get crowded around noon, so arrive fifteen minutes before opening!",
+      "subtitle": "Praise: \"Unmatched authentic quality in Near Tokyo (Kanto)!\"\nLocal Warning: \"Arrive 15 mins before opening on weekends to skip the queue.\""
+    },
+    {
+      "seg_type": "spot",
+      "rank_badge": "#5  89/100pt",
+      "place_ja": "Naritasan Omotesando Merchant Street",
+      "place_en": "#5 Naritasan Omotesando Merchant Street — Preserved Edo Merchant Streets & Kominka Old Towns 1 Hr from Tokyo",
+      "area": "Near Tokyo (Kanto), Japan",
+      "budget": "¥900 Keisei Main Line",
+      "access_info": "Train Access: Ueno Stn 55m / Narita 10m (IC Card / JR Line)",
+      "insider_tip": "LOCAL HIGHLIGHT: 800m Edo Pilgrimage Street with Charcoal-Grilled Unagi & Pagodas — Pick up a numbered ticket at Kawatoyo Honten before visiting the temple",
+      "photos": [
+        "spot_05_1.jpg",
+        "spot_05_2.jpg"
+      ],
+      "narration": "At rank #5 with 89/100pt is Naritasan Omotesando Merchant Street in Near Tokyo (Kanto). It scored high for 800m Edo Pilgrimage Street with Charcoal-Grilled Unagi & Pagodas. Easy access via Ueno Stn 55m / Narita 10m.",
+      "subtitle": "#5 Naritasan Omotesando Merchant Street (89/100pt): 800m Edo Pilgrimage Street with Charcoal-Grilled Unagi & Pagodas\nAccess: Ueno Stn 55m / Narita 10m | Tip: Pick up a numbered ticket at Kawatoyo Honten before visiting the temple"
+    },
+    {
+      "seg_type": "review",
+      "rank_badge": "#5 LOCAL REVIEWS",
+      "place_ja": "Naritasan Omotesando Merchant Street Reviews",
+      "place_en": "What Japanese Locals Say About Naritasan Omotesando Merchant Street",
+      "area": "Near Tokyo (Kanto), Japan",
+      "budget": "1,200+ Domestic Reviews",
+      "access_info": "Train Access: Ueno Stn 55m / Narita 10m",
+      "insider_tip": "PRO HACK: Pick up a numbered ticket at Kawatoyo Honten before visiting the temple",
+      "review_praise_en": "\"Incredible authentic quality that tourists almost never find—worth every minute of the trip in Near Tokyo (Kanto)!\"",
+      "review_warn_en": "\"Weekends get busy with local fans after 11:30 AM, so arrive 15 minutes before opening for immediate entry!\"",
+      "photos": [
+        "spot_05_2.jpg",
+        "spot_05_1.jpg"
+      ],
+      "narration": "Japanese reviewers praise Naritasan Omotesando Merchant Street for its authentic atmosphere and unmatched local value. However, locals warn that weekends get crowded around noon, so arrive fifteen minutes before opening!",
+      "subtitle": "Praise: \"Unmatched authentic quality in Near Tokyo (Kanto)!\"\nLocal Warning: \"Arrive 15 mins before opening on weekends to skip the queue.\""
+    },
+    {
+      "seg_type": "spot",
+      "rank_badge": "#4  90/100pt",
+      "place_ja": "Shibamata Taishakuten Approach (Katsushika)",
+      "place_en": "#4 Shibamata Taishakuten Approach (Katsushika) — Preserved Edo Merchant Streets & Kominka Old Towns 1 Hr from Tokyo",
+      "area": "Near Tokyo (Kanto), Japan",
+      "budget": "¥300 Keisei Line Access",
+      "access_info": "Train Access: Ueno Stn 28m (Keisei Line) (IC Card / JR Line)",
+      "insider_tip": "LOCAL HIGHLIGHT: 1920s Showa Retro Wooden Sweet Shops & Intricate Wood-Carved Temple — Eat freshly pounded Kusa-dango mugwort mochi and ride the Yagiri Ferry",
+      "photos": [
+        "spot_04_1.jpg",
+        "spot_04_2.jpg"
+      ],
+      "narration": "At rank #4 with 90/100pt is Shibamata Taishakuten Approach (Katsushika) in Near Tokyo (Kanto). It scored high for 1920s Showa Retro Wooden Sweet Shops & Intricate Wood-Carved Temple. Easy access via Ueno Stn 28m (Keisei Line).",
+      "subtitle": "#4 Shibamata Taishakuten Approach (Katsushika) (90/100pt): 1920s Showa Retro Wooden Sweet Shops & Intricate Wood-Carved Temple\nAccess: Ueno Stn 28m (Keisei Line) | Tip: Eat freshly pounded Kusa-dango mugwort mochi and ride the Yagiri Ferry"
+    },
+    {
+      "seg_type": "review",
+      "rank_badge": "#4 LOCAL REVIEWS",
+      "place_ja": "Shibamata Taishakuten Approach (Katsushika) Reviews",
+      "place_en": "What Japanese Locals Say About Shibamata Taishakuten Approach (Katsushika)",
+      "area": "Near Tokyo (Kanto), Japan",
+      "budget": "1,200+ Domestic Reviews",
+      "access_info": "Train Access: Ueno Stn 28m (Keisei Line)",
+      "insider_tip": "PRO HACK: Eat freshly pounded Kusa-dango mugwort mochi and ride the Yagiri Ferry",
+      "review_praise_en": "\"Incredible authentic quality that tourists almost never find—worth every minute of the trip in Near Tokyo (Kanto)!\"",
+      "review_warn_en": "\"Weekends get busy with local fans after 11:30 AM, so arrive 15 minutes before opening for immediate entry!\"",
+      "photos": [
+        "spot_04_2.jpg",
+        "spot_04_1.jpg"
+      ],
+      "narration": "Japanese reviewers praise Shibamata Taishakuten Approach (Katsushika) for its authentic atmosphere and unmatched local value. However, locals warn that weekends get crowded around noon, so arrive fifteen minutes before opening!",
+      "subtitle": "Praise: \"Unmatched authentic quality in Near Tokyo (Kanto)!\"\nLocal Warning: \"Arrive 15 mins before opening on weekends to skip the queue.\""
+    },
+    {
+      "seg_type": "spot",
+      "rank_badge": "#3  92/100pt",
+      "place_ja": "Tochigi Kura no Machi (Uzuma River Town)",
+      "place_en": "#3 Tochigi Kura no Machi (Uzuma River Town) — Preserved Edo Merchant Streets & Kominka Old Towns 1 Hr from Tokyo",
+      "area": "Near Tokyo (Kanto), Japan",
+      "budget": "¥1,200 Tobu Line from Asakusa",
+      "access_info": "Train Access: Asakusa Stn 70m (Spacia) (IC Card / JR Line)",
+      "insider_tip": "LOCAL HIGHLIGHT: 200 Black-and-White Edo Warehouses & Carp Streamer Canal Boats — Visit theYokoyama Kyodokan merchant estate right beside the canal",
+      "photos": [
+        "spot_03_1.jpg",
+        "spot_03_2.jpg"
+      ],
+      "narration": "At rank #3 with 92/100pt is Tochigi Kura no Machi (Uzuma River Town) in Near Tokyo (Kanto). It scored high for 200 Black-and-White Edo Warehouses & Carp Streamer Canal Boats. Easy access via Asakusa Stn 70m (Spacia).",
+      "subtitle": "#3 Tochigi Kura no Machi (Uzuma River Town) (92/100pt): 200 Black-and-White Edo Warehouses & Carp Streamer Canal Boats\nAccess: Asakusa Stn 70m (Spacia) | Tip: Visit theYokoyama Kyodokan merchant estate right beside the canal"
+    },
+    {
+      "seg_type": "review",
+      "rank_badge": "#3 LOCAL REVIEWS",
+      "place_ja": "Tochigi Kura no Machi (Uzuma River Town) Reviews",
+      "place_en": "What Japanese Locals Say About Tochigi Kura no Machi (Uzuma River Town)",
+      "area": "Near Tokyo (Kanto), Japan",
+      "budget": "1,200+ Domestic Reviews",
+      "access_info": "Train Access: Asakusa Stn 70m (Spacia)",
+      "insider_tip": "PRO HACK: Visit theYokoyama Kyodokan merchant estate right beside the canal",
+      "review_praise_en": "\"Incredible authentic quality that tourists almost never find—worth every minute of the trip in Near Tokyo (Kanto)!\"",
+      "review_warn_en": "\"Weekends get busy with local fans after 11:30 AM, so arrive 15 minutes before opening for immediate entry!\"",
+      "photos": [
+        "spot_03_2.jpg",
+        "spot_03_1.jpg"
+      ],
+      "narration": "Japanese reviewers praise Tochigi Kura no Machi (Uzuma River Town) for its authentic atmosphere and unmatched local value. However, locals warn that weekends get crowded around noon, so arrive fifteen minutes before opening!",
+      "subtitle": "Praise: \"Unmatched authentic quality in Near Tokyo (Kanto)!\"\nLocal Warning: \"Arrive 15 mins before opening on weekends to skip the queue.\""
+    },
+    {
+      "seg_type": "spot",
+      "rank_badge": "#2  94/100pt",
+      "place_ja": "Sawara Historic Canal District (Chiba)",
+      "place_en": "#2 Sawara Historic Canal District (Chiba) — Preserved Edo Merchant Streets & Kominka Old Towns 1 Hr from Tokyo",
+      "area": "Near Tokyo (Kanto), Japan",
+      "budget": "¥1,600 Boat & JR Access",
+      "access_info": "Train Access: Tokyo Stn 85m (JR Express) (IC Card / JR Line)",
+      "insider_tip": "LOCAL HIGHLIGHT: Little Edo Willow-Lined Canal Boats & 200-Yr Sake Breweries — Ride the wooden flat-bottom boat along the Ono River at 10:00 AM",
+      "photos": [
+        "spot_02_1.jpg",
+        "spot_02_2.jpg"
+      ],
+      "narration": "At rank #2 with 94/100pt is Sawara Historic Canal District (Chiba) in Near Tokyo (Kanto). It scored high for Little Edo Willow-Lined Canal Boats & 200-Yr Sake Breweries. Easy access via Tokyo Stn 85m (JR Express).",
+      "subtitle": "#2 Sawara Historic Canal District (Chiba) (94/100pt): Little Edo Willow-Lined Canal Boats & 200-Yr Sake Breweries\nAccess: Tokyo Stn 85m (JR Express) | Tip: Ride the wooden flat-bottom boat along the Ono River at 10:00 AM"
+    },
+    {
+      "seg_type": "review",
+      "rank_badge": "#2 LOCAL REVIEWS",
+      "place_ja": "Sawara Historic Canal District (Chiba) Reviews",
+      "place_en": "What Japanese Locals Say About Sawara Historic Canal District (Chiba)",
+      "area": "Near Tokyo (Kanto), Japan",
+      "budget": "1,200+ Domestic Reviews",
+      "access_info": "Train Access: Tokyo Stn 85m (JR Express)",
+      "insider_tip": "PRO HACK: Ride the wooden flat-bottom boat along the Ono River at 10:00 AM",
+      "review_praise_en": "\"Incredible authentic quality that tourists almost never find—worth every minute of the trip in Near Tokyo (Kanto)!\"",
+      "review_warn_en": "\"Weekends get busy with local fans after 11:30 AM, so arrive 15 minutes before opening for immediate entry!\"",
+      "photos": [
+        "spot_02_2.jpg",
+        "spot_02_1.jpg"
+      ],
+      "narration": "Japanese reviewers praise Sawara Historic Canal District (Chiba) for its authentic atmosphere and unmatched local value. However, locals warn that weekends get crowded around noon, so arrive fifteen minutes before opening!",
+      "subtitle": "Praise: \"Unmatched authentic quality in Near Tokyo (Kanto)!\"\nLocal Warning: \"Arrive 15 mins before opening on weekends to skip the queue.\""
+    },
+    {
+      "seg_type": "spot",
+      "rank_badge": "#1  96/100pt",
+      "place_ja": "Kawagoe Kurazukuri Old Warehouse Street",
+      "place_en": "#1 Kawagoe Kurazukuri Old Warehouse Street — Preserved Edo Merchant Streets & Kominka Old Towns 1 Hr from Tokyo",
+      "area": "Near Tokyo (Kanto), Japan",
+      "budget": "¥500 Train from Ikebukuro",
+      "access_info": "Train Access: Ikebukuro Stn 30m (Tobu Tojo) (IC Card / JR Line)",
+      "insider_tip": "LOCAL HIGHLIGHT: 17th-Century Clay-Wall Edo Merchant Houses & Bell of Time (Toki no Kane) — Arrive by 9:30 AM and try freshly grilled unagi & sweet potato chips",
+      "photos": [
+        "spot_01_1.jpg",
+        "spot_01_2.jpg"
+      ],
+      "narration": "At rank #1 with 96/100pt is Kawagoe Kurazukuri Old Warehouse Street in Near Tokyo (Kanto). It scored high for 17th-Century Clay-Wall Edo Merchant Houses & Bell of Time (Toki no Kane). Easy access via Ikebukuro Stn 30m (Tobu Tojo).",
+      "subtitle": "#1 Kawagoe Kurazukuri Old Warehouse Street (96/100pt): 17th-Century Clay-Wall Edo Merchant Houses & Bell of Time (Toki no Kane)\nAccess: Ikebukuro Stn 30m (Tobu Tojo) | Tip: Arrive by 9:30 AM and try freshly grilled unagi & sweet potato chips"
+    },
+    {
+      "seg_type": "review",
+      "rank_badge": "#1 LOCAL REVIEWS",
+      "place_ja": "Kawagoe Kurazukuri Old Warehouse Street Reviews",
+      "place_en": "What Japanese Locals Say About Kawagoe Kurazukuri Old Warehouse Street",
+      "area": "Near Tokyo (Kanto), Japan",
+      "budget": "1,200+ Domestic Reviews",
+      "access_info": "Train Access: Ikebukuro Stn 30m (Tobu Tojo)",
+      "insider_tip": "PRO HACK: Arrive by 9:30 AM and try freshly grilled unagi & sweet potato chips",
+      "review_praise_en": "\"Incredible authentic quality that tourists almost never find—worth every minute of the trip in Near Tokyo (Kanto)!\"",
+      "review_warn_en": "\"Weekends get busy with local fans after 11:30 AM, so arrive 15 minutes before opening for immediate entry!\"",
+      "photos": [
+        "spot_01_2.jpg",
+        "spot_01_1.jpg"
+      ],
+      "narration": "Japanese reviewers praise Kawagoe Kurazukuri Old Warehouse Street for its authentic atmosphere and unmatched local value. However, locals warn that weekends get crowded around noon, so arrive fifteen minutes before opening!",
+      "subtitle": "Praise: \"Unmatched authentic quality in Near Tokyo (Kanto)!\"\nLocal Warning: \"Arrive 15 mins before opening on weekends to skip the queue.\""
+    },
+    {
+      "seg_type": "summary",
+      "rank_badge": "FULL TOP 10 SUMMARY",
+      "place_ja": "Near Tokyo (Kanto) TOP 10 Summary",
+      "place_en": "Near Tokyo (Kanto) TOP 10 Complete Comparison Cheat-Sheet",
+      "area": "Near Tokyo (Kanto), Japan",
+      "budget": "Save & Screenshot!",
+      "insider_tip": "SCREENSHOT THIS TABLE: All 10 scores, access times & insider hacks on one screen!",
+      "photos": [
+        "spot_01_1.jpg",
+        "spot_01_2.jpg"
+      ],
+      "narration": "Here is your complete Near Tokyo (Kanto) top ten cheat-sheet! Pause and screenshot this table right now for your trip, and subscribe for our next real Japan data ranking!",
+      "subtitle": "Pause & screenshot this complete Near Tokyo (Kanto) TOP 10 cheat-sheet!\nSubscribe & comment which spot you want to visit first!"
+    }
+  ]
+}

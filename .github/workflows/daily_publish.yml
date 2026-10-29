@@ -76,7 +76,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add stocks/ output/upload_history.json || true
+          git add stocks/ assets/images/ output/upload_history.json || true
           if git diff --cached --quiet; then
             echo "No stock state changes to commit."
           else

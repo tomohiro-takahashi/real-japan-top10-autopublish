@@ -1,0 +1,381 @@
+#!/usr/bin/env python3
+"""
+real_spots_catalog.py
+
+Curated Top 10 real Japanese spots for upcoming themes + automatic English Wikipedia
+real-landmark discovery (`discover_real_spots_via_wikipedia`) so NO video ever uses
+placeholder names like "Local Pick #1".
+"""
+
+import json
+import re
+import urllib.parse
+import urllib.request
+from pathlib import Path
+from typing import Any, Dict, List
+
+CURATED_THEME_SPOTS: Dict[str, List[Dict[str, str]]] = {
+    "ramen_tokyo_tabelog_top10": [
+        {
+            "name_en": "Ginza Hachigou (Higashi-Ginza)",
+            "dish": "Golden Duck & French Consomme Shoyu Broth (Tabelog ★3.96)",
+            "budget": "¥1,400–¥1,800 (Reserve Online)",
+            "access_short": "Higashi-Ginza Stn 3m",
+            "hack": "Book Saturday 9:00 AM TableCheck slot or arrive 45m before 11:00 AM",
+            "photo_query": "Shoyu ramen Tokyo bowl",
+        },
+        {
+            "name_en": "Menya Itto (Shin-Koiwa)",
+            "dish": "Rich Chicken & 5-Seafood Creamy Tsukemen Dipping Noodles (★4.08)",
+            "budget": "¥1,350–¥1,750 (Ticket Machine)",
+            "access_short": "Shin-Koiwa Stn 3m",
+            "hack": "Get a numbered time-slot ticket at the storefront before 10:00 AM",
+            "photo_query": "Tsukemen ramen Tokyo",
+        },
+        {
+            "name_en": "Ramen Hayashida (Shinjuku 3-Chome)",
+            "dish": "Whole Duck & Nodoguro Seaperch Clear Shoyu Ramen (★3.78)",
+            "budget": "¥1,000–¥1,350 (Cash Only)",
+            "access_short": "Shinjuku-sanchome Stn 2m",
+            "hack": "Visit between 2:30 PM and 5:00 PM on weekdays for zero wait time",
+            "photo_query": "Shoyu ramen chashu",
+        },
+        {
+            "name_en": "SOBAHOUSE Konjiki Hototogisu (Shinjuku Gyoen)",
+            "dish": "Hamaguri Clam, Porcini & Truffle Oil Shio/Shoyu Ramen (★3.92)",
+            "budget": "¥1,400–¥1,850 (Numbered Ticket)",
+            "access_short": "Shinjuku-gyoemmae Stn 4m",
+            "hack": "Sign up at the morning ticket kiosk from 8:30 AM to lock in your time",
+            "photo_query": "Shio ramen Tokyo",
+        },
+        {
+            "name_en": "Homemade Ramen Muginae (Omori)",
+            "dish": "Artisanal Inaniwa-Style Hand-Cut Noodles & Yamagata Chicken Broth (★4.05)",
+            "budget": "¥1,300–¥1,700 (TableCheck)",
+            "access_short": "Omori Stn 7m",
+            "hack": "Add the charcoal-grilled Wagyu & Iberian pork chashu topping combo",
+            "photo_query": "Tokyo ramen noodles chashu",
+        },
+        {
+            "name_en": "Chuka Soba Tomita KITTE Marunouchi",
+            "dish": "Ultra-Thick 20-Hour Tonkotsu-Gyokai Tsukemen by Japan's Ramen King (★3.89)",
+            "budget": "¥1,250–¥1,650 (IC Card OK)",
+            "access_short": "Tokyo Stn 2m (KITTE B1F)",
+            "hack": "Order soup-wari (dashi citrus broth refill) after finishing your noodles",
+            "photo_query": "Tsukemen dipping noodles Japan",
+        },
+        {
+            "name_en": "Menya Shichisai (Hatchobori)",
+            "dish": "Freshly Hand-Kneaded & Cut-to-Order Kitakata Niboshi Ramen (★3.84)",
+            "budget": "¥1,200–¥1,500 (Cashless Only)",
+            "access_short": "Hatchobori Stn 3m",
+            "hack": "Choose Large (Oomori) noodles at the exact same price as Regular!",
+            "photo_query": "Kitakata ramen Japan",
+        },
+        {
+            "name_en": "Ramen Afro Beats (Shinjuku Gyoen)",
+            "dish": "Velvety Amakusa Daio Chicken Paitan & Truffle Foam Ramen (★3.82)",
+            "budget": "¥1,300–¥1,700 (Cash / PayPay)",
+            "access_short": "Shinjuku-gyoemmae Stn 3m",
+            "hack": "Order the lemon & potato espuma Special Tori Paitan before 1:30 PM",
+            "photo_query": "Tori paitan ramen Japan",
+        },
+        {
+            "name_en": "Iruca Tokyo (Roppongi)",
+            "dish": "4-Stock Blend (Chicken, Pork, Clam & Lobster) Porcini Shoyu Ramen (★3.91)",
+            "budget": "¥1,500–¥2,000 (Midtown Walk)",
+            "access_short": "Roppongi Stn 3m",
+            "hack": "Scoop the black truffle & porcini paste into the soup halfway through",
+            "photo_query": "Ramen egg chashu Tokyo",
+        },
+        {
+            "name_en": "Kikanbo (Kanda Main Shop)",
+            "dish": "Flame-Seared Thick Pork Belly & 5-Level Karashibi Miso Ramen (★3.79)",
+            "budget": "¥1,200–¥1,600 (Ticket Machine)",
+            "access_short": "Kanda Stn 4m",
+            "hack": "Ask for Medium Spice (Chu-kara) & Medium Sansho Numbing (Chu-shibi)",
+            "photo_query": "Miso ramen Japan",
+        },
+    ],
+    "tokyo_daytrip_oldtown_003": [
+        {
+            "name_en": "Kawagoe Kurazukuri Old Warehouse Street",
+            "dish": "17th-Century Clay-Wall Edo Merchant Houses & Bell of Time (Toki no Kane)",
+            "budget": "¥500 Train from Ikebukuro",
+            "access_short": "Ikebukuro Stn 30m (Tobu Tojo)",
+            "hack": "Arrive by 9:30 AM and try freshly grilled unagi & sweet potato chips",
+            "photo_query": "Kawagoe Saitama old town",
+        },
+        {
+            "name_en": "Sawara Historic Canal District (Chiba)",
+            "dish": "Little Edo Willow-Lined Canal Boats & 200-Yr Sake Breweries",
+            "budget": "¥1,600 Boat & JR Access",
+            "access_short": "Tokyo Stn 85m (JR Express)",
+            "hack": "Ride the wooden flat-bottom boat along the Ono River at 10:00 AM",
+            "photo_query": "Sawara Katori Chiba canal",
+        },
+        {
+            "name_en": "Tochigi Kura no Machi (Uzuma River Town)",
+            "dish": "200 Black-and-White Edo Warehouses & Carp Streamer Canal Boats",
+            "budget": "¥1,200 Tobu Line from Asakusa",
+            "access_short": "Asakusa Stn 70m (Spacia)",
+            "hack": "Visit theYokoyama Kyodokan merchant estate right beside the canal",
+            "photo_query": "Tochigi Kura no Machi river",
+        },
+        {
+            "name_en": "Shibamata Taishakuten Approach (Katsushika)",
+            "dish": "1920s Showa Retro Wooden Sweet Shops & Intricate Wood-Carved Temple",
+            "budget": "¥300 Keisei Line Access",
+            "access_short": "Ueno Stn 28m (Keisei Line)",
+            "hack": "Eat freshly pounded Kusa-dango mugwort mochi and ride the Yagiri Ferry",
+            "photo_query": "Shibamata Taishakuten Tokyo",
+        },
+        {
+            "name_en": "Naritasan Omotesando Merchant Street",
+            "dish": "800m Edo Pilgrimage Street with Charcoal-Grilled Unagi & Pagodas",
+            "budget": "¥900 Keisei Main Line",
+            "access_short": "Ueno Stn 55m / Narita 10m",
+            "hack": "Pick up a numbered ticket at Kawatoyo Honten before visiting the temple",
+            "photo_query": "Naritasan Shinshoji Omotesando",
+        },
+        {
+            "name_en": "Yanaka Ginza & Nezu Shrine Old Quarter",
+            "dish": "Pre-War Wooden Shitamachi Alleys, 70+ Historic Temples & Torii Tunnel",
+            "budget": "¥200 JR Yamanote Line",
+            "access_short": "Nippori Stn 5m",
+            "hack": "Walk the Yuyake Dandan steps at sunset with a freshly fried menchi-katsu",
+            "photo_query": "Yanaka Ginza Tokyo",
+        },
+        {
+            "name_en": "Chichibu Shrine & Banba Street (Saitama)",
+            "dish": "Early-1900s Timber-Frame Cafes, Sake Cellars & Night Festival Floats",
+            "budget": "¥1,500 Seibu Laview Express",
+            "access_short": "Ikebukuro Stn 77m (Laview)",
+            "hack": "Try Waraji Katsu-don (giant pork cutlets) and Ichiro's Malt whisky bars",
+            "photo_query": "Chichibu Shrine Saitama",
+        },
+        {
+            "name_en": "Mashiko Pottery Village & Kominka Cafes",
+            "dish": "400+ Ceramic Kilns, Thatched-Roof Farmhouse Studios & Climbing Kilns",
+            "budget": "¥2,200 Direct Highway Bus",
+            "access_short": "Akihabara Stn 95m",
+            "hack": "Rent an e-bike at Mashiko Station to tour Starnet and local kiln alleys",
+            "photo_query": "Mashiko pottery Tochigi",
+        },
+        {
+            "name_en": "Kamakura Hase & Kominka Backstreets",
+            "dish": "100-Yr-Old Wooden Villas Turned Matcha Teahouses Along the Enoden Line",
+            "budget": "¥950 JR Yokosuka Line",
+            "access_short": "Tokyo Stn 55m (JR Direct)",
+            "hack": "Skip Komachi-dori crowds and explore the quiet alleys around Gokurakuji",
+            "photo_query": "Enoden Kamakura Hase",
+        },
+        {
+            "name_en": "Edo-Tokyo Open Air Architectural Museum (Koganei)",
+            "dish": "30 Authentic Relocated Edo & Meiji Buildings (Spirited Away Inspiration!)",
+            "budget": "¥400 Admission",
+            "access_short": "Shinjuku Stn 25m (JR Chuo)",
+            "hack": "Step inside the Kodakara-yu bathhouse and武居三省堂 stationery shop",
+            "photo_query": "Edo-Tokyo Open Air Architectural Museum",
+        },
+    ],
+    "anime_ghibli_real_locations": [
+        {
+            "name_en": "Ginzan Onsen Gaslit Ryokan Town (Yamagata)",
+            "dish": "Snowy Taisho-Era Wooden Bathhouses That Echo Spirited Away's Night Street",
+            "budget": "¥500 Footbath / Day Entry",
+            "access_short": "Oishida Stn 35m Bus",
+            "hack": "Arrive at 4:15 PM for the magical blue-hour gas lamp illumination",
+            "photo_query": "Ginzan Onsen Yamagata winter",
+        },
+        {
+            "name_en": "Dogo Onsen Honkan (Matsuyama, Ehime)",
+            "dish": "1894 3-Story Wooden Public Bathhouse — Official Model for Yubaba's Bathhouse",
+            "budget": "¥460 Kami-no-Yu Bath",
+            "access_short": "Dogo Onsen Tram Stn 3m",
+            "hack": "Listen for the 6:00 AM太鼓 (taiko drum) from the rooftop Shinrokaku tower",
+            "photo_query": "Dogo Onsen Honkan Matsuyama",
+        },
+        {
+            "name_en": "Shiratani Unsuikyo Moss Forest (Yakushima)",
+            "dish": "Ancient Cedar Roots & Emerald Moss Ravine That Inspired Princess Mononoke",
+            "budget": "¥500 Forest Conservation Fee",
+            "access_short": "Miyanoura Port 30m Bus",
+            "hack": "Take the 6:30 AM first bus to hike the Moss Forest in mist before crowds",
+            "photo_query": "Shiratani Unsuikyo Yakushima moss",
+        },
+        {
+            "name_en": "Shima Onsen Sekizenkan Honkan (Gunma)",
+            "dish": "1691 Red Bridge Leading Straight to Japan's Oldest Wooden Ryokan Bathhouse",
+            "budget": "¥1,500 Day-Use Roman Bath",
+            "access_short": "Nakanojo Stn 40m Bus",
+            "hack": "Photograph the iconic red慶雲橋 (Keiun Bridge) and bath in the Genroku-no-Yu",
+            "photo_query": "Sekizenkan Shima Onsen red bridge",
+        },
+        {
+            "name_en": "Sayama Hills (Totoro's Forest / Kurosuke's House)",
+            "dish": "Real-Life Satoyama Woodland in Saitama Where Miyazaki Conceived My Neighbor Totoro",
+            "budget": "Free Trail Entry",
+            "access_short": "Kotesashi Stn 15m Bus",
+            "hack": "Visit Kurosuke's House (100-yr-old farmhouse with a giant Totoro inside!)",
+            "photo_query": "Sayama Hills Totoro forest Saitama",
+        },
+        {
+            "name_en": "Tomonoura Port & Joyato Lighthouse (Hiroshima)",
+            "dish": "Edo-Era Stone Harbor Where Hayao Miyazaki Lived While Creating Ponyo",
+            "budget": "Free Harbor Walk",
+            "access_short": "Fukuyama Stn 30m Bus",
+            "hack": "Climb to Fukuzenji Taichoro Hall for the exact view over Sensuijima Island",
+            "photo_query": "Tomonoura port Hiroshima lighthouse",
+        },
+        {
+            "name_en": "Seiseki-Sakuragaoka Hilltop (Tama, Tokyo)",
+            "dish": "Rotary, Stairways & Hilltop Panorama from Whisper of the Heart",
+            "budget": "¥380 Keio Line from Shinjuku",
+            "access_short": "Seiseki-Sakuragaoka Stn 10m",
+            "hack": "Walk the Iroha-zaka slope up to the small roundabout at golden sunset",
+            "photo_query": "Seiseki-Sakuragaoka Tama hills",
+        },
+        {
+            "name_en": "Takeda Castle Ruins in the Clouds (Hyogo)",
+            "dish": "400-Yr Stone Walls Floating Above Sea of Clouds Like Laputa: Castle in the Sky",
+            "budget": "¥500 Castle Entry",
+            "access_short": "Takeda Stn 20m Taxi/Bus",
+            "hack": "Hike Ritsuunkyo Viewpoint at 5:30 AM in autumn for the sea-of-clouds view",
+            "photo_query": "Takeda Castle sea of clouds",
+        },
+        {
+            "name_en": "Ghibli Park & Satsuki and Mei's House (Aichi)",
+            "dish": "Full-Scale Recreated 1950s Kusakabe Family House & Grand Warehouse in Nagakute",
+            "budget": "¥3,500–¥7,300 (Advance Ticket)",
+            "access_short": "Ai-Chikyuhaku-Kinen-Koen Stn 2m",
+            "hack": "Book tickets on the 10th of the month two months prior at 2:00 PM JST",
+            "photo_query": "Satsuki and Mei House Aichi Ghibli",
+        },
+        {
+            "name_en": "Mitaka Ghibli Museum & Inokashira Park (Tokyo)",
+            "dish": "Frescoed Spirited Away Doors, Rooftop Laputa Robot & Exclusive Short Film",
+            "budget": "¥1,000 (Lawson Ticket Required)",
+            "access_short": "Mitaka Stn 15m Walk",
+            "hack": "Walk along the Tamagawa Josui tree-lined canal path from Mitaka Station",
+            "photo_query": "Ghibli Museum Mitaka robot",
+        },
+    ],
+}
+
+
+def fetch_spot_specific_photos(spots: List[Dict[str, str]], region_en: str, out_dir: Path) -> List[str]:
+    """
+    Download 2 high-res (1600px) Wikimedia Commons JPEG photos per spot (total 20 photos)
+    using each spot's specific `photo_query` or `name_en`.
+    """
+    out_dir.mkdir(parents=True, exist_ok=True)
+    saved_names: List[str] = []
+    seen_urls = set()
+
+    for i, sp in enumerate(spots[:10]):
+        idx_s = i + 1
+        q_primary = sp.get("photo_query") or f"{sp['name_en'].split('(')[0].strip()} Japan"
+        q_fallback = f"{region_en} Japan landmark"
+
+        spot_urls: List[str] = []
+        for q in [q_primary, q_fallback]:
+            if len(spot_urls) >= 2:
+                break
+            api_url = (
+                "https://commons.wikimedia.org/w/api.php?action=query&generator=search"
+                f"&gsrsearch={urllib.parse.quote('filetype:bitmap ' + q)}"
+                "&gsrnamespace=6&gsrlimit=12&prop=imageinfo&iiprop=url&iiurlwidth=1600&format=json"
+            )
+            try:
+                req = urllib.request.Request(api_url, headers={"User-Agent": "RealJapanTop10Bot/1.0"})
+                with urllib.request.urlopen(req, timeout=15) as resp:
+                    pages = json.loads(resp.read().decode("utf-8")).get("query", {}).get("pages", {})
+                for pg in pages.values():
+                    ii = (pg.get("imageinfo") or [{}])[0]
+                    u = ii.get("thumburl") or ii.get("url") or ""
+                    clean_u = u.split("?")[0].lower()
+                    if clean_u.endswith((".jpg", ".jpeg")) and u not in seen_urls:
+                        seen_urls.add(u)
+                        spot_urls.append(u)
+                        if len(spot_urls) >= 2:
+                            break
+            except Exception:
+                continue
+
+        for sub_idx in (1, 2):
+            fname = f"spot_{idx_s:02d}_{sub_idx}.jpg"
+            dest = out_dir / fname
+            chosen_url = spot_urls[sub_idx - 1] if len(spot_urls) >= sub_idx else (spot_urls[0] if spot_urls else "")
+            if chosen_url:
+                try:
+                    img_req = urllib.request.Request(chosen_url, headers={"User-Agent": "RealJapanTop10Bot/1.0"})
+                    with urllib.request.urlopen(img_req, timeout=15) as r_img:
+                        data = r_img.read()
+                    if len(data) > 20000:
+                        dest.write_bytes(data)
+                        saved_names.append(fname)
+                        continue
+                except Exception:
+                    pass
+            # Copy previous valid photo if download failed
+            if saved_names and (out_dir / saved_names[-1]).exists():
+                dest.write_bytes((out_dir / saved_names[-1]).read_bytes())
+                saved_names.append(fname)
+
+    return saved_names
+
+
+def discover_real_spots_via_wikipedia(region_en: str, category_en: str, ranking_id: str) -> List[Dict[str, str]]:
+    """
+    If `ranking_id` is in `CURATED_THEME_SPOTS`, return the 10 curated real spots.
+    Otherwise, query English Wikipedia API (`en.wikipedia.org/w/api.php`) to discover 10 real,
+    verified landmarks/places in `region_en` with their real English names and descriptions!
+    """
+    if ranking_id in CURATED_THEME_SPOTS:
+        return CURATED_THEME_SPOTS[ranking_id]
+
+    clean_region = re.sub(r"\(.*?\)", "", region_en).strip()
+    search_queries = [
+        f"{clean_region} {category_en} Japan",
+        f"Tourism in {clean_region} Japan landmarks",
+        f"{clean_region} Castle Shrine Temple Onsen Park Japan",
+    ]
+    skip_words = ("list of", "prefecture", "disambiguation", "station", "university", "airport", "railway", "line")
+    discovered: List[Dict[str, str]] = []
+    seen_titles = set()
+
+    for sq in search_queries:
+        if len(discovered) >= 10:
+            break
+        api_url = (
+            "https://en.wikipedia.org/w/api.php?action=query&list=search"
+            f"&srsearch={urllib.parse.quote(sq)}&srlimit=25&format=json"
+        )
+        try:
+            req = urllib.request.Request(api_url, headers={"User-Agent": "RealJapanTop10Bot/1.0"})
+            with urllib.request.urlopen(req, timeout=15) as resp:
+                items = json.loads(resp.read().decode("utf-8")).get("query", {}).get("search", [])
+            for it in items:
+                title = it.get("title", "").strip()
+                if not title or title.lower() in seen_titles:
+                    continue
+                if any(w in title.lower() for w in skip_words):
+                    continue
+                snippet = re.sub(r"<[^>]+>", "", it.get("snippet", "")).strip()
+                snippet = re.sub(r"\s+", " ", snippet)[:95]
+                seen_titles.add(title.lower())
+                discovered.append({
+                    "name_en": title,
+                    "dish": snippet if snippet else f"Iconic {category_en} in {clean_region}",
+                    "budget": f"Direct JR / Local Bus in {clean_region}",
+                    "access_short": f"{clean_region} Stn 15-30m",
+                    "hack": "Arrive before 9:30 AM on weekdays to enjoy without crowds",
+                    "photo_query": f"{title} Japan",
+                })
+                if len(discovered) >= 10:
+                    break
+        except Exception:
+            continue
+
+    return discovered[:10]

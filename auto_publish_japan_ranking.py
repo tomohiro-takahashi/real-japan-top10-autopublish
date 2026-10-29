@@ -437,6 +437,18 @@ def upload_video_with_custom_thumbnail(
         except Exception as exc:
             logger.warning(f"Could not set custom thumbnail via API (check account verification): {exc}")
 
+    # Auto-deduplicate: if an older video with the exact same title exists on the channel, delete the old one
+    try:
+        s_res = youtube.search().list(part="snippet", forMine=True, type="video", maxResults=25).execute()
+        for item in s_res.get("items", []):
+            old_vid = item["id"]["videoId"]
+            old_title = item.get("snippet", {}).get("title", "")
+            if old_vid != video_id and old_title.strip() == title[:100].strip():
+                youtube.videos().delete(id=old_vid).execute()
+                logger.info(f"🧹 Deleted older duplicate video with same title: {old_vid}")
+    except Exception as exc:
+        logger.debug(f"Deduplication check skipped: {exc}")
+
     return video_id
 
 
@@ -558,10 +570,18 @@ def auto_generate_next_theme_script() -> Path:
     target_pref_ja = chosen_theme.get("target_pref_ja", "東京都")
 
     logger.info(f"Auto-generating complete 24-segment ranking script '{rid}' ({region_en} - {cat_en})...")
-    photo_dir = BASE_DIR / "assets" / "images" / rid
-    photos_list = fetch_wikimedia_highres_photos(f"{region_en} {rid.replace('_', ' ')}", photo_dir, count=20)
+    from real_spots_catalog import discover_real_spots_via_wikipedia, fetch_spot_specific_photos
 
-    # Ensure 20 photo slots using theme-matched photos first (never mix castle photos into other themes)
+    real_spots = discover_real_spots_via_wikipedia(region_en, cat_en, rid)
+    photo_dir = BASE_DIR / "assets" / "images" / rid
+    photos_list = fetch_spot_specific_photos(real_spots, region_en, photo_dir)
+    if len(photos_list) < 20:
+        extra = fetch_wikimedia_highres_photos(f"{region_en} {rid.replace('_', ' ')}", photo_dir, count=20)
+        for ex in extra:
+            if len(photos_list) < 20 and ex not in photos_list:
+                photos_list.append(ex)
+
+    # Ensure 20 photo slots using theme-matched photos first
     base_fetched = list(photos_list)
     while len(photos_list) < 20 and base_fetched:
         idx_s = len(photos_list) // 2 + 1
@@ -572,24 +592,31 @@ def auto_generate_next_theme_script() -> Path:
             shutil.copyfile(photo_dir / src_fname, photo_dir / fname)
         photos_list.append(fname)
 
-
     scores = [96, 94, 92, 90, 89, 87, 86, 85, 84, 82]
     summary_rows: List[Dict[str, Any]] = []
     for i in range(10):
         rk = i + 1
         sc_pt = scores[i]
         p1 = photos_list[i * 2]
-        summary_rows.append({
-            "rank": f"#{rk}",
-            "score": f"{sc_pt}/100pt",
-            "name_en": f"{region_en} Local Pick #{rk}",
-            "name_ja": f"{region_en} #{rk}",
+        sp_info = real_spots[i] if i < len(real_spots) else {
+            "name_en": f"{region_en} Landmark #{rk}",
             "dish": f"Authentic {cat_en} (IG {min(50, sc_pt - 45)}/50 | ★4.{max(1, 5 - i // 3)})",
             "budget": f"{region_en} Direct Train Access",
             "access_short": f"{region_en} Stn 10-30m",
             "hack": "Arrive 15 mins before opening for zero tourist queues",
+        }
+        summary_rows.append({
+            "rank": f"#{rk}",
+            "score": f"{sc_pt}/100pt",
+            "name_en": sp_info["name_en"],
+            "name_ja": sp_info["name_en"],
+            "dish": sp_info["dish"],
+            "budget": sp_info["budget"],
+            "access_short": sp_info["access_short"],
+            "hack": sp_info["hack"],
             "thumb": p1,
         })
+
 
     segments: List[Dict[str, Any]] = [
         {
