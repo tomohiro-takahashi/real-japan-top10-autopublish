@@ -11,9 +11,9 @@ on:
         required: false
         default: 'public'
       duration:
-        description: 'Main Video Duration in Seconds (default: 885 = 14m45s unverified-safe)'
+        description: 'Main Video Duration in Seconds (default: 0 = auto 3600s 1-hour when phone-verified, 885s before verification)'
         required: false
-        default: '885'
+        default: '0'
 
 permissions:
   contents: write
@@ -58,8 +58,8 @@ jobs:
           YOUTUBE_REFRESH_TOKEN_MUSIC: ${{ secrets.YOUTUBE_REFRESH_TOKEN_MUSIC }}
           SUNO_COOKIE: ${{ secrets.SUNO_COOKIE }}
           SUNO_API_BASE_URL: ${{ secrets.SUNO_API_BASE_URL }}
-          SUNO_BATCHES_PER_VIDEO: '2'
+          SUNO_BATCHES_PER_VIDEO: 'auto'
         run: |
           PRIVACY="${{ github.event.inputs.privacy || 'public' }}"
-          DURATION="${{ github.event.inputs.duration || '885' }}"
+          DURATION="${{ github.event.inputs.duration || '0' }}"
           python build_music_video.py --privacy "$PRIVACY" --duration "$DURATION"

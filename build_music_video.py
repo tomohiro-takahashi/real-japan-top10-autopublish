@@ -1591,6 +1591,30 @@ def resolve_description_with_chapters(
     return out_desc
 
 
+def detect_channel_long_uploads_allowed() -> Tuple[bool, bool]:
+    """
+    Query YouTube Data API v3 `channels().list(part="status", mine=True)` (1 quota unit)
+    to check whether phone verification is completed (`longUploadsStatus == "allowed"`)
+    and whether monetization is enabled (`isChannelMonetizationEnabled`).
+    Returns `(long_uploads_allowed, is_monetized)`.
+    """
+    try:
+        yt = get_youtube_service()
+        resp = yt.channels().list(part="status", mine=True).execute()
+        items = resp.get("items") or []
+        if items:
+            st = items[0].get("status", {})
+            long_status = st.get("longUploadsStatus", "eligible")
+            monetized = bool(st.get("isChannelMonetizationEnabled", False))
+            logger.info(
+                f"YouTube Channel Status: longUploadsStatus={long_status}, isChannelMonetizationEnabled={monetized}"
+            )
+            return (long_status == "allowed"), monetized
+    except Exception as exc:
+        logger.warning(f"Could not query channel status for auto-duration detection: {exc}")
+    return False, False
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Build & upload 1-Hour Retro Music Video + 9:16 Short from Suno MP3.")
     parser.add_argument(
@@ -1601,8 +1625,8 @@ def main() -> int:
     parser.add_argument(
         "--duration",
         type=int,
-        default=885,
-        help="Target duration in seconds for output_1hour.mp4 (default: 885 = 14m45s, safe for channels without 15m+ phone verification).",
+        default=0,
+        help="Target duration in seconds for output_1hour.mp4 (default: 0 = auto-detect 3600s 1-hour when phone-verified, or 885s before verification).",
     )
     parser.add_argument(
         "--privacy",
@@ -1630,6 +1654,20 @@ def main() -> int:
     DONE_DIR.mkdir(parents=True, exist_ok=True)
     BG_VIDEOS_DIR.mkdir(parents=True, exist_ok=True)
 
+    long_allowed, is_monetized = detect_channel_long_uploads_allowed()
+    target_duration = args.duration
+    if target_duration <= 0:
+        if long_allowed:
+            target_duration = 3600
+            if os.environ.get("SUNO_BATCHES_PER_VIDEO") in (None, "", "2", "auto"):
+                os.environ["SUNO_BATCHES_PER_VIDEO"] = "8"
+            logger.info("Phone verification detected (longUploadsStatus=allowed)! Auto-selecting 1-Hour (3600s, 16 tracks) mode.")
+        else:
+            target_duration = 885
+            if os.environ.get("SUNO_BATCHES_PER_VIDEO") in (None, "", "auto"):
+                os.environ["SUNO_BATCHES_PER_VIDEO"] = "2"
+            logger.info("Channel not yet phone-verified (longUploadsStatus!=allowed). Auto-selecting 14m45s (885s) safe mode.")
+
     chosen_mp3, chosen_meta, pool = pick_mp3_and_metadata(auto_suno=True)
 
     if not chosen_mp3 and args.generate_sample_mp3:
@@ -1641,8 +1679,10 @@ def main() -> int:
         logger.info("No MP3 in stocks/music/queue/ and SUNO_COOKIE not active. Exiting cleanly (0).")
         return 0
 
-    if args.duration <= 900:
+    if target_duration <= 900:
         chosen_meta["_under_15m"] = True
+    else:
+        chosen_meta.pop("_under_15m", None)
 
     font_path = find_bold_font()
 
@@ -1663,25 +1703,30 @@ def main() -> int:
         render_16x9_hud_and_thumb(bg_jpg, chosen_meta, hud_png, OUTPUT_THUMB, font_path)
 
         # Step 4: Build looped audio + 16:9 video (`output_1hour.mp4`)
-        build_1hour_loop_audio(chosen_mp3, looped_m4a, target_duration_sec=args.duration)
-        build_1hour_video(bg_loop_mp4, hud_png, looped_m4a, OUTPUT_1HOUR, duration_sec=args.duration)
+        build_1hour_loop_audio(chosen_mp3, looped_m4a, target_duration_sec=target_duration)
+        build_1hour_video(bg_loop_mp4, hud_png, looped_m4a, OUTPUT_1HOUR, duration_sec=target_duration)
 
         # Step 5: Build 9:16 vertical Short (`output_short.mp4`) from 30s..60s of the MP3 with live highway motion
         build_short_video(bg_jpg, bg_loop_mp4, chosen_mp3, chosen_meta, OUTPUT_SHORT, font_path)
 
-    full_description = resolve_description_with_chapters(chosen_mp3, chosen_meta, duration_sec=args.duration)
+    full_description = resolve_description_with_chapters(chosen_mp3, chosen_meta, duration_sec=target_duration)
     long_title = chosen_meta["title"].replace("カバー", "").replace("Cover", "")
     short_title = chosen_meta.get(
         "short_title",
         f"{chosen_meta.get('target_badge', '【40代・50代必見】')}{chosen_meta.get('thumb_main', '青春BGM')} 🎧本編はチャンネルへ！ #Shorts",
     ).replace("カバー", "").replace("Cover", "")
-    if args.duration <= 900:
+    if target_duration <= 900:
         long_title = long_title.replace("1時間耐久", "").strip()
         short_title = short_title.replace("本編1時間は", "本編は").replace("1時間耐久", "").strip()
         full_description = full_description.replace("・1時間耐久", "").replace("1時間耐久", "").replace("全16曲（60分）", "")
+    else:
+        if "1時間" not in long_title and len(long_title) <= 92:
+            long_title = f"{long_title}【1時間耐久】"
 
-    if os.environ.get("INCLUDE_NO_ADS_TAG", "1") == "1" and "【広告なし】" not in long_title:
+    if not is_monetized and os.environ.get("INCLUDE_NO_ADS_TAG", "1") == "1" and "【広告なし】" not in long_title:
         long_title = f"【広告なし】{long_title}"
+    elif is_monetized:
+        long_title = long_title.replace("【広告なし】", "").replace("【広告なし・", "【")
 
     if args.dry_run:
         logger.info("Dry-run complete! Videos generated at:")
