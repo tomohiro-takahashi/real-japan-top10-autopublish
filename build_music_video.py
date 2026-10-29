@@ -724,15 +724,47 @@ def render_16x9_hud_and_thumb(
         draw.line([(0, y), (HW, y)], fill=(4, 6, 12, alpha))
 
     # Top-left understated editorial label (warm amber vertical bar + crisp text)
-    f_hud_top = load_font(cjk_reg_path, 29)
+    f_hud_top = load_font(cjk_reg_path, 27)
     draw.rectangle((72, 57, 78, 99), fill=(217, 179, 108, 245))
     _draw_soft_shadow_text(
         hud,
-        (99, 60),
+        (99, 61),
         era_label,
         font=f_hud_top,
         fill=(226, 214, 185, 245),
         blur_radius=6,
+    )
+
+    # Top-right permanent Subscribe & Save Banner (fixed on screen throughout the entire video)
+    draw = ImageDraw.Draw(hud, "RGBA")
+    sub_bx0, sub_by0, sub_bx1, sub_by1 = 1236, 46, 1848, 110
+    draw.rounded_rectangle(
+        (sub_bx0, sub_by0, sub_bx1, sub_by1),
+        radius=32,
+        fill=(10, 14, 24, 215),
+        outline=(217, 179, 108, 185),
+        width=2,
+    )
+    # Red/Crimson YouTube-style play/subscribe pill on the left side of the banner
+    draw.rounded_rectangle(
+        (sub_bx0 + 10, sub_by0 + 9, sub_bx0 + 218, sub_by1 - 9),
+        radius=23,
+        fill=(198, 40, 40, 245),
+    )
+    # White play triangle inside the red pill
+    tri_cx, tri_cy = sub_bx0 + 36, (sub_by0 + sub_by1) // 2
+    draw.polygon(
+        [(tri_cx - 6, tri_cy - 8), (tri_cx - 6, tri_cy + 8), (tri_cx + 8, tri_cy)],
+        fill=(255, 255, 255, 255),
+    )
+    f_sub_btn = load_font(cjk_reg_path, 21)
+    draw.text((sub_bx0 + 52, sub_by0 + 20), "チャンネル登録", font=f_sub_btn, fill=(255, 255, 255, 255))
+    f_sub_msg = load_font(cjk_reg_path, 21)
+    draw.text(
+        (sub_bx0 + 234, sub_by0 + 20),
+        "毎晩80s・90s名曲を追加中｜保存して聴く",
+        font=f_sub_msg,
+        fill=(238, 224, 190, 248),
     )
 
     is_vocal = bool(meta.get("vocal_playlist") or "洋楽" in meta.get("title", "") or "歌詞" in meta.get("title", ""))
