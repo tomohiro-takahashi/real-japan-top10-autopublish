@@ -130,11 +130,26 @@ def smart_truncate(
                 if (tb_fp[2] - tb_fp[0]) <= max_w:
                     return first_part
 
-    # Otherwise drop whole words from the end
+    # Otherwise drop whole words from the end, cleaning unclosed parens and dangling stop-words
+    dangling = {
+        "of", "in", "to", "for", "with", "on", "at", "from", "by", "about", "as",
+        "into", "before", "after", "between", "through", "during", "under", "over",
+        "the", "a", "an", "your", "their", "its", "&", "and", "or", "japan's",
+    }
     words = s.split(" ")
     while len(words) > 1:
         words.pop()
         candidate = " ".join(words).rstrip(",;:|—-")
+        while candidate.count("(") > candidate.count(")"):
+            idx_p = candidate.rfind("(")
+            if idx_p > 0:
+                candidate = candidate[:idx_p].strip().rstrip(",;:|—-")
+            else:
+                break
+        c_words = candidate.split(" ")
+        while len(c_words) > 2 and c_words[-1].lower().rstrip(".,;:") in dangling:
+            c_words.pop()
+        candidate = " ".join(c_words).rstrip(",;:|—-")
         tb_c = draw.textbbox((0, 0), candidate, font=font)
         if (tb_c[2] - tb_c[0]) <= max_w:
             return candidate
@@ -701,33 +716,24 @@ def render_summary_table_jpg(
             tb_r = draw.textbbox((0, 0), r_txt, font=f_rank)
             draw.text((rx + (badge_w - (tb_r[2] - tb_r[0])) // 2, y0 + 11), r_txt, font=f_rank, fill=(255, 255, 255))
 
-            acc_short = row.get("access_short", row.get("budget", ""))
-            while len(acc_short) > 6:
-                tb_a = draw.textbbox((0, 0), acc_short, font=f_hack)
-                if (tb_a[2] - tb_a[0]) <= badge_w + 2:
-                    break
-                acc_short = acc_short[:-2] + "…"
-            draw.text((rx + 2, y0 + 42), acc_short, font=f_hack, fill=(125, 211, 252))
+            acc_raw = row.get("access_short", row.get("budget", ""))
+            f_acc = fit_font_for_width(draw, acc_raw, font_path, 13, 10, badge_w + 4)
+            acc_short = smart_truncate(draw, acc_raw, f_acc, badge_w + 4)
+            draw.text((rx + 2, y0 + 42), acc_short, font=f_acc, fill=(125, 211, 252))
 
             tx = rx + badge_w + 10
             max_tw = x1 - tx - 8
 
-            def fit_line(txt: str, fnt: ImageFont.FreeTypeFont) -> str:
-                s = txt
-                while len(s) > 6:
-                    tb_s = draw.textbbox((0, 0), s, font=fnt)
-                    if (tb_s[2] - tb_s[0]) <= max_tw:
-                        return s
-                    s = s[:-2] + "…"
-                return s
+            f_t_row = fit_font_for_width(draw, row["name_en"], font_path, 17, 12, max_tw)
+            title_str = smart_truncate(draw, row["name_en"], f_t_row, max_tw)
+            f_d_row = fit_font_for_width(draw, row["dish"], font_path, 14, 11, max_tw)
+            dish_str = smart_truncate(draw, row["dish"], f_d_row, max_tw)
+            f_h_row = fit_font_for_width(draw, f"TIP: {row['hack']}", font_path, 13, 11, max_tw)
+            hack_str = smart_truncate(draw, f"TIP: {row['hack']}", f_h_row, max_tw)
 
-            title_str = fit_line(row["name_en"], f_title)
-            dish_str = fit_line(row["dish"], f_sub)
-            hack_str = fit_line(f"TIP: {row['hack']}", f_hack)
-
-            draw.text((tx, y0 + 6), title_str, font=f_title, fill=(255, 255, 255))
-            draw.text((tx, y0 + 30), dish_str, font=f_sub, fill=(253, 224, 71))
-            draw.text((tx, y0 + 50), hack_str, font=f_hack, fill=(167, 243, 208))
+            draw.text((tx, y0 + 6), title_str, font=f_t_row, fill=(255, 255, 255))
+            draw.text((tx, y0 + 30), dish_str, font=f_d_row, fill=(253, 224, 71))
+            draw.text((tx, y0 + 50), hack_str, font=f_h_row, fill=(167, 243, 208))
     else:
         f_rank = ImageFont.truetype(font_path, 22)
         f_title = ImageFont.truetype(font_path, 20)
@@ -2423,6 +2429,16 @@ def render_custom_thumbnails(script_path: Path) -> Tuple[Path, Path, Path]:
         comp.paste(grad_im, (0, 0), mask_im)
         canvas.alpha_composite(comp, (x + tb[0] - pad, y + tb[1] - pad))
 
+    def clean_short_spot_name(raw_name: str) -> str:
+        """Strip parenthetical suffixes like '(Higashi-Ginza)' so spot names are clean and never leave dangling '('."""
+        base = strip_cjk(raw_name).split("(")[0].split("—")[0].split(" - ")[0].strip()
+        return base or strip_cjk(raw_name)
+
+    def clean_short_dish(raw_dish: str) -> str:
+        """Strip parentheticals and score tags from dish/feature descriptions."""
+        base = strip_cjk(raw_dish).split("(")[0].split("|")[0].strip()
+        return base or strip_cjk(raw_dish)
+
     def make_polaroid_card(
         photo_path: Path,
         card_w: int,
@@ -2441,14 +2457,16 @@ def render_custom_thumbnails(script_path: Path) -> Tuple[Path, Path, Path]:
         base.paste(ph.convert("RGBA"), (8, 8), mask)
 
         f_rk = ImageFont.truetype(w9_path, 19)
-        f_tt = ImageFont.truetype(w9_path, 18)
         tb_r = d.textbbox((0, 0), rank_txt, font=f_rk)
         rw = (tb_r[2] - tb_r[0]) + 22
         d.rounded_rectangle((14, 14, 14 + rw, 46), radius=8, fill=(*badge_col, 250), outline=(255, 255, 255, 255), width=2)
         d.text((25, 21), rank_txt, font=f_rk, fill=(255, 255, 255, 255))
 
-        tb_t = d.textbbox((0, 0), title_txt, font=f_tt)
-        d.text(((card_w - (tb_t[2] - tb_t[0])) // 2, card_h - 36), title_txt, font=f_tt, fill=(15, 23, 42, 255))
+        clean_t = clean_short_spot_name(title_txt)
+        f_tt = fit_font_for_width(d, clean_t, w9_path, 19, 13, card_w - 20)
+        clean_t = smart_truncate(d, clean_t, f_tt, card_w - 20)
+        tb_t = d.textbbox((0, 0), clean_t, font=f_tt)
+        d.text(((card_w - (tb_t[2] - tb_t[0])) // 2, card_h - 36), clean_t, font=f_tt, fill=(15, 23, 42, 255))
 
         rot = base.rotate(angle_deg, resample=Image.Resampling.BICUBIC, expand=True)
         sh = Image.new("RGBA", (rot.width + 32, rot.height + 32), (0, 0, 0, 0))
@@ -2465,7 +2483,38 @@ def render_custom_thumbnails(script_path: Path) -> Tuple[Path, Path, Path]:
     thumb_b = OUTPUT_DIR / f"overseas_japan_{rid}_thumb_alt.jpg"
     thumb_s = OUTPUT_DIR / f"overseas_japan_{rid}_short_thumb.jpg"
 
-    # Design A (1280x720)
+    tc = data.get("thumb_config", {})
+    clean_pref = strip_cjk(data.get("prefecture", "JAPAN")).replace("TOP 10", "").replace("Sightseeing", "").strip().upper() or "JAPAN"
+    short_geo = clean_pref.split()[0] if clean_pref else "JAPAN"
+
+    # Dynamically choose contextual hero_line1 so Tokyo Ramen never says "SKIP KYOTO!"
+    raw_hl1 = tc.get("hero_line1", "NO PROMO!")
+    if raw_hl1 == "SKIP KYOTO!" and ("TOKYO" in clean_pref or "RAMEN" in clean_pref or "SUSHI" in clean_pref):
+        hero_line1 = "NO PROMO!"
+    else:
+        hero_line1 = raw_hl1
+    hero_line2 = tc.get("hero_line2", "REAL JAPAN")
+
+    # Never chop region names mid-word (fixes 'TOKYO RAME TOP 10' -> 'TOKYO RAMEN TOP 10')
+    banner_title = f"{clean_pref} TOP 10"
+    banner_sub = "REAL JAPANESE IG VOICES ONLY"
+    map_header = f"WHERE IS {short_geo}?"
+    map_pill = tc.get("map_pill", "DIRECT")
+    map_line1 = tc.get("map_line1", "Shinkansen / Train")
+    map_line2 = tc.get("map_line2", "from Tokyo Station!")
+    map_footer = "0% SPONSORED"
+    highlight_prefs = set(tc.get("highlight_prefs_ja", [target_pref_ja]))
+
+    r1_clean_name = clean_short_spot_name(rows[0]["name_en"]).upper()
+    r2_clean_name = clean_short_spot_name(rows[1]["name_en"]).upper()
+    r3_clean_name = clean_short_spot_name(rows[2]["name_en"]).upper()
+    r1_clean_dish = clean_short_dish(rows[0]["dish"]).upper()
+    r2_clean_dish = clean_short_dish(rows[1]["dish"]).upper()
+    r3_clean_dish = clean_short_dish(rows[2]["dish"]).upper()
+
+    # =========================================================================
+    # Design A (1280x720): Diagonal Split + Polaroid Stack + Map Radar
+    # =========================================================================
     canvas_a = Image.new("RGBA", (W, H), (8, 12, 24, 255))
     hero_im = grade_photo(Image.open(p1_path), 920, H, sat=1.42, con=1.22, bri=1.06)
     canvas_a.paste(hero_im.convert("RGBA"), (360, 0))
@@ -2491,54 +2540,46 @@ def render_custom_thumbnails(script_path: Path) -> Tuple[Path, Path, Path]:
     d_a.line([(552, -5), (442, H + 5)], fill=(220, 38, 38, 255), width=12)
     d_a.line([(546, -5), (436, H + 5)], fill=(253, 224, 71, 255), width=6)
 
-    pol3 = make_polaroid_card(p3_path, 272, 194, f"#3  {rows[2]['score']}", rows[2]["name_en"][:20], (2, 132, 199), -5.5)
-    pol2 = make_polaroid_card(p2_path, 272, 194, f"#2  {rows[1]['score']}", rows[1]["name_en"][:20], (220, 38, 38), 5.5)
-    canvas_a.alpha_composite(pol3, (972, 252))
-    canvas_a.alpha_composite(pol2, (966, 466))
+    pol3 = make_polaroid_card(p3_path, 272, 194, f"#3  {rows[2]['score']}", rows[2]["name_en"], (2, 132, 199), -5.5)
+    pol2 = make_polaroid_card(p2_path, 272, 194, f"#2  {rows[1]['score']}", rows[1]["name_en"], (220, 38, 38), 5.5)
+    canvas_a.alpha_composite(pol3, (972, 232))
+    canvas_a.alpha_composite(pol2, (966, 448))
 
-    f_b1 = ImageFont.truetype(w9_path, 22)
-    f_b2 = ImageFont.truetype(w9_path, 21)
-    t_no1 = f"NO.1: {rows[0]['score'].upper()}"
-    t_ph = rows[0]["dish"].split("(")[0].strip().upper()[:28] + "!"
-    tb_n1 = d_a.textbbox((0, 0), t_no1, font=f_b1)
-    tb_ph = d_a.textbbox((0, 0), t_ph, font=f_b2)
-    w_n1 = (tb_n1[2] - tb_n1[0]) + 32
-    w_ph = (tb_ph[2] - tb_ph[0]) + 34
-    bx1 = 1260
-    bx0 = bx1 - (w_n1 + w_ph + 20)
-    d_a.rounded_rectangle((bx0, 20, bx1, 88), radius=16, fill=(12, 18, 32, 242), outline=(253, 224, 71, 255), width=3)
-    d_a.rounded_rectangle((bx0 + 8, 28, bx0 + 8 + w_n1, 80), radius=10, fill=(217, 119, 6, 255))
-    d_a.text((bx0 + 24, 42), t_no1, font=f_b1, fill=(255, 255, 255, 255))
-    d_a.text((bx0 + 8 + w_n1 + 16, 43), t_ph, font=f_b2, fill=(253, 224, 71, 255))
-
-    tc = data.get("thumb_config", {})
-    hero_line1 = tc.get("hero_line1", "SKIP KYOTO!")
-    hero_line2 = tc.get("hero_line2", "REAL JAPAN")
-    banner_title = tc.get("banner_title", "AKITA TOP 10")
-    banner_sub = tc.get("banner_sub", "HIDDEN GEMS VOTED BY LOCALS")
-    map_header = tc.get("map_header", "WHERE IS AKITA?")
-    map_pill = tc.get("map_pill", "3h 15m")
-    map_line1 = tc.get("map_line1", "Direct Shinkansen")
-    map_line2 = tc.get("map_line2", "from Tokyo Station!")
-    map_footer = tc.get("map_footer", "95% LOCAL GUESTS")
-    highlight_prefs = set(tc.get("highlight_prefs_ja", [target_pref_ja]))
-
-    d_a.rounded_rectangle((28, 20, 512, 76), radius=12, fill=(220, 38, 38, 255), outline=(253, 224, 71, 255), width=3)
-    f_rib = ImageFont.truetype(w9_path, 22)
-    rib_txt = tc.get("ribbon_text", "ZERO PAID PROMO • JAPANESE IG")
+    # Top-left Red Verification Ribbon (x=28..516, y=20..76)
+    d_a.rounded_rectangle((28, 20, 516, 76), radius=12, fill=(220, 38, 38, 255), outline=(253, 224, 71, 255), width=3)
+    rib_txt = "ZERO PAID PROMO • JAPANESE IG"
+    f_rib = fit_font_for_width(d_a, rib_txt, w9_path, 22, 16, 464)
     tb_rb = d_a.textbbox((0, 0), rib_txt, font=f_rib)
-    d_a.text((28 + (484 - (tb_rb[2] - tb_rb[0])) // 2, 36), rib_txt, font=f_rib, fill=(255, 255, 255, 255))
+    d_a.text((28 + (488 - (tb_rb[2] - tb_rb[0])) // 2, 36), rib_txt, font=f_rib, fill=(255, 255, 255, 255))
 
-    f_hero1 = ImageFont.truetype(black_path, 70 if len(hero_line1) > 11 else 74)
-    f_hero2 = ImageFont.truetype(black_path, 68 if len(hero_line2) > 11 else 80)
+    # Top-right #1 Highlight Pill strictly bounded to x=566..1260 (never overlaps left ribbon!)
+    bx0, bx1 = 566, 1260
+    avail_top_r = bx1 - bx0
+    f_b1 = ImageFont.truetype(w9_path, 21)
+    t_no1 = f"NO.1: {rows[0]['score'].upper()}"
+    tb_n1 = d_a.textbbox((0, 0), t_no1, font=f_b1)
+    w_n1 = (tb_n1[2] - tb_n1[0]) + 28
+    max_ph_w = avail_top_r - w_n1 - 36
+    f_b2 = fit_font_for_width(d_a, r1_clean_dish, w9_path, 20, 14, max_ph_w)
+    t_ph = smart_truncate(d_a, r1_clean_dish, f_b2, max_ph_w)
+    tb_ph = d_a.textbbox((0, 0), t_ph, font=f_b2)
+    actual_box_w = w_n1 + (tb_ph[2] - tb_ph[0]) + 38
+    bx0_dyn = max(566, bx1 - actual_box_w)
+    d_a.rounded_rectangle((bx0_dyn, 20, bx1, 80), radius=14, fill=(12, 18, 32, 244), outline=(253, 224, 71, 255), width=3)
+    d_a.rounded_rectangle((bx0_dyn + 8, 28, bx0_dyn + 8 + w_n1, 72), radius=9, fill=(217, 119, 6, 255))
+    d_a.text((bx0_dyn + 22, 39), t_no1, font=f_b1, fill=(255, 255, 255, 255))
+    d_a.text((bx0_dyn + 8 + w_n1 + 14, 40), t_ph, font=f_b2, fill=(253, 224, 71, 255))
+
+    f_hero1 = fit_font_for_width(d_a, hero_line1, black_path, 72, 48, 490)
+    f_hero2 = fit_font_for_width(d_a, hero_line2, black_path, 76, 48, 490)
     draw_pro_3d_text(canvas_a, (28, 88), hero_line1, f_hero1, (255, 255, 255), (218, 234, 255), stroke_w=9, depth=8)
     draw_pro_3d_text(canvas_a, (28, 178), hero_line2, f_hero2, (255, 248, 130), (245, 158, 11), stroke_w=10, depth=9)
 
     d_a.rounded_rectangle((28, 288, 502, 396), radius=18, fill=(14, 116, 144, 248), outline=(167, 243, 208, 255), width=3)
-    f_ak = ImageFont.truetype(w9_path, 38 if len(banner_title) > 12 else 42)
-    f_ak_sub = ImageFont.truetype(w9_path, 19 if len(banner_sub) > 27 else 20)
-    d_a.text((48, 300), banner_title, font=f_ak, fill=(255, 255, 255, 255), stroke_width=3, stroke_fill=(0, 0, 0, 240))
-    d_a.text((48, 355), banner_sub, font=f_ak_sub, fill=(253, 224, 71, 255), stroke_width=2, stroke_fill=(0, 0, 0, 230))
+    f_ak = fit_font_for_width(d_a, banner_title, w9_path, 40, 22, 446)
+    f_ak_sub = fit_font_for_width(d_a, banner_sub, w9_path, 19, 14, 446)
+    d_a.text((44, 302), banner_title, font=f_ak, fill=(255, 255, 255, 255), stroke_width=3, stroke_fill=(0, 0, 0, 240))
+    d_a.text((44, 356), banner_sub, font=f_ak_sub, fill=(253, 224, 71, 255), stroke_width=2, stroke_fill=(0, 0, 0, 230))
 
     mx0, my0, mx1, my1 = 28, 414, 452, 696
     d_a.rounded_rectangle((mx0, my0, mx1, my1), radius=20, fill=(10, 18, 34, 245), outline=(56, 189, 248, 250), width=3)
@@ -2578,7 +2619,7 @@ def render_custom_thumbnails(script_path: Path) -> Tuple[Path, Path, Path]:
 
     rx0, rx1 = mx0 + 206, mx1 - 14
     rw_box = rx1 - rx0
-    f_m1 = ImageFont.truetype(w9_path, 18)
+    f_m1 = fit_font_for_width(d_a, map_header, w9_path, 18, 13, rw_box - 6)
     f_m2 = ImageFont.truetype(black_path, 28 if len(map_pill) > 8 else 34)
     f_m3 = ImageFont.truetype(w9_path, 16)
     tb_wh = d_a.textbbox((0, 0), map_header, font=f_m1)
@@ -2592,13 +2633,15 @@ def render_custom_thumbnails(script_path: Path) -> Tuple[Path, Path, Path]:
     tb_loc = d_a.textbbox((0, 0), map_footer, font=f_m3)
     d_a.text((rx0 + (rw_box - (tb_loc[2] - tb_loc[0])) // 2, my0 + 223), map_footer, font=f_m3, fill=(255, 255, 255, 255))
 
-    f_c1 = ImageFont.truetype(w9_path, 22)
-    f_c2 = ImageFont.truetype(w9_path, 18)
-    tc1 = f"#1 {rows[0]['name_en'].upper()} ({rows[0]['score'].split('/')[0].strip()} PT)"
-    tc2 = tc.get("no1_sub_badge", "100% NO PAID PROMO  |  JAPANESE IG #1")
-    w_c = max(d_a.textbbox((0, 0), tc1, font=f_c1)[2], d_a.textbbox((0, 0), tc2, font=f_c2)[2]) + 36
-    cx0_b = 466
-    d_a.rounded_rectangle((cx0_b, 608, cx0_b + w_c, 696), radius=18, fill=(12, 18, 32, 242), outline=(245, 158, 11, 255), width=3)
+    # Bottom-center #1 Badge strictly bounded to x=466..952 so it never collides with Polaroid #2
+    cx0_b, cx1_b_max = 466, 952
+    max_cb_tw = (cx1_b_max - cx0_b) - 36
+    tc1 = f"#1 {r1_clean_name} ({rows[0]['score'].split('/')[0].strip()} PT)"
+    tc2 = "100% NO PAID PROMO  |  JAPANESE IG #1"
+    f_c1 = fit_font_for_width(d_a, tc1, w9_path, 22, 15, max_cb_tw)
+    f_c2 = fit_font_for_width(d_a, tc2, w9_path, 18, 14, max_cb_tw)
+    w_c = min(cx1_b_max - cx0_b, max(d_a.textbbox((0, 0), tc1, font=f_c1)[2], d_a.textbbox((0, 0), tc2, font=f_c2)[2]) + 36)
+    d_a.rounded_rectangle((cx0_b, 608, cx0_b + w_c, 696), radius=18, fill=(12, 18, 32, 244), outline=(245, 158, 11, 255), width=3)
     d_a.text((cx0_b + 18, 622), tc1, font=f_c1, fill=(253, 224, 71, 255))
     d_a.text((cx0_b + 18, 658), tc2, font=f_c2, fill=(167, 243, 208, 255))
 
@@ -2636,9 +2679,9 @@ def render_custom_thumbnails(script_path: Path) -> Tuple[Path, Path, Path]:
     for y in range(215):
         a = int(235 * (1 - y / 215) ** 1.3)
         od_b.line([(0, y), (W, y)], fill=(6, 10, 22, a))
-    for y in range(H - 210, H):
-        t = (y - (H - 210)) / 210
-        a = int(242 * (t ** 1.3))
+    for y in range(H - 220, H):
+        t = (y - (H - 220)) / 220
+        a = int(246 * (t ** 1.25))
         od_b.line([(0, y), (W, y)], fill=(6, 10, 22, a))
     canvas_b.alpha_composite(ov_b)
 
@@ -2655,8 +2698,8 @@ def render_custom_thumbnails(script_path: Path) -> Tuple[Path, Path, Path]:
     d_b.rounded_rectangle((28, 18, 28 + w_sb, 68), radius=10, fill=(220, 38, 38, 255), outline=(253, 224, 71, 255), width=3)
     d_b.text((48, 32), t_sub_b, font=f_sub_b, fill=(255, 255, 255, 255))
 
-    f_b_main = ImageFont.truetype(black_path, 82 if len(banner_title) > 12 else 86)
-    draw_pro_3d_text(canvas_b, (28, 72), banner_title, f_b_main, (255, 250, 145), (245, 158, 11), stroke_w=10, depth=9)
+    f_b_main = fit_font_for_width(d_b, banner_title, black_path, 82, 52, W - 64)
+    draw_pro_3d_text(canvas_b, (28, 74), banner_title, f_b_main, (255, 250, 145), (245, 158, 11), stroke_w=10, depth=9)
 
     f_vs = ImageFont.truetype(black_path, 28)
     for vx, vy in [(375, 360), (765, 360)]:
@@ -2664,28 +2707,32 @@ def render_custom_thumbnails(script_path: Path) -> Tuple[Path, Path, Path]:
         tb_v = d_b.textbbox((0, 0), "VS", font=f_vs)
         d_b.text((vx - (tb_v[2] - tb_v[0]) // 2, vy - 18), "VS", font=f_vs, fill=(255, 255, 255, 255))
 
-    f_rk_b = ImageFont.truetype(black_path, 32)
-    f_nm_b = ImageFont.truetype(w9_path, 24)
-    f_tg_b = ImageFont.truetype(w9_path, 15)
-
+    # Each panel has a strict horizontal width limit so text NEVER crosses the diagonal divider!
     panels_b = [
-        (18, 544, f"#3 ({rows[2]['score'].split('/')[0].strip()} PT)", rows[2]["name_en"].upper(), rows[2]["dish"].split("(")[0].strip().upper(), (2, 132, 199)),
-        (362, 544, f"#2 ({rows[1]['score'].split('/')[0].strip()} PT)", rows[1]["name_en"].upper(), rows[1]["dish"].split("(")[0].strip().upper(), (234, 88, 12)),
-        (754, 520, f"#1 WINNER ({rows[0]['score'].split('/')[0].strip()} PT)", rows[0]["name_en"].upper(), rows[0]["dish"].split("(")[0].strip().upper(), (220, 38, 38)),
+        (16, 540, 312, f"#3 ({rows[2]['score'].split('/')[0].strip()} PT)", r3_clean_name, r3_clean_dish, (2, 132, 199)),
+        (356, 540, 360, f"#2 ({rows[1]['score'].split('/')[0].strip()} PT)", r2_clean_name, r2_clean_dish, (234, 88, 12)),
+        (748, 524, 512, f"#1 WINNER ({rows[0]['score'].split('/')[0].strip()} PT)", r1_clean_name, r1_clean_dish, (220, 38, 38)),
     ]
-    for px, py, rk_s, nm_en, tg_en, col in panels_b:
+    for px, py, max_pw, rk_s, nm_en, tg_en, col in panels_b:
+        f_rk_b = fit_font_for_width(d_b, rk_s, black_path, 30, 20, max_pw - 24)
         tb_r = d_b.textbbox((0, 0), rk_s, font=f_rk_b)
-        bw = (tb_r[2] - tb_r[0]) + 28
-        d_b.rounded_rectangle((px, py, px + bw, py + 52), radius=12, fill=(*col, 255), outline=(253, 224, 71, 255), width=3)
-        d_b.text((px + 14, py + 7), rk_s, font=f_rk_b, fill=(255, 255, 255, 255))
-        d_b.text((px + 4, py + 62), tg_en, font=f_tg_b, fill=(253, 224, 71, 255), stroke_width=3, stroke_fill=(0, 0, 0, 245))
-        d_b.text((px + 4, py + 88), nm_en, font=f_nm_b, fill=(255, 255, 255, 255), stroke_width=4, stroke_fill=(0, 0, 0, 255))
+        bw = (tb_r[2] - tb_r[0]) + 26
+        d_b.rounded_rectangle((px, py, px + bw, py + 50), radius=12, fill=(*col, 255), outline=(253, 224, 71, 255), width=3)
+        d_b.text((px + 13, py + 8), rk_s, font=f_rk_b, fill=(255, 255, 255, 255))
+
+        f_tg_b = fit_font_for_width(d_b, tg_en, w9_path, 16, 12, max_pw)
+        tg_fit = smart_truncate(d_b, tg_en, f_tg_b, max_pw)
+        f_nm_b = fit_font_for_width(d_b, nm_en, w9_path, 25, 16, max_pw)
+        nm_fit = smart_truncate(d_b, nm_en, f_nm_b, max_pw)
+
+        d_b.text((px + 4, py + 60), tg_fit, font=f_tg_b, fill=(253, 224, 71, 255), stroke_width=3, stroke_fill=(0, 0, 0, 245))
+        d_b.text((px + 4, py + 86), nm_fit, font=f_nm_b, fill=(255, 255, 255, 255), stroke_width=4, stroke_fill=(0, 0, 0, 255))
 
     canvas_b.convert("RGB").save(thumb_b, "JPEG", quality=96)
     logger.info(f"Completed Custom Thumbnail B (1280x720): {thumb_b}")
 
     # =========================================================================
-    # Design 3 (1280x720): "TOURIST TRAP vs REAL LOCAL #1" Split Comparison
+    # Design 3 (1280x720): "PAID INFLUENCER TRAP vs JAPANESE IG #1" Split
     # =========================================================================
     p4_path = img_dir / rows[3]["thumb"] if len(rows) > 3 else p3_path
     canvas_3 = Image.new("RGBA", (W, H), (10, 12, 20, 255))
@@ -2726,25 +2773,29 @@ def render_custom_thumbnails(script_path: Path) -> Tuple[Path, Path, Path]:
     tb_x = d3.textbbox((0, 0), "X", font=f_x)
     d3.text((cx_x - (tb_x[2] - tb_x[0]) // 2, cy_x - 48), "X", font=f_x, fill=(255, 255, 255, 255))
 
-    f_lb = ImageFont.truetype(w9_path, 24)
-    f_ls = ImageFont.truetype(w9_path, 19)
-    d3.text((28, 595), tc.get("trap_title", "PAID INFLUENCER TRAP"), font=f_lb, fill=(252, 165, 165, 255), stroke_width=3, stroke_fill=(0, 0, 0, 255))
-    d3.text((28, 632), tc.get("trap_sub", "90% of Foreign Tourists Fall For This"), font=f_ls, fill=(255, 255, 255, 255), stroke_width=3, stroke_fill=(0, 0, 0, 255))
+    f_lb = ImageFont.truetype(w9_path, 23)
+    f_ls = ImageFont.truetype(w9_path, 18)
+    d3.text((24, 595), "PAID INFLUENCER TRAP", font=f_lb, fill=(252, 165, 165, 255), stroke_width=3, stroke_fill=(0, 0, 0, 255))
+    d3.text((24, 632), "90% of Tourists Fall For This", font=f_ls, fill=(255, 255, 255, 255), stroke_width=3, stroke_fill=(0, 0, 0, 255))
 
     d3.rounded_rectangle((540, 180, 1020, 254), radius=14, fill=(5, 150, 105, 250), outline=(253, 224, 71, 255), width=4)
-    rl_stamp = tc.get("real_stamp", "JAPANESE IG #1")
+    rl_stamp = "JAPANESE IG #1"
     tb_rl = d3.textbbox((0, 0), rl_stamp, font=f_st)
     d3.text((540 + (480 - (tb_rl[2] - tb_rl[0])) // 2, 194), rl_stamp, font=f_st, fill=(255, 255, 255, 255))
 
-    f_top3 = ImageFont.truetype(black_path, 74)
-    top3_txt = f"{hero_line1} {hero_line2}"[:22]
-    draw_pro_3d_text(canvas_3, (28, 18), top3_txt, f_top3, (255, 250, 140), (245, 158, 11), stroke_w=10, depth=9)
+    top3_txt = f"{hero_line1} {banner_title}"
+    f_top3 = fit_font_for_width(d3, top3_txt, black_path, 72, 46, W - 56)
+    draw_pro_3d_text(canvas_3, (28, 20), top3_txt, f_top3, (255, 250, 140), (245, 158, 11), stroke_w=10, depth=9)
 
     d3.rounded_rectangle((490, 568, 1252, 696), radius=20, fill=(10, 18, 34, 245), outline=(253, 224, 71, 255), width=4)
-    f_w1 = ImageFont.truetype(black_path, 36)
-    f_w2 = ImageFont.truetype(w9_path, 19)
-    d3.text((514, 584), f"#1 {rows[0]['name_en'].upper()} ({rows[0]['score'].split('/')[0]} PT)", font=f_w1, fill=(253, 224, 71, 255))
-    d3.text((514, 644), f"{rows[0]['dish'].split('(')[0].strip()}  |  100% No Paid Promo", font=f_w2, fill=(167, 243, 208, 255))
+    max_d3_w = (1252 - 490) - 48
+    t_w1 = f"#1 {r1_clean_name} ({rows[0]['score'].split('/')[0]} PT)"
+    t_w2 = f"{clean_short_dish(rows[0]['dish'])}  |  100% No Paid Promo"
+    f_w1 = fit_font_for_width(d3, t_w1, black_path, 35, 20, max_d3_w)
+    f_w2 = fit_font_for_width(d3, t_w2, w9_path, 20, 14, max_d3_w)
+    t_w2 = smart_truncate(d3, t_w2, f_w2, max_d3_w)
+    d3.text((514, 586), t_w1, font=f_w1, fill=(253, 224, 71, 255))
+    d3.text((514, 644), t_w2, font=f_w2, fill=(167, 243, 208, 255))
 
     # =========================================================================
     # Design 4 (1280x720): 4-Photo Bento Magazine Grid + Center Shield Emblem
@@ -2757,8 +2808,7 @@ def render_custom_thumbnails(script_path: Path) -> Tuple[Path, Path, Path]:
         (646, 366, 622, 342, rows[3] if len(rows) > 3 else rows[0], (16, 185, 129), False),
     ]
     d4 = ImageDraw.Draw(canvas_4)
-    f_c_rk = ImageFont.truetype(black_path, 25)
-    f_c_nm = ImageFont.truetype(w9_path, 22)
+    f_c_rk = ImageFont.truetype(black_path, 24)
     for cx, cy, cw, ch, row, bcol, is_top in cells_4:
         im_c = grade_photo(Image.open(img_dir / row["thumb"]), cw, ch, sat=1.42, con=1.22)
         ov_c = Image.new("RGBA", (cw, ch), (0, 0, 0, 0))
@@ -2776,13 +2826,18 @@ def render_custom_thumbnails(script_path: Path) -> Tuple[Path, Path, Path]:
 
         rk_t = f"{row['rank']} ({row['score'].split('/')[0]} PT)"
         tb_r = d4.textbbox((0, 0), rk_t, font=f_c_rk)
-        rw = (tb_r[2] - tb_r[0]) + 24
+        rw = (tb_r[2] - tb_r[0]) + 22
         px, py = cx + 16, (cy + 16 if is_top else cy + ch - 62)
         d4.rounded_rectangle((px, py, px + rw, py + 44), radius=10, fill=(*bcol, 250), outline=(255, 255, 255, 255), width=2)
-        d4.text((px + 12, py + 6), rk_t, font=f_c_rk, fill=(255, 255, 255, 255))
-        d4.text((px + rw + 14, py + 10), row["name_en"].upper(), font=f_c_nm, fill=(255, 255, 255, 255), stroke_width=3, stroke_fill=(0, 0, 0, 255))
+        d4.text((px + 11, py + 7), rk_t, font=f_c_rk, fill=(255, 255, 255, 255))
 
-    ex0, ey0, ex1, ey1 = 235, 232, 1045, 488
+        cell_nm = clean_short_spot_name(row["name_en"]).upper()
+        max_cell_tw = (cx + cw - 16) - (px + rw + 12)
+        f_c_nm = fit_font_for_width(d4, cell_nm, w9_path, 22, 14, max_cell_tw)
+        cell_nm_fit = smart_truncate(d4, cell_nm, f_c_nm, max_cell_tw)
+        d4.text((px + rw + 12, py + 11), cell_nm_fit, font=f_c_nm, fill=(255, 255, 255, 255), stroke_width=3, stroke_fill=(0, 0, 0, 255))
+
+    ex0, ey0, ex1, ey1 = 215, 232, 1065, 488
     sh4 = Image.new("RGBA", (W, H), (0, 0, 0, 0))
     ImageDraw.Draw(sh4).rounded_rectangle((ex0 - 12, ey0 - 8, ex1 + 12, ey1 + 16), radius=34, fill=(0, 0, 0, 235))
     canvas_4.alpha_composite(sh4.filter(ImageFilter.GaussianBlur(radius=14)))
@@ -2793,13 +2848,13 @@ def render_custom_thumbnails(script_path: Path) -> Tuple[Path, Path, Path]:
     t_em = "ZERO PAID PROMO • JAPANESE IG ANALYZED"
     tb_em = d4.textbbox((0, 0), t_em, font=f_em_sub)
     d4.text(((W - (tb_em[2] - tb_em[0])) // 2, ey0 - 10), t_em, font=f_em_sub, fill=(255, 255, 255, 255))
-    f_em_main = ImageFont.truetype(black_path, 78)
+    f_em_main = fit_font_for_width(d4, banner_title, black_path, 74, 42, (ex1 - ex0) - 48)
     tb_bm = d4.textbbox((0, 0), banner_title, font=f_em_main)
-    draw_pro_3d_text(canvas_4, ((W - (tb_bm[2] - tb_bm[0])) // 2, ey0 + 36), banner_title, f_em_main, (255, 250, 140), (245, 158, 11), stroke_w=10, depth=8)
+    draw_pro_3d_text(canvas_4, ((W - (tb_bm[2] - tb_bm[0])) // 2, ey0 + 40), banner_title, f_em_main, (255, 250, 140), (245, 158, 11), stroke_w=10, depth=8)
     f_em_bot = ImageFont.truetype(w9_path, 20)
-    t_eb = f"{hero_line1} {banner_sub}"
+    t_eb = "100% UNSPONSORED • REAL JAPANESE LOCAL VOICES"
     tb_eb = d4.textbbox((0, 0), t_eb, font=f_em_bot)
-    d4.text(((W - (tb_eb[2] - tb_eb[0])) // 2, ey1 - 48), t_eb, font=f_em_bot, fill=(167, 243, 208, 255))
+    d4.text(((W - (tb_eb[2] - tb_eb[0])) // 2, ey1 - 46), t_eb, font=f_em_bot, fill=(167, 243, 208, 255))
 
     # =========================================================================
     # Design 5 (1280x720): Full-Bleed Cinema Poster + Bottom Podium Bar
@@ -2825,25 +2880,29 @@ def render_custom_thumbnails(script_path: Path) -> Tuple[Path, Path, Path]:
     d5.rounded_rectangle(((W - rw5) // 2, 16, (W + rw5) // 2, 64), radius=24, fill=(220, 38, 38, 255), outline=(253, 224, 71, 255), width=3)
     d5.text(((W - (tb_r5[2] - tb_r5[0])) // 2, 29), t_r5, font=f_em_sub, fill=(255, 255, 255, 255))
 
-    f_cin = ImageFont.truetype(black_path, 74)
-    cin_title = f"{hero_line1} {hero_line2}"[:22]
+    cin_title = f"{hero_line1} {banner_title}"
+    f_cin = fit_font_for_width(d5, cin_title, black_path, 72, 44, W - 56)
     tb_cin = d5.textbbox((0, 0), cin_title, font=f_cin)
-    draw_pro_3d_text(canvas_5, ((W - (tb_cin[2] - tb_cin[0])) // 2, 72), cin_title, f_cin, (255, 250, 145), (245, 158, 11), stroke_w=10, depth=8)
+    draw_pro_3d_text(canvas_5, ((W - (tb_cin[2] - tb_cin[0])) // 2, 74), cin_title, f_cin, (255, 250, 145), (245, 158, 11), stroke_w=10, depth=8)
 
     pod_cards = [
-        (28, 548, 390, 148, f"#1 {rows[0]['name_en'].upper()[:15]}", f"{rows[0]['score']}  |  {rows[0]['access_short']}", rows[0]["dish"].split("(")[0].strip()[:26], (220, 38, 38)),
-        (445, 548, 390, 148, f"#2 {rows[1]['name_en'].upper()[:15]}", f"{rows[1]['score']}  |  {rows[1]['access_short']}", rows[1]["dish"].split("(")[0].strip()[:26], (234, 88, 12)),
-        (862, 548, 390, 148, f"#3 {rows[2]['name_en'].upper()[:15]}", f"{rows[2]['score']}  |  {rows[2]['access_short']}", rows[2]["dish"].split("(")[0].strip()[:26], (2, 132, 199)),
+        (28, 548, 390, 148, f"#1 {r1_clean_name}", f"{rows[0]['score']}  |  {rows[0]['access_short']}", clean_short_dish(rows[0]["dish"]), (220, 38, 38)),
+        (445, 548, 390, 148, f"#2 {r2_clean_name}", f"{rows[1]['score']}  |  {rows[1]['access_short']}", clean_short_dish(rows[1]["dish"]), (234, 88, 12)),
+        (862, 548, 390, 148, f"#3 {r3_clean_name}", f"{rows[2]['score']}  |  {rows[2]['access_short']}", clean_short_dish(rows[2]["dish"]), (2, 132, 199)),
     ]
-    f_p1 = ImageFont.truetype(black_path, 24)
-    f_p2 = ImageFont.truetype(w9_path, 16)
-    f_p3 = ImageFont.truetype(w9_path, 16)
     for px, py, pw, ph, pt1, pt2, pt3, pcol in pod_cards:
         d5.rounded_rectangle((px, py, px + pw, py + ph), radius=18, fill=(10, 18, 34, 245), outline=(253, 224, 71, 255), width=3)
         d5.rounded_rectangle((px + 10, py + 10, px + pw - 10, py + 56), radius=10, fill=(*pcol, 255))
-        d5.text((px + 20, py + 16), pt1, font=f_p1, fill=(255, 255, 255, 255))
-        d5.text((px + 18, py + 70), pt2, font=f_p2, fill=(253, 224, 71, 255))
-        d5.text((px + 18, py + 104), pt3, font=f_p3, fill=(167, 243, 208, 255))
+        max_p_tw = pw - 36
+        f_p1 = fit_font_for_width(d5, pt1, black_path, 23, 15, max_p_tw)
+        pt1_fit = smart_truncate(d5, pt1, f_p1, max_p_tw)
+        f_p2 = fit_font_for_width(d5, pt2, w9_path, 16, 12, max_p_tw)
+        pt2_fit = smart_truncate(d5, pt2, f_p2, max_p_tw)
+        f_p3 = fit_font_for_width(d5, pt3, w9_path, 16, 12, max_p_tw)
+        pt3_fit = smart_truncate(d5, pt3, f_p3, max_p_tw)
+        d5.text((px + 18, py + 17), pt1_fit, font=f_p1, fill=(255, 255, 255, 255))
+        d5.text((px + 18, py + 70), pt2_fit, font=f_p2, fill=(253, 224, 71, 255))
+        d5.text((px + 18, py + 104), pt3_fit, font=f_p3, fill=(167, 243, 208, 255))
 
     # Save all 5 templates and automatically rotate which template is set as primary `thumb_a` & `thumb_b` by episode number!
     all_tpls = [canvas_a, canvas_b, canvas_3, canvas_4, canvas_5]
@@ -2880,36 +2939,40 @@ def render_custom_thumbnails(script_path: Path) -> Tuple[Path, Path, Path]:
     canvas_s.alpha_composite(ov_s)
 
     d_s = ImageDraw.Draw(canvas_s)
-    d_s.rounded_rectangle((110, 56, 970, 130), radius=37, fill=(220, 38, 38, 255), outline=(253, 224, 71, 255), width=4)
-    f_sr = ImageFont.truetype(w9_path, 32)
+    d_s.rounded_rectangle((90, 56, 990, 130), radius=37, fill=(220, 38, 38, 255), outline=(253, 224, 71, 255), width=4)
     t_sr = "ZERO PAID PROMO • JAPANESE IG DATA"
+    f_sr = fit_font_for_width(d_s, t_sr, w9_path, 32, 22, 860)
     tb_sr = d_s.textbbox((0, 0), t_sr, font=f_sr)
     d_s.text(((SW_T - (tb_sr[2] - tb_sr[0])) // 2, 74), t_sr, font=f_sr, fill=(255, 255, 255, 255))
 
-    f_sh1 = ImageFont.truetype(black_path, 104 if len(hero_line1) > 11 else 112)
-    f_sh2 = ImageFont.truetype(black_path, 102 if len(hero_line2) > 11 else 118)
-    draw_pro_3d_text(canvas_s, (95, 148), hero_line1, f_sh1, (255, 255, 255), (218, 234, 255), stroke_w=12, depth=10)
-    draw_pro_3d_text(canvas_s, (105, 282), hero_line2, f_sh2, (255, 248, 130), (245, 158, 11), stroke_w=12, depth=10)
+    f_sh1 = fit_font_for_width(d_s, hero_line1, black_path, 108, 68, SW_T - 120)
+    f_sh2 = fit_font_for_width(d_s, hero_line2, black_path, 112, 68, SW_T - 120)
+    tb_sh1 = d_s.textbbox((0, 0), hero_line1, font=f_sh1)
+    tb_sh2 = d_s.textbbox((0, 0), hero_line2, font=f_sh2)
+    draw_pro_3d_text(canvas_s, ((SW_T - (tb_sh1[2] - tb_sh1[0])) // 2, 148), hero_line1, f_sh1, (255, 255, 255), (218, 234, 255), stroke_w=12, depth=10)
+    draw_pro_3d_text(canvas_s, ((SW_T - (tb_sh2[2] - tb_sh2[0])) // 2, 282), hero_line2, f_sh2, (255, 248, 130), (245, 158, 11), stroke_w=12, depth=10)
 
-    d_s.rounded_rectangle((80, 440, 1000, 548), radius=22, fill=(14, 116, 144, 248), outline=(167, 243, 208, 255), width=4)
-    f_sak = ImageFont.truetype(black_path, 58)
+    d_s.rounded_rectangle((70, 440, 1010, 548), radius=22, fill=(14, 116, 144, 248), outline=(167, 243, 208, 255), width=4)
+    f_sak = fit_font_for_width(d_s, banner_title, black_path, 56, 34, 900)
     tb_sak = d_s.textbbox((0, 0), banner_title, font=f_sak)
-    d_s.text(((SW_T - (tb_sak[2] - tb_sak[0])) // 2, 456), banner_title, font=f_sak, fill=(255, 255, 255, 255))
+    d_s.text(((SW_T - (tb_sak[2] - tb_sak[0])) // 2, 460), banner_title, font=f_sak, fill=(255, 255, 255, 255))
 
     sp_p3 = make_polaroid_card(p3_path, 430, 310, f"#3  {rows[2]['score']}", rows[2]["name_en"], (2, 132, 199), -5.0)
     sp_p2 = make_polaroid_card(p2_path, 430, 310, f"#2  {rows[1]['score']}", rows[1]["name_en"], (220, 38, 38), 5.0)
     canvas_s.alpha_composite(sp_p3, (65, 1390))
     canvas_s.alpha_composite(sp_p2, (545, 1390))
 
-    d_s.rounded_rectangle((70, 1210, 1010, 1365), radius=26, fill=(12, 18, 32, 245), outline=(253, 224, 71, 255), width=5)
-    f_sn1 = ImageFont.truetype(w9_path, 44)
-    f_sn2 = ImageFont.truetype(w9_path, 28)
-    t_sn1 = f"#1 {rows[0]['name_en'].upper()} ({rows[0]['score'].split('/')[0].strip()} PT)"
-    t_sn2 = rows[0]["dish"].split("(")[0].strip().upper() + "!"
+    d_s.rounded_rectangle((60, 1210, 1020, 1365), radius=26, fill=(12, 18, 32, 245), outline=(253, 224, 71, 255), width=5)
+    max_sn_w = (1020 - 60) - 48
+    t_sn1 = f"#1 {r1_clean_name} ({rows[0]['score'].split('/')[0].strip()} PT)"
+    t_sn2 = r1_clean_dish
+    f_sn1 = fit_font_for_width(d_s, t_sn1, w9_path, 42, 24, max_sn_w)
+    f_sn2 = fit_font_for_width(d_s, t_sn2, w9_path, 26, 18, max_sn_w)
+    t_sn2 = smart_truncate(d_s, t_sn2, f_sn2, max_sn_w)
     tb_sn1 = d_s.textbbox((0, 0), t_sn1, font=f_sn1)
     tb_sn2 = d_s.textbbox((0, 0), t_sn2, font=f_sn2)
-    d_s.text(((SW_T - (tb_sn1[2] - tb_sn1[0])) // 2, 1232), t_sn1, font=f_sn1, fill=(253, 224, 71, 255))
-    d_s.text(((SW_T - (tb_sn2[2] - tb_sn2[0])) // 2, 1302), t_sn2, font=f_sn2, fill=(167, 243, 208, 255))
+    d_s.text(((SW_T - (tb_sn1[2] - tb_sn1[0])) // 2, 1234), t_sn1, font=f_sn1, fill=(253, 224, 71, 255))
+    d_s.text(((SW_T - (tb_sn2[2] - tb_sn2[0])) // 2, 1304), t_sn2, font=f_sn2, fill=(167, 243, 208, 255))
 
     canvas_s.convert("RGB").save(thumb_s, "JPEG", quality=96)
     logger.info(f"Completed Custom Shorts Thumbnail C (1080x1920): {thumb_s}")
