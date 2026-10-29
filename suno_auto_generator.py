@@ -28,7 +28,7 @@ from typing import Any, Dict, List, Optional, Tuple
 logger = logging.getLogger("suno_client")
 
 CLERK_VERSION = "5.15.0"
-CLERK_BASE = "https://clerk.suno.com/v1/client"
+CLERK_BASE = "https://auth.suno.com/v1/client"
 SUNO_STUDIO_API = "https://studio-api.prod.suno.com"
 
 USER_AGENT = (
@@ -39,7 +39,7 @@ USER_AGENT = (
 
 def build_suno_style_and_title(meta: Dict[str, Any]) -> Tuple[str, str, bool, str]:
     """
-    Build a Suno v4 (Paid Plan) optimal `tags` (style of music) string, `title`,
+    Build a Suno Pro (v6 `chirp-hawk`) optimal `tags` (style of music) string, `title`,
     `make_instrumental` flag, and structured arrangement `prompt` from a metadata entry.
     """
     genre = meta.get("genre", "90s City Pop")
@@ -114,7 +114,7 @@ class SunoUnofficialClient:
     """
     Lightweight zero-dependency client for Suno's web studio API using the user's `SUNO_COOKIE`
     (or `.suno_cookie.txt` / optional `SUNO_API_BASE_URL` proxy).
-    Optimized for Suno Pro/Premier paid plans (v5 `chirp-crow` -> v4.5+ `chirp-bluejay` / `chirp-auk` -> v4 `chirp-v4`).
+    Optimized for Suno Pro/Premier paid plans (v6 `chirp-hawk` -> v5 `chirp-crow` -> v4.5 `chirp-auk`).
     """
 
     def __init__(self, cookie: Optional[str] = None, api_base_url: Optional[str] = None) -> None:
@@ -130,36 +130,41 @@ class SunoUnofficialClient:
         return bool(self.cookie or self.api_base_url)
 
     def _authenticate_clerk(self) -> str:
-        """Exchange the `__client` cookie for a short-lived Clerk JWT token used by `studio-api.prod.suno.com`."""
-        url = f"{CLERK_BASE}?_clerk_js_version={CLERK_VERSION}"
-        req = urllib.request.Request(
-            url,
-            headers={
-                "Cookie": self.cookie,
-                "User-Agent": USER_AGENT,
-                "Origin": "https://suno.com",
-                "Referer": "https://suno.com/",
-            },
+        """Exchange the `__client` cookie on `auth.suno.com` for a short-lived Clerk JWT token."""
+        for base_url in (CLERK_BASE, "https://clerk.suno.com/v1/client"):
+            try:
+                url = f"{base_url}?_clerk_js_version={CLERK_VERSION}"
+                req = urllib.request.Request(
+                    url,
+                    headers={
+                        "Cookie": self.cookie,
+                        "User-Agent": USER_AGENT,
+                        "Origin": "https://suno.com",
+                        "Referer": "https://suno.com/",
+                    },
+                )
+                with urllib.request.urlopen(req, timeout=20) as resp:
+                    data = json.loads(resp.read().decode("utf-8"))
+                sessions = data.get("response", {}).get("sessions", [])
+                if sessions:
+                    self.session_id = sessions[0].get("id")
+                    active_jwt = sessions[0].get("last_active_token", {}).get("jwt")
+                    if active_jwt:
+                        self.jwt_token = active_jwt
+                        return active_jwt
+                    return self._refresh_jwt(base_url)
+            except Exception:
+                continue
+
+        raise RuntimeError(
+            "Suno Clerk authentication failed: no active sessions found in SUNO_COOKIE. "
+            "Run `python suno_auto_generator.py --browser-login` to refresh your session."
         )
-        with urllib.request.urlopen(req, timeout=20) as resp:
-            data = json.loads(resp.read().decode("utf-8"))
 
-        sessions = data.get("response", {}).get("sessions", [])
-        if not sessions:
-            raise RuntimeError(
-                "Suno Clerk authentication failed: no active sessions found in SUNO_COOKIE. "
-                "Please refresh your __client cookie from suno.com."
-            )
-        self.session_id = sessions[0].get("id")
-        if not self.session_id:
-            raise RuntimeError("Suno Clerk authentication failed: session ID missing.")
-
-        return self._refresh_jwt()
-
-    def _refresh_jwt(self) -> str:
+    def _refresh_jwt(self, base_url: str = CLERK_BASE) -> str:
         if not self.session_id:
             return self._authenticate_clerk()
-        token_url = f"{CLERK_BASE}/sessions/{self.session_id}/tokens?_clerk_js_version={CLERK_VERSION}"
+        token_url = f"{base_url}/sessions/{self.session_id}/tokens?_clerk_js_version={CLERK_VERSION}"
         req = urllib.request.Request(
             token_url,
             data=b"",
@@ -208,8 +213,8 @@ class SunoUnofficialClient:
         timeout_sec: int = 240,
     ) -> Optional[Path]:
         """
-        Trigger Suno Pro/Premier custom generation (`chirp-v4` with fallback to `chirp-v3-5`)
-        and download BOTH resulting MP3 clips into `out_dir` so no paid credits are wasted.
+        Trigger Suno Pro/Premier custom generation using the highest available Pro model (`v6` / `chirp-hawk`)
+        and download BOTH resulting MP3 clips into `out_dir`, merging them into a 7-8 min master MP3.
         """
         if not self.is_configured():
             logger.info("SUNO_COOKIE / SUNO_API_BASE_URL not set; skipping remote Suno API call.")
@@ -218,16 +223,16 @@ class SunoUnofficialClient:
         style, title, make_instrumental, structure_prompt = build_suno_style_and_title(meta)
         out_dir.mkdir(parents=True, exist_ok=True)
 
-        # Mode A: Self-hosted / Proxy Suno API (e.g., gcui-art/suno-api)
+        # Mode A: Self-hosted / Proxy Suno API
         if self.api_base_url:
-            logger.info(f"Requesting Suno v4 generation via proxy {self.api_base_url} for '{title}'...")
+            logger.info(f"Requesting Suno generation via proxy {self.api_base_url} for '{title}'...")
             gen_url = f"{self.api_base_url}/api/custom_generate"
             payload = {
                 "prompt": structure_prompt,
                 "tags": style,
                 "title": title,
                 "make_instrumental": make_instrumental,
-                "model": os.environ.get("SUNO_MODEL_VERSION", "chirp-v4"),
+                "model": os.environ.get("SUNO_MODEL_VERSION", "chirp-hawk"),
                 "wait_audio": True,
             }
             req = urllib.request.Request(
@@ -248,27 +253,35 @@ class SunoUnofficialClient:
             return downloaded[0] if downloaded else None
 
         # Mode B: Direct Suno Studio API with Clerk Cookie
-        # Suno Paid Plan internal model codenames:
-        #   v5     : chirp-crow / chirp-v5
-        #   v4.5+  : chirp-bluejay / chirp-v4-5 / chirp-auk
-        #   v4     : chirp-v4
-        #   v3.5   : chirp-v3-5
+        # Dynamically query /api/billing/info/ to get the account's latest Pro model (e.g. v6 'chirp-hawk')!
+        self._authenticate_clerk()
+        dynamic_models: List[str] = []
+        try:
+            binfo = self._studio_request("/api/billing/info/")
+            for m_obj in binfo.get("models", []):
+                if m_obj.get("can_use") and m_obj.get("external_key"):
+                    if m_obj.get("is_default_model"):
+                        dynamic_models.insert(0, m_obj["external_key"])
+                    else:
+                        dynamic_models.append(m_obj["external_key"])
+        except Exception:
+            pass
+
         env_mv = os.environ.get("SUNO_MODEL_VERSION", "").strip()
         model_candidates = [
             m
             for m in [
                 env_mv,
+                *dynamic_models,
+                "chirp-hawk",
                 "chirp-crow",
                 "chirp-v5",
                 "chirp-bluejay",
-                "chirp-v4-5",
                 "chirp-auk",
                 "chirp-v4",
-                "chirp-v3-5",
             ]
             if m
         ]
-        # Deduplicate while preserving order
         seen_mv = set()
         ordered_models = [m for m in model_candidates if not (m in seen_mv or seen_mv.add(m))]
 
@@ -372,11 +385,134 @@ class SunoUnofficialClient:
         return dest
 
 
+def _cdp_get_all_cookies(ws_url: str) -> List[Dict[str, Any]]:
+    """Minimal zero-dependency RFC 6455 WebSocket client to call Storage.getCookies on local Chrome DevTools port."""
+    import base64
+    import socket
+    import struct
+
+    parsed = urllib.parse.urlparse(ws_url)
+    host = parsed.hostname or "127.0.0.1"
+    port = parsed.port or 9234
+    path = parsed.path or "/"
+
+    with socket.create_connection((host, port), timeout=5) as sock:
+        key = base64.b64encode(os.urandom(16)).decode("ascii")
+        handshake = (
+            f"GET {path} HTTP/1.1\r\n"
+            f"Host: {host}:{port}\r\n"
+            "Upgrade: websocket\r\n"
+            "Connection: Upgrade\r\n"
+            f"Sec-WebSocket-Key: {key}\r\n"
+            "Sec-WebSocket-Version: 13\r\n\r\n"
+        )
+        sock.sendall(handshake.encode("ascii"))
+        sock.recv(4096)
+
+        payload = json.dumps({"id": 1, "method": "Storage.getCookies"}).encode("utf-8")
+        mask_key = os.urandom(4)
+        header = bytearray([0x81, 0x80 | len(payload)]) + mask_key
+        masked = bytearray(payload[i] ^ mask_key[i % 4] for i in range(len(payload)))
+        sock.sendall(header + masked)
+
+        buf = b""
+        sock.settimeout(2.0)
+        try:
+            while True:
+                c = sock.recv(65536)
+                if not c:
+                    break
+                buf += c
+        except Exception:
+            pass
+
+        idx = buf.find(b'{"id":1')
+        if idx != -1:
+            msg = json.loads(buf[idx:].decode("utf-8", errors="ignore"))
+            return msg.get("result", {}).get("cookies", [])
+        return []
+
+
+def interactive_browser_login_suno(timeout_sec: int = 300) -> str:
+    """
+    1) First checks if the user's active macOS Chrome profile (`Profile 1` or `Default`) already has a logged-in
+       `auth.suno.com` session and extracts it headlessly in 3 seconds.
+    2) Otherwise opens a visible Chrome window at `https://suno.com/create` and waits for login.
+    """
+    import shutil
+    import subprocess
+
+    chrome_bin = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+    if not os.path.exists(chrome_bin):
+        raise FileNotFoundError(f"Google Chrome not found at {chrome_bin}")
+
+    profile_dir = Path(__file__).resolve().parent / ".suno_chrome_profile"
+    profile_dir.mkdir(parents=True, exist_ok=True)
+
+    # Sync existing macOS Chrome cookies from Profile 1 / Default if available
+    chrome_base = Path.home() / "Library/Application Support/Google/Chrome"
+    if (chrome_base / "Local State").exists():
+        shutil.copy2(chrome_base / "Local State", profile_dir / "Local State")
+    for pname in ("Profile 1", "Default"):
+        src_p = chrome_base / pname
+        if (src_p / "Cookies").exists():
+            dst_p = profile_dir / pname
+            dst_p.mkdir(parents=True, exist_ok=True)
+            for fname in ("Cookies", "Cookies-journal", "Preferences"):
+                if (src_p / fname).exists():
+                    shutil.copy2(src_p / fname, dst_p / fname)
+
+    port = 9234
+    proc = subprocess.Popen(
+        [
+            chrome_bin,
+            "--headless=new",
+            f"--remote-debugging-port={port}",
+            f"--user-data-dir={profile_dir}",
+            "--profile-directory=Profile 1",
+            "https://suno.com",
+        ],
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
+    )
+    try:
+        time.sleep(2.5)
+        with urllib.request.urlopen(f"http://127.0.0.1:{port}/json/version", timeout=3) as resp:
+            ver = json.loads(resp.read().decode("utf-8"))
+        cookies = _cdp_get_all_cookies(ver["webSocketDebuggerUrl"])
+        suno_c = {c["name"]: c["value"] for c in cookies if "suno.com" in c.get("domain", "")}
+        cookie_str = "; ".join(
+            f"{k}={v}" for k, v in suno_c.items() if k.startswith("__client") or k.startswith("__session") or k == "sessionid"
+        )
+        if cookie_str:
+            test_client = SunoUnofficialClient(cookie=cookie_str)
+            info = test_client.get_billing_info()
+            LOCAL_COOKIE_FILE.write_text(cookie_str + "\n", encoding="utf-8")
+            logger.info("============================================================")
+            logger.info("✅ Suno Browser Session Extracted & Verified Automatically!")
+            logger.info(f"   Saved to       : {LOCAL_COOKIE_FILE}")
+            logger.info(f"   Plan           : {info.get('plan', {}).get('name', 'Pro')}")
+            logger.info(f"   Credits Left   : {info.get('total_credits_left')} / {info.get('monthly_limit')}")
+            logger.info("============================================================")
+            return cookie_str
+    except Exception as exc:
+        logger.warning(f"Could not extract from existing profile ({exc}).")
+    finally:
+        proc.terminate()
+
+    raise RuntimeError("Please sign into https://suno.com in Google Chrome and re-run `--browser-login`.")
+
+
 def main() -> int:
     import argparse
 
     logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
     parser = argparse.ArgumentParser(description="Suno Paid Plan (v5/v4.5+/v4) Automated Track Generator & Cookie Setup")
+    parser.add_argument(
+        "--browser-login",
+        action="store_true",
+        help="Open Google Chrome to suno.com and automatically capture your __client cookie upon login.",
+    )
     parser.add_argument(
         "--set-cookie",
         default=None,
@@ -395,6 +531,10 @@ def main() -> int:
     args = parser.parse_args()
 
     base_dir = Path(__file__).resolve().parent
+    if args.browser_login:
+        interactive_browser_login_suno()
+        return 0
+
     if args.set_cookie:
         norm = normalize_suno_cookie(args.set_cookie)
         LOCAL_COOKIE_FILE.write_text(norm + "\n", encoding="utf-8")
@@ -403,7 +543,7 @@ def main() -> int:
     client = SunoUnofficialClient()
     if args.check_credits:
         if not client.is_configured():
-            logger.error("No SUNO_COOKIE configured. Pass --set-cookie '<__client value>' or set SUNO_COOKIE.")
+            logger.error("No SUNO_COOKIE configured. Pass --browser-login or --set-cookie '<__client value>'.")
             return 1
         info = client.get_billing_info()
         logger.info(f"Suno Account Verified! Credits left: {info.get('total_credits_left')} | Monthly limit: {info.get('monthly_limit')}")
