@@ -54,13 +54,24 @@ def fetch_channel_report(yt, label: str) -> Dict[str, Any]:
             })
 
     videos_data.sort(key=lambda x: x["views"], reverse=True)
+    long_videos = [v for v in videos_data if v["type"] == "Long" and v["privacyStatus"] == "public"]
+    short_videos = [v for v in videos_data if v["type"] == "Short" and v["privacyStatus"] == "public"]
+    long_views = sum(v["views"] for v in long_videos)
+    short_views = sum(v["views"] for v in short_videos)
+    raw_subs = int(ch["statistics"].get("subscriberCount", 0))
+    baseline_subs = 2 if "Music" in label else 0
     return {
         "label": label,
         "channel_id": ch["id"],
         "channel_title": ch["snippet"]["title"],
         "custom_url": ch["snippet"].get("customUrl", ""),
-        "subscribers": int(ch["statistics"].get("subscriberCount", 0)),
+        "subscribers_raw": raw_subs,
+        "subscribers_organic_net": max(0, raw_subs - baseline_subs),
         "total_views": int(ch["statistics"].get("viewCount", 0)),
+        "long_public_count": len(long_videos),
+        "long_total_views": long_views,
+        "short_public_count": len(short_videos),
+        "short_total_views": short_views,
         "video_count": int(ch["statistics"].get("videoCount", 0)),
         "videos": videos_data,
     }
