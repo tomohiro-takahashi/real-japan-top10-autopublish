@@ -37,40 +37,70 @@ USER_AGENT = (
 )
 
 
-def build_suno_style_and_title(meta: Dict[str, Any]) -> Tuple[str, str, bool]:
+def build_suno_style_and_title(meta: Dict[str, Any]) -> Tuple[str, str, bool, str]:
     """
-    Build a Suno v3.5 / v4 optimal `tags` (style of music) string, `title`, and `make_instrumental` flag
-    from a metadata entry in `stocks/music/metadata_pool.json`.
+    Build a Suno v4 (Paid Plan) optimal `tags` (style of music) string, `title`,
+    `make_instrumental` flag, and structured arrangement `prompt` from a metadata entry.
     """
     genre = meta.get("genre", "90s City Pop")
     raw_title = meta.get("title", "Midnight Tokyo Drive").split("|")[0].replace("[1 Hour]", "").strip()
 
     if "Eurobeat" in genre:
         style = (
-            "90s Eurobeat, high energy 158 BPM, Initial D style touge drift, "
-            "synthesizer brass lead, driving octave synth bass, crisp eurobeat drums, "
-            "melodic guitar solo, nostalgic 1990s Japanese arcade racing soundtrack, instrumental"
+            "1990s Initial D Eurobeat, high energy 158 BPM, Japanese touge drift racing, "
+            "explosive brass synth riff, driving octave Eurobeat bassline, crisp LinnDrum & TR-909, "
+            "shredding electric guitar solo, Super Eurobeat Dave Rodgers style, studio master quality"
+        )
+        structure_prompt = (
+            "[Intro: High-speed synthesizer arpeggio & racing engine atmosphere]\n"
+            "[Build-up: Explosive Eurobeat snare roll]\n"
+            "[Main Riff: Iconic 90s Super Eurobeat brass synth hook]\n"
+            "[Verse 1: Driving octave bassline & rhythmic synth chords]\n"
+            "[Pre-Chorus: Rising melodic tension]\n"
+            "[Chorus: Maximum energy Eurobeat synth brass & melodic lead]\n"
+            "[Bridge: Virtuoso melodic electric guitar solo]\n"
+            "[Final Chorus: Key modulation +1 semitone, full power synth brass]\n"
+            "[Outro: Clean fade-out for seamless loop]"
         )
     elif "Disco" in genre or "Boogie" in genre:
         style = (
-            "1980s Japanese Boogie Disco, 118 BPM, bubble era Tokyo Roppongi nightclub funk, "
-            "virtuoso slap bass, Roland Juno-106 analog synth brass, funky rhythm guitar, "
-            "four-on-the-floor disco groove, Toshiki Kadomatsu aesthetic, instrumental"
+            "1980s Japanese Boogie Disco, 118 BPM, 1986 bubble era Tokyo Roppongi nightclub funk, "
+            "virtuoso thumb slap bass, Roland Juno-106 & Jupiter-8 analog synth brass, "
+            "Nile Rodgers style funky rhythm guitar, Toshiki Kadomatsu & Anri groove, warm analog master"
+        )
+        structure_prompt = (
+            "[Intro: Punchy 80s slap bass & crisp gated-reverb drums]\n"
+            "[Main Groove: Jupiter-8 analog brass stabs & funky rhythm guitar]\n"
+            "[Verse: Smooth Tokyo midnight boogie groove with Rhodes chords]\n"
+            "[Chorus: Euphoric 80s Japanese disco horn section & synth lead]\n"
+            "[Solo: Virtuoso slap bass & talkbox synth solo]\n"
+            "[Chorus: Full Roppongi dancefloor climax]\n"
+            "[Outro: Smooth disco groove fade for seamless loop]"
         )
     else:
         style = (
-            "90s Japanese City Pop, 108 BPM, midnight Tokyo bayshore highway drive, "
-            "warm Fender Rhodes electric piano, smooth slap bass, chorus clean guitar, "
-            "nostalgic saxophone & synth lead, Tatsuro Yamashita & AOR groove, instrumental"
+            "1990s Japanese City Pop & AOR, 108 BPM, midnight Tokyo bayshore highway Wangan drive, "
+            "warm Fender Rhodes electric piano, smooth fretless & slap bass, chorus clean Stratocaster guitar, "
+            "emotional alto saxophone solo, Tatsuro Yamashita & Piper aesthetic, audiophile analog warmth"
+        )
+        structure_prompt = (
+            "[Intro: Warm Fender Rhodes electric piano & midnight highway rain ambiance]\n"
+            "[Verse: Smooth slap bass & clean chorus guitar groove]\n"
+            "[Pre-Chorus: Lush 90s analog synth strings]\n"
+            "[Chorus: Nostalgic midnight Tokyo City Pop melody]\n"
+            "[Solo: Emotional alto saxophone solo over jazzy 7th chords]\n"
+            "[Bridge: Dreamy electric piano breakdown]\n"
+            "[Final Chorus: Full band sunset-to-midnight bayshore groove]\n"
+            "[Outro: Gentle Rhodes chord fade for seamless loop]"
         )
 
-    return style, raw_title[:60], True
+    return style, raw_title[:60], True, structure_prompt
 
 
 class SunoUnofficialClient:
     """
     Lightweight zero-dependency client for Suno's web studio API using the user's `SUNO_COOKIE`
-    (or an optional `SUNO_API_BASE_URL` proxy).
+    (or an optional `SUNO_API_BASE_URL` proxy). Optimized for Suno Pro/Premier paid plans (`chirp-v4`).
     """
 
     def __init__(self, cookie: Optional[str] = None, api_base_url: Optional[str] = None) -> None:
@@ -161,24 +191,26 @@ class SunoUnofficialClient:
         timeout_sec: int = 240,
     ) -> Optional[Path]:
         """
-        Trigger Suno custom instrumental generation for `meta` and download the resulting MP3 into `out_dir`.
+        Trigger Suno Pro/Premier custom generation (`chirp-v4` with fallback to `chirp-v3-5`)
+        and download BOTH resulting MP3 clips into `out_dir` so no paid credits are wasted.
         """
         if not self.is_configured():
             logger.info("SUNO_COOKIE / SUNO_API_BASE_URL not set; skipping remote Suno API call.")
             return None
 
-        style, title, make_instrumental = build_suno_style_and_title(meta)
+        style, title, make_instrumental, structure_prompt = build_suno_style_and_title(meta)
         out_dir.mkdir(parents=True, exist_ok=True)
 
         # Mode A: Self-hosted / Proxy Suno API (e.g., gcui-art/suno-api)
         if self.api_base_url:
-            logger.info(f"Requesting Suno generation via proxy {self.api_base_url} for '{title}'...")
+            logger.info(f"Requesting Suno v4 generation via proxy {self.api_base_url} for '{title}'...")
             gen_url = f"{self.api_base_url}/api/custom_generate"
             payload = {
-                "prompt": "",
+                "prompt": structure_prompt,
                 "tags": style,
                 "title": title,
                 "make_instrumental": make_instrumental,
+                "model": os.environ.get("SUNO_MODEL_VERSION", "chirp-v4"),
                 "wait_audio": True,
             }
             req = urllib.request.Request(
@@ -189,32 +221,42 @@ class SunoUnofficialClient:
             )
             with urllib.request.urlopen(req, timeout=timeout_sec) as resp:
                 clips = json.loads(resp.read().decode("utf-8"))
-            if isinstance(clips, list) and clips:
-                audio_url = clips[0].get("audio_url")
-                clip_id = clips[0].get("id", meta.get("id", "suno"))
-                if audio_url:
-                    return self._download_file(audio_url, out_dir / f"suno_{clip_id}.mp3")
-            return None
+            downloaded: List[Path] = []
+            if isinstance(clips, list):
+                for idx, clip in enumerate(clips):
+                    audio_url = clip.get("audio_url")
+                    clip_id = clip.get("id", f"{meta.get('id', 'suno')}_{idx+1}")
+                    if audio_url:
+                        downloaded.append(self._download_file(audio_url, out_dir / f"suno_{clip_id}.mp3"))
+            return downloaded[0] if downloaded else None
 
-        # Mode B: Direct Suno Studio API with Clerk Cookie
-        logger.info(f"Authenticating with Suno Clerk & generating '{title}' ({style[:55]}...)...")
+        # Mode B: Direct Suno Studio API with Clerk Cookie (Suno Paid Plan `chirp-v4`)
+        preferred_mv = os.environ.get("SUNO_MODEL_VERSION", "chirp-v4")
+        logger.info(f"Authenticating with Suno Clerk & generating '{title}' [model={preferred_mv}]...")
         self._authenticate_clerk()
         gen_payload = {
             "gpt_description_prompt": "",
-            "mv": os.environ.get("SUNO_MODEL_VERSION", "chirp-v3-5"),
-            "prompt": "",
+            "mv": preferred_mv,
+            "prompt": structure_prompt,
             "make_instrumental": make_instrumental,
             "tags": style,
             "title": title,
         }
-        gen_resp = self._studio_request("/api/generate/v2/", payload=gen_payload)
+        try:
+            gen_resp = self._studio_request("/api/generate/v2/", payload=gen_payload)
+        except Exception as exc:
+            logger.warning(f"Suno model '{preferred_mv}' failed ({exc}); falling back to 'chirp-v3-5'...")
+            gen_payload["mv"] = "chirp-v3-5"
+            gen_resp = self._studio_request("/api/generate/v2/", payload=gen_payload)
+
         clips = gen_resp.get("clips", [])
         if not clips:
             raise RuntimeError(f"Suno generate/v2 returned no clips: {gen_resp}")
 
         clip_ids = [c["id"] for c in clips if "id" in c]
-        logger.info(f"Suno generation started! Clip IDs: {clip_ids}. Polling until audio is complete...")
+        logger.info(f"Suno Paid Plan generation started! Clip IDs: {clip_ids}. Polling until audio is complete...")
 
+        downloaded_paths: Dict[str, Path] = {}
         start_t = time.time()
         while time.time() - start_t < timeout_sec:
             time.sleep(8.0)
@@ -223,14 +265,20 @@ class SunoUnofficialClient:
             feed = self._studio_request(f"/api/feed/?ids={urllib.parse.quote(ids_param)}")
             if isinstance(feed, list):
                 for item in feed:
+                    cid = item.get("id", "track")
                     status = item.get("status", "")
                     audio_url = item.get("audio_url", "")
-                    if status in ("complete", "streaming") and audio_url and ".mp3" in audio_url:
-                        cid = item.get("id", "track")
-                        dest = out_dir / f"suno_{meta.get('id', 'track')}_{cid[:8]}.mp3"
-                        return self._download_file(audio_url, dest)
                     if status == "error":
                         raise RuntimeError(f"Suno clip generation errored: {item}")
+                    # Wait for status == "complete" so we get the full-length high-bitrate MP3 file
+                    if status == "complete" and audio_url and cid not in downloaded_paths:
+                        dest = out_dir / f"suno_{meta.get('id', 'track')}_{cid[:8]}.mp3"
+                        downloaded_paths[cid] = self._download_file(audio_url, dest)
+                if len(downloaded_paths) >= len(clip_ids):
+                    break
+
+        if downloaded_paths:
+            return list(downloaded_paths.values())[0]
 
         raise TimeoutError(f"Timed out waiting for Suno clips {clip_ids} after {timeout_sec}s.")
 
