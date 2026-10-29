@@ -1437,8 +1437,12 @@ def mark_done_and_git_push(
             logger.warning(f"Git commit/push warning: {exc}")
 
 
-def resolve_description_with_chapters(chosen_mp3: Path, chosen_meta: Dict[str, Any]) -> str:
-    """Replace {{TIMESTAMPS}} in chosen_meta['description'] with exact chapter timestamps from .chapters.json."""
+def resolve_description_with_chapters(
+    chosen_mp3: Path,
+    chosen_meta: Dict[str, Any],
+    duration_sec: int = 3600,
+) -> str:
+    """Replace {TIMESTAMPS} and {{TIMESTAMPS}} in chosen_meta['description'] with exact chapter timestamps filtered to duration_sec."""
     desc = chosen_meta.get("description", "")
     chapters_file = chosen_mp3.with_suffix(".chapters.json")
     ts_block = chosen_meta.get("default_timestamps", "00:00 Track 01")
@@ -1449,7 +1453,38 @@ def resolve_description_with_chapters(chosen_mp3: Path, chosen_meta: Dict[str, A
                 ts_block = cdata["formatted_timestamps"]
         except Exception:
             pass
-    return desc.replace("{{TIMESTAMPS}}", ts_block)
+
+    # Filter timestamp lines so only chapters starting before duration_sec - 10s are included
+    valid_lines: List[str] = []
+    for raw_line in ts_block.splitlines():
+        line = raw_line.strip()
+        if not line:
+            continue
+        parts = line.split(" ", 1)[0].split(":")
+        try:
+            if len(parts) == 2:
+                sec = int(parts[0]) * 60 + int(parts[1])
+            elif len(parts) == 3:
+                sec = int(parts[0]) * 3600 + int(parts[1]) * 60 + int(parts[2])
+            else:
+                sec = 0
+            if sec < max(60, duration_sec - 10):
+                valid_lines.append(line)
+        except Exception:
+            valid_lines.append(line)
+
+    if valid_lines:
+        ts_block = "\n".join(valid_lines)
+
+    out_desc = desc.replace("{{TIMESTAMPS}}", ts_block).replace("{TIMESTAMPS}", ts_block)
+    if duration_sec <= 900 and valid_lines:
+        n_tr = len(valid_lines)
+        out_desc = (
+            out_desc.replace("全16曲ノンストップフルアルバム", f"全{n_tr}曲ノンストップミックス")
+            .replace("全16曲ノンストップ", f"全{n_tr}曲ノンストップ")
+            .replace("全16曲", f"全{n_tr}曲")
+        )
+    return out_desc
 
 
 def main() -> int:
@@ -1509,12 +1544,12 @@ def main() -> int:
 
     with tempfile.TemporaryDirectory(prefix="music_build_") as tmp_s:
         tmp_dir = Path(tmp_s)
-        bg_jpg = tmp_dir / "background_1280x720.jpg"
-        bg_loop_mp4 = tmp_dir / "highway_loop_1280x720.mp4"
-        hud_png = tmp_dir / "hud_1280x720.png"
+        bg_jpg = tmp_dir / "background_1920x1080.jpg"
+        bg_loop_mp4 = tmp_dir / "highway_loop_1920x1080.mp4"
+        hud_png = tmp_dir / "hud_1920x1080.png"
         looped_m4a = tmp_dir / "looped_1hour.m4a"
 
-        # Step 1: Load 1280x720 curated Japanese retro artwork
+        # Step 1: Load 1920x1080 curated Japanese retro artwork
         download_background_image(chosen_meta, bg_jpg)
 
         # Step 2: Build 24fps motion loop
@@ -1530,7 +1565,7 @@ def main() -> int:
         # Step 5: Build 9:16 vertical Short (`output_short.mp4`) from 30s..60s of the MP3 with live highway motion
         build_short_video(bg_jpg, bg_loop_mp4, chosen_mp3, chosen_meta, OUTPUT_SHORT, font_path)
 
-    full_description = resolve_description_with_chapters(chosen_mp3, chosen_meta)
+    full_description = resolve_description_with_chapters(chosen_mp3, chosen_meta, duration_sec=args.duration)
     long_title = chosen_meta["title"]
     short_title = chosen_meta.get(
         "short_title",
