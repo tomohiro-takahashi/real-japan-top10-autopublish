@@ -2131,11 +2131,11 @@ def build_shorts_video(script_path: Path) -> Path:
             "mode": "outro",
             "se_type": "area_chime",
             "badge": "FULL TOP 10 CHEAT-SHEET",
-            "title_en": "Screenshot This TOP 10 List!",
-            "sub_en": f"{prefecture} — Complete Guide",
-            "access": "TAP RELATED VIDEO BELOW FOR FULL 9-MIN GUIDE!",
-            "narration": "Screenshot this Top 10 list, and tap below for the full guide!",
-            "pop_lines": ["PAUSE & SCREENSHOT THIS LIST!", "Tap Below for Full 9-Min Video!"],
+            "title_en": "Screenshot & Subscribe!",
+            "sub_en": f"{prefecture} — Daily Local Japan Guides",
+            "access": "SUBSCRIBE + TAP CHANNEL BELOW FOR FULL TOP 10 VIDEO!",
+            "narration": "Screenshot this list, subscribe for daily Japan guides, and tap our channel for the full video!",
+            "pop_lines": ["SCREENSHOT THIS TOP 10 LIST!", "SUBSCRIBE FOR DAILY JAPAN GUIDES!"],
         },
     ]
 

@@ -1124,11 +1124,7 @@ def render_short_vertical_hud(
     )
 
     # 4. Bottom Japanese Spec & Channel CTA (y=1581..1752)
-    bot_spec = (
-        "MIDNIGHT COCKPIT  ｜  あの頃の夜と音楽"
-        if meta.get("_under_15m")
-        else "作業・ドライブ・晩酌用  ｜  全16曲ノンストップ（60分）"
-    )
+    bot_spec = "毎晩20時に80s・90s名曲を追加中  ｜  チャンネル登録で保存"
     f_bs = fit_font_for_width(draw, bot_spec, cjk_reg_path, 30, 22, SW - 84)
     tb_bs = draw.textbbox((0, 0), bot_spec, font=f_bs)
     draw.text(
@@ -1138,11 +1134,7 @@ def render_short_vertical_hud(
         fill=(226, 232, 240, 240),
     )
 
-    cta_ja = (
-        "▼ 下のアイコンから本編フル音源へ"
-        if meta.get("_under_15m")
-        else "▼ 下のアイコンから本編フルアルバムへ"
-    )
+    cta_ja = "▼ 下のアイコンから本編フル音源＆登録へ"
     f_cta = fit_font_for_width(draw, cta_ja, cjk_heavy_path, 30, 22, SW - 144)
     tb_cta = draw.textbbox((0, 0), cta_ja, font=f_cta)
     text_w = tb_cta[2] - tb_cta[0]
