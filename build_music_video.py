@@ -55,6 +55,7 @@ MUSIC_DIR = BASE_DIR / "stocks" / "music"
 QUEUE_DIR = MUSIC_DIR / "queue"
 DONE_DIR = MUSIC_DIR / "done"
 BG_VIDEOS_DIR = MUSIC_DIR / "bg_videos"
+ARTWORKS_DIR = MUSIC_DIR / "artworks"
 METADATA_POOL_PATH = MUSIC_DIR / "metadata_pool.json"
 
 OUTPUT_1HOUR = BASE_DIR / "output_1hour.mp4"
@@ -94,6 +95,35 @@ def find_cjk_font() -> str:
         if os.path.exists(c):
             return c
     return ""
+
+
+def find_cjk_heavy_font() -> str:
+    """Find an extra-heavy Japanese Gothic font for record-jacket main headlines."""
+    candidates = [
+        "/System/Library/Fonts/ヒラギノ角ゴシック W8.ttc",
+        "/System/Library/Fonts/ヒラギノ角ゴシック W7.ttc",
+        "/System/Library/Fonts/ヒラギノ角ゴシック W6.ttc",
+        "/usr/share/fonts/opentype/noto/NotoSansCJK-Bold.ttc",
+        "/usr/share/fonts/truetype/noto/NotoSansCJK-Bold.ttc",
+    ]
+    for c in candidates:
+        if os.path.exists(c):
+            return c
+    return find_cjk_font()
+
+
+def find_cjk_mincho_font() -> str:
+    """Find a Japanese Mincho / Serif font for nostalgic emotional catchphrases."""
+    candidates = [
+        "/System/Library/Fonts/ヒラギノ明朝 ProN.ttc",
+        "/System/Library/Fonts/ヒラギノ明朝 ProN W4.ttc",
+        "/usr/share/fonts/opentype/noto/NotoSerifCJK-Bold.ttc",
+        "/usr/share/fonts/opentype/noto/NotoSansCJK-Bold.ttc",
+    ]
+    for c in candidates:
+        if os.path.exists(c):
+            return c
+    return find_cjk_font()
 
 
 def load_font(font_path: str, size: int) -> ImageFont.FreeTypeFont | ImageFont.ImageFont:
@@ -343,12 +373,52 @@ def render_procedural_retro_artwork(meta: Dict[str, Any], out_jpg: Path, width: 
     return out_jpg
 
 
+def resolve_curated_artwork_path(meta: Dict[str, Any]) -> Optional[Path]:
+    """
+    Resolve the curated high-sense 16:9 Japanese retro master illustration in `stocks/music/artworks/`.
+    """
+    ARTWORKS_DIR.mkdir(parents=True, exist_ok=True)
+    explicit = meta.get("artwork_file", "")
+    if explicit and (ARTWORKS_DIR / explicit).exists():
+        return ARTWORKS_DIR / explicit
+
+    genre = meta.get("genre", "").lower()
+    mapping = [
+        ("eurobeat", "eurobeat.jpg"),
+        ("disco", "disco.jpg"),
+        ("boogie", "disco.jpg"),
+        ("rave", "tkrave.jpg"),
+        ("tk", "tkrave.jpg"),
+        ("80s city pop", "citypop80s.jpg"),
+        ("sax aor", "citypop80s.jpg"),
+        ("urban", "urban90s.jpg"),
+        ("shibuya", "urban90s.jpg"),
+        ("arcade", "arcade.jpg"),
+        ("fusion", "arcade.jpg"),
+    ]
+    for key, fname in mapping:
+        if key in genre and (ARTWORKS_DIR / fname).exists():
+            return ARTWORKS_DIR / fname
+
+    all_arts = sorted([p for p in ARTWORKS_DIR.iterdir() if p.suffix.lower() in (".jpg", ".jpeg", ".png")])
+    if all_arts:
+        return all_arts[hash(meta.get("id", "0")) % len(all_arts)]
+    return None
+
+
 def download_background_image(meta: Dict[str, Any], out_jpg: Path) -> Path:
     """
-    Download 1280x720 background image from Pollinations.ai using `meta["image_prompt"]`:
-    `https://image.pollinations.ai/prompt/{encoded_prompt}?width=1280&height=720&nologo=true`
-    Center-crops 5% edges to remove any watermark, or falls back to procedural artwork.
+    Load the curated high-sense 16:9 Japanese retro illustration from `stocks/music/artworks/` first.
+    Falls back to Pollinations.ai or procedural artwork only if `stocks/music/artworks/` is empty.
     """
+    curated = resolve_curated_artwork_path(meta)
+    if curated is not None and curated.exists():
+        im = Image.open(curated).convert("RGB")
+        im = im.resize((1280, 720), Image.Resampling.LANCZOS)
+        im.save(out_jpg, "JPEG", quality=96)
+        logger.info(f"Loaded curated Japanese retro master illustration: {curated.name} -> {out_jpg.name}")
+        return out_jpg
+
     prompt = meta.get(
         "image_prompt",
         "90s retro anime style aesthetic, lo-fi vintage illustration, midnight Tokyo highway, sports car, neon lights, 16:9",
@@ -415,18 +485,16 @@ def build_highway_driving_loop_mp4(
     fps: int = 24,
 ) -> Path:
     """
-    Build a seamless 1280x720 highway driving motion loop MP4:
+    Build a seamless 1280x720 motion loop MP4:
     - Priority 1: If `stocks/music/bg_videos/` has a Flow `.mp4` video, converts it into a seamless
       Ping-Pong (forward + reverse) 1280x720@24fps loop so there is zero jump cut!
-    - Priority 2: If no Flow `.mp4` is present yet, synthesizes a 24fps 3D Midnight Highway Driving
-      Animation over the upper sky/cityscape of `bg_jpg` — featuring rushing perspective road lanes,
-      glowing neon guardrails, overhead sodium streetlamps swooshing past, and a 90s JDM sports car
-      rear silhouette with glowing red twin tail lights!
+    - Priority 2: Preserves 100% of the curated master illustration (`bg_jpg`) and animates it at 24fps
+      (96 frames / 4.0s seamless cycle) with smooth breathing camera drift, pulsing neon highlight bloom,
+      and atmospheric drifting light trails / bokeh particles so the artwork shines without any crude polygon overwrite.
     """
     flow_mp4 = find_matching_flow_video(meta)
     if flow_mp4 is not None:
         logger.info(f"Building seamless Ping-Pong highway loop from Flow video: {flow_mp4.name} ...")
-        # Create a forward + reverse ping-pong loop scaled cleanly to 1280x720@24fps
         vf = (
             f"[0:v]scale=1280:720:force_original_aspect_ratio=increase,crop=1280:720,fps={fps},setsar=1,"
             f"vignette=PI/6,split[fwd][tmp];"
@@ -457,194 +525,67 @@ def build_highway_driving_loop_mp4(
         )
         return out_loop_mp4
 
-    logger.info("Synthesizing 24fps 3D Midnight Tokyo Highway High-Speed Driving Loop (96 frames / 4.0s cycle)...")
+    logger.info("Synthesizing 24fps Cinematic Japanese Retro Illustration Motion Loop (96 frames / 4.0s cycle)...")
     W, H = 1280, 720
-    horizon_y = 376
-    total_frames = 96  # 4.0 seconds @ 24fps, exact integer phase multiples for 100% seamless loop
+    total_frames = 96  # 4.0 seconds @ 24fps
 
-    base_im = Image.open(bg_jpg).convert("RGB").resize((W, H), Image.Resampling.LANCZOS)
+    # Overscan to 1344x756 (1.05x) for smooth sub-pixel-like camera drift without losing borders
+    OW, OH = 1344, 756
+    overscan_im = Image.open(bg_jpg).convert("RGB").resize((OW, OH), Image.Resampling.LANCZOS)
+
     genre = meta.get("genre", "90s Eurobeat")
-    if "Eurobeat" in genre:
-        neon_rgb = (56, 189, 248)
-        rail_rgb = (244, 63, 94)
-        speed_mult = 4
-    elif "Disco" in genre:
-        neon_rgb = (244, 114, 182)
-        rail_rgb = (253, 224, 71)
-        speed_mult = 2
+    if "Eurobeat" in genre or "Arcade" in genre:
+        accent_c1, accent_c2 = (253, 224, 71), (56, 189, 248)
+    elif "Disco" in genre or "Rave" in genre:
+        accent_c1, accent_c2 = (244, 114, 182), (253, 224, 71)
     else:
-        neon_rgb = (56, 189, 248)
-        rail_rgb = (167, 139, 250)
-        speed_mult = 2
+        accent_c1, accent_c2 = (56, 189, 248), (253, 224, 71)
 
-    with tempfile.TemporaryDirectory(prefix="hwy_frames_") as tmp_s:
+    rng = random.Random(hash(meta.get("id", "retro_loop")))
+    # Pre-generate 28 seamless drifting bokeh / light particles
+    particles = []
+    for _ in range(28):
+        particles.append(
+            {
+                "x0": rng.uniform(0.05, 0.95),
+                "y0": rng.uniform(0.08, 0.72),
+                "r": rng.choice([2, 3, 4, 6]),
+                "phase": rng.uniform(0.0, 1.0),
+                "col": accent_c1 if rng.random() < 0.55 else accent_c2,
+                "alpha": rng.randint(45, 110),
+            }
+        )
+
+    with tempfile.TemporaryDirectory(prefix="retro_frames_") as tmp_s:
         frames_dir = Path(tmp_s)
-        vp_x = W // 2
 
         for f_idx in range(total_frames):
             t_norm = f_idx / float(total_frames)  # 0.0 .. 1.0
-            # Subtle camera sway (simulating high-speed lane weave)
-            sway_x = int(16.0 * math.sin(2.0 * math.pi * t_norm))
-            cur_vp_x = vp_x + sway_x // 3
+            theta = 2.0 * math.pi * t_norm
 
-            frame = base_im.copy()
+            # Smooth figure-8 camera breath within the 1344x756 overscan canvas
+            cx_off = int((OW - W) * 0.5 + 22.0 * math.sin(theta))
+            cy_off = int((OH - H) * 0.5 + 10.0 * math.cos(theta))
+            frame = overscan_im.crop((cx_off, cy_off, cx_off + W, cy_off + H))
+
+            # Subtle analog neon pulse (1.00 .. 1.06 brightness & color warmth)
+            pulse = 1.0 + 0.045 * math.sin(2.0 * theta)
+            frame = ImageEnhance.Brightness(frame).enhance(pulse)
+            frame = ImageEnhance.Color(frame).enhance(1.02 + 0.03 * math.cos(theta))
+
             draw = ImageDraw.Draw(frame, "RGBA")
 
-            # 1. Dark wet highway asphalt trapezium from horizon_y to H
-            road_top_half = 58
-            road_bot_half = int(W * 0.72)
-            # Darken lower half for road bed + neon reflection shoulders
-            draw.rectangle((0, horizon_y, W, H), fill=(7, 9, 18, 242))
+            # Subtle drifting atmospheric bokeh / light reflections
+            for pt in particles:
+                p_t = (pt["phase"] + t_norm) % 1.0
+                px = int((pt["x0"] + 0.04 * math.sin(2.0 * math.pi * p_t)) * W) % W
+                py = int((pt["y0"] - 0.06 * math.cos(2.0 * math.pi * p_t)) * H) % H
+                pr = pt["r"]
+                pa = int(pt["alpha"] * (0.55 + 0.45 * math.sin(2.0 * math.pi * p_t)))
+                draw.ellipse((px - pr * 2, py - pr * 2, px + pr * 2, py + pr * 2), fill=(*pt["col"], pa // 3))
+                draw.ellipse((px - pr, py - pr, px + pr, py + pr), fill=(255, 255, 255, pa))
 
-            # Glowing city reflection bands on wet shoulders outside guardrails
-            for s_i in range(1, 14):
-                z_s = ((s_i / 13.0) + t_norm * speed_mult) % 1.0
-                if z_s < 0.02:
-                    continue
-                p_s = z_s ** 2.1
-                ry = int(horizon_y + p_s * (H - horizon_y))
-                rw = int(road_top_half + p_s * (road_bot_half - road_top_half))
-                alpha_s = int(95 * p_s)
-                draw.line([(0, ry), (max(0, cur_vp_x - rw - 10), ry)], fill=(*neon_rgb, alpha_s), width=2)
-                draw.line([(min(W, cur_vp_x + rw + 10), ry), (W, ry)], fill=(*rail_rgb, alpha_s), width=2)
-
-            # Main asphalt surface polygon
-            asphalt_poly = [
-                (cur_vp_x - road_top_half, horizon_y),
-                (cur_vp_x + road_top_half, horizon_y),
-                (cur_vp_x + road_bot_half + sway_x, H),
-                (cur_vp_x - road_bot_half + sway_x, H),
-            ]
-            draw.polygon(asphalt_poly, fill=(14, 18, 30, 255))
-
-            # Glowing side guardrails (double neon lines)
-            for offset_top, offset_bot, col_g, w_g in [
-                (road_top_half, road_bot_half, (*rail_rgb, 245), 4),
-                (road_top_half + 6, road_bot_half + 28, (*neon_rgb, 180), 2),
-            ]:
-                draw.line(
-                    [(cur_vp_x - offset_top, horizon_y), (cur_vp_x - offset_bot + sway_x, H)],
-                    fill=col_g,
-                    width=w_g,
-                )
-                draw.line(
-                    [(cur_vp_x + offset_top, horizon_y), (cur_vp_x + offset_bot + sway_x, H)],
-                    fill=col_g,
-                    width=w_g,
-                )
-
-            # 2. High-Speed Dashed Lane Markers rushing from horizon to bottom
-            num_dashes = 10
-            for d_i in range(num_dashes):
-                z0 = ((d_i + (t_norm * speed_mult * num_dashes)) % num_dashes) / float(num_dashes)
-                z1 = min(1.0, z0 + 0.055)
-                if z1 <= z0 or z0 < 0.03:
-                    continue
-                p0 = z0 ** 2.25
-                p1 = z1 ** 2.25
-                y0 = int(horizon_y + p0 * (H - horizon_y))
-                y1 = int(horizon_y + p1 * (H - horizon_y))
-
-                # Draw 3 highway lane dividers (-0.35, 0.0, +0.35 of road half-width)
-                for lane_rel in (-0.36, 0.0, 0.36):
-                    hw0 = road_top_half + p0 * (road_bot_half - road_top_half)
-                    hw1 = road_top_half + p1 * (road_bot_half - road_top_half)
-                    cx0 = cur_vp_x + int(sway_x * p0 + lane_rel * hw0)
-                    cx1 = cur_vp_x + int(sway_x * p1 + lane_rel * hw1)
-                    bw0 = max(1, int(1 + p0 * 8))
-                    bw1 = max(2, int(1 + p1 * 11))
-                    col_dash = (254, 240, 138, 240) if lane_rel == 0.0 else (241, 245, 249, 225)
-                    draw.polygon(
-                        [(cx0 - bw0, y0), (cx0 + bw0, y0), (cx1 + bw1, y1), (cx1 - bw1, y1)],
-                        fill=col_dash,
-                    )
-
-            # 3. Overhead Sodium Highway Streetlamps & Guardrail Posts rushing past on both sides
-            num_poles = 7
-            for p_i in range(num_poles):
-                zp = ((p_i + (t_norm * (speed_mult // 2) * num_poles)) % num_poles) / float(num_poles)
-                if zp < 0.05:
-                    continue
-                pp = zp ** 2.15
-                py = int(horizon_y + pp * (H - horizon_y))
-                hw = road_top_half + pp * (road_bot_half - road_top_half)
-                pole_h = int(28 + pp * 250)
-                pole_w = max(1, int(1 + pp * 5))
-                arm_w = int(14 + pp * 95)
-
-                for side in (-1, 1):
-                    px = cur_vp_x + int(sway_x * pp + side * hw)
-                    top_py = max(0, py - pole_h)
-                    # Vertical pole
-                    draw.line([(px, py), (px, top_py)], fill=(148, 163, 184, int(190 * pp)), width=pole_w)
-                    # Inward overhanging streetlamp arm
-                    arm_x = px - side * arm_w
-                    draw.line([(px, top_py), (arm_x, top_py + int(6 * pp))], fill=(203, 213, 225, int(200 * pp)), width=max(1, pole_w - 1))
-                    # Glowing sodium / cyan highway lamp halo
-                    lamp_r = max(2, int(3 + pp * 16))
-                    ly = top_py + int(6 * pp)
-                    draw.ellipse(
-                        (arm_x - lamp_r * 2, ly - lamp_r, arm_x + lamp_r * 2, ly + lamp_r),
-                        fill=(253, 224, 71, int(115 * pp)),
-                    )
-                    draw.ellipse(
-                        (arm_x - lamp_r, ly - lamp_r // 2, arm_x + lamp_r, ly + lamp_r // 2),
-                        fill=(255, 255, 255, int(245 * pp)),
-                    )
-
-            # 4. Horizon Neon Bridge Glow
-            draw.line([(0, horizon_y), (W, horizon_y)], fill=(255, 255, 255, 220), width=2)
-            draw.line([(0, horizon_y + 2), (W, horizon_y + 2)], fill=(*rail_rgb, 210), width=3)
-
-            # 5. Sleek 90s JDM Sports Car Rear Silhouette + Glowing Red Tail Lights & Exhaust Pulse
-            car_cx = W // 2 + int(sway_x * 0.85)
-            car_vib = int(1.5 * math.sin(2.0 * math.pi * t_norm * 12))
-            car_y0 = 492 + car_vib
-            car_w, car_h = 250, 96
-
-            # Red tail light reflection on wet asphalt behind the car
-            draw.ellipse(
-                (car_cx - 135, car_y0 + 78, car_cx - 35, car_y0 + 132),
-                fill=(239, 68, 68, 95),
-            )
-            draw.ellipse(
-                (car_cx + 35, car_y0 + 78, car_cx + 135, car_y0 + 132),
-                fill=(239, 68, 68, 95),
-            )
-
-            # Car lower body & rear diffuser
-            body_poly = [
-                (car_cx - car_w // 2, car_y0 + 48),
-                (car_cx - car_w // 2 + 18, car_y0 + 18),
-                (car_cx + car_w // 2 - 18, car_y0 + 18),
-                (car_cx + car_w // 2, car_y0 + 48),
-                (car_cx + car_w // 2 - 6, car_y0 + 86),
-                (car_cx - car_w // 2 + 6, car_y0 + 86),
-            ]
-            draw.polygon(body_poly, fill=(18, 24, 38, 255), outline=(148, 163, 184, 220))
-
-            # Fastback cabin / rear window
-            cabin_poly = [
-                (car_cx - 88, car_y0 + 18),
-                (car_cx - 62, car_y0 - 16),
-                (car_cx + 62, car_y0 - 16),
-                (car_cx + 88, car_y0 + 18),
-            ]
-            draw.polygon(cabin_poly, fill=(10, 15, 28, 255), outline=(100, 116, 139, 210))
-
-            # Rear GT Wing / Spoiler
-            draw.line([(car_cx - 106, car_y0 + 8), (car_cx + 106, car_y0 + 8)], fill=(30, 41, 59, 255), width=5)
-
-            # Iconic 90s Twin Round / Strip Glowing Red Tail Lights
-            draw.rounded_rectangle((car_cx - 114, car_y0 + 30, car_cx + 114, car_y0 + 50), radius=6, fill=(127, 29, 29, 255))
-            for tl_x in (car_cx - 92, car_cx - 58, car_cx + 58, car_cx + 92):
-                draw.ellipse((tl_x - 16, car_y0 + 26, tl_x + 16, car_y0 + 54), fill=(239, 68, 68, 165))
-                draw.ellipse((tl_x - 10, car_y0 + 31, tl_x + 10, car_y0 + 49), fill=(254, 202, 202, 255))
-
-            # Glowing green JDM license plate
-            draw.rounded_rectangle((car_cx - 22, car_y0 + 54, car_cx + 22, car_y0 + 74), radius=3, fill=(22, 163, 74, 235), outline=(255, 255, 255, 210))
-
-            frame.save(frames_dir / f"f_{f_idx:04d}.jpg", "JPEG", quality=92)
+            frame.save(frames_dir / f"f_{f_idx:04d}.jpg", "JPEG", quality=94)
 
         subprocess.run(
             [
@@ -655,13 +596,13 @@ def build_highway_driving_loop_mp4(
                 "-i",
                 str(frames_dir / "f_%04d.jpg"),
                 "-vf",
-                "vignette=PI/5,format=yuv420p",
+                "format=yuv420p",
                 "-c:v",
                 "libx264",
                 "-preset",
                 "veryfast",
                 "-crf",
-                "19",
+                "18",
                 str(out_loop_mp4),
             ],
             check=True,
@@ -669,8 +610,56 @@ def build_highway_driving_loop_mp4(
             stderr=subprocess.DEVNULL,
         )
 
-    logger.info(f"Built 3D highway driving motion loop: {out_loop_mp4.name}")
+    logger.info(f"Built cinematic retro illustration motion loop: {out_loop_mp4.name}")
     return out_loop_mp4
+
+
+def _draw_soft_shadow_text(
+    base_rgba: Image.Image,
+    pos: Tuple[int, int],
+    text: str,
+    font: ImageFont.FreeTypeFont | ImageFont.ImageFont,
+    fill: Tuple[int, int, int, int],
+    shadow_color: Tuple[int, int, int, int] = (0, 0, 0, 220),
+    shadow_offset: Tuple[int, int] = (0, 4),
+    blur_radius: int = 6,
+    stroke_width: int = 0,
+    stroke_fill: Tuple[int, int, int, int] = (0, 0, 0, 200),
+) -> None:
+    """Render crisp Japanese typography with a soft Gaussian drop-shadow like a professional record jacket."""
+    x, y = pos
+    if blur_radius > 0:
+        sh_layer = Image.new("RGBA", base_rgba.size, (0, 0, 0, 0))
+        sh_draw = ImageDraw.Draw(sh_layer, "RGBA")
+        sh_draw.text(
+            (x + shadow_offset[0], y + shadow_offset[1]),
+            text,
+            font=font,
+            fill=shadow_color,
+            stroke_width=max(2, stroke_width + 2),
+            stroke_fill=shadow_color,
+        )
+        sh_layer = sh_layer.filter(ImageFilter.GaussianBlur(radius=blur_radius))
+        base_rgba.alpha_composite(sh_layer)
+
+    draw = ImageDraw.Draw(base_rgba, "RGBA")
+    draw.text(
+        (x, y),
+        text,
+        font=font,
+        fill=fill,
+        stroke_width=stroke_width,
+        stroke_fill=stroke_fill if stroke_width > 0 else None,
+    )
+
+
+def _extract_ja_parts(meta: Dict[str, Any]) -> Tuple[str, str, str, str]:
+    """Return (era_label, catchphrase, main_headline, sub_spec) in Japanese for thumbnails & HUDs."""
+    era_label = meta.get("thumb_era_label") or "40代・50代に捧ぐ  ｜  1980s-90s ARCHIVE"
+    catch_txt = meta.get("thumb_catch") or "聴くだけで、当時の記憶がよみがえる——"
+    main_txt = meta.get("thumb_main") or "深夜の首都高・青春BGMアーカイブ"
+    sub_txt = meta.get("thumb_sub") or "作業・ドライブ用BGM  ｜  全16曲ノンストップ・フルアルバム（60分耐久）"
+    return era_label, catch_txt, main_txt, sub_txt
 
 
 def render_16x9_hud_and_thumb(
@@ -682,88 +671,172 @@ def render_16x9_hud_and_thumb(
 ) -> None:
     """
     Create:
-    1) A subtle retro VHS / Aesthetic HUD overlay (`hud_png`, 1280x720 RGBA) for the 1-hour video
-    2) A high-CTR 1280x720 YouTube thumbnail (`thumb_jpg`) with zero mid-word cutoffs or border overflow
+    1) A refined Japanese FM-Radio / Record-Jacket HUD overlay (`hud_png`, 1280x720 RGBA) for the 1-hour video
+    2) A high-sense Japanese 80s/90s Record-Jacket YouTube thumbnail (`thumb_jpg`, 1280x720) where the
+       curated illustration shines without tacky black boxes or supermarket stickers.
     """
-    genre = clean_ascii_text(meta.get("genre", "90s Retro Mix")).upper()
-    short_hook = clean_ascii_text(meta.get("short_hook_text", "90s Retro Vibes // Full 1 Hour in Channel"))
+    cjk_reg_path = find_cjk_font() or font_path
+    cjk_heavy_path = find_cjk_heavy_font() or cjk_reg_path
+    cjk_mincho_path = find_cjk_mincho_font() or cjk_reg_path
 
+    era_label, catch_txt, main_txt, sub_txt = _extract_ja_parts(meta)
+
+    # =========================================================================
+    # 1) 16:9 VIDEO OVERLAY HUD (`hud_png`) — Minimalist Japanese FM-Radio Style
+    # =========================================================================
     hud = Image.new("RGBA", (1280, 720), (0, 0, 0, 0))
     draw = ImageDraw.Draw(hud, "RGBA")
 
-    for y in range(540, 720):
-        alpha = int(165 * ((y - 540) / 180.0) ** 1.3)
-        draw.line([(0, y), (1280, y)], fill=(6, 8, 18, alpha))
+    # Smooth bottom gradient (y=520..720) for audio spectrum + track caption
+    for y in range(520, 720):
+        u = (y - 520) / 200.0
+        alpha = int(205 * (u ** 1.45))
+        draw.line([(0, y), (1280, y)], fill=(5, 8, 18, alpha))
 
-    f_badge = load_font(font_path, 18)
+    # Top-left minimalist frosted pill
+    f_hud_top = load_font(cjk_reg_path, 17)
+    hud_top_txt = f"●  {era_label}"
+    tb_top = draw.textbbox((0, 0), hud_top_txt, font=f_hud_top)
+    tw_top = (tb_top[2] - tb_top[0]) + 36
+    draw.rounded_rectangle(
+        (32, 26, 32 + tw_top, 60),
+        radius=17,
+        fill=(8, 12, 24, 155),
+        outline=(253, 224, 71, 140),
+        width=1,
+    )
+    draw.text((50, 34), hud_top_txt, font=f_hud_top, fill=(248, 250, 252, 235))
 
-    badge_txt = f"REC  |  {genre}  |  1-HOUR MIDNIGHT HIGHWAY MIX"
-    tb = draw.textbbox((0, 0), badge_txt, font=f_badge)
-    bw = (tb[2] - tb[0]) + 56
-    draw.rounded_rectangle((28, 24, 28 + bw, 62), radius=10, fill=(12, 16, 30, 210), outline=(253, 224, 71, 220), width=2)
-    draw.ellipse((44, 37, 56, 49), fill=(239, 68, 68, 255))
-    draw.text((66, 33), badge_txt, font=f_badge, fill=(253, 224, 71, 255))
-
-    raw_en = meta.get("en_title") or meta.get("title", "").split("|")[-1].strip()
-    clean_title = clean_ascii_text(raw_en)
-    now_playing_str = f"NOW PLAYING: {clean_title}"
-    f_title = fit_font_for_width(draw, now_playing_str, font_path, 22, 16, 1280 - 64)
-    now_playing_str = smart_truncate(draw, now_playing_str, f_title, 1280 - 64)
+    # Bottom caption under the audio equalizer (y=678)
+    hud_bot_txt = f"♪  {main_txt}   —   {sub_txt}"
+    f_hud_bot = fit_font_for_width(draw, hud_bot_txt, cjk_reg_path, 20, 15, 1280 - 96)
     draw.text(
-        (32, 682),
-        now_playing_str,
-        font=f_title,
-        fill=(241, 245, 249, 235),
+        (44, 676),
+        hud_bot_txt,
+        font=f_hud_bot,
+        fill=(241, 245, 249, 240),
         stroke_width=2,
-        stroke_fill=(0, 0, 0, 230),
+        stroke_fill=(0, 0, 0, 210),
     )
     hud.save(hud_png, "PNG")
 
-    base = Image.open(bg_jpg).convert("RGBA")
+    # =========================================================================
+    # 2) 16:9 YOUTUBE THUMBNAIL (`thumb_jpg`) — Japanese Record-Jacket Design
+    # =========================================================================
+    base = Image.open(bg_jpg).convert("RGBA").resize((1280, 720), Image.Resampling.LANCZOS)
+
+    # Subtle contrast & saturation polish on the master illustration
+    base_rgb = ImageEnhance.Contrast(base.convert("RGB")).enhance(1.06)
+    base_rgb = ImageEnhance.Color(base_rgb).enhance(1.08)
+    base = base_rgb.convert("RGBA")
+
+    grad = Image.new("RGBA", (1280, 720), (0, 0, 0, 0))
+    g_draw = ImageDraw.Draw(grad, "RGBA")
+
+    # Top subtle vignette (y=0..115) so the top-left editorial tag is effortlessly legible
+    for y in range(0, 115):
+        u = 1.0 - (y / 115.0)
+        alpha = int(125 * (u ** 1.6))
+        g_draw.line([(0, y), (1280, y)], fill=(4, 7, 16, alpha))
+
+    # Smooth multi-stop bottom cinema gradient (y=360..720) — zero boxy borders!
+    for y in range(360, 720):
+        u = (y - 360) / 360.0
+        alpha = int(242 * (u ** 1.35))
+        g_draw.line([(0, y), (1280, y)], fill=(4, 7, 18, alpha))
+
+    base.alpha_composite(grad)
     t_draw = ImageDraw.Draw(base, "RGBA")
 
-    # Top-left Japanese target generation badge (e.g. 【40代・50代必見】【50代必見】) when CJK font is available
-    cjk_font_path = find_cjk_font()
-    target_badge = meta.get("target_badge", "").strip()
-    if target_badge and cjk_font_path:
-        badge_clean = target_badge.strip("【】")
-        f_cjk = load_font(cjk_font_path, 40)
-        tb_b = t_draw.textbbox((0, 0), badge_clean, font=f_cjk)
-        bw_cjk = (tb_b[2] - tb_b[0]) + 56
-        bh_cjk = 76
-        t_draw.rounded_rectangle(
-            (36, 28, 36 + bw_cjk, 28 + bh_cjk),
-            radius=16,
-            fill=(220, 38, 38, 245),
-            outline=(253, 224, 71, 255),
-            width=4,
-        )
-        t_draw.text(
-            (64, 42),
-            badge_clean,
-            font=f_cjk,
-            fill=(255, 255, 255, 255),
-            stroke_width=2,
-            stroke_fill=(0, 0, 0, 240),
-        )
+    # A. Top-Left Editorial Archive Tag (Vertical Gold Bar + Frosted Pill)
+    f_era = load_font(cjk_reg_path, 21)
+    tb_era = t_draw.textbbox((0, 0), era_label, font=f_era)
+    era_w = (tb_era[2] - tb_era[0]) + 44
+    t_draw.rounded_rectangle(
+        (44, 32, 44 + era_w, 76),
+        radius=8,
+        fill=(8, 12, 24, 175),
+        outline=(255, 255, 255, 65),
+        width=1,
+    )
+    # Warm gold left accent bar inside the tag
+    t_draw.rounded_rectangle((44, 32, 52, 76), radius=3, fill=(251, 191, 36, 255))
+    t_draw.text((66, 43), era_label, font=f_era, fill=(254, 240, 138, 255))
 
-    t_draw.rounded_rectangle((36, 480, 1244, 684), radius=20, fill=(8, 12, 24, 232), outline=(56, 189, 248, 240), width=3)
+    # B. Bottom-Left Record-Jacket Typography (Mincho Catchphrase + Heavy Gothic Headline)
+    max_text_w = 1180
 
-    th_title = clean_title.upper()
-    max_th_w = 1244 - 64 - 28  # 1152px safe width inside card
-    f_th_big = fit_font_for_width(t_draw, th_title, font_path, 36, 20, max_th_w)
-    th_title = smart_truncate(t_draw, th_title, f_th_big, max_th_w)
+    # 1. Emotional Catchphrase (Mincho / Serif in warm champagne gold)
+    f_catch = fit_font_for_width(t_draw, catch_txt, cjk_mincho_path, 29, 20, max_text_w)
+    _draw_soft_shadow_text(
+        base,
+        (48, 480),
+        catch_txt,
+        font=f_catch,
+        fill=(253, 224, 71, 255),
+        shadow_color=(0, 0, 0, 235),
+        shadow_offset=(0, 3),
+        blur_radius=5,
+        stroke_width=1,
+        stroke_fill=(0, 0, 0, 210),
+    )
 
-    sub_line1 = f"{genre}  |  16-TRACK NON-STOP 1 HOUR ALBUM"
-    f_th_sub1 = fit_font_for_width(t_draw, sub_line1, font_path, 25, 18, max_th_w)
-    sub_line2 = short_hook.replace("//", "|")
-    f_th_sub2 = fit_font_for_width(t_draw, sub_line2, font_path, 24, 18, max_th_w)
-    sub_line2 = smart_truncate(t_draw, sub_line2, f_th_sub2, max_th_w)
+    # 2. Main Japanese Headline (Extra-Heavy Gothic W8 in pure white with deep cinema shadow)
+    f_main = fit_font_for_width(t_draw, main_txt, cjk_heavy_path, 62, 38, max_text_w)
+    _draw_soft_shadow_text(
+        base,
+        (46, 524),
+        main_txt,
+        font=f_main,
+        fill=(255, 255, 255, 255),
+        shadow_color=(0, 0, 0, 245),
+        shadow_offset=(0, 5),
+        blur_radius=8,
+        stroke_width=2,
+        stroke_fill=(6, 10, 24, 230),
+    )
 
-    t_draw.text((64, 505), th_title, font=f_th_big, fill=(255, 255, 255, 255), stroke_width=3, stroke_fill=(0, 0, 0, 255))
-    t_draw.text((64, 575), sub_line1, font=f_th_sub1, fill=(253, 224, 71, 255))
-    t_draw.text((64, 622), sub_line2, font=f_th_sub2, fill=(125, 211, 252, 255))
-    base.convert("RGB").save(thumb_jpg, "JPEG", quality=95)
+    # 3. Thin Editorial Gold/Silver Divider Line (y=616)
+    t_draw = ImageDraw.Draw(base, "RGBA")
+    t_draw.line([(48, 618), (68, 618)], fill=(251, 191, 36, 255), width=3)
+    t_draw.line([(74, 618), (960, 618)], fill=(226, 232, 240, 115), width=1)
+
+    # 4. Bottom Album Spec Line (Clean Gothic W6 in silver-white)
+    f_sub = fit_font_for_width(t_draw, sub_txt, cjk_reg_path, 22, 16, 920)
+    _draw_soft_shadow_text(
+        base,
+        (48, 634),
+        sub_txt,
+        font=f_sub,
+        fill=(226, 232, 240, 245),
+        shadow_color=(0, 0, 0, 220),
+        shadow_offset=(0, 2),
+        blur_radius=4,
+    )
+
+    # C. Bottom-Right Minimalist CD/Vinyl Spec Badge ("60 MIN / 16 TRACKS")
+    t_draw = ImageDraw.Draw(base, "RGBA")
+    stamp_txt = "60 MIN  /  16 TRACKS"
+    f_stamp = load_font(font_path, 18)
+    tb_st = t_draw.textbbox((0, 0), stamp_txt, font=f_stamp)
+    st_w = (tb_st[2] - tb_st[0]) + 40
+    st_x0 = 1280 - 44 - st_w
+    st_y0 = 624
+    t_draw.rounded_rectangle(
+        (st_x0, st_y0, st_x0 + st_w, st_y0 + 42),
+        radius=21,
+        fill=(12, 18, 34, 200),
+        outline=(251, 191, 36, 215),
+        width=2,
+    )
+    t_draw.text(
+        (st_x0 + 20, st_y0 + 11),
+        stamp_txt,
+        font=f_stamp,
+        fill=(253, 224, 71, 255),
+    )
+
+    base.convert("RGB").save(thumb_jpg, "JPEG", quality=96)
 
 
 def build_1hour_loop_audio(
@@ -903,8 +976,8 @@ def render_short_vertical_hud(
     font_path: str,
 ) -> Path:
     """
-    Build the 720x1280 (9:16) RGBA overlay for `output_short.mp4` with a transparent center window
-    (`x=28..692, y=282..780`) so the moving highway driving video plays live inside the center frame!
+    Build the 720x1280 (9:16) RGBA overlay for `output_short.mp4` in a 100% Japanese Record-Jacket
+    layout with a transparent center window (`x=28..692, y=282..780`) where the animated artwork plays live!
     """
     SW, SH = 720, 1280
     raw = Image.open(bg_jpg).convert("RGB")
@@ -914,56 +987,114 @@ def render_short_vertical_hud(
     bg_crop = raw.resize((nw, nh), Image.Resampling.LANCZOS).crop(
         ((nw - SW) // 2, (nh - SH) // 2, (nw - SW) // 2 + SW, (nh - SH) // 2 + SH)
     )
-    bg_blur = bg_crop.filter(ImageFilter.GaussianBlur(radius=28))
-    bg_blur = ImageEnhance.Brightness(bg_blur).enhance(0.32).convert("RGBA")
+    bg_blur = bg_crop.filter(ImageFilter.GaussianBlur(radius=30))
+    bg_blur = ImageEnhance.Brightness(bg_blur).enhance(0.28).convert("RGBA")
 
+    cjk_reg_path = find_cjk_font() or font_path
+    cjk_heavy_path = find_cjk_heavy_font() or cjk_reg_path
+    cjk_mincho_path = find_cjk_mincho_font() or cjk_reg_path
+
+    era_label, catch_txt, main_txt, _ = _extract_ja_parts(meta)
     draw = ImageDraw.Draw(bg_blur, "RGBA")
 
-    # 1. Top Hook Banner (y=88..248) — 100% clean ASCII, zero missing glyph boxes (□)
-    draw.rounded_rectangle((28, 88, SW - 28, 248), radius=20, fill=(12, 18, 36, 238), outline=(253, 224, 71, 250), width=3)
-    hook_raw = meta.get("short_hook_text", "90s Retro Vibes // Full 1 Hour in Channel")
-    clean_hook = clean_ascii_text(hook_raw)
-    parts = [p.strip() for p in clean_hook.split("//") if p.strip()]
-    line1 = parts[0].upper() if parts else "90S RETRO VIBES"
-    line2 = f">> {(parts[1].upper() if len(parts) > 1 else 'FULL 1 HOUR IN CHANNEL')} <<"
+    # 1. Top Japanese Editorial Header (y=76..258)
+    f_era = fit_font_for_width(draw, era_label, cjk_reg_path, 18, 14, SW - 96)
+    tb_e = draw.textbbox((0, 0), era_label, font=f_era)
+    ew = (tb_e[2] - tb_e[0]) + 36
+    ex0 = (SW - ew) // 2
+    draw.rounded_rectangle(
+        (ex0, 78, ex0 + ew, 114),
+        radius=18,
+        fill=(12, 18, 34, 210),
+        outline=(251, 191, 36, 190),
+        width=1,
+    )
+    draw.text(((SW - (tb_e[2] - tb_e[0])) // 2, 86), era_label, font=f_era, fill=(253, 224, 71, 255))
 
-    max_banner_w = SW - 56 - 32
-    f_h1 = fit_font_for_width(draw, line1, font_path, 33, 20, max_banner_w)
-    line1 = smart_truncate(draw, line1, f_h1, max_banner_w)
-    f_h2 = fit_font_for_width(draw, line2, font_path, 24, 16, max_banner_w)
-    line2 = smart_truncate(draw, line2, f_h2, max_banner_w)
+    # Catchphrase (Mincho)
+    f_catch = fit_font_for_width(draw, catch_txt, cjk_mincho_path, 23, 16, SW - 64)
+    tb_c = draw.textbbox((0, 0), catch_txt, font=f_catch)
+    _draw_soft_shadow_text(
+        bg_blur,
+        ((SW - (tb_c[2] - tb_c[0])) // 2, 134),
+        catch_txt,
+        font=f_catch,
+        fill=(254, 240, 138, 255),
+        blur_radius=4,
+    )
 
-    tb1 = draw.textbbox((0, 0), line1, font=f_h1)
-    tb2 = draw.textbbox((0, 0), line2, font=f_h2)
-    draw.text(((SW - (tb1[2] - tb1[0])) // 2, 114), line1, font=f_h1, fill=(255, 255, 255, 255), stroke_width=2, stroke_fill=(0, 0, 0, 240))
-    draw.text(((SW - (tb2[2] - tb2[0])) // 2, 178), line2, font=f_h2, fill=(253, 224, 71, 255), stroke_width=2, stroke_fill=(0, 0, 0, 240))
+    # Main Title (Heavy Gothic)
+    draw = ImageDraw.Draw(bg_blur, "RGBA")
+    f_main = fit_font_for_width(draw, main_txt, cjk_heavy_path, 40, 24, SW - 56)
+    tb_m = draw.textbbox((0, 0), main_txt, font=f_main)
+    _draw_soft_shadow_text(
+        bg_blur,
+        ((SW - (tb_m[2] - tb_m[0])) // 2, 178),
+        main_txt,
+        font=f_main,
+        fill=(255, 255, 255, 255),
+        blur_radius=6,
+        stroke_width=2,
+        stroke_fill=(4, 8, 20, 230),
+    )
 
-    # 2. Punch a transparent window at (x=28..692, y=282..780) where the live highway driving video will play
+    # 2. Punch a transparent window at (x=28..692, y=282..780) where the live animated illustration plays
+    draw = ImageDraw.Draw(bg_blur, "RGBA")
     fx0, fy0, fx1, fy1 = 28, 282, SW - 28, 780
-    draw.rounded_rectangle((fx0, fy0, fx1, fy1), radius=22, fill=(0, 0, 0, 0), outline=(56, 189, 248, 245), width=4)
+    draw.rounded_rectangle(
+        (fx0, fy0, fx1, fy1),
+        radius=18,
+        fill=(0, 0, 0, 0),
+        outline=(251, 191, 36, 210),
+        width=2,
+    )
 
-    genre = clean_ascii_text(meta.get("genre", "90s Retro Mix")).upper()
-    f_g = load_font(font_path, 19)
-    tb_g = draw.textbbox((0, 0), genre, font=f_g)
-    gw = (tb_g[2] - tb_g[0]) + 32
-    draw.rounded_rectangle((fx0 + 16, fy0 + 16, fx0 + 16 + gw, fy0 + 56), radius=10, fill=(220, 38, 38, 240), outline=(255, 255, 255, 230), width=2)
-    draw.text((fx0 + 32, fy0 + 26), genre, font=f_g, fill=(255, 255, 255, 255))
+    # 3. Spectrum Equalizer Frame Box (y=808..1028)
+    draw.rounded_rectangle(
+        (28, 808, SW - 28, 1028),
+        radius=16,
+        fill=(6, 10, 22, 205),
+        outline=(148, 163, 184, 110),
+        width=1,
+    )
 
-    # 3. Spectrum Frame Box (y=808..1028)
-    draw.rounded_rectangle((28, 808, SW - 28, 1028), radius=18, fill=(8, 12, 24, 215), outline=(244, 114, 182, 220), width=2)
+    # 4. Bottom Japanese Spec & Channel CTA (y=1054..1168)
+    bot_spec = "作業・ドライブ用BGM  ｜  全16曲ノンストップ（60分耐久）"
+    f_bs = fit_font_for_width(draw, bot_spec, cjk_reg_path, 21, 15, SW - 56)
+    tb_bs = draw.textbbox((0, 0), bot_spec, font=f_bs)
+    draw.text(
+        ((SW - (tb_bs[2] - tb_bs[0])) // 2, 1058),
+        bot_spec,
+        font=f_bs,
+        fill=(241, 245, 249, 245),
+    )
 
-    # 4. Bottom Track Title & Channel CTA (y=1058..1185) — zero mid-word cutoff
-    raw_en = meta.get("en_title") or meta.get("title", "").split("|")[-1].strip()
-    short_title = clean_ascii_text(raw_en)
-    f_bot = fit_font_for_width(draw, short_title, font_path, 22, 15, SW - 48)
-    short_title = smart_truncate(draw, short_title, f_bot, SW - 48)
-    tb_bt = draw.textbbox((0, 0), short_title, font=f_bot)
-    draw.text(((SW - (tb_bt[2] - tb_bt[0])) // 2, 1068), short_title, font=f_bot, fill=(255, 255, 255, 255), stroke_width=2, stroke_fill=(0, 0, 0, 240))
-
-    cta_str = "TAP CHANNEL FOR FULL 1-HOUR WORK & DRIVE BGM"
-    f_cta = fit_font_for_width(draw, cta_str, font_path, 20, 15, SW - 48)
-    tb_c = draw.textbbox((0, 0), cta_str, font=f_cta)
-    draw.text(((SW - (tb_c[2] - tb_c[0])) // 2, 1116), cta_str, font=f_cta, fill=(125, 211, 252, 255))
+    cta_ja = "本編フルアルバム（1時間耐久）はチャンネルから"
+    f_cta = fit_font_for_width(draw, cta_ja, cjk_heavy_path, 21, 16, SW - 96)
+    tb_cta = draw.textbbox((0, 0), cta_ja, font=f_cta)
+    text_w = tb_cta[2] - tb_cta[0]
+    cw = text_w + 68
+    cx0 = (SW - cw) // 2
+    draw.rounded_rectangle(
+        (cx0, 1104, cx0 + cw, 1152),
+        radius=24,
+        fill=(15, 23, 42, 230),
+        outline=(251, 191, 36, 220),
+        width=2,
+    )
+    # Vector gold play triangle on the left inside the pill
+    tri_x = cx0 + 24
+    tri_cy = 1128
+    draw.polygon(
+        [(tri_x, tri_cy - 8), (tri_x, tri_cy + 8), (tri_x + 13, tri_cy)],
+        fill=(253, 224, 71, 255),
+    )
+    draw.text(
+        (tri_x + 22, 1116),
+        cta_ja,
+        font=f_cta,
+        fill=(253, 224, 71, 255),
+    )
 
     bg_blur.save(out_vertical_hud_png, "PNG")
     return out_vertical_hud_png
@@ -1140,8 +1271,8 @@ def upload_video_to_youtube(
             "description": description[:4900],
             "tags": tags[:35],
             "categoryId": "10",  # Music category
-            "defaultLanguage": "en",
-            "defaultAudioLanguage": "en",
+            "defaultLanguage": "ja",
+            "defaultAudioLanguage": "ja",
         },
         "status": {
             "privacyStatus": privacy_status,
@@ -1309,10 +1440,10 @@ def main() -> int:
         hud_png = tmp_dir / "hud_1280x720.png"
         looped_m4a = tmp_dir / "looped_1hour.m4a"
 
-        # Step 1: Download 1280x720 background image from Pollinations.ai
+        # Step 1: Load 1280x720 curated Japanese retro artwork
         download_background_image(chosen_meta, bg_jpg)
 
-        # Step 2: Build High-Speed Highway Driving Video Loop (Flow MP4 if present, else 24fps 3D Highway Animation)
+        # Step 2: Build 24fps motion loop
         build_highway_driving_loop_mp4(bg_jpg, chosen_meta, bg_loop_mp4, fps=24)
 
         # Step 3: Render HUD overlay and YouTube thumbnail
@@ -1349,10 +1480,10 @@ def main() -> int:
 
         short_title = chosen_meta.get(
             "short_title",
-            f"{clean_ascii_text(chosen_meta.get('short_hook_text', '90s Retro Vibes'))} | {chosen_meta['genre']} #Shorts",
+            f"{chosen_meta.get('target_badge', '【40代・50代必見】')}{chosen_meta.get('thumb_main', '青春BGM')} 🎧本編1時間はチャンネルへ！ #Shorts",
         )
         short_desc = (
-            f"🎧 Listen to the full 1-Hour {chosen_meta['genre']} Mix here: https://youtu.be/{long_id}\n\n"
+            f"🎧 本編（全16曲ノンストップ・1時間耐久フルアルバム）はこちら 👉 https://youtu.be/{long_id}\n\n"
             f"{full_description}"
         )
         short_id = upload_video_to_youtube(
