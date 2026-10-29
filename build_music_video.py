@@ -453,8 +453,8 @@ def download_background_image(meta: Dict[str, Any], out_jpg: Path) -> Path:
 
 def find_matching_flow_video(meta: Dict[str, Any]) -> Optional[Path]:
     """
-    Check `stocks/music/bg_videos/` for a user-supplied Flow / Veo MP4 loop matching the genre.
-    Matches `eurobeat*.mp4`, `disco*.mp4`, `citypop*.mp4` or falls back to any `.mp4` in `bg_videos/`.
+    Check `stocks/music/bg_videos/` for a Google Flow / Veo MP4 loop matching the 6 genres.
+    Matches `eurobeat*.mp4`, `disco*.mp4`, `tkrave*.mp4`, `citypop80s*.mp4`, `urban90s*.mp4`, `arcade*.mp4`.
     """
     if not BG_VIDEOS_DIR.exists():
         return None
@@ -464,13 +464,19 @@ def find_matching_flow_video(meta: Dict[str, Any]) -> Optional[Path]:
 
     genre = meta.get("genre", "").lower()
     if "eurobeat" in genre:
-        key = "eurobeat"
+        keys = ["eurobeat"]
     elif "disco" in genre or "boogie" in genre:
-        key = "disco"
+        keys = ["disco"]
+    elif "rave" in genre or "tk " in genre or "synth dance" in genre:
+        keys = ["tkrave", "rave"]
+    elif "urban" in genre or "mellow" in genre or "shibuya" in genre:
+        keys = ["urban90s", "urban"]
+    elif "arcade" in genre or "fusion" in genre:
+        keys = ["arcade", "fusion"]
     else:
-        key = "citypop"
+        keys = ["citypop80s", "citypop"]
 
-    matched = [p for p in all_mp4s if key in p.stem.lower()]
+    matched = [p for p in all_mp4s if any(k in p.stem.lower() for k in keys)]
     pool = matched if matched else all_mp4s
     idx = hash(meta.get("id", "0")) % len(pool)
     chosen = pool[idx]
@@ -494,12 +500,10 @@ def build_highway_driving_loop_mp4(
     """
     flow_mp4 = find_matching_flow_video(meta)
     if flow_mp4 is not None:
-        logger.info(f"Building seamless Ping-Pong highway loop from Flow video: {flow_mp4.name} ...")
+        logger.info(f"Building seamless 24fps master loop from Google Flow video: {flow_mp4.name} ...")
         vf = (
             f"[0:v]scale=1280:720:force_original_aspect_ratio=increase,crop=1280:720,fps={fps},setsar=1,"
-            f"vignette=PI/6,split[fwd][tmp];"
-            f"[tmp]reverse[rev];"
-            f"[fwd][rev]concat=n=2:v=1:a=0,format=yuv420p[vout]"
+            f"vignette=PI/7,format=yuv420p[vout]"
         )
         subprocess.run(
             [
@@ -516,7 +520,7 @@ def build_highway_driving_loop_mp4(
                 "-preset",
                 "veryfast",
                 "-crf",
-                "20",
+                "19",
                 str(out_loop_mp4),
             ],
             check=True,
