@@ -1012,7 +1012,7 @@ def run_midnight_batch_pipeline(
                 break
 
         lh, lm, sh, sm, label = overseas_slots_jst[idx % len(overseas_slots_jst)]
-        if schedule_prime_time:
+        if schedule_prime_time and idx >= 1:
             pub_long_iso: Optional[str] = compute_jst_slot_iso(lh, lm)
             pub_short_iso: Optional[str] = compute_jst_slot_iso(sh, sm)
             eff_privacy = "private"
