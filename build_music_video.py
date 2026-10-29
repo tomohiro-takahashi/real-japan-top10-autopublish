@@ -673,6 +673,8 @@ def _extract_ja_parts(meta: Dict[str, Any]) -> Tuple[str, str, str, str]:
     catch_txt = meta.get("thumb_catch") or "聴くだけで、当時の記憶がよみがえる——"
     main_txt = meta.get("thumb_main") or "深夜の首都高・青春BGMアーカイブ"
     sub_txt = meta.get("thumb_sub") or "作業・ドライブ・晩酌用  ｜  全16曲ノンストップ（60分）"
+    if meta.get("_under_15m"):
+        sub_txt = sub_txt.replace("全16曲ノンストップ（60分）", "厳選ノンストップMIX").replace("（60分）", "")
     return era_label, catch_txt, main_txt, sub_txt
 
 
@@ -811,9 +813,9 @@ def render_16x9_hud_and_thumb(
         blur_radius=3,
     )
 
-    # C. Bottom-Right Minimalist Spec Pill ("60 MIN / 16 TRACKS")
+    # C. Bottom-Right Minimalist Spec Pill
     t_draw = ImageDraw.Draw(base, "RGBA")
-    stamp_txt = "60 MIN / 16 TRACKS"
+    stamp_txt = "NON-STOP ARCHIVE MIX" if meta.get("_under_15m") else "60 MIN / 16 TRACKS"
     f_stamp = load_font(font_path, 16)
     tb_st = t_draw.textbbox((0, 0), stamp_txt, font=f_stamp)
     st_w = (tb_st[2] - tb_st[0]) + 36
@@ -1055,7 +1057,11 @@ def render_short_vertical_hud(
     )
 
     # 4. Bottom Japanese Spec & Channel CTA (y=1054..1168)
-    bot_spec = "作業・ドライブ・晩酌用  ｜  全16曲ノンストップ（60分）"
+    bot_spec = (
+        "作業・ドライブ・晩酌用  ｜  厳選ノンストップMIX"
+        if meta.get("_under_15m")
+        else "作業・ドライブ・晩酌用  ｜  全16曲ノンストップ（60分）"
+    )
     f_bs = fit_font_for_width(draw, bot_spec, cjk_reg_path, 20, 15, SW - 56)
     tb_bs = draw.textbbox((0, 0), bot_spec, font=f_bs)
     draw.text(
@@ -1065,7 +1071,11 @@ def render_short_vertical_hud(
         fill=(226, 232, 240, 240),
     )
 
-    cta_ja = "本編フルアルバム（1時間耐久）はチャンネルから"
+    cta_ja = (
+        "本編ノンストップMIXはチャンネルから"
+        if meta.get("_under_15m")
+        else "本編フルアルバム（1時間耐久）はチャンネルから"
+    )
     f_cta = fit_font_for_width(draw, cta_ja, cjk_heavy_path, 20, 15, SW - 96)
     tb_cta = draw.textbbox((0, 0), cta_ja, font=f_cta)
     text_w = tb_cta[2] - tb_cta[0]
@@ -1389,8 +1399,8 @@ def main() -> int:
     parser.add_argument(
         "--duration",
         type=int,
-        default=3600,
-        help="Target duration in seconds for output_1hour.mp4 (default: 3600).",
+        default=885,
+        help="Target duration in seconds for output_1hour.mp4 (default: 885 = 14m45s, safe for channels without 15m+ phone verification).",
     )
     parser.add_argument(
         "--privacy",
@@ -1429,6 +1439,9 @@ def main() -> int:
         logger.info("No MP3 in stocks/music/queue/ and SUNO_COOKIE not active. Exiting cleanly (0).")
         return 0
 
+    if args.duration <= 900:
+        chosen_meta["_under_15m"] = True
+
     font_path = find_bold_font()
 
     with tempfile.TemporaryDirectory(prefix="music_build_") as tmp_s:
@@ -1447,7 +1460,7 @@ def main() -> int:
         # Step 3: Render HUD overlay and YouTube thumbnail
         render_16x9_hud_and_thumb(bg_jpg, chosen_meta, hud_png, OUTPUT_THUMB, font_path)
 
-        # Step 4: Build looped 1-hour audio + 16:9 video (`output_1hour.mp4`)
+        # Step 4: Build looped audio + 16:9 video (`output_1hour.mp4`)
         build_1hour_loop_audio(chosen_mp3, looped_m4a, target_duration_sec=args.duration)
         build_1hour_video(bg_loop_mp4, hud_png, looped_m4a, OUTPUT_1HOUR, duration_sec=args.duration)
 
@@ -1455,10 +1468,19 @@ def main() -> int:
         build_short_video(bg_jpg, bg_loop_mp4, chosen_mp3, chosen_meta, OUTPUT_SHORT, font_path)
 
     full_description = resolve_description_with_chapters(chosen_mp3, chosen_meta)
+    long_title = chosen_meta["title"]
+    short_title = chosen_meta.get(
+        "short_title",
+        f"{chosen_meta.get('target_badge', '【40代・50代必見】')}{chosen_meta.get('thumb_main', '青春BGM')} 🎧本編はチャンネルへ！ #Shorts",
+    )
+    if args.duration <= 900:
+        long_title = long_title.replace("1時間耐久", "作業・ドライブ用ノンストップMIX").replace("1時間", "厳選MIX")
+        short_title = short_title.replace("本編1時間は", "本編MIXは").replace("1時間耐久", "厳選MIX")
+        full_description = full_description.replace("1時間耐久", "ノンストップMIX").replace("全16曲（60分）", "厳選ノンストップメドレー")
 
     if args.dry_run:
         logger.info("Dry-run complete! Videos generated at:")
-        logger.info(f"  - 1-Hour Video : {OUTPUT_1HOUR}")
+        logger.info(f"  - Main Video   : {OUTPUT_1HOUR}")
         logger.info(f"  - Short Video  : {OUTPUT_SHORT}")
         logger.info(f"  - Thumbnail    : {OUTPUT_THUMB}")
         return 0
@@ -1469,19 +1491,15 @@ def main() -> int:
         long_id = upload_video_to_youtube(
             youtube=youtube,
             video_path=OUTPUT_1HOUR,
-            title=chosen_meta["title"],
+            title=long_title,
             description=full_description,
             tags=chosen_meta.get("tags", []),
             privacy_status=args.privacy,
             thumbnail_path=OUTPUT_THUMB,
         )
 
-        short_title = chosen_meta.get(
-            "short_title",
-            f"{chosen_meta.get('target_badge', '【40代・50代必見】')}{chosen_meta.get('thumb_main', '青春BGM')} 🎧本編1時間はチャンネルへ！ #Shorts",
-        )
         short_desc = (
-            f"🎧 本編（全16曲ノンストップ・1時間耐久フルアルバム）はこちら 👉 https://youtu.be/{long_id}\n\n"
+            f"🎧 本編（ノンストップMIXフル動画）はこちら 👉 https://youtu.be/{long_id}\n\n"
             f"{full_description}"
         )
         short_id = upload_video_to_youtube(

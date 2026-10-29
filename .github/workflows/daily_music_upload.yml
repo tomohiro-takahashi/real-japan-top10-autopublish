@@ -11,9 +11,9 @@ on:
         required: false
         default: 'public'
       duration:
-        description: '1-Hour Video Duration in Seconds (default: 3600)'
+        description: 'Main Video Duration in Seconds (default: 885 = 14m45s unverified-safe)'
         required: false
-        default: '3600'
+        default: '885'
 
 permissions:
   contents: write
@@ -49,7 +49,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Build 1-Hour Music Video + Short & Upload to YouTube
+      - name: Build Music Video + Short & Upload to YouTube
         env:
           YOUTUBE_CLIENT_ID: ${{ secrets.YOUTUBE_CLIENT_ID }}
           YOUTUBE_CLIENT_SECRET: ${{ secrets.YOUTUBE_CLIENT_SECRET }}
@@ -58,8 +58,8 @@ jobs:
           YOUTUBE_REFRESH_TOKEN_MUSIC: ${{ secrets.YOUTUBE_REFRESH_TOKEN_MUSIC }}
           SUNO_COOKIE: ${{ secrets.SUNO_COOKIE }}
           SUNO_API_BASE_URL: ${{ secrets.SUNO_API_BASE_URL }}
-          SUNO_BATCHES_PER_VIDEO: '8'
+          SUNO_BATCHES_PER_VIDEO: '2'
         run: |
           PRIVACY="${{ github.event.inputs.privacy || 'public' }}"
-          DURATION="${{ github.event.inputs.duration || '3600' }}"
+          DURATION="${{ github.event.inputs.duration || '885' }}"
           python build_music_video.py --privacy "$PRIVACY" --duration "$DURATION"

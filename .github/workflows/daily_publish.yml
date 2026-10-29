@@ -69,7 +69,7 @@ jobs:
           if [ -n "${{ inputs.script }}" ]; then
             python auto_publish_japan_ranking.py --script "${{ inputs.script }}" --privacy "${YOUTUBE_PRIVACY_STATUS}"
           else
-            python auto_publish_japan_ranking.py --midnight-batch --daily-sets 3
+            python auto_publish_japan_ranking.py --midnight-batch --daily-sets 3 --schedule-prime-time
           fi
 
       - name: Commit and push moved queue/done stock files & upload history

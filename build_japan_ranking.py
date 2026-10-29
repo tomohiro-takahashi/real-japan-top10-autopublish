@@ -1999,9 +1999,27 @@ def build_shorts_video(script_path: Path) -> Path:
 
     short_region = prefecture.replace("Sightseeing", "").replace("TOP 10", "").strip() or "Japan"
     hook_title = strip_cjk(shorts_cfg.get("promise_catch", f"SKIP TOURIST TRAPS! {short_region} TOP 10"))
-    hook_narration = shorts_cfg.get(
-        "narration_hook",
-        f"Stop going to crowded tourist traps! In the next 60 seconds, here are the Top 3 spots in {short_region} ranked from 500,000 Japanese Instagram posts and local reviews!",
+
+    def _short_punch(raw_text: str, prefix: str = "", max_words: int = 16) -> str:
+        clean = " ".join(strip_cjk(raw_text).split())
+        # Take the first punchy clause/sentence
+        for sep in [". ", "! ", "? "]:
+            if sep in clean:
+                first = clean.split(sep)[0].strip()
+                if len(first.split()) >= 5:
+                    clean = first + "."
+                    break
+        words = clean.split()
+        if len(words) > max_words:
+            clean = " ".join(words[:max_words]).rstrip(",;:") + "!"
+        return f"{prefix} {clean}".strip() if prefix else clean
+
+    r3_short_name = strip_cjk(r3_row["name_en"].split("(")[0].strip())
+    r2_short_name = strip_cjk(r2_row["name_en"].split("(")[0].strip())
+    r1_short_name = strip_cjk(r1_row["name_en"].split("(")[0].strip())
+
+    hook_narration = (
+        f"Stop going to tourist traps! Here are the Top 3 {short_region} spots ranked by Japanese locals!"
     )
 
     short_scenes = [
@@ -2019,7 +2037,7 @@ def build_shorts_video(script_path: Path) -> Path:
             "mode": "cinema",
             "se_type": "top3_hit",
             "badge": f"NO.3  |  SCORE: {r3_row['score'].upper()}",
-            "title_en": r3_row["name_en"].split("(")[0].strip(),
+            "title_en": r3_short_name,
             "sub_en": r3_row["dish"].split("(")[0].strip(),
             "access": f"ACCESS: {sp3.get('access_info', r3_row['budget'])}",
             "photos": [sp3["photos"][0], sp3["photos"][1]],
@@ -2027,14 +2045,14 @@ def build_shorts_video(script_path: Path) -> Path:
             "card_style": "praise",
             "card_title": "LOCAL PRAISE & HIGHLIGHT",
             "card_body_en": rv3.get("review_praise_en", sp3["insider_tip"]),
-            "narration": sp3["narration"],
-            "pop_lines": [f"#3 {r3_row['name_en'].split('(')[0].strip().upper()} ({r3_row['score']})", r3_row["dish"].split("(")[0].strip()],
+            "narration": _short_punch(sp3["narration"], f"Number 3: {r3_short_name}, scoring {r3_row['score']}!", 14),
+            "pop_lines": [f"#3 {r3_short_name.upper()} ({r3_row['score']})", r3_row["dish"].split("(")[0].strip()],
         },
         {
             "mode": "cinema",
             "se_type": "review_pop",
             "badge": "NO.3  |  INSIDER HACK",
-            "title_en": r3_row["name_en"].split("(")[0].strip(),
+            "title_en": r3_short_name,
             "sub_en": f"PRO TIP: {r3_row['hack']}",
             "access": f"TIP: {sp3.get('insider_tip', r3_row['hack'])}",
             "photos": [rv3["photos"][0], rv3["photos"][1]],
@@ -2042,14 +2060,14 @@ def build_shorts_video(script_path: Path) -> Path:
             "card_style": "warn",
             "card_title": "LOCAL HACK & WARNING",
             "card_body_en": rv3.get("review_warn_en", r3_row["hack"]),
-            "narration": rv3["narration"],
+            "narration": _short_punch(r3_row["hack"], "Local hack:", 14),
             "pop_lines": ["LOCAL INSIDER WARNING!", r3_row["hack"]],
         },
         {
             "mode": "cinema",
             "se_type": "top3_hit",
             "badge": f"NO.2  |  SCORE: {r2_row['score'].upper()}",
-            "title_en": r2_row["name_en"].split("(")[0].strip(),
+            "title_en": r2_short_name,
             "sub_en": r2_row["dish"].split("(")[0].strip(),
             "access": f"ACCESS: {sp2.get('access_info', r2_row['budget'])}",
             "photos": [sp2["photos"][0], sp2["photos"][1]],
@@ -2057,14 +2075,14 @@ def build_shorts_video(script_path: Path) -> Path:
             "card_style": "praise",
             "card_title": "LOCAL PRAISE & HIGHLIGHT",
             "card_body_en": rv2.get("review_praise_en", sp2["insider_tip"]),
-            "narration": sp2["narration"],
-            "pop_lines": [f"#2 {r2_row['name_en'].split('(')[0].strip().upper()} ({r2_row['score']})", r2_row["dish"].split("(")[0].strip()],
+            "narration": _short_punch(sp2["narration"], f"Number 2: {r2_short_name}, scoring {r2_row['score']}!", 14),
+            "pop_lines": [f"#2 {r2_short_name.upper()} ({r2_row['score']})", r2_row["dish"].split("(")[0].strip()],
         },
         {
             "mode": "cinema",
             "se_type": "review_pop",
             "badge": "NO.2  |  INSIDER HACK",
-            "title_en": r2_row["name_en"].split("(")[0].strip(),
+            "title_en": r2_short_name,
             "sub_en": f"PRO TIP: {r2_row['hack']}",
             "access": f"TIP: {sp2.get('insider_tip', r2_row['hack'])}",
             "photos": [rv2["photos"][0], rv2["photos"][1]],
@@ -2072,14 +2090,14 @@ def build_shorts_video(script_path: Path) -> Path:
             "card_style": "warn",
             "card_title": "LOCAL HACK & WARNING",
             "card_body_en": rv2.get("review_warn_en", r2_row["hack"]),
-            "narration": rv2["narration"],
+            "narration": _short_punch(r2_row["hack"], "Insider tip:", 14),
             "pop_lines": ["LOCAL INSIDER WARNING!", r2_row["hack"]],
         },
         {
             "mode": "cinema",
             "se_type": "top3_hit",
             "badge": f"NO.1  |  SCORE: {r1_row['score'].upper()}",
-            "title_en": r1_row["name_en"].split("(")[0].strip(),
+            "title_en": r1_short_name,
             "sub_en": r1_row["dish"].split("(")[0].strip(),
             "access": f"ACCESS: {sp1.get('access_info', r1_row['budget'])}",
             "photos": [sp1["photos"][0], sp1["photos"][1]],
@@ -2087,14 +2105,14 @@ def build_shorts_video(script_path: Path) -> Path:
             "card_style": "praise",
             "card_title": "LOCAL PRAISE & HIGHLIGHT",
             "card_body_en": rv1.get("review_praise_en", sp1["insider_tip"]),
-            "narration": sp1["narration"],
-            "pop_lines": [f"#1 {r1_row['name_en'].split('(')[0].strip().upper()} ({r1_row['score']})", r1_row["dish"].split("(")[0].strip()],
+            "narration": _short_punch(sp1["narration"], f"And Number 1: {r1_short_name}, scoring {r1_row['score']}!", 15),
+            "pop_lines": [f"#1 {r1_short_name.upper()} ({r1_row['score']})", r1_row["dish"].split("(")[0].strip()],
         },
         {
             "mode": "cinema",
             "se_type": "review_pop",
             "badge": "NO.1  |  LOCAL RULE & HACK",
-            "title_en": r1_row["name_en"].split("(")[0].strip(),
+            "title_en": r1_short_name,
             "sub_en": f"PRO TIP: {r1_row['hack']}",
             "access": f"TIP: {sp1.get('insider_tip', r1_row['hack'])}",
             "photos": [rv1["photos"][0], rv1["photos"][1]],
@@ -2102,7 +2120,7 @@ def build_shorts_video(script_path: Path) -> Path:
             "card_style": "warn",
             "card_title": "LOCAL HACK & WARNING",
             "card_body_en": rv1.get("review_warn_en", r1_row["hack"]),
-            "narration": rv1["narration"],
+            "narration": _short_punch(r1_row["hack"], "Must-know local rule:", 14),
             "pop_lines": ["MUST-KNOW LOCAL RULE!", r1_row["hack"]],
         },
         {
@@ -2112,7 +2130,7 @@ def build_shorts_video(script_path: Path) -> Path:
             "title_en": "Screenshot This TOP 10 List!",
             "sub_en": f"{prefecture} — Complete Guide",
             "access": "TAP RELATED VIDEO BELOW FOR FULL 9-MIN GUIDE!",
-            "narration": shorts_cfg.get("narration_outro", "Screenshot this full Top 10 list right now, and tap the related video below for our full 9-minute insider guide!"),
+            "narration": "Screenshot this full Top 10 list, and tap the related video below for the complete guide!",
             "pop_lines": ["PAUSE & SCREENSHOT THIS LIST!", "Tap Below for Full 9-Min Video!"],
         },
     ]
@@ -2128,7 +2146,7 @@ def build_shorts_video(script_path: Path) -> Path:
             seg_starts.append(cur_t)
 
             tts_mp3 = work_dir / f"stts_{idx:02d}.mp3"
-            comm = edge_tts.Communicate(text=sc["narration"], voice=voice, rate="+22%")
+            comm = edge_tts.Communicate(text=sc["narration"], voice=voice, rate="+26%")
             asyncio.run(comm.save(str(tts_mp3)))
 
             seg_wav = work_dir / f"swav_{idx:02d}.wav"

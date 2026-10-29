@@ -404,8 +404,8 @@ def upload_video_with_custom_thumbnail(
             "description": description[:4900],
             "tags": tags[:30],
             "categoryId": category_id,
-            "defaultLanguage": "en",
-            "defaultAudioLanguage": "en",
+            "defaultLanguage": "en-US",
+            "defaultAudioLanguage": "en-US",
         },
         "status": status_dict,
     }
@@ -436,18 +436,6 @@ def upload_video_with_custom_thumbnail(
             logger.info(f"✅ Custom thumbnail applied to https://youtu.be/{video_id}")
         except Exception as exc:
             logger.warning(f"Could not set custom thumbnail via API (check account verification): {exc}")
-
-    # Auto-deduplicate: if an older video with the exact same title exists on the channel, delete the old one
-    try:
-        s_res = youtube.search().list(part="snippet", forMine=True, type="video", maxResults=25).execute()
-        for item in s_res.get("items", []):
-            old_vid = item["id"]["videoId"]
-            old_title = item.get("snippet", {}).get("title", "")
-            if old_vid != video_id and old_title.strip() == title[:100].strip():
-                youtube.videos().delete(id=old_vid).execute()
-                logger.info(f"🧹 Deleted older duplicate video with same title: {old_vid}")
-    except Exception as exc:
-        logger.debug(f"Deduplication check skipped: {exc}")
 
     return video_id
 
@@ -949,7 +937,7 @@ def run_daily_pipeline(
         short_video_id = upload_video_with_custom_thumbnail(
             youtube=youtube,
             video_path=short_mp4,
-            thumbnail_path=thumb_s,
+            thumbnail_path=None,
             title=seo_pkg["title_short"],
             description=short_description,
             tags=seo_pkg["tags"] + ["Shorts", "YouTubeShorts"],
