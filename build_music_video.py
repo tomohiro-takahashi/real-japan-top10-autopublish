@@ -42,7 +42,7 @@ from typing import Any, Dict, List, Optional, Tuple
 
 from PIL import Image, ImageDraw, ImageEnhance, ImageFilter, ImageFont
 
-from suno_auto_generator import SunoUnofficialClient
+from suno_auto_generator import WESTERN_AOR_VOCAL_LYRICS, SunoUnofficialClient
 
 logging.basicConfig(
     level=logging.INFO,
@@ -735,6 +735,59 @@ def render_16x9_hud_and_thumb(
         blur_radius=6,
     )
 
+    is_vocal = bool(meta.get("vocal_playlist") or "洋楽" in meta.get("title", "") or "歌詞" in meta.get("title", ""))
+    if is_vocal and WESTERN_AOR_VOCAL_LYRICS:
+        # Render an understated, classy Lyrics & Japanese Translation card in the upper-right/center calm region
+        song_idx = hash(meta.get("id", "0")) % len(WESTERN_AOR_VOCAL_LYRICS)
+        s_primary = WESTERN_AOR_VOCAL_LYRICS[song_idx]
+        s_second = WESTERN_AOR_VOCAL_LYRICS[(song_idx + 1) % len(WESTERN_AOR_VOCAL_LYRICS)]
+        draw = ImageDraw.Draw(hud, "RGBA")
+        lx0, ly0, lx1, ly1 = 72, 162, 1280, 408
+        draw.rounded_rectangle(
+            (lx0, ly0, lx1, ly1),
+            radius=22,
+            fill=(8, 12, 22, 158),
+            outline=(217, 179, 108, 130),
+            width=2,
+        )
+        f_lhead = load_font(cjk_reg_path, 22)
+        f_len = load_font(font_path, 27)
+        f_lja = load_font(cjk_mincho_path, 25)
+        draw.text((lx0 + 30, ly0 + 20), "♪ LYRICS & TRANSLATION  ｜  歌詞・日本語対訳", font=f_lhead, fill=(217, 179, 108, 245))
+        draw.line([(lx0 + 30, ly0 + 56), (lx1 - 30, ly0 + 56)], fill=(217, 179, 108, 90), width=1)
+        _draw_soft_shadow_text(
+            hud,
+            (lx0 + 30, ly0 + 70),
+            f'"{s_primary["lyric_card_en"].strip()}"',
+            font=f_len,
+            fill=(252, 250, 245, 250),
+            blur_radius=4,
+        )
+        _draw_soft_shadow_text(
+            hud,
+            (lx0 + 30, ly0 + 110),
+            s_primary["lyric_card_ja"],
+            font=f_lja,
+            fill=(235, 213, 160, 245),
+            blur_radius=4,
+        )
+        _draw_soft_shadow_text(
+            hud,
+            (lx0 + 30, ly0 + 158),
+            f'"{s_second["lyric_card_en"].strip()}"',
+            font=f_len,
+            fill=(240, 244, 248, 235),
+            blur_radius=4,
+        )
+        _draw_soft_shadow_text(
+            hud,
+            (lx0 + 30, ly0 + 196),
+            s_second["lyric_card_ja"],
+            font=f_lja,
+            fill=(226, 214, 185, 235),
+            blur_radius=4,
+        )
+
     max_text_w = 1740
     draw = ImageDraw.Draw(hud, "RGBA")
 
@@ -776,8 +829,12 @@ def render_16x9_hud_and_thumb(
     )
 
     draw = ImageDraw.Draw(hud, "RGBA")
-    stamp_txt = "NON-STOP ARCHIVE MIX" if meta.get("_under_15m") else "60 MIN / 16 TRACKS"
-    f_stamp = load_font(font_path, 24)
+    if is_vocal:
+        stamp_txt = "NO ADS  ｜  歌詞・和訳付き"
+        f_stamp = load_font(cjk_reg_path, 23)
+    else:
+        stamp_txt = "NO ADS  ｜  NON-STOP MIX" if meta.get("_under_15m") else "NO ADS  ｜  60 MIN MIX"
+        f_stamp = load_font(cjk_reg_path, 23)
     tb_st = draw.textbbox((0, 0), stamp_txt, font=f_stamp)
     st_w = (tb_st[2] - tb_st[0]) + 54
     st_x0 = HW - 72 - st_w
@@ -789,7 +846,7 @@ def render_16x9_hud_and_thumb(
         width=2,
     )
     draw.text(
-        (st_x0 + 27, 984),
+        (st_x0 + 27, 983),
         stamp_txt,
         font=f_stamp,
         fill=(226, 214, 185, 240),
@@ -877,8 +934,11 @@ def render_16x9_hud_and_thumb(
 
     # C. Bottom-Right Minimalist Spec Pill
     t_draw = ImageDraw.Draw(base, "RGBA")
-    stamp_txt = "NON-STOP ARCHIVE MIX" if meta.get("_under_15m") else "60 MIN / 16 TRACKS"
-    f_stamp = load_font(font_path, 16)
+    if is_vocal:
+        stamp_txt = "NO ADS  ｜  歌詞・和訳付き"
+    else:
+        stamp_txt = "NO ADS  ｜  NON-STOP MIX" if meta.get("_under_15m") else "NO ADS  ｜  60 MIN MIX"
+    f_stamp = load_font(cjk_reg_path, 15)
     tb_st = t_draw.textbbox((0, 0), stamp_txt, font=f_stamp)
     st_w = (tb_st[2] - tb_st[0]) + 36
     st_x0 = 1280 - 48 - st_w
@@ -1122,6 +1182,27 @@ def render_short_vertical_hud(
         outline=(217, 179, 108, 85),
         width=2,
     )
+
+    is_vocal = bool(meta.get("vocal_playlist") or "洋楽" in meta.get("title", "") or "歌詞" in meta.get("title", ""))
+    if is_vocal and WESTERN_AOR_VOCAL_LYRICS:
+        song_idx = hash(meta.get("id", "0")) % len(WESTERN_AOR_VOCAL_LYRICS)
+        s_primary = WESTERN_AOR_VOCAL_LYRICS[song_idx]
+        f_len_s = fit_font_for_width(draw, s_primary["lyric_card_en"].strip(), font_path, 24, 18, SW - 140)
+        f_lja_s = fit_font_for_width(draw, s_primary["lyric_card_ja"], cjk_mincho_path, 23, 17, SW - 140)
+        tb_len = draw.textbbox((0, 0), s_primary["lyric_card_en"].strip(), font=f_len_s)
+        tb_lja = draw.textbbox((0, 0), s_primary["lyric_card_ja"], font=f_lja_s)
+        draw.text(
+            ((SW - (tb_len[2] - tb_len[0])) // 2, 1228),
+            s_primary["lyric_card_en"].strip(),
+            font=f_len_s,
+            fill=(248, 250, 252, 245),
+        )
+        draw.text(
+            ((SW - (tb_lja[2] - tb_lja[0])) // 2, 1492),
+            s_primary["lyric_card_ja"],
+            font=f_lja_s,
+            fill=(235, 213, 160, 245),
+        )
 
     # 4. Bottom Japanese Spec & Channel CTA (y=1581..1752)
     bot_spec = "毎晩20時に80s・90s名曲を追加中  ｜  チャンネル登録で保存"
@@ -1484,6 +1565,29 @@ def resolve_description_with_chapters(
             .replace("全16曲ノンストップ", f"全{n_tr}曲ノンストップ")
             .replace("全16曲", f"全{n_tr}曲")
         )
+
+    is_vocal = bool(
+        chosen_meta.get("vocal_playlist")
+        or "洋楽" in chosen_meta.get("title", "")
+        or "歌詞" in chosen_meta.get("title", "")
+    )
+    if is_vocal and WESTERN_AOR_VOCAL_LYRICS and "📝 収録曲 歌詞" not in out_desc:
+        lyrics_blocks: List[str] = [
+            "\n\n━━━━━━━━━━━━━━━━━━━━━━\n📝 収録曲 歌詞＆日本語対訳 (Lyrics & Translation)\n━━━━━━━━━━━━━━━━━━━━━━"
+        ]
+        for idx, s_obj in enumerate(WESTERN_AOR_VOCAL_LYRICS, start=1):
+            clean_lyrics = "\n".join(
+                ln for ln in s_obj["prompt"].splitlines() if not ln.strip().startswith("[")
+            ).strip()
+            lyrics_blocks.append(
+                f"♪ 0{idx}. {s_obj['title_en']} （邦題：{s_obj['title_ja']}）\n"
+                f"\"{s_obj['lyric_card_en'].strip()}\"\n"
+                f"（対訳：{s_obj['lyric_card_ja']}）\n\n"
+                f"{clean_lyrics}"
+            )
+        out_desc = out_desc + "\n\n".join(lyrics_blocks)
+
+    out_desc = out_desc.replace("カバー", "").replace("Cover", "").replace("cover", "")
     return out_desc
 
 
@@ -1566,15 +1670,18 @@ def main() -> int:
         build_short_video(bg_jpg, bg_loop_mp4, chosen_mp3, chosen_meta, OUTPUT_SHORT, font_path)
 
     full_description = resolve_description_with_chapters(chosen_mp3, chosen_meta, duration_sec=args.duration)
-    long_title = chosen_meta["title"]
+    long_title = chosen_meta["title"].replace("カバー", "").replace("Cover", "")
     short_title = chosen_meta.get(
         "short_title",
         f"{chosen_meta.get('target_badge', '【40代・50代必見】')}{chosen_meta.get('thumb_main', '青春BGM')} 🎧本編はチャンネルへ！ #Shorts",
-    )
+    ).replace("カバー", "").replace("Cover", "")
     if args.duration <= 900:
         long_title = long_title.replace("1時間耐久", "").strip()
         short_title = short_title.replace("本編1時間は", "本編は").replace("1時間耐久", "").strip()
         full_description = full_description.replace("・1時間耐久", "").replace("1時間耐久", "").replace("全16曲（60分）", "")
+
+    if os.environ.get("INCLUDE_NO_ADS_TAG", "1") == "1" and "【広告なし】" not in long_title:
+        long_title = f"【広告なし】{long_title}"
 
     if args.dry_run:
         logger.info("Dry-run complete! Videos generated at:")

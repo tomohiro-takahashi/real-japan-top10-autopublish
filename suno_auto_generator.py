@@ -98,19 +98,136 @@ GENRE_BATCH_VARIATIONS: Dict[str, List[str]] = {
         "1990s Final Lap Checkpoint Overdrive, 144 BPM, dramatic arcade racing climax, fast synth arpeggios, twin-guitar & EWI trade-off solos, triumphant key modulation, studio master quality",
         "1980s-1990s High Score Name Entry & Victory Encore, 118 BPM, nostalgic arcade ending theme, uplifting jazz-fusion groove, warm electric piano & horn section, studio master quality",
     ],
+    "Western AOR Vocal": [
+        "1982 West Coast AOR & Blue-Eyed Soul Ballad, 88 BPM, warm Fender Rhodes electric piano, velvety male baritone vocal, smooth fretless bass, weeping alto saxophone solo, Bobby Caldwell & Boz Scaggs late-night lounge aesthetic, audiophile analog tape master",
+        "1986 Sophisticated British Smooth Jazz-Pop & Soul, 84 BPM, smoky intimate female alto vocal, brushed jazz drums, warm upright & electric bass, muted trumpet & tenor sax solo, Sade & Simply Red midnight mood, studio master quality",
+        "1989 Adult Contemporary Soft Rock Ballad, 78 BPM, emotional Yamaha CP-80 piano & lush strings, warm soulful male vocal, clean chorus Stratocaster guitar solo, Chicago & Richard Marx nostalgic weekend evening vibe, studio master quality",
+        "1992 Midnight Urban R&B & Quiet Storm Slow Jam, 82 BPM, silky Rhodes chords, tender soulful male vocal, gentle acoustic guitar arpeggios, smooth soprano saxophone solo, Babyface & Peabo Bryson aesthetic, warm studio master",
+        "1984 Sunset Harbor West Coast Soft Rock, 94 BPM, breezy electric piano & acoustic guitar, warm harmonizing male vocals, melodic West Coast guitar solo, Toto & Christopher Cross twilight cruise vibe, audiophile master",
+        "1991 Rainy Window Acoustic Soul & AOR Ballad, 76 BPM, intimate fingerstyle acoustic guitar & warm Rhodes, husky emotional male vocal, crying slow-hand electric guitar solo, Eric Clapton & Billy Joel nocturnal ballad vibe",
+        "1987 Penthouse Lounge Jazz-Pop & AOR, 86 BPM, shimmering DX7 & Rhodes layer, silky female vocal, smooth slap & fretless bass, expressive flugelhorn solo, Anita Baker & Swing Out Sister midnight cocktail vibe",
+        "1994 Starlight Highway Adult Pop Encore, 80 BPM, warm grand piano & analog pad, comforting male vocal, soaring melodic guitar & sax duet finale, nostalgic 90s FM radio late-night ballad",
+    ],
 }
+
+WESTERN_AOR_VOCAL_LYRICS: List[Dict[str, str]] = [
+    {
+        "title_en": "Harbor Lights & Bourbon Glass",
+        "title_ja": "ハーバーライトと琥珀色のグラス",
+        "lyric_card_en": " Close your eyes and let the Friday rain wash the week away...",
+        "lyric_card_ja": "目を閉じて、金曜の雨に一週間の疲れを流してしまおう——",
+        "prompt": """[Intro - Warm Fender Rhodes Chords & Weeping Alto Saxophone]
+
+[Verse 1]
+City lights are fading in the rearview mirror now
+Another long week running through the crowd
+Pour a little amber in a quiet crystal glass
+Let the midnight shadows gently pass
+
+[Chorus]
+Close your eyes, let the harbor breeze carry you home
+You don't have to carry all that weight alone
+Underneath the amber glow of Tokyo Bay tonight
+Everything will turn out alright
+
+[Instrumental Interlude - Velvety Alto Saxophone Solo]
+
+[Chorus]
+Close your eyes, let the harbor breeze carry you home
+Nothing left to prove beneath the starry dome
+
+[Outro - Soft Rhodes & Saxophone Fade]""",
+    },
+    {
+        "title_en": "Velvet Rain on the Windshield",
+        "title_ja": "フロントガラスの優しい雨",
+        "lyric_card_en": "No more rushing through the neon streets, tonight belongs to you...",
+        "lyric_card_ja": "もうネオンの街を急がなくていい、今夜は君だけの時間だから——",
+        "prompt": """[Intro - Brushed Drums, Upright Bass & Smoky Tenor Sax]
+
+[Verse 1]
+Silver raindrops tracing lines across the windowpane
+FM radio playing an old familiar refrain
+Take your coat off, leave the noise outside the door
+We're not chasing tomorrow anymore
+
+[Chorus]
+Velvet rain falling softly on the avenue
+No more rushing, tonight belongs to you
+Let the slow groove wrap around your tired heart
+Where the quiet weekend dreams can start
+
+[Instrumental Interlude - Muted Trumpet & Guitar Duet]
+
+[Outro - Warm Electric Piano Fade Out]""",
+    },
+    {
+        "title_en": "After Hours on Coastline 134",
+        "title_ja": "午前0時のルート134",
+        "lyric_card_en": "Just the ocean wind and an old song from 1989...",
+        "lyric_card_ja": "潮風と、1989年の懐かしいメロディだけがあればいい——",
+        "prompt": """[Intro - Acoustic Piano & Clean Chorus Stratocaster Arpeggio]
+
+[Verse 1]
+Headlights skimming softly by the sleeping ocean shore
+Like we used to drive back in nineteen eighty-four
+Time moves faster every year we turn the page
+But the music never shows its age
+
+[Chorus]
+Hold on to the quiet night, let the highway roll
+Let the old familiar melody heal your soul
+Just the ocean wind and a song from eighty-nine
+Whispering that we're doing fine
+
+[Guitar Solo - Melodic West Coast Overdrive Guitar]
+
+[Outro - Gentle Piano & Strings Fade]""",
+    },
+    {
+        "title_en": "Last Train, First Star",
+        "title_ja": "終電のあと、最初の星",
+        "lyric_card_en": "Breathe in deep, the weekend has finally begun...",
+        "lyric_card_ja": "深く息を吸い込んでごらん、ようやく週末が始まったから——",
+        "prompt": """[Intro - Silky Rhodes & Finger-Picked Acoustic Guitar]
+
+[Verse 1]
+The last train echoes softly down the empty platform line
+Loosen up your tie and leave the clock behind
+Every scar and worry from the Monday morning race
+Melts into the midnight's warm embrace
+
+[Chorus]
+Breathe in deep, the weekend has finally begun
+Underneath the silver moon,Second to none
+Rest your shoulders, let the mellow rhythm flow
+Nowhere else that you need to go
+
+[Saxophone Solo - Soprano Saxophone Over Slow Jam Groove]
+
+[Outro - Soft Rhodes Chords]""",
+    },
+]
 
 
 def build_suno_style_and_title(meta: Dict[str, Any], batch_idx: int = 0) -> Tuple[str, str, bool, str]:
     """
     Build a Suno Pro (v6 `chirp-hawk`) optimal `tags` (style of music) string, `title`,
     `make_instrumental` flag, and structured arrangement `prompt` from a metadata entry
-    and `batch_idx` (0..7) so all 8 generations (16 tracks) in an album have distinct styles.
+    and `batch_idx` (0..7). Supports both instrumental BGM and English vocal playlists (`vocal_playlist: True`).
     """
     genre = meta.get("genre", "90s City Pop")
     en_title = meta.get("en_title") or meta.get("title", "Midnight Tokyo Drive").split("|")[-1]
     base_title = en_title.replace("[1 Hour]", "").strip()
     track_titles = meta.get("track_titles") or []
+    is_vocal = bool(meta.get("vocal_playlist") or "Vocal" in genre or "洋楽" in meta.get("title", ""))
+
+    if is_vocal:
+        variations = GENRE_BATCH_VARIATIONS["Western AOR Vocal"]
+        style = variations[batch_idx % len(variations)]
+        song_obj = WESTERN_AOR_VOCAL_LYRICS[batch_idx % len(WESTERN_AOR_VOCAL_LYRICS)]
+        sub_title = f"{song_obj['title_en']} ({song_obj['title_ja']})"
+        return style, sub_title[:60], False, song_obj["prompt"]
 
     if "Eurobeat" in genre:
         variations = GENRE_BATCH_VARIATIONS["Eurobeat"]
