@@ -180,7 +180,7 @@
     },
     {
       "id": "real_mix_002",
-      "used": false,
+      "used": true,
       "genre": "80s City Pop & Sax AOR",
       "artwork_file": "citypop80s.jpg",
       "title": "【夜に聴きたい洋楽】一日の終わりに心がほどける80年代・90年代AOR＆極上バラード【2時間・全24曲フル】Bobby Caldwell / Boz Scaggs / Sade / Toto",
@@ -350,7 +350,10 @@
         "洋楽バラード",
         "作業用BGM",
         "2時間"
-      ]
+      ],
+      "published_at": "2026-10-30T17:17:56.499608+00:00",
+      "youtube_long_id": "gQDBxt0hkZQ",
+      "youtube_short_id": "HrWEP_Zem_E"
     },
     {
       "id": "real_mix_003",
