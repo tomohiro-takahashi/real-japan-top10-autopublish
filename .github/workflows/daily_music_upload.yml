@@ -2,10 +2,8 @@ name: Daily Retro Music 1-Hour & Shorts Auto-Upload
 
 on:
   schedule:
-    # Slot 1: 06:30 UTC (15:30 JST) -> pre-builds & auto-publishes at 18:00 JST Golden Time
-    - cron: '30 6 * * *'
-    # Slot 3: 09:30 UTC (18:30 JST) -> pre-builds & auto-publishes at 21:00 JST Golden Time
-    - cron: '30 9 * * *'
+    # Runs 1x daily at 07:30 UTC (16:30 JST) -> pre-builds & auto-publishes at Golden Time
+    - cron: '30 7 * * *'
   workflow_dispatch:
     inputs:
       privacy:

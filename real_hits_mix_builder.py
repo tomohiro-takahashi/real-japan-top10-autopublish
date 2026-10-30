@@ -35,10 +35,12 @@ from build_music_video import (
     MUSIC_DIR,
     OUTPUT_1HOUR,
     OUTPUT_SHORT,
+    OUTPUT_SHORT_MEDLEY,
     OUTPUT_THUMB,
     _draw_soft_shadow_text,
     build_1hour_video,
     build_highway_driving_loop_mp4,
+    build_short_medley_video,
     build_short_video,
     compute_music_golden_time_iso,
     download_background_image,
@@ -444,15 +446,17 @@ def download_and_mix_real_tracks(
     out_m4a: Path,
     out_mp3_for_short: Path,
     max_total_duration_sec: int = 10800,
-) -> Tuple[str, float]:
+    medley_out_dir: Optional[Path] = None,
+) -> Tuple[str, float, List[Path]]:
     """
     Download all 24 tracks via `yt-dlp` at full length (up to 480s per song so every song plays completely!),
     normalize loudness (`loudnorm`), apply smooth 2.5s fade-in/out per track, concatenate into `out_m4a` (~2 hours),
-    and return `(formatted_timestamps, actual_duration)`.
+    and return `(formatted_timestamps, actual_duration, medley_track_paths)`.
     """
     import yt_dlp
 
     per_track_max = 480 if max_total_duration_sec >= 3600 else int((max_total_duration_sec - 5) / max(1, len(tracks)))
+    medley_saved: List[Path] = []
 
     with tempfile.TemporaryDirectory(prefix="real_hits_dl_") as tmp_s:
         tmp_dir = Path(tmp_s)
@@ -547,6 +551,10 @@ def download_and_mix_real_tracks(
 
             if idx == 1:
                 shutil.copy2(norm_m4a, out_mp3_for_short)
+            if medley_out_dir and idx in (2, 3, 4):
+                m_dest = medley_out_dir / f"medley_trk_{idx:02d}.m4a"
+                shutil.copy2(norm_m4a, m_dest)
+                medley_saved.append(m_dest)
 
         concat_txt = tmp_dir / "concat.txt"
         concat_txt.write_text(
@@ -576,7 +584,7 @@ def download_and_mix_real_tracks(
 
     total_dur = get_audio_duration(out_m4a)
     logger.info(f"Built 2-Hour Full-Length 24-Track Real Hits Mix audio: {out_m4a.name} ({total_dur:.1f}s / {total_dur/60:.1f}m across {len(tracks)} tracks)")
-    return "\n".join(timestamp_lines), total_dur
+    return "\n".join(timestamp_lines), total_dur, medley_saved
 
 
 def decorate_hud_and_thumb_with_setlist(
@@ -661,7 +669,7 @@ def build_real_hits_description(meta: Dict[str, Any], formatted_timestamps: str)
         f"⏱️ 収録曲トラックリスト / チャプター (全{len(meta['tracks'])}曲フル尺・約2時間):\n"
         f"{formatted_timestamps}\n"
         "━━━━━━━━━━━━━━━━━━━━━━\n\n"
-        "🌙 途中に広告が入らない【広告なし】の深夜ドライブ・80s/90s AORプレイリスト（毎日20時公開）も\n"
+        "🌙 途中に広告が入らない【広告なし】の深夜ドライブ・80s/90s AORプレイリスト（毎日19時公開）も\n"
         "👇 チャンネルトップからぜひチャンネル登録してお楽しみください。\n"
         "https://www.youtube.com/@midnight_cockpit\n\n"
         "#80年代洋楽 #90年代洋楽 #映画音楽 #名画メドレー #AOR #洋楽メドレー #40代 #50代 #懐かしい洋楽 #作業用BGM #ドライブBGM"
@@ -669,7 +677,7 @@ def build_real_hits_description(meta: Dict[str, Any], formatted_timestamps: str)
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Build & upload 2-Hour Full-Length Real 80s/90s Western Legend 24-Song Hit Mix.")
+    parser = argparse.ArgumentParser(description="Build & upload 2-Hour Full-Length Real 80s/90s Western Legend 24-Song Hit Mix + 2 Shorts (Design A & C).")
     parser.add_argument("--mix-id", default="", help="Specific mix id from real_hits_pool.json (default: first unused).")
     parser.add_argument("--max-duration", type=int, default=10800, help="Max total duration in seconds (default: 10800 = up to 3 hours).")
     parser.add_argument("--privacy", default="public", choices=["public", "unlisted", "private"])
@@ -702,12 +710,15 @@ def main() -> int:
         hud_png = tmp_dir / "hud_1920x1080.png"
         mixed_m4a = tmp_dir / "real_mix.m4a"
         first_mp3 = tmp_dir / "first_track.m4a"
+        medley_dir = tmp_dir / "medley_tracks"
+        medley_dir.mkdir(parents=True, exist_ok=True)
 
-        formatted_ts, actual_dur = download_and_mix_real_tracks(
+        formatted_ts, actual_dur, medley_files = download_and_mix_real_tracks(
             chosen_meta["tracks"],
             mixed_m4a,
             first_mp3,
             max_total_duration_sec=max_dur,
+            medley_out_dir=medley_dir,
         )
 
         download_background_image(chosen_meta, bg_jpg)
@@ -717,18 +728,32 @@ def main() -> int:
 
         build_1hour_video(bg_loop_mp4, hud_png, mixed_m4a, OUTPUT_1HOUR, duration_sec=int(actual_dur))
         build_short_video(bg_jpg, bg_loop_mp4, first_mp3, chosen_meta, OUTPUT_SHORT, font_path)
+        build_short_medley_video(
+            bg_loop_mp4,
+            mixed_m4a,
+            chosen_meta,
+            OUTPUT_SHORT_MEDLEY,
+            font_path,
+            medley_audio_files=medley_files,
+        )
 
     full_desc = build_real_hits_description(chosen_meta, formatted_ts)
     long_title = chosen_meta["title"]
     short_title = chosen_meta["short_title"]
+    tr_med = chosen_meta["tracks"][1:4] if len(chosen_meta["tracks"]) >= 4 else chosen_meta["tracks"][:3]
+    med_names = " / ".join(t["artist"] for t in tr_med)
+    medley_short_title = f"【洋楽神曲3連発】{med_names}｜イントロで鳥肌が立つ80s-90s名曲メドレー 🎧本編2時間は関連動画へ #Shorts"[:100]
 
     if args.dry_run:
-        logger.info(f"Dry-run complete! Main video: {OUTPUT_1HOUR} ({actual_dur/60:.1f}m), Short: {OUTPUT_SHORT}")
+        logger.info(
+            f"Dry-run complete! Main: {OUTPUT_1HOUR} ({actual_dur/60:.1f}m), Short A: {OUTPUT_SHORT}, Short C: {OUTPUT_SHORT_MEDLEY}"
+        )
         logger.info(f"Timestamps:\n{formatted_ts}")
         return 0
 
-    publish_at_long = None if args.publish_now else compute_music_golden_time_iso(19, 30)
-    publish_at_short = None if args.publish_now else compute_music_golden_time_iso(19, 35)
+    publish_at_short_a = None if args.publish_now else compute_music_golden_time_iso(20, 0)
+    publish_at_long = None if args.publish_now else compute_music_golden_time_iso(20, 30)
+    publish_at_short_c = None if args.publish_now else compute_music_golden_time_iso(21, 0)
 
     try:
         youtube = get_youtube_service()
@@ -751,7 +776,17 @@ def main() -> int:
             tags=chosen_meta["tags"] + ["Shorts", "YouTubeShorts"],
             privacy_status=args.privacy,
             thumbnail_path=None,
-            publish_at_iso=publish_at_short,
+            publish_at_iso=publish_at_short_a,
+        )
+        short_medley_id = upload_video_to_youtube(
+            youtube=youtube,
+            video_path=OUTPUT_SHORT_MEDLEY,
+            title=medley_short_title,
+            description=short_desc,
+            tags=chosen_meta["tags"] + ["Shorts", "YouTubeShorts", "洋楽メドレー"],
+            privacy_status=args.privacy,
+            thumbnail_path=None,
+            publish_at_iso=publish_at_short_c,
         )
     except Exception as exc:
         logger.warning(f"Upload deferred ({exc}).")
@@ -763,9 +798,12 @@ def main() -> int:
             item["published_at"] = datetime.now(timezone.utc).isoformat()
             item["youtube_long_id"] = long_id
             item["youtube_short_id"] = short_id
+            item["youtube_short_medley_id"] = short_medley_id
             break
     save_real_hits_pool(pool, chosen_meta["id"], auto_git_push=True)
-    logger.info(f"Published 2-Hour Full-Length 24-Track Real Hits Mix [{chosen_meta['id']}]: Long={long_id}, Short={short_id}")
+    logger.info(
+        f"Published 2-Hour Full-Length 24-Track Real Hits Mix [{chosen_meta['id']}]: Long={long_id}, ShortA={short_id}, ShortC={short_medley_id}"
+    )
     return 0
 
 
