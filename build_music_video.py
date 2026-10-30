@@ -1917,8 +1917,12 @@ def mark_done_and_git_push(
     DONE_DIR.mkdir(parents=True, exist_ok=True)
     ts = datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S")
     dest_mp3 = DONE_DIR / f"{ts}_{mp3_path.name}"
-    shutil.move(str(mp3_path), str(dest_mp3))
-    logger.info(f"Moved MP3 to done: {dest_mp3}")
+    if mp3_path.exists() and (mp3_path.stat().st_size > 48 * 1024 * 1024 or os.environ.get("GITHUB_ACTIONS") == "true"):
+        mp3_path.unlink(missing_ok=True)
+        logger.info(f"Cleaned up large concatenated master MP3 ({mp3_path.name}) before git push (individual tracks preserved in archive/).")
+    elif mp3_path.exists():
+        shutil.move(str(mp3_path), str(dest_mp3))
+        logger.info(f"Moved MP3 to done: {dest_mp3}")
 
     chapters_file = mp3_path.with_suffix(".chapters.json")
     if chapters_file.exists():
