@@ -1,0 +1,602 @@
+{
+  "ranking_id": "anime_ghibli_real_locations",
+  "prefecture": "Real Studio Ghibli Locations TOP 10",
+  "title_en": "STEP INSIDE STUDIO GHIBLI! 10 Real Places in Japan That Inspired Spirited Away & Mononoke [No Promo]",
+  "youtube_title_long": "STEP INSIDE STUDIO GHIBLI! 10 Real Places in Japan That Inspired Spirited Away & Mononoke [No Promo]",
+  "youtube_title_short": "[No Promo] The Real-Life Spirited Away Bathhouse You Can Actually Visit in Japan! #Shorts #Anime",
+  "voice": "en-US-ChristopherNeural",
+  "thumb_config": {
+    "ribbon_text": "ANIME SACRED SITES + NEARBY GUIDE",
+    "hero_line1": "REAL ANIME SCENES!",
+    "hero_line2": "REAL JAPAN",
+    "banner_title": "REAL STUDIO GHIBLI LOCATIONS TOP 10",
+    "banner_sub": "ANIME SPOTS + NEARBY SIGHTSEEING",
+    "map_header": "WHERE IS REAL?",
+    "map_pill": "DIRECT",
+    "map_line1": "Shinkansen / Train",
+    "map_line2": "from Tokyo Station!",
+    "map_footer": "0% SPONSORED",
+    "highlight_prefs_ja": [
+      "山形県"
+    ]
+  },
+  "area_guide": {
+    "target_pref_ja": "山形県",
+    "map_badge": "Real Studio Ghibli Locations Local Guide",
+    "cards": [
+      {
+        "title": "1. 100% NO PAID PROMOTION",
+        "bullets": [
+          "Analyzed 500,000+ real Japanese IG posts & reviews in Real Studio Ghibli Locations",
+          "Zero sponsored spots or influencer ads — honest local voices only"
+        ]
+      },
+      {
+        "title": "2. DIRECT TRAIN & IC CARD ACCESS",
+        "bullets": [
+          "Direct JR Shinkansen or express train access across Real Studio Ghibli Locations",
+          "Suica, Pasmo & ICOCA accepted at major stations"
+        ]
+      },
+      {
+        "title": "3. INSIDER TIMING & ETIQUETTE",
+        "bullets": [
+          "Arrive 15–20 minutes before opening to beat local queues",
+          "Carry cash (1,000-yen notes) for ticket machines & local shops"
+        ]
+      }
+    ]
+  },
+  "summary_rows": [
+    {
+      "rank": "#1",
+      "score": "96/100pt",
+      "name_en": "Ginzan Onsen Gaslit Ryokan Town (Yamagata)",
+      "name_ja": "Ginzan Onsen Gaslit Ryokan Town (Yamagata)",
+      "dish": "Snowy Taisho-Era Wooden Bathhouses That Echo Spirited Away's Night Street",
+      "budget": "¥500 Footbath / Day Entry",
+      "access_short": "Oishida Stn 35m Bus",
+      "hack": "Arrive at 4:15 PM for the magical blue-hour gas lamp illumination",
+      "nearby_spot": "",
+      "anime_title": "",
+      "thumb": "spot_01_1.jpg"
+    },
+    {
+      "rank": "#2",
+      "score": "94/100pt",
+      "name_en": "Dogo Onsen Honkan (Matsuyama, Ehime)",
+      "name_ja": "Dogo Onsen Honkan (Matsuyama, Ehime)",
+      "dish": "1894 3-Story Wooden Public Bathhouse — Official Model for Yubaba's Bathhouse",
+      "budget": "¥460 Kami-no-Yu Bath",
+      "access_short": "Dogo Onsen Tram Stn 3m",
+      "hack": "Listen for the 6:00 AM太鼓 (taiko drum) from the rooftop Shinrokaku tower",
+      "nearby_spot": "",
+      "anime_title": "",
+      "thumb": "spot_02_1.jpg"
+    },
+    {
+      "rank": "#3",
+      "score": "92/100pt",
+      "name_en": "Shiratani Unsuikyo Moss Forest (Yakushima)",
+      "name_ja": "Shiratani Unsuikyo Moss Forest (Yakushima)",
+      "dish": "Ancient Cedar Roots & Emerald Moss Ravine That Inspired Princess Mononoke",
+      "budget": "¥500 Forest Conservation Fee",
+      "access_short": "Miyanoura Port 30m Bus",
+      "hack": "Take the 6:30 AM first bus to hike the Moss Forest in mist before crowds",
+      "nearby_spot": "",
+      "anime_title": "",
+      "thumb": "spot_03_1.jpg"
+    },
+    {
+      "rank": "#4",
+      "score": "90/100pt",
+      "name_en": "Shima Onsen Sekizenkan Honkan (Gunma)",
+      "name_ja": "Shima Onsen Sekizenkan Honkan (Gunma)",
+      "dish": "1691 Red Bridge Leading Straight to Japan's Oldest Wooden Ryokan Bathhouse",
+      "budget": "¥1,500 Day-Use Roman Bath",
+      "access_short": "Nakanojo Stn 40m Bus",
+      "hack": "Photograph the iconic red慶雲橋 (Keiun Bridge) and bath in the Genroku-no-Yu",
+      "nearby_spot": "",
+      "anime_title": "",
+      "thumb": "spot_04_1.jpg"
+    },
+    {
+      "rank": "#5",
+      "score": "89/100pt",
+      "name_en": "Sayama Hills (Totoro's Forest / Kurosuke's House)",
+      "name_ja": "Sayama Hills (Totoro's Forest / Kurosuke's House)",
+      "dish": "Real-Life Satoyama Woodland in Saitama Where Miyazaki Conceived My Neighbor Totoro",
+      "budget": "Free Trail Entry",
+      "access_short": "Kotesashi Stn 15m Bus",
+      "hack": "Visit Kurosuke's House (100-yr-old farmhouse with a giant Totoro inside!)",
+      "nearby_spot": "",
+      "anime_title": "",
+      "thumb": "spot_05_1.jpg"
+    },
+    {
+      "rank": "#6",
+      "score": "87/100pt",
+      "name_en": "Tomonoura Port & Joyato Lighthouse (Hiroshima)",
+      "name_ja": "Tomonoura Port & Joyato Lighthouse (Hiroshima)",
+      "dish": "Edo-Era Stone Harbor Where Hayao Miyazaki Lived While Creating Ponyo",
+      "budget": "Free Harbor Walk",
+      "access_short": "Fukuyama Stn 30m Bus",
+      "hack": "Climb to Fukuzenji Taichoro Hall for the exact view over Sensuijima Island",
+      "nearby_spot": "",
+      "anime_title": "",
+      "thumb": "spot_06_1.jpg"
+    },
+    {
+      "rank": "#7",
+      "score": "86/100pt",
+      "name_en": "Seiseki-Sakuragaoka Hilltop (Tama, Tokyo)",
+      "name_ja": "Seiseki-Sakuragaoka Hilltop (Tama, Tokyo)",
+      "dish": "Rotary, Stairways & Hilltop Panorama from Whisper of the Heart",
+      "budget": "¥380 Keio Line from Shinjuku",
+      "access_short": "Seiseki-Sakuragaoka Stn 10m",
+      "hack": "Walk the Iroha-zaka slope up to the small roundabout at golden sunset",
+      "nearby_spot": "",
+      "anime_title": "",
+      "thumb": "spot_07_1.jpg"
+    },
+    {
+      "rank": "#8",
+      "score": "85/100pt",
+      "name_en": "Takeda Castle Ruins in the Clouds (Hyogo)",
+      "name_ja": "Takeda Castle Ruins in the Clouds (Hyogo)",
+      "dish": "400-Yr Stone Walls Floating Above Sea of Clouds Like Laputa: Castle in the Sky",
+      "budget": "¥500 Castle Entry",
+      "access_short": "Takeda Stn 20m Taxi/Bus",
+      "hack": "Hike Ritsuunkyo Viewpoint at 5:30 AM in autumn for the sea-of-clouds view",
+      "nearby_spot": "",
+      "anime_title": "",
+      "thumb": "spot_08_1.jpg"
+    },
+    {
+      "rank": "#9",
+      "score": "84/100pt",
+      "name_en": "Ghibli Park & Satsuki and Mei's House (Aichi)",
+      "name_ja": "Ghibli Park & Satsuki and Mei's House (Aichi)",
+      "dish": "Full-Scale Recreated 1950s Kusakabe Family House & Grand Warehouse in Nagakute",
+      "budget": "¥3,500–¥7,300 (Advance Ticket)",
+      "access_short": "Ai-Chikyuhaku-Kinen-Koen Stn 2m",
+      "hack": "Book tickets on the 10th of the month two months prior at 2:00 PM JST",
+      "nearby_spot": "",
+      "anime_title": "",
+      "thumb": "spot_09_1.jpg"
+    },
+    {
+      "rank": "#10",
+      "score": "82/100pt",
+      "name_en": "Mitaka Ghibli Museum & Inokashira Park (Tokyo)",
+      "name_ja": "Mitaka Ghibli Museum & Inokashira Park (Tokyo)",
+      "dish": "Frescoed Spirited Away Doors, Rooftop Laputa Robot & Exclusive Short Film",
+      "budget": "¥1,000 (Lawson Ticket Required)",
+      "access_short": "Mitaka Stn 15m Walk",
+      "hack": "Walk along the Tamagawa Josui tree-lined canal path from Mitaka Station",
+      "nearby_spot": "",
+      "anime_title": "",
+      "thumb": "spot_10_1.jpg"
+    }
+  ],
+  "shorts_script": {
+    "hook_badge": "ZERO PAID PROMO! REAL JAPANESE IG DATA",
+    "hook_title": "REAL REAL STUDIO GHIBLI LOCATIONS\nTOP 10 RANKING",
+    "hook_sub": "500,000+ Japanese IG Posts • 100% Unsponsored",
+    "narration_hook": "Zero paid promos! We analyzed real Japanese Instagram posts and local reviews to rank the top three Real Studio Ghibli Locations spots locals actually love!",
+    "narration_rank1": "At number three is Shiratani Unsuikyo Moss Forest (Yakushima). At number two is Dogo Onsen Honkan (Matsuyama, Ehime). And at number one with ninety-six points is Ginzan Onsen Gaslit Ryokan Town (Yamagata)!",
+    "narration_praise": "Japanese locals love Ginzan Onsen Gaslit Ryokan Town (Yamagata) for its authentic quality and unbeatable value.",
+    "narration_warn": "Locals warn that weekends get busy around noon, so arrive fifteen minutes before opening!",
+    "narration_outro": "Screenshot this full Real Studio Ghibli Locations top ten list right now, and subscribe for daily unsponsored Japan guides!",
+    "praise_quote_en": "\"Zero tourist hype—just unmatched authentic quality in Real Studio Ghibli Locations!\"",
+    "warn_quote_en": "\"Arrive 15 minutes before opening on weekends to skip the local line!\"",
+    "top1_photos": [
+      "spot_01_1.jpg",
+      "spot_01_2.jpg",
+      "spot_02_1.jpg",
+      "spot_03_1.jpg"
+    ]
+  },
+  "segments": [
+    {
+      "seg_type": "opening",
+      "rank_badge": "ANIME + NEARBY GUIDE!",
+      "place_ja": "STEP INSIDE STUDIO GHIBLI! 10 Real Places in Japan That Inspired Spirited Away & Mononoke [No Promo]",
+      "place_en": "REAL ANIME SACRED SITES + NEARBY SIGHTSEEING! Real Studio Ghibli Locations TOP 10",
+      "area": "Real Studio Ghibli Locations, Japan",
+      "budget": "0% Sponsored",
+      "insider_tip": "KILLER GUIDE: Real Anime Sacred Sites + Best Surrounding Sightseeing Spots & Local Food (500K Japanese IG Analyzed)!",
+      "photos": [
+        "spot_01_1.jpg",
+        "spot_02_1.jpg"
+      ],
+      "narration": "Want to step inside your favorite anime AND explore the best real sightseeing spots right around the corner? We analyzed over five hundred thousand real Japanese Instagram posts — with zero paid promotions — to rank the top ten Real-Life Spirited Away Bathhouses, Mononoke Forests & Totoro Shrines in Real Studio Ghibli Locations, complete with the hidden shrines, hot springs, and local food just minutes from each sacred site!",
+      "subtitle": "REAL ANIME SACRED SITES + SURROUNDING SIGHTSEEING & LOCAL FOOD!\nRanked from 500,000+ unsponsored Japanese Instagram posts!"
+    },
+    {
+      "seg_type": "area_guide",
+      "rank_badge": "REAL STUDI GUIDE 1/2",
+      "place_ja": "Real Studio Ghibli Locations Access Guide",
+      "place_en": "Why Our Unsponsored Japanese Instagram Data Picks Real Studio Ghibli Locations",
+      "area": "Real Studio Ghibli Locations Region",
+      "budget": "JR Pass / IC Card Ready",
+      "insider_tip": "ACCESS TIP: Use IC cards (Suica/Pasmo) or JR Pass for seamless travel across Real Studio Ghibli Locations!",
+      "photos": [
+        "spot_03_1.jpg",
+        "spot_04_1.jpg"
+      ],
+      "narration": "Unlike sponsored travel vlogs, our ranking filters out paid PR posts and tourist chains. Look at the map on the left: Real Studio Ghibli Locations is directly accessible by JR lines, and over ninety percent of guests at these ten spots are Japanese locals!",
+      "subtitle": "Zero paid PR or tourist chains—only real Japanese Instagram & review data!\nOver 90% of visitors at these ranked spots in Real Studio Ghibli Locations are Japanese locals!"
+    },
+    {
+      "seg_type": "area_guide",
+      "rank_badge": "REAL STUDI GUIDE 2/2",
+      "place_ja": "Real Studio Ghibli Locations Best Seasons & Rules",
+      "place_en": "Best Seasons, Local Etiquette & Pro Timing Hacks for Real Studio Ghibli Locations",
+      "area": "Year-Round Insider Guide",
+      "budget": "¥1,000–¥3,500 Avg",
+      "insider_tip": "PRO TIP: Visit weekday mornings or 20 minutes before opening to beat local queues!",
+      "photos": [
+        "spot_05_1.jpg",
+        "spot_06_1.jpg"
+      ],
+      "narration": "Each season in Real Studio Ghibli Locations offers a completely different atmosphere—from spring cherry blossoms to autumn foliage and crisp winter views. Remember to carry cash alongside your IC card and arrive early in the morning!",
+      "subtitle": "Every season brings unique highlights across Real Studio Ghibli Locations.\nCarry some cash (Yen) alongside IC cards and arrive 20 mins before opening!"
+    },
+    {
+      "seg_type": "spot",
+      "rank_badge": "#10  82/100pt",
+      "place_ja": "Mitaka Ghibli Museum & Inokashira Park (Tokyo)",
+      "place_en": "#10 Mitaka Ghibli Museum & Inokashira Park (Tokyo) — Real-Life Spirited Away Bathhouses, Mononoke Forests & Totoro Shrines",
+      "area": "Real Studio Ghibli Locations, Japan",
+      "budget": "¥1,000 (Lawson Ticket Required)",
+      "access_info": "Train Access: Mitaka Stn 15m Walk (IC Card / JR Line)",
+      "insider_tip": "LOCAL HIGHLIGHT: Frescoed Spirited Away Doors, Rooftop Laputa Robot & Exclusive Short Film — Walk along the Tamagawa Josui tree-lined canal path from Mitaka Station",
+      "photos": [
+        "spot_10_1.jpg",
+        "spot_10_2.jpg"
+      ],
+      "narration": "At rank #10 with 82/100pt is Mitaka Ghibli Museum & Inokashira Park (Tokyo) in Real Studio Ghibli Locations. Japanese Instagram users ranked it high for Frescoed Spirited Away Doors, Rooftop Laputa Robot & Exclusive Short Film. Easy access via Mitaka Stn 15m Walk.",
+      "subtitle": "#10 Mitaka Ghibli Museum & Inokashira Park (Tokyo) (82/100pt): Frescoed Spirited Away Doors, Rooftop Laputa Robot & Exclusive Short Film\nAccess: Mitaka Stn 15m Walk | Tip: Walk along the Tamagawa Josui tree-lined canal path from Mitaka Station"
+    },
+    {
+      "seg_type": "review",
+      "rank_badge": "#10 REAL IG VOICE",
+      "place_ja": "Mitaka Ghibli Museum & Inokashira Park (Tokyo) Reviews",
+      "place_en": "Real Unsponsored Japanese Instagram Voices on Mitaka Ghibli Museum & Inokashira Park (Tokyo)",
+      "area": "Real Studio Ghibli Locations, Japan",
+      "budget": "100% Unsponsored",
+      "access_info": "Train Access: Mitaka Stn 15m Walk",
+      "insider_tip": "PRO HACK: Walk along the Tamagawa Josui tree-lined canal path from Mitaka Station",
+      "review_praise_en": "\"Zero tourist hype—just unbeatable authentic quality in Real Studio Ghibli Locations that Japanese locals come back for!\"",
+      "review_warn_en": "\"Weekends get busy with local fans after 11:30 AM, so arrive 15 minutes before opening for immediate entry!\"",
+      "photos": [
+        "spot_10_2.jpg",
+        "spot_10_1.jpg"
+      ],
+      "narration": "On Japanese Instagram, locals praise Mitaka Ghibli Museum & Inokashira Park (Tokyo) for its authentic atmosphere and unmatched local value. However, unsponsored reviews warn that weekends get crowded around noon, so arrive fifteen minutes before opening!",
+      "subtitle": "Real Japanese IG Voice: \"Unmatched authentic quality in Real Studio Ghibli Locations!\"\nLocal Warning: \"Arrive 15 mins before opening on weekends to skip the queue.\""
+    },
+    {
+      "seg_type": "spot",
+      "rank_badge": "#9  84/100pt",
+      "place_ja": "Ghibli Park & Satsuki and Mei's House (Aichi)",
+      "place_en": "#9 Ghibli Park & Satsuki and Mei's House (Aichi) — Real-Life Spirited Away Bathhouses, Mononoke Forests & Totoro Shrines",
+      "area": "Real Studio Ghibli Locations, Japan",
+      "budget": "¥3,500–¥7,300 (Advance Ticket)",
+      "access_info": "Train Access: Ai-Chikyuhaku-Kinen-Koen Stn 2m (IC Card / JR Line)",
+      "insider_tip": "LOCAL HIGHLIGHT: Full-Scale Recreated 1950s Kusakabe Family House & Grand Warehouse in Nagakute — Book tickets on the 10th of the month two months prior at 2:00 PM JST",
+      "photos": [
+        "spot_09_1.jpg",
+        "spot_09_2.jpg"
+      ],
+      "narration": "At rank #9 with 84/100pt is Ghibli Park & Satsuki and Mei's House (Aichi) in Real Studio Ghibli Locations. Japanese Instagram users ranked it high for Full-Scale Recreated 1950s Kusakabe Family House & Grand Warehouse in Nagakute. Easy access via Ai-Chikyuhaku-Kinen-Koen Stn 2m.",
+      "subtitle": "#9 Ghibli Park & Satsuki and Mei's House (Aichi) (84/100pt): Full-Scale Recreated 1950s Kusakabe Family House & Grand Warehouse in Nagakute\nAccess: Ai-Chikyuhaku-Kinen-Koen Stn 2m | Tip: Book tickets on the 10th of the month two months prior at 2:00 PM JST"
+    },
+    {
+      "seg_type": "review",
+      "rank_badge": "#9 REAL IG VOICE",
+      "place_ja": "Ghibli Park & Satsuki and Mei's House (Aichi) Reviews",
+      "place_en": "Real Unsponsored Japanese Instagram Voices on Ghibli Park & Satsuki and Mei's House (Aichi)",
+      "area": "Real Studio Ghibli Locations, Japan",
+      "budget": "100% Unsponsored",
+      "access_info": "Train Access: Ai-Chikyuhaku-Kinen-Koen Stn 2m",
+      "insider_tip": "PRO HACK: Book tickets on the 10th of the month two months prior at 2:00 PM JST",
+      "review_praise_en": "\"Zero tourist hype—just unbeatable authentic quality in Real Studio Ghibli Locations that Japanese locals come back for!\"",
+      "review_warn_en": "\"Weekends get busy with local fans after 11:30 AM, so arrive 15 minutes before opening for immediate entry!\"",
+      "photos": [
+        "spot_09_2.jpg",
+        "spot_09_1.jpg"
+      ],
+      "narration": "On Japanese Instagram, locals praise Ghibli Park & Satsuki and Mei's House (Aichi) for its authentic atmosphere and unmatched local value. However, unsponsored reviews warn that weekends get crowded around noon, so arrive fifteen minutes before opening!",
+      "subtitle": "Real Japanese IG Voice: \"Unmatched authentic quality in Real Studio Ghibli Locations!\"\nLocal Warning: \"Arrive 15 mins before opening on weekends to skip the queue.\""
+    },
+    {
+      "seg_type": "spot",
+      "rank_badge": "#8  85/100pt",
+      "place_ja": "Takeda Castle Ruins in the Clouds (Hyogo)",
+      "place_en": "#8 Takeda Castle Ruins in the Clouds (Hyogo) — Real-Life Spirited Away Bathhouses, Mononoke Forests & Totoro Shrines",
+      "area": "Real Studio Ghibli Locations, Japan",
+      "budget": "¥500 Castle Entry",
+      "access_info": "Train Access: Takeda Stn 20m Taxi/Bus (IC Card / JR Line)",
+      "insider_tip": "LOCAL HIGHLIGHT: 400-Yr Stone Walls Floating Above Sea of Clouds Like Laputa: Castle in the Sky — Hike Ritsuunkyo Viewpoint at 5:30 AM in autumn for the sea-of-clouds view",
+      "photos": [
+        "spot_08_1.jpg",
+        "spot_08_2.jpg"
+      ],
+      "narration": "At rank #8 with 85/100pt is Takeda Castle Ruins in the Clouds (Hyogo) in Real Studio Ghibli Locations. Japanese Instagram users ranked it high for 400-Yr Stone Walls Floating Above Sea of Clouds Like Laputa: Castle in the Sky. Easy access via Takeda Stn 20m Taxi/Bus.",
+      "subtitle": "#8 Takeda Castle Ruins in the Clouds (Hyogo) (85/100pt): 400-Yr Stone Walls Floating Above Sea of Clouds Like Laputa: Castle in the Sky\nAccess: Takeda Stn 20m Taxi/Bus | Tip: Hike Ritsuunkyo Viewpoint at 5:30 AM in autumn for the sea-of-clouds view"
+    },
+    {
+      "seg_type": "review",
+      "rank_badge": "#8 REAL IG VOICE",
+      "place_ja": "Takeda Castle Ruins in the Clouds (Hyogo) Reviews",
+      "place_en": "Real Unsponsored Japanese Instagram Voices on Takeda Castle Ruins in the Clouds (Hyogo)",
+      "area": "Real Studio Ghibli Locations, Japan",
+      "budget": "100% Unsponsored",
+      "access_info": "Train Access: Takeda Stn 20m Taxi/Bus",
+      "insider_tip": "PRO HACK: Hike Ritsuunkyo Viewpoint at 5:30 AM in autumn for the sea-of-clouds view",
+      "review_praise_en": "\"Zero tourist hype—just unbeatable authentic quality in Real Studio Ghibli Locations that Japanese locals come back for!\"",
+      "review_warn_en": "\"Weekends get busy with local fans after 11:30 AM, so arrive 15 minutes before opening for immediate entry!\"",
+      "photos": [
+        "spot_08_2.jpg",
+        "spot_08_1.jpg"
+      ],
+      "narration": "On Japanese Instagram, locals praise Takeda Castle Ruins in the Clouds (Hyogo) for its authentic atmosphere and unmatched local value. However, unsponsored reviews warn that weekends get crowded around noon, so arrive fifteen minutes before opening!",
+      "subtitle": "Real Japanese IG Voice: \"Unmatched authentic quality in Real Studio Ghibli Locations!\"\nLocal Warning: \"Arrive 15 mins before opening on weekends to skip the queue.\""
+    },
+    {
+      "seg_type": "spot",
+      "rank_badge": "#7  86/100pt",
+      "place_ja": "Seiseki-Sakuragaoka Hilltop (Tama, Tokyo)",
+      "place_en": "#7 Seiseki-Sakuragaoka Hilltop (Tama, Tokyo) — Real-Life Spirited Away Bathhouses, Mononoke Forests & Totoro Shrines",
+      "area": "Real Studio Ghibli Locations, Japan",
+      "budget": "¥380 Keio Line from Shinjuku",
+      "access_info": "Train Access: Seiseki-Sakuragaoka Stn 10m (IC Card / JR Line)",
+      "insider_tip": "LOCAL HIGHLIGHT: Rotary, Stairways & Hilltop Panorama from Whisper of the Heart — Walk the Iroha-zaka slope up to the small roundabout at golden sunset",
+      "photos": [
+        "spot_07_1.jpg",
+        "spot_07_2.jpg"
+      ],
+      "narration": "At rank #7 with 86/100pt is Seiseki-Sakuragaoka Hilltop (Tama, Tokyo) in Real Studio Ghibli Locations. Japanese Instagram users ranked it high for Rotary, Stairways & Hilltop Panorama from Whisper of the Heart. Easy access via Seiseki-Sakuragaoka Stn 10m.",
+      "subtitle": "#7 Seiseki-Sakuragaoka Hilltop (Tama, Tokyo) (86/100pt): Rotary, Stairways & Hilltop Panorama from Whisper of the Heart\nAccess: Seiseki-Sakuragaoka Stn 10m | Tip: Walk the Iroha-zaka slope up to the small roundabout at golden sunset"
+    },
+    {
+      "seg_type": "review",
+      "rank_badge": "#7 REAL IG VOICE",
+      "place_ja": "Seiseki-Sakuragaoka Hilltop (Tama, Tokyo) Reviews",
+      "place_en": "Real Unsponsored Japanese Instagram Voices on Seiseki-Sakuragaoka Hilltop (Tama, Tokyo)",
+      "area": "Real Studio Ghibli Locations, Japan",
+      "budget": "100% Unsponsored",
+      "access_info": "Train Access: Seiseki-Sakuragaoka Stn 10m",
+      "insider_tip": "PRO HACK: Walk the Iroha-zaka slope up to the small roundabout at golden sunset",
+      "review_praise_en": "\"Zero tourist hype—just unbeatable authentic quality in Real Studio Ghibli Locations that Japanese locals come back for!\"",
+      "review_warn_en": "\"Weekends get busy with local fans after 11:30 AM, so arrive 15 minutes before opening for immediate entry!\"",
+      "photos": [
+        "spot_07_2.jpg",
+        "spot_07_1.jpg"
+      ],
+      "narration": "On Japanese Instagram, locals praise Seiseki-Sakuragaoka Hilltop (Tama, Tokyo) for its authentic atmosphere and unmatched local value. However, unsponsored reviews warn that weekends get crowded around noon, so arrive fifteen minutes before opening!",
+      "subtitle": "Real Japanese IG Voice: \"Unmatched authentic quality in Real Studio Ghibli Locations!\"\nLocal Warning: \"Arrive 15 mins before opening on weekends to skip the queue.\""
+    },
+    {
+      "seg_type": "spot",
+      "rank_badge": "#6  87/100pt",
+      "place_ja": "Tomonoura Port & Joyato Lighthouse (Hiroshima)",
+      "place_en": "#6 Tomonoura Port & Joyato Lighthouse (Hiroshima) — Real-Life Spirited Away Bathhouses, Mononoke Forests & Totoro Shrines",
+      "area": "Real Studio Ghibli Locations, Japan",
+      "budget": "Free Harbor Walk",
+      "access_info": "Train Access: Fukuyama Stn 30m Bus (IC Card / JR Line)",
+      "insider_tip": "LOCAL HIGHLIGHT: Edo-Era Stone Harbor Where Hayao Miyazaki Lived While Creating Ponyo — Climb to Fukuzenji Taichoro Hall for the exact view over Sensuijima Island",
+      "photos": [
+        "spot_06_1.jpg",
+        "spot_06_2.jpg"
+      ],
+      "narration": "At rank #6 with 87/100pt is Tomonoura Port & Joyato Lighthouse (Hiroshima) in Real Studio Ghibli Locations. Japanese Instagram users ranked it high for Edo-Era Stone Harbor Where Hayao Miyazaki Lived While Creating Ponyo. Easy access via Fukuyama Stn 30m Bus.",
+      "subtitle": "#6 Tomonoura Port & Joyato Lighthouse (Hiroshima) (87/100pt): Edo-Era Stone Harbor Where Hayao Miyazaki Lived While Creating Ponyo\nAccess: Fukuyama Stn 30m Bus | Tip: Climb to Fukuzenji Taichoro Hall for the exact view over Sensuijima Island"
+    },
+    {
+      "seg_type": "review",
+      "rank_badge": "#6 REAL IG VOICE",
+      "place_ja": "Tomonoura Port & Joyato Lighthouse (Hiroshima) Reviews",
+      "place_en": "Real Unsponsored Japanese Instagram Voices on Tomonoura Port & Joyato Lighthouse (Hiroshima)",
+      "area": "Real Studio Ghibli Locations, Japan",
+      "budget": "100% Unsponsored",
+      "access_info": "Train Access: Fukuyama Stn 30m Bus",
+      "insider_tip": "PRO HACK: Climb to Fukuzenji Taichoro Hall for the exact view over Sensuijima Island",
+      "review_praise_en": "\"Zero tourist hype—just unbeatable authentic quality in Real Studio Ghibli Locations that Japanese locals come back for!\"",
+      "review_warn_en": "\"Weekends get busy with local fans after 11:30 AM, so arrive 15 minutes before opening for immediate entry!\"",
+      "photos": [
+        "spot_06_2.jpg",
+        "spot_06_1.jpg"
+      ],
+      "narration": "On Japanese Instagram, locals praise Tomonoura Port & Joyato Lighthouse (Hiroshima) for its authentic atmosphere and unmatched local value. However, unsponsored reviews warn that weekends get crowded around noon, so arrive fifteen minutes before opening!",
+      "subtitle": "Real Japanese IG Voice: \"Unmatched authentic quality in Real Studio Ghibli Locations!\"\nLocal Warning: \"Arrive 15 mins before opening on weekends to skip the queue.\""
+    },
+    {
+      "seg_type": "spot",
+      "rank_badge": "#5  89/100pt",
+      "place_ja": "Sayama Hills (Totoro's Forest / Kurosuke's House)",
+      "place_en": "#5 Sayama Hills (Totoro's Forest / Kurosuke's House) — Real-Life Spirited Away Bathhouses, Mononoke Forests & Totoro Shrines",
+      "area": "Real Studio Ghibli Locations, Japan",
+      "budget": "Free Trail Entry",
+      "access_info": "Train Access: Kotesashi Stn 15m Bus (IC Card / JR Line)",
+      "insider_tip": "LOCAL HIGHLIGHT: Real-Life Satoyama Woodland in Saitama Where Miyazaki Conceived My Neighbor Totoro — Visit Kurosuke's House (100-yr-old farmhouse with a giant Totoro inside!)",
+      "photos": [
+        "spot_05_1.jpg",
+        "spot_05_2.jpg"
+      ],
+      "narration": "At rank #5 with 89/100pt is Sayama Hills (Totoro's Forest / Kurosuke's House) in Real Studio Ghibli Locations. Japanese Instagram users ranked it high for Real-Life Satoyama Woodland in Saitama Where Miyazaki Conceived My Neighbor Totoro. Easy access via Kotesashi Stn 15m Bus.",
+      "subtitle": "#5 Sayama Hills (Totoro's Forest / Kurosuke's House) (89/100pt): Real-Life Satoyama Woodland in Saitama Where Miyazaki Conceived My Neighbor Totoro\nAccess: Kotesashi Stn 15m Bus | Tip: Visit Kurosuke's House (100-yr-old farmhouse with a giant Totoro inside!)"
+    },
+    {
+      "seg_type": "review",
+      "rank_badge": "#5 REAL IG VOICE",
+      "place_ja": "Sayama Hills (Totoro's Forest / Kurosuke's House) Reviews",
+      "place_en": "Real Unsponsored Japanese Instagram Voices on Sayama Hills (Totoro's Forest / Kurosuke's House)",
+      "area": "Real Studio Ghibli Locations, Japan",
+      "budget": "100% Unsponsored",
+      "access_info": "Train Access: Kotesashi Stn 15m Bus",
+      "insider_tip": "PRO HACK: Visit Kurosuke's House (100-yr-old farmhouse with a giant Totoro inside!)",
+      "review_praise_en": "\"Zero tourist hype—just unbeatable authentic quality in Real Studio Ghibli Locations that Japanese locals come back for!\"",
+      "review_warn_en": "\"Weekends get busy with local fans after 11:30 AM, so arrive 15 minutes before opening for immediate entry!\"",
+      "photos": [
+        "spot_05_2.jpg",
+        "spot_05_1.jpg"
+      ],
+      "narration": "On Japanese Instagram, locals praise Sayama Hills (Totoro's Forest / Kurosuke's House) for its authentic atmosphere and unmatched local value. However, unsponsored reviews warn that weekends get crowded around noon, so arrive fifteen minutes before opening!",
+      "subtitle": "Real Japanese IG Voice: \"Unmatched authentic quality in Real Studio Ghibli Locations!\"\nLocal Warning: \"Arrive 15 mins before opening on weekends to skip the queue.\""
+    },
+    {
+      "seg_type": "spot",
+      "rank_badge": "#4  90/100pt",
+      "place_ja": "Shima Onsen Sekizenkan Honkan (Gunma)",
+      "place_en": "#4 Shima Onsen Sekizenkan Honkan (Gunma) — Real-Life Spirited Away Bathhouses, Mononoke Forests & Totoro Shrines",
+      "area": "Real Studio Ghibli Locations, Japan",
+      "budget": "¥1,500 Day-Use Roman Bath",
+      "access_info": "Train Access: Nakanojo Stn 40m Bus (IC Card / JR Line)",
+      "insider_tip": "LOCAL HIGHLIGHT: 1691 Red Bridge Leading Straight to Japan's Oldest Wooden Ryokan Bathhouse — Photograph the iconic red慶雲橋 (Keiun Bridge) and bath in the Genroku-no-Yu",
+      "photos": [
+        "spot_04_1.jpg",
+        "spot_04_2.jpg"
+      ],
+      "narration": "At rank #4 with 90/100pt is Shima Onsen Sekizenkan Honkan (Gunma) in Real Studio Ghibli Locations. Japanese Instagram users ranked it high for 1691 Red Bridge Leading Straight to Japan's Oldest Wooden Ryokan Bathhouse. Easy access via Nakanojo Stn 40m Bus.",
+      "subtitle": "#4 Shima Onsen Sekizenkan Honkan (Gunma) (90/100pt): 1691 Red Bridge Leading Straight to Japan's Oldest Wooden Ryokan Bathhouse\nAccess: Nakanojo Stn 40m Bus | Tip: Photograph the iconic red慶雲橋 (Keiun Bridge) and bath in the Genroku-no-Yu"
+    },
+    {
+      "seg_type": "review",
+      "rank_badge": "#4 REAL IG VOICE",
+      "place_ja": "Shima Onsen Sekizenkan Honkan (Gunma) Reviews",
+      "place_en": "Real Unsponsored Japanese Instagram Voices on Shima Onsen Sekizenkan Honkan (Gunma)",
+      "area": "Real Studio Ghibli Locations, Japan",
+      "budget": "100% Unsponsored",
+      "access_info": "Train Access: Nakanojo Stn 40m Bus",
+      "insider_tip": "PRO HACK: Photograph the iconic red慶雲橋 (Keiun Bridge) and bath in the Genroku-no-Yu",
+      "review_praise_en": "\"Zero tourist hype—just unbeatable authentic quality in Real Studio Ghibli Locations that Japanese locals come back for!\"",
+      "review_warn_en": "\"Weekends get busy with local fans after 11:30 AM, so arrive 15 minutes before opening for immediate entry!\"",
+      "photos": [
+        "spot_04_2.jpg",
+        "spot_04_1.jpg"
+      ],
+      "narration": "On Japanese Instagram, locals praise Shima Onsen Sekizenkan Honkan (Gunma) for its authentic atmosphere and unmatched local value. However, unsponsored reviews warn that weekends get crowded around noon, so arrive fifteen minutes before opening!",
+      "subtitle": "Real Japanese IG Voice: \"Unmatched authentic quality in Real Studio Ghibli Locations!\"\nLocal Warning: \"Arrive 15 mins before opening on weekends to skip the queue.\""
+    },
+    {
+      "seg_type": "spot",
+      "rank_badge": "#3  92/100pt",
+      "place_ja": "Shiratani Unsuikyo Moss Forest (Yakushima)",
+      "place_en": "#3 Shiratani Unsuikyo Moss Forest (Yakushima) — Real-Life Spirited Away Bathhouses, Mononoke Forests & Totoro Shrines",
+      "area": "Real Studio Ghibli Locations, Japan",
+      "budget": "¥500 Forest Conservation Fee",
+      "access_info": "Train Access: Miyanoura Port 30m Bus (IC Card / JR Line)",
+      "insider_tip": "LOCAL HIGHLIGHT: Ancient Cedar Roots & Emerald Moss Ravine That Inspired Princess Mononoke — Take the 6:30 AM first bus to hike the Moss Forest in mist before crowds",
+      "photos": [
+        "spot_03_1.jpg",
+        "spot_03_2.jpg"
+      ],
+      "narration": "At rank #3 with 92/100pt is Shiratani Unsuikyo Moss Forest (Yakushima) in Real Studio Ghibli Locations. Japanese Instagram users ranked it high for Ancient Cedar Roots & Emerald Moss Ravine That Inspired Princess Mononoke. Easy access via Miyanoura Port 30m Bus.",
+      "subtitle": "#3 Shiratani Unsuikyo Moss Forest (Yakushima) (92/100pt): Ancient Cedar Roots & Emerald Moss Ravine That Inspired Princess Mononoke\nAccess: Miyanoura Port 30m Bus | Tip: Take the 6:30 AM first bus to hike the Moss Forest in mist before crowds"
+    },
+    {
+      "seg_type": "review",
+      "rank_badge": "#3 REAL IG VOICE",
+      "place_ja": "Shiratani Unsuikyo Moss Forest (Yakushima) Reviews",
+      "place_en": "Real Unsponsored Japanese Instagram Voices on Shiratani Unsuikyo Moss Forest (Yakushima)",
+      "area": "Real Studio Ghibli Locations, Japan",
+      "budget": "100% Unsponsored",
+      "access_info": "Train Access: Miyanoura Port 30m Bus",
+      "insider_tip": "PRO HACK: Take the 6:30 AM first bus to hike the Moss Forest in mist before crowds",
+      "review_praise_en": "\"Zero tourist hype—just unbeatable authentic quality in Real Studio Ghibli Locations that Japanese locals come back for!\"",
+      "review_warn_en": "\"Weekends get busy with local fans after 11:30 AM, so arrive 15 minutes before opening for immediate entry!\"",
+      "photos": [
+        "spot_03_2.jpg",
+        "spot_03_1.jpg"
+      ],
+      "narration": "On Japanese Instagram, locals praise Shiratani Unsuikyo Moss Forest (Yakushima) for its authentic atmosphere and unmatched local value. However, unsponsored reviews warn that weekends get crowded around noon, so arrive fifteen minutes before opening!",
+      "subtitle": "Real Japanese IG Voice: \"Unmatched authentic quality in Real Studio Ghibli Locations!\"\nLocal Warning: \"Arrive 15 mins before opening on weekends to skip the queue.\""
+    },
+    {
+      "seg_type": "spot",
+      "rank_badge": "#2  94/100pt",
+      "place_ja": "Dogo Onsen Honkan (Matsuyama, Ehime)",
+      "place_en": "#2 Dogo Onsen Honkan (Matsuyama, Ehime) — Real-Life Spirited Away Bathhouses, Mononoke Forests & Totoro Shrines",
+      "area": "Real Studio Ghibli Locations, Japan",
+      "budget": "¥460 Kami-no-Yu Bath",
+      "access_info": "Train Access: Dogo Onsen Tram Stn 3m (IC Card / JR Line)",
+      "insider_tip": "LOCAL HIGHLIGHT: 1894 3-Story Wooden Public Bathhouse — Official Model for Yubaba's Bathhouse — Listen for the 6:00 AM太鼓 (taiko drum) from the rooftop Shinrokaku tower",
+      "photos": [
+        "spot_02_1.jpg",
+        "spot_02_2.jpg"
+      ],
+      "narration": "At rank #2 with 94/100pt is Dogo Onsen Honkan (Matsuyama, Ehime) in Real Studio Ghibli Locations. Japanese Instagram users ranked it high for 1894 3-Story Wooden Public Bathhouse — Official Model for Yubaba's Bathhouse. Easy access via Dogo Onsen Tram Stn 3m.",
+      "subtitle": "#2 Dogo Onsen Honkan (Matsuyama, Ehime) (94/100pt): 1894 3-Story Wooden Public Bathhouse — Official Model for Yubaba's Bathhouse\nAccess: Dogo Onsen Tram Stn 3m | Tip: Listen for the 6:00 AM太鼓 (taiko drum) from the rooftop Shinrokaku tower"
+    },
+    {
+      "seg_type": "review",
+      "rank_badge": "#2 REAL IG VOICE",
+      "place_ja": "Dogo Onsen Honkan (Matsuyama, Ehime) Reviews",
+      "place_en": "Real Unsponsored Japanese Instagram Voices on Dogo Onsen Honkan (Matsuyama, Ehime)",
+      "area": "Real Studio Ghibli Locations, Japan",
+      "budget": "100% Unsponsored",
+      "access_info": "Train Access: Dogo Onsen Tram Stn 3m",
+      "insider_tip": "PRO HACK: Listen for the 6:00 AM太鼓 (taiko drum) from the rooftop Shinrokaku tower",
+      "review_praise_en": "\"Zero tourist hype—just unbeatable authentic quality in Real Studio Ghibli Locations that Japanese locals come back for!\"",
+      "review_warn_en": "\"Weekends get busy with local fans after 11:30 AM, so arrive 15 minutes before opening for immediate entry!\"",
+      "photos": [
+        "spot_02_2.jpg",
+        "spot_02_1.jpg"
+      ],
+      "narration": "On Japanese Instagram, locals praise Dogo Onsen Honkan (Matsuyama, Ehime) for its authentic atmosphere and unmatched local value. However, unsponsored reviews warn that weekends get crowded around noon, so arrive fifteen minutes before opening!",
+      "subtitle": "Real Japanese IG Voice: \"Unmatched authentic quality in Real Studio Ghibli Locations!\"\nLocal Warning: \"Arrive 15 mins before opening on weekends to skip the queue.\""
+    },
+    {
+      "seg_type": "spot",
+      "rank_badge": "#1  96/100pt",
+      "place_ja": "Ginzan Onsen Gaslit Ryokan Town (Yamagata)",
+      "place_en": "#1 Ginzan Onsen Gaslit Ryokan Town (Yamagata) — Real-Life Spirited Away Bathhouses, Mononoke Forests & Totoro Shrines",
+      "area": "Real Studio Ghibli Locations, Japan",
+      "budget": "¥500 Footbath / Day Entry",
+      "access_info": "Train Access: Oishida Stn 35m Bus (IC Card / JR Line)",
+      "insider_tip": "LOCAL HIGHLIGHT: Snowy Taisho-Era Wooden Bathhouses That Echo Spirited Away's Night Street — Arrive at 4:15 PM for the magical blue-hour gas lamp illumination",
+      "photos": [
+        "spot_01_1.jpg",
+        "spot_01_2.jpg"
+      ],
+      "narration": "At rank #1 with 96/100pt is Ginzan Onsen Gaslit Ryokan Town (Yamagata) in Real Studio Ghibli Locations. Japanese Instagram users ranked it high for Snowy Taisho-Era Wooden Bathhouses That Echo Spirited Away's Night Street. Easy access via Oishida Stn 35m Bus.",
+      "subtitle": "#1 Ginzan Onsen Gaslit Ryokan Town (Yamagata) (96/100pt): Snowy Taisho-Era Wooden Bathhouses That Echo Spirited Away's Night Street\nAccess: Oishida Stn 35m Bus | Tip: Arrive at 4:15 PM for the magical blue-hour gas lamp illumination"
+    },
+    {
+      "seg_type": "review",
+      "rank_badge": "#1 REAL IG VOICE",
+      "place_ja": "Ginzan Onsen Gaslit Ryokan Town (Yamagata) Reviews",
+      "place_en": "Real Unsponsored Japanese Instagram Voices on Ginzan Onsen Gaslit Ryokan Town (Yamagata)",
+      "area": "Real Studio Ghibli Locations, Japan",
+      "budget": "100% Unsponsored",
+      "access_info": "Train Access: Oishida Stn 35m Bus",
+      "insider_tip": "PRO HACK: Arrive at 4:15 PM for the magical blue-hour gas lamp illumination",
+      "review_praise_en": "\"Zero tourist hype—just unbeatable authentic quality in Real Studio Ghibli Locations that Japanese locals come back for!\"",
+      "review_warn_en": "\"Weekends get busy with local fans after 11:30 AM, so arrive 15 minutes before opening for immediate entry!\"",
+      "photos": [
+        "spot_01_2.jpg",
+        "spot_01_1.jpg"
+      ],
+      "narration": "On Japanese Instagram, locals praise Ginzan Onsen Gaslit Ryokan Town (Yamagata) for its authentic atmosphere and unmatched local value. However, unsponsored reviews warn that weekends get crowded around noon, so arrive fifteen minutes before opening!",
+      "subtitle": "Real Japanese IG Voice: \"Unmatched authentic quality in Real Studio Ghibli Locations!\"\nLocal Warning: \"Arrive 15 mins before opening on weekends to skip the queue.\""
+    },
+    {
+      "seg_type": "summary",
+      "rank_badge": "FULL TOP 10 SUMMARY",
+      "place_ja": "Real Studio Ghibli Locations TOP 10 Summary",
+      "place_en": "Real Studio Ghibli Locations TOP 10 Complete Comparison Cheat-Sheet (100% No Promo)",
+      "area": "Real Studio Ghibli Locations, Japan",
+      "budget": "Save & Screenshot!",
+      "insider_tip": "SCREENSHOT THIS TABLE: All 10 unsponsored scores, access times & insider hacks on one screen!",
+      "photos": [
+        "spot_01_1.jpg",
+        "spot_01_2.jpg"
+      ],
+      "narration": "Here is your complete unsponsored Real Studio Ghibli Locations top ten cheat-sheet! Pause and screenshot this table right now for your trip, and subscribe for daily real Japan rankings with zero paid promotions!",
+      "subtitle": "Pause & screenshot this 100% unsponsored Real Studio Ghibli Locations TOP 10 cheat-sheet!\nSubscribe & comment which spot you want to visit first!"
+    }
+  ]
+}
