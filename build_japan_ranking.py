@@ -61,6 +61,110 @@ def find_font() -> str:
     raise FileNotFoundError("Font not found")
 
 
+def find_cjk_font() -> str:
+    """Return a font guaranteed to support Japanese CJK glyphs on both macOS and Ubuntu runners."""
+    candidates = [
+        "/System/Library/Fonts/ヒラギノ角ゴシック W8.ttc",
+        "/System/Library/Fonts/ヒラギノ角ゴシック W9.ttc",
+        "/System/Library/Fonts/ヒラギノ角ゴシック W6.ttc",
+        "/usr/share/fonts/opentype/noto/NotoSansCJK-Black.ttc",
+        "/usr/share/fonts/opentype/noto/NotoSansCJK-Bold.ttc",
+        "/usr/share/fonts/truetype/noto/NotoSansCJK-Bold.ttc",
+        "/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc",
+    ]
+    for p in candidates:
+        if os.path.exists(p):
+            return p
+    return find_font()
+
+
+def draw_instagram_logo(canvas: Image.Image, x: int, y: int, size: int = 52) -> None:
+    """Draw a vector-crisp Instagram gradient camera icon at (x, y) onto an RGBA canvas."""
+    icon = Image.new("RGBA", (size, size), (0, 0, 0, 0))
+    idraw = ImageDraw.Draw(icon)
+    for py in range(size):
+        for px in range(size):
+            t = (px + (size - 1 - py)) / max(1.0, (2.0 * (size - 1)))
+            if t < 0.35:
+                u = t / 0.35
+                r = int(252 * (1 - u) + 253 * u)
+                g = int(176 * (1 - u) + 29 * u)
+                b = int(69 * (1 - u) + 29 * u)
+            elif t < 0.70:
+                u = (t - 0.35) / 0.35
+                r = int(253 * (1 - u) + 225 * u)
+                g = int(29 * (1 - u) + 48 * u)
+                b = int(29 * (1 - u) + 108 * u)
+            else:
+                u = (t - 0.70) / 0.30
+                r = int(225 * (1 - u) + 131 * u)
+                g = int(48 * (1 - u) + 58 * u)
+                b = int(108 * (1 - u) + 180 * u)
+            idraw.point((px, py), fill=(r, g, b, 255))
+    mask = Image.new("L", (size, size), 0)
+    ImageDraw.Draw(mask).rounded_rectangle((0, 0, size - 1, size - 1), radius=int(size * 0.26), fill=255)
+    clipped = Image.new("RGBA", (size, size), (0, 0, 0, 0))
+    clipped.paste(icon, (0, 0), mask)
+    cd = ImageDraw.Draw(clipped)
+    pad = max(3, int(size * 0.16))
+    w_line = max(2, int(size * 0.075))
+    cd.rounded_rectangle((pad, pad, size - 1 - pad, size - 1 - pad), radius=int(size * 0.20), outline=(255, 255, 255, 255), width=w_line)
+    cx, cy = size // 2, size // 2
+    cr = int(size * 0.17)
+    cd.ellipse((cx - cr, cy - cr, cx + cr, cy + cr), outline=(255, 255, 255, 255), width=w_line)
+    dot_r = max(2, int(size * 0.045))
+    dx, dy = int(size * 0.68), int(size * 0.32)
+    cd.ellipse((dx - dot_r, dy - dot_r, dx + dot_r, dy + dot_r), fill=(255, 255, 255, 255))
+    canvas.alpha_composite(clipped, (x, y))
+
+
+def synthesize_jp_local_voice(
+    rank_str: str,
+    title_en: str,
+    dish_en: str,
+    card_style: str = "praise",
+    explicit_ja: str = "",
+) -> str:
+    """Return an authentic, concise Japanese Instagram local review quote ('日本人のリアルな声') that fits cleanly on 1 line."""
+    if explicit_ja and re.search(r"[\u3040-\u30ff\u4e00-\u9fff]", explicit_ja):
+        q = explicit_ja.strip().strip("「」\"'")
+        for sep in ("！", "!", "。", "、"):
+            if sep in q:
+                first = q.split(sep)[0].strip()
+                if 8 <= len(first) <= 29:
+                    q = first + ("！" if sep in ("！", "!") else "")
+                    break
+        if len(q) > 29:
+            q = q[:28].rstrip("、。") + "！"
+        return f"「{q}」"
+    ctx = f"{title_en} {dish_en}".lower()
+    is_food = any(k in ctx for k in ("ramen", "sushi", "wagyu", "beef", "noodle", "broth", "market", "izakaya", "cafe", "sweets", "matcha", "tempura", "udon", "soba", "tonkatsu", "curry", "gourmet", "food", "bowl", "fish", "crab", "unagi", "gyoza", "okonomiyaki", "takoyaki", "yakitori"))
+    is_onsen = any(k in ctx for k in ("onsen", "bath", "ryokan", "hot spring", "rotenburo"))
+    is_anime = any(k in ctx for k in ("ghibli", "anime", "spirited", "shinkai", "your name", "slayer", "totoro", "mononoke", "ponyo", "kamakura"))
+    if card_style == "warn":
+        if is_food:
+            return "「開店30分前に並ぶのが鉄則！現金も用意して」"
+        if is_onsen:
+            return "「日帰り入浴は朝一番が狙い目！湯上がり散策も最高」"
+        return "「ツアー客が来る前の早朝8時台に行くと独り占め！」"
+    if "#1" in rank_str or "NO.1" in rank_str:
+        if is_food:
+            return "「観光客向けの店とは別次元。地元民が推すNo.1名店！」"
+        if is_onsen:
+            return "「一生に一度は行くべき名湯！泉質も風情も日本一」"
+        if is_anime:
+            return "「映画のワンシーンそのまま！絶対感動する聖地No.1」"
+        return "「定番の観光地より絶対ここ！日本人が感動したNo.1絶景」"
+    if "#2" in rank_str or "NO.2" in rank_str:
+        if is_food:
+            return "「ステマなしで本当に旨い店！リピーターが絶えない名店」"
+        return "「写真の何倍も実物がすごい！季節ごとに通いたい名所」"
+    if is_food:
+        return "「コスパも味も最高クラス！常連に愛される隠れた名店」"
+    return "「混雑しすぎず空気感が最高！日本らしい風景が残る穴場」"
+
+
+
 def fit_crop(im: Image.Image, target_w: int, target_h: int) -> Image.Image:
     """Resize and center-crop an image to exact (target_w, target_h)."""
     im = im.convert("RGB")
@@ -820,24 +924,28 @@ def render_ranking_hud_png(
     )
     draw.text((W - rw - 32, 19), info_right, font=f_r_fit, fill=(253, 224, 71, 255))
 
-    # Top-Center Permanent "100% NO PAID PROMO • JAPANESE IG ANALYZED | SUBSCRIBE" Badge on Row 1
+    # Top-Center Permanent "[IG Logo] JAPANESE IG ANALYZED • 日本人のリアルな声" Badge on Row 1
+    cjk_font_path = find_cjk_font()
     left_edge = 24 + bw + 12
     avail_mid_w = right_box_x0 - left_edge - 12
     if avail_mid_w >= 220:
-        np_txt = "100% NO PAID PROMO • JAPANESE IG ANALYZED  |  ▶ SUBSCRIBE"
-        f_np_fit = fit_font_for_width(draw, np_txt, font_path, 15, 11, avail_mid_w - 20)
-        np_txt_fit = smart_truncate(draw, np_txt, f_np_fit, avail_mid_w - 20)
-        tb_np = draw.textbbox((0, 0), np_txt_fit, font=f_np_fit)
-        np_w = (tb_np[2] - tb_np[0]) + 24
+        np_txt = "JAPANESE IG ANALYZED • 日本人のリアルな声"
+        f_np_fit = ImageFont.truetype(cjk_font_path, 15)
+        tb_np = draw.textbbox((0, 0), np_txt, font=f_np_fit)
+        while (tb_np[2] - tb_np[0]) + 56 > avail_mid_w and f_np_fit.size > 11:
+            f_np_fit = ImageFont.truetype(cjk_font_path, f_np_fit.size - 1)
+            tb_np = draw.textbbox((0, 0), np_txt, font=f_np_fit)
+        np_w = min(avail_mid_w, (tb_np[2] - tb_np[0]) + 56)
         np_x0 = left_edge + max(0, (avail_mid_w - np_w) // 2)
         draw.rounded_rectangle(
             (np_x0, 12, np_x0 + np_w, 46),
             radius=8,
-            fill=(15, 23, 42, 248),
-            outline=(16, 185, 129, 245),
+            fill=(18, 14, 32, 248),
+            outline=(225, 48, 108, 250),
             width=2,
         )
-        draw.text((np_x0 + 12, 20), np_txt_fit, font=f_np_fit, fill=(167, 243, 208, 255))
+        draw_instagram_logo(overlay, np_x0 + 8, 15, 28)
+        draw.text((np_x0 + 42, 20), np_txt, font=f_np_fit, fill=(255, 215, 235, 255))
 
     # Main English Place Title on Row 2 (Large 26px bold with dark stroke)
     title_en = strip_cjk(seg["place_en"].strip()).replace("What You Get in This 9-Min Guide", "100% UNSPONSORED TOP 10 — ANALYZED FROM JAPANESE IG!")
@@ -870,35 +978,42 @@ def render_ranking_hud_png(
             stroke_fill=(0, 0, 0, 220),
         )
 
-    # 2. Optional Real Local Review Card (when seg_type == "review" — 100% English, Large 20px font)
+    # 2. Optional Real Local Review Card (when seg_type == "review" — Instagram Logo + 日本人のリアルな声 + English)
     if seg.get("seg_type") == "review" and seg.get("review_praise_en"):
-        f_rhead = ImageFont.truetype(font_path, 17)
+        f_rhead = ImageFont.truetype(cjk_font_path, 16)
+        f_jp_quote = ImageFont.truetype(cjk_font_path, 17)
         card_x0, card_x1 = 24, W - 24
         max_rw = (card_x1 - card_x0) - 32
 
-        c1_y0, c1_y1 = 336, 430
-        lbl1 = "REAL JAPANESE INSTAGRAM VOICE (100% NO PROMO)"
+        c1_y0, c1_y1 = 324, 428
+        lbl1 = "日本人のリアルな声  •  REAL JAPANESE INSTAGRAM VOICE (NO PROMO)"
         tb_l1 = draw.textbbox((0, 0), lbl1, font=f_rhead)
-        l1_w = (tb_l1[2] - tb_l1[0]) + 28
+        l1_w = (tb_l1[2] - tb_l1[0]) + 62
+        jp_praise = synthesize_jp_local_voice(badge, title_en, seg.get("area", ""), "praise", seg.get("review_praise_ja", ""))
         praise_txt = strip_cjk(seg["review_praise_en"])
-        f_ren1 = fit_font_for_width(draw, praise_txt, font_path, 20, 14, max_rw)
+        f_ren1 = fit_font_for_width(draw, praise_txt, font_path, 19, 14, max_rw)
         praise_txt = smart_truncate(draw, praise_txt, f_ren1, max_rw)
-        draw.rectangle([(card_x0, c1_y0), (card_x1, c1_y1)], fill=(12, 19, 34, 238), outline=(16, 185, 129, 250), width=2)
-        draw.rectangle([(card_x0, c1_y0), (card_x0 + l1_w, c1_y0 + 32)], fill=(16, 185, 129, 250))
-        draw.text((card_x0 + 14, c1_y0 + 7), lbl1, font=f_rhead, fill=(255, 255, 255, 255))
-        draw.text((card_x0 + 16, c1_y0 + 46), praise_txt, font=f_ren1, fill=(255, 255, 255, 255), stroke_width=2, stroke_fill=(0, 0, 0, 230))
+        draw.rounded_rectangle((card_x0, c1_y0, card_x1, c1_y1), radius=12, fill=(16, 14, 28, 242), outline=(225, 48, 108, 250), width=2)
+        draw.rounded_rectangle((card_x0, c1_y0, card_x0 + l1_w, c1_y0 + 34), radius=10, fill=(225, 48, 108, 250))
+        draw_instagram_logo(overlay, card_x0 + 8, c1_y0 + 3, 28)
+        draw.text((card_x0 + 44, c1_y0 + 8), lbl1, font=f_rhead, fill=(255, 255, 255, 255))
+        draw.text((card_x0 + 16, c1_y0 + 42), jp_praise, font=f_jp_quote, fill=(255, 215, 110, 255))
+        draw.text((card_x0 + 16, c1_y0 + 68), praise_txt, font=f_ren1, fill=(255, 255, 255, 255), stroke_width=2, stroke_fill=(0, 0, 0, 230))
 
-        c2_y0, c2_y1 = 440, 534
-        lbl2 = "UNFILTERED LOCAL WARNING & INSIDER HACK"
+        c2_y0, c2_y1 = 436, 536
+        lbl2 = "地元の裏技・注意点  •  UNFILTERED LOCAL IG WARNING & HACK"
         tb_l2 = draw.textbbox((0, 0), lbl2, font=f_rhead)
-        l2_w = (tb_l2[2] - tb_l2[0]) + 28
+        l2_w = (tb_l2[2] - tb_l2[0]) + 62
+        jp_warn = synthesize_jp_local_voice(badge, title_en, seg.get("area", ""), "warn", seg.get("review_warn_ja", ""))
         warn_txt = strip_cjk(seg["review_warn_en"])
-        f_ren2 = fit_font_for_width(draw, warn_txt, font_path, 20, 14, max_rw)
+        f_ren2 = fit_font_for_width(draw, warn_txt, font_path, 19, 14, max_rw)
         warn_txt = smart_truncate(draw, warn_txt, f_ren2, max_rw)
-        draw.rectangle([(card_x0, c2_y0), (card_x1, c2_y1)], fill=(12, 19, 34, 238), outline=(245, 158, 11, 250), width=2)
-        draw.rectangle([(card_x0, c2_y0), (card_x0 + l2_w, c2_y0 + 32)], fill=(217, 119, 6, 250))
-        draw.text((card_x0 + 14, c2_y0 + 7), lbl2, font=f_rhead, fill=(255, 255, 255, 255))
-        draw.text((card_x0 + 16, c2_y0 + 46), warn_txt, font=f_ren2, fill=(253, 224, 71, 255), stroke_width=2, stroke_fill=(0, 0, 0, 230))
+        draw.rounded_rectangle((card_x0, c2_y0, card_x1, c2_y1), radius=12, fill=(16, 14, 28, 242), outline=(245, 158, 11, 250), width=2)
+        draw.rounded_rectangle((card_x0, c2_y0, card_x0 + l2_w, c2_y0 + 34), radius=10, fill=(217, 119, 6, 250))
+        draw_instagram_logo(overlay, card_x0 + 8, c2_y0 + 3, 28)
+        draw.text((card_x0 + 44, c2_y0 + 8), lbl2, font=f_rhead, fill=(255, 255, 255, 255))
+        draw.text((card_x0 + 16, c2_y0 + 42), jp_warn, font=f_jp_quote, fill=(255, 200, 225, 255))
+        draw.text((card_x0 + 16, c2_y0 + 68), warn_txt, font=f_ren2, fill=(253, 224, 71, 255), stroke_width=2, stroke_fill=(0, 0, 0, 230))
 
     # 3. Bottom Insider Tip Bar + Subtitle Bar
     sub_bar_h = 132
@@ -1855,49 +1970,369 @@ def render_short_outro_jpg(
     canvas.convert("RGB").save(out_jpg, "JPEG", quality=95)
 
 
+def _load_short_full_bleed(photo_path: Path, w: int = SW, h: int = SH, darken: float = 0.85) -> Image.Image:
+    """Load and center-crop a photo to full-bleed (w, h) with rich color grading."""
+    from PIL import ImageChops
+
+    if not photo_path.exists():
+        return Image.new("RGB", (w, h), (12, 16, 28))
+    raw_im = Image.open(photo_path).convert("RGB")
+    white_bg = Image.new("RGB", raw_im.size, (250, 250, 250))
+    diff = ImageChops.difference(raw_im, white_bg).convert("L").point(lambda p: 255 if p > 18 else 0)
+    bbox = diff.getbbox()
+    if bbox and (bbox[2] - bbox[0]) > raw_im.width * 0.6 and (bbox[3] - bbox[1]) > raw_im.height * 0.5:
+        raw_im = raw_im.crop(bbox)
+    im = fit_crop(raw_im, w, h)
+    im = ImageEnhance.Color(im).enhance(1.24)
+    im = ImageEnhance.Contrast(im).enhance(1.12)
+    return ImageEnhance.Brightness(im).enhance(darken)
+
+
+def _apply_short_cinema_grad(im: Image.Image, top_alpha: int = 200, mid_alpha: int = 12, bot_alpha: int = 244) -> Image.Image:
+    """Apply top and bottom cinema gradient over a 1080x1920 image, keeping the center photo crystal clear."""
+    ov = Image.new("RGBA", (SW, SH), (0, 0, 0, 0))
+    od = ImageDraw.Draw(ov)
+    for y in range(SH):
+        if y < 620:
+            a = int(top_alpha * (1.0 - y / 620.0) ** 1.3)
+        elif y < 1000:
+            a = mid_alpha
+        else:
+            t = (y - 1000) / 920.0
+            a = int(mid_alpha + (bot_alpha - mid_alpha) * (t ** 1.2))
+        od.line([(0, y), (SW, y)], fill=(6, 9, 16, min(255, a)))
+    return Image.alpha_composite(im.convert("RGBA"), ov)
+
+
+def _fit_cjk_font(draw: ImageDraw.ImageDraw, text: str, font_path: str, start_size: int, min_size: int, max_w: int) -> ImageFont.FreeTypeFont:
+    """Fit text width without stripping Japanese CJK characters."""
+    sz = start_size
+    while sz >= min_size:
+        f = ImageFont.truetype(font_path, sz)
+        tb = draw.textbbox((0, 0), text, font=f)
+        if (tb[2] - tb[0]) <= max_w:
+            return f
+        sz -= 2
+    return ImageFont.truetype(font_path, min_size)
+
+
+def render_short_ig_design_a_jpg(
+    photo_path: Path,
+    scene: Dict[str, Any],
+    font_path: str,
+    out_jpg: Path,
+) -> None:
+    """
+    案A: 全面フルスクリーン絶景 ＋ IGロゴ＆日本人のリアルな声 (NatGeo / IG Reel Immersive)
+    - Full-bleed 1080x1920 photo with clear center window
+    - Upper Eye-Level (y=272..510): Instagram Logo Pill + Giant Hook & Spot Name
+    - Lower-Center Eye-Level (y=1050..1545): Direct Access/Budget Bar + Instagram '日本人のリアルな声' Bilingual Review Card
+    """
+    cjk_path = find_cjk_font()
+    canvas = _apply_short_cinema_grad(_load_short_full_bleed(photo_path, SW, SH, darken=0.86), top_alpha=205, mid_alpha=10, bot_alpha=245)
+    draw = ImageDraw.Draw(canvas, "RGBA")
+
+    badge_en = strip_cjk(scene.get("badge", "RANK #01")).upper()
+    is_warn = scene.get("card_style") == "warn"
+    pill_border = (252, 176, 69, 255) if is_warn else (225, 48, 108, 255)
+
+    # 1. Top Eye-Level Instagram Analysis Pill (y=272..346)
+    draw.rounded_rectangle((60, 272, 860, 346), radius=22, fill=(18, 14, 32, 238), outline=pill_border, width=3)
+    draw_instagram_logo(canvas, 76, 281, 56)
+    top_lbl = f"JP INSTAGRAM ANALYSIS  •  {badge_en}"
+    f_ig_top = fit_font_for_width(draw, top_lbl, font_path, 27, 18, 690)
+    draw.text((148, 283), smart_truncate(draw, top_lbl, f_ig_top, 690), font=f_ig_top, fill=(255, 255, 255, 255))
+    sub_lbl = "日本人のリアルな声  |  ♥ 98% Local Approval  •  0% Paid Promo"
+    f_ig_sub = _fit_cjk_font(draw, sub_lbl, cjk_path, 21, 15, 690)
+    draw.text((148, 315), sub_lbl, font=f_ig_sub, fill=(255, 195, 225, 255))
+
+    # 2. Giant Eye-Level Feature Hook & Spot Name (y=366..510)
+    sub_en = strip_cjk(scene.get("sub_en", "")).replace("PRO TIP:", "").strip().upper()
+    title_en = strip_cjk(scene.get("title_en", "")).upper()
+    if sub_en:
+        f_hook = fit_font_for_width(draw, sub_en, font_path, 54, 28, SW - 120)
+        sub_fit = smart_truncate(draw, sub_en, f_hook, SW - 120)
+        draw.text((60, 368), sub_fit, font=f_hook, fill=(255, 215, 70, 255), stroke_width=6, stroke_fill=(0, 0, 0, 255))
+    f_spot = fit_font_for_width(draw, title_en, font_path, 62, 32, SW - 120)
+    title_fit = smart_truncate(draw, title_en, f_spot, SW - 120)
+    draw.text((60, 442), title_fit, font=f_spot, fill=(255, 255, 255, 255), stroke_width=7, stroke_fill=(0, 0, 0, 255))
+
+    # 3. Lower-Center Direct Access & Entry/Budget Glass Bar (y=1050..1172)
+    raw_acc = strip_cjk(scene.get("access", "")).replace("ACCESS:", "").replace("TIP:", "").strip()
+    parts = [p.strip() for p in re.split(r"\||•|;", raw_acc) if p.strip()]
+    uniq_parts: List[str] = []
+    for p in parts:
+        if p.lower() not in [u.lower() for u in uniq_parts]:
+            uniq_parts.append(p)
+    acc_val = uniq_parts[0] if len(uniq_parts) >= 1 else (raw_acc or "Direct Train Access")
+    bud_val = uniq_parts[1] if len(uniq_parts) >= 2 else "Arrive Early • Cash/IC"
+
+    draw.rounded_rectangle((60, 1050, SW - 60, 1172), radius=22, fill=(12, 18, 30, 224), outline=(255, 210, 80, 215), width=3)
+    f_blbl = ImageFont.truetype(font_path, 21)
+    draw.text((90, 1068), "DIRECT ACCESS", font=f_blbl, fill=(255, 205, 75, 255))
+    f_bval1 = fit_font_for_width(draw, acc_val, font_path, 31, 18, 435)
+    draw.text((90, 1100), smart_truncate(draw, acc_val, f_bval1, 435), font=f_bval1, fill=(255, 255, 255, 255))
+    draw.line([(555, 1068), (555, 1154)], fill=(255, 255, 255, 75), width=2)
+    draw.text((582, 1068), "ENTRY / LOCAL TIP", font=f_blbl, fill=(110, 235, 190, 255))
+    f_bval2 = fit_font_for_width(draw, bud_val, font_path, 31, 18, 405)
+    draw.text((582, 1100), smart_truncate(draw, bud_val, f_bval2, 405), font=f_bval2, fill=(255, 255, 255, 255))
+
+    # 4. Instagram '日本人のリアルな声' Bilingual Review Card (y=1196..1548)
+    draw.rounded_rectangle((60, 1196, SW - 60, 1548), radius=28, fill=(16, 14, 28, 244), outline=pill_border, width=4)
+    hdr_bg = (217, 119, 6, 245) if is_warn else (225, 48, 108, 245)
+    draw.rounded_rectangle((88, 1218, 720, 1274), radius=14, fill=hdr_bg)
+    draw_instagram_logo(canvas, 98, 1224, 44)
+    vc_hdr = "日本人のリアルな声  •  LOCAL IG RULE & TIP" if is_warn else "日本人のリアルな声  •  REAL JP IG VOICE"
+    f_vch = _fit_cjk_font(draw, vc_hdr, cjk_path, 23, 16, 555)
+    draw.text((154, 1232), vc_hdr, font=f_vch, fill=(255, 255, 255, 255))
+
+    jp_voice = synthesize_jp_local_voice(
+        badge_en,
+        title_en,
+        sub_en,
+        "warn" if is_warn else "praise",
+        scene.get("card_body_ja", ""),
+    )
+    f_jpq = _fit_cjk_font(draw, jp_voice, cjk_path, 27, 17, SW - 180)
+    draw.text((90, 1294), jp_voice, font=f_jpq, fill=(255, 225, 105, 255))
+
+    raw_body_en = strip_cjk(scene.get("card_body_en") or scene.get("access") or scene.get("sub_en", "")).strip().strip("\"'“”")
+    for sep in (". ", "! ", "; "):
+        if sep in raw_body_en:
+            s0 = raw_body_en.split(sep)[0].strip()
+            if len(s0) >= 24:
+                raw_body_en = s0 + ("!" if sep == "! " else ".")
+                break
+    f_enq = ImageFont.truetype(font_path, 29)
+    en_lines = wrap_text_lines(draw, f"\"{raw_body_en}\"", f_enq, SW - 180)
+    if len(en_lines) > 2:
+        en_lines = [en_lines[0], smart_truncate(draw, " ".join(en_lines[1:]).rstrip("\"") + "\"", f_enq, SW - 180)]
+    for li, el in enumerate(en_lines[:2]):
+        draw.text((90, 1354 + li * 44), el, font=f_enq, fill=(255, 255, 255, 255))
+
+    f_meta = ImageFont.truetype(font_path, 23)
+    draw.text((90, 1480), "♥ Verified Japanese Local Review on IG   •   100% Unsponsored", font=f_meta, fill=(167, 243, 208, 255))
+
+    canvas.convert("RGB").save(out_jpg, "JPEG", quality=95)
+
+
+def render_short_ig_design_b_jpg(
+    photo_top_path: Path,
+    photo_bot_path: Path,
+    scene: Dict[str, Any],
+    font_path: str,
+    out_jpg: Path,
+) -> None:
+    """
+    案B: 上下2画面スプリット（上：メイン聖地・名所 × 下：周辺コンボ・別アングル）＋ 中央IG口コミ＆裏技ブリッジ
+    - Top half (0..960) & Bottom half (960..1920) full-bleed photos
+    - Center Eye-Level Bridge (y=795..1130): Instagram Logo + '日本人のリアルな声' + Local Insider Hack & Walk Combo
+    """
+    cjk_path = find_cjk_font()
+    canvas = Image.new("RGBA", (SW, SH), (8, 12, 20, 255))
+    top_im = _load_short_full_bleed(photo_top_path, SW, 960, darken=0.86)
+    bot_im = _load_short_full_bleed(photo_bot_path, SW, 960, darken=0.84)
+    canvas.paste(top_im, (0, 0))
+    canvas.paste(bot_im, (0, 960))
+
+    ov = Image.new("RGBA", (SW, SH), (0, 0, 0, 0))
+    od = ImageDraw.Draw(ov)
+    for y in range(SH):
+        dist_c = abs(y - 960)
+        if dist_c < 245:
+            a = int(228 * (1.0 - dist_c / 245.0))
+        elif y < 400:
+            a = int(198 * (1.0 - y / 400.0))
+        elif y > 1360:
+            a = int(238 * ((y - 1360) / 560.0))
+        else:
+            a = 18
+        od.line([(0, y), (SW, y)], fill=(6, 10, 18, min(255, a)))
+    canvas = Image.alpha_composite(canvas, ov)
+    draw = ImageDraw.Draw(canvas, "RGBA")
+
+    badge_en = strip_cjk(scene.get("badge", "RANK #01")).upper()
+    title_en = strip_cjk(scene.get("title_en", "")).upper()
+    sub_en = strip_cjk(scene.get("sub_en", "")).replace("PRO TIP:", "").strip()
+
+    # 1. Top Header Pill + Main Spot Name (y=272..435)
+    draw.rounded_rectangle((60, 272, 820, 344), radius=20, fill=(18, 14, 32, 240), outline=(225, 48, 108, 255), width=3)
+    draw_instagram_logo(canvas, 76, 280, 54)
+    top_lbl = f"JP IG LOCAL COMBO  •  {badge_en}"
+    f_top = fit_font_for_width(draw, top_lbl, font_path, 27, 18, 650)
+    draw.text((146, 283), smart_truncate(draw, top_lbl, f_top, 650), font=f_top, fill=(255, 255, 255, 255))
+    sub_lbl = "日本人のリアルな声  |  名所＋周辺コンボ＆地元の裏技"
+    f_sub_jp = _fit_cjk_font(draw, sub_lbl, cjk_path, 21, 15, 650)
+    draw.text((146, 314), sub_lbl, font=f_sub_jp, fill=(255, 195, 225, 255))
+
+    f_main = fit_font_for_width(draw, title_en, font_path, 58, 30, SW - 120)
+    draw.text((60, 362), smart_truncate(draw, title_en, f_main, SW - 120), font=f_main, fill=(255, 255, 255, 255), stroke_width=7, stroke_fill=(0, 0, 0, 255))
+
+    # 2. Center Eye-Level Instagram Real Japanese Voice + Combo Bridge (y=798..1128)
+    draw.rounded_rectangle((50, 798, SW - 50, 1128), radius=28, fill=(16, 14, 28, 246), outline=(252, 176, 69, 255), width=4)
+    draw_instagram_logo(canvas, 78, 822, 56)
+    mid_hdr = "日本人のリアルな声  •  LOCAL IG INSIDER HACK"
+    f_mhdr = _fit_cjk_font(draw, mid_hdr, cjk_path, 27, 18, SW - 220)
+    draw.text((150, 824), mid_hdr, font=f_mhdr, fill=(255, 215, 75, 255))
+
+    jp_voice = synthesize_jp_local_voice(
+        badge_en,
+        title_en,
+        sub_en,
+        scene.get("card_style", "warn"),
+        scene.get("card_body_ja", ""),
+    )
+    f_jp = _fit_cjk_font(draw, jp_voice, cjk_path, 25, 17, SW - 220)
+    draw.text((150, 864), jp_voice, font=f_jp, fill=(255, 195, 225, 255))
+
+    draw.line([(78, 910), (SW - 78, 910)], fill=(255, 255, 255, 68), width=2)
+    raw_body_en = strip_cjk(scene.get("card_body_en") or scene.get("access") or sub_en).strip().strip("\"'“”")
+    for sep in (". ", "! ", "; "):
+        if sep in raw_body_en:
+            s0 = raw_body_en.split(sep)[0].strip()
+            if len(s0) >= 24:
+                raw_body_en = s0 + ("!" if sep == "! " else ".")
+                break
+    f_en = ImageFont.truetype(font_path, 30)
+    en_lines = wrap_text_lines(draw, f"\"{raw_body_en}\"", f_en, SW - 160)
+    if len(en_lines) > 2:
+        en_lines = [en_lines[0], smart_truncate(draw, " ".join(en_lines[1:]).rstrip("\"") + "\"", f_en, SW - 160)]
+    for li, el in enumerate(en_lines[:2]):
+        col_l = (255, 225, 95, 255) if li == 1 else (255, 255, 255, 255)
+        draw.text((78, 926 + li * 44), el, font=f_en, fill=col_l)
+
+    raw_acc = strip_cjk(scene.get("access", "")).replace("ACCESS:", "").replace("TIP:", "").strip()
+    parts_b = [p.strip() for p in re.split(r"\||•|;", raw_acc) if p.strip()]
+    uniq_b: List[str] = []
+    for p in parts_b:
+        if p.lower() not in [u.lower() for u in uniq_b]:
+            uniq_b.append(p)
+    acc_clean = "  •  ".join(uniq_b) if uniq_b else "100% UNSPONSORED LOCAL DATA"
+    bot_strip = f"▼  {acc_clean}  •  ♥ 98% LOCAL SAVES  ▼"
+    f_bstrip = fit_font_for_width(draw, bot_strip, font_path, 25, 16, SW - 160)
+    draw.text((78, 1058), smart_truncate(draw, bot_strip, f_bstrip, SW - 160), font=f_bstrip, fill=(110, 235, 195, 255))
+
+    # 3. Bottom Half Feature / Nearby Highlight (y=1380..1535)
+    draw.rounded_rectangle((60, 1380, 620, 1442), radius=14, fill=(20, 155, 120, 242))
+    f_btag = ImageFont.truetype(font_path, 25)
+    draw.text((86, 1396), "MUST-KNOW FEATURE & LOCAL TIP", font=f_btag, fill=(255, 255, 255, 255))
+    f_bbot = fit_font_for_width(draw, sub_en.upper() or title_en, font_path, 48, 26, SW - 120)
+    draw.text((60, 1458), smart_truncate(draw, sub_en.upper() or title_en, f_bbot, SW - 120), font=f_bbot, fill=(255, 225, 95, 255), stroke_width=6, stroke_fill=(0, 0, 0, 255))
+
+    canvas.convert("RGB").save(out_jpg, "JPEG", quality=95)
+
+
+def render_short_ig_design_c_jpg(
+    bg_photo_path: Path,
+    scene: Dict[str, Any],
+    summary_rows: List[Dict[str, Any]],
+    active_rank: str,
+    font_path: str,
+    out_jpg: Path,
+) -> None:
+    """
+    案C: 全面背景 ＋ IG分析TOP3 高速カウントダウン点灯型 (#3 -> #2 -> #1 + 日本人のリアルな声)
+    - Full-bleed 1080x1920 background of the active spot
+    - Center 3-Card Countdown Stack (#3, #2, #1) where `active_rank` lights up with Instagram Logo & 日本人の声
+    """
+    cjk_path = find_cjk_font()
+    canvas = _apply_short_cinema_grad(_load_short_full_bleed(bg_photo_path, SW, SH, darken=0.80), top_alpha=215, mid_alpha=90, bot_alpha=242)
+    draw = ImageDraw.Draw(canvas, "RGBA")
+
+    # 1. Top Instagram Analysis Header (y=272..500)
+    draw.rounded_rectangle((60, 272, 850, 346), radius=22, fill=(18, 14, 32, 240), outline=(225, 48, 108, 255), width=3)
+    draw_instagram_logo(canvas, 76, 281, 56)
+    f_top = ImageFont.truetype(font_path, 27)
+    draw.text((148, 283), "RANKED BY JAPANESE INSTAGRAM", font=f_top, fill=(255, 255, 255, 255))
+    sub_lbl = "日本人のリアルな声 50万件分析  •  100% Unsponsored"
+    f_sub_jp = _fit_cjk_font(draw, sub_lbl, cjk_path, 21, 15, 680)
+    draw.text((148, 315), sub_lbl, font=f_sub_jp, fill=(255, 195, 225, 255))
+
+    head_en = strip_cjk(scene.get("title_en", "TOP 3 REAL JAPAN SPOTS")).upper()
+    f_head = fit_font_for_width(draw, head_en, font_path, 58, 30, SW - 120)
+    draw.text((60, 366), smart_truncate(draw, head_en, f_head, SW - 120), font=f_head, fill=(255, 255, 255, 255), stroke_width=7, stroke_fill=(0, 0, 0, 255))
+    sub_en = strip_cjk(scene.get("sub_en", "Where Japanese Locals Actually Visit (Zero Tourist Traps)"))
+    f_sub = fit_font_for_width(draw, sub_en, font_path, 31, 20, SW - 120)
+    draw.text((60, 442), smart_truncate(draw, sub_en, f_sub, SW - 120), font=f_sub, fill=(255, 215, 85, 255), stroke_width=5, stroke_fill=(0, 0, 0, 255))
+
+    # 2. 3-Card Countdown Stack (#3 -> #2 -> #1) at Center Eye Level (y=555..1545)
+    r3 = summary_rows[2] if len(summary_rows) >= 3 else (summary_rows[-1] if summary_rows else {})
+    r2 = summary_rows[1] if len(summary_rows) >= 2 else (summary_rows[0] if summary_rows else {})
+    r1 = summary_rows[0] if len(summary_rows) >= 1 else {}
+
+    stack_rows = [("#3", r3), ("#2", r2), ("#1", r1)]
+    cy = 555
+    for rk_str, row in stack_rows:
+        is_act = rk_str == active_rank
+        nm = strip_cjk(row.get("name_en", rk_str).split("(")[0].strip()).upper()
+        sc_pt = strip_cjk(row.get("score", "95/100pt"))
+        acc = strip_cjk(row.get("access_short") or row.get("budget", "Direct Access"))
+        dish = strip_cjk(row.get("dish", "").split("(")[0].strip())
+        meta = f"{acc}  •  ♥ {sc_pt} on JP IG"
+        jp_v = synthesize_jp_local_voice(rk_str, nm, dish, "praise", "")
+
+        if is_act:
+            draw.rounded_rectangle((50, cy, SW - 50, cy + 345), radius=28, fill=(20, 16, 36, 246), outline=(252, 176, 69, 255), width=5)
+            draw.rounded_rectangle((80, cy + 28, 210, cy + 122), radius=18, fill=(225, 48, 108, 255))
+            f_rk = ImageFont.truetype(font_path, 54)
+            draw.text((106, cy + 42), rk_str, font=f_rk, fill=(255, 255, 255, 255))
+
+            f_ct = fit_font_for_width(draw, nm, font_path, 40, 24, 760)
+            draw.text((235, cy + 32), smart_truncate(draw, nm, f_ct, 760), font=f_ct, fill=(255, 225, 90, 255))
+            f_cm = fit_font_for_width(draw, meta, font_path, 26, 18, 760)
+            draw.text((235, cy + 90), smart_truncate(draw, meta, f_cm, 760), font=f_cm, fill=(255, 255, 255, 255))
+
+            draw.rounded_rectangle((80, cy + 144, SW - 80, cy + 318), radius=18, fill=(10, 12, 24, 232), outline=(225, 48, 108, 195), width=2)
+            draw_instagram_logo(canvas, 98, cy + 160, 44)
+            jv_line = f"日本人の声: {jp_v}"
+            f_jv = _fit_cjk_font(draw, jv_line, cjk_path, 24, 16, 810)
+            draw.text((156, cy + 168), jv_line, font=f_jv, fill=(255, 195, 225, 255))
+
+            clean_d = (dish or strip_cjk(scene.get("card_body_en", "Top-rated local favorite!"))).strip().strip("\"'“”")
+            en_v = f"\"{clean_d}\""
+            f_ev = fit_font_for_width(draw, en_v, font_path, 26, 18, 880)
+            draw.text((98, cy + 218), smart_truncate(draw, en_v, f_ev, 880), font=f_ev, fill=(255, 255, 255, 255))
+
+            now_txt = f"★ NOW SHOWING  •  {strip_cjk(row.get('budget', 'LOCAL PRICE'))}  •  100% UNSPONSORED"
+            f_now = fit_font_for_width(draw, now_txt, font_path, 23, 16, 880)
+            draw.text((98, cy + 268), smart_truncate(draw, now_txt, f_now, 880), font=f_now, fill=(110, 235, 195, 255))
+            cy += 370
+        else:
+            draw.rounded_rectangle((60, cy, SW - 60, cy + 225), radius=24, fill=(10, 14, 24, 198), outline=(255, 255, 255, 78), width=2)
+            draw.rounded_rectangle((90, cy + 28, 200, cy + 108), radius=16, fill=(45, 55, 75, 225))
+            f_rk = ImageFont.truetype(font_path, 44)
+            draw.text((114, cy + 40), rk_str, font=f_rk, fill=(205, 215, 230, 255))
+
+            f_ct = fit_font_for_width(draw, nm, font_path, 34, 22, 760)
+            draw.text((225, cy + 32), smart_truncate(draw, nm, f_ct, 760), font=f_ct, fill=(225, 232, 245, 255))
+            f_cm = fit_font_for_width(draw, meta, font_path, 24, 17, 760)
+            draw.text((225, cy + 84), smart_truncate(draw, meta, f_cm, 760), font=f_cm, fill=(165, 180, 205, 255))
+
+            draw_instagram_logo(canvas, 90, cy + 134, 36)
+            jv_sm = f"日本人の声: {jp_v}"
+            f_jv_sm = _fit_cjk_font(draw, jv_sm, cjk_path, 22, 15, 840)
+            draw.text((138, cy + 140), jv_sm, font=f_jv_sm, fill=(215, 185, 210, 255))
+            cy += 250
+
+    canvas.convert("RGB").save(out_jpg, "JPEG", quality=95)
+
+
 def render_short_cinema_frame_jpg(
     raw_photo_path: Path,
     photo_label: str,
     font_path: str,
     out_jpg: Path,
 ) -> None:
-    """
-    Composite a visitor photograph inside a razor-sharp Eye-Level Cinema Window (1008x562 at y=474..1036)
-    over a dark Gaussian-blurred 1080x1920 ambient background!
-    """
-    from PIL import ImageFilter, ImageChops
-
-    raw_im = Image.open(raw_photo_path).convert("RGB")
-    white_bg = Image.new("RGB", raw_im.size, (250, 250, 250))
-    diff = ImageChops.difference(raw_im, white_bg).convert("L")
-    diff = diff.point(lambda p: 255 if p > 18 else 0)
-    bbox = diff.getbbox()
-    if bbox and (bbox[2] - bbox[0]) > raw_im.width * 0.6 and (bbox[3] - bbox[1]) > raw_im.height * 0.5:
-        raw_im = raw_im.crop(bbox)
-
-    bg = fit_crop(raw_im, SW, SH).filter(ImageFilter.GaussianBlur(radius=36))
-    bg = ImageEnhance.Brightness(bg).enhance(0.32)
-    canvas = bg.convert("RGBA")
-    draw = ImageDraw.Draw(canvas, "RGBA")
-
-    fx0, fy0, fx1, fy1 = 36, 474, SW - 36, 1036
-    fw, fh = fx1 - fx0, fy1 - fy0
-    sharp_photo = fit_crop(raw_im, fw, fh)
-    sharp_photo = ImageEnhance.Contrast(sharp_photo).enhance(1.06)
-
-    mask = Image.new("L", (fw, fh), 0)
-    ImageDraw.Draw(mask).rounded_rectangle((0, 0, fw, fh), radius=24, fill=255)
-    canvas.paste(sharp_photo.convert("RGBA"), (fx0, fy0), mask)
-    draw.rounded_rectangle((fx0, fy0, fx1, fy1), radius=24, fill=None, outline=(255, 255, 255, 240), width=4)
-
-    f_tag = ImageFont.truetype(font_path, 20)
-    clean_lbl = smart_truncate(draw, photo_label, f_tag, fw - 72)
-    tb_t = draw.textbbox((0, 0), clean_lbl, font=f_tag)
-    tw = (tb_t[2] - tb_t[0]) + 34
-    draw.rounded_rectangle((fx0 + 18, fy0 + 18, fx0 + 18 + tw, fy0 + 62), radius=12, fill=(10, 14, 24, 225), outline=(253, 224, 71, 235), width=2)
-    draw.text((fx0 + 35, fy0 + 29), clean_lbl, font=f_tag, fill=(253, 224, 71, 255))
-
-    canvas.convert("RGB").save(out_jpg, "JPEG", quality=95)
+    """Fallback wrapper rendering Full-Screen Design A."""
+    dummy_scene = {
+        "badge": photo_label,
+        "title_en": photo_label,
+        "sub_en": "100% Unsponsored Japanese Instagram Analysis",
+        "access": "Direct Station Access  |  Local Price",
+        "card_style": "praise",
+        "card_body_en": "Analyzed from real Japanese Instagram posts with zero paid promotions.",
+    }
+    render_short_ig_design_a_jpg(raw_photo_path, dummy_scene, font_path, out_jpg)
 
 
 def render_short_hud_png(
@@ -1906,103 +2341,45 @@ def render_short_hud_png(
     out_png: Path,
 ) -> None:
     """
-    Render the Eye-Level Centered Shorts HUD (100% English, High-Contrast Large Fonts, Zero Top Dead-Zone Clutter):
-    - Leaves y=0..265 100% clear so YouTube Shorts top UI never overlaps key text!
-    - Upper Eye-Level Header (y=268..462): Rank & Score Pill + Huge Spot Title + Gold Feature Highlight
-    - Integrated Bottom-of-Photo Bar (y=960..1034): Exact Station Access & Yen Price
-    - Center-Lower Eye-Level Storytelling & Insider Card (y=1052..1456):
-      2-Section structured card conveying (1) Why It's Famous / Key Appeal and (2) Local Insider Hack / Warning!
+    Render the Shorts overlay HUD:
+    - For full-bleed Instagram designs (案A, 案B, 案C), all eye-level cards & headers are baked into the frame,
+      so this overlay renders only the crisp bottom Pop Captions (y=1572..1695) without covering the design!
+    - For 'outro' (Cheat-Sheet), renders the Upper Eye-Level Instagram Header + Bottom Pop Captions.
     """
     overlay = Image.new("RGBA", (SW, SH), (0, 0, 0, 0))
     draw = ImageDraw.Draw(overlay, "RGBA")
+    cjk_path = find_cjk_font()
 
-    f_pill = ImageFont.truetype(font_path, 25)
-    f_rhead = ImageFont.truetype(font_path, 22)
+    if scene.get("mode") == "outro":
+        draw.rounded_rectangle((60, 268, SW - 60, 342), radius=22, fill=(18, 14, 32, 242), outline=(225, 48, 108, 255), width=3)
+        draw_instagram_logo(overlay, 78, 277, 56)
+        f_top = ImageFont.truetype(font_path, 26)
+        draw.text((150, 280), "FULL TOP 10 CHEAT-SHEET  •  SCREENSHOT NOW!", font=f_top, fill=(255, 255, 255, 255))
+        f_sub_jp = _fit_cjk_font(draw, "日本人のリアルな声 徹底分析  |  100% Unsponsored Local Guide", cjk_path, 20, 15, 800)
+        draw.text((150, 312), "日本人のリアルな声 徹底分析  |  100% Unsponsored Local Guide", font=f_sub_jp, fill=(255, 195, 225, 255))
 
-    # 1. Upper Eye-Level Rank & Verification Pill (y=268..326 — well below top Shorts UI bar!)
-    pill_txt = strip_cjk(scene["badge"])
-    if "SCORE" not in pill_txt and "NO." in pill_txt:
-        pill_txt = f"{pill_txt}  •  REAL LOCAL DATA"
-    is_gold = "NO.1" in pill_txt or "#1 " in pill_txt
-    p_col = (217, 119, 6, 250) if is_gold else (220, 38, 38, 250)
-    f_pill_fit = fit_font_for_width(draw, pill_txt, font_path, 26, 18, SW - 96)
-    pill_txt_fit = smart_truncate(draw, pill_txt, f_pill_fit, SW - 96)
-    tb_p = draw.textbbox((0, 0), pill_txt_fit, font=f_pill_fit)
-    pw = (tb_p[2] - tb_p[0]) + 56
-    px0 = (SW - pw) // 2
-    draw.rounded_rectangle((px0, 268, px0 + pw, 326), radius=29, fill=p_col, outline=(254, 240, 138, 255), width=3)
-    draw.text((px0 + 28, 283), pill_txt_fit, font=f_pill_fit, fill=(255, 255, 255, 255))
+        t_en = strip_cjk(scene["title_en"])
+        f_title = fit_font_for_width(draw, t_en, font_path, 46, 28, SW - 52)
+        t_en_fit = smart_truncate(draw, t_en, f_title, SW - 52)
+        tb_t = draw.textbbox((0, 0), t_en_fit, font=f_title)
+        draw.text(((SW - (tb_t[2] - tb_t[0])) // 2, 354), t_en_fit, font=f_title, fill=(255, 255, 255, 255), stroke_width=5, stroke_fill=(0, 0, 0, 255))
 
-    # 2. Huge Eye-Level English Spot Title + Gold Feature Line (y=338..460)
-    t_en = strip_cjk(scene["title_en"])
-    f_title = fit_font_for_width(draw, t_en, font_path, 48, 28, SW - 52)
-    t_en_fit = smart_truncate(draw, t_en, f_title, SW - 52)
-    tb_t = draw.textbbox((0, 0), t_en_fit, font=f_title)
-    draw.text(((SW - (tb_t[2] - tb_t[0])) // 2, 338), t_en_fit, font=f_title, fill=(255, 255, 255, 255), stroke_width=5, stroke_fill=(0, 0, 0, 255))
+        t_sub = strip_cjk(scene.get("sub_en", ""))
+        if t_sub:
+            f_sub = fit_font_for_width(draw, t_sub, font_path, 26, 18, SW - 56)
+            t_sub_fit = smart_truncate(draw, t_sub, f_sub, SW - 56)
+            tb_j = draw.textbbox((0, 0), t_sub_fit, font=f_sub)
+            draw.text(((SW - (tb_j[2] - tb_j[0])) // 2, 416), t_sub_fit, font=f_sub, fill=(253, 224, 71, 255), stroke_width=4, stroke_fill=(0, 0, 0, 245))
 
-    t_sub = strip_cjk(scene.get("sub_en", ""))
-    if t_sub:
-        f_sub = fit_font_for_width(draw, t_sub, font_path, 27, 18, SW - 56)
-        t_sub_fit = smart_truncate(draw, t_sub, f_sub, SW - 56)
-        tb_j = draw.textbbox((0, 0), t_sub_fit, font=f_sub)
-        draw.text(((SW - (tb_j[2] - tb_j[0])) // 2, 406), t_sub_fit, font=f_sub, fill=(253, 224, 71, 255), stroke_width=4, stroke_fill=(0, 0, 0, 245))
-
-    # 3. Integrated Bottom-of-Photo Access & Budget Bar (y=960..1034 inside the Cinema Window!)
-    if scene.get("access") and scene.get("mode") != "outro":
-        acc_txt = strip_cjk(scene["access"].replace("🚄", "").strip())
-        if not acc_txt.upper().startswith("ACCESS") and not acc_txt.upper().startswith("TIP"):
-            acc_txt = f"ACCESS & BUDGET:  {acc_txt}"
-        f_acc = fit_font_for_width(draw, acc_txt, font_path, 25, 17, SW - 112)
-        acc_txt_fit = smart_truncate(draw, acc_txt, f_acc, SW - 112)
-        tb_a = draw.textbbox((0, 0), acc_txt_fit, font=f_acc)
-        draw.rounded_rectangle((40, 962, SW - 40, 1032), radius=20, fill=(8, 15, 30, 236), outline=(56, 189, 248, 225), width=2)
-        draw.text(((SW - (tb_a[2] - tb_a[0])) // 2, 983), acc_txt_fit, font=f_acc, fill=(125, 211, 252, 255))
-
-    # 4. Rich 2-Section Storytelling & Insider Value Card right at Center-Lower Eye Level (y=1052..1456)
-    if scene.get("card_title") and scene.get("card_body_en"):
-        cx0, cy0, cx1, cy1 = 36, 1052, SW - 36, 1456
-        is_warn = scene.get("card_style") == "warn"
-        c_border = (245, 158, 11, 255) if is_warn else (16, 185, 129, 255)
-        c_tag_bg = (217, 119, 6, 255) if is_warn else (16, 185, 129, 255)
-
-        draw.rounded_rectangle((cx0, cy0, cx1, cy1), radius=24, fill=(10, 18, 34, 246), outline=c_border, width=3)
-
-        # Top Section: Why You Must Visit / Signature Appeal
-        why_badge = "MUST-KNOW LOCAL RULE & TIP" if is_warn else "WHY LOCALS LOVE THIS SPOT  •  KEY APPEAL"
-        tb_ct = draw.textbbox((0, 0), why_badge, font=f_rhead)
-        ct_w = (tb_ct[2] - tb_ct[0]) + 36
-        draw.rounded_rectangle((cx0 + 22, cy0 + 18, cx0 + 22 + ct_w, cy0 + 62), radius=10, fill=c_tag_bg)
-        draw.text((cx0 + 40, cy0 + 28), why_badge, font=f_rhead, fill=(255, 255, 255, 255))
-
-        max_cw = (cx1 - cx0) - 52
-        f_why = ImageFont.truetype(font_path, 29)
-        f_body = ImageFont.truetype(font_path, 28)
-
-        # Highlight 1: Spot's core feature / dish / anime setting (Gold)
-        highlight_str = strip_cjk(scene.get("sub_en") or scene.get("title_en", ""))
-        hl_lines = wrap_text_lines(draw, f"★ {highlight_str}", f_why, max_cw)
-        for li, hl_l in enumerate(hl_lines[:2]):
-            draw.text((cx0 + 26, cy0 + 78 + li * 38), hl_l, font=f_why, fill=(253, 224, 71, 255))
-
-        div_y = cy0 + 78 + min(2, len(hl_lines)) * 38 + 10
-        draw.line([(cx0 + 26, div_y), (cx1 - 26, div_y)], fill=(148, 163, 184, 110), width=2)
-
-        # Highlight 2: Local Review / Insider Hack (Crisp White & Emerald)
-        q_lines = wrap_text_lines(draw, strip_cjk(scene["card_body_en"]), f_body, max_cw)
-        for li, ql in enumerate(q_lines[:4]):
-            y_line = div_y + 14 + li * 39
-            if y_line + 34 <= cy1 - 10:
-                draw.text((cx0 + 26, y_line), ql, font=f_body, fill=(255, 255, 255, 255))
-
-    # 5. CapCut / Hormozi-Style Floating Outline Pop Captions (y=1474..1620)
+    # Bottom Floating Outline Pop Captions (y=1572..1690, well below the y=1548 review card!)
     pop_lines = scene.get("pop_lines", [])
     for li, raw_pl in enumerate(pop_lines[:2]):
         pl = strip_cjk(raw_pl)
-        f_pop = fit_font_for_width(draw, pl, font_path, 38, 22, SW - 56)
-        pl = smart_truncate(draw, pl, f_pop, SW - 56)
+        f_pop = fit_font_for_width(draw, pl, font_path, 36, 21, SW - 64)
+        pl = smart_truncate(draw, pl, f_pop, SW - 64)
         tb_l = draw.textbbox((0, 0), pl, font=f_pop)
         lx = (SW - (tb_l[2] - tb_l[0])) // 2
-        ly = 1476 + li * 60
+        ly = 1572 + li * 54
         col = (253, 224, 71, 255) if li == 1 else (255, 255, 255, 255)
         draw.text((lx + 3, ly + 4), pl, font=f_pop, fill=(0, 0, 0, 230), stroke_width=7, stroke_fill=(0, 0, 0, 230))
         draw.text((lx, ly), pl, font=f_pop, fill=col, stroke_width=5, stroke_fill=(0, 0, 0, 255))
@@ -2012,8 +2389,9 @@ def render_short_hud_png(
 
 def build_shorts_video(script_path: Path) -> Path:
     """
-    Build a high-retention 8-Scene CapCut-Style YouTube Short (1080x1920) — 100% Dynamic & English:
-    Driven completely by the ranking JSON's Top 3 spots (sp3/rv3, sp2/rv2, sp1/rv1) and summary_rows!
+    Build a high-retention 8-Scene CapCut-Style YouTube Short (1080x1920):
+    Rotates ALL 3 Full-Bleed Instagram-Branded Designs (案A, 案B, 案C) with the Instagram Logo
+    and '日本人のリアルな声' (Real Japanese Local Voices)!
     """
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
     data = json.loads(script_path.read_text(encoding="utf-8"))
@@ -2052,7 +2430,6 @@ def build_shorts_video(script_path: Path) -> Path:
 
     def _short_punch(raw_text: str, prefix: str = "", max_words: int = 9) -> str:
         clean = " ".join(strip_cjk(raw_text).split())
-        # Take the first punchy clause/sentence
         for sep in [". ", "! ", "? "]:
             if sep in clean:
                 first = clean.split(sep)[0].strip()
@@ -2075,101 +2452,118 @@ def build_shorts_video(script_path: Path) -> Path:
     short_scenes = [
         {
             "mode": "hook",
+            "active_rank": "#1",
             "se_type": "area_chime",
             "badge": "ZERO PAID PROMO! REAL JAPANESE IG DATA",
             "title_en": hook_title,
             "sub_en": "500,000+ Japanese IG Posts • 100% Unsponsored",
-            "access": "NO INFLUENCER ADS — ONLY REAL JAPANESE LOCAL VOICES!",
+            "access": f"{r1_row.get('access_short', 'Direct Access')} | {r1_row.get('budget', 'Local Price')}",
+            "photos": [sp1["photos"][0], sp2["photos"][0]],
+            "card_style": "praise",
+            "card_body_en": rv1.get("review_praise_en", sp1["insider_tip"]),
+            "card_body_ja": rv1.get("review_praise_ja", ""),
             "narration": hook_narration,
             "pop_lines": ["ZERO PAID PROMOS! REAL IG DATA!", f"Top 3 {short_region} Ranked by Locals!"],
         },
         {
             "mode": "cinema",
+            "active_rank": "#3",
             "se_type": "top3_hit",
             "badge": f"NO.3  |  SCORE: {r3_row['score'].upper()}",
             "title_en": r3_short_name,
             "sub_en": r3_row["dish"].split("(")[0].strip(),
-            "access": f"ACCESS: {sp3.get('access_info', r3_row['budget'])}",
+            "access": f"{r3_row.get('access_short', sp3.get('access_info', 'Direct Access'))} | {r3_row.get('budget', '')}",
             "photos": [sp3["photos"][0], sp3["photos"][1]],
             "photo_tags": ["REAL JAPANESE IG VOICE (1/4)", "REAL JAPANESE IG VOICE (2/4)"],
             "card_style": "praise",
             "card_title": "REAL JAPANESE IG VOICE (NO PROMO)",
             "card_body_en": rv3.get("review_praise_en", sp3["insider_tip"]),
+            "card_body_ja": rv3.get("review_praise_ja", ""),
             "narration": _short_punch(r3_row["dish"], f"Number 3: {r3_short_name}!", 9),
             "pop_lines": [f"#3 {r3_short_name.upper()} ({r3_row['score']})", r3_row["dish"].split("(")[0].strip()],
         },
         {
             "mode": "cinema",
+            "active_rank": "#3",
             "se_type": "review_pop",
             "badge": "NO.3  |  UNSPONSORED HACK",
             "title_en": r3_short_name,
             "sub_en": f"PRO TIP: {r3_row['hack']}",
-            "access": f"TIP: {sp3.get('insider_tip', r3_row['hack'])}",
+            "access": f"{r3_row.get('access_short', 'Direct Access')} | {r3_row.get('budget', '')}",
             "photos": [rv3["photos"][0], rv3["photos"][1]],
             "photo_tags": ["REAL JAPANESE IG VOICE (3/4)", "REAL JAPANESE IG VOICE (4/4)"],
             "card_style": "warn",
             "card_title": "UNFILTERED LOCAL WARNING",
             "card_body_en": rv3.get("review_warn_en", r3_row["hack"]),
+            "card_body_ja": rv3.get("review_warn_ja", ""),
             "narration": _short_punch(r3_row["hack"], "Local hack:", 9),
             "pop_lines": ["UNFILTERED LOCAL WARNING!", r3_row["hack"]],
         },
         {
             "mode": "cinema",
+            "active_rank": "#2",
             "se_type": "top3_hit",
             "badge": f"NO.2  |  SCORE: {r2_row['score'].upper()}",
             "title_en": r2_short_name,
             "sub_en": r2_row["dish"].split("(")[0].strip(),
-            "access": f"ACCESS: {sp2.get('access_info', r2_row['budget'])}",
+            "access": f"{r2_row.get('access_short', sp2.get('access_info', 'Direct Access'))} | {r2_row.get('budget', '')}",
             "photos": [sp2["photos"][0], sp2["photos"][1]],
             "photo_tags": ["REAL JAPANESE IG VOICE (1/4)", "REAL JAPANESE IG VOICE (2/4)"],
             "card_style": "praise",
             "card_title": "REAL JAPANESE IG VOICE (NO PROMO)",
             "card_body_en": rv2.get("review_praise_en", sp2["insider_tip"]),
+            "card_body_ja": rv2.get("review_praise_ja", ""),
             "narration": _short_punch(r2_row["dish"], f"Number 2: {r2_short_name}!", 9),
             "pop_lines": [f"#2 {r2_short_name.upper()} ({r2_row['score']})", r2_row["dish"].split("(")[0].strip()],
         },
         {
             "mode": "cinema",
+            "active_rank": "#2",
             "se_type": "review_pop",
             "badge": "NO.2  |  UNSPONSORED HACK",
             "title_en": r2_short_name,
             "sub_en": f"PRO TIP: {r2_row['hack']}",
-            "access": f"TIP: {sp2.get('insider_tip', r2_row['hack'])}",
+            "access": f"{r2_row.get('access_short', 'Direct Access')} | {r2_row.get('budget', '')}",
             "photos": [rv2["photos"][0], rv2["photos"][1]],
             "photo_tags": ["REAL JAPANESE IG VOICE (3/4)", "REAL JAPANESE IG VOICE (4/4)"],
             "card_style": "warn",
             "card_title": "UNFILTERED LOCAL WARNING",
             "card_body_en": rv2.get("review_warn_en", r2_row["hack"]),
+            "card_body_ja": rv2.get("review_warn_ja", ""),
             "narration": _short_punch(r2_row["hack"], "Insider tip:", 9),
             "pop_lines": ["UNFILTERED LOCAL WARNING!", r2_row["hack"]],
         },
         {
             "mode": "cinema",
+            "active_rank": "#1",
             "se_type": "top3_hit",
             "badge": f"NO.1  |  SCORE: {r1_row['score'].upper()}",
             "title_en": r1_short_name,
             "sub_en": r1_row["dish"].split("(")[0].strip(),
-            "access": f"ACCESS: {sp1.get('access_info', r1_row['budget'])}",
+            "access": f"{r1_row.get('access_short', sp1.get('access_info', 'Direct Access'))} | {r1_row.get('budget', '')}",
             "photos": [sp1["photos"][0], sp1["photos"][1]],
             "photo_tags": ["REAL JAPANESE IG VOICE (1/4)", "REAL JAPANESE IG VOICE (2/4)"],
             "card_style": "praise",
             "card_title": "REAL JAPANESE IG VOICE (NO PROMO)",
             "card_body_en": rv1.get("review_praise_en", sp1["insider_tip"]),
+            "card_body_ja": rv1.get("review_praise_ja", ""),
             "narration": _short_punch(r1_row["dish"], f"And Number 1: {r1_short_name}!", 9),
             "pop_lines": [f"#1 {r1_short_name.upper()} ({r1_row['score']})", r1_row["dish"].split("(")[0].strip()],
         },
         {
             "mode": "cinema",
+            "active_rank": "#1",
             "se_type": "review_pop",
             "badge": "NO.1  |  LOCAL RULE & HACK",
             "title_en": r1_short_name,
             "sub_en": f"PRO TIP: {r1_row['hack']}",
-            "access": f"TIP: {sp1.get('insider_tip', r1_row['hack'])}",
+            "access": f"{r1_row.get('access_short', 'Direct Access')} | {r1_row.get('budget', '')}",
             "photos": [rv1["photos"][0], rv1["photos"][1]],
             "photo_tags": ["REAL JAPANESE IG VOICE (3/4)", "REAL JAPANESE IG VOICE (4/4)"],
             "card_style": "warn",
             "card_title": "UNFILTERED LOCAL WARNING",
             "card_body_en": rv1.get("review_warn_en", r1_row["hack"]),
+            "card_body_ja": rv1.get("review_warn_ja", ""),
             "narration": _short_punch(r1_row["hack"], "Must-know rule:", 9),
             "pop_lines": ["MUST-KNOW LOCAL RULE!", r1_row["hack"]],
         },
@@ -2184,6 +2578,9 @@ def build_shorts_video(script_path: Path) -> Path:
             "pop_lines": ["SCREENSHOT THIS TOP 10 LIST!", "SUBSCRIBE FOR REAL JAPAN DATA!"],
         },
     ]
+
+    ep_rot = sum(ord(c) for c in ranking_id) % 3
+    logger.info(f"Shorts Design Rotation for '{ranking_id}': Lead Style #{ep_rot + 1} (Rotating 案A / 案B / 案C across all cuts)")
 
     with tempfile.TemporaryDirectory(prefix="yt_short_") as tmp_str:
         work_dir = Path(tmp_str)
@@ -2208,15 +2605,41 @@ def build_shorts_video(script_path: Path) -> Path:
             p2 = work_dir / f"sp_{idx:02d}_b.jpg"
             short_flash: List[Path] = []
             if sc["mode"] == "hook":
-                render_short_promise_jpg(ranking_id, summary_rows, font_path, p1)
-                render_short_hook_jpg(ranking_id, area_guide, summary_rows, font_path, p2)
+                ph_a = cache_dir / sc["photos"][0]
+                ph_b = cache_dir / sc["photos"][1]
+                if ep_rot == 0:
+                    render_short_ig_design_c_jpg(ph_a, sc, summary_rows, "#1", font_path, p1)
+                    render_short_ig_design_a_jpg(ph_b, sc, font_path, p2)
+                elif ep_rot == 1:
+                    render_short_ig_design_a_jpg(ph_a, sc, font_path, p1)
+                    render_short_ig_design_b_jpg(ph_a, ph_b, sc, font_path, p2)
+                else:
+                    render_short_ig_design_b_jpg(ph_a, ph_b, sc, font_path, p1)
+                    render_short_ig_design_c_jpg(ph_a, sc, summary_rows, "#1", font_path, p2)
                 short_flash = [p1, p2]
             elif sc["mode"] == "outro":
                 render_short_outro_jpg(ranking_id, summary_rows, font_path, p1)
                 shutil.copyfile(p1, p2)
             else:
-                render_short_cinema_frame_jpg(cache_dir / sc["photos"][0], sc["photo_tags"][0], font_path, p1)
-                render_short_cinema_frame_jpg(cache_dir / sc["photos"][1], sc["photo_tags"][1], font_path, p2)
+                ph_a = cache_dir / sc["photos"][0]
+                ph_b = cache_dir / sc["photos"][1]
+                act_rk = sc.get("active_rank", "#1")
+                if sc.get("card_style") == "praise":
+                    # Rotate between 案C (TOP3 Countdown Stack) and 案A (Full-Screen NatGeo + IG Voice)
+                    if (idx + ep_rot) % 2 == 0:
+                        render_short_ig_design_c_jpg(ph_a, sc, summary_rows, act_rk, font_path, p1)
+                        render_short_ig_design_a_jpg(ph_b, sc, font_path, p2)
+                    else:
+                        render_short_ig_design_a_jpg(ph_a, sc, font_path, p1)
+                        render_short_ig_design_c_jpg(ph_b, sc, summary_rows, act_rk, font_path, p2)
+                else:
+                    # Rotate between 案B (Top/Bottom 2-Screen Split + IG Combo Bridge) and 案A (Full-Screen IG Warning)
+                    if (idx + ep_rot) % 2 == 0:
+                        render_short_ig_design_b_jpg(ph_a, ph_b, sc, font_path, p1)
+                        render_short_ig_design_a_jpg(ph_b, sc, font_path, p2)
+                    else:
+                        render_short_ig_design_a_jpg(ph_a, sc, font_path, p1)
+                        render_short_ig_design_b_jpg(ph_b, ph_a, sc, font_path, p2)
 
             hud_png = work_dir / f"shud_{idx:02d}.png"
             render_short_hud_png(sc, font_path, hud_png)
@@ -2549,13 +2972,13 @@ def render_custom_thumbnails(script_path: Path) -> Tuple[Path, Path, Path]:
     canvas_a.alpha_composite(pol3, (972, 232))
     canvas_a.alpha_composite(pol2, (966, 448))
 
-    # Top-left Red Verification Ribbon (x=28..516, y=20..76)
-    d_a.rounded_rectangle((28, 20, 516, 76), radius=12, fill=(220, 38, 38, 255), outline=(253, 224, 71, 255), width=3)
+    # Top-left Instagram Verification Ribbon (x=28..516, y=20..76)
+    d_a.rounded_rectangle((28, 20, 516, 76), radius=12, fill=(24, 16, 40, 250), outline=(225, 48, 108, 255), width=3)
+    draw_instagram_logo(canvas_a, 38, 26, 44)
     rib_txt = tc.get("ribbon_text", "ZERO PAID PROMO • JAPANESE IG")
-    f_rib = fit_font_for_width(d_a, rib_txt, w9_path, 22, 15, 464)
-    rib_txt_fit = smart_truncate(d_a, rib_txt, f_rib, 464)
-    tb_rb = d_a.textbbox((0, 0), rib_txt_fit, font=f_rib)
-    d_a.text((28 + (488 - (tb_rb[2] - tb_rb[0])) // 2, 36), rib_txt_fit, font=f_rib, fill=(255, 255, 255, 255))
+    f_rib = fit_font_for_width(d_a, rib_txt, w9_path, 21, 14, 412)
+    rib_txt_fit = smart_truncate(d_a, rib_txt, f_rib, 412)
+    d_a.text((92, 36), rib_txt_fit, font=f_rib, fill=(255, 255, 255, 255))
 
     # Top-right #1 Highlight Pill strictly bounded to x=566..1260 (never overlaps left ribbon!)
     bx0, bx1 = 566, 1260
@@ -2701,9 +3124,10 @@ def render_custom_thumbnails(script_path: Path) -> Tuple[Path, Path, Path]:
     f_sub_b = ImageFont.truetype(w9_path, 22)
     t_sub_b = "100% NO PAID PROMO  •  ANALYZED FROM JAPANESE IG"
     tb_sb = d_b.textbbox((0, 0), t_sub_b, font=f_sub_b)
-    w_sb = (tb_sb[2] - tb_sb[0]) + 40
-    d_b.rounded_rectangle((28, 18, 28 + w_sb, 68), radius=10, fill=(220, 38, 38, 255), outline=(253, 224, 71, 255), width=3)
-    d_b.text((48, 32), t_sub_b, font=f_sub_b, fill=(255, 255, 255, 255))
+    w_sb = (tb_sb[2] - tb_sb[0]) + 84
+    d_b.rounded_rectangle((28, 18, 28 + w_sb, 68), radius=10, fill=(24, 16, 40, 250), outline=(225, 48, 108, 255), width=3)
+    draw_instagram_logo(canvas_b, 38, 23, 40)
+    d_b.text((90, 32), t_sub_b, font=f_sub_b, fill=(255, 255, 255, 255))
 
     f_b_main = fit_font_for_width(d_b, banner_title, black_path, 82, 52, W - 64)
     draw_pro_3d_text(canvas_b, (28, 74), banner_title, f_b_main, (255, 250, 145), (245, 158, 11), stroke_w=10, depth=9)
@@ -2785,10 +3209,11 @@ def render_custom_thumbnails(script_path: Path) -> Tuple[Path, Path, Path]:
     d3.text((24, 595), "PAID INFLUENCER TRAP", font=f_lb, fill=(252, 165, 165, 255), stroke_width=3, stroke_fill=(0, 0, 0, 255))
     d3.text((24, 632), "90% of Tourists Fall For This", font=f_ls, fill=(255, 255, 255, 255), stroke_width=3, stroke_fill=(0, 0, 0, 255))
 
-    d3.rounded_rectangle((540, 180, 1020, 254), radius=14, fill=(5, 150, 105, 250), outline=(253, 224, 71, 255), width=4)
+    d3.rounded_rectangle((540, 180, 1060, 254), radius=14, fill=(24, 16, 40, 250), outline=(225, 48, 108, 255), width=4)
+    draw_instagram_logo(canvas_3, 556, 188, 56)
     rl_stamp = "JAPANESE IG #1"
     tb_rl = d3.textbbox((0, 0), rl_stamp, font=f_st)
-    d3.text((540 + (480 - (tb_rl[2] - tb_rl[0])) // 2, 194), rl_stamp, font=f_st, fill=(255, 255, 255, 255))
+    d3.text((624 + (420 - (tb_rl[2] - tb_rl[0])) // 2, 194), rl_stamp, font=f_st, fill=(255, 255, 255, 255))
 
     top3_txt = f"{hero_line1} {banner_title}"
     f_top3 = fit_font_for_width(d3, top3_txt, black_path, 72, 28, W - 56)
@@ -2851,11 +3276,12 @@ def render_custom_thumbnails(script_path: Path) -> Tuple[Path, Path, Path]:
     canvas_4.alpha_composite(sh4.filter(ImageFilter.GaussianBlur(radius=14)))
     d4 = ImageDraw.Draw(canvas_4)
     d4.rounded_rectangle((ex0, ey0, ex1, ey1), radius=28, fill=(10, 16, 32, 248), outline=(253, 224, 71, 255), width=5)
-    d4.rounded_rectangle((ex0 + 50, ey0 - 24, ex1 - 50, ey0 + 26), radius=18, fill=(220, 38, 38, 255), outline=(253, 224, 71, 255), width=3)
+    d4.rounded_rectangle((ex0 + 50, ey0 - 24, ex1 - 50, ey0 + 26), radius=18, fill=(24, 16, 40, 255), outline=(225, 48, 108, 255), width=3)
+    draw_instagram_logo(canvas_4, ex0 + 66, ey0 - 19, 38)
     f_em_sub = ImageFont.truetype(w9_path, 21)
     t_em = "ZERO PAID PROMO • JAPANESE IG ANALYZED"
     tb_em = d4.textbbox((0, 0), t_em, font=f_em_sub)
-    d4.text(((W - (tb_em[2] - tb_em[0])) // 2, ey0 - 10), t_em, font=f_em_sub, fill=(255, 255, 255, 255))
+    d4.text(((W - (tb_em[2] - tb_em[0])) // 2 + 20, ey0 - 10), t_em, font=f_em_sub, fill=(255, 255, 255, 255))
     f_em_main = fit_font_for_width(d4, banner_title, black_path, 74, 30, (ex1 - ex0) - 48)
     tb_bm = d4.textbbox((0, 0), banner_title, font=f_em_main)
     draw_pro_3d_text(canvas_4, ((W - (tb_bm[2] - tb_bm[0])) // 2, ey0 + 40), banner_title, f_em_main, (255, 250, 140), (245, 158, 11), stroke_w=10, depth=8)
@@ -2884,9 +3310,11 @@ def render_custom_thumbnails(script_path: Path) -> Tuple[Path, Path, Path]:
     d5 = ImageDraw.Draw(canvas_5)
     t_r5 = "100% NO PAID PROMO • JAPANESE IG VOICE RANKING"
     tb_r5 = d5.textbbox((0, 0), t_r5, font=f_em_sub)
-    rw5 = (tb_r5[2] - tb_r5[0]) + 60
-    d5.rounded_rectangle(((W - rw5) // 2, 16, (W + rw5) // 2, 64), radius=24, fill=(220, 38, 38, 255), outline=(253, 224, 71, 255), width=3)
-    d5.text(((W - (tb_r5[2] - tb_r5[0])) // 2, 29), t_r5, font=f_em_sub, fill=(255, 255, 255, 255))
+    rw5 = (tb_r5[2] - tb_r5[0]) + 100
+    rx5_0 = (W - rw5) // 2
+    d5.rounded_rectangle((rx5_0, 16, rx5_0 + rw5, 64), radius=24, fill=(24, 16, 40, 255), outline=(225, 48, 108, 255), width=3)
+    draw_instagram_logo(canvas_5, rx5_0 + 18, 21, 38)
+    d5.text((rx5_0 + 66, 29), t_r5, font=f_em_sub, fill=(255, 255, 255, 255))
 
     cin_title = f"{hero_line1} {banner_title}"
     f_cin = fit_font_for_width(d5, cin_title, black_path, 72, 28, W - 56)
@@ -2928,62 +3356,24 @@ def render_custom_thumbnails(script_path: Path) -> Tuple[Path, Path, Path]:
     logger.info(f"Auto-rotated primary thumbnail for '{rid}' -> Template #{(ep_idx % 5) + 1} (Alt: Template #{((ep_idx + 2) % 5) + 1})")
 
     # =========================================================================
-    # Design C (1080x1920): Vertical YouTube Shorts Custom Cover
+    # Vertical YouTube Shorts Custom Cover (1080x1920): Rotates 案A / 案B / 案C!
     # =========================================================================
-    SW_T, SH_T = 1080, 1920
-    canvas_s = Image.new("RGBA", (SW_T, SH_T), (8, 12, 24, 255))
-    sh_hero = grade_photo(Image.open(p1_path), SW_T, 1320, sat=1.45, con=1.22, bri=1.06)
-    canvas_s.paste(sh_hero.convert("RGBA"), (0, 260))
-
-    ov_s = Image.new("RGBA", (SW_T, SH_T), (0, 0, 0, 0))
-    od_s = ImageDraw.Draw(ov_s)
-    for y in range(540):
-        a = int(252 * (1 - max(0, (y - 240)) / 300) ** 1.5) if y > 240 else 252
-        od_s.line([(0, y), (SW_T, y)], fill=(8, 13, 26, a))
-    for y in range(1180, SH_T):
-        t = min(1.0, (y - 1180) / 380)
-        a = int(252 * (t ** 1.3))
-        od_s.line([(0, y), (SW_T, y)], fill=(8, 13, 26, a))
-    canvas_s.alpha_composite(ov_s)
-
-    d_s = ImageDraw.Draw(canvas_s)
-    d_s.rounded_rectangle((90, 56, 990, 130), radius=37, fill=(220, 38, 38, 255), outline=(253, 224, 71, 255), width=4)
-    t_sr = "ZERO PAID PROMO • JAPANESE IG DATA"
-    f_sr = fit_font_for_width(d_s, t_sr, w9_path, 32, 22, 860)
-    tb_sr = d_s.textbbox((0, 0), t_sr, font=f_sr)
-    d_s.text(((SW_T - (tb_sr[2] - tb_sr[0])) // 2, 74), t_sr, font=f_sr, fill=(255, 255, 255, 255))
-
-    f_sh1 = fit_font_for_width(d_s, hero_line1, black_path, 108, 68, SW_T - 120)
-    f_sh2 = fit_font_for_width(d_s, hero_line2, black_path, 112, 68, SW_T - 120)
-    tb_sh1 = d_s.textbbox((0, 0), hero_line1, font=f_sh1)
-    tb_sh2 = d_s.textbbox((0, 0), hero_line2, font=f_sh2)
-    draw_pro_3d_text(canvas_s, ((SW_T - (tb_sh1[2] - tb_sh1[0])) // 2, 148), hero_line1, f_sh1, (255, 255, 255), (218, 234, 255), stroke_w=12, depth=10)
-    draw_pro_3d_text(canvas_s, ((SW_T - (tb_sh2[2] - tb_sh2[0])) // 2, 282), hero_line2, f_sh2, (255, 248, 130), (245, 158, 11), stroke_w=12, depth=10)
-
-    d_s.rounded_rectangle((70, 440, 1010, 548), radius=22, fill=(14, 116, 144, 248), outline=(167, 243, 208, 255), width=4)
-    f_sak = fit_font_for_width(d_s, banner_title, black_path, 56, 34, 900)
-    tb_sak = d_s.textbbox((0, 0), banner_title, font=f_sak)
-    d_s.text(((SW_T - (tb_sak[2] - tb_sak[0])) // 2, 460), banner_title, font=f_sak, fill=(255, 255, 255, 255))
-
-    sp_p3 = make_polaroid_card(p3_path, 430, 310, f"#3  {rows[2]['score']}", rows[2]["name_en"], (2, 132, 199), -5.0)
-    sp_p2 = make_polaroid_card(p2_path, 430, 310, f"#2  {rows[1]['score']}", rows[1]["name_en"], (220, 38, 38), 5.0)
-    canvas_s.alpha_composite(sp_p3, (65, 1390))
-    canvas_s.alpha_composite(sp_p2, (545, 1390))
-
-    d_s.rounded_rectangle((60, 1210, 1020, 1365), radius=26, fill=(12, 18, 32, 245), outline=(253, 224, 71, 255), width=5)
-    max_sn_w = (1020 - 60) - 48
-    t_sn1 = f"#1 {r1_clean_name} ({rows[0]['score'].split('/')[0].strip()} PT)"
-    t_sn2 = r1_clean_dish
-    f_sn1 = fit_font_for_width(d_s, t_sn1, w9_path, 42, 24, max_sn_w)
-    f_sn2 = fit_font_for_width(d_s, t_sn2, w9_path, 26, 18, max_sn_w)
-    t_sn2 = smart_truncate(d_s, t_sn2, f_sn2, max_sn_w)
-    tb_sn1 = d_s.textbbox((0, 0), t_sn1, font=f_sn1)
-    tb_sn2 = d_s.textbbox((0, 0), t_sn2, font=f_sn2)
-    d_s.text(((SW_T - (tb_sn1[2] - tb_sn1[0])) // 2, 1234), t_sn1, font=f_sn1, fill=(253, 224, 71, 255))
-    d_s.text(((SW_T - (tb_sn2[2] - tb_sn2[0])) // 2, 1304), t_sn2, font=f_sn2, fill=(167, 243, 208, 255))
-
-    canvas_s.convert("RGB").save(thumb_s, "JPEG", quality=96)
-    logger.info(f"Completed Custom Shorts Thumbnail C (1080x1920): {thumb_s}")
+    cover_scene = {
+        "badge": f"NO.1  |  SCORE: {rows[0]['score'].upper()}",
+        "title_en": r1_clean_name,
+        "sub_en": r1_clean_dish,
+        "access": f"{rows[0].get('access_short', 'Direct Access')} | {rows[0].get('budget', 'Local Price')}",
+        "card_style": "praise",
+        "card_body_en": rows[0].get("hack", "Top-rated local favorite on Japanese Instagram!"),
+    }
+    short_rot = ep_idx % 3
+    if short_rot == 0:
+        render_short_ig_design_a_jpg(p1_path, cover_scene, w9_path, thumb_s)
+    elif short_rot == 1:
+        render_short_ig_design_b_jpg(p1_path, p2_path, cover_scene, w9_path, thumb_s)
+    else:
+        render_short_ig_design_c_jpg(p1_path, cover_scene, rows, "#1", w9_path, thumb_s)
+    logger.info(f"Completed Custom Shorts Thumbnail (1080x1920, Design {['A', 'B', 'C'][short_rot]}): {thumb_s}")
     return thumb_a, thumb_b, thumb_s
 
 
