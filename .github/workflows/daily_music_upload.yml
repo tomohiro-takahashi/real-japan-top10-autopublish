@@ -2,8 +2,8 @@ name: Daily Retro Music 1-Hour & Shorts Auto-Upload
 
 on:
   schedule:
-    # Runs daily at 11:00 UTC (20:00 JST / 07:00 EDT / 12:00 London)
-    - cron: '0 11 * * *'
+    # Runs daily at 07:30 UTC (16:30 JST) -> pre-builds, finishes 1080p HD processing, and auto-publishes at 19:00 JST Golden Time
+    - cron: '30 7 * * *'
   workflow_dispatch:
     inputs:
       privacy:

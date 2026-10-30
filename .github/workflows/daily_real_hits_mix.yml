@@ -2,9 +2,8 @@ name: Real 80s-90s Western Legend 2-Hour Full Mix Auto-Upload
 
 on:
   schedule:
-    # Runs 1x daily at 13:00 UTC (22:00 JST Late Night)
-    # 1x Suno Original (20:00 JST) + 1x 2-Hour Real Western Masterpiece Mix (22:00 JST)
-    - cron: '0 13 * * *'
+    # Runs 1x daily at 08:30 UTC (17:30 JST) -> pre-builds 2-Hour Real Western Mix and auto-publishes at 20:30 JST Golden Time
+    - cron: '30 8 * * *'
   workflow_dispatch:
     inputs:
       mix_id:

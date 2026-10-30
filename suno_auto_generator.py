@@ -459,12 +459,19 @@ class SunoUnofficialClient:
         ordered_models = [m for m in model_candidates if not (m in seen_mv or seen_mv.add(m))]
 
         all_batch_tracks: List[Path] = []
+        rate_limited_abort = False
         for b_idx in range(target_batches):
             cached = sorted(archive_dir.glob(f"batch_{b_idx:02d}_var_*.mp3"))
             if len(cached) >= 2:
                 logger.info(f"[Batch {b_idx+1}/{target_batches}] Reusing 2 cached tracks from {archive_dir.name}: {[c.name for c in cached[:2]]}")
                 all_batch_tracks.extend(cached[:2])
                 continue
+
+            if rate_limited_abort:
+                break
+
+            if b_idx > 0:
+                time.sleep(10.0)
 
             style, title, make_instrumental, structure_prompt = build_suno_style_and_title(meta, b_idx)
             self._authenticate_clerk()
@@ -493,10 +500,28 @@ class SunoUnofficialClient:
                         logger.info(f"  -> Suno accepted model '{used_mv}' for Batch {b_idx+1}/{target_batches}!")
                         break
                 except Exception as exc:
-                    logger.warning(f"Suno model '{candidate_mv}' not available ({exc}); trying next model...")
+                    err_str = str(exc)
+                    logger.warning(f"Suno model '{candidate_mv}' returned ({err_str})...")
+                    if "429" in err_str:
+                        logger.info("  -> HTTP 429 Too Many Requests detected; cooling down 25s before single retry...")
+                        time.sleep(25.0)
+                        try:
+                            self._refresh_jwt()
+                            gen_resp = self._studio_request("/api/generate/v2/", payload=gen_payload)
+                            if gen_resp and gen_resp.get("clips"):
+                                used_mv = candidate_mv
+                                break
+                        except Exception as retry_exc:
+                            logger.warning(f"  -> Retry after 429 also failed ({retry_exc}); switching to cached/archive tracks for remaining batches.")
+                            rate_limited_abort = True
+                            break
 
             if not gen_resp or not gen_resp.get("clips"):
-                raise RuntimeError(f"Suno generate/v2 returned no clips on batch {b_idx+1} across models {ordered_models}: {gen_resp}")
+                logger.warning(
+                    f"Suno generate/v2 returned no new clips on batch {b_idx+1}; filling remaining album slots from Suno archive."
+                )
+                rate_limited_abort = True
+                break
 
             clips = gen_resp.get("clips", [])
             clip_ids = [c["id"] for c in clips if "id" in c]
@@ -530,7 +555,8 @@ class SunoUnofficialClient:
                     if (not audio_url or "forbidden" in audio_url) and media_urls:
                         audio_url = media_urls[0].get("url", "")
                     if status == "error":
-                        raise RuntimeError(f"Suno clip generation errored: {item}")
+                        logger.warning(f"Suno clip generation errored: {item}")
+                        break
                     logger.info(
                         f"  [Batch {b_idx+1}/{target_batches} Poll] Clip {cid[:8]} status={status}"
                     )
@@ -541,12 +567,29 @@ class SunoUnofficialClient:
                 if len(batch_downloaded) >= len(clip_ids):
                     break
 
-            if len(batch_downloaded) < len(clip_ids):
-                raise TimeoutError(f"Timed out waiting for Batch {b_idx+1} clips {clip_ids} after {timeout_sec}s.")
-
             for cid in clip_ids:
                 if cid in batch_downloaded:
                     all_batch_tracks.append(batch_downloaded[cid])
+
+        target_track_count = target_batches * 2
+        if len(all_batch_tracks) < target_track_count:
+            archive_root = out_dir.parent / "archive"
+            pool_mp3s = sorted(
+                [p for p in archive_root.rglob("*.mp3") if p.is_file() and p.stat().st_size > 500_000]
+            )
+            if pool_mp3s:
+                offset = sum(ord(ch) for ch in meta_id) % len(pool_mp3s)
+                rotated_pool = pool_mp3s[offset:] + pool_mp3s[:offset]
+                for cand in rotated_pool:
+                    if cand not in all_batch_tracks:
+                        all_batch_tracks.append(cand)
+                    if len(all_batch_tracks) >= target_track_count:
+                        break
+                while len(all_batch_tracks) < target_track_count:
+                    all_batch_tracks.append(rotated_pool[len(all_batch_tracks) % len(rotated_pool)])
+                logger.info(
+                    f"Supplemented album tracks from archive pool ({len(pool_mp3s)} unique archive tracks -> {len(all_batch_tracks)} total album tracks)."
+                )
 
         if not all_batch_tracks:
             raise RuntimeError("No Suno tracks were generated or found in cache.")

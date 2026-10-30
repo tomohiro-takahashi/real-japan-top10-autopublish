@@ -40,6 +40,7 @@ from build_music_video import (
     build_1hour_video,
     build_highway_driving_loop_mp4,
     build_short_video,
+    compute_music_golden_time_iso,
     download_background_image,
     find_bold_font,
     find_cjk_font,
@@ -461,17 +462,44 @@ def download_and_mix_real_tracks(
 
         for idx, tr in enumerate(tracks, start=1):
             query = tr["query"]
+            sc_query = f"{tr['artist']} {tr['title']}"
             raw_out_tmpl = str(tmp_dir / f"raw_{idx:02d}.%(ext)s")
             logger.info(f"[{idx}/{len(tracks)}] Downloading Full Track via yt-dlp: {tr['artist']} - {tr['title']} ...")
+
+            def _duration_filter(info_dict: Dict[str, Any], *, incomplete: bool = False) -> Optional[str]:
+                dur = info_dict.get("duration")
+                if dur is not None and (dur < 95 or dur > 660):
+                    return "Track duration outside 95s..660s full-song window"
+                return None
+
             ydl_opts = {
                 "format": "bestaudio/best",
                 "noplaylist": True,
                 "outtmpl": raw_out_tmpl,
                 "quiet": True,
                 "no_warnings": True,
+                "match_filter": _duration_filter,
+                "playlistend": 1,
             }
-            with yt_dlp.YoutubeDL(ydl_opts) as ydl:
-                ydl.download([f"ytsearch1:{query}"])
+            search_targets = (
+                [f"scsearch5:{sc_query}", f"scsearch1:{sc_query}", f"ytsearch1:{query}"]
+                if os.environ.get("GITHUB_ACTIONS") == "true"
+                else [f"ytsearch1:{query}", f"scsearch5:{sc_query}", f"scsearch1:{sc_query}"]
+            )
+            for starget in search_targets:
+                for old_f in tmp_dir.glob(f"raw_{idx:02d}.*"):
+                    old_f.unlink(missing_ok=True)
+                try:
+                    opts_try = dict(ydl_opts)
+                    if starget.startswith("scsearch1:"):
+                        opts_try.pop("match_filter", None)
+                    with yt_dlp.YoutubeDL(opts_try) as ydl:
+                        ydl.download([starget])
+                except Exception as dl_exc:
+                    logger.warning(f"  -> {starget} warning: {dl_exc}")
+                downloaded = sorted(tmp_dir.glob(f"raw_{idx:02d}.*"))
+                if downloaded and get_audio_duration(downloaded[0]) >= 60.0:
+                    break
 
             downloaded = sorted(tmp_dir.glob(f"raw_{idx:02d}.*"))
             if not downloaded:
@@ -645,6 +673,7 @@ def main() -> int:
     parser.add_argument("--max-duration", type=int, default=10800, help="Max total duration in seconds (default: 10800 = up to 3 hours).")
     parser.add_argument("--privacy", default="public", choices=["public", "unlisted", "private"])
     parser.add_argument("--dry-run", action="store_true")
+    parser.add_argument("--publish-now", action="store_true", help="Publish immediately even if outside Japan Golden Time.")
     args = parser.parse_args()
 
     pool = ensure_real_hits_pool()
@@ -697,6 +726,9 @@ def main() -> int:
         logger.info(f"Timestamps:\n{formatted_ts}")
         return 0
 
+    publish_at_long = None if args.publish_now else compute_music_golden_time_iso(20, 30)
+    publish_at_short = None if args.publish_now else compute_music_golden_time_iso(20, 35)
+
     try:
         youtube = get_youtube_service()
         long_id = upload_video_to_youtube(
@@ -707,6 +739,7 @@ def main() -> int:
             tags=chosen_meta["tags"],
             privacy_status=args.privacy,
             thumbnail_path=OUTPUT_THUMB,
+            publish_at_iso=publish_at_long,
         )
         short_desc = f"🎧 本編2時間フルメドレー動画（全24曲フル尺）はこちら 👉 https://youtu.be/{long_id}\n\n{full_desc}"
         short_id = upload_video_to_youtube(
@@ -717,6 +750,7 @@ def main() -> int:
             tags=chosen_meta["tags"] + ["Shorts", "YouTubeShorts"],
             privacy_status=args.privacy,
             thumbnail_path=None,
+            publish_at_iso=publish_at_short,
         )
     except Exception as exc:
         logger.warning(f"Upload deferred ({exc}).")

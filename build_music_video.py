@@ -291,6 +291,24 @@ def pick_mp3_and_metadata(
             except Exception as exc:
                 logger.error(f"Suno automatic generation failed: {exc}")
 
+        if not mp3_files:
+            archive_root = QUEUE_DIR.parent / "archive"
+            pool_mp3s = sorted(
+                [p for p in archive_root.rglob("*.mp3") if p.is_file() and p.stat().st_size > 500_000]
+            )
+            if pool_mp3s:
+                meta_id = chosen_meta.get("id", "music_track")
+                offset = sum(ord(ch) for ch in meta_id) % len(pool_mp3s)
+                rotated = pool_mp3s[offset:] + pool_mp3s[:offset]
+                target_n = int(os.environ.get("SUNO_BATCHES_PER_VIDEO", "8")) * 2
+                tracks_to_use = [rotated[i % len(rotated)] for i in range(target_n)]
+                logger.info(
+                    f"Assembling fallback {target_n}-track album master for {meta_id} from {len(pool_mp3s)} archived Suno Pro tracks..."
+                )
+                fallback_master = suno_client._assemble_album_master(chosen_meta, tracks_to_use, QUEUE_DIR)
+                if fallback_master and fallback_master.exists():
+                    mp3_files = [fallback_master]
+
     if not mp3_files:
         logger.warning(f"No MP3 files found in {QUEUE_DIR} (and SUNO_COOKIE not active).")
         return None, None, []
@@ -1584,6 +1602,36 @@ def get_youtube_service():
     return build("youtube", "v3", credentials=creds)
 
 
+def compute_music_golden_time_iso(
+    target_hour_jst: int = 19,
+    target_minute_jst: int = 0,
+) -> Optional[str]:
+    """
+    If current JST time is outside the 18:00..22:15 Golden Time window (e.g., pre-built at 16:30 JST
+    or triggered late at night), return the next occurrence of `target_hour_jst:target_minute_jst` JST
+    as an ISO-8601 UTC timestamp (`YYYY-MM-DDTHH:MM:SSZ`) for YouTube's `status.publishAt`.
+    If currently inside 18:00..22:15 JST, return None so the video goes public immediately.
+    """
+    from datetime import timedelta
+
+    jst = timezone(timedelta(hours=9))
+    now_jst = datetime.now(jst)
+    if 18 <= now_jst.hour < 22 or (now_jst.hour == 22 and now_jst.minute <= 15):
+        return None
+
+    candidate_jst = now_jst.replace(
+        hour=target_hour_jst,
+        minute=target_minute_jst,
+        second=0,
+        microsecond=0,
+    )
+    if candidate_jst <= now_jst + timedelta(minutes=10):
+        candidate_jst += timedelta(days=1)
+
+    utc_dt = candidate_jst.astimezone(timezone.utc)
+    return utc_dt.strftime("%Y-%m-%dT%H:%M:%SZ")
+
+
 def upload_video_to_youtube(
     youtube,
     video_path: Path,
@@ -1592,9 +1640,17 @@ def upload_video_to_youtube(
     tags: List[str],
     privacy_status: str = "public",
     thumbnail_path: Optional[Path] = None,
+    publish_at_iso: Optional[str] = None,
 ) -> str:
-    """Upload a video to YouTube Data API v3 and optionally set its custom thumbnail."""
+    """Upload a video to YouTube Data API v3 and optionally set its custom thumbnail and scheduled publishAt."""
     from googleapiclient.http import MediaFileUpload
+
+    status_dict: Dict[str, Any] = {
+        "privacyStatus": "private" if (publish_at_iso and privacy_status == "public") else privacy_status,
+        "selfDeclaredMadeForKids": False,
+    }
+    if publish_at_iso and privacy_status == "public":
+        status_dict["publishAt"] = publish_at_iso
 
     body = {
         "snippet": {
@@ -1605,10 +1661,7 @@ def upload_video_to_youtube(
             "defaultLanguage": "ja",
             "defaultAudioLanguage": "ja",
         },
-        "status": {
-            "privacyStatus": privacy_status,
-            "selfDeclaredMadeForKids": False,
-        },
+        "status": status_dict,
     }
 
     media = MediaFileUpload(
@@ -1625,7 +1678,12 @@ def upload_video_to_youtube(
             logger.info(f"Uploading {video_path.name}: {int(status.progress() * 100)}%")
 
     video_id = response["id"]
-    logger.info(f"Uploaded {video_path.name} -> https://youtu.be/{video_id}")
+    if publish_at_iso and privacy_status == "public":
+        logger.info(
+            f"Uploaded {video_path.name} -> https://youtu.be/{video_id} (Scheduled for Golden Time: {publish_at_iso})"
+        )
+    else:
+        logger.info(f"Uploaded {video_path.name} -> https://youtu.be/{video_id}")
 
     if thumbnail_path and thumbnail_path.exists():
         try:
@@ -1823,6 +1881,11 @@ def main() -> int:
         action="store_true",
         help="If stocks/music/queue/ is empty and SUNO_COOKIE is not set, synthesize a sample retro MP3 for testing.",
     )
+    parser.add_argument(
+        "--publish-now",
+        action="store_true",
+        help="Publish immediately even if outside Japan Golden Time (18:00-22:15 JST).",
+    )
     args = parser.parse_args()
 
     if args.auth_setup:
@@ -1905,6 +1968,9 @@ def main() -> int:
         logger.info(f"  - Thumbnail    : {OUTPUT_THUMB}")
         return 0
 
+    publish_at_long = None if args.publish_now else compute_music_golden_time_iso(19, 0)
+    publish_at_short = None if args.publish_now else compute_music_golden_time_iso(19, 5)
+
     # Step 6: Upload both videos to YouTube & move MP3 to done/
     try:
         youtube = get_youtube_service()
@@ -1916,6 +1982,7 @@ def main() -> int:
             tags=chosen_meta.get("tags", []),
             privacy_status=args.privacy,
             thumbnail_path=OUTPUT_THUMB,
+            publish_at_iso=publish_at_long,
         )
 
         short_desc = (
@@ -1930,6 +1997,7 @@ def main() -> int:
             tags=chosen_meta.get("tags", []) + ["Shorts", "YouTubeShorts"],
             privacy_status=args.privacy,
             thumbnail_path=None,
+            publish_at_iso=publish_at_short,
         )
     except Exception as exc:
         err_s = str(exc)
