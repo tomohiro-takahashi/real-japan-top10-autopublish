@@ -3,7 +3,7 @@
   "items": [
     {
       "id": "real_mix_001",
-      "used": false,
+      "used": true,
       "genre": "80s City Pop & Sax AOR",
       "artwork_file": "citypop80s.jpg",
       "title": "【名画メドレー】イントロで名シーンが蘇る！80年代・90年代「映画主題歌＆サントラ」洋楽名曲集【2時間・全24曲フル】トップガン / BTTF / スタンド・バイ・ミー / アルマゲドン",
@@ -173,7 +173,10 @@
         "作業用BGM",
         "ドライブBGM",
         "2時間"
-      ]
+      ],
+      "published_at": "2026-10-30T02:05:57.260771+00:00",
+      "youtube_long_id": "Ty98jxVheWQ",
+      "youtube_short_id": "4W8uGl8SCGg"
     },
     {
       "id": "real_mix_002",

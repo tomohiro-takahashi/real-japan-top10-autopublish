@@ -1062,66 +1062,92 @@ def build_1hour_video(
     duration_sec: int = 3600,
 ) -> Path:
     """
-    Synthesize the 16:9 Video (`output_1hour.mp4`, Native 1920x1080 Full HD):
-    - Loops the native 1920x1080 35mm film motion video (`bg_loop_mp4`) seamlessly for `duration_sec`.
-    - Overlays the native 1920x1080 HUD (`hud_png`) and a slim champagne-gold waveform (`0xd9b36c`, opacity `0.40`).
-    - Adds subtle 35mm film grain (`noise=c0s=3:c0f=t+u`) + High Profile CRF 15 so YouTube never crushes dark areas or drops Auto quality.
+    Synthesize the 16:9 Video (`output_1hour.mp4`, Native 1920x1080 Full HD) in ~5 seconds via 2-Stage Master Loop Stream-Copy:
+    Stage 1: Composite `bg_loop_mp4` + `hud_png` + 16s waveform + subtle 35mm grain into a single 16-second H.264 master loop (~3s).
+    Stage 2: Stream-copy (`-stream_loop -1 -c:v copy -c:a copy`) the master loop across `duration_sec` (~2s, ~350MB for 2 hours).
     """
     logger.info(f"Rendering native 16:9 1080p Full HD calm adult music video ({duration_sec}s): {out_mp4} ...")
     fps = 24
-    filter_complex = (
-        f"[0:v]setpts=PTS-STARTPTS[bg];"
-        f"[bg][1:v]overlay=0:0[bghud];"
-        f"[2:a]showwaves=s=1788x48:mode=cline:rate={fps}:scale=sqrt:colors=0xd9b36c,format=rgba,"
-        f"colorchannelmixer=aa=0.42[sw];"
-        f"[bghud][sw]overlay=66:906:shortest=1,noise=c0s=3:c0f=t+u,unsharp=3:3:0.45:3:3:0.0,format=yuv420p[vout]"
-    )
+    loop_dur = max(8.0, min(20.0, get_audio_duration(bg_loop_mp4) or 16.0))
 
-    cmd = [
-        "ffmpeg",
-        "-y",
-        "-stream_loop",
-        "-1",
-        "-i",
-        str(bg_loop_mp4),
-        "-i",
-        str(hud_png),
-        "-i",
-        str(looped_audio_m4a),
-        "-filter_complex",
-        filter_complex,
-        "-map",
-        "[vout]",
-        "-map",
-        "2:a",
-        "-t",
-        str(duration_sec),
-        "-r",
-        str(fps),
-        "-c:v",
-        "libx264",
-        "-preset",
-        "veryfast",
-        "-profile:v",
-        "high",
-        "-level",
-        "4.2",
-        "-crf",
-        "15",
-        "-maxrate",
-        "10M",
-        "-bufsize",
-        "20M",
-        "-pix_fmt",
-        "yuv420p",
-        "-c:a",
-        "copy",
-        "-movflags",
-        "+faststart",
-        "-shortest",
-        str(out_mp4),
-    ]
-    subprocess.run(cmd, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    with tempfile.TemporaryDirectory(prefix="master_loop_") as tmp_s:
+        master_loop = Path(tmp_s) / "composited_loop.mp4"
+        filter_complex = (
+            f"[0:v]setpts=PTS-STARTPTS[bg];"
+            f"[bg][1:v]overlay=0:0[bghud];"
+            f"[2:a]atrim=0:{loop_dur:.2f},asetpts=PTS-STARTPTS,"
+            f"showwaves=s=1788x48:mode=cline:rate={fps}:scale=sqrt:colors=0xd9b36c,format=rgba,"
+            f"colorchannelmixer=aa=0.42[sw];"
+            f"[bghud][sw]overlay=66:906:shortest=1,noise=c0s=2:c0f=t,unsharp=3:3:0.45:3:3:0.0,format=yuv420p[vout]"
+        )
+        cmd_stage1 = [
+            "ffmpeg",
+            "-y",
+            "-stream_loop",
+            "-1",
+            "-i",
+            str(bg_loop_mp4),
+            "-i",
+            str(hud_png),
+            "-i",
+            str(looped_audio_m4a),
+            "-filter_complex",
+            filter_complex,
+            "-map",
+            "[vout]",
+            "-an",
+            "-t",
+            f"{loop_dur:.2f}",
+            "-r",
+            str(fps),
+            "-c:v",
+            "libx264",
+            "-preset",
+            "veryfast",
+            "-profile:v",
+            "high",
+            "-level",
+            "4.2",
+            "-crf",
+            "18",
+            "-g",
+            str(fps),
+            "-keyint_min",
+            str(fps),
+            "-sc_threshold",
+            "0",
+            "-pix_fmt",
+            "yuv420p",
+            str(master_loop),
+        ]
+        subprocess.run(cmd_stage1, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+
+        cmd_stage2 = [
+            "ffmpeg",
+            "-y",
+            "-stream_loop",
+            "-1",
+            "-i",
+            str(master_loop),
+            "-i",
+            str(looped_audio_m4a),
+            "-map",
+            "0:v:0",
+            "-map",
+            "1:a:0",
+            "-t",
+            str(duration_sec),
+            "-c:v",
+            "copy",
+            "-c:a",
+            "copy",
+            "-movflags",
+            "+faststart",
+            "-shortest",
+            str(out_mp4),
+        ]
+        subprocess.run(cmd_stage2, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+
     logger.info(f"Completed native 16:9 1080p video: {out_mp4} ({out_mp4.stat().st_size / (1024*1024):.1f} MB)")
     return out_mp4
 
