@@ -112,16 +112,14 @@
       "short_title_en": "[No Promo] 430m Above the Clouds?! Japan's #1 Mountain Samurai Fortress #Shorts #Samurai"
     },
     {
-      "day": 8,
-      "ranking_id": "anime_shinkai_your_name_suzume",
-      "scope_type": "🎬 アニメ聖地特化 (君の名は・すずめ)",
-      "category_type": "『君の名は。』『すずめの戸締まり』の鳥肌が立つ実在風景TOP10",
-      "keyword_ja": "君の名は すずめの戸締まり 聖地 飛騨古川 諏訪湖",
-      "region_en": "Your Name & Suzume Real Sites",
-      "category_en": "Exact Stairs, Crater Lakes & Abandoned Doors from Makoto Shinkai Films",
-      "target_pref_ja": "岐阜県",
-      "hook_title_en": "REAL 'YOUR NAME' & 'SUZUME' JAPAN! TOP 10 Anime Sacred Sites + Nearby Sightseeing & Food Guide [No Promo]",
-      "short_title_en": "Real-Life 'Your Name' Stairs + Best Nearby Tokyo Spots! #Shorts #YourName #AnimePilgrimage"
+      "ranking_id": "anime_dragon_ball_akira_toriyama",
+      "keyword_ja": "ドラゴンボール 聖地 鳥山明",
+      "region_en": "Dragon Ball & Toriyama Sites",
+      "category_en": "Akira Toriyama Hometown, Toei Museum & Goku Sanctuaries + Nearby Gourmet",
+      "target_pref_ja": "愛知県",
+      "hook_title_en": "REAL DRAGON BALL PILGRIMAGE! Top 10 Akira Toriyama & Goku Sacred Sites in Japan + Local Food",
+      "short_title_en": "Real Dragon Ball & Akira Toriyama Sacred Sites in Japan! #Shorts #DragonBall #JapanTravel",
+      "day": 8
     },
     {
       "day": 9,
@@ -148,16 +146,14 @@
       "short_title_en": "[No Promo] Have Tattoos? This #1 Japanese Onsen Town Welcomes Everyone! #Shorts #Onsen"
     },
     {
-      "day": 11,
-      "ranking_id": "anime_demon_slayer_jujutsu",
-      "scope_type": "🎬 アニメ聖地特化 (鬼滅の刃・呪術廻戦)",
-      "category_type": "『鬼滅の刃』『呪術廻戦』のモデルになった神社・温泉・一刀石TOP10",
-      "keyword_ja": "鬼滅の刃 聖地 芦ノ牧温泉 宝満宮竈門神社 一刀石",
-      "region_en": "Demon Slayer & Jujutsu Kaisen Sites",
-      "category_en": "Real Split Boulders, Infinity Castle Ryokan & Wisteria Shrines",
-      "target_pref_ja": "福島県",
-      "hook_title_en": "REAL 'DEMON SLAYER' & 'JUJUTSU KAISEN'! 10 Anime Sacred Sites + Nearby Onsen, Castles & Food [No Promo]",
-      "short_title_en": "Real Demon Slayer Infinity Castle Ryokan in Japan! #Shorts #DemonSlayer #JujutsuKaisen"
+      "ranking_id": "anime_sailor_moon_azabu_tokyo",
+      "keyword_ja": "セーラームーン 聖地 麻布十番",
+      "region_en": "Sailor Moon Tokyo Sites",
+      "category_en": "Azabu-Juban, Rei's Hikawa Shrine & Tokyo Tower + Nearby Sweets",
+      "target_pref_ja": "東京都",
+      "hook_title_en": "REAL SAILOR MOON TOKYO! Top 10 Azabu-Juban & Hikawa Shrine Sacred Sites + Nearby Cafes",
+      "short_title_en": "Real Sailor Moon Locations in Azabu-Juban Tokyo! #Shorts #SailorMoon #Tokyo",
+      "day": 11
     },
     {
       "day": 12,
@@ -220,16 +216,17 @@
       "short_title_en": "[No Promo] Just 90 Mins from Tokyo! Japan's #1 Volume Hot Spring Town #Shorts #TokyoTravel"
     },
     {
-      "day": 17,
-      "ranking_id": "anime_onepiece_attack_kyushu",
-      "scope_type": "🎬 アニメ聖地特化 (進撃の巨人・ワンピース)",
-      "category_type": "作者の故郷！九州にある『進撃の巨人』日田＆『ワンピース』熊本聖地TOP10",
-      "keyword_ja": "進撃の巨人 日田 ワンピース 熊本 聖地",
-      "region_en": "Attack on Titan & One Piece Kyushu",
-      "category_en": "Giant Bronze Titan Statues at Oyama Dam & Straw Hat Statues Across Kumamoto",
-      "target_pref_ja": "大分県",
-      "hook_title_en": "'ONE PIECE' & 'ATTACK ON TITAN' KYUSHU! 10 Real Statues & Sacred Sites + Aso Volcano & Onsen [No Promo]",
-      "short_title_en": "Real 94m Attack on Titan Wall & One Piece Statues in Japan! #Shorts #AttackOnTitan #OnePiece"
+      "ranking_id": "anime_evangelion_hakone_yamaguchi",
+      "scope_type": "national",
+      "category_type": "anime",
+      "keyword_ja": "エヴァンゲリオン 箱根 聖地",
+      "region_en": "Hakone & Tokyo-3",
+      "category_en": "Evangelion Sacred Sites & Nearby Onsen",
+      "target_pref_ja": "神奈川県",
+      "hook_title_en": "REAL TOKYO-3! 'Evangelion' Hakone TOP 10 Anime Sacred Sites + Nearby Onsen & Food Guide [No Promo]",
+      "short_title_en": "Step Inside Real Tokyo-3! Evangelion Hakone Sacred Sites & Onsen #Shorts #Evangelion #JapanTravel",
+      "script_file": "spot_099_anime_evangelion_hakone_yamaguchi.json",
+      "day": 17
     },
     {
       "day": 18,
@@ -256,16 +253,13 @@
       "short_title_en": "[No Promo] Skip Crowded Asakusa! Tokyo's #1 Secret Forest Zen Temple #Shorts #TokyoTravel"
     },
     {
-      "ranking_id": "anime_evangelion_hakone_yamaguchi",
-      "scope_type": "national",
-      "category_type": "anime",
-      "keyword_ja": "エヴァンゲリオン 箱根 聖地",
-      "region_en": "Hakone & Tokyo-3",
-      "category_en": "Evangelion Sacred Sites & Nearby Onsen",
-      "target_pref_ja": "神奈川県",
-      "hook_title_en": "REAL TOKYO-3! 'Evangelion' Hakone TOP 10 Anime Sacred Sites + Nearby Onsen & Food Guide [No Promo]",
-      "short_title_en": "Step Inside Real Tokyo-3! Evangelion Hakone Sacred Sites & Onsen #Shorts #Evangelion #JapanTravel",
-      "script_file": "spot_099_anime_evangelion_hakone_yamaguchi.json",
+      "ranking_id": "anime_pokemon_real_regions_japan",
+      "keyword_ja": "ポケモン 聖地 日本",
+      "region_en": "Pokemon Real-Life Regions",
+      "category_en": "Real Johto Bell Tower, Kanto, Hoenn & Flagship Pokemon Centers + Local Food",
+      "target_pref_ja": "京都府",
+      "hook_title_en": "REAL-LIFE POKEMON REGIONS! Top 10 Japan Landmarks That Inspired Kanto, Johto & Hoenn + Nearby Food",
+      "short_title_en": "Real-Life Pokemon Locations Across Japan! #Shorts #Pokemon #JapanTravel",
       "day": 20
     },
     {
@@ -293,13 +287,13 @@
       "short_title_en": "[No Promo] The Real Spirited Away Onsen Town Japanese Locals Ranked #1! #Shorts #JapanTravel"
     },
     {
-      "ranking_id": "anime_naruto_ninja_sacred_sites",
-      "keyword_ja": "NARUTO 聖地 忍者",
-      "region_en": "Naruto & Real Ninja Sites",
-      "category_en": "Hidden Leaf Village, Naruto Whirlpools & Ninja Castles + Nearby Food",
-      "target_pref_ja": "兵庫県",
-      "hook_title_en": "REAL NARUTO SACRED SITES! Top 10 Hidden Leaf & Ninja Locations + Nearby Food (500K Japanese IG)",
-      "short_title_en": "Real NARUTO Hidden Leaf Village & Ninja Spots in Japan! #Shorts #Naruto #JapanTravel",
+      "ranking_id": "anime_akira_cyberpunk_neo_tokyo",
+      "keyword_ja": "AKIRA 攻殻機動隊 聖地 東京",
+      "region_en": "AKIRA & Cyberpunk Neo-Tokyo",
+      "category_en": "Real Neo-Tokyo Neon Alleys, Bay Bridges & Ghost in the Shell Megastructures",
+      "target_pref_ja": "東京都",
+      "hook_title_en": "REAL NEO-TOKYO! AKIRA, Ghost in the Shell & Cowboy Bebop Top 10 Cyberpunk Locations in Japan",
+      "short_title_en": "Real Neo-Tokyo Cyberpunk Locations from AKIRA! #Shorts #Akira #Tokyo",
       "day": 23
     },
     {
@@ -327,13 +321,13 @@
       "short_title_en": "Everyone Sees the Nara Deer and Leaves — Missing a 500-House Edo Town! #Shorts #JapanTravel"
     },
     {
-      "ranking_id": "anime_dragon_ball_akira_toriyama",
-      "keyword_ja": "ドラゴンボール 聖地 鳥山明",
-      "region_en": "Dragon Ball & Toriyama Sites",
-      "category_en": "Akira Toriyama Hometown, Toei Museum & Goku Sanctuaries + Nearby Gourmet",
-      "target_pref_ja": "愛知県",
-      "hook_title_en": "REAL DRAGON BALL PILGRIMAGE! Top 10 Akira Toriyama & Goku Sacred Sites in Japan + Local Food",
-      "short_title_en": "Real Dragon Ball & Akira Toriyama Sacred Sites in Japan! #Shorts #DragonBall #JapanTravel",
+      "ranking_id": "anime_initial_d_haruna_touge",
+      "keyword_ja": "頭文字D 聖地 榛名山",
+      "region_en": "Initial D & MF Ghost Touge",
+      "category_en": "Mt. Akina (Haruna) 5 Hairpins, Tofu Shop Cafe, Usui Pass & Ikaho Onsen",
+      "target_pref_ja": "群馬県",
+      "hook_title_en": "REAL MOUNT AKINA! Initial D & MF Ghost Top 10 Mountain Passes, AE86 Cafes & Nearby Onsen",
+      "short_title_en": "Real Mount Akina & Fujiwara Tofu Shop from Initial D! #Shorts #InitialD #Japan",
       "day": 26
     },
     {
@@ -361,13 +355,13 @@
       "short_title_en": "[No Promo] 1,000 Steps Into the Clouds! Japan's #1 Mountain Temple #Shorts #JapanTravel"
     },
     {
-      "ranking_id": "anime_sailor_moon_azabu_tokyo",
-      "keyword_ja": "セーラームーン 聖地 麻布十番",
-      "region_en": "Sailor Moon Tokyo Sites",
-      "category_en": "Azabu-Juban, Rei's Hikawa Shrine & Tokyo Tower + Nearby Sweets",
-      "target_pref_ja": "東京都",
-      "hook_title_en": "REAL SAILOR MOON TOKYO! Top 10 Azabu-Juban & Hikawa Shrine Sacred Sites + Nearby Cafes",
-      "short_title_en": "Real Sailor Moon Locations in Azabu-Juban Tokyo! #Shorts #SailorMoon #Tokyo",
+      "ranking_id": "anime_naruto_ninja_sacred_sites",
+      "keyword_ja": "NARUTO 聖地 忍者",
+      "region_en": "Naruto & Real Ninja Sites",
+      "category_en": "Hidden Leaf Village, Naruto Whirlpools & Ninja Castles + Nearby Food",
+      "target_pref_ja": "兵庫県",
+      "hook_title_en": "REAL NARUTO SACRED SITES! Top 10 Hidden Leaf & Ninja Locations + Nearby Food (500K Japanese IG)",
+      "short_title_en": "Real NARUTO Hidden Leaf Village & Ninja Spots in Japan! #Shorts #Naruto #JapanTravel",
       "day": 29
     },
     {
@@ -395,14 +389,16 @@
       "short_title_en": "[No Promo] Better Than Shirakawa-go?! Gifu's #1 Secret Mountain Town #Shorts #JapanTravel"
     },
     {
-      "ranking_id": "anime_pokemon_real_regions_japan",
-      "keyword_ja": "ポケモン 聖地 日本",
-      "region_en": "Pokemon Real-Life Regions",
-      "category_en": "Real Johto Bell Tower, Kanto, Hoenn & Flagship Pokemon Centers + Local Food",
-      "target_pref_ja": "京都府",
-      "hook_title_en": "REAL-LIFE POKEMON REGIONS! Top 10 Japan Landmarks That Inspired Kanto, Johto & Hoenn + Nearby Food",
-      "short_title_en": "Real-Life Pokemon Locations Across Japan! #Shorts #Pokemon #JapanTravel",
-      "day": 32
+      "day": 32,
+      "ranking_id": "anime_onepiece_attack_kyushu",
+      "scope_type": "🎬 アニメ聖地特化 (進撃の巨人・ワンピース)",
+      "category_type": "作者の故郷！九州にある『進撃の巨人』日田＆『ワンピース』熊本聖地TOP10",
+      "keyword_ja": "進撃の巨人 日田 ワンピース 熊本 聖地",
+      "region_en": "Attack on Titan & One Piece Kyushu",
+      "category_en": "Giant Bronze Titan Statues at Oyama Dam & Straw Hat Statues Across Kumamoto",
+      "target_pref_ja": "大分県",
+      "hook_title_en": "'ONE PIECE' & 'ATTACK ON TITAN' KYUSHU! 10 Real Statues & Sacred Sites + Aso Volcano & Onsen [No Promo]",
+      "short_title_en": "Real 94m Attack on Titan Wall & One Piece Statues in Japan! #Shorts #AttackOnTitan #OnePiece"
     },
     {
       "day": 33,
@@ -429,13 +425,13 @@
       "short_title_en": "[No Promo] Just 1 Hour from Tokyo! The Impenetrable Samurai Fortress of Odawara #Shorts #Samurai"
     },
     {
-      "ranking_id": "anime_jojo_sendai_morioh_tokyo",
-      "keyword_ja": "ジョジョ 聖地 仙台 杜王町",
-      "region_en": "JoJo Morioh & Tokyo Sites",
-      "category_en": "Sendai Morioh Town, OWSON & Stardust Crusaders Spots + Gyutan Gourmet",
-      "target_pref_ja": "宮城県",
-      "hook_title_en": "REAL MORIOH TOWN! JoJo's Bizarre Adventure Top 10 Sacred Sites in Sendai & Tokyo + Local Food",
-      "short_title_en": "Real Morioh Town from JoJo's Bizarre Adventure in Sendai! #Shorts #JoJo #JapanTravel",
+      "ranking_id": "anime_gundam_giant_mecha_japan",
+      "keyword_ja": "ガンダム 実物大 聖地",
+      "region_en": "Giant Gundam & Mecha Sites",
+      "category_en": "Life-Size Unicorn & Nu Gundam, Shizuoka Gunpla HQ & Sunrise Town + Nearby Food",
+      "target_pref_ja": "東京都",
+      "hook_title_en": "LIFE-SIZE GUNDAM JAPAN! Top 10 Giant Mecha Statues & Gunpla Sacred Sites + Nearby Sightseeing",
+      "short_title_en": "Life-Size Gundam Statues & Mecha Sanctuaries in Japan! #Shorts #Gundam #JapanTravel",
       "day": 35
     },
     {
@@ -463,13 +459,13 @@
       "short_title_en": "[No Promo] Voted #1 Garden in Japan for 20 Straight Years! #Shorts #JapanTravel"
     },
     {
-      "ranking_id": "anime_gundam_giant_mecha_japan",
-      "keyword_ja": "ガンダム 実物大 聖地",
-      "region_en": "Giant Gundam & Mecha Sites",
-      "category_en": "Life-Size Unicorn & Nu Gundam, Shizuoka Gunpla HQ & Sunrise Town + Nearby Food",
+      "ranking_id": "anime_bleach_death_note_tokyo",
+      "keyword_ja": "BLEACH デスノート 聖地 東京",
+      "region_en": "BLEACH & Death Note Sites",
+      "category_en": "Karakura Town Riverbank, Light Yagami's Tokyo & Soul Society Vibes + Nearby Food",
       "target_pref_ja": "東京都",
-      "hook_title_en": "LIFE-SIZE GUNDAM JAPAN! Top 10 Giant Mecha Statues & Gunpla Sacred Sites + Nearby Sightseeing",
-      "short_title_en": "Life-Size Gundam Statues & Mecha Sanctuaries in Japan! #Shorts #Gundam #JapanTravel",
+      "hook_title_en": "REAL BLEACH & DEATH NOTE JAPAN! Top 10 Tokyo & Soul Society Sacred Sites + Nearby Food",
+      "short_title_en": "Real Death Note & BLEACH Locations in Tokyo! #Shorts #DeathNote #Bleach",
       "day": 38
     },
     {
@@ -531,13 +527,13 @@
       "short_title_en": "[No Promo] Inside Oda Nobunaga's Mountain Fortress Above Gifu! #Shorts #Samurai"
     },
     {
-      "ranking_id": "anime_initial_d_haruna_touge",
-      "keyword_ja": "頭文字D 聖地 榛名山",
-      "region_en": "Initial D & MF Ghost Touge",
-      "category_en": "Mt. Akina (Haruna) 5 Hairpins, Tofu Shop Cafe, Usui Pass & Ikaho Onsen",
-      "target_pref_ja": "群馬県",
-      "hook_title_en": "REAL MOUNT AKINA! Initial D & MF Ghost Top 10 Mountain Passes, AE86 Cafes & Nearby Onsen",
-      "short_title_en": "Real Mount Akina & Fujiwara Tofu Shop from Initial D! #Shorts #InitialD #Japan",
+      "ranking_id": "anime_jojo_sendai_morioh_tokyo",
+      "keyword_ja": "ジョジョ 聖地 仙台 杜王町",
+      "region_en": "JoJo Morioh & Tokyo Sites",
+      "category_en": "Sendai Morioh Town, OWSON & Stardust Crusaders Spots + Gyutan Gourmet",
+      "target_pref_ja": "宮城県",
+      "hook_title_en": "REAL MORIOH TOWN! JoJo's Bizarre Adventure Top 10 Sacred Sites in Sendai & Tokyo + Local Food",
+      "short_title_en": "Real Morioh Town from JoJo's Bizarre Adventure in Sendai! #Shorts #JoJo #JapanTravel",
       "day": 44
     },
     {
@@ -565,14 +561,16 @@
       "short_title_en": "[No Promo] Skip Hakone! Japanese Locals Ranked Nagano's #1 Mountain Onsen #Shorts #JapanTravel"
     },
     {
-      "ranking_id": "anime_haikyuu_sendai_iwate_tokyo",
-      "keyword_ja": "ハイキュー 聖地 軽米 仙台",
-      "region_en": "Haikyuu!! Sacred Sites",
-      "category_en": "Karumai High School, Sendai Gymnasium & Orange Court + Nearby Onsen & Food",
-      "target_pref_ja": "岩手県",
-      "hook_title_en": "REAL KARASUNO HIGH! Haikyuu!! Top 10 Sacred Sites in Iwate, Sendai & Tokyo + Local Food",
-      "short_title_en": "Real Karasuno High & Sendai Gym from Haikyuu!! #Shorts #Haikyuu #JapanTravel",
-      "day": 47
+      "day": 47,
+      "ranking_id": "anime_shinto_myth_spirits",
+      "scope_type": "🎬 アニメ聖地特化 (神隠し・妖怪・異界)",
+      "category_type": "アニメのような異世界感！日本の「妖怪の街・千本鳥居・神隠し神社」TOP10",
+      "keyword_ja": "水木しげるロード 伏見稲荷 貴船神社 異世界 神社",
+      "region_en": "Spirited Away Shrines & Yokai Towns",
+      "category_en": "Forest Lantern Shrines, Yokai Folklore Streets & Mossy Spirit Gates",
+      "target_pref_ja": "京都府",
+      "hook_title_en": "SPIRITED AWAY & ANIME SHRINES! 10 Mystical Torii Portals & Yokai Towns + Nearby Local Food [No Promo]",
+      "short_title_en": "Real-Life Anime Forest Shrine Portal in Japan! #Shorts #Anime #JapanTravel"
     },
     {
       "day": 48,
@@ -599,14 +597,16 @@
       "short_title_en": "[No Promo] Where the Real-Life Shogun Fought & Built His Empire! #Shorts #Samurai"
     },
     {
-      "ranking_id": "anime_bleach_death_note_tokyo",
-      "keyword_ja": "BLEACH デスノート 聖地 東京",
-      "region_en": "BLEACH & Death Note Sites",
-      "category_en": "Karakura Town Riverbank, Light Yagami's Tokyo & Soul Society Vibes + Nearby Food",
-      "target_pref_ja": "東京都",
-      "hook_title_en": "REAL BLEACH & DEATH NOTE JAPAN! Top 10 Tokyo & Soul Society Sacred Sites + Nearby Food",
-      "short_title_en": "Real Death Note & BLEACH Locations in Tokyo! #Shorts #DeathNote #Bleach",
-      "day": 50
+      "day": 50,
+      "ranking_id": "anime_shinkai_your_name_suzume",
+      "scope_type": "🎬 アニメ聖地特化 (君の名は・すずめ)",
+      "category_type": "『君の名は。』『すずめの戸締まり』の鳥肌が立つ実在風景TOP10",
+      "keyword_ja": "君の名は すずめの戸締まり 聖地 飛騨古川 諏訪湖",
+      "region_en": "Your Name & Suzume Real Sites",
+      "category_en": "Exact Stairs, Crater Lakes & Abandoned Doors from Makoto Shinkai Films",
+      "target_pref_ja": "岐阜県",
+      "hook_title_en": "REAL 'YOUR NAME' & 'SUZUME' JAPAN! TOP 10 Anime Sacred Sites + Nearby Sightseeing & Food Guide [No Promo]",
+      "short_title_en": "Real-Life 'Your Name' Stairs + Best Nearby Tokyo Spots! #Shorts #YourName #AnimePilgrimage"
     },
     {
       "day": 51,
@@ -633,14 +633,16 @@
       "short_title_en": "[No Promo] This Open-Air Hot Spring Sits Right on the Crashing Ocean Rocks! #Shorts #Onsen"
     },
     {
-      "ranking_id": "anime_akira_cyberpunk_neo_tokyo",
-      "keyword_ja": "AKIRA 攻殻機動隊 聖地 東京",
-      "region_en": "AKIRA & Cyberpunk Neo-Tokyo",
-      "category_en": "Real Neo-Tokyo Neon Alleys, Bay Bridges & Ghost in the Shell Megastructures",
-      "target_pref_ja": "東京都",
-      "hook_title_en": "REAL NEO-TOKYO! AKIRA, Ghost in the Shell & Cowboy Bebop Top 10 Cyberpunk Locations in Japan",
-      "short_title_en": "Real Neo-Tokyo Cyberpunk Locations from AKIRA! #Shorts #Akira #Tokyo",
-      "day": 53
+      "day": 53,
+      "ranking_id": "anime_demon_slayer_jujutsu",
+      "scope_type": "🎬 アニメ聖地特化 (鬼滅の刃・呪術廻戦)",
+      "category_type": "『鬼滅の刃』『呪術廻戦』のモデルになった神社・温泉・一刀石TOP10",
+      "keyword_ja": "鬼滅の刃 聖地 芦ノ牧温泉 宝満宮竈門神社 一刀石",
+      "region_en": "Demon Slayer & Jujutsu Kaisen Sites",
+      "category_en": "Real Split Boulders, Infinity Castle Ryokan & Wisteria Shrines",
+      "target_pref_ja": "福島県",
+      "hook_title_en": "REAL 'DEMON SLAYER' & 'JUJUTSU KAISEN'! 10 Anime Sacred Sites + Nearby Onsen, Castles & Food [No Promo]",
+      "short_title_en": "Real Demon Slayer Infinity Castle Ryokan in Japan! #Shorts #DemonSlayer #JujutsuKaisen"
     },
     {
       "day": 54,
@@ -667,13 +669,13 @@
       "short_title_en": "[No Promo] How 2,000 Samurai Defeated the Shogun's 38,000-Man Army Twice! #Shorts #Samurai"
     },
     {
-      "ranking_id": "anime_chainsaw_man_tokyo_enoshima",
-      "keyword_ja": "チェンソーマン 聖地 江ノ島 京都",
-      "region_en": "Chainsaw Man Sacred Sites",
-      "category_en": "Enoshima Jellyfish Aquarium, Makima's Kyoto Shrine & Jinbocho Reze Cafe",
-      "target_pref_ja": "神奈川県",
-      "hook_title_en": "REAL CHAINSAW MAN SITES! Top 10 Enoshima Aquarium, Kyoto Shrine & Reze Cafe Locations + Food",
-      "short_title_en": "Real Chainsaw Man Locations in Tokyo, Enoshima & Kyoto! #Shorts #ChainsawMan #Japan",
+      "ranking_id": "anime_haikyuu_sendai_iwate_tokyo",
+      "keyword_ja": "ハイキュー 聖地 軽米 仙台",
+      "region_en": "Haikyuu!! Sacred Sites",
+      "category_en": "Karumai High School, Sendai Gymnasium & Orange Court + Nearby Onsen & Food",
+      "target_pref_ja": "岩手県",
+      "hook_title_en": "REAL KARASUNO HIGH! Haikyuu!! Top 10 Sacred Sites in Iwate, Sendai & Tokyo + Local Food",
+      "short_title_en": "Real Karasuno High & Sendai Gym from Haikyuu!! #Shorts #Haikyuu #JapanTravel",
       "day": 56
     },
     {
@@ -701,13 +703,13 @@
       "short_title_en": "[No Promo] This Exists in Japan?! The #1 Emerald Gorge Ranked by Locals #Shorts #JapanTravel"
     },
     {
-      "ranking_id": "anime_bocchi_the_rock_shimokitazawa",
-      "keyword_ja": "ぼっちざろっく けいおん 聖地 下北沢",
-      "region_en": "Bocchi the Rock! & K-ON! Sites",
-      "category_en": "Shimokitazawa Shelter Live House, Enoshima & K-ON! Schoolhouse + Soup Curry",
-      "target_pref_ja": "東京都",
-      "hook_title_en": "REAL STARRY LIVE HOUSE! Bocchi the Rock! & K-ON! Top 10 Sacred Sites + Shimokitazawa Food",
-      "short_title_en": "Real Shimokitazawa Live House from Bocchi the Rock! #Shorts #BocchiTheRock #Tokyo",
+      "ranking_id": "anime_golden_kamuy_hokkaido_frontier",
+      "keyword_ja": "ゴールデンカムイ 聖地 北海道 網走",
+      "region_en": "Golden Kamuy Hokkaido Sites",
+      "category_en": "Abashiri Prison, Otaru Meiji Streets, Ainu Kotan & Noboribetsu Onsen + Ohaw",
+      "target_pref_ja": "北海道",
+      "hook_title_en": "REAL GOLDEN KAMUY HOKKAIDO! Top 10 Abashiri Prison, Otaru & Ainu Sacred Sites + Hinna Food",
+      "short_title_en": "Real Abashiri Prison & Hokkaido Sites from Golden Kamuy! #Shorts #GoldenKamuy #Hokkaido",
       "day": 59
     },
     {
@@ -735,13 +737,13 @@
       "short_title_en": "[No Promo] Put On a Yukata & Hop Between 7 Wooden Bathhouses in This Town! #Shorts #JapanTravel"
     },
     {
-      "ranking_id": "anime_frieren_ghibli_fantasy_japan",
-      "keyword_ja": "フリーレン ジブリ 絶景 日本",
-      "region_en": "Frieren & Ghibli Fantasy Japan",
-      "category_en": "Blue Moonweed Flower Hills, Alpine Rivers, Underground Dungeons & Sky Castles",
-      "target_pref_ja": "岐阜県",
-      "hook_title_en": "REAL-LIFE FRIEREN & GHIBLI! Top 10 Fantasy Landscapes & Blue Flower Hills in Japan + Local Food",
-      "short_title_en": "Real-Life Frieren & Ghibli Fantasy Places in Japan! #Shorts #Frieren #JapanTravel",
+      "ranking_id": "anime_chainsaw_man_tokyo_enoshima",
+      "keyword_ja": "チェンソーマン 聖地 江ノ島 京都",
+      "region_en": "Chainsaw Man Sacred Sites",
+      "category_en": "Enoshima Jellyfish Aquarium, Makima's Kyoto Shrine & Jinbocho Reze Cafe",
+      "target_pref_ja": "神奈川県",
+      "hook_title_en": "REAL CHAINSAW MAN SITES! Top 10 Enoshima Aquarium, Kyoto Shrine & Reze Cafe Locations + Food",
+      "short_title_en": "Real Chainsaw Man Locations in Tokyo, Enoshima & Kyoto! #Shorts #ChainsawMan #Japan",
       "day": 62
     },
     {
@@ -769,13 +771,13 @@
       "short_title_en": "[No Promo] Darth Vader's Helmet Was Inspired by This Samurai Warlord! #Shorts #Samurai"
     },
     {
-      "ranking_id": "anime_golden_kamuy_hokkaido_frontier",
-      "keyword_ja": "ゴールデンカムイ 聖地 北海道 網走",
-      "region_en": "Golden Kamuy Hokkaido Sites",
-      "category_en": "Abashiri Prison, Otaru Meiji Streets, Ainu Kotan & Noboribetsu Onsen + Ohaw",
-      "target_pref_ja": "北海道",
-      "hook_title_en": "REAL GOLDEN KAMUY HOKKAIDO! Top 10 Abashiri Prison, Otaru & Ainu Sacred Sites + Hinna Food",
-      "short_title_en": "Real Abashiri Prison & Hokkaido Sites from Golden Kamuy! #Shorts #GoldenKamuy #Hokkaido",
+      "ranking_id": "anime_bocchi_the_rock_shimokitazawa",
+      "keyword_ja": "ぼっちざろっく けいおん 聖地 下北沢",
+      "region_en": "Bocchi the Rock! & K-ON! Sites",
+      "category_en": "Shimokitazawa Shelter Live House, Enoshima & K-ON! Schoolhouse + Soup Curry",
+      "target_pref_ja": "東京都",
+      "hook_title_en": "REAL STARRY LIVE HOUSE! Bocchi the Rock! & K-ON! Top 10 Sacred Sites + Shimokitazawa Food",
+      "short_title_en": "Real Shimokitazawa Live House from Bocchi the Rock! #Shorts #BocchiTheRock #Tokyo",
       "day": 65
     },
     {
@@ -803,16 +805,14 @@
       "short_title_en": "[No Promo] Walk Inside Real 400-Yr Samurai Mansions With Zero Crowds! #Shorts #Samurai"
     },
     {
-      "day": 68,
-      "ranking_id": "anime_shinto_myth_spirits",
-      "scope_type": "🎬 アニメ聖地特化 (神隠し・妖怪・異界)",
-      "category_type": "アニメのような異世界感！日本の「妖怪の街・千本鳥居・神隠し神社」TOP10",
-      "keyword_ja": "水木しげるロード 伏見稲荷 貴船神社 異世界 神社",
-      "region_en": "Spirited Away Shrines & Yokai Towns",
-      "category_en": "Forest Lantern Shrines, Yokai Folklore Streets & Mossy Spirit Gates",
-      "target_pref_ja": "京都府",
-      "hook_title_en": "SPIRITED AWAY & ANIME SHRINES! 10 Mystical Torii Portals & Yokai Towns + Nearby Local Food [No Promo]",
-      "short_title_en": "Real-Life Anime Forest Shrine Portal in Japan! #Shorts #Anime #JapanTravel"
+      "ranking_id": "anime_frieren_ghibli_fantasy_japan",
+      "keyword_ja": "フリーレン ジブリ 絶景 日本",
+      "region_en": "Frieren & Ghibli Fantasy Japan",
+      "category_en": "Blue Moonweed Flower Hills, Alpine Rivers, Underground Dungeons & Sky Castles",
+      "target_pref_ja": "岐阜県",
+      "hook_title_en": "REAL-LIFE FRIEREN & GHIBLI! Top 10 Fantasy Landscapes & Blue Flower Hills in Japan + Local Food",
+      "short_title_en": "Real-Life Frieren & Ghibli Fantasy Places in Japan! #Shorts #Frieren #JapanTravel",
+      "day": 68
     },
     {
       "day": 69,
