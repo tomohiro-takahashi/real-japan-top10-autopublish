@@ -575,6 +575,18 @@ def fetch_spot_specific_photos(spots: List[Dict[str, str]], region_en: str, out_
             target_q = q_primary if sub_idx == 1 else q_nearby
             wrote_ok = False
 
+            # 0. Preserve existing curated valid photo if already present on disk
+            if dest.exists():
+                try:
+                    existing_bytes = dest.read_bytes()
+                    eh = hashlib.md5(existing_bytes).hexdigest()
+                    if eh not in seen_hashes and _is_valid_landscape_photo(existing_bytes, allow_anime=False):
+                        seen_hashes.add(eh)
+                        saved_names.append(fname)
+                        continue
+                except Exception:
+                    pass
+
             # 1. Primary path: Verified watermark-free Bing landscape photo search for the exact spot/food query
             bing_queries = [
                 f"{target_q} photo",
