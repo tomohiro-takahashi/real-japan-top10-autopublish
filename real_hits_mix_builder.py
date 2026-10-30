@@ -418,7 +418,7 @@ def save_real_hits_pool(pool: List[Dict[str, Any]], chosen_id: str, auto_git_pus
             )
             subprocess.run(["git", "add", "stocks/music/real_hits_pool.json"], check=True)
             subprocess.run(
-                ["git", "commit", "-m", f"chore(music): mark {chosen_id} as published in real_hits_pool.json [skip ci]"],
+                ["git", "commit", "-m", f"chore(music): mark {chosen_id} as published in real_hits_pool.json"],
                 check=True,
             )
             subprocess.run(["git", "pull", "--rebase", "--autostash", "origin", "main"], check=True)

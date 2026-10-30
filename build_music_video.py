@@ -1242,12 +1242,16 @@ def render_short_vertical_hud(
         radius=20,
         fill=(8, 12, 22, 218),
     )
-    is_vocal = bool(meta.get("vocal_playlist") or "洋楽" in meta.get("title", "") or "歌詞" in meta.get("title", ""))
+    real_tracks = meta.get("tracks") or []
+    is_vocal = bool(real_tracks or meta.get("vocal_playlist") or "洋楽" in meta.get("title", "") or "歌詞" in meta.get("title", ""))
     song_idx = hash(meta.get("id", "0")) % len(WESTERN_AOR_VOCAL_LYRICS) if WESTERN_AOR_VOCAL_LYRICS else 0
     s_primary = WESTERN_AOR_VOCAL_LYRICS[song_idx] if WESTERN_AOR_VOCAL_LYRICS else {}
     s_second = WESTERN_AOR_VOCAL_LYRICS[(song_idx + 1) % len(WESTERN_AOR_VOCAL_LYRICS)] if WESTERN_AOR_VOCAL_LYRICS else {}
 
-    if is_vocal and s_primary:
+    if real_tracks:
+        tr0 = real_tracks[0]
+        np_txt = f"♪ NOW PLAYING  ｜  {tr0['artist']} - {tr0['title']}（{tr0.get('ja_title', '')}）"
+    elif is_vocal and s_primary:
         np_txt = f"♪ NOW PLAYING  ｜  {s_primary.get('title', '80s-90s West Coast AOR Ballad')}  •  歌詞・和訳付き"
     else:
         np_txt = f"♪ NOW PLAYING  ｜  {sub_txt}"
@@ -1268,7 +1272,14 @@ def render_short_vertical_hud(
     if act_idx == 1:
         badge_txt = "POINT 01 / 04  ｜  なぜ今、この曲が胸に刺さるのか"
         badge_col = (180, 83, 9, 245)
-        if is_vocal:
+        if real_tracks:
+            tr0 = real_tracks[0]
+            tr1 = real_tracks[1] if len(real_tracks) > 1 else tr0
+            tr2 = real_tracks[2] if len(real_tracks) > 2 else tr0
+            line1 = f"♪ {tr0['artist']}「{tr0['title']}」"
+            line2 = f"邦題：{tr0.get('ja_title', '')}  ｜  イントロで蘇る名曲"
+            line3 = f"ほか {tr1['artist']} / {tr2['artist']} など全{len(real_tracks)}曲フル尺収録"
+        elif is_vocal:
             line1 = "イントロ3秒で、あの頃の映画と青春がよみがえる"
             line2 = f"“{s_primary.get('lyric_card_en', 'Breathe in deep, the weekend has finally begun...').strip()}”"
             line3 = f"訳：{s_primary.get('lyric_card_ja', '深く息を吸い込んでごらん、ようやく週末が始まったから——')}"
@@ -1277,9 +1288,14 @@ def render_short_vertical_hud(
             line2 = "カセットテープや夜のFMラジオで聴いた80s・90sサウンド"
             line3 = "40代・50代の記憶に寄り添う、大人の深夜BGMアーカイブ"
     elif act_idx == 2:
-        badge_txt = "POINT 02 / 04  ｜  歌詞と情景のイメージ"
+        badge_txt = "POINT 02 / 04  ｜  本編収録の名曲ラインナップ" if real_tracks else "POINT 02 / 04  ｜  歌詞と情景のイメージ"
         badge_col = (14, 116, 144, 245)
-        if is_vocal and s_second:
+        if real_tracks and len(real_tracks) >= 4:
+            tr1, tr2, tr3 = real_tracks[1], real_tracks[2], real_tracks[3]
+            line1 = f"★ {tr1['artist']} - {tr1['title']}（{tr1.get('ja_title', '')}）"
+            line2 = f"★ {tr2['artist']} - {tr2['title']}（{tr2.get('ja_title', '')}）"
+            line3 = f"★ {tr3['artist']} - {tr3['title']}  ほか全{len(real_tracks)}曲ノンストップ"
+        elif is_vocal and s_second:
             line1 = f"“{s_second.get('lyric_card_en', 'City lights reflecting on the midnight bayshore...').strip()}”"
             line2 = f"訳：{s_second.get('lyric_card_ja', '午前0時の湾岸線、街の灯りがフロントガラスに溶けていく——')}"
             line3 = "英語詞の響きと日本語対訳で味わう、大人のAOR＆バラード"
@@ -1290,8 +1306,8 @@ def render_short_vertical_hud(
     elif act_idx == 3:
         badge_txt = "POINT 03 / 04  ｜  本編メドレーの収録スペック"
         badge_col = (15, 118, 110, 245)
-        line1 = "本編は『途中広告なし・高音質』ノンストップ収録"
-        line2 = "厳選した80年代・90年代スタイル名曲をフル尺で凝縮"
+        line1 = "本編は『全曲フル尺・約2時間』ノンストップ収録" if real_tracks else "本編は『途中広告なし・高音質』ノンストップ収録"
+        line2 = "厳選した80年代・90年代の名曲を繋いだ永久保存版メドレー"
         line3 = "深夜ドライブ・晩酌・読書・集中作業のBGMとしてそのまま流せます"
     else:
         badge_txt = "POINT 04 / 04  ｜  フル音源（本編）のご案内"
@@ -1671,7 +1687,7 @@ def mark_done_and_git_push(
             )
             subprocess.run(["git", "add", "stocks/music/"], check=True)
             subprocess.run(
-                ["git", "commit", "-m", f"chore(music): mark {chosen_meta['id']} and {mp3_path.name} as published [skip ci]"],
+                ["git", "commit", "-m", f"chore(music): mark {chosen_meta['id']} and {mp3_path.name} as published"],
                 check=True,
             )
             subprocess.run(["git", "pull", "--rebase", "--autostash", "origin", "main"], check=True)
