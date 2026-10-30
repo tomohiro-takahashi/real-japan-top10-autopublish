@@ -2,8 +2,8 @@ name: Real 80s-90s Western Legend 2-Hour Full Mix Auto-Upload
 
 on:
   schedule:
-    # Runs 1x daily at 08:30 UTC (17:30 JST) -> pre-builds 2-Hour Real Western Mix and auto-publishes at 20:30 JST Golden Time
-    - cron: '30 8 * * *'
+    # Slot 2: Runs 1x daily at 07:30 UTC (16:30 JST) -> pre-builds 2-Hour Real Western Mix and auto-publishes at 19:30 JST Golden Time
+    - cron: '30 7 * * *'
   workflow_dispatch:
     inputs:
       mix_id:
@@ -14,6 +14,10 @@ on:
         description: 'YouTube Privacy Status (public / unlisted / private)'
         required: false
         default: 'public'
+      publish_now:
+        description: 'Publish immediately instead of scheduling for Golden Time (true/false)'
+        required: false
+        default: 'false'
 
 permissions:
   contents: write
@@ -60,8 +64,12 @@ jobs:
         run: |
           PRIVACY="${{ github.event.inputs.privacy || 'public' }}"
           MIX_ID="${{ github.event.inputs.mix_id || '' }}"
+          EXTRA_ARGS=""
+          if [ "${{ github.event.inputs.publish_now }}" = "true" ]; then
+            EXTRA_ARGS="--publish-now"
+          fi
           if [ -n "$MIX_ID" ]; then
-            python real_hits_mix_builder.py --privacy "$PRIVACY" --mix-id "$MIX_ID"
+            python real_hits_mix_builder.py --privacy "$PRIVACY" --mix-id "$MIX_ID" $EXTRA_ARGS
           else
-            python real_hits_mix_builder.py --privacy "$PRIVACY"
+            python real_hits_mix_builder.py --privacy "$PRIVACY" $EXTRA_ARGS
           fi

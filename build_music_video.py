@@ -1440,10 +1440,10 @@ def build_short_video(
       at center-lower eye level (`y=1088..1482`) so the viewer is continuously hooked!
     - Overlays a refined warm champagne-gold audio waveform (`showwaves=s=954x76`) at `y=1510`.
     """
-    logger.info(f"Rendering native 9:16 1080p Full HD 4-Act Dynamic Shorts video (30s): {out_short_mp4} ...")
+    logger.info(f"Rendering native 9:16 1080p Full HD 4-Act Dynamic Shorts video (20s high-retention loop): {out_short_mp4} ...")
     mp3_dur = get_audio_duration(src_mp3)
-    start_sec = 30.0 if mp3_dur >= 62.0 else max(0.0, mp3_dur * 0.2)
-    clip_dur = min(30.0, max(10.0, mp3_dur - start_sec))
+    start_sec = 42.0 if mp3_dur >= 65.0 else (30.0 if mp3_dur >= 52.0 else max(0.0, mp3_dur * 0.25))
+    clip_dur = min(20.0, max(10.0, mp3_dur - start_sec))
     seg_d = clip_dur / 4.0
 
     with tempfile.TemporaryDirectory(prefix="music_short_") as tmp_s:
@@ -1467,7 +1467,7 @@ def build_short_video(
             f"[v_a2][3:v]overlay=0:0:enable='between(t,{t2:.2f},{t3:.2f})'[v_a3];"
             f"[v_a3][4:v]overlay=0:0:enable='gte(t,{t3:.2f})'[v2];"
             f"[5:a]atrim=start={start_sec:.2f}:duration={clip_dur:.2f},asetpts=PTS-STARTPTS,"
-            f"afade=t=in:st=0:d=1.0,afade=t=out:st={max(1.0, clip_dur - 1.5):.2f}:d=1.5[aud];"
+            f"afade=t=in:st=0:d=0.08,afade=t=out:st={max(1.0, clip_dur - 0.8):.2f}:d=0.8[aud];"
             f"[aud]asplit=2[a_out][a_viz];"
             f"[a_viz]showwaves=s=954x76:mode=cline:rate={fps}:scale=sqrt:colors=0xd9b36c,format=rgba,"
             f"colorchannelmixer=aa=0.72[sw];"
@@ -1607,17 +1607,24 @@ def compute_music_golden_time_iso(
     target_minute_jst: int = 0,
 ) -> Optional[str]:
     """
-    If current JST time is outside the 18:00..22:15 Golden Time window (e.g., pre-built at 16:30 JST
-    or triggered late at night), return the next occurrence of `target_hour_jst:target_minute_jst` JST
-    as an ISO-8601 UTC timestamp (`YYYY-MM-DDTHH:MM:SSZ`) for YouTube's `status.publishAt`.
-    If currently inside 18:00..22:15 JST, return None so the video goes public immediately.
+    Compute the exact ISO-8601 UTC timestamp (`YYYY-MM-DDTHH:MM:SSZ`) for YouTube's `status.publishAt`
+    so all 3 daily Music channel releases (6 videos = 9,900 / 10,000 API units) land on Japan Golden Time:
+    - Slot 1: 18:00 JST (Long) / 18:05 JST (Short)
+    - Slot 2: 19:30 JST (Long) / 19:35 JST (Short) [Real Hits Mix]
+    - Slot 3: 21:00 JST (Long) / 21:05 JST (Short)
     """
     from datetime import timedelta
 
     jst = timezone(timedelta(hours=9))
     now_jst = datetime.now(jst)
-    if 18 <= now_jst.hour < 22 or (now_jst.hour == 22 and now_jst.minute <= 15):
-        return None
+
+    if target_hour_jst == 19:
+        if now_jst.hour < 17 or (now_jst.hour == 17 and now_jst.minute < 15):
+            target_hour_jst = 18
+        elif now_jst.hour < 20 or (now_jst.hour == 20 and now_jst.minute < 40):
+            target_hour_jst = 21
+        else:
+            target_hour_jst = 18
 
     candidate_jst = now_jst.replace(
         hour=target_hour_jst,
@@ -1625,7 +1632,7 @@ def compute_music_golden_time_iso(
         second=0,
         microsecond=0,
     )
-    if candidate_jst <= now_jst + timedelta(minutes=10):
+    if candidate_jst <= now_jst + timedelta(minutes=12):
         candidate_jst += timedelta(days=1)
 
     utc_dt = candidate_jst.astimezone(timezone.utc)

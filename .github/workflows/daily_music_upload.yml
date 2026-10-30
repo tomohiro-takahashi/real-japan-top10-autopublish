@@ -2,8 +2,10 @@ name: Daily Retro Music 1-Hour & Shorts Auto-Upload
 
 on:
   schedule:
-    # Runs daily at 07:30 UTC (16:30 JST) -> pre-builds, finishes 1080p HD processing, and auto-publishes at 19:00 JST Golden Time
-    - cron: '30 7 * * *'
+    # Slot 1: 06:30 UTC (15:30 JST) -> pre-builds & auto-publishes at 18:00 JST Golden Time
+    - cron: '30 6 * * *'
+    # Slot 3: 09:30 UTC (18:30 JST) -> pre-builds & auto-publishes at 21:00 JST Golden Time
+    - cron: '30 9 * * *'
   workflow_dispatch:
     inputs:
       privacy:
@@ -14,6 +16,10 @@ on:
         description: 'Main Video Duration in Seconds (default: 3600 = 1-Hour full length)'
         required: false
         default: '3600'
+      publish_now:
+        description: 'Publish immediately instead of scheduling for Golden Time (true/false)'
+        required: false
+        default: 'false'
 
 permissions:
   contents: write
@@ -62,4 +68,8 @@ jobs:
         run: |
           PRIVACY="${{ github.event.inputs.privacy || 'public' }}"
           DURATION="${{ github.event.inputs.duration || '3600' }}"
-          python build_music_video.py --privacy "$PRIVACY" --duration "$DURATION"
+          EXTRA_ARGS=""
+          if [ "${{ github.event.inputs.publish_now }}" = "true" ]; then
+            EXTRA_ARGS="--publish-now"
+          fi
+          python build_music_video.py --privacy "$PRIVACY" --duration "$DURATION" $EXTRA_ARGS

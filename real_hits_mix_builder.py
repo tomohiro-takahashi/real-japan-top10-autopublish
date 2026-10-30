@@ -478,25 +478,26 @@ def download_and_mix_real_tracks(
                 "outtmpl": raw_out_tmpl,
                 "quiet": True,
                 "no_warnings": True,
+                "ignoreerrors": True,
+                "max_downloads": 1,
                 "match_filter": _duration_filter,
-                "playlistend": 1,
             }
             search_targets = (
-                [f"scsearch5:{sc_query}", f"scsearch1:{sc_query}", f"ytsearch1:{query}"]
+                [f"scsearch10:{sc_query}", f"ytsearch3:{query}"]
                 if os.environ.get("GITHUB_ACTIONS") == "true"
-                else [f"ytsearch1:{query}", f"scsearch5:{sc_query}", f"scsearch1:{sc_query}"]
+                else [f"ytsearch3:{query}", f"scsearch10:{sc_query}"]
             )
             for starget in search_targets:
                 for old_f in tmp_dir.glob(f"raw_{idx:02d}.*"):
                     old_f.unlink(missing_ok=True)
                 try:
-                    opts_try = dict(ydl_opts)
-                    if starget.startswith("scsearch1:"):
-                        opts_try.pop("match_filter", None)
-                    with yt_dlp.YoutubeDL(opts_try) as ydl:
+                    with yt_dlp.YoutubeDL(dict(ydl_opts)) as ydl:
                         ydl.download([starget])
+                except yt_dlp.utils.MaxDownloadsReached:
+                    pass
                 except Exception as dl_exc:
-                    logger.warning(f"  -> {starget} warning: {dl_exc}")
+                    if "Maximum number of downloads reached" not in str(dl_exc):
+                        logger.warning(f"  -> {starget} warning: {dl_exc}")
                 downloaded = sorted(tmp_dir.glob(f"raw_{idx:02d}.*"))
                 if downloaded and get_audio_duration(downloaded[0]) >= 60.0:
                     break
@@ -726,8 +727,8 @@ def main() -> int:
         logger.info(f"Timestamps:\n{formatted_ts}")
         return 0
 
-    publish_at_long = None if args.publish_now else compute_music_golden_time_iso(20, 30)
-    publish_at_short = None if args.publish_now else compute_music_golden_time_iso(20, 35)
+    publish_at_long = None if args.publish_now else compute_music_golden_time_iso(19, 30)
+    publish_at_short = None if args.publish_now else compute_music_golden_time_iso(19, 35)
 
     try:
         youtube = get_youtube_service()
