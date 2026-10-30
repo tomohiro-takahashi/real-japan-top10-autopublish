@@ -2510,16 +2510,18 @@ def render_custom_thumbnails(script_path: Path) -> Tuple[Path, Path, Path]:
     )
     short_geo = clean_pref.split()[0] if clean_pref else "JAPAN"
 
-    # Dynamically choose contextual hero_line1 so Tokyo Ramen never says "SKIP KYOTO!"
+    # Dynamically choose clean, non-redundant hero_line1 and hero_line2
     raw_hl1 = tc.get("hero_line1", "NO PROMO!")
-    if raw_hl1 == "SKIP KYOTO!" and ("TOKYO" in clean_pref or "RAMEN" in clean_pref or "SUSHI" in clean_pref):
-        hero_line1 = "NO PROMO!"
+    if "ANIME" in raw_hl1:
+        hero_line1 = "REAL ANIME SCENES!"
+    elif "SKIP" in raw_hl1 and "TOKYO" not in clean_pref and "RAMEN" not in clean_pref and "SUSHI" not in clean_pref:
+        hero_line1 = raw_hl1.split("REAL JAPAN")[0].strip()
     else:
-        hero_line1 = raw_hl1
-    hero_line2 = tc.get("hero_line2", "REAL JAPAN")
+        hero_line1 = "NO PROMO!"
+    hero_line2 = "REAL JAPAN"
 
     # Never chop region names mid-word (fixes 'TOKYO RAME TOP 10' -> 'TOKYO RAMEN TOP 10')
-    banner_title = f"{clean_pref} TOP 10"
+    banner_title = re.sub(r"(TOP 10\s*)+$", "TOP 10", f"{clean_pref} TOP 10").strip()
     banner_sub = tc.get("banner_sub", "REAL JAPANESE IG VOICES ONLY")
     non_geo_words = {"YOUR", "REAL", "STEP", "ANIME", "DEMON", "SLAM", "ONE", "SPIRITED", "JUJUTSU", "STUDIO"}
     map_header = "WHERE IN JAPAN?" if short_geo in non_geo_words else f"WHERE IS {short_geo}?"
@@ -2811,7 +2813,8 @@ def render_custom_thumbnails(script_path: Path) -> Tuple[Path, Path, Path]:
     d3.text((540 + (480 - (tb_rl[2] - tb_rl[0])) // 2, 194), rl_stamp, font=f_st, fill=(255, 255, 255, 255))
 
     top3_txt = f"{hero_line1} {banner_title}"
-    f_top3 = fit_font_for_width(d3, top3_txt, black_path, 72, 46, W - 56)
+    f_top3 = fit_font_for_width(d3, top3_txt, black_path, 72, 28, W - 56)
+    top3_txt = smart_truncate(d3, top3_txt, f_top3, W - 56)
     draw_pro_3d_text(canvas_3, (28, 20), top3_txt, f_top3, (255, 250, 140), (245, 158, 11), stroke_w=10, depth=9)
 
     d3.rounded_rectangle((490, 568, 1252, 696), radius=20, fill=(10, 18, 34, 245), outline=(253, 224, 71, 255), width=4)
@@ -2875,7 +2878,7 @@ def render_custom_thumbnails(script_path: Path) -> Tuple[Path, Path, Path]:
     t_em = "ZERO PAID PROMO • JAPANESE IG ANALYZED"
     tb_em = d4.textbbox((0, 0), t_em, font=f_em_sub)
     d4.text(((W - (tb_em[2] - tb_em[0])) // 2, ey0 - 10), t_em, font=f_em_sub, fill=(255, 255, 255, 255))
-    f_em_main = fit_font_for_width(d4, banner_title, black_path, 74, 42, (ex1 - ex0) - 48)
+    f_em_main = fit_font_for_width(d4, banner_title, black_path, 74, 30, (ex1 - ex0) - 48)
     tb_bm = d4.textbbox((0, 0), banner_title, font=f_em_main)
     draw_pro_3d_text(canvas_4, ((W - (tb_bm[2] - tb_bm[0])) // 2, ey0 + 40), banner_title, f_em_main, (255, 250, 140), (245, 158, 11), stroke_w=10, depth=8)
     f_em_bot = ImageFont.truetype(w9_path, 20)
@@ -2908,7 +2911,8 @@ def render_custom_thumbnails(script_path: Path) -> Tuple[Path, Path, Path]:
     d5.text(((W - (tb_r5[2] - tb_r5[0])) // 2, 29), t_r5, font=f_em_sub, fill=(255, 255, 255, 255))
 
     cin_title = f"{hero_line1} {banner_title}"
-    f_cin = fit_font_for_width(d5, cin_title, black_path, 72, 44, W - 56)
+    f_cin = fit_font_for_width(d5, cin_title, black_path, 72, 28, W - 56)
+    cin_title = smart_truncate(d5, cin_title, f_cin, W - 56)
     tb_cin = d5.textbbox((0, 0), cin_title, font=f_cin)
     draw_pro_3d_text(canvas_5, ((W - (tb_cin[2] - tb_cin[0])) // 2, 74), cin_title, f_cin, (255, 250, 145), (245, 158, 11), stroke_w=10, depth=8)
 
@@ -2937,9 +2941,8 @@ def render_custom_thumbnails(script_path: Path) -> Tuple[Path, Path, Path]:
         p_t = OUTPUT_DIR / f"overseas_japan_{rid}_thumb_tpl{idx_t}.jpg"
         c_im.convert("RGB").save(p_t, "JPEG", quality=96)
 
-    import re
     m_num = re.search(r"(\d+)$", rid)
-    ep_idx = (int(m_num.group(1)) - 1) if m_num else 0
+    ep_idx = (int(m_num.group(1)) - 1) if m_num else (sum(ord(c) for c in rid) % 5)
     primary_im = all_tpls[ep_idx % 5]
     secondary_im = all_tpls[(ep_idx + 2) % 5]
     primary_im.convert("RGB").save(thumb_a, "JPEG", quality=96)

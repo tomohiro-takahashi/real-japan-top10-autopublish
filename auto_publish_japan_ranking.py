@@ -565,22 +565,21 @@ def auto_generate_next_theme_script() -> Path:
     real_spots = discover_real_spots_via_wikipedia(region_en, cat_en, rid)
     photo_dir = BASE_DIR / "assets" / "images" / rid
     photos_list = fetch_spot_specific_photos(real_spots, region_en, photo_dir)
-    if len(photos_list) < 20:
-        extra = fetch_wikimedia_highres_photos(f"{region_en} {rid.replace('_', ' ')}", photo_dir, count=20)
-        for ex in extra:
-            if len(photos_list) < 20 and ex not in photos_list:
-                photos_list.append(ex)
-
-    # Ensure 20 photo slots using theme-matched photos first
-    base_fetched = list(photos_list)
-    while len(photos_list) < 20 and base_fetched:
-        idx_s = len(photos_list) // 2 + 1
-        sub_s = (len(photos_list) % 2) + 1
-        fname = f"spot_{idx_s:02d}_{sub_s}.jpg"
-        src_fname = base_fetched[len(photos_list) % len(base_fetched)]
-        if (photo_dir / src_fname).exists() and src_fname != fname:
-            shutil.copyfile(photo_dir / src_fname, photo_dir / fname)
-        photos_list.append(fname)
+    # Never call fetch_wikimedia_highres_photos here (it previously overwrote spot_01_1..spot_04_2 with generic 1890s archival slides!).
+    # Instead, guarantee all 20 filenames exist in order spot_01_1 .. spot_10_2:
+    ordered_photos: List[str] = []
+    for idx_s in range(1, 11):
+        for sub_s in (1, 2):
+            fname = f"spot_{idx_s:02d}_{sub_s}.jpg"
+            fpath = photo_dir / fname
+            if not fpath.exists():
+                alt_fname = f"spot_{idx_s:02d}_{1 if sub_s == 2 else 2}.jpg"
+                if (photo_dir / alt_fname).exists():
+                    shutil.copyfile(photo_dir / alt_fname, fpath)
+                elif photos_list and (photo_dir / photos_list[0]).exists():
+                    shutil.copyfile(photo_dir / photos_list[0], fpath)
+            ordered_photos.append(fname)
+    photos_list = ordered_photos
 
     scores = [96, 94, 92, 90, 89, 87, 86, 85, 84, 82]
     summary_rows: List[Dict[str, Any]] = []

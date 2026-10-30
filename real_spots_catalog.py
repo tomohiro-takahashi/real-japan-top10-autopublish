@@ -368,8 +368,52 @@ def clean_wikipedia_description(snippet: str, title: str, category_en: str, clea
     return f"{text} ({rating})"
 
 
-def _fetch_bing_image_bytes(query: str) -> bytes:
-    """Search Bing Images for an anime scene or landmark still and return raw JPEG/PNG bytes."""
+_BLOCKED_IMAGE_DOMAINS = (
+    "alamy.com", "shutterstock.com", "gettyimages.", "istockphoto.com",
+    "123rf.com", "depositphotos.com", "dreamstime.com", "vecteezy.com",
+    "pixta.jp", "ftcdn.net", "bigstockphoto.com", "canstockphoto.com",
+)
+
+_BLOCKED_URL_KEYWORDS = (
+    "watermark", "alamy", "shutterstock", "getty", "istock", "123rf",
+    "kimbei", "farsari", "meiji", "1880", "1890", "1900", "ukiyo",
+    "woodblock", "diagram", "chart", "map_", "map-", "logo", "icon",
+    "stamp", "postcard", "herbarium", "specimen",
+)
+
+
+def _is_valid_landscape_photo(data: bytes, allow_anime: bool = False) -> bool:
+    """Verify image bytes decode cleanly as a crisp, modern color landscape photo (never sepia/1890s scans or tiny icons)."""
+    if not data or len(data) < 22000:
+        return False
+    try:
+        import io
+        from PIL import Image, ImageStat
+
+        im = Image.open(io.BytesIO(data)).convert("RGB")
+        w, h = im.size
+        if w < 550 or h < 320:
+            return False
+        ratio = w / float(h)
+        if ratio < 1.05 or ratio > 2.45:
+            return False
+        if not allow_anime:
+            # Reject monochrome / sepia / washed-out 1890s lantern slides or white-background diagrams
+            hsv = im.resize((120, 80)).convert("HSV")
+            stat = ImageStat.Stat(hsv)
+            mean_sat = stat.mean[1]
+            std_val = stat.stddev[2]
+            if mean_sat < 28 or std_val < 24:
+                return False
+        return True
+    except Exception:
+        return False
+
+
+def _fetch_bing_image_candidates(query: str, seen_hashes: set, count: int = 1, allow_anime: bool = False) -> List[bytes]:
+    """Search Bing Images and return up to `count` verified, watermark-free, unique landscape JPEG/PNG byte payloads."""
+    import hashlib
+
     url = "https://www.bing.com/images/search?q=" + urllib.parse.quote(query) + "&form=HDRSC2&first=1"
     headers = {
         "User-Agent": (
@@ -377,23 +421,42 @@ def _fetch_bing_image_bytes(query: str) -> bytes:
             "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
         )
     }
+    results: List[bytes] = []
     try:
         req = urllib.request.Request(url, headers=headers)
         with urllib.request.urlopen(req, timeout=12) as resp:
             html = resp.read().decode("utf-8", errors="ignore")
-        murls = re.findall(r'murl&quot;:&quot;(https?://[^&]+?\.(?:jpg|jpeg|png))&quot;', html)
-        for img_url in murls[:5]:
+        murls = re.findall(r'murl&quot;:&quot;(https?://[^&]+?\.(?:jpg|jpeg|png))&quot;', html, flags=re.IGNORECASE)
+        for img_url in murls[:18]:
+            low_u = img_url.lower()
+            if any(dom in low_u for dom in _BLOCKED_IMAGE_DOMAINS):
+                continue
+            if any(kw in low_u for kw in _BLOCKED_URL_KEYWORDS):
+                continue
             try:
                 ireq = urllib.request.Request(img_url, headers=headers)
                 with urllib.request.urlopen(ireq, timeout=10) as iresp:
                     data = iresp.read()
-                if len(data) > 18000:
-                    return data
+                if not _is_valid_landscape_photo(data, allow_anime=allow_anime):
+                    continue
+                h_digest = hashlib.md5(data).hexdigest()
+                if h_digest in seen_hashes:
+                    continue
+                seen_hashes.add(h_digest)
+                results.append(data)
+                if len(results) >= count:
+                    break
             except Exception:
                 continue
     except Exception:
         pass
-    return b""
+    return results
+
+
+def _fetch_bing_image_bytes(query: str) -> bytes:
+    """Backwards-compatible helper returning a single verified image payload."""
+    res = _fetch_bing_image_candidates(query, set(), count=1, allow_anime=True)
+    return res[0] if res else b""
 
 
 def _composite_anime_scene_inset(real_photo_path: Path, anime_bytes: bytes, anime_label: str) -> None:
@@ -458,13 +521,22 @@ def _search_wikimedia_urls(query: str, seen_urls: set, limit: int = 2) -> List[s
     api_url = (
         "https://commons.wikimedia.org/w/api.php?action=query&generator=search"
         f"&gsrsearch={urllib.parse.quote('filetype:bitmap ' + query)}"
-        "&gsrnamespace=6&gsrlimit=12&prop=imageinfo&iiprop=url&iiurlwidth=1600&format=json"
+        "&gsrnamespace=6&gsrlimit=15&prop=imageinfo&iiprop=url&iiurlwidth=1600&format=json"
+    )
+    bad_title_words = (
+        "186", "187", "188", "189", "190", "191", "192", "193", "194",
+        "meiji", "taisho", "kimbei", "farsari", "ukiyo", "print", "woodblock",
+        "map", "diagram", "chart", "statue", "monument", "plaque", "sign",
+        "fern", "plant", "herbarium", "tsunami", "damage", "hospital", "logo",
     )
     try:
         req = urllib.request.Request(api_url, headers={"User-Agent": "RealJapanTop10Bot/1.0"})
         with urllib.request.urlopen(req, timeout=15) as resp:
             pages = json.loads(resp.read().decode("utf-8")).get("query", {}).get("pages", {})
         for pg in pages.values():
+            title_low = pg.get("title", "").lower()
+            if any(bw in title_low for bw in bad_title_words):
+                continue
             ii = (pg.get("imageinfo") or [{}])[0]
             u = ii.get("thumburl") or ii.get("url") or ""
             clean_u = u.split("?")[0].lower()
@@ -480,67 +552,70 @@ def _search_wikimedia_urls(query: str, seen_urls: set, limit: int = 2) -> List[s
 
 def fetch_spot_specific_photos(spots: List[Dict[str, str]], region_en: str, out_dir: Path) -> List[str]:
     """
-    Download 2 high-res (1600px) JPEG photos per spot (total 20 photos):
+    Download 2 verified, watermark-free, unique landscape JPEG photos per spot (total 20 photos):
     - `spot_XX_1.jpg`: The primary spot / Anime Sacred Site (plus optional Anime Scene PiP comparison if `anime_scene_query` is present).
-    - `spot_XX_2.jpg`: The surrounding sightseeing / local food photo (`nearby_photo_query` if present, else second angle of spot).
+    - `spot_XX_2.jpg`: The surrounding sightseeing / local food photo (`nearby_photo_query` if present, else second distinct angle of spot).
     """
+    import hashlib
+
     out_dir.mkdir(parents=True, exist_ok=True)
     saved_names: List[str] = []
     seen_urls: set = set()
+    seen_hashes: set = set()
 
     for i, sp in enumerate(spots[:10]):
         idx_s = i + 1
-        q_primary = sp.get("photo_query") or f"{sp['name_en'].split('(')[0].split('—')[0].strip()} Japan"
-        q_nearby = sp.get("nearby_photo_query") or ""
-        q_fallback = f"{region_en} Japan landmark"
-
-        spot_urls: List[str] = _search_wikimedia_urls(q_primary, seen_urls, limit=1 if q_nearby else 2)
-        if q_nearby:
-            nearby_urls = _search_wikimedia_urls(q_nearby, seen_urls, limit=1)
-            spot_urls.extend(nearby_urls)
-        if len(spot_urls) < 2:
-            more = _search_wikimedia_urls(q_primary, seen_urls, limit=2 - len(spot_urls))
-            spot_urls.extend(more)
-        if len(spot_urls) < 2:
-            fb = _search_wikimedia_urls(q_fallback, seen_urls, limit=2 - len(spot_urls))
-            spot_urls.extend(fb)
+        clean_spot_name = sp["name_en"].split("—")[0].split("(")[0].strip()
+        q_primary = sp.get("photo_query") or f"{clean_spot_name} Japan"
+        q_nearby = sp.get("nearby_photo_query") or f"{clean_spot_name} {sp.get('dish', '')[:30]} Japan"
 
         for sub_idx in (1, 2):
             fname = f"spot_{idx_s:02d}_{sub_idx}.jpg"
             dest = out_dir / fname
-            chosen_url = spot_urls[sub_idx - 1] if len(spot_urls) >= sub_idx else (spot_urls[0] if spot_urls else "")
+            target_q = q_primary if sub_idx == 1 else q_nearby
             wrote_ok = False
-            if sub_idx == 1 and sp.get("anime_scene_query"):
-                # Prefer exact sacred site photo via Bing Image Search so iconic stairs/crossings match the anime scene
-                b_real = _fetch_bing_image_bytes(f"{q_primary} real life photo Japan")
-                if b_real:
-                    dest.write_bytes(b_real)
+
+            # 1. Primary path: Verified watermark-free Bing landscape photo search for the exact spot/food query
+            bing_queries = [
+                f"{target_q} photo",
+                f"{clean_spot_name} Japan scenery",
+                f"{region_en} {clean_spot_name} Japan",
+            ]
+            for bq in bing_queries:
+                cands = _fetch_bing_image_candidates(bq, seen_hashes, count=1, allow_anime=False)
+                if cands:
+                    dest.write_bytes(cands[0])
                     saved_names.append(fname)
                     wrote_ok = True
-            if not wrote_ok and chosen_url:
-                try:
-                    img_req = urllib.request.Request(chosen_url, headers={"User-Agent": "RealJapanTop10Bot/1.0"})
-                    with urllib.request.urlopen(img_req, timeout=15) as r_img:
-                        data = r_img.read()
-                    if len(data) > 20000:
-                        dest.write_bytes(data)
-                        saved_names.append(fname)
-                        wrote_ok = True
-                except Exception:
-                    pass
-            if not wrote_ok and saved_names and (out_dir / saved_names[-1]).exists():
-                dest.write_bytes((out_dir / saved_names[-1]).read_bytes())
-                saved_names.append(fname)
-                wrote_ok = True
+                    break
+
+            # 2. Secondary path: Filtered Wikimedia Commons search (with strict anti-1890s/anti-diagram validation)
+            if not wrote_ok:
+                wm_urls = _search_wikimedia_urls(target_q, seen_urls, limit=3)
+                for wu in wm_urls:
+                    try:
+                        img_req = urllib.request.Request(wu, headers={"User-Agent": "RealJapanTop10Bot/1.0"})
+                        with urllib.request.urlopen(img_req, timeout=15) as r_img:
+                            data = r_img.read()
+                        if _is_valid_landscape_photo(data, allow_anime=False):
+                            hd = hashlib.md5(data).hexdigest()
+                            if hd not in seen_hashes:
+                                seen_hashes.add(hd)
+                                dest.write_bytes(data)
+                                saved_names.append(fname)
+                                wrote_ok = True
+                                break
+                    except Exception:
+                        continue
 
             # Save a clean copy for thumbnails before compositing the Anime Scene inset
             if wrote_ok and sub_idx == 1 and sp.get("anime_scene_query"):
                 clean_copy = out_dir / f"spot_{idx_s:02d}_1_clean.jpg"
                 clean_copy.write_bytes(dest.read_bytes())
-                anime_bytes = _fetch_bing_image_bytes(sp["anime_scene_query"])
-                if anime_bytes:
+                anime_cands = _fetch_bing_image_candidates(sp["anime_scene_query"], seen_hashes, count=1, allow_anime=True)
+                if anime_cands:
                     anime_lbl = sp.get("anime_title") or "ICONIC SCENE"
-                    _composite_anime_scene_inset(dest, anime_bytes, anime_lbl)
+                    _composite_anime_scene_inset(dest, anime_cands[0], anime_lbl)
 
     return saved_names
 
