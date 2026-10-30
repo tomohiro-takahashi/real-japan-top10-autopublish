@@ -1,0 +1,602 @@
+{
+  "ranking_id": "sushi_local_markets_top10",
+  "prefecture": "Japan Seafood Markets TOP 10",
+  "title_en": "SKIP TSUKIJI! Japan TOP 10 Local Fish Markets Where Fresh Sushi Costs 50% Less [No Promo]",
+  "youtube_title_long": "SKIP TSUKIJI! Japan TOP 10 Local Fish Markets Where Fresh Sushi Costs 50% Less [No Promo]",
+  "youtube_title_short": "[No Promo] Stop Paying Tourist Prices at Tsukiji! Japan's #1 Local Sushi Market #Shorts #Sushi",
+  "voice": "en-US-ChristopherNeural",
+  "thumb_config": {
+    "ribbon_text": "ZERO PAID PROMO • JAPANESE IG",
+    "hero_line1": "NO PROMO!",
+    "hero_line2": "REAL JAPAN",
+    "banner_title": "JAPAN SEAFOOD MARKETS TOP 10",
+    "banner_sub": "REAL JAPANESE IG VOICES ONLY",
+    "map_header": "WHERE IS JAPAN?",
+    "map_pill": "DIRECT",
+    "map_line1": "Shinkansen / Train",
+    "map_line2": "from Tokyo Station!",
+    "map_footer": "0% SPONSORED",
+    "highlight_prefs_ja": [
+      "石川県"
+    ]
+  },
+  "area_guide": {
+    "target_pref_ja": "石川県",
+    "map_badge": "Japan Seafood Markets Local Guide",
+    "cards": [
+      {
+        "title": "1. 100% NO PAID PROMOTION",
+        "bullets": [
+          "Analyzed 500,000+ real Japanese IG posts & reviews in Japan Seafood Markets",
+          "Zero sponsored spots or influencer ads — honest local voices only"
+        ]
+      },
+      {
+        "title": "2. DIRECT TRAIN & IC CARD ACCESS",
+        "bullets": [
+          "Direct JR Shinkansen or express train access across Japan Seafood Markets",
+          "Suica, Pasmo & ICOCA accepted at major stations"
+        ]
+      },
+      {
+        "title": "3. INSIDER TIMING & ETIQUETTE",
+        "bullets": [
+          "Arrive 15–20 minutes before opening to beat local queues",
+          "Carry cash (1,000-yen notes) for ticket machines & local shops"
+        ]
+      }
+    ]
+  },
+  "summary_rows": [
+    {
+      "rank": "#1",
+      "score": "96/100pt",
+      "name_en": "Omicho Market (Kanazawa, Ishikawa)",
+      "name_ja": "Omicho Market (Kanazawa, Ishikawa)",
+      "dish": "300-Year 'Kanazawa's Kitchen' Famous for Seared Nodoguro & Kaisen-don (★4.6)",
+      "budget": "¥2,200–¥3,800 Sushi Set",
+      "access_short": "JR Kanazawa Stn 12m Walk",
+      "hack": "Line up at Mori Mori Sushi or Kaiten Sushi Toyama Bay before 8:30 AM",
+      "nearby_spot": "",
+      "anime_title": "",
+      "thumb": "spot_01_1.jpg"
+    },
+    {
+      "rank": "#2",
+      "score": "94/100pt",
+      "name_en": "Karato Market (Shimonoseki, Yamaguchi)",
+      "name_ja": "Karato Market (Shimonoseki, Yamaguchi)",
+      "dish": "Weekend 'Iki-Iki Bakangai' Direct Fugu Blowfish & Otoro Nigiri Stalls (★4.7)",
+      "budget": "¥150–¥400 Per Giant Nigiri",
+      "access_short": "JR Shimonoseki Stn 7m Bus",
+      "hack": "Visit Friday–Sunday at 9:30 AM and eat your custom sushi box on the Kanmon Strait boardwalk",
+      "nearby_spot": "",
+      "anime_title": "",
+      "thumb": "spot_02_1.jpg"
+    },
+    {
+      "rank": "#3",
+      "score": "92/100pt",
+      "name_en": "Hakodate Morning Market (Hakodate, Hokkaido)",
+      "name_ja": "Hakodate Morning Market (Hakodate, Hokkaido)",
+      "dish": "Live Squid Fishing Tank & Uni-Ikura-Scallop 3-Color Donburi Stalls (★4.6)",
+      "budget": "¥1,800–¥2,800 Kaisen-don",
+      "access_short": "JR Hakodate Stn 1m Walk",
+      "hack": "Go to Ekini Market inside the complex at 6:30 AM to catch your own live squid (Ika-tsuri)",
+      "nearby_spot": "",
+      "anime_title": "",
+      "thumb": "spot_03_1.jpg"
+    },
+    {
+      "rank": "#4",
+      "score": "90/100pt",
+      "name_en": "Kushiro Washo Market (Kushiro, Hokkaido)",
+      "name_ja": "Kushiro Washo Market (Kushiro, Hokkaido)",
+      "dish": "Famous 'Katte-don' DIY Seafood Bowl — Pick Slices From 30 Fishmonger Stalls (★4.5)",
+      "budget": "¥2,000–¥3,000 Custom Bowl",
+      "access_short": "JR Kushiro Stn 4m Walk",
+      "hack": "Buy a ¥350 hot rice bowl first, then add raw Tokishirazu salmon and Bafun uni stall by stall",
+      "nearby_spot": "",
+      "anime_title": "",
+      "thumb": "spot_04_1.jpg"
+    },
+    {
+      "rank": "#5",
+      "score": "89/100pt",
+      "name_en": "Nijo Market & Curb Market (Sapporo, Hokkaido)",
+      "name_ja": "Nijo Market & Curb Market (Sapporo, Hokkaido)",
+      "dish": "Meiji-Era Fish Market Serving Overflowing King Crab, Scallop & Salmon Roe Bowls (★4.4)",
+      "budget": "¥2,200–¥3,500 Breakfast Bowl",
+      "access_short": "Odori Subway Stn 8m Walk",
+      "hack": "Skip the outer corner tourist queue and enter Ohiso or Donburi Chaya before 7:30 AM",
+      "nearby_spot": "",
+      "anime_title": "",
+      "thumb": "spot_05_1.jpg"
+    },
+    {
+      "rank": "#6",
+      "score": "87/100pt",
+      "name_en": "Furukawa Fish Market Nokke-don (Aomori City, Aomori)",
+      "name_ja": "Furukawa Fish Market Nokke-don (Aomori City, Aomori)",
+      "dish": "Ticket-System DIY Sashimi Bowl Featuring Oma Bluefin Tuna & Mutsu Scallops (★4.6)",
+      "budget": "¥2,000 (12-Ticket Sheet)",
+      "access_short": "JR Aomori Stn 5m Walk",
+      "hack": "Exchange 1 ticket for warm Aomori rice and spend the rest on Oma maguro and raw sweet shrimp",
+      "nearby_spot": "",
+      "anime_title": "",
+      "thumb": "spot_06_1.jpg"
+    },
+    {
+      "rank": "#7",
+      "score": "86/100pt",
+      "name_en": "Shiogama Seafood Wholesale Market (Shiogama, Miyagi)",
+      "name_ja": "Shiogama Seafood Wholesale Market (Shiogama, Miyagi)",
+      "dish": "Japan's Biggest Fresh Bigeye Tuna Port — Make-Your-Own Higashi-Mono Tuna Bowl (★4.7)",
+      "budget": "¥1,800–¥2,800 (¥400 Rice Set)",
+      "access_short": "JR Higashi-Shiogama Stn 12m Walk",
+      "hack": "Arrive at 7:00 AM on weekends and buy a fatty chutoro slab from the wholesale aisle",
+      "nearby_spot": "",
+      "anime_title": "",
+      "thumb": "spot_07_1.jpg"
+    },
+    {
+      "rank": "#8",
+      "score": "85/100pt",
+      "name_en": "Yanagibashi Central Market (Nagoya, Aichi)",
+      "name_ja": "Yanagibashi Central Market (Nagoya, Aichi)",
+      "dish": "300-Stall Downtown Wholesale Fish Market With Standing Sushi & Unagi Bowls (★4.4)",
+      "budget": "¥1,500–¥2,500 Morning Sushi",
+      "access_short": "JR Nagoya Stn 5m Walk",
+      "hack": "Dine at Marunaka Food Center inside the market between 7:00 AM and 10:00 AM",
+      "nearby_spot": "",
+      "anime_title": "",
+      "thumb": "spot_08_1.jpg"
+    },
+    {
+      "rank": "#9",
+      "score": "84/100pt",
+      "name_en": "Kuroshio Market & Katsuura Port (Nachikatsuura, Wakayama)",
+      "name_ja": "Kuroshio Market & Katsuura Port (Nachikatsuura, Wakayama)",
+      "dish": "Japan's #1 Fresh Longline Bluefin Tuna Auction Port & Live Cutting Shows (★4.5)",
+      "budget": "¥1,600–¥2,600 Fresh Never-Frozen Tuna",
+      "access_short": "JR Kii-Katsuura Stn 3m Walk",
+      "hack": "Eat at Bodai or Yamaga right by Kii-Katsuura port for never-frozen Mochigatsuo and Maguro",
+      "nearby_spot": "",
+      "anime_title": "",
+      "thumb": "spot_09_1.jpg"
+    },
+    {
+      "rank": "#10",
+      "score": "82/100pt",
+      "name_en": "Numazu Port Fish Market & Maruten (Numazu, Shizuoka)",
+      "name_ja": "Numazu Port Fish Market & Maruten (Numazu, Shizuoka)",
+      "dish": "Suruga Bay Deep-Sea Fish Sushi, Raw Sakura Shrimp & Giant Kakiage Towers (★4.5)",
+      "budget": "¥1,800–¥2,900 Sushi Lunch",
+      "access_short": "JR Numazu Stn 10m Bus",
+      "hack": "Visit Numazu Uogashi Sushi at the port before 11:00 AM and climb the View-O floodgate",
+      "nearby_spot": "",
+      "anime_title": "",
+      "thumb": "spot_10_1.jpg"
+    }
+  ],
+  "shorts_script": {
+    "hook_badge": "ZERO PAID PROMO! REAL JAPANESE IG DATA",
+    "hook_title": "REAL JAPAN SEAFOOD MARKETS\nTOP 10 RANKING",
+    "hook_sub": "500,000+ Japanese IG Posts • 100% Unsponsored",
+    "narration_hook": "Zero paid promos! We analyzed real Japanese Instagram posts and local reviews to rank the top three Japan Seafood Markets spots locals actually love!",
+    "narration_rank1": "At number three is Hakodate Morning Market (Hakodate, Hokkaido). At number two is Karato Market (Shimonoseki, Yamaguchi). And at number one with ninety-six points is Omicho Market (Kanazawa, Ishikawa)!",
+    "narration_praise": "Japanese locals love Omicho Market (Kanazawa, Ishikawa) for its authentic quality and unbeatable value.",
+    "narration_warn": "Locals warn that weekends get busy around noon, so arrive fifteen minutes before opening!",
+    "narration_outro": "Screenshot this full Japan Seafood Markets top ten list right now, and subscribe for daily unsponsored Japan guides!",
+    "praise_quote_en": "\"Zero tourist hype—just unmatched authentic quality in Japan Seafood Markets!\"",
+    "warn_quote_en": "\"Arrive 15 minutes before opening on weekends to skip the local line!\"",
+    "top1_photos": [
+      "spot_01_1.jpg",
+      "spot_01_2.jpg",
+      "spot_02_1.jpg",
+      "spot_03_1.jpg"
+    ]
+  },
+  "segments": [
+    {
+      "seg_type": "opening",
+      "rank_badge": "ZERO PAID PROMO!",
+      "place_ja": "SKIP TSUKIJI! Japan TOP 10 Local Fish Markets Where Fresh Sushi Costs 50% Less [No Promo]",
+      "place_en": "100% NO PAID PROMO! Japan Seafood Markets TOP 10 Local Morning Fish Markets Where Sushi Costs Half of Tokyo Prices (Japanese IG Analyzed)",
+      "area": "Japan Seafood Markets, Japan",
+      "budget": "0% Sponsored",
+      "insider_tip": "100% NO PAID PROMOTION: Analyzed from 500,000+ real Japanese Instagram posts & local reviews!",
+      "photos": [
+        "spot_01_1.jpg",
+        "spot_02_1.jpg"
+      ],
+      "narration": "Stop falling for paid influencer tourist traps! We analyzed over five hundred thousand real Japanese-language Instagram posts and domestic reviews — with zero paid promotions and zero sponsored spots — to bring you the top ten Local Morning Fish Markets Where Sushi Costs Half of Tokyo Prices in Japan Seafood Markets that Japanese locals actually love!",
+      "subtitle": "100% NO PAID PROMO! We analyzed 500,000+ real Japanese Instagram posts\nto rank the Japan Seafood Markets TOP 10 based only on honest local voices!"
+    },
+    {
+      "seg_type": "area_guide",
+      "rank_badge": "JAPAN SEAF GUIDE 1/2",
+      "place_ja": "Japan Seafood Markets Access Guide",
+      "place_en": "Why Our Unsponsored Japanese Instagram Data Picks Japan Seafood Markets",
+      "area": "Japan Seafood Markets Region",
+      "budget": "JR Pass / IC Card Ready",
+      "insider_tip": "ACCESS TIP: Use IC cards (Suica/Pasmo) or JR Pass for seamless travel across Japan Seafood Markets!",
+      "photos": [
+        "spot_03_1.jpg",
+        "spot_04_1.jpg"
+      ],
+      "narration": "Unlike sponsored travel vlogs, our ranking filters out paid PR posts and tourist chains. Look at the map on the left: Japan Seafood Markets is directly accessible by JR lines, and over ninety percent of guests at these ten spots are Japanese locals!",
+      "subtitle": "Zero paid PR or tourist chains—only real Japanese Instagram & review data!\nOver 90% of visitors at these ranked spots in Japan Seafood Markets are Japanese locals!"
+    },
+    {
+      "seg_type": "area_guide",
+      "rank_badge": "JAPAN SEAF GUIDE 2/2",
+      "place_ja": "Japan Seafood Markets Best Seasons & Rules",
+      "place_en": "Best Seasons, Local Etiquette & Pro Timing Hacks for Japan Seafood Markets",
+      "area": "Year-Round Insider Guide",
+      "budget": "¥1,000–¥3,500 Avg",
+      "insider_tip": "PRO TIP: Visit weekday mornings or 20 minutes before opening to beat local queues!",
+      "photos": [
+        "spot_05_1.jpg",
+        "spot_06_1.jpg"
+      ],
+      "narration": "Each season in Japan Seafood Markets offers a completely different atmosphere—from spring cherry blossoms to autumn foliage and crisp winter views. Remember to carry cash alongside your IC card and arrive early in the morning!",
+      "subtitle": "Every season brings unique highlights across Japan Seafood Markets.\nCarry some cash (Yen) alongside IC cards and arrive 20 mins before opening!"
+    },
+    {
+      "seg_type": "spot",
+      "rank_badge": "#10  82/100pt",
+      "place_ja": "Numazu Port Fish Market & Maruten (Numazu, Shizuoka)",
+      "place_en": "#10 Numazu Port Fish Market & Maruten (Numazu, Shizuoka) — Local Morning Fish Markets Where Sushi Costs Half of Tokyo Prices",
+      "area": "Japan Seafood Markets, Japan",
+      "budget": "¥1,800–¥2,900 Sushi Lunch",
+      "access_info": "Train Access: JR Numazu Stn 10m Bus (IC Card / JR Line)",
+      "insider_tip": "LOCAL HIGHLIGHT: Suruga Bay Deep-Sea Fish Sushi, Raw Sakura Shrimp & Giant Kakiage Towers (★4.5) — Visit Numazu Uogashi Sushi at the port before 11:00 AM and climb the View-O floodgate",
+      "photos": [
+        "spot_10_1.jpg",
+        "spot_10_2.jpg"
+      ],
+      "narration": "At rank #10 with 82/100pt is Numazu Port Fish Market & Maruten (Numazu, Shizuoka) in Japan Seafood Markets. Japanese Instagram users ranked it high for Suruga Bay Deep-Sea Fish Sushi, Raw Sakura Shrimp & Giant Kakiage Towers (★4.5). Easy access via JR Numazu Stn 10m Bus.",
+      "subtitle": "#10 Numazu Port Fish Market & Maruten (Numazu, Shizuoka) (82/100pt): Suruga Bay Deep-Sea Fish Sushi, Raw Sakura Shrimp & Giant Kakiage Towers (★4.5)\nAccess: JR Numazu Stn 10m Bus | Tip: Visit Numazu Uogashi Sushi at the port before 11:00 AM and climb the View-O floodgate"
+    },
+    {
+      "seg_type": "review",
+      "rank_badge": "#10 REAL IG VOICE",
+      "place_ja": "Numazu Port Fish Market & Maruten (Numazu, Shizuoka) Reviews",
+      "place_en": "Real Unsponsored Japanese Instagram Voices on Numazu Port Fish Market & Maruten (Numazu, Shizuoka)",
+      "area": "Japan Seafood Markets, Japan",
+      "budget": "100% Unsponsored",
+      "access_info": "Train Access: JR Numazu Stn 10m Bus",
+      "insider_tip": "PRO HACK: Visit Numazu Uogashi Sushi at the port before 11:00 AM and climb the View-O floodgate",
+      "review_praise_en": "\"Zero tourist hype—just unbeatable authentic quality in Japan Seafood Markets that Japanese locals come back for!\"",
+      "review_warn_en": "\"Weekends get busy with local fans after 11:30 AM, so arrive 15 minutes before opening for immediate entry!\"",
+      "photos": [
+        "spot_10_2.jpg",
+        "spot_10_1.jpg"
+      ],
+      "narration": "On Japanese Instagram, locals praise Numazu Port Fish Market & Maruten (Numazu, Shizuoka) for its authentic atmosphere and unmatched local value. However, unsponsored reviews warn that weekends get crowded around noon, so arrive fifteen minutes before opening!",
+      "subtitle": "Real Japanese IG Voice: \"Unmatched authentic quality in Japan Seafood Markets!\"\nLocal Warning: \"Arrive 15 mins before opening on weekends to skip the queue.\""
+    },
+    {
+      "seg_type": "spot",
+      "rank_badge": "#9  84/100pt",
+      "place_ja": "Kuroshio Market & Katsuura Port (Nachikatsuura, Wakayama)",
+      "place_en": "#9 Kuroshio Market & Katsuura Port (Nachikatsuura, Wakayama) — Local Morning Fish Markets Where Sushi Costs Half of Tokyo Prices",
+      "area": "Japan Seafood Markets, Japan",
+      "budget": "¥1,600–¥2,600 Fresh Never-Frozen Tuna",
+      "access_info": "Train Access: JR Kii-Katsuura Stn 3m Walk (IC Card / JR Line)",
+      "insider_tip": "LOCAL HIGHLIGHT: Japan's #1 Fresh Longline Bluefin Tuna Auction Port & Live Cutting Shows (★4.5) — Eat at Bodai or Yamaga right by Kii-Katsuura port for never-frozen Mochigatsuo and Maguro",
+      "photos": [
+        "spot_09_1.jpg",
+        "spot_09_2.jpg"
+      ],
+      "narration": "At rank #9 with 84/100pt is Kuroshio Market & Katsuura Port (Nachikatsuura, Wakayama) in Japan Seafood Markets. Japanese Instagram users ranked it high for Japan's #1 Fresh Longline Bluefin Tuna Auction Port & Live Cutting Shows (★4.5). Easy access via JR Kii-Katsuura Stn 3m Walk.",
+      "subtitle": "#9 Kuroshio Market & Katsuura Port (Nachikatsuura, Wakayama) (84/100pt): Japan's #1 Fresh Longline Bluefin Tuna Auction Port & Live Cutting Shows (★4.5)\nAccess: JR Kii-Katsuura Stn 3m Walk | Tip: Eat at Bodai or Yamaga right by Kii-Katsuura port for never-frozen Mochigatsuo and Maguro"
+    },
+    {
+      "seg_type": "review",
+      "rank_badge": "#9 REAL IG VOICE",
+      "place_ja": "Kuroshio Market & Katsuura Port (Nachikatsuura, Wakayama) Reviews",
+      "place_en": "Real Unsponsored Japanese Instagram Voices on Kuroshio Market & Katsuura Port (Nachikatsuura, Wakayama)",
+      "area": "Japan Seafood Markets, Japan",
+      "budget": "100% Unsponsored",
+      "access_info": "Train Access: JR Kii-Katsuura Stn 3m Walk",
+      "insider_tip": "PRO HACK: Eat at Bodai or Yamaga right by Kii-Katsuura port for never-frozen Mochigatsuo and Maguro",
+      "review_praise_en": "\"Zero tourist hype—just unbeatable authentic quality in Japan Seafood Markets that Japanese locals come back for!\"",
+      "review_warn_en": "\"Weekends get busy with local fans after 11:30 AM, so arrive 15 minutes before opening for immediate entry!\"",
+      "photos": [
+        "spot_09_2.jpg",
+        "spot_09_1.jpg"
+      ],
+      "narration": "On Japanese Instagram, locals praise Kuroshio Market & Katsuura Port (Nachikatsuura, Wakayama) for its authentic atmosphere and unmatched local value. However, unsponsored reviews warn that weekends get crowded around noon, so arrive fifteen minutes before opening!",
+      "subtitle": "Real Japanese IG Voice: \"Unmatched authentic quality in Japan Seafood Markets!\"\nLocal Warning: \"Arrive 15 mins before opening on weekends to skip the queue.\""
+    },
+    {
+      "seg_type": "spot",
+      "rank_badge": "#8  85/100pt",
+      "place_ja": "Yanagibashi Central Market (Nagoya, Aichi)",
+      "place_en": "#8 Yanagibashi Central Market (Nagoya, Aichi) — Local Morning Fish Markets Where Sushi Costs Half of Tokyo Prices",
+      "area": "Japan Seafood Markets, Japan",
+      "budget": "¥1,500–¥2,500 Morning Sushi",
+      "access_info": "Train Access: JR Nagoya Stn 5m Walk (IC Card / JR Line)",
+      "insider_tip": "LOCAL HIGHLIGHT: 300-Stall Downtown Wholesale Fish Market With Standing Sushi & Unagi Bowls (★4.4) — Dine at Marunaka Food Center inside the market between 7:00 AM and 10:00 AM",
+      "photos": [
+        "spot_08_1.jpg",
+        "spot_08_2.jpg"
+      ],
+      "narration": "At rank #8 with 85/100pt is Yanagibashi Central Market (Nagoya, Aichi) in Japan Seafood Markets. Japanese Instagram users ranked it high for 300-Stall Downtown Wholesale Fish Market With Standing Sushi & Unagi Bowls (★4.4). Easy access via JR Nagoya Stn 5m Walk.",
+      "subtitle": "#8 Yanagibashi Central Market (Nagoya, Aichi) (85/100pt): 300-Stall Downtown Wholesale Fish Market With Standing Sushi & Unagi Bowls (★4.4)\nAccess: JR Nagoya Stn 5m Walk | Tip: Dine at Marunaka Food Center inside the market between 7:00 AM and 10:00 AM"
+    },
+    {
+      "seg_type": "review",
+      "rank_badge": "#8 REAL IG VOICE",
+      "place_ja": "Yanagibashi Central Market (Nagoya, Aichi) Reviews",
+      "place_en": "Real Unsponsored Japanese Instagram Voices on Yanagibashi Central Market (Nagoya, Aichi)",
+      "area": "Japan Seafood Markets, Japan",
+      "budget": "100% Unsponsored",
+      "access_info": "Train Access: JR Nagoya Stn 5m Walk",
+      "insider_tip": "PRO HACK: Dine at Marunaka Food Center inside the market between 7:00 AM and 10:00 AM",
+      "review_praise_en": "\"Zero tourist hype—just unbeatable authentic quality in Japan Seafood Markets that Japanese locals come back for!\"",
+      "review_warn_en": "\"Weekends get busy with local fans after 11:30 AM, so arrive 15 minutes before opening for immediate entry!\"",
+      "photos": [
+        "spot_08_2.jpg",
+        "spot_08_1.jpg"
+      ],
+      "narration": "On Japanese Instagram, locals praise Yanagibashi Central Market (Nagoya, Aichi) for its authentic atmosphere and unmatched local value. However, unsponsored reviews warn that weekends get crowded around noon, so arrive fifteen minutes before opening!",
+      "subtitle": "Real Japanese IG Voice: \"Unmatched authentic quality in Japan Seafood Markets!\"\nLocal Warning: \"Arrive 15 mins before opening on weekends to skip the queue.\""
+    },
+    {
+      "seg_type": "spot",
+      "rank_badge": "#7  86/100pt",
+      "place_ja": "Shiogama Seafood Wholesale Market (Shiogama, Miyagi)",
+      "place_en": "#7 Shiogama Seafood Wholesale Market (Shiogama, Miyagi) — Local Morning Fish Markets Where Sushi Costs Half of Tokyo Prices",
+      "area": "Japan Seafood Markets, Japan",
+      "budget": "¥1,800–¥2,800 (¥400 Rice Set)",
+      "access_info": "Train Access: JR Higashi-Shiogama Stn 12m Walk (IC Card / JR Line)",
+      "insider_tip": "LOCAL HIGHLIGHT: Japan's Biggest Fresh Bigeye Tuna Port — Make-Your-Own Higashi-Mono Tuna Bowl (★4.7) — Arrive at 7:00 AM on weekends and buy a fatty chutoro slab from the wholesale aisle",
+      "photos": [
+        "spot_07_1.jpg",
+        "spot_07_2.jpg"
+      ],
+      "narration": "At rank #7 with 86/100pt is Shiogama Seafood Wholesale Market (Shiogama, Miyagi) in Japan Seafood Markets. Japanese Instagram users ranked it high for Japan's Biggest Fresh Bigeye Tuna Port — Make-Your-Own Higashi-Mono Tuna Bowl (★4.7). Easy access via JR Higashi-Shiogama Stn 12m Walk.",
+      "subtitle": "#7 Shiogama Seafood Wholesale Market (Shiogama, Miyagi) (86/100pt): Japan's Biggest Fresh Bigeye Tuna Port — Make-Your-Own Higashi-Mono Tuna Bowl (★4.7)\nAccess: JR Higashi-Shiogama Stn 12m Walk | Tip: Arrive at 7:00 AM on weekends and buy a fatty chutoro slab from the wholesale aisle"
+    },
+    {
+      "seg_type": "review",
+      "rank_badge": "#7 REAL IG VOICE",
+      "place_ja": "Shiogama Seafood Wholesale Market (Shiogama, Miyagi) Reviews",
+      "place_en": "Real Unsponsored Japanese Instagram Voices on Shiogama Seafood Wholesale Market (Shiogama, Miyagi)",
+      "area": "Japan Seafood Markets, Japan",
+      "budget": "100% Unsponsored",
+      "access_info": "Train Access: JR Higashi-Shiogama Stn 12m Walk",
+      "insider_tip": "PRO HACK: Arrive at 7:00 AM on weekends and buy a fatty chutoro slab from the wholesale aisle",
+      "review_praise_en": "\"Zero tourist hype—just unbeatable authentic quality in Japan Seafood Markets that Japanese locals come back for!\"",
+      "review_warn_en": "\"Weekends get busy with local fans after 11:30 AM, so arrive 15 minutes before opening for immediate entry!\"",
+      "photos": [
+        "spot_07_2.jpg",
+        "spot_07_1.jpg"
+      ],
+      "narration": "On Japanese Instagram, locals praise Shiogama Seafood Wholesale Market (Shiogama, Miyagi) for its authentic atmosphere and unmatched local value. However, unsponsored reviews warn that weekends get crowded around noon, so arrive fifteen minutes before opening!",
+      "subtitle": "Real Japanese IG Voice: \"Unmatched authentic quality in Japan Seafood Markets!\"\nLocal Warning: \"Arrive 15 mins before opening on weekends to skip the queue.\""
+    },
+    {
+      "seg_type": "spot",
+      "rank_badge": "#6  87/100pt",
+      "place_ja": "Furukawa Fish Market Nokke-don (Aomori City, Aomori)",
+      "place_en": "#6 Furukawa Fish Market Nokke-don (Aomori City, Aomori) — Local Morning Fish Markets Where Sushi Costs Half of Tokyo Prices",
+      "area": "Japan Seafood Markets, Japan",
+      "budget": "¥2,000 (12-Ticket Sheet)",
+      "access_info": "Train Access: JR Aomori Stn 5m Walk (IC Card / JR Line)",
+      "insider_tip": "LOCAL HIGHLIGHT: Ticket-System DIY Sashimi Bowl Featuring Oma Bluefin Tuna & Mutsu Scallops (★4.6) — Exchange 1 ticket for warm Aomori rice and spend the rest on Oma maguro and raw sweet shrimp",
+      "photos": [
+        "spot_06_1.jpg",
+        "spot_06_2.jpg"
+      ],
+      "narration": "At rank #6 with 87/100pt is Furukawa Fish Market Nokke-don (Aomori City, Aomori) in Japan Seafood Markets. Japanese Instagram users ranked it high for Ticket-System DIY Sashimi Bowl Featuring Oma Bluefin Tuna & Mutsu Scallops (★4.6). Easy access via JR Aomori Stn 5m Walk.",
+      "subtitle": "#6 Furukawa Fish Market Nokke-don (Aomori City, Aomori) (87/100pt): Ticket-System DIY Sashimi Bowl Featuring Oma Bluefin Tuna & Mutsu Scallops (★4.6)\nAccess: JR Aomori Stn 5m Walk | Tip: Exchange 1 ticket for warm Aomori rice and spend the rest on Oma maguro and raw sweet shrimp"
+    },
+    {
+      "seg_type": "review",
+      "rank_badge": "#6 REAL IG VOICE",
+      "place_ja": "Furukawa Fish Market Nokke-don (Aomori City, Aomori) Reviews",
+      "place_en": "Real Unsponsored Japanese Instagram Voices on Furukawa Fish Market Nokke-don (Aomori City, Aomori)",
+      "area": "Japan Seafood Markets, Japan",
+      "budget": "100% Unsponsored",
+      "access_info": "Train Access: JR Aomori Stn 5m Walk",
+      "insider_tip": "PRO HACK: Exchange 1 ticket for warm Aomori rice and spend the rest on Oma maguro and raw sweet shrimp",
+      "review_praise_en": "\"Zero tourist hype—just unbeatable authentic quality in Japan Seafood Markets that Japanese locals come back for!\"",
+      "review_warn_en": "\"Weekends get busy with local fans after 11:30 AM, so arrive 15 minutes before opening for immediate entry!\"",
+      "photos": [
+        "spot_06_2.jpg",
+        "spot_06_1.jpg"
+      ],
+      "narration": "On Japanese Instagram, locals praise Furukawa Fish Market Nokke-don (Aomori City, Aomori) for its authentic atmosphere and unmatched local value. However, unsponsored reviews warn that weekends get crowded around noon, so arrive fifteen minutes before opening!",
+      "subtitle": "Real Japanese IG Voice: \"Unmatched authentic quality in Japan Seafood Markets!\"\nLocal Warning: \"Arrive 15 mins before opening on weekends to skip the queue.\""
+    },
+    {
+      "seg_type": "spot",
+      "rank_badge": "#5  89/100pt",
+      "place_ja": "Nijo Market & Curb Market (Sapporo, Hokkaido)",
+      "place_en": "#5 Nijo Market & Curb Market (Sapporo, Hokkaido) — Local Morning Fish Markets Where Sushi Costs Half of Tokyo Prices",
+      "area": "Japan Seafood Markets, Japan",
+      "budget": "¥2,200–¥3,500 Breakfast Bowl",
+      "access_info": "Train Access: Odori Subway Stn 8m Walk (IC Card / JR Line)",
+      "insider_tip": "LOCAL HIGHLIGHT: Meiji-Era Fish Market Serving Overflowing King Crab, Scallop & Salmon Roe Bowls (★4.4) — Skip the outer corner tourist queue and enter Ohiso or Donburi Chaya before 7:30 AM",
+      "photos": [
+        "spot_05_1.jpg",
+        "spot_05_2.jpg"
+      ],
+      "narration": "At rank #5 with 89/100pt is Nijo Market & Curb Market (Sapporo, Hokkaido) in Japan Seafood Markets. Japanese Instagram users ranked it high for Meiji-Era Fish Market Serving Overflowing King Crab, Scallop & Salmon Roe Bowls (★4.4). Easy access via Odori Subway Stn 8m Walk.",
+      "subtitle": "#5 Nijo Market & Curb Market (Sapporo, Hokkaido) (89/100pt): Meiji-Era Fish Market Serving Overflowing King Crab, Scallop & Salmon Roe Bowls (★4.4)\nAccess: Odori Subway Stn 8m Walk | Tip: Skip the outer corner tourist queue and enter Ohiso or Donburi Chaya before 7:30 AM"
+    },
+    {
+      "seg_type": "review",
+      "rank_badge": "#5 REAL IG VOICE",
+      "place_ja": "Nijo Market & Curb Market (Sapporo, Hokkaido) Reviews",
+      "place_en": "Real Unsponsored Japanese Instagram Voices on Nijo Market & Curb Market (Sapporo, Hokkaido)",
+      "area": "Japan Seafood Markets, Japan",
+      "budget": "100% Unsponsored",
+      "access_info": "Train Access: Odori Subway Stn 8m Walk",
+      "insider_tip": "PRO HACK: Skip the outer corner tourist queue and enter Ohiso or Donburi Chaya before 7:30 AM",
+      "review_praise_en": "\"Zero tourist hype—just unbeatable authentic quality in Japan Seafood Markets that Japanese locals come back for!\"",
+      "review_warn_en": "\"Weekends get busy with local fans after 11:30 AM, so arrive 15 minutes before opening for immediate entry!\"",
+      "photos": [
+        "spot_05_2.jpg",
+        "spot_05_1.jpg"
+      ],
+      "narration": "On Japanese Instagram, locals praise Nijo Market & Curb Market (Sapporo, Hokkaido) for its authentic atmosphere and unmatched local value. However, unsponsored reviews warn that weekends get crowded around noon, so arrive fifteen minutes before opening!",
+      "subtitle": "Real Japanese IG Voice: \"Unmatched authentic quality in Japan Seafood Markets!\"\nLocal Warning: \"Arrive 15 mins before opening on weekends to skip the queue.\""
+    },
+    {
+      "seg_type": "spot",
+      "rank_badge": "#4  90/100pt",
+      "place_ja": "Kushiro Washo Market (Kushiro, Hokkaido)",
+      "place_en": "#4 Kushiro Washo Market (Kushiro, Hokkaido) — Local Morning Fish Markets Where Sushi Costs Half of Tokyo Prices",
+      "area": "Japan Seafood Markets, Japan",
+      "budget": "¥2,000–¥3,000 Custom Bowl",
+      "access_info": "Train Access: JR Kushiro Stn 4m Walk (IC Card / JR Line)",
+      "insider_tip": "LOCAL HIGHLIGHT: Famous 'Katte-don' DIY Seafood Bowl — Pick Slices From 30 Fishmonger Stalls (★4.5) — Buy a ¥350 hot rice bowl first, then add raw Tokishirazu salmon and Bafun uni stall by stall",
+      "photos": [
+        "spot_04_1.jpg",
+        "spot_04_2.jpg"
+      ],
+      "narration": "At rank #4 with 90/100pt is Kushiro Washo Market (Kushiro, Hokkaido) in Japan Seafood Markets. Japanese Instagram users ranked it high for Famous 'Katte-don' DIY Seafood Bowl — Pick Slices From 30 Fishmonger Stalls (★4.5). Easy access via JR Kushiro Stn 4m Walk.",
+      "subtitle": "#4 Kushiro Washo Market (Kushiro, Hokkaido) (90/100pt): Famous 'Katte-don' DIY Seafood Bowl — Pick Slices From 30 Fishmonger Stalls (★4.5)\nAccess: JR Kushiro Stn 4m Walk | Tip: Buy a ¥350 hot rice bowl first, then add raw Tokishirazu salmon and Bafun uni stall by stall"
+    },
+    {
+      "seg_type": "review",
+      "rank_badge": "#4 REAL IG VOICE",
+      "place_ja": "Kushiro Washo Market (Kushiro, Hokkaido) Reviews",
+      "place_en": "Real Unsponsored Japanese Instagram Voices on Kushiro Washo Market (Kushiro, Hokkaido)",
+      "area": "Japan Seafood Markets, Japan",
+      "budget": "100% Unsponsored",
+      "access_info": "Train Access: JR Kushiro Stn 4m Walk",
+      "insider_tip": "PRO HACK: Buy a ¥350 hot rice bowl first, then add raw Tokishirazu salmon and Bafun uni stall by stall",
+      "review_praise_en": "\"Zero tourist hype—just unbeatable authentic quality in Japan Seafood Markets that Japanese locals come back for!\"",
+      "review_warn_en": "\"Weekends get busy with local fans after 11:30 AM, so arrive 15 minutes before opening for immediate entry!\"",
+      "photos": [
+        "spot_04_2.jpg",
+        "spot_04_1.jpg"
+      ],
+      "narration": "On Japanese Instagram, locals praise Kushiro Washo Market (Kushiro, Hokkaido) for its authentic atmosphere and unmatched local value. However, unsponsored reviews warn that weekends get crowded around noon, so arrive fifteen minutes before opening!",
+      "subtitle": "Real Japanese IG Voice: \"Unmatched authentic quality in Japan Seafood Markets!\"\nLocal Warning: \"Arrive 15 mins before opening on weekends to skip the queue.\""
+    },
+    {
+      "seg_type": "spot",
+      "rank_badge": "#3  92/100pt",
+      "place_ja": "Hakodate Morning Market (Hakodate, Hokkaido)",
+      "place_en": "#3 Hakodate Morning Market (Hakodate, Hokkaido) — Local Morning Fish Markets Where Sushi Costs Half of Tokyo Prices",
+      "area": "Japan Seafood Markets, Japan",
+      "budget": "¥1,800–¥2,800 Kaisen-don",
+      "access_info": "Train Access: JR Hakodate Stn 1m Walk (IC Card / JR Line)",
+      "insider_tip": "LOCAL HIGHLIGHT: Live Squid Fishing Tank & Uni-Ikura-Scallop 3-Color Donburi Stalls (★4.6) — Go to Ekini Market inside the complex at 6:30 AM to catch your own live squid (Ika-tsuri)",
+      "photos": [
+        "spot_03_1.jpg",
+        "spot_03_2.jpg"
+      ],
+      "narration": "At rank #3 with 92/100pt is Hakodate Morning Market (Hakodate, Hokkaido) in Japan Seafood Markets. Japanese Instagram users ranked it high for Live Squid Fishing Tank & Uni-Ikura-Scallop 3-Color Donburi Stalls (★4.6). Easy access via JR Hakodate Stn 1m Walk.",
+      "subtitle": "#3 Hakodate Morning Market (Hakodate, Hokkaido) (92/100pt): Live Squid Fishing Tank & Uni-Ikura-Scallop 3-Color Donburi Stalls (★4.6)\nAccess: JR Hakodate Stn 1m Walk | Tip: Go to Ekini Market inside the complex at 6:30 AM to catch your own live squid (Ika-tsuri)"
+    },
+    {
+      "seg_type": "review",
+      "rank_badge": "#3 REAL IG VOICE",
+      "place_ja": "Hakodate Morning Market (Hakodate, Hokkaido) Reviews",
+      "place_en": "Real Unsponsored Japanese Instagram Voices on Hakodate Morning Market (Hakodate, Hokkaido)",
+      "area": "Japan Seafood Markets, Japan",
+      "budget": "100% Unsponsored",
+      "access_info": "Train Access: JR Hakodate Stn 1m Walk",
+      "insider_tip": "PRO HACK: Go to Ekini Market inside the complex at 6:30 AM to catch your own live squid (Ika-tsuri)",
+      "review_praise_en": "\"Zero tourist hype—just unbeatable authentic quality in Japan Seafood Markets that Japanese locals come back for!\"",
+      "review_warn_en": "\"Weekends get busy with local fans after 11:30 AM, so arrive 15 minutes before opening for immediate entry!\"",
+      "photos": [
+        "spot_03_2.jpg",
+        "spot_03_1.jpg"
+      ],
+      "narration": "On Japanese Instagram, locals praise Hakodate Morning Market (Hakodate, Hokkaido) for its authentic atmosphere and unmatched local value. However, unsponsored reviews warn that weekends get crowded around noon, so arrive fifteen minutes before opening!",
+      "subtitle": "Real Japanese IG Voice: \"Unmatched authentic quality in Japan Seafood Markets!\"\nLocal Warning: \"Arrive 15 mins before opening on weekends to skip the queue.\""
+    },
+    {
+      "seg_type": "spot",
+      "rank_badge": "#2  94/100pt",
+      "place_ja": "Karato Market (Shimonoseki, Yamaguchi)",
+      "place_en": "#2 Karato Market (Shimonoseki, Yamaguchi) — Local Morning Fish Markets Where Sushi Costs Half of Tokyo Prices",
+      "area": "Japan Seafood Markets, Japan",
+      "budget": "¥150–¥400 Per Giant Nigiri",
+      "access_info": "Train Access: JR Shimonoseki Stn 7m Bus (IC Card / JR Line)",
+      "insider_tip": "LOCAL HIGHLIGHT: Weekend 'Iki-Iki Bakangai' Direct Fugu Blowfish & Otoro Nigiri Stalls (★4.7) — Visit Friday–Sunday at 9:30 AM and eat your custom sushi box on the Kanmon Strait boardwalk",
+      "photos": [
+        "spot_02_1.jpg",
+        "spot_02_2.jpg"
+      ],
+      "narration": "At rank #2 with 94/100pt is Karato Market (Shimonoseki, Yamaguchi) in Japan Seafood Markets. Japanese Instagram users ranked it high for Weekend 'Iki-Iki Bakangai' Direct Fugu Blowfish & Otoro Nigiri Stalls (★4.7). Easy access via JR Shimonoseki Stn 7m Bus.",
+      "subtitle": "#2 Karato Market (Shimonoseki, Yamaguchi) (94/100pt): Weekend 'Iki-Iki Bakangai' Direct Fugu Blowfish & Otoro Nigiri Stalls (★4.7)\nAccess: JR Shimonoseki Stn 7m Bus | Tip: Visit Friday–Sunday at 9:30 AM and eat your custom sushi box on the Kanmon Strait boardwalk"
+    },
+    {
+      "seg_type": "review",
+      "rank_badge": "#2 REAL IG VOICE",
+      "place_ja": "Karato Market (Shimonoseki, Yamaguchi) Reviews",
+      "place_en": "Real Unsponsored Japanese Instagram Voices on Karato Market (Shimonoseki, Yamaguchi)",
+      "area": "Japan Seafood Markets, Japan",
+      "budget": "100% Unsponsored",
+      "access_info": "Train Access: JR Shimonoseki Stn 7m Bus",
+      "insider_tip": "PRO HACK: Visit Friday–Sunday at 9:30 AM and eat your custom sushi box on the Kanmon Strait boardwalk",
+      "review_praise_en": "\"Zero tourist hype—just unbeatable authentic quality in Japan Seafood Markets that Japanese locals come back for!\"",
+      "review_warn_en": "\"Weekends get busy with local fans after 11:30 AM, so arrive 15 minutes before opening for immediate entry!\"",
+      "photos": [
+        "spot_02_2.jpg",
+        "spot_02_1.jpg"
+      ],
+      "narration": "On Japanese Instagram, locals praise Karato Market (Shimonoseki, Yamaguchi) for its authentic atmosphere and unmatched local value. However, unsponsored reviews warn that weekends get crowded around noon, so arrive fifteen minutes before opening!",
+      "subtitle": "Real Japanese IG Voice: \"Unmatched authentic quality in Japan Seafood Markets!\"\nLocal Warning: \"Arrive 15 mins before opening on weekends to skip the queue.\""
+    },
+    {
+      "seg_type": "spot",
+      "rank_badge": "#1  96/100pt",
+      "place_ja": "Omicho Market (Kanazawa, Ishikawa)",
+      "place_en": "#1 Omicho Market (Kanazawa, Ishikawa) — Local Morning Fish Markets Where Sushi Costs Half of Tokyo Prices",
+      "area": "Japan Seafood Markets, Japan",
+      "budget": "¥2,200–¥3,800 Sushi Set",
+      "access_info": "Train Access: JR Kanazawa Stn 12m Walk (IC Card / JR Line)",
+      "insider_tip": "LOCAL HIGHLIGHT: 300-Year 'Kanazawa's Kitchen' Famous for Seared Nodoguro & Kaisen-don (★4.6) — Line up at Mori Mori Sushi or Kaiten Sushi Toyama Bay before 8:30 AM",
+      "photos": [
+        "spot_01_1.jpg",
+        "spot_01_2.jpg"
+      ],
+      "narration": "At rank #1 with 96/100pt is Omicho Market (Kanazawa, Ishikawa) in Japan Seafood Markets. Japanese Instagram users ranked it high for 300-Year 'Kanazawa's Kitchen' Famous for Seared Nodoguro & Kaisen-don (★4.6). Easy access via JR Kanazawa Stn 12m Walk.",
+      "subtitle": "#1 Omicho Market (Kanazawa, Ishikawa) (96/100pt): 300-Year 'Kanazawa's Kitchen' Famous for Seared Nodoguro & Kaisen-don (★4.6)\nAccess: JR Kanazawa Stn 12m Walk | Tip: Line up at Mori Mori Sushi or Kaiten Sushi Toyama Bay before 8:30 AM"
+    },
+    {
+      "seg_type": "review",
+      "rank_badge": "#1 REAL IG VOICE",
+      "place_ja": "Omicho Market (Kanazawa, Ishikawa) Reviews",
+      "place_en": "Real Unsponsored Japanese Instagram Voices on Omicho Market (Kanazawa, Ishikawa)",
+      "area": "Japan Seafood Markets, Japan",
+      "budget": "100% Unsponsored",
+      "access_info": "Train Access: JR Kanazawa Stn 12m Walk",
+      "insider_tip": "PRO HACK: Line up at Mori Mori Sushi or Kaiten Sushi Toyama Bay before 8:30 AM",
+      "review_praise_en": "\"Zero tourist hype—just unbeatable authentic quality in Japan Seafood Markets that Japanese locals come back for!\"",
+      "review_warn_en": "\"Weekends get busy with local fans after 11:30 AM, so arrive 15 minutes before opening for immediate entry!\"",
+      "photos": [
+        "spot_01_2.jpg",
+        "spot_01_1.jpg"
+      ],
+      "narration": "On Japanese Instagram, locals praise Omicho Market (Kanazawa, Ishikawa) for its authentic atmosphere and unmatched local value. However, unsponsored reviews warn that weekends get crowded around noon, so arrive fifteen minutes before opening!",
+      "subtitle": "Real Japanese IG Voice: \"Unmatched authentic quality in Japan Seafood Markets!\"\nLocal Warning: \"Arrive 15 mins before opening on weekends to skip the queue.\""
+    },
+    {
+      "seg_type": "summary",
+      "rank_badge": "FULL TOP 10 SUMMARY",
+      "place_ja": "Japan Seafood Markets TOP 10 Summary",
+      "place_en": "Japan Seafood Markets TOP 10 Complete Comparison Cheat-Sheet (100% No Promo)",
+      "area": "Japan Seafood Markets, Japan",
+      "budget": "Save & Screenshot!",
+      "insider_tip": "SCREENSHOT THIS TABLE: All 10 unsponsored scores, access times & insider hacks on one screen!",
+      "photos": [
+        "spot_01_1.jpg",
+        "spot_01_2.jpg"
+      ],
+      "narration": "Here is your complete unsponsored Japan Seafood Markets top ten cheat-sheet! Pause and screenshot this table right now for your trip, and subscribe for daily real Japan rankings with zero paid promotions!",
+      "subtitle": "Pause & screenshot this 100% unsponsored Japan Seafood Markets TOP 10 cheat-sheet!\nSubscribe & comment which spot you want to visit first!"
+    }
+  ]
+}

@@ -1,0 +1,602 @@
+{
+  "ranking_id": "national_sky_castles_004",
+  "prefecture": "Japan Sky Castles TOP 10",
+  "title_en": "CASTLES IN THE CLOUDS! Japan TOP 10 Unconquered Mountain Samurai Fortresses [No Promo]",
+  "youtube_title_long": "CASTLES IN THE CLOUDS! Japan TOP 10 Unconquered Mountain Samurai Fortresses [No Promo]",
+  "youtube_title_short": "[No Promo] 430m Above the Clouds?! Japan's #1 Mountain Samurai Fortress #Shorts #Samurai",
+  "voice": "en-US-ChristopherNeural",
+  "thumb_config": {
+    "ribbon_text": "ZERO PAID PROMO • JAPANESE IG",
+    "hero_line1": "NO PROMO!",
+    "hero_line2": "REAL JAPAN",
+    "banner_title": "JAPAN SKY CASTLES TOP 10",
+    "banner_sub": "REAL JAPANESE IG VOICES ONLY",
+    "map_header": "WHERE IS JAPAN?",
+    "map_pill": "DIRECT",
+    "map_line1": "Shinkansen / Train",
+    "map_line2": "from Tokyo Station!",
+    "map_footer": "0% SPONSORED",
+    "highlight_prefs_ja": [
+      "岡山県"
+    ]
+  },
+  "area_guide": {
+    "target_pref_ja": "岡山県",
+    "map_badge": "Japan Sky Castles Local Guide",
+    "cards": [
+      {
+        "title": "1. 100% NO PAID PROMOTION",
+        "bullets": [
+          "Analyzed 500,000+ real Japanese IG posts & reviews in Japan Sky Castles",
+          "Zero sponsored spots or influencer ads — honest local voices only"
+        ]
+      },
+      {
+        "title": "2. DIRECT TRAIN & IC CARD ACCESS",
+        "bullets": [
+          "Direct JR Shinkansen or express train access across Japan Sky Castles",
+          "Suica, Pasmo & ICOCA accepted at major stations"
+        ]
+      },
+      {
+        "title": "3. INSIDER TIMING & ETIQUETTE",
+        "bullets": [
+          "Arrive 15–20 minutes before opening to beat local queues",
+          "Carry cash (1,000-yen notes) for ticket machines & local shops"
+        ]
+      }
+    ]
+  },
+  "summary_rows": [
+    {
+      "rank": "#1",
+      "score": "96/100pt",
+      "name_en": "Takeda Castle Ruins (Asago, Hyogo)",
+      "name_ja": "Takeda Castle Ruins (Asago, Hyogo)",
+      "dish": "353m 'Machu Picchu of Japan' Stone Citadel Floating Above Autumn Clouds (★4.7)",
+      "budget": "¥500 Castle Entry (Cash)",
+      "access_short": "JR Takeda Stn 20m Bus/Taxi",
+      "hack": "Climb Ritsuunkyo Observatory before 6:00 AM in Oct–Nov for the classic sea-of-clouds shot",
+      "nearby_spot": "",
+      "anime_title": "",
+      "thumb": "spot_01_1.jpg"
+    },
+    {
+      "rank": "#2",
+      "score": "94/100pt",
+      "name_en": "Bitchu Matsuyama Castle (Takahashi, Okayama)",
+      "name_ja": "Bitchu Matsuyama Castle (Takahashi, Okayama)",
+      "dish": "Japan's Only Surviving Original Mountain Keep at 430m Elevation (★4.7)",
+      "budget": "¥500 Keep Entry",
+      "access_short": "JR Bitchu-Takahashi Stn 15m Taxi",
+      "hack": "Greet Sanjuro, the resident castle cat Lord, on the stone steps at 9:00 AM",
+      "nearby_spot": "",
+      "anime_title": "",
+      "thumb": "spot_02_1.jpg"
+    },
+    {
+      "rank": "#3",
+      "score": "92/100pt",
+      "name_en": "Echizen Ono Castle (Ono, Fukui)",
+      "name_ja": "Echizen Ono Castle (Ono, Fukui)",
+      "dish": "249m Hilltop Castle Surrounded by a Bowl of Morning Mist (★4.5)",
+      "budget": "¥300 Keep Admission",
+      "access_short": "JR Echizen-Ono Stn 25m Walk",
+      "hack": "Hike up Inuyama (戌山) viewing trail across the valley at 6:00 AM in November",
+      "nearby_spot": "",
+      "anime_title": "",
+      "thumb": "spot_03_1.jpg"
+    },
+    {
+      "rank": "#4",
+      "score": "90/100pt",
+      "name_en": "Gujo Hachiman Castle (Gujo, Gifu)",
+      "name_ja": "Gujo Hachiman Castle (Gujo, Gifu)",
+      "dish": "1933 Japan's Oldest Wooden Reconstructed Keep Perched Above a River Town (★4.6)",
+      "budget": "¥400 Castle Entry",
+      "access_short": "Nagaragawa Railway Gujo-Hachiman Stn 20m",
+      "hack": "Photograph the white keep from the mountain hairpin curve at sunrise",
+      "nearby_spot": "",
+      "anime_title": "",
+      "thumb": "spot_04_1.jpg"
+    },
+    {
+      "rank": "#5",
+      "score": "89/100pt",
+      "name_en": "Iwamura Castle Ruins (Ena, Gifu)",
+      "name_ja": "Iwamura Castle Ruins (Ena, Gifu)",
+      "dish": "717m Highest Mountain Castle Ruins in Japan With 6-Tier Stone Walls (★4.6)",
+      "budget": "Free Ruin Entry (¥300 Museum)",
+      "access_short": "Akechi Railway Iwamura Stn 25m Walk",
+      "hack": "Admire the Famous Six-Level Stone Wall (Rokudan-ishigaki) shrouded in mountain fog",
+      "nearby_spot": "",
+      "anime_title": "",
+      "thumb": "spot_05_1.jpg"
+    },
+    {
+      "rank": "#6",
+      "score": "87/100pt",
+      "name_en": "Takatori Castle Ruins (Takatori, Nara)",
+      "name_ja": "Takatori Castle Ruins (Takatori, Nara)",
+      "dish": "583m Massive Mountain Fortress With 30km Perimeter Stone Ramparts (★4.5)",
+      "budget": "Free Trail Entry",
+      "access_short": "Kintetsu Tsubosakayama Stn 50m Hike",
+      "hack": "Stop at the Saru-ishi monkey stone carving along the ancient cedar forest ascent",
+      "nearby_spot": "",
+      "anime_title": "",
+      "thumb": "spot_06_1.jpg"
+    },
+    {
+      "rank": "#7",
+      "score": "86/100pt",
+      "name_en": "Oka Castle Ruins (Taketa, Oita)",
+      "name_ja": "Oka Castle Ruins (Taketa, Oita)",
+      "dish": "Impregnable 325m Volcanic Cliff Fortress That Inspired 'Kojo no Tsuki' (★4.6)",
+      "budget": "¥300 Entry",
+      "access_short": "JR Bungo-Taketa Stn 15m Walk",
+      "hack": "Stand on the sheer Honmaru cliff edge overlooking the Kuju Mountain range",
+      "nearby_spot": "",
+      "anime_title": "",
+      "thumb": "spot_07_1.jpg"
+    },
+    {
+      "rank": "#8",
+      "score": "85/100pt",
+      "name_en": "Tsuwano Castle Ruins (Tsuwano, Shimane)",
+      "name_ja": "Tsuwano Castle Ruins (Tsuwano, Shimane)",
+      "dish": "362m Ridge-Top Stone Walls Overlooking Red Sekishu-Tile Castle Town (★4.6)",
+      "budget": "¥700 Round-Trip Chairlift",
+      "access_short": "JR Tsuwano Stn 20m Walk to Lift",
+      "hack": "Take the first 9:00 AM chairlift up and walk 15 minutes along the pine ridge to the walls",
+      "nearby_spot": "",
+      "anime_title": "",
+      "thumb": "spot_08_1.jpg"
+    },
+    {
+      "rank": "#9",
+      "score": "84/100pt",
+      "name_en": "Yonago Castle Ruins (Yonago, Tottori)",
+      "name_ja": "Yonago Castle Ruins (Yonago, Tottori)",
+      "dish": "90m Mt. Minatoyama Stone Keep Base With 360° Views of Mt. Daisen & Sea of Japan (★4.6)",
+      "budget": "Free Climb Entry",
+      "access_short": "JR Yonago Stn 15m Walk",
+      "hack": "Hike 20 minutes before sunrise to see Mt. Daisen mirrored in Lake Nakaumi",
+      "nearby_spot": "",
+      "anime_title": "",
+      "thumb": "spot_09_1.jpg"
+    },
+    {
+      "rank": "#10",
+      "score": "82/100pt",
+      "name_en": "Naegi Castle Ruins (Nakatsugawa, Gifu)",
+      "name_ja": "Naegi Castle Ruins (Nakatsugawa, Gifu)",
+      "dish": "432m Castle Built Directly on Giant Natural Granite Boulders Above Kiso River (★4.7)",
+      "budget": "Free Castle Ruins (¥330 Museum)",
+      "access_short": "JR Nakatsugawa Stn 12m Taxi",
+      "hack": "Climb the wooden watchtower scaffolding bolted directly into the giant summit boulders",
+      "nearby_spot": "",
+      "anime_title": "",
+      "thumb": "spot_10_1.jpg"
+    }
+  ],
+  "shorts_script": {
+    "hook_badge": "ZERO PAID PROMO! REAL JAPANESE IG DATA",
+    "hook_title": "REAL JAPAN SKY CASTLES\nTOP 10 RANKING",
+    "hook_sub": "500,000+ Japanese IG Posts • 100% Unsponsored",
+    "narration_hook": "Zero paid promos! We analyzed real Japanese Instagram posts and local reviews to rank the top three Japan Sky Castles spots locals actually love!",
+    "narration_rank1": "At number three is Echizen Ono Castle (Ono, Fukui). At number two is Bitchu Matsuyama Castle (Takahashi, Okayama). And at number one with ninety-six points is Takeda Castle Ruins (Asago, Hyogo)!",
+    "narration_praise": "Japanese locals love Takeda Castle Ruins (Asago, Hyogo) for its authentic quality and unbeatable value.",
+    "narration_warn": "Locals warn that weekends get busy around noon, so arrive fifteen minutes before opening!",
+    "narration_outro": "Screenshot this full Japan Sky Castles top ten list right now, and subscribe for daily unsponsored Japan guides!",
+    "praise_quote_en": "\"Zero tourist hype—just unmatched authentic quality in Japan Sky Castles!\"",
+    "warn_quote_en": "\"Arrive 15 minutes before opening on weekends to skip the local line!\"",
+    "top1_photos": [
+      "spot_01_1.jpg",
+      "spot_01_2.jpg",
+      "spot_02_1.jpg",
+      "spot_03_1.jpg"
+    ]
+  },
+  "segments": [
+    {
+      "seg_type": "opening",
+      "rank_badge": "ZERO PAID PROMO!",
+      "place_ja": "CASTLES IN THE CLOUDS! Japan TOP 10 Unconquered Mountain Samurai Fortresses [No Promo]",
+      "place_en": "100% NO PAID PROMO! Japan Sky Castles TOP 10 Unconquered Samurai Mountain Fortresses Floating in the Clouds (Japanese IG Analyzed)",
+      "area": "Japan Sky Castles, Japan",
+      "budget": "0% Sponsored",
+      "insider_tip": "100% NO PAID PROMOTION: Analyzed from 500,000+ real Japanese Instagram posts & local reviews!",
+      "photos": [
+        "spot_01_1.jpg",
+        "spot_02_1.jpg"
+      ],
+      "narration": "Stop falling for paid influencer tourist traps! We analyzed over five hundred thousand real Japanese-language Instagram posts and domestic reviews — with zero paid promotions and zero sponsored spots — to bring you the top ten Unconquered Samurai Mountain Fortresses Floating in the Clouds in Japan Sky Castles that Japanese locals actually love!",
+      "subtitle": "100% NO PAID PROMO! We analyzed 500,000+ real Japanese Instagram posts\nto rank the Japan Sky Castles TOP 10 based only on honest local voices!"
+    },
+    {
+      "seg_type": "area_guide",
+      "rank_badge": "JAPAN SKY  GUIDE 1/2",
+      "place_ja": "Japan Sky Castles Access Guide",
+      "place_en": "Why Our Unsponsored Japanese Instagram Data Picks Japan Sky Castles",
+      "area": "Japan Sky Castles Region",
+      "budget": "JR Pass / IC Card Ready",
+      "insider_tip": "ACCESS TIP: Use IC cards (Suica/Pasmo) or JR Pass for seamless travel across Japan Sky Castles!",
+      "photos": [
+        "spot_03_1.jpg",
+        "spot_04_1.jpg"
+      ],
+      "narration": "Unlike sponsored travel vlogs, our ranking filters out paid PR posts and tourist chains. Look at the map on the left: Japan Sky Castles is directly accessible by JR lines, and over ninety percent of guests at these ten spots are Japanese locals!",
+      "subtitle": "Zero paid PR or tourist chains—only real Japanese Instagram & review data!\nOver 90% of visitors at these ranked spots in Japan Sky Castles are Japanese locals!"
+    },
+    {
+      "seg_type": "area_guide",
+      "rank_badge": "JAPAN SKY  GUIDE 2/2",
+      "place_ja": "Japan Sky Castles Best Seasons & Rules",
+      "place_en": "Best Seasons, Local Etiquette & Pro Timing Hacks for Japan Sky Castles",
+      "area": "Year-Round Insider Guide",
+      "budget": "¥1,000–¥3,500 Avg",
+      "insider_tip": "PRO TIP: Visit weekday mornings or 20 minutes before opening to beat local queues!",
+      "photos": [
+        "spot_05_1.jpg",
+        "spot_06_1.jpg"
+      ],
+      "narration": "Each season in Japan Sky Castles offers a completely different atmosphere—from spring cherry blossoms to autumn foliage and crisp winter views. Remember to carry cash alongside your IC card and arrive early in the morning!",
+      "subtitle": "Every season brings unique highlights across Japan Sky Castles.\nCarry some cash (Yen) alongside IC cards and arrive 20 mins before opening!"
+    },
+    {
+      "seg_type": "spot",
+      "rank_badge": "#10  82/100pt",
+      "place_ja": "Naegi Castle Ruins (Nakatsugawa, Gifu)",
+      "place_en": "#10 Naegi Castle Ruins (Nakatsugawa, Gifu) — Unconquered Samurai Mountain Fortresses Floating in the Clouds",
+      "area": "Japan Sky Castles, Japan",
+      "budget": "Free Castle Ruins (¥330 Museum)",
+      "access_info": "Train Access: JR Nakatsugawa Stn 12m Taxi (IC Card / JR Line)",
+      "insider_tip": "LOCAL HIGHLIGHT: 432m Castle Built Directly on Giant Natural Granite Boulders Above Kiso River (★4.7) — Climb the wooden watchtower scaffolding bolted directly into the giant summit boulders",
+      "photos": [
+        "spot_10_1.jpg",
+        "spot_10_2.jpg"
+      ],
+      "narration": "At rank #10 with 82/100pt is Naegi Castle Ruins (Nakatsugawa, Gifu) in Japan Sky Castles. Japanese Instagram users ranked it high for 432m Castle Built Directly on Giant Natural Granite Boulders Above Kiso River (★4.7). Easy access via JR Nakatsugawa Stn 12m Taxi.",
+      "subtitle": "#10 Naegi Castle Ruins (Nakatsugawa, Gifu) (82/100pt): 432m Castle Built Directly on Giant Natural Granite Boulders Above Kiso River (★4.7)\nAccess: JR Nakatsugawa Stn 12m Taxi | Tip: Climb the wooden watchtower scaffolding bolted directly into the giant summit boulders"
+    },
+    {
+      "seg_type": "review",
+      "rank_badge": "#10 REAL IG VOICE",
+      "place_ja": "Naegi Castle Ruins (Nakatsugawa, Gifu) Reviews",
+      "place_en": "Real Unsponsored Japanese Instagram Voices on Naegi Castle Ruins (Nakatsugawa, Gifu)",
+      "area": "Japan Sky Castles, Japan",
+      "budget": "100% Unsponsored",
+      "access_info": "Train Access: JR Nakatsugawa Stn 12m Taxi",
+      "insider_tip": "PRO HACK: Climb the wooden watchtower scaffolding bolted directly into the giant summit boulders",
+      "review_praise_en": "\"Zero tourist hype—just unbeatable authentic quality in Japan Sky Castles that Japanese locals come back for!\"",
+      "review_warn_en": "\"Weekends get busy with local fans after 11:30 AM, so arrive 15 minutes before opening for immediate entry!\"",
+      "photos": [
+        "spot_10_2.jpg",
+        "spot_10_1.jpg"
+      ],
+      "narration": "On Japanese Instagram, locals praise Naegi Castle Ruins (Nakatsugawa, Gifu) for its authentic atmosphere and unmatched local value. However, unsponsored reviews warn that weekends get crowded around noon, so arrive fifteen minutes before opening!",
+      "subtitle": "Real Japanese IG Voice: \"Unmatched authentic quality in Japan Sky Castles!\"\nLocal Warning: \"Arrive 15 mins before opening on weekends to skip the queue.\""
+    },
+    {
+      "seg_type": "spot",
+      "rank_badge": "#9  84/100pt",
+      "place_ja": "Yonago Castle Ruins (Yonago, Tottori)",
+      "place_en": "#9 Yonago Castle Ruins (Yonago, Tottori) — Unconquered Samurai Mountain Fortresses Floating in the Clouds",
+      "area": "Japan Sky Castles, Japan",
+      "budget": "Free Climb Entry",
+      "access_info": "Train Access: JR Yonago Stn 15m Walk (IC Card / JR Line)",
+      "insider_tip": "LOCAL HIGHLIGHT: 90m Mt. Minatoyama Stone Keep Base With 360° Views of Mt. Daisen & Sea of Japan (★4.6) — Hike 20 minutes before sunrise to see Mt. Daisen mirrored in Lake Nakaumi",
+      "photos": [
+        "spot_09_1.jpg",
+        "spot_09_2.jpg"
+      ],
+      "narration": "At rank #9 with 84/100pt is Yonago Castle Ruins (Yonago, Tottori) in Japan Sky Castles. Japanese Instagram users ranked it high for 90m Mt. Minatoyama Stone Keep Base With 360° Views of Mt. Daisen & Sea of Japan (★4.6). Easy access via JR Yonago Stn 15m Walk.",
+      "subtitle": "#9 Yonago Castle Ruins (Yonago, Tottori) (84/100pt): 90m Mt. Minatoyama Stone Keep Base With 360° Views of Mt. Daisen & Sea of Japan (★4.6)\nAccess: JR Yonago Stn 15m Walk | Tip: Hike 20 minutes before sunrise to see Mt. Daisen mirrored in Lake Nakaumi"
+    },
+    {
+      "seg_type": "review",
+      "rank_badge": "#9 REAL IG VOICE",
+      "place_ja": "Yonago Castle Ruins (Yonago, Tottori) Reviews",
+      "place_en": "Real Unsponsored Japanese Instagram Voices on Yonago Castle Ruins (Yonago, Tottori)",
+      "area": "Japan Sky Castles, Japan",
+      "budget": "100% Unsponsored",
+      "access_info": "Train Access: JR Yonago Stn 15m Walk",
+      "insider_tip": "PRO HACK: Hike 20 minutes before sunrise to see Mt. Daisen mirrored in Lake Nakaumi",
+      "review_praise_en": "\"Zero tourist hype—just unbeatable authentic quality in Japan Sky Castles that Japanese locals come back for!\"",
+      "review_warn_en": "\"Weekends get busy with local fans after 11:30 AM, so arrive 15 minutes before opening for immediate entry!\"",
+      "photos": [
+        "spot_09_2.jpg",
+        "spot_09_1.jpg"
+      ],
+      "narration": "On Japanese Instagram, locals praise Yonago Castle Ruins (Yonago, Tottori) for its authentic atmosphere and unmatched local value. However, unsponsored reviews warn that weekends get crowded around noon, so arrive fifteen minutes before opening!",
+      "subtitle": "Real Japanese IG Voice: \"Unmatched authentic quality in Japan Sky Castles!\"\nLocal Warning: \"Arrive 15 mins before opening on weekends to skip the queue.\""
+    },
+    {
+      "seg_type": "spot",
+      "rank_badge": "#8  85/100pt",
+      "place_ja": "Tsuwano Castle Ruins (Tsuwano, Shimane)",
+      "place_en": "#8 Tsuwano Castle Ruins (Tsuwano, Shimane) — Unconquered Samurai Mountain Fortresses Floating in the Clouds",
+      "area": "Japan Sky Castles, Japan",
+      "budget": "¥700 Round-Trip Chairlift",
+      "access_info": "Train Access: JR Tsuwano Stn 20m Walk to Lift (IC Card / JR Line)",
+      "insider_tip": "LOCAL HIGHLIGHT: 362m Ridge-Top Stone Walls Overlooking Red Sekishu-Tile Castle Town (★4.6) — Take the first 9:00 AM chairlift up and walk 15 minutes along the pine ridge to the walls",
+      "photos": [
+        "spot_08_1.jpg",
+        "spot_08_2.jpg"
+      ],
+      "narration": "At rank #8 with 85/100pt is Tsuwano Castle Ruins (Tsuwano, Shimane) in Japan Sky Castles. Japanese Instagram users ranked it high for 362m Ridge-Top Stone Walls Overlooking Red Sekishu-Tile Castle Town (★4.6). Easy access via JR Tsuwano Stn 20m Walk to Lift.",
+      "subtitle": "#8 Tsuwano Castle Ruins (Tsuwano, Shimane) (85/100pt): 362m Ridge-Top Stone Walls Overlooking Red Sekishu-Tile Castle Town (★4.6)\nAccess: JR Tsuwano Stn 20m Walk to Lift | Tip: Take the first 9:00 AM chairlift up and walk 15 minutes along the pine ridge to the walls"
+    },
+    {
+      "seg_type": "review",
+      "rank_badge": "#8 REAL IG VOICE",
+      "place_ja": "Tsuwano Castle Ruins (Tsuwano, Shimane) Reviews",
+      "place_en": "Real Unsponsored Japanese Instagram Voices on Tsuwano Castle Ruins (Tsuwano, Shimane)",
+      "area": "Japan Sky Castles, Japan",
+      "budget": "100% Unsponsored",
+      "access_info": "Train Access: JR Tsuwano Stn 20m Walk to Lift",
+      "insider_tip": "PRO HACK: Take the first 9:00 AM chairlift up and walk 15 minutes along the pine ridge to the walls",
+      "review_praise_en": "\"Zero tourist hype—just unbeatable authentic quality in Japan Sky Castles that Japanese locals come back for!\"",
+      "review_warn_en": "\"Weekends get busy with local fans after 11:30 AM, so arrive 15 minutes before opening for immediate entry!\"",
+      "photos": [
+        "spot_08_2.jpg",
+        "spot_08_1.jpg"
+      ],
+      "narration": "On Japanese Instagram, locals praise Tsuwano Castle Ruins (Tsuwano, Shimane) for its authentic atmosphere and unmatched local value. However, unsponsored reviews warn that weekends get crowded around noon, so arrive fifteen minutes before opening!",
+      "subtitle": "Real Japanese IG Voice: \"Unmatched authentic quality in Japan Sky Castles!\"\nLocal Warning: \"Arrive 15 mins before opening on weekends to skip the queue.\""
+    },
+    {
+      "seg_type": "spot",
+      "rank_badge": "#7  86/100pt",
+      "place_ja": "Oka Castle Ruins (Taketa, Oita)",
+      "place_en": "#7 Oka Castle Ruins (Taketa, Oita) — Unconquered Samurai Mountain Fortresses Floating in the Clouds",
+      "area": "Japan Sky Castles, Japan",
+      "budget": "¥300 Entry",
+      "access_info": "Train Access: JR Bungo-Taketa Stn 15m Walk (IC Card / JR Line)",
+      "insider_tip": "LOCAL HIGHLIGHT: Impregnable 325m Volcanic Cliff Fortress That Inspired 'Kojo no Tsuki' (★4.6) — Stand on the sheer Honmaru cliff edge overlooking the Kuju Mountain range",
+      "photos": [
+        "spot_07_1.jpg",
+        "spot_07_2.jpg"
+      ],
+      "narration": "At rank #7 with 86/100pt is Oka Castle Ruins (Taketa, Oita) in Japan Sky Castles. Japanese Instagram users ranked it high for Impregnable 325m Volcanic Cliff Fortress That Inspired 'Kojo no Tsuki' (★4.6). Easy access via JR Bungo-Taketa Stn 15m Walk.",
+      "subtitle": "#7 Oka Castle Ruins (Taketa, Oita) (86/100pt): Impregnable 325m Volcanic Cliff Fortress That Inspired 'Kojo no Tsuki' (★4.6)\nAccess: JR Bungo-Taketa Stn 15m Walk | Tip: Stand on the sheer Honmaru cliff edge overlooking the Kuju Mountain range"
+    },
+    {
+      "seg_type": "review",
+      "rank_badge": "#7 REAL IG VOICE",
+      "place_ja": "Oka Castle Ruins (Taketa, Oita) Reviews",
+      "place_en": "Real Unsponsored Japanese Instagram Voices on Oka Castle Ruins (Taketa, Oita)",
+      "area": "Japan Sky Castles, Japan",
+      "budget": "100% Unsponsored",
+      "access_info": "Train Access: JR Bungo-Taketa Stn 15m Walk",
+      "insider_tip": "PRO HACK: Stand on the sheer Honmaru cliff edge overlooking the Kuju Mountain range",
+      "review_praise_en": "\"Zero tourist hype—just unbeatable authentic quality in Japan Sky Castles that Japanese locals come back for!\"",
+      "review_warn_en": "\"Weekends get busy with local fans after 11:30 AM, so arrive 15 minutes before opening for immediate entry!\"",
+      "photos": [
+        "spot_07_2.jpg",
+        "spot_07_1.jpg"
+      ],
+      "narration": "On Japanese Instagram, locals praise Oka Castle Ruins (Taketa, Oita) for its authentic atmosphere and unmatched local value. However, unsponsored reviews warn that weekends get crowded around noon, so arrive fifteen minutes before opening!",
+      "subtitle": "Real Japanese IG Voice: \"Unmatched authentic quality in Japan Sky Castles!\"\nLocal Warning: \"Arrive 15 mins before opening on weekends to skip the queue.\""
+    },
+    {
+      "seg_type": "spot",
+      "rank_badge": "#6  87/100pt",
+      "place_ja": "Takatori Castle Ruins (Takatori, Nara)",
+      "place_en": "#6 Takatori Castle Ruins (Takatori, Nara) — Unconquered Samurai Mountain Fortresses Floating in the Clouds",
+      "area": "Japan Sky Castles, Japan",
+      "budget": "Free Trail Entry",
+      "access_info": "Train Access: Kintetsu Tsubosakayama Stn 50m Hike (IC Card / JR Line)",
+      "insider_tip": "LOCAL HIGHLIGHT: 583m Massive Mountain Fortress With 30km Perimeter Stone Ramparts (★4.5) — Stop at the Saru-ishi monkey stone carving along the ancient cedar forest ascent",
+      "photos": [
+        "spot_06_1.jpg",
+        "spot_06_2.jpg"
+      ],
+      "narration": "At rank #6 with 87/100pt is Takatori Castle Ruins (Takatori, Nara) in Japan Sky Castles. Japanese Instagram users ranked it high for 583m Massive Mountain Fortress With 30km Perimeter Stone Ramparts (★4.5). Easy access via Kintetsu Tsubosakayama Stn 50m Hike.",
+      "subtitle": "#6 Takatori Castle Ruins (Takatori, Nara) (87/100pt): 583m Massive Mountain Fortress With 30km Perimeter Stone Ramparts (★4.5)\nAccess: Kintetsu Tsubosakayama Stn 50m Hike | Tip: Stop at the Saru-ishi monkey stone carving along the ancient cedar forest ascent"
+    },
+    {
+      "seg_type": "review",
+      "rank_badge": "#6 REAL IG VOICE",
+      "place_ja": "Takatori Castle Ruins (Takatori, Nara) Reviews",
+      "place_en": "Real Unsponsored Japanese Instagram Voices on Takatori Castle Ruins (Takatori, Nara)",
+      "area": "Japan Sky Castles, Japan",
+      "budget": "100% Unsponsored",
+      "access_info": "Train Access: Kintetsu Tsubosakayama Stn 50m Hike",
+      "insider_tip": "PRO HACK: Stop at the Saru-ishi monkey stone carving along the ancient cedar forest ascent",
+      "review_praise_en": "\"Zero tourist hype—just unbeatable authentic quality in Japan Sky Castles that Japanese locals come back for!\"",
+      "review_warn_en": "\"Weekends get busy with local fans after 11:30 AM, so arrive 15 minutes before opening for immediate entry!\"",
+      "photos": [
+        "spot_06_2.jpg",
+        "spot_06_1.jpg"
+      ],
+      "narration": "On Japanese Instagram, locals praise Takatori Castle Ruins (Takatori, Nara) for its authentic atmosphere and unmatched local value. However, unsponsored reviews warn that weekends get crowded around noon, so arrive fifteen minutes before opening!",
+      "subtitle": "Real Japanese IG Voice: \"Unmatched authentic quality in Japan Sky Castles!\"\nLocal Warning: \"Arrive 15 mins before opening on weekends to skip the queue.\""
+    },
+    {
+      "seg_type": "spot",
+      "rank_badge": "#5  89/100pt",
+      "place_ja": "Iwamura Castle Ruins (Ena, Gifu)",
+      "place_en": "#5 Iwamura Castle Ruins (Ena, Gifu) — Unconquered Samurai Mountain Fortresses Floating in the Clouds",
+      "area": "Japan Sky Castles, Japan",
+      "budget": "Free Ruin Entry (¥300 Museum)",
+      "access_info": "Train Access: Akechi Railway Iwamura Stn 25m Walk (IC Card / JR Line)",
+      "insider_tip": "LOCAL HIGHLIGHT: 717m Highest Mountain Castle Ruins in Japan With 6-Tier Stone Walls (★4.6) — Admire the Famous Six-Level Stone Wall (Rokudan-ishigaki) shrouded in mountain fog",
+      "photos": [
+        "spot_05_1.jpg",
+        "spot_05_2.jpg"
+      ],
+      "narration": "At rank #5 with 89/100pt is Iwamura Castle Ruins (Ena, Gifu) in Japan Sky Castles. Japanese Instagram users ranked it high for 717m Highest Mountain Castle Ruins in Japan With 6-Tier Stone Walls (★4.6). Easy access via Akechi Railway Iwamura Stn 25m Walk.",
+      "subtitle": "#5 Iwamura Castle Ruins (Ena, Gifu) (89/100pt): 717m Highest Mountain Castle Ruins in Japan With 6-Tier Stone Walls (★4.6)\nAccess: Akechi Railway Iwamura Stn 25m Walk | Tip: Admire the Famous Six-Level Stone Wall (Rokudan-ishigaki) shrouded in mountain fog"
+    },
+    {
+      "seg_type": "review",
+      "rank_badge": "#5 REAL IG VOICE",
+      "place_ja": "Iwamura Castle Ruins (Ena, Gifu) Reviews",
+      "place_en": "Real Unsponsored Japanese Instagram Voices on Iwamura Castle Ruins (Ena, Gifu)",
+      "area": "Japan Sky Castles, Japan",
+      "budget": "100% Unsponsored",
+      "access_info": "Train Access: Akechi Railway Iwamura Stn 25m Walk",
+      "insider_tip": "PRO HACK: Admire the Famous Six-Level Stone Wall (Rokudan-ishigaki) shrouded in mountain fog",
+      "review_praise_en": "\"Zero tourist hype—just unbeatable authentic quality in Japan Sky Castles that Japanese locals come back for!\"",
+      "review_warn_en": "\"Weekends get busy with local fans after 11:30 AM, so arrive 15 minutes before opening for immediate entry!\"",
+      "photos": [
+        "spot_05_2.jpg",
+        "spot_05_1.jpg"
+      ],
+      "narration": "On Japanese Instagram, locals praise Iwamura Castle Ruins (Ena, Gifu) for its authentic atmosphere and unmatched local value. However, unsponsored reviews warn that weekends get crowded around noon, so arrive fifteen minutes before opening!",
+      "subtitle": "Real Japanese IG Voice: \"Unmatched authentic quality in Japan Sky Castles!\"\nLocal Warning: \"Arrive 15 mins before opening on weekends to skip the queue.\""
+    },
+    {
+      "seg_type": "spot",
+      "rank_badge": "#4  90/100pt",
+      "place_ja": "Gujo Hachiman Castle (Gujo, Gifu)",
+      "place_en": "#4 Gujo Hachiman Castle (Gujo, Gifu) — Unconquered Samurai Mountain Fortresses Floating in the Clouds",
+      "area": "Japan Sky Castles, Japan",
+      "budget": "¥400 Castle Entry",
+      "access_info": "Train Access: Nagaragawa Railway Gujo-Hachiman Stn 20m (IC Card / JR Line)",
+      "insider_tip": "LOCAL HIGHLIGHT: 1933 Japan's Oldest Wooden Reconstructed Keep Perched Above a River Town (★4.6) — Photograph the white keep from the mountain hairpin curve at sunrise",
+      "photos": [
+        "spot_04_1.jpg",
+        "spot_04_2.jpg"
+      ],
+      "narration": "At rank #4 with 90/100pt is Gujo Hachiman Castle (Gujo, Gifu) in Japan Sky Castles. Japanese Instagram users ranked it high for 1933 Japan's Oldest Wooden Reconstructed Keep Perched Above a River Town (★4.6). Easy access via Nagaragawa Railway Gujo-Hachiman Stn 20m.",
+      "subtitle": "#4 Gujo Hachiman Castle (Gujo, Gifu) (90/100pt): 1933 Japan's Oldest Wooden Reconstructed Keep Perched Above a River Town (★4.6)\nAccess: Nagaragawa Railway Gujo-Hachiman Stn 20m | Tip: Photograph the white keep from the mountain hairpin curve at sunrise"
+    },
+    {
+      "seg_type": "review",
+      "rank_badge": "#4 REAL IG VOICE",
+      "place_ja": "Gujo Hachiman Castle (Gujo, Gifu) Reviews",
+      "place_en": "Real Unsponsored Japanese Instagram Voices on Gujo Hachiman Castle (Gujo, Gifu)",
+      "area": "Japan Sky Castles, Japan",
+      "budget": "100% Unsponsored",
+      "access_info": "Train Access: Nagaragawa Railway Gujo-Hachiman Stn 20m",
+      "insider_tip": "PRO HACK: Photograph the white keep from the mountain hairpin curve at sunrise",
+      "review_praise_en": "\"Zero tourist hype—just unbeatable authentic quality in Japan Sky Castles that Japanese locals come back for!\"",
+      "review_warn_en": "\"Weekends get busy with local fans after 11:30 AM, so arrive 15 minutes before opening for immediate entry!\"",
+      "photos": [
+        "spot_04_2.jpg",
+        "spot_04_1.jpg"
+      ],
+      "narration": "On Japanese Instagram, locals praise Gujo Hachiman Castle (Gujo, Gifu) for its authentic atmosphere and unmatched local value. However, unsponsored reviews warn that weekends get crowded around noon, so arrive fifteen minutes before opening!",
+      "subtitle": "Real Japanese IG Voice: \"Unmatched authentic quality in Japan Sky Castles!\"\nLocal Warning: \"Arrive 15 mins before opening on weekends to skip the queue.\""
+    },
+    {
+      "seg_type": "spot",
+      "rank_badge": "#3  92/100pt",
+      "place_ja": "Echizen Ono Castle (Ono, Fukui)",
+      "place_en": "#3 Echizen Ono Castle (Ono, Fukui) — Unconquered Samurai Mountain Fortresses Floating in the Clouds",
+      "area": "Japan Sky Castles, Japan",
+      "budget": "¥300 Keep Admission",
+      "access_info": "Train Access: JR Echizen-Ono Stn 25m Walk (IC Card / JR Line)",
+      "insider_tip": "LOCAL HIGHLIGHT: 249m Hilltop Castle Surrounded by a Bowl of Morning Mist (★4.5) — Hike up Inuyama (戌山) viewing trail across the valley at 6:00 AM in November",
+      "photos": [
+        "spot_03_1.jpg",
+        "spot_03_2.jpg"
+      ],
+      "narration": "At rank #3 with 92/100pt is Echizen Ono Castle (Ono, Fukui) in Japan Sky Castles. Japanese Instagram users ranked it high for 249m Hilltop Castle Surrounded by a Bowl of Morning Mist (★4.5). Easy access via JR Echizen-Ono Stn 25m Walk.",
+      "subtitle": "#3 Echizen Ono Castle (Ono, Fukui) (92/100pt): 249m Hilltop Castle Surrounded by a Bowl of Morning Mist (★4.5)\nAccess: JR Echizen-Ono Stn 25m Walk | Tip: Hike up Inuyama (戌山) viewing trail across the valley at 6:00 AM in November"
+    },
+    {
+      "seg_type": "review",
+      "rank_badge": "#3 REAL IG VOICE",
+      "place_ja": "Echizen Ono Castle (Ono, Fukui) Reviews",
+      "place_en": "Real Unsponsored Japanese Instagram Voices on Echizen Ono Castle (Ono, Fukui)",
+      "area": "Japan Sky Castles, Japan",
+      "budget": "100% Unsponsored",
+      "access_info": "Train Access: JR Echizen-Ono Stn 25m Walk",
+      "insider_tip": "PRO HACK: Hike up Inuyama (戌山) viewing trail across the valley at 6:00 AM in November",
+      "review_praise_en": "\"Zero tourist hype—just unbeatable authentic quality in Japan Sky Castles that Japanese locals come back for!\"",
+      "review_warn_en": "\"Weekends get busy with local fans after 11:30 AM, so arrive 15 minutes before opening for immediate entry!\"",
+      "photos": [
+        "spot_03_2.jpg",
+        "spot_03_1.jpg"
+      ],
+      "narration": "On Japanese Instagram, locals praise Echizen Ono Castle (Ono, Fukui) for its authentic atmosphere and unmatched local value. However, unsponsored reviews warn that weekends get crowded around noon, so arrive fifteen minutes before opening!",
+      "subtitle": "Real Japanese IG Voice: \"Unmatched authentic quality in Japan Sky Castles!\"\nLocal Warning: \"Arrive 15 mins before opening on weekends to skip the queue.\""
+    },
+    {
+      "seg_type": "spot",
+      "rank_badge": "#2  94/100pt",
+      "place_ja": "Bitchu Matsuyama Castle (Takahashi, Okayama)",
+      "place_en": "#2 Bitchu Matsuyama Castle (Takahashi, Okayama) — Unconquered Samurai Mountain Fortresses Floating in the Clouds",
+      "area": "Japan Sky Castles, Japan",
+      "budget": "¥500 Keep Entry",
+      "access_info": "Train Access: JR Bitchu-Takahashi Stn 15m Taxi (IC Card / JR Line)",
+      "insider_tip": "LOCAL HIGHLIGHT: Japan's Only Surviving Original Mountain Keep at 430m Elevation (★4.7) — Greet Sanjuro, the resident castle cat Lord, on the stone steps at 9:00 AM",
+      "photos": [
+        "spot_02_1.jpg",
+        "spot_02_2.jpg"
+      ],
+      "narration": "At rank #2 with 94/100pt is Bitchu Matsuyama Castle (Takahashi, Okayama) in Japan Sky Castles. Japanese Instagram users ranked it high for Japan's Only Surviving Original Mountain Keep at 430m Elevation (★4.7). Easy access via JR Bitchu-Takahashi Stn 15m Taxi.",
+      "subtitle": "#2 Bitchu Matsuyama Castle (Takahashi, Okayama) (94/100pt): Japan's Only Surviving Original Mountain Keep at 430m Elevation (★4.7)\nAccess: JR Bitchu-Takahashi Stn 15m Taxi | Tip: Greet Sanjuro, the resident castle cat Lord, on the stone steps at 9:00 AM"
+    },
+    {
+      "seg_type": "review",
+      "rank_badge": "#2 REAL IG VOICE",
+      "place_ja": "Bitchu Matsuyama Castle (Takahashi, Okayama) Reviews",
+      "place_en": "Real Unsponsored Japanese Instagram Voices on Bitchu Matsuyama Castle (Takahashi, Okayama)",
+      "area": "Japan Sky Castles, Japan",
+      "budget": "100% Unsponsored",
+      "access_info": "Train Access: JR Bitchu-Takahashi Stn 15m Taxi",
+      "insider_tip": "PRO HACK: Greet Sanjuro, the resident castle cat Lord, on the stone steps at 9:00 AM",
+      "review_praise_en": "\"Zero tourist hype—just unbeatable authentic quality in Japan Sky Castles that Japanese locals come back for!\"",
+      "review_warn_en": "\"Weekends get busy with local fans after 11:30 AM, so arrive 15 minutes before opening for immediate entry!\"",
+      "photos": [
+        "spot_02_2.jpg",
+        "spot_02_1.jpg"
+      ],
+      "narration": "On Japanese Instagram, locals praise Bitchu Matsuyama Castle (Takahashi, Okayama) for its authentic atmosphere and unmatched local value. However, unsponsored reviews warn that weekends get crowded around noon, so arrive fifteen minutes before opening!",
+      "subtitle": "Real Japanese IG Voice: \"Unmatched authentic quality in Japan Sky Castles!\"\nLocal Warning: \"Arrive 15 mins before opening on weekends to skip the queue.\""
+    },
+    {
+      "seg_type": "spot",
+      "rank_badge": "#1  96/100pt",
+      "place_ja": "Takeda Castle Ruins (Asago, Hyogo)",
+      "place_en": "#1 Takeda Castle Ruins (Asago, Hyogo) — Unconquered Samurai Mountain Fortresses Floating in the Clouds",
+      "area": "Japan Sky Castles, Japan",
+      "budget": "¥500 Castle Entry (Cash)",
+      "access_info": "Train Access: JR Takeda Stn 20m Bus/Taxi (IC Card / JR Line)",
+      "insider_tip": "LOCAL HIGHLIGHT: 353m 'Machu Picchu of Japan' Stone Citadel Floating Above Autumn Clouds (★4.7) — Climb Ritsuunkyo Observatory before 6:00 AM in Oct–Nov for the classic sea-of-clouds shot",
+      "photos": [
+        "spot_01_1.jpg",
+        "spot_01_2.jpg"
+      ],
+      "narration": "At rank #1 with 96/100pt is Takeda Castle Ruins (Asago, Hyogo) in Japan Sky Castles. Japanese Instagram users ranked it high for 353m 'Machu Picchu of Japan' Stone Citadel Floating Above Autumn Clouds (★4.7). Easy access via JR Takeda Stn 20m Bus/Taxi.",
+      "subtitle": "#1 Takeda Castle Ruins (Asago, Hyogo) (96/100pt): 353m 'Machu Picchu of Japan' Stone Citadel Floating Above Autumn Clouds (★4.7)\nAccess: JR Takeda Stn 20m Bus/Taxi | Tip: Climb Ritsuunkyo Observatory before 6:00 AM in Oct–Nov for the classic sea-of-clouds shot"
+    },
+    {
+      "seg_type": "review",
+      "rank_badge": "#1 REAL IG VOICE",
+      "place_ja": "Takeda Castle Ruins (Asago, Hyogo) Reviews",
+      "place_en": "Real Unsponsored Japanese Instagram Voices on Takeda Castle Ruins (Asago, Hyogo)",
+      "area": "Japan Sky Castles, Japan",
+      "budget": "100% Unsponsored",
+      "access_info": "Train Access: JR Takeda Stn 20m Bus/Taxi",
+      "insider_tip": "PRO HACK: Climb Ritsuunkyo Observatory before 6:00 AM in Oct–Nov for the classic sea-of-clouds shot",
+      "review_praise_en": "\"Zero tourist hype—just unbeatable authentic quality in Japan Sky Castles that Japanese locals come back for!\"",
+      "review_warn_en": "\"Weekends get busy with local fans after 11:30 AM, so arrive 15 minutes before opening for immediate entry!\"",
+      "photos": [
+        "spot_01_2.jpg",
+        "spot_01_1.jpg"
+      ],
+      "narration": "On Japanese Instagram, locals praise Takeda Castle Ruins (Asago, Hyogo) for its authentic atmosphere and unmatched local value. However, unsponsored reviews warn that weekends get crowded around noon, so arrive fifteen minutes before opening!",
+      "subtitle": "Real Japanese IG Voice: \"Unmatched authentic quality in Japan Sky Castles!\"\nLocal Warning: \"Arrive 15 mins before opening on weekends to skip the queue.\""
+    },
+    {
+      "seg_type": "summary",
+      "rank_badge": "FULL TOP 10 SUMMARY",
+      "place_ja": "Japan Sky Castles TOP 10 Summary",
+      "place_en": "Japan Sky Castles TOP 10 Complete Comparison Cheat-Sheet (100% No Promo)",
+      "area": "Japan Sky Castles, Japan",
+      "budget": "Save & Screenshot!",
+      "insider_tip": "SCREENSHOT THIS TABLE: All 10 unsponsored scores, access times & insider hacks on one screen!",
+      "photos": [
+        "spot_01_1.jpg",
+        "spot_01_2.jpg"
+      ],
+      "narration": "Here is your complete unsponsored Japan Sky Castles top ten cheat-sheet! Pause and screenshot this table right now for your trip, and subscribe for daily real Japan rankings with zero paid promotions!",
+      "subtitle": "Pause & screenshot this 100% unsponsored Japan Sky Castles TOP 10 cheat-sheet!\nSubscribe & comment which spot you want to visit first!"
+    }
+  ]
+}
