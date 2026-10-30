@@ -3,7 +3,7 @@
   "description": "Multi-Dimensional Combinatorial Theme Matrix (All-Japan × Greater Tokyo × 47 Prefectures × Samurai Warlords × Castles/Food/Kominka/Parks/Temples/Scenic/Onsen)",
   "midnight_batch_time_jst": "02:30",
   "daily_sets_target": 3,
-  "total_themes_registered": 433,
+  "total_themes_registered": 429,
   "overseas_golden_slots_jst": [
     {
       "slot": 1,
@@ -112,13 +112,13 @@
       "short_title_en": "[No Promo] 430m Above the Clouds?! Japan's #1 Mountain Samurai Fortress #Shorts #Samurai"
     },
     {
-      "ranking_id": "anime_dragon_ball_akira_toriyama",
-      "keyword_ja": "ドラゴンボール 聖地 鳥山明",
-      "region_en": "Dragon Ball & Toriyama Sites",
-      "category_en": "Akira Toriyama Hometown, Toei Museum & Goku Sanctuaries + Nearby Gourmet",
-      "target_pref_ja": "愛知県",
-      "hook_title_en": "REAL DRAGON BALL PILGRIMAGE! Top 10 Akira Toriyama & Goku Sacred Sites in Japan + Local Food",
-      "short_title_en": "Real Dragon Ball & Akira Toriyama Sacred Sites in Japan! #Shorts #DragonBall #JapanTravel",
+      "ranking_id": "anime_slam_dunk_kamakura_tokyo",
+      "keyword_ja": "スラムダンク 聖地 鎌倉 湘南 広島",
+      "region_en": "Slam Dunk Real Kamakura & Shonan Sites",
+      "category_en": "Kamakurakokomae Crossing, Ryonan Slope, Enoshima & Hiroshima Inter-High Arena + Local Food",
+      "target_pref_ja": "神奈川県",
+      "hook_title_en": "REAL SLAM DUNK LOCATIONS! Top 10 Kamakura, Shonan & Inter-High Sacred Sites + Nearby Food",
+      "short_title_en": "Real Slam Dunk Locations in Kamakura & Shonan! #Shorts #SlamDunk #JapanTravel",
       "day": 8
     },
     {
@@ -180,16 +180,17 @@
       "short_title_en": "[No Promo] Zero Tourists in Kyoto?! The Secret Moss Temple Locals Hide #Shorts #Kyoto"
     },
     {
-      "day": 14,
-      "ranking_id": "anime_slam_dunk_kamakura_tokyo",
-      "scope_type": "🎬 アニメ聖地特化 (東京・鎌倉・関東)",
-      "category_type": "スラムダンク踏切・秋葉原・中野・三鷹など関東アニメ聖地TOP10",
-      "keyword_ja": "鎌倉 スラムダンク 秋葉原 中野ブロードウェイ 聖地",
-      "region_en": "Tokyo & Kamakura Anime Pilgrimage",
-      "category_en": "Kamakura Ocean Crossing, Nakano Broadway Retro Vaults & Akihabara Shrines",
+      "ranking_id": "anime_evangelion_hakone_yamaguchi",
+      "scope_type": "national",
+      "category_type": "anime",
+      "keyword_ja": "エヴァンゲリオン 箱根 聖地",
+      "region_en": "Hakone & Tokyo-3",
+      "category_en": "Evangelion Sacred Sites & Nearby Onsen",
       "target_pref_ja": "神奈川県",
-      "hook_title_en": "'SLAM DUNK' & 'BOCCHI THE ROCK' KAMAKURA GUIDE! 10 Anime Spots + Nearby Beaches, Temples & Food [No Promo]",
-      "short_title_en": "The Real Slam Dunk & Bocchi the Rock Kamakura Route! #Shorts #SlamDunk #JapanTravel"
+      "hook_title_en": "REAL TOKYO-3! 'Evangelion' Hakone TOP 10 Anime Sacred Sites + Nearby Onsen & Food Guide [No Promo]",
+      "short_title_en": "Step Inside Real Tokyo-3! Evangelion Hakone Sacred Sites & Onsen #Shorts #Evangelion #JapanTravel",
+      "script_file": "spot_099_anime_evangelion_hakone_yamaguchi.json",
+      "day": 14
     },
     {
       "day": 15,
@@ -216,16 +217,13 @@
       "short_title_en": "[No Promo] Just 90 Mins from Tokyo! Japan's #1 Volume Hot Spring Town #Shorts #TokyoTravel"
     },
     {
-      "ranking_id": "anime_evangelion_hakone_yamaguchi",
-      "scope_type": "national",
-      "category_type": "anime",
-      "keyword_ja": "エヴァンゲリオン 箱根 聖地",
-      "region_en": "Hakone & Tokyo-3",
-      "category_en": "Evangelion Sacred Sites & Nearby Onsen",
-      "target_pref_ja": "神奈川県",
-      "hook_title_en": "REAL TOKYO-3! 'Evangelion' Hakone TOP 10 Anime Sacred Sites + Nearby Onsen & Food Guide [No Promo]",
-      "short_title_en": "Step Inside Real Tokyo-3! Evangelion Hakone Sacred Sites & Onsen #Shorts #Evangelion #JapanTravel",
-      "script_file": "spot_099_anime_evangelion_hakone_yamaguchi.json",
+      "ranking_id": "anime_initial_d_haruna_touge",
+      "keyword_ja": "頭文字D 聖地 榛名山",
+      "region_en": "Initial D & MF Ghost Touge",
+      "category_en": "Mt. Akina (Haruna) 5 Hairpins, Tofu Shop Cafe, Usui Pass & Ikaho Onsen",
+      "target_pref_ja": "群馬県",
+      "hook_title_en": "REAL MOUNT AKINA! Initial D & MF Ghost Top 10 Mountain Passes, AE86 Cafes & Nearby Onsen",
+      "short_title_en": "Real Mount Akina & Fujiwara Tofu Shop from Initial D! #Shorts #InitialD #Japan",
       "day": 17
     },
     {
@@ -253,13 +251,13 @@
       "short_title_en": "[No Promo] Skip Crowded Asakusa! Tokyo's #1 Secret Forest Zen Temple #Shorts #TokyoTravel"
     },
     {
-      "ranking_id": "anime_pokemon_real_regions_japan",
-      "keyword_ja": "ポケモン 聖地 日本",
-      "region_en": "Pokemon Real-Life Regions",
-      "category_en": "Real Johto Bell Tower, Kanto, Hoenn & Flagship Pokemon Centers + Local Food",
+      "ranking_id": "anime_rurouni_kenshin_gintama_kyoto_tokyo",
+      "keyword_ja": "るろうに剣心 銀魂 聖地 京都 歌舞伎町",
+      "region_en": "Rurouni Kenshin & Gintama Sites",
+      "category_en": "Kyoto Shinsengumi Mibu-dera, Ikedaya, Nanzen-ji & Shinjuku Kabukicho + Sukiyaki",
       "target_pref_ja": "京都府",
-      "hook_title_en": "REAL-LIFE POKEMON REGIONS! Top 10 Japan Landmarks That Inspired Kanto, Johto & Hoenn + Nearby Food",
-      "short_title_en": "Real-Life Pokemon Locations Across Japan! #Shorts #Pokemon #JapanTravel",
+      "hook_title_en": "REAL RUROUNI KENSHIN & GINTAMA! Top 10 Kyoto Shinsengumi & Edo Sacred Sites + Nearby Food",
+      "short_title_en": "Real Rurouni Kenshin & Gintama Locations in Kyoto & Tokyo! #Shorts #RurouniKenshin #Gintama",
       "day": 20
     },
     {
@@ -287,13 +285,13 @@
       "short_title_en": "[No Promo] The Real Spirited Away Onsen Town Japanese Locals Ranked #1! #Shorts #JapanTravel"
     },
     {
-      "ranking_id": "anime_akira_cyberpunk_neo_tokyo",
-      "keyword_ja": "AKIRA 攻殻機動隊 聖地 東京",
-      "region_en": "AKIRA & Cyberpunk Neo-Tokyo",
-      "category_en": "Real Neo-Tokyo Neon Alleys, Bay Bridges & Ghost in the Shell Megastructures",
-      "target_pref_ja": "東京都",
-      "hook_title_en": "REAL NEO-TOKYO! AKIRA, Ghost in the Shell & Cowboy Bebop Top 10 Cyberpunk Locations in Japan",
-      "short_title_en": "Real Neo-Tokyo Cyberpunk Locations from AKIRA! #Shorts #Akira #Tokyo",
+      "ranking_id": "anime_detective_conan_tottori_kyoto",
+      "keyword_ja": "名探偵コナン 聖地 鳥取 京都",
+      "region_en": "Detective Conan Sacred Sites",
+      "category_en": "Conan Town Tottori, Kiyomizu Kiss Stage & Hakodate Star Fort + Nearby Gourmet",
+      "target_pref_ja": "鳥取県",
+      "hook_title_en": "REAL DETECTIVE CONAN JAPAN! Top 10 Conan Town, Kyoto & Hakodate Movie Sites + Nearby Food",
+      "short_title_en": "Real Detective Conan Town & Movie Locations in Japan! #Shorts #DetectiveConan #Japan",
       "day": 23
     },
     {
@@ -321,13 +319,13 @@
       "short_title_en": "Everyone Sees the Nara Deer and Leaves — Missing a 500-House Edo Town! #Shorts #JapanTravel"
     },
     {
-      "ranking_id": "anime_initial_d_haruna_touge",
-      "keyword_ja": "頭文字D 聖地 榛名山",
-      "region_en": "Initial D & MF Ghost Touge",
-      "category_en": "Mt. Akina (Haruna) 5 Hairpins, Tofu Shop Cafe, Usui Pass & Ikaho Onsen",
-      "target_pref_ja": "群馬県",
-      "hook_title_en": "REAL MOUNT AKINA! Initial D & MF Ghost Top 10 Mountain Passes, AE86 Cafes & Nearby Onsen",
-      "short_title_en": "Real Mount Akina & Fujiwara Tofu Shop from Initial D! #Shorts #InitialD #Japan",
+      "ranking_id": "anime_cardcaptor_sakura_clamp_tokyo",
+      "keyword_ja": "カードキャプターさくら CLAMP 聖地 東京",
+      "region_en": "Cardcaptor Sakura & CLAMP Tokyo Sites",
+      "category_en": "Tokyo Tower, Shinagawa Aquarium, Den-en-chofu Tomoeda Town & Inokashira Park + Sweets",
+      "target_pref_ja": "東京都",
+      "hook_title_en": "REAL CARDCAPTOR SAKURA TOKYO! Top 10 Tomoeda Town, Tokyo Tower & Aquarium Sites + Cafes",
+      "short_title_en": "Real Cardcaptor Sakura Locations in Tokyo! #Shorts #CardcaptorSakura #Tokyo",
       "day": 26
     },
     {
@@ -355,13 +353,13 @@
       "short_title_en": "[No Promo] 1,000 Steps Into the Clouds! Japan's #1 Mountain Temple #Shorts #JapanTravel"
     },
     {
-      "ranking_id": "anime_naruto_ninja_sacred_sites",
-      "keyword_ja": "NARUTO 聖地 忍者",
-      "region_en": "Naruto & Real Ninja Sites",
-      "category_en": "Hidden Leaf Village, Naruto Whirlpools & Ninja Castles + Nearby Food",
-      "target_pref_ja": "兵庫県",
-      "hook_title_en": "REAL NARUTO SACRED SITES! Top 10 Hidden Leaf & Ninja Locations + Nearby Food (500K Japanese IG)",
-      "short_title_en": "Real NARUTO Hidden Leaf Village & Ninja Spots in Japan! #Shorts #Naruto #JapanTravel",
+      "ranking_id": "anime_steins_gate_durarara_tokyo",
+      "keyword_ja": "シュタインズゲート デュラララ 聖地 秋葉原 池袋",
+      "region_en": "Steins;Gate & Durarara!! Tokyo Sites",
+      "category_en": "Akihabara Radio Kaikan, Lukako's Shrine, Manseibashi & Ikebukuro Sunshine 60 + Ramen",
+      "target_pref_ja": "東京都",
+      "hook_title_en": "REAL STEINS;GATE & DURARARA!! Top 10 Akihabara & Ikebukuro Sacred Sites + Nearby Food",
+      "short_title_en": "Real Steins;Gate & Durarara Locations in Akihabara & Ikebukuro! #Shorts #SteinsGate #Tokyo",
       "day": 29
     },
     {
@@ -389,16 +387,14 @@
       "short_title_en": "[No Promo] Better Than Shirakawa-go?! Gifu's #1 Secret Mountain Town #Shorts #JapanTravel"
     },
     {
-      "day": 32,
-      "ranking_id": "anime_onepiece_attack_kyushu",
-      "scope_type": "🎬 アニメ聖地特化 (進撃の巨人・ワンピース)",
-      "category_type": "作者の故郷！九州にある『進撃の巨人』日田＆『ワンピース』熊本聖地TOP10",
-      "keyword_ja": "進撃の巨人 日田 ワンピース 熊本 聖地",
-      "region_en": "Attack on Titan & One Piece Kyushu",
-      "category_en": "Giant Bronze Titan Statues at Oyama Dam & Straw Hat Statues Across Kumamoto",
-      "target_pref_ja": "大分県",
-      "hook_title_en": "'ONE PIECE' & 'ATTACK ON TITAN' KYUSHU! 10 Real Statues & Sacred Sites + Aso Volcano & Onsen [No Promo]",
-      "short_title_en": "Real 94m Attack on Titan Wall & One Piece Statues in Japan! #Shorts #AttackOnTitan #OnePiece"
+      "ranking_id": "anime_bleach_death_note_tokyo",
+      "keyword_ja": "BLEACH デスノート 聖地 東京",
+      "region_en": "BLEACH & Death Note Sites",
+      "category_en": "Karakura Town Riverbank, Light Yagami's Tokyo & Soul Society Vibes + Nearby Food",
+      "target_pref_ja": "東京都",
+      "hook_title_en": "REAL BLEACH & DEATH NOTE JAPAN! Top 10 Tokyo & Soul Society Sacred Sites + Nearby Food",
+      "short_title_en": "Real Death Note & BLEACH Locations in Tokyo! #Shorts #DeathNote #Bleach",
+      "day": 32
     },
     {
       "day": 33,
@@ -425,13 +421,13 @@
       "short_title_en": "[No Promo] Just 1 Hour from Tokyo! The Impenetrable Samurai Fortress of Odawara #Shorts #Samurai"
     },
     {
-      "ranking_id": "anime_gundam_giant_mecha_japan",
-      "keyword_ja": "ガンダム 実物大 聖地",
-      "region_en": "Giant Gundam & Mecha Sites",
-      "category_en": "Life-Size Unicorn & Nu Gundam, Shizuoka Gunpla HQ & Sunrise Town + Nearby Food",
-      "target_pref_ja": "東京都",
-      "hook_title_en": "LIFE-SIZE GUNDAM JAPAN! Top 10 Giant Mecha Statues & Gunpla Sacred Sites + Nearby Sightseeing",
-      "short_title_en": "Life-Size Gundam Statues & Mecha Sanctuaries in Japan! #Shorts #Gundam #JapanTravel",
+      "ranking_id": "anime_jojo_sendai_morioh_tokyo",
+      "keyword_ja": "ジョジョ 聖地 仙台 杜王町",
+      "region_en": "JoJo Morioh & Tokyo Sites",
+      "category_en": "Sendai Morioh Town, OWSON & Stardust Crusaders Spots + Gyutan Gourmet",
+      "target_pref_ja": "宮城県",
+      "hook_title_en": "REAL MORIOH TOWN! JoJo's Bizarre Adventure Top 10 Sacred Sites in Sendai & Tokyo + Local Food",
+      "short_title_en": "Real Morioh Town from JoJo's Bizarre Adventure in Sendai! #Shorts #JoJo #JapanTravel",
       "day": 35
     },
     {
@@ -459,14 +455,16 @@
       "short_title_en": "[No Promo] Voted #1 Garden in Japan for 20 Straight Years! #Shorts #JapanTravel"
     },
     {
-      "ranking_id": "anime_bleach_death_note_tokyo",
-      "keyword_ja": "BLEACH デスノート 聖地 東京",
-      "region_en": "BLEACH & Death Note Sites",
-      "category_en": "Karakura Town Riverbank, Light Yagami's Tokyo & Soul Society Vibes + Nearby Food",
-      "target_pref_ja": "東京都",
-      "hook_title_en": "REAL BLEACH & DEATH NOTE JAPAN! Top 10 Tokyo & Soul Society Sacred Sites + Nearby Food",
-      "short_title_en": "Real Death Note & BLEACH Locations in Tokyo! #Shorts #DeathNote #Bleach",
-      "day": 38
+      "day": 38,
+      "ranking_id": "anime_shinto_myth_spirits",
+      "scope_type": "🎬 アニメ聖地特化 (神隠し・妖怪・異界)",
+      "category_type": "アニメのような異世界感！日本の「妖怪の街・千本鳥居・神隠し神社」TOP10",
+      "keyword_ja": "水木しげるロード 伏見稲荷 貴船神社 異世界 神社",
+      "region_en": "Spirited Away Shrines & Yokai Towns",
+      "category_en": "Forest Lantern Shrines, Yokai Folklore Streets & Mossy Spirit Gates",
+      "target_pref_ja": "京都府",
+      "hook_title_en": "SPIRITED AWAY & ANIME SHRINES! 10 Mystical Torii Portals & Yokai Towns + Nearby Local Food [No Promo]",
+      "short_title_en": "Real-Life Anime Forest Shrine Portal in Japan! #Shorts #Anime #JapanTravel"
     },
     {
       "day": 39,
@@ -493,14 +491,16 @@
       "short_title_en": "[No Promo] Soaking in a 42°C Milky Hot Spring Surrounded by 3 Meters of Snow! #Shorts #Onsen"
     },
     {
-      "ranking_id": "anime_detective_conan_tottori_kyoto",
-      "keyword_ja": "名探偵コナン 聖地 鳥取 京都",
-      "region_en": "Detective Conan Sacred Sites",
-      "category_en": "Conan Town Tottori, Kiyomizu Kiss Stage & Hakodate Star Fort + Nearby Gourmet",
-      "target_pref_ja": "鳥取県",
-      "hook_title_en": "REAL DETECTIVE CONAN JAPAN! Top 10 Conan Town, Kyoto & Hakodate Movie Sites + Nearby Food",
-      "short_title_en": "Real Detective Conan Town & Movie Locations in Japan! #Shorts #DetectiveConan #Japan",
-      "day": 41
+      "day": 41,
+      "ranking_id": "anime_shinkai_your_name_suzume",
+      "scope_type": "🎬 アニメ聖地特化 (君の名は・すずめ)",
+      "category_type": "『君の名は。』『すずめの戸締まり』の鳥肌が立つ実在風景TOP10",
+      "keyword_ja": "君の名は すずめの戸締まり 聖地 飛騨古川 諏訪湖",
+      "region_en": "Your Name & Suzume Real Sites",
+      "category_en": "Exact Stairs, Crater Lakes & Abandoned Doors from Makoto Shinkai Films",
+      "target_pref_ja": "岐阜県",
+      "hook_title_en": "REAL 'YOUR NAME' & 'SUZUME' JAPAN! TOP 10 Anime Sacred Sites + Nearby Sightseeing & Food Guide [No Promo]",
+      "short_title_en": "Real-Life 'Your Name' Stairs + Best Nearby Tokyo Spots! #Shorts #YourName #AnimePilgrimage"
     },
     {
       "day": 42,
@@ -527,14 +527,16 @@
       "short_title_en": "[No Promo] Inside Oda Nobunaga's Mountain Fortress Above Gifu! #Shorts #Samurai"
     },
     {
-      "ranking_id": "anime_jojo_sendai_morioh_tokyo",
-      "keyword_ja": "ジョジョ 聖地 仙台 杜王町",
-      "region_en": "JoJo Morioh & Tokyo Sites",
-      "category_en": "Sendai Morioh Town, OWSON & Stardust Crusaders Spots + Gyutan Gourmet",
-      "target_pref_ja": "宮城県",
-      "hook_title_en": "REAL MORIOH TOWN! JoJo's Bizarre Adventure Top 10 Sacred Sites in Sendai & Tokyo + Local Food",
-      "short_title_en": "Real Morioh Town from JoJo's Bizarre Adventure in Sendai! #Shorts #JoJo #JapanTravel",
-      "day": 44
+      "day": 44,
+      "ranking_id": "anime_demon_slayer_jujutsu",
+      "scope_type": "🎬 アニメ聖地特化 (鬼滅の刃・呪術廻戦)",
+      "category_type": "『鬼滅の刃』『呪術廻戦』のモデルになった神社・温泉・一刀石TOP10",
+      "keyword_ja": "鬼滅の刃 聖地 芦ノ牧温泉 宝満宮竈門神社 一刀石",
+      "region_en": "Demon Slayer & Jujutsu Kaisen Sites",
+      "category_en": "Real Split Boulders, Infinity Castle Ryokan & Wisteria Shrines",
+      "target_pref_ja": "福島県",
+      "hook_title_en": "REAL 'DEMON SLAYER' & 'JUJUTSU KAISEN'! 10 Anime Sacred Sites + Nearby Onsen, Castles & Food [No Promo]",
+      "short_title_en": "Real Demon Slayer Infinity Castle Ryokan in Japan! #Shorts #DemonSlayer #JujutsuKaisen"
     },
     {
       "day": 45,
@@ -561,16 +563,14 @@
       "short_title_en": "[No Promo] Skip Hakone! Japanese Locals Ranked Nagano's #1 Mountain Onsen #Shorts #JapanTravel"
     },
     {
-      "day": 47,
-      "ranking_id": "anime_shinto_myth_spirits",
-      "scope_type": "🎬 アニメ聖地特化 (神隠し・妖怪・異界)",
-      "category_type": "アニメのような異世界感！日本の「妖怪の街・千本鳥居・神隠し神社」TOP10",
-      "keyword_ja": "水木しげるロード 伏見稲荷 貴船神社 異世界 神社",
-      "region_en": "Spirited Away Shrines & Yokai Towns",
-      "category_en": "Forest Lantern Shrines, Yokai Folklore Streets & Mossy Spirit Gates",
-      "target_pref_ja": "京都府",
-      "hook_title_en": "SPIRITED AWAY & ANIME SHRINES! 10 Mystical Torii Portals & Yokai Towns + Nearby Local Food [No Promo]",
-      "short_title_en": "Real-Life Anime Forest Shrine Portal in Japan! #Shorts #Anime #JapanTravel"
+      "ranking_id": "anime_haikyuu_sendai_iwate_tokyo",
+      "keyword_ja": "ハイキュー 聖地 軽米 仙台",
+      "region_en": "Haikyuu!! Sacred Sites",
+      "category_en": "Karumai High School, Sendai Gymnasium & Orange Court + Nearby Onsen & Food",
+      "target_pref_ja": "岩手県",
+      "hook_title_en": "REAL KARASUNO HIGH! Haikyuu!! Top 10 Sacred Sites in Iwate, Sendai & Tokyo + Local Food",
+      "short_title_en": "Real Karasuno High & Sendai Gym from Haikyuu!! #Shorts #Haikyuu #JapanTravel",
+      "day": 47
     },
     {
       "day": 48,
@@ -597,16 +597,14 @@
       "short_title_en": "[No Promo] Where the Real-Life Shogun Fought & Built His Empire! #Shorts #Samurai"
     },
     {
-      "day": 50,
-      "ranking_id": "anime_shinkai_your_name_suzume",
-      "scope_type": "🎬 アニメ聖地特化 (君の名は・すずめ)",
-      "category_type": "『君の名は。』『すずめの戸締まり』の鳥肌が立つ実在風景TOP10",
-      "keyword_ja": "君の名は すずめの戸締まり 聖地 飛騨古川 諏訪湖",
-      "region_en": "Your Name & Suzume Real Sites",
-      "category_en": "Exact Stairs, Crater Lakes & Abandoned Doors from Makoto Shinkai Films",
-      "target_pref_ja": "岐阜県",
-      "hook_title_en": "REAL 'YOUR NAME' & 'SUZUME' JAPAN! TOP 10 Anime Sacred Sites + Nearby Sightseeing & Food Guide [No Promo]",
-      "short_title_en": "Real-Life 'Your Name' Stairs + Best Nearby Tokyo Spots! #Shorts #YourName #AnimePilgrimage"
+      "ranking_id": "anime_golden_kamuy_hokkaido_frontier",
+      "keyword_ja": "ゴールデンカムイ 聖地 北海道 網走",
+      "region_en": "Golden Kamuy Hokkaido Sites",
+      "category_en": "Abashiri Prison, Otaru Meiji Streets, Ainu Kotan & Noboribetsu Onsen + Ohaw",
+      "target_pref_ja": "北海道",
+      "hook_title_en": "REAL GOLDEN KAMUY HOKKAIDO! Top 10 Abashiri Prison, Otaru & Ainu Sacred Sites + Hinna Food",
+      "short_title_en": "Real Abashiri Prison & Hokkaido Sites from Golden Kamuy! #Shorts #GoldenKamuy #Hokkaido",
+      "day": 50
     },
     {
       "day": 51,
@@ -633,16 +631,14 @@
       "short_title_en": "[No Promo] This Open-Air Hot Spring Sits Right on the Crashing Ocean Rocks! #Shorts #Onsen"
     },
     {
-      "day": 53,
-      "ranking_id": "anime_demon_slayer_jujutsu",
-      "scope_type": "🎬 アニメ聖地特化 (鬼滅の刃・呪術廻戦)",
-      "category_type": "『鬼滅の刃』『呪術廻戦』のモデルになった神社・温泉・一刀石TOP10",
-      "keyword_ja": "鬼滅の刃 聖地 芦ノ牧温泉 宝満宮竈門神社 一刀石",
-      "region_en": "Demon Slayer & Jujutsu Kaisen Sites",
-      "category_en": "Real Split Boulders, Infinity Castle Ryokan & Wisteria Shrines",
-      "target_pref_ja": "福島県",
-      "hook_title_en": "REAL 'DEMON SLAYER' & 'JUJUTSU KAISEN'! 10 Anime Sacred Sites + Nearby Onsen, Castles & Food [No Promo]",
-      "short_title_en": "Real Demon Slayer Infinity Castle Ryokan in Japan! #Shorts #DemonSlayer #JujutsuKaisen"
+      "ranking_id": "anime_chainsaw_man_tokyo_enoshima",
+      "keyword_ja": "チェンソーマン 聖地 江ノ島 京都",
+      "region_en": "Chainsaw Man Sacred Sites",
+      "category_en": "Enoshima Jellyfish Aquarium, Makima's Kyoto Shrine & Jinbocho Reze Cafe",
+      "target_pref_ja": "神奈川県",
+      "hook_title_en": "REAL CHAINSAW MAN SITES! Top 10 Enoshima Aquarium, Kyoto Shrine & Reze Cafe Locations + Food",
+      "short_title_en": "Real Chainsaw Man Locations in Tokyo, Enoshima & Kyoto! #Shorts #ChainsawMan #Japan",
+      "day": 53
     },
     {
       "day": 54,
@@ -669,13 +665,13 @@
       "short_title_en": "[No Promo] How 2,000 Samurai Defeated the Shogun's 38,000-Man Army Twice! #Shorts #Samurai"
     },
     {
-      "ranking_id": "anime_haikyuu_sendai_iwate_tokyo",
-      "keyword_ja": "ハイキュー 聖地 軽米 仙台",
-      "region_en": "Haikyuu!! Sacred Sites",
-      "category_en": "Karumai High School, Sendai Gymnasium & Orange Court + Nearby Onsen & Food",
-      "target_pref_ja": "岩手県",
-      "hook_title_en": "REAL KARASUNO HIGH! Haikyuu!! Top 10 Sacred Sites in Iwate, Sendai & Tokyo + Local Food",
-      "short_title_en": "Real Karasuno High & Sendai Gym from Haikyuu!! #Shorts #Haikyuu #JapanTravel",
+      "ranking_id": "anime_bocchi_the_rock_shimokitazawa",
+      "keyword_ja": "ぼっちざろっく けいおん 聖地 下北沢",
+      "region_en": "Bocchi the Rock! & K-ON! Sites",
+      "category_en": "Shimokitazawa Shelter Live House, Enoshima & K-ON! Schoolhouse + Soup Curry",
+      "target_pref_ja": "東京都",
+      "hook_title_en": "REAL STARRY LIVE HOUSE! Bocchi the Rock! & K-ON! Top 10 Sacred Sites + Shimokitazawa Food",
+      "short_title_en": "Real Shimokitazawa Live House from Bocchi the Rock! #Shorts #BocchiTheRock #Tokyo",
       "day": 56
     },
     {
@@ -703,17 +699,7 @@
       "short_title_en": "[No Promo] This Exists in Japan?! The #1 Emerald Gorge Ranked by Locals #Shorts #JapanTravel"
     },
     {
-      "ranking_id": "anime_golden_kamuy_hokkaido_frontier",
-      "keyword_ja": "ゴールデンカムイ 聖地 北海道 網走",
-      "region_en": "Golden Kamuy Hokkaido Sites",
-      "category_en": "Abashiri Prison, Otaru Meiji Streets, Ainu Kotan & Noboribetsu Onsen + Ohaw",
-      "target_pref_ja": "北海道",
-      "hook_title_en": "REAL GOLDEN KAMUY HOKKAIDO! Top 10 Abashiri Prison, Otaru & Ainu Sacred Sites + Hinna Food",
-      "short_title_en": "Real Abashiri Prison & Hokkaido Sites from Golden Kamuy! #Shorts #GoldenKamuy #Hokkaido",
-      "day": 59
-    },
-    {
-      "day": 60,
+      "day": 59,
       "ranking_id": "pref_chiba_matrix_045",
       "scope_type": "都道府県網羅 (千葉県)",
       "category_type": "古民家水郷×石仏寺×朝市グルメ",
@@ -725,7 +711,7 @@
       "short_title_en": "[No Promo] 95% of Tourists Skip Chiba! Japan Locals Ranked This #1 #Shorts #JapanTravel"
     },
     {
-      "day": 61,
+      "day": 60,
       "ranking_id": "onsen_retro_yukata_towns",
       "scope_type": "♨️ 温泉特化 (浴衣で歩けるレトロ温泉街)",
       "category_type": "浴衣と下駄で夜歩き！日本の「ノスタルジック木造温泉街」TOP10",
@@ -737,17 +723,7 @@
       "short_title_en": "[No Promo] Put On a Yukata & Hop Between 7 Wooden Bathhouses in This Town! #Shorts #JapanTravel"
     },
     {
-      "ranking_id": "anime_chainsaw_man_tokyo_enoshima",
-      "keyword_ja": "チェンソーマン 聖地 江ノ島 京都",
-      "region_en": "Chainsaw Man Sacred Sites",
-      "category_en": "Enoshima Jellyfish Aquarium, Makima's Kyoto Shrine & Jinbocho Reze Cafe",
-      "target_pref_ja": "神奈川県",
-      "hook_title_en": "REAL CHAINSAW MAN SITES! Top 10 Enoshima Aquarium, Kyoto Shrine & Reze Cafe Locations + Food",
-      "short_title_en": "Real Chainsaw Man Locations in Tokyo, Enoshima & Kyoto! #Shorts #ChainsawMan #Japan",
-      "day": 62
-    },
-    {
-      "day": 63,
+      "day": 61,
       "ranking_id": "pref_shizuoka_matrix_046",
       "scope_type": "都道府県網羅 (静岡県)",
       "category_type": "絶景吊り橋×家康神社×海鮮",
@@ -759,7 +735,7 @@
       "short_title_en": "[No Promo] 95% of Tourists Skip Shizuoka! Japan Locals Ranked This #1 #Shorts #JapanTravel"
     },
     {
-      "day": 64,
+      "day": 62,
       "ranking_id": "warlord_masamune_019",
       "scope_type": "戦国武将別 (Warlord)",
       "category_type": "伊達政宗・独眼竜 (Date Masamune)",
@@ -771,17 +747,7 @@
       "short_title_en": "[No Promo] Darth Vader's Helmet Was Inspired by This Samurai Warlord! #Shorts #Samurai"
     },
     {
-      "ranking_id": "anime_bocchi_the_rock_shimokitazawa",
-      "keyword_ja": "ぼっちざろっく けいおん 聖地 下北沢",
-      "region_en": "Bocchi the Rock! & K-ON! Sites",
-      "category_en": "Shimokitazawa Shelter Live House, Enoshima & K-ON! Schoolhouse + Soup Curry",
-      "target_pref_ja": "東京都",
-      "hook_title_en": "REAL STARRY LIVE HOUSE! Bocchi the Rock! & K-ON! Top 10 Sacred Sites + Shimokitazawa Food",
-      "short_title_en": "Real Shimokitazawa Live House from Bocchi the Rock! #Shorts #BocchiTheRock #Tokyo",
-      "day": 65
-    },
-    {
-      "day": 66,
+      "day": 63,
       "ranking_id": "pref_mie_matrix_048",
       "scope_type": "都道府県網羅 (三重県)",
       "category_type": "聖地神社×食べ歩き横丁×忍者渓谷",
@@ -793,7 +759,7 @@
       "short_title_en": "[No Promo] 95% of Tourists Skip Mie! Japan Locals Ranked This #1 #Shorts #JapanTravel"
     },
     {
-      "day": 67,
+      "day": 64,
       "ranking_id": "national_samurai_districts_020",
       "scope_type": "日本全国 (All-Japan)",
       "category_type": "武家屋敷・城下町 (Samurai Districts)",
@@ -805,17 +771,7 @@
       "short_title_en": "[No Promo] Walk Inside Real 400-Yr Samurai Mansions With Zero Crowds! #Shorts #Samurai"
     },
     {
-      "ranking_id": "anime_frieren_ghibli_fantasy_japan",
-      "keyword_ja": "フリーレン ジブリ 絶景 日本",
-      "region_en": "Frieren & Ghibli Fantasy Japan",
-      "category_en": "Blue Moonweed Flower Hills, Alpine Rivers, Underground Dungeons & Sky Castles",
-      "target_pref_ja": "岐阜県",
-      "hook_title_en": "REAL-LIFE FRIEREN & GHIBLI! Top 10 Fantasy Landscapes & Blue Flower Hills in Japan + Local Food",
-      "short_title_en": "Real-Life Frieren & Ghibli Fantasy Places in Japan! #Shorts #Frieren #JapanTravel",
-      "day": 68
-    },
-    {
-      "day": 69,
+      "day": 65,
       "ranking_id": "pref_kochi_matrix_056",
       "scope_type": "都道府県網羅 (高知県)",
       "category_type": "現存天守の城×屋台市場グルメ×奇跡の清流",
@@ -827,7 +783,7 @@
       "short_title_en": "[No Promo] 95% of Tourists Skip Kochi! Japan Locals Ranked This #1 #Shorts #JapanTravel"
     },
     {
-      "day": 70,
+      "day": 66,
       "ranking_id": "ehime_castles_islands_021",
       "scope_type": "都道府県×城・絶景 (Pref × Castles & Islands)",
       "category_type": "現存天守・古民家・しまなみ海道 (Castles & Islands)",
@@ -839,7 +795,7 @@
       "short_title_en": "[No Promo] 2 Original Samurai Castles in One Prefecture?! Ehime Japan #Shorts #JapanTravel"
     },
     {
-      "day": 71,
+      "day": 67,
       "ranking_id": "pref_nagasaki_matrix_058",
       "scope_type": "都道府県網羅 (長崎県)",
       "category_type": "廃墟島×キリシタンの城×港町グルメ",
@@ -851,7 +807,7 @@
       "short_title_en": "[No Promo] 95% of Tourists Skip Nagasaki! Japan Locals Ranked This #1 #Shorts #JapanTravel"
     },
     {
-      "day": 72,
+      "day": 68,
       "ranking_id": "warlord_takeda_uesugi_022",
       "scope_type": "戦国武将別 (Warlord)",
       "category_type": "武田信玄 vs 上杉謙信 (Takeda vs Uesugi)",
@@ -863,7 +819,7 @@
       "short_title_en": "[No Promo] Where Two Legendary Samurai Warlords Clashed 5 Times! #Shorts #Samurai"
     },
     {
-      "day": 73,
+      "day": 69,
       "ranking_id": "miyagi_local_food_110",
       "scope_type": "都道府県×専門切り口 (宮城県)",
       "category_type": "食事・ご当地グルメ・老舗食堂",
@@ -875,7 +831,7 @@
       "short_title_en": "[No Promo] Forget Tourist Traps! Miyagi's #1 Local Food Spot Ranked by Japanese #Shorts #JapanFood"
     },
     {
-      "day": 74,
+      "day": 70,
       "ranking_id": "kanto_parks_023",
       "scope_type": "東京近郊・関東 (Greater Tokyo)",
       "category_type": "公園・花絶景 (Parks & Gardens)",
@@ -887,7 +843,7 @@
       "short_title_en": "[No Promo] 1 Hour from Tokyo?! The #1 Flower Park Japanese Locals Obsess Over #Shorts #TokyoTravel"
     },
     {
-      "day": 75,
+      "day": 71,
       "ranking_id": "saitama_local_food_111",
       "scope_type": "都道府県×専門切り口 (埼玉県)",
       "category_type": "食事・ご当地グルメ・老舗食堂",
@@ -899,7 +855,7 @@
       "short_title_en": "[No Promo] Forget Tourist Traps! Saitama's #1 Local Food Spot Ranked by Japanese #Shorts #JapanFood"
     },
     {
-      "day": 76,
+      "day": 72,
       "ranking_id": "aomori_nature_shrines_024",
       "scope_type": "都道府県×絶景・神社 (Pref × Nature & Shrines)",
       "category_type": "渓流・鳥居・秘湯 (Gorges, Torii & Onsen)",
@@ -911,7 +867,7 @@
       "short_title_en": "[No Promo] Better Than Fushimi Inari?! Aomori's Secret 200-Torii Garden #Shorts #JapanTravel"
     },
     {
-      "day": 77,
+      "day": 73,
       "ranking_id": "fukui_local_food_112",
       "scope_type": "都道府県×専門切り口 (福井県)",
       "category_type": "食事・ご当地グルメ・老舗食堂",
@@ -923,7 +879,7 @@
       "short_title_en": "[No Promo] Forget Tourist Traps! Fukui's #1 Local Food Spot Ranked by Japanese #Shorts #JapanFood"
     },
     {
-      "day": 78,
+      "day": 74,
       "ranking_id": "warlord_musashi_025",
       "scope_type": "戦国武将別 (Warlord)",
       "category_type": "宮本武蔵・剣豪聖地 (Miyamoto Musashi)",
@@ -935,7 +891,7 @@
       "short_title_en": "Inside the Real Cave Where Miyamoto Musashi Wrote The Book of Five Rings! #Shorts #Samurai"
     },
     {
-      "day": 79,
+      "day": 75,
       "ranking_id": "shiga_local_food_113",
       "scope_type": "都道府県×専門切り口 (滋賀県)",
       "category_type": "食事・ご当地グルメ・老舗食堂",
@@ -947,7 +903,7 @@
       "short_title_en": "[No Promo] Forget Tourist Traps! Shiga's #1 Local Food Spot Ranked by Japanese #Shorts #JapanFood"
     },
     {
-      "day": 80,
+      "day": 76,
       "ranking_id": "onsen_beppu_kyushu_hells",
       "scope_type": "♨️ 温泉特化 (九州・別府・黒川・指宿)",
       "category_type": "温泉湧出量日本一！九州の「地獄めぐり・砂むし・洞窟温泉」TOP10",
@@ -959,7 +915,7 @@
       "short_title_en": "[No Promo] Buried in Volcanic Heated Beach Sand in Kyushu Japan! #Shorts #Onsen"
     },
     {
-      "day": 81,
+      "day": 77,
       "ranking_id": "shimane_local_food_114",
       "scope_type": "都道府県×専門切り口 (島根県)",
       "category_type": "食事・ご当地グルメ・老舗食堂",
@@ -971,7 +927,7 @@
       "short_title_en": "[No Promo] Forget Tourist Traps! Shimane's #1 Local Food Spot Ranked by Japanese #Shorts #JapanFood"
     },
     {
-      "day": 82,
+      "day": 78,
       "ranking_id": "okayama_kominka_castles_027",
       "scope_type": "都道府県×古民家・城 (Pref × Old Town & Castle)",
       "category_type": "倉敷美観地区・山城・日本庭園 (Canals, Castles & Gardens)",
@@ -983,7 +939,7 @@
       "short_title_en": "[No Promo] Why Do Foreigners Skip Okayama?! It Has a Castle in the Clouds! #Shorts #JapanTravel"
     },
     {
-      "day": 83,
+      "day": 79,
       "ranking_id": "kochi_local_food_115",
       "scope_type": "都道府県×専門切り口 (高知県)",
       "category_type": "食事・ご当地グルメ・老舗食堂",
@@ -995,7 +951,7 @@
       "short_title_en": "[No Promo] Forget Tourist Traps! Kochi's #1 Local Food Spot Ranked by Japanese #Shorts #JapanFood"
     },
     {
-      "day": 84,
+      "day": 80,
       "ranking_id": "warlord_ninja_shinobi_028",
       "scope_type": "戦国武将別 (Warlord)",
       "category_type": "伊賀・甲賀・戸隠の忍者 (Real Ninja Strongholds)",
@@ -1007,7 +963,7 @@
       "short_title_en": "[No Promo] Inside a Real 400-Yr Ninja Trap House in Iga Japan! #Shorts #Ninja"
     },
     {
-      "day": 85,
+      "day": 81,
       "ranking_id": "kagoshima_local_food_116",
       "scope_type": "都道府県×専門切り口 (鹿児島県)",
       "category_type": "食事・ご当地グルメ・老舗食堂",
@@ -1019,7 +975,7 @@
       "short_title_en": "Forget Tourist Traps! Kagoshima's #1 Local Food Spot Ranked by Japanese #Shorts #JapanFood"
     },
     {
-      "day": 86,
+      "day": 82,
       "ranking_id": "kumamoto_volcano_castles_030",
       "scope_type": "都道府県×絶景・城 (Pref × Volcano & Castle)",
       "category_type": "阿蘇カルデラ・名城・黒川温泉 (Caldera, Castle & Onsen)",
@@ -1031,7 +987,7 @@
       "short_title_en": "[No Promo] Inside an Active Supervolcano Caldera in Kumamoto Japan! #Shorts #JapanTravel"
     },
     {
-      "day": 87,
+      "day": 83,
       "ranking_id": "yamagata_local_food_117",
       "scope_type": "都道府県×専門切り口 (山形県)",
       "category_type": "食事・ご当地グルメ・老舗食堂",
@@ -1043,7 +999,7 @@
       "short_title_en": "[No Promo] Forget Tourist Traps! Yamagata's #1 Local Food Spot Ranked by Japanese #Shorts #JapanFood"
     },
     {
-      "day": 88,
+      "day": 84,
       "ranking_id": "warlord_katana_forges_031",
       "scope_type": "戦国武将別 (Warlord)",
       "category_type": "日本刀・刀鍛冶の聖地 (Katana Swordsmith Towns)",
@@ -1055,7 +1011,7 @@
       "short_title_en": "[No Promo] The 800-Year-Old Japanese Village That Forged Legendary Samurai Swords! #Shorts #Samurai"
     },
     {
-      "day": 89,
+      "day": 85,
       "ranking_id": "tokyo_local_food_118",
       "scope_type": "都道府県×専門切り口 (東京都)",
       "category_type": "食事・ご当地グルメ・老舗食堂",
@@ -1067,7 +1023,7 @@
       "short_title_en": "[No Promo] Forget Tourist Traps! Tokyo's #1 Local Food Spot Ranked by Japanese #Shorts #JapanFood"
     },
     {
-      "day": 90,
+      "day": 86,
       "ranking_id": "kanto_scenic_032",
       "scope_type": "東京近郊・関東 (Greater Tokyo)",
       "category_type": "絶景・渓谷・海岸 (Scenic Day-Trips)",
@@ -1079,7 +1035,7 @@
       "short_title_en": "[No Promo] You Won't Believe This Gorge Is Still Inside Tokyo! #Shorts #TokyoTravel"
     },
     {
-      "day": 91,
+      "day": 87,
       "ranking_id": "nagano_local_food_119",
       "scope_type": "都道府県×専門切り口 (長野県)",
       "category_type": "食事・ご当地グルメ・老舗食堂",
@@ -1091,7 +1047,7 @@
       "short_title_en": "[No Promo] Forget Tourist Traps! Nagano's #1 Local Food Spot Ranked by Japanese #Shorts #JapanFood"
     },
     {
-      "day": 92,
+      "day": 88,
       "ranking_id": "shimane_myth_castles_033",
       "scope_type": "都道府県×神社・城 (Pref × Shrines & Castles)",
       "category_type": "出雲神話・国宝松江城・日本庭園 (God Shrines & Castles)",
@@ -1103,7 +1059,7 @@
       "short_title_en": "The Least Visited Prefecture With Japan's #1 Garden & Samurai Castle! #Shorts #JapanTravel"
     },
     {
-      "day": 93,
+      "day": 89,
       "ranking_id": "osaka_local_food_120",
       "scope_type": "都道府県×専門切り口 (大阪府)",
       "category_type": "食事・ご当地グルメ・老舗食堂",
@@ -1115,7 +1071,7 @@
       "short_title_en": "[No Promo] Forget Tourist Traps! Osaka's #1 Local Food Spot Ranked by Japanese #Shorts #JapanFood"
     },
     {
-      "day": 94,
+      "day": 90,
       "ranking_id": "warlord_bakumatsu_034",
       "scope_type": "戦国武将別 (Warlord)",
       "category_type": "幕末・新選組・ラストサムライ (Last Samurai & Shinsengumi)",
@@ -1127,7 +1083,7 @@
       "short_title_en": "[No Promo] Where the Real Last Samurai Made Their Final Stand! #Shorts #Samurai"
     },
     {
-      "day": 95,
+      "day": 91,
       "ranking_id": "hiroshima_local_food_121",
       "scope_type": "都道府県×専門切り口 (広島県)",
       "category_type": "食事・ご当地グルメ・老舗食堂",
@@ -1139,7 +1095,7 @@
       "short_title_en": "Forget Tourist Traps! Hiroshima's #1 Local Food Spot Ranked by Japanese #Shorts #JapanFood"
     },
     {
-      "day": 96,
+      "day": 92,
       "ranking_id": "kanto_onsen_035",
       "scope_type": "東京近郊・関東 (Greater Tokyo)",
       "category_type": "温泉・秘湯 (Hot Springs Near Tokyo)",
@@ -1151,7 +1107,7 @@
       "short_title_en": "[No Promo] Better Than Hakone! Japanese Locals Voted This #1 Onsen Near Tokyo #Shorts #JapanTravel"
     },
     {
-      "day": 97,
+      "day": 93,
       "ranking_id": "saga_local_food_122",
       "scope_type": "都道府県×専門切り口 (佐賀県)",
       "category_type": "食事・ご当地グルメ・老舗食堂",
@@ -1163,7 +1119,7 @@
       "short_title_en": "[No Promo] Forget Tourist Traps! Saga's #1 Local Food Spot Ranked by Japanese #Shorts #JapanFood"
     },
     {
-      "day": 98,
+      "day": 94,
       "ranking_id": "kanto_kominka_cafes_037",
       "scope_type": "東京近郊・関東 (Greater Tokyo)",
       "category_type": "古民家カフェ・レトロ街 (Kominka & Retro Streets)",
@@ -1175,7 +1131,7 @@
       "short_title_en": "[No Promo] 100-Year-Old Samurai House Cafe Inside Tokyo! #Shorts #TokyoTravel"
     },
     {
-      "day": 99,
+      "day": 95,
       "ranking_id": "hokkaido_local_food_123",
       "scope_type": "都道府県×専門切り口 (北海道)",
       "category_type": "食事・ご当地グルメ・老舗食堂",
@@ -1187,7 +1143,7 @@
       "short_title_en": "[No Promo] Forget Tourist Traps! Hokkaido's #1 Local Food Spot Ranked by Japanese #Shorts #JapanFood"
     },
     {
-      "day": 100,
+      "day": 96,
       "ranking_id": "yamaguchi_torii_samurai_038",
       "scope_type": "都道府県×絶景・城下町 (Pref × Scenic & Samurai)",
       "category_type": "断崖鳥居・萩城下町・カルスト絶景 (Cliff Torii & Samurai Town)",
@@ -1199,7 +1155,7 @@
       "short_title_en": "[No Promo] 123 Red Torii Gates on an Ocean Cliff in Yamaguchi Japan! #Shorts #JapanTravel"
     },
     {
-      "day": 101,
+      "day": 97,
       "ranking_id": "ibaraki_local_food_124",
       "scope_type": "都道府県×専門切り口 (茨城県)",
       "category_type": "食事・ご当地グルメ・老舗食堂",
@@ -1211,7 +1167,7 @@
       "short_title_en": "[No Promo] Forget Tourist Traps! Ibaraki's #1 Local Food Spot Ranked by Japanese #Shorts #JapanFood"
     },
     {
-      "day": 102,
+      "day": 98,
       "ranking_id": "pref_fukushima_matrix_039",
       "scope_type": "都道府県網羅 (福島県)",
       "category_type": "古民家宿場町×幕末の城",
@@ -1223,7 +1179,7 @@
       "short_title_en": "[No Promo] 95% of Tourists Skip Fukushima! Japan Locals Ranked This #1 #Shorts #JapanTravel"
     },
     {
-      "day": 103,
+      "day": 99,
       "ranking_id": "niigata_local_food_125",
       "scope_type": "都道府県×専門切り口 (新潟県)",
       "category_type": "食事・ご当地グルメ・老舗食堂",
@@ -1235,7 +1191,7 @@
       "short_title_en": "[No Promo] Forget Tourist Traps! Niigata's #1 Local Food Spot Ranked by Japanese #Shorts #JapanFood"
     },
     {
-      "day": 104,
+      "day": 100,
       "ranking_id": "pref_iwate_matrix_041",
       "scope_type": "都道府県網羅 (岩手県)",
       "category_type": "黄金の寺×古民家の里",
@@ -1247,7 +1203,7 @@
       "short_title_en": "[No Promo] 95% of Tourists Skip Iwate! Japan Locals Ranked This #1 #Shorts #JapanTravel"
     },
     {
-      "day": 105,
+      "day": 101,
       "ranking_id": "shizuoka_local_food_126",
       "scope_type": "都道府県×専門切り口 (静岡県)",
       "category_type": "食事・ご当地グルメ・老舗食堂",
@@ -1259,7 +1215,7 @@
       "short_title_en": "[No Promo] Forget Tourist Traps! Shizuoka's #1 Local Food Spot Ranked by Japanese #Shorts #JapanFood"
     },
     {
-      "day": 106,
+      "day": 102,
       "ranking_id": "pref_yamagata_matrix_042",
       "scope_type": "都道府県網羅 (山形県)",
       "category_type": "断崖の寺×レトロ温泉街",
@@ -1271,7 +1227,7 @@
       "short_title_en": "[No Promo] 95% of Tourists Skip Yamagata! Japan Locals Ranked This #1 #Shorts #JapanTravel"
     },
     {
-      "day": 107,
+      "day": 103,
       "ranking_id": "nara_local_food_127",
       "scope_type": "都道府県×専門切り口 (奈良県)",
       "category_type": "食事・ご当地グルメ・老舗食堂",
@@ -1283,7 +1239,7 @@
       "short_title_en": "[No Promo] Forget Tourist Traps! Nara's #1 Local Food Spot Ranked by Japanese #Shorts #JapanFood"
     },
     {
-      "day": 108,
+      "day": 104,
       "ranking_id": "pref_tochigi_matrix_043",
       "scope_type": "都道府県網羅 (栃木県)",
       "category_type": "神社・公園・地下神殿",
@@ -1295,7 +1251,7 @@
       "short_title_en": "[No Promo] 95% of Tourists Skip Tochigi! Japan Locals Ranked This #1 #Shorts #JapanTravel"
     },
     {
-      "day": 109,
+      "day": 105,
       "ranking_id": "tokushima_local_food_128",
       "scope_type": "都道府県×専門切り口 (徳島県)",
       "category_type": "食事・ご当地グルメ・老舗食堂",
@@ -1307,7 +1263,7 @@
       "short_title_en": "Forget Tourist Traps! Tokushima's #1 Local Food Spot Ranked by Japanese #Shorts #JapanFood"
     },
     {
-      "day": 110,
+      "day": 106,
       "ranking_id": "pref_gunma_matrix_044",
       "scope_type": "都道府県網羅 (群馬県)",
       "category_type": "温泉街×渓谷絶景",
@@ -1319,7 +1275,7 @@
       "short_title_en": "[No Promo] 95% of Tourists Skip Gunma! Japan Locals Ranked This #1 #Shorts #JapanTravel"
     },
     {
-      "day": 111,
+      "day": 107,
       "ranking_id": "kumamoto_local_food_129",
       "scope_type": "都道府県×専門切り口 (熊本県)",
       "category_type": "食事・ご当地グルメ・老舗食堂",
@@ -1331,7 +1287,7 @@
       "short_title_en": "[No Promo] Forget Tourist Traps! Kumamoto's #1 Local Food Spot Ranked by Japanese #Shorts #JapanFood"
     },
     {
-      "day": 112,
+      "day": 108,
       "ranking_id": "pref_aichi_matrix_047",
       "scope_type": "都道府県網羅 (愛知県)",
       "category_type": "国宝の城×古民家街道×名古屋めし",
@@ -1343,7 +1299,7 @@
       "short_title_en": "[No Promo] 95% of Tourists Skip Aichi! Japan Locals Ranked This #1 #Shorts #JapanTravel"
     },
     {
-      "day": 113,
+      "day": 109,
       "ranking_id": "iwate_local_food_130",
       "scope_type": "都道府県×専門切り口 (岩手県)",
       "category_type": "食事・ご当地グルメ・老舗食堂",
@@ -1355,7 +1311,7 @@
       "short_title_en": "[No Promo] Forget Tourist Traps! Iwate's #1 Local Food Spot Ranked by Japanese #Shorts #JapanFood"
     },
     {
-      "day": 114,
+      "day": 110,
       "ranking_id": "pref_shiga_matrix_049",
       "scope_type": "都道府県網羅 (滋賀県)",
       "category_type": "名城×水郷古民家×湖上鳥居",
@@ -1367,7 +1323,7 @@
       "short_title_en": "[No Promo] 95% of Tourists Skip Shiga! Japan Locals Ranked This #1 #Shorts #JapanTravel"
     },
     {
-      "day": 115,
+      "day": 111,
       "ranking_id": "gunma_local_food_131",
       "scope_type": "都道府県×専門切り口 (群馬県)",
       "category_type": "食事・ご当地グルメ・老舗食堂",
@@ -1379,7 +1335,7 @@
       "short_title_en": "[No Promo] Forget Tourist Traps! Gunma's #1 Local Food Spot Ranked by Japanese #Shorts #JapanFood"
     },
     {
-      "day": 116,
+      "day": 112,
       "ranking_id": "pref_hyogo_matrix_050",
       "scope_type": "都道府県網羅 (兵庫県)",
       "category_type": "世界遺産の城×雲海山城×外湯温泉街",
@@ -1391,7 +1347,7 @@
       "short_title_en": "[No Promo] 95% of Tourists Skip Hyogo! Japan Locals Ranked This #1 #Shorts #JapanTravel"
     },
     {
-      "day": 117,
+      "day": 113,
       "ranking_id": "ishikawa_local_food_132",
       "scope_type": "都道府県×専門切り口 (石川県)",
       "category_type": "食事・ご当地グルメ・老舗食堂",
@@ -1403,7 +1359,7 @@
       "short_title_en": "[No Promo] Forget Tourist Traps! Ishikawa's #1 Local Food Spot Ranked by Japanese #Shorts #JapanFood"
     },
     {
-      "day": 118,
+      "day": 114,
       "ranking_id": "pref_wakayama_matrix_051",
       "scope_type": "都道府県網羅 (和歌山県)",
       "category_type": "天空の寺×聖地古道×大滝絶景",
@@ -1415,7 +1371,7 @@
       "short_title_en": "[No Promo] 95% of Tourists Skip Wakayama! Japan Locals Ranked This #1 #Shorts #JapanTravel"
     },
     {
-      "day": 119,
+      "day": 115,
       "ranking_id": "mie_local_food_133",
       "scope_type": "都道府県×専門切り口 (三重県)",
       "category_type": "食事・ご当地グルメ・老舗食堂",
@@ -1427,7 +1383,7 @@
       "short_title_en": "[No Promo] Forget Tourist Traps! Mie's #1 Local Food Spot Ranked by Japanese #Shorts #JapanFood"
     },
     {
-      "day": 120,
+      "day": 116,
       "ranking_id": "pref_tottori_matrix_052",
       "scope_type": "都道府県網羅 (鳥取県)",
       "category_type": "断崖絶壁の寺×白壁古民家×砂丘",
@@ -1439,7 +1395,7 @@
       "short_title_en": "[No Promo] 95% of Tourists Skip Tottori! Japan Locals Ranked This #1 #Shorts #JapanTravel"
     },
     {
-      "day": 121,
+      "day": 117,
       "ranking_id": "tottori_local_food_134",
       "scope_type": "都道府県×専門切り口 (鳥取県)",
       "category_type": "食事・ご当地グルメ・老舗食堂",
@@ -1451,7 +1407,7 @@
       "short_title_en": "[No Promo] Forget Tourist Traps! Tottori's #1 Local Food Spot Ranked by Japanese #Shorts #JapanFood"
     },
     {
-      "day": 122,
+      "day": 118,
       "ranking_id": "pref_hiroshima_matrix_053",
       "scope_type": "都道府県網羅 (広島県)",
       "category_type": "古民家港町×海上の神社×鉄板グルメ",
@@ -1463,7 +1419,7 @@
       "short_title_en": "[No Promo] 95% of Tourists Skip Hiroshima! Japan Locals Ranked This #1 #Shorts #JapanTravel"
     },
     {
-      "day": 123,
+      "day": 119,
       "ranking_id": "ehime_local_food_135",
       "scope_type": "都道府県×専門切り口 (愛媛県)",
       "category_type": "食事・ご当地グルメ・老舗食堂",
@@ -1475,7 +1431,7 @@
       "short_title_en": "[No Promo] Forget Tourist Traps! Ehime's #1 Local Food Spot Ranked by Japanese #Shorts #JapanFood"
     },
     {
-      "day": 124,
+      "day": 120,
       "ranking_id": "pref_kagawa_matrix_054",
       "scope_type": "都道府県網羅 (香川県)",
       "category_type": "最高峰の日本庭園×石垣の城×うどん巡り",
@@ -1487,7 +1443,7 @@
       "short_title_en": "[No Promo] 95% of Tourists Skip Kagawa! Japan Locals Ranked This #1 #Shorts #JapanTravel"
     },
     {
-      "day": 125,
+      "day": 121,
       "ranking_id": "miyazaki_local_food_136",
       "scope_type": "都道府県×専門切り口 (宮崎県)",
       "category_type": "食事・ご当地グルメ・老舗食堂",
@@ -1499,7 +1455,7 @@
       "short_title_en": "[No Promo] Forget Tourist Traps! Miyazaki's #1 Local Food Spot Ranked by Japanese #Shorts #JapanFood"
     },
     {
-      "day": 126,
+      "day": 122,
       "ranking_id": "pref_tokushima_matrix_055",
       "scope_type": "都道府県網羅 (徳島県)",
       "category_type": "平家落人の秘境×古民家街道",
@@ -1511,7 +1467,7 @@
       "short_title_en": "[No Promo] 95% of Tourists Skip Tokushima! Japan Locals Ranked This #1 #Shorts #JapanTravel"
     },
     {
-      "day": 127,
+      "day": 123,
       "ranking_id": "akita_local_food_137",
       "scope_type": "都道府県×専門切り口 (秋田県)",
       "category_type": "食事・ご当地グルメ・老舗食堂",
@@ -1523,7 +1479,7 @@
       "short_title_en": "[No Promo] Forget Tourist Traps! Akita's #1 Local Food Spot Ranked by Japanese #Shorts #JapanFood"
     },
     {
-      "day": 128,
+      "day": 124,
       "ranking_id": "pref_saga_matrix_057",
       "scope_type": "都道府県網羅 (佐賀県)",
       "category_type": "断崖の神社×海城×陶磁器の街並み",
@@ -1535,7 +1491,7 @@
       "short_title_en": "[No Promo] 95% of Tourists Skip Saga! Japan Locals Ranked This #1 #Shorts #JapanTravel"
     },
     {
-      "day": 129,
+      "day": 125,
       "ranking_id": "chiba_local_food_138",
       "scope_type": "都道府県×専門切り口 (千葉県)",
       "category_type": "食事・ご当地グルメ・老舗食堂",
@@ -1547,7 +1503,7 @@
       "short_title_en": "[No Promo] Forget Tourist Traps! Chiba's #1 Local Food Spot Ranked by Japanese #Shorts #JapanFood"
     },
     {
-      "day": 130,
+      "day": 126,
       "ranking_id": "pref_oita_matrix_059",
       "scope_type": "都道府県網羅 (大分県)",
       "category_type": "湯けむり温泉×城下町坂道×摩崖仏",
@@ -1559,7 +1515,7 @@
       "short_title_en": "[No Promo] 95% of Tourists Skip Oita! Japan Locals Ranked This #1 #Shorts #JapanTravel"
     },
     {
-      "day": 131,
+      "day": 127,
       "ranking_id": "yamanashi_local_food_139",
       "scope_type": "都道府県×専門切り口 (山梨県)",
       "category_type": "食事・ご当地グルメ・老舗食堂",
@@ -1571,7 +1527,7 @@
       "short_title_en": "Forget Tourist Traps! Yamanashi's #1 Local Food Spot Ranked by Japanese #Shorts #JapanFood"
     },
     {
-      "day": 132,
+      "day": 128,
       "ranking_id": "pref_miyazaki_matrix_060",
       "scope_type": "都道府県網羅 (宮崎県)",
       "category_type": "神話の渓谷×洞窟神社×九州の小京都",
@@ -1583,7 +1539,7 @@
       "short_title_en": "[No Promo] 95% of Tourists Skip Miyazaki! Japan Locals Ranked This #1 #Shorts #JapanTravel"
     },
     {
-      "day": 133,
+      "day": 129,
       "ranking_id": "kyoto_local_food_140",
       "scope_type": "都道府県×専門切り口 (京都府)",
       "category_type": "食事・ご当地グルメ・老舗食堂",
@@ -1595,7 +1551,7 @@
       "short_title_en": "[No Promo] Forget Tourist Traps! Kyoto's #1 Local Food Spot Ranked by Japanese #Shorts #JapanFood"
     },
     {
-      "day": 134,
+      "day": 130,
       "ranking_id": "pref_kagoshima_matrix_061",
       "scope_type": "都道府県網羅 (鹿児島県)",
       "category_type": "活火山絶景×武家屋敷庭園×黒豚グルメ",
@@ -1607,7 +1563,7 @@
       "short_title_en": "[No Promo] 95% of Tourists Skip Kagoshima! Japan Locals Ranked This #1 #Shorts #JapanTravel"
     },
     {
-      "day": 135,
+      "day": 131,
       "ranking_id": "okayama_local_food_141",
       "scope_type": "都道府県×専門切り口 (岡山県)",
       "category_type": "食事・ご当地グルメ・老舗食堂",
@@ -1619,7 +1575,7 @@
       "short_title_en": "[No Promo] Forget Tourist Traps! Okayama's #1 Local Food Spot Ranked by Japanese #Shorts #JapanFood"
     },
     {
-      "day": 136,
+      "day": 132,
       "ranking_id": "pref_okinawa_matrix_062",
       "scope_type": "都道府県網羅 (沖縄県)",
       "category_type": "琉球グスク城×赤瓦古民家の島×島グルメ",
@@ -1631,7 +1587,7 @@
       "short_title_en": "[No Promo] 95% of Tourists Skip Okinawa! Japan Locals Ranked This #1 #Shorts #JapanTravel"
     },
     {
-      "day": 137,
+      "day": 133,
       "ranking_id": "fukuoka_local_food_142",
       "scope_type": "都道府県×専門切り口 (福岡県)",
       "category_type": "食事・ご当地グルメ・老舗食堂",
@@ -1643,7 +1599,7 @@
       "short_title_en": "[No Promo] Forget Tourist Traps! Fukuoka's #1 Local Food Spot Ranked by Japanese #Shorts #JapanFood"
     },
     {
-      "day": 138,
+      "day": 134,
       "ranking_id": "hokkaido_castles_samurai_063",
       "scope_type": "都道府県×専門切り口 (北海道)",
       "category_type": "城・武家屋敷・古戦場",
@@ -1655,7 +1611,7 @@
       "short_title_en": "[No Promo] Real Samurai Fortress in Hokkaido Japan Ranked #1 by Locals! #Shorts #Samurai"
     },
     {
-      "day": 139,
+      "day": 135,
       "ranking_id": "okinawa_local_food_143",
       "scope_type": "都道府県×専門切り口 (沖縄県)",
       "category_type": "食事・ご当地グルメ・老舗食堂",
@@ -1667,7 +1623,7 @@
       "short_title_en": "[No Promo] Forget Tourist Traps! Okinawa's #1 Local Food Spot Ranked by Japanese #Shorts #JapanFood"
     },
     {
-      "day": 140,
+      "day": 136,
       "ranking_id": "ibaraki_castles_samurai_064",
       "scope_type": "都道府県×専門切り口 (茨城県)",
       "category_type": "城・武家屋敷・古戦場",
@@ -1679,7 +1635,7 @@
       "short_title_en": "[No Promo] Real Samurai Fortress in Ibaraki Japan Ranked #1 by Locals! #Shorts #Samurai"
     },
     {
-      "day": 141,
+      "day": 137,
       "ranking_id": "fukushima_local_food_144",
       "scope_type": "都道府県×専門切り口 (福島県)",
       "category_type": "食事・ご当地グルメ・老舗食堂",
@@ -1691,7 +1647,7 @@
       "short_title_en": "Forget Tourist Traps! Fukushima's #1 Local Food Spot Ranked by Japanese #Shorts #JapanFood"
     },
     {
-      "day": 142,
+      "day": 138,
       "ranking_id": "niigata_castles_samurai_065",
       "scope_type": "都道府県×専門切り口 (新潟県)",
       "category_type": "城・武家屋敷・古戦場",
@@ -1703,7 +1659,7 @@
       "short_title_en": "[No Promo] Real Samurai Fortress in Niigata Japan Ranked #1 by Locals! #Shorts #Samurai"
     },
     {
-      "day": 143,
+      "day": 139,
       "ranking_id": "kanagawa_local_food_145",
       "scope_type": "都道府県×専門切り口 (神奈川県)",
       "category_type": "食事・ご当地グルメ・老舗食堂",
@@ -1715,7 +1671,7 @@
       "short_title_en": "[No Promo] Forget Tourist Traps! Kanagawa's #1 Local Food Spot Ranked by Japanese #Shorts #JapanFood"
     },
     {
-      "day": 144,
+      "day": 140,
       "ranking_id": "shizuoka_castles_samurai_066",
       "scope_type": "都道府県×専門切り口 (静岡県)",
       "category_type": "城・武家屋敷・古戦場",
@@ -1727,7 +1683,7 @@
       "short_title_en": "[No Promo] Real Samurai Fortress in Shizuoka Japan Ranked #1 by Locals! #Shorts #Samurai"
     },
     {
-      "day": 145,
+      "day": 141,
       "ranking_id": "gifu_local_food_146",
       "scope_type": "都道府県×専門切り口 (岐阜県)",
       "category_type": "食事・ご当地グルメ・老舗食堂",
@@ -1739,7 +1695,7 @@
       "short_title_en": "[No Promo] Forget Tourist Traps! Gifu's #1 Local Food Spot Ranked by Japanese #Shorts #JapanFood"
     },
     {
-      "day": 146,
+      "day": 142,
       "ranking_id": "nara_castles_samurai_067",
       "scope_type": "都道府県×専門切り口 (奈良県)",
       "category_type": "城・武家屋敷・古戦場",
@@ -1751,7 +1707,7 @@
       "short_title_en": "[No Promo] Real Samurai Fortress in Nara Japan Ranked #1 by Locals! #Shorts #Samurai"
     },
     {
-      "day": 147,
+      "day": 143,
       "ranking_id": "hyogo_local_food_147",
       "scope_type": "都道府県×専門切り口 (兵庫県)",
       "category_type": "食事・ご当地グルメ・老舗食堂",
@@ -1763,7 +1719,7 @@
       "short_title_en": "[No Promo] Forget Tourist Traps! Hyogo's #1 Local Food Spot Ranked by Japanese #Shorts #JapanFood"
     },
     {
-      "day": 148,
+      "day": 144,
       "ranking_id": "tokushima_castles_samurai_068",
       "scope_type": "都道府県×専門切り口 (徳島県)",
       "category_type": "城・武家屋敷・古戦場",
@@ -1775,7 +1731,7 @@
       "short_title_en": "[No Promo] Real Samurai Fortress in Tokushima Japan Ranked #1 by Locals! #Shorts #Samurai"
     },
     {
-      "day": 149,
+      "day": 145,
       "ranking_id": "yamaguchi_local_food_148",
       "scope_type": "都道府県×専門切り口 (山口県)",
       "category_type": "食事・ご当地グルメ・老舗食堂",
@@ -1787,7 +1743,7 @@
       "short_title_en": "Forget Tourist Traps! Yamaguchi's #1 Local Food Spot Ranked by Japanese #Shorts #JapanFood"
     },
     {
-      "day": 150,
+      "day": 146,
       "ranking_id": "kumamoto_castles_samurai_069",
       "scope_type": "都道府県×専門切り口 (熊本県)",
       "category_type": "城・武家屋敷・古戦場",
@@ -1799,7 +1755,7 @@
       "short_title_en": "[No Promo] Real Samurai Fortress in Kumamoto Japan Ranked #1 by Locals! #Shorts #Samurai"
     },
     {
-      "day": 151,
+      "day": 147,
       "ranking_id": "nagasaki_local_food_149",
       "scope_type": "都道府県×専門切り口 (長崎県)",
       "category_type": "食事・ご当地グルメ・老舗食堂",
@@ -1811,7 +1767,7 @@
       "short_title_en": "[No Promo] Forget Tourist Traps! Nagasaki's #1 Local Food Spot Ranked by Japanese #Shorts #JapanFood"
     },
     {
-      "day": 152,
+      "day": 148,
       "ranking_id": "iwate_castles_samurai_070",
       "scope_type": "都道府県×専門切り口 (岩手県)",
       "category_type": "城・武家屋敷・古戦場",
@@ -1823,7 +1779,7 @@
       "short_title_en": "[No Promo] Real Samurai Fortress in Iwate Japan Ranked #1 by Locals! #Shorts #Samurai"
     },
     {
-      "day": 153,
+      "day": 149,
       "ranking_id": "aomori_local_food_150",
       "scope_type": "都道府県×専門切り口 (青森県)",
       "category_type": "食事・ご当地グルメ・老舗食堂",
@@ -1835,7 +1791,7 @@
       "short_title_en": "[No Promo] Forget Tourist Traps! Aomori's #1 Local Food Spot Ranked by Japanese #Shorts #JapanFood"
     },
     {
-      "day": 154,
+      "day": 150,
       "ranking_id": "gunma_castles_samurai_071",
       "scope_type": "都道府県×専門切り口 (群馬県)",
       "category_type": "城・武家屋敷・古戦場",
@@ -1847,7 +1803,7 @@
       "short_title_en": "[No Promo] Real Samurai Fortress in Gunma Japan Ranked #1 by Locals! #Shorts #Samurai"
     },
     {
-      "day": 155,
+      "day": 151,
       "ranking_id": "tochigi_local_food_151",
       "scope_type": "都道府県×専門切り口 (栃木県)",
       "category_type": "食事・ご当地グルメ・老舗食堂",
@@ -1859,7 +1815,7 @@
       "short_title_en": "[No Promo] Forget Tourist Traps! Tochigi's #1 Local Food Spot Ranked by Japanese #Shorts #JapanFood"
     },
     {
-      "day": 156,
+      "day": 152,
       "ranking_id": "ishikawa_castles_samurai_072",
       "scope_type": "都道府県×専門切り口 (石川県)",
       "category_type": "城・武家屋敷・古戦場",
@@ -1871,7 +1827,7 @@
       "short_title_en": "[No Promo] Real Samurai Fortress in Ishikawa Japan Ranked #1 by Locals! #Shorts #Samurai"
     },
     {
-      "day": 157,
+      "day": 153,
       "ranking_id": "toyama_local_food_152",
       "scope_type": "都道府県×専門切り口 (富山県)",
       "category_type": "食事・ご当地グルメ・老舗食堂",
@@ -1883,7 +1839,7 @@
       "short_title_en": "[No Promo] Forget Tourist Traps! Toyama's #1 Local Food Spot Ranked by Japanese #Shorts #JapanFood"
     },
     {
-      "day": 158,
+      "day": 154,
       "ranking_id": "mie_castles_samurai_073",
       "scope_type": "都道府県×専門切り口 (三重県)",
       "category_type": "城・武家屋敷・古戦場",
@@ -1895,7 +1851,7 @@
       "short_title_en": "[No Promo] Real Samurai Fortress in Mie Japan Ranked #1 by Locals! #Shorts #Samurai"
     },
     {
-      "day": 159,
+      "day": 155,
       "ranking_id": "aichi_local_food_153",
       "scope_type": "都道府県×専門切り口 (愛知県)",
       "category_type": "食事・ご当地グルメ・老舗食堂",
@@ -1907,7 +1863,7 @@
       "short_title_en": "[No Promo] Forget Tourist Traps! Aichi's #1 Local Food Spot Ranked by Japanese #Shorts #JapanFood"
     },
     {
-      "day": 160,
+      "day": 156,
       "ranking_id": "tottori_castles_samurai_074",
       "scope_type": "都道府県×専門切り口 (鳥取県)",
       "category_type": "城・武家屋敷・古戦場",
@@ -1919,7 +1875,7 @@
       "short_title_en": "[No Promo] Real Samurai Fortress in Tottori Japan Ranked #1 by Locals! #Shorts #Samurai"
     },
     {
-      "day": 161,
+      "day": 157,
       "ranking_id": "wakayama_local_food_154",
       "scope_type": "都道府県×専門切り口 (和歌山県)",
       "category_type": "食事・ご当地グルメ・老舗食堂",
@@ -1931,7 +1887,7 @@
       "short_title_en": "[No Promo] Forget Tourist Traps! Wakayama's #1 Local Food Spot Ranked by Japanese #Shorts #JapanFood"
     },
     {
-      "day": 162,
+      "day": 158,
       "ranking_id": "ehime_castles_samurai_075",
       "scope_type": "都道府県×専門切り口 (愛媛県)",
       "category_type": "城・武家屋敷・古戦場",
@@ -1943,7 +1899,7 @@
       "short_title_en": "[No Promo] Real Samurai Fortress in Ehime Japan Ranked #1 by Locals! #Shorts #Samurai"
     },
     {
-      "day": 163,
+      "day": 159,
       "ranking_id": "kagawa_local_food_155",
       "scope_type": "都道府県×専門切り口 (香川県)",
       "category_type": "食事・ご当地グルメ・老舗食堂",
@@ -1955,7 +1911,7 @@
       "short_title_en": "[No Promo] Forget Tourist Traps! Kagawa's #1 Local Food Spot Ranked by Japanese #Shorts #JapanFood"
     },
     {
-      "day": 164,
+      "day": 160,
       "ranking_id": "miyazaki_castles_samurai_076",
       "scope_type": "都道府県×専門切り口 (宮崎県)",
       "category_type": "城・武家屋敷・古戦場",
@@ -1967,7 +1923,7 @@
       "short_title_en": "[No Promo] Real Samurai Fortress in Miyazaki Japan Ranked #1 by Locals! #Shorts #Samurai"
     },
     {
-      "day": 165,
+      "day": 161,
       "ranking_id": "oita_local_food_156",
       "scope_type": "都道府県×専門切り口 (大分県)",
       "category_type": "食事・ご当地グルメ・老舗食堂",
@@ -1979,7 +1935,7 @@
       "short_title_en": "[No Promo] Forget Tourist Traps! Oita's #1 Local Food Spot Ranked by Japanese #Shorts #JapanFood"
     },
     {
-      "day": 166,
+      "day": 162,
       "ranking_id": "akita_castles_samurai_077",
       "scope_type": "都道府県×専門切り口 (秋田県)",
       "category_type": "城・武家屋敷・古戦場",
@@ -1991,7 +1947,7 @@
       "short_title_en": "[No Promo] Real Samurai Fortress in Akita Japan Ranked #1 by Locals! #Shorts #Samurai"
     },
     {
-      "day": 167,
+      "day": 163,
       "ranking_id": "chiba_castles_samurai_078",
       "scope_type": "都道府県×専門切り口 (千葉県)",
       "category_type": "城・武家屋敷・古戦場",
@@ -2003,7 +1959,7 @@
       "short_title_en": "[No Promo] Real Samurai Fortress in Chiba Japan Ranked #1 by Locals! #Shorts #Samurai"
     },
     {
-      "day": 168,
+      "day": 164,
       "ranking_id": "yamanashi_castles_samurai_079",
       "scope_type": "都道府県×専門切り口 (山梨県)",
       "category_type": "城・武家屋敷・古戦場",
@@ -2015,7 +1971,7 @@
       "short_title_en": "[No Promo] Real Samurai Fortress in Yamanashi Japan Ranked #1 by Locals! #Shorts #Samurai"
     },
     {
-      "day": 169,
+      "day": 165,
       "ranking_id": "kyoto_castles_samurai_080",
       "scope_type": "都道府県×専門切り口 (京都府)",
       "category_type": "城・武家屋敷・古戦場",
@@ -2027,7 +1983,7 @@
       "short_title_en": "[No Promo] Real Samurai Fortress in Kyoto Japan Ranked #1 by Locals! #Shorts #Samurai"
     },
     {
-      "day": 170,
+      "day": 166,
       "ranking_id": "okayama_castles_samurai_081",
       "scope_type": "都道府県×専門切り口 (岡山県)",
       "category_type": "城・武家屋敷・古戦場",
@@ -2039,7 +1995,7 @@
       "short_title_en": "[No Promo] Real Samurai Fortress in Okayama Japan Ranked #1 by Locals! #Shorts #Samurai"
     },
     {
-      "day": 171,
+      "day": 167,
       "ranking_id": "fukuoka_castles_samurai_082",
       "scope_type": "都道府県×専門切り口 (福岡県)",
       "category_type": "城・武家屋敷・古戦場",
@@ -2051,7 +2007,7 @@
       "short_title_en": "[No Promo] Real Samurai Fortress in Fukuoka Japan Ranked #1 by Locals! #Shorts #Samurai"
     },
     {
-      "day": 172,
+      "day": 168,
       "ranking_id": "okinawa_castles_samurai_083",
       "scope_type": "都道府県×専門切り口 (沖縄県)",
       "category_type": "城・武家屋敷・古戦場",
@@ -2063,7 +2019,7 @@
       "short_title_en": "[No Promo] Real Samurai Fortress in Okinawa Japan Ranked #1 by Locals! #Shorts #Samurai"
     },
     {
-      "day": 173,
+      "day": 169,
       "ranking_id": "fukushima_castles_samurai_084",
       "scope_type": "都道府県×専門切り口 (福島県)",
       "category_type": "城・武家屋敷・古戦場",
@@ -2075,7 +2031,7 @@
       "short_title_en": "[No Promo] Real Samurai Fortress in Fukushima Japan Ranked #1 by Locals! #Shorts #Samurai"
     },
     {
-      "day": 174,
+      "day": 170,
       "ranking_id": "kanagawa_castles_samurai_085",
       "scope_type": "都道府県×専門切り口 (神奈川県)",
       "category_type": "城・武家屋敷・古戦場",
@@ -2087,7 +2043,7 @@
       "short_title_en": "[No Promo] Real Samurai Fortress in Kanagawa Japan Ranked #1 by Locals! #Shorts #Samurai"
     },
     {
-      "day": 175,
+      "day": 171,
       "ranking_id": "gifu_castles_samurai_086",
       "scope_type": "都道府県×専門切り口 (岐阜県)",
       "category_type": "城・武家屋敷・古戦場",
@@ -2099,7 +2055,7 @@
       "short_title_en": "[No Promo] Real Samurai Fortress in Gifu Japan Ranked #1 by Locals! #Shorts #Samurai"
     },
     {
-      "day": 176,
+      "day": 172,
       "ranking_id": "hyogo_castles_samurai_087",
       "scope_type": "都道府県×専門切り口 (兵庫県)",
       "category_type": "城・武家屋敷・古戦場",
@@ -2111,7 +2067,7 @@
       "short_title_en": "[No Promo] Real Samurai Fortress in Hyogo Japan Ranked #1 by Locals! #Shorts #Samurai"
     },
     {
-      "day": 177,
+      "day": 173,
       "ranking_id": "yamaguchi_castles_samurai_088",
       "scope_type": "都道府県×専門切り口 (山口県)",
       "category_type": "城・武家屋敷・古戦場",
@@ -2123,7 +2079,7 @@
       "short_title_en": "[No Promo] Real Samurai Fortress in Yamaguchi Japan Ranked #1 by Locals! #Shorts #Samurai"
     },
     {
-      "day": 178,
+      "day": 174,
       "ranking_id": "nagasaki_castles_samurai_089",
       "scope_type": "都道府県×専門切り口 (長崎県)",
       "category_type": "城・武家屋敷・古戦場",
@@ -2135,7 +2091,7 @@
       "short_title_en": "[No Promo] Real Samurai Fortress in Nagasaki Japan Ranked #1 by Locals! #Shorts #Samurai"
     },
     {
-      "day": 179,
+      "day": 175,
       "ranking_id": "aomori_castles_samurai_090",
       "scope_type": "都道府県×専門切り口 (青森県)",
       "category_type": "城・武家屋敷・古戦場",
@@ -2147,7 +2103,7 @@
       "short_title_en": "[No Promo] Real Samurai Fortress in Aomori Japan Ranked #1 by Locals! #Shorts #Samurai"
     },
     {
-      "day": 180,
+      "day": 176,
       "ranking_id": "tochigi_castles_samurai_091",
       "scope_type": "都道府県×専門切り口 (栃木県)",
       "category_type": "城・武家屋敷・古戦場",
@@ -2159,7 +2115,7 @@
       "short_title_en": "[No Promo] Real Samurai Fortress in Tochigi Japan Ranked #1 by Locals! #Shorts #Samurai"
     },
     {
-      "day": 181,
+      "day": 177,
       "ranking_id": "toyama_castles_samurai_092",
       "scope_type": "都道府県×専門切り口 (富山県)",
       "category_type": "城・武家屋敷・古戦場",
@@ -2171,7 +2127,7 @@
       "short_title_en": "[No Promo] Real Samurai Fortress in Toyama Japan Ranked #1 by Locals! #Shorts #Samurai"
     },
     {
-      "day": 182,
+      "day": 178,
       "ranking_id": "aichi_castles_samurai_093",
       "scope_type": "都道府県×専門切り口 (愛知県)",
       "category_type": "城・武家屋敷・古戦場",
@@ -2183,7 +2139,7 @@
       "short_title_en": "[No Promo] Real Samurai Fortress in Aichi Japan Ranked #1 by Locals! #Shorts #Samurai"
     },
     {
-      "day": 183,
+      "day": 179,
       "ranking_id": "wakayama_castles_samurai_094",
       "scope_type": "都道府県×専門切り口 (和歌山県)",
       "category_type": "城・武家屋敷・古戦場",
@@ -2195,7 +2151,7 @@
       "short_title_en": "[No Promo] Real Samurai Fortress in Wakayama Japan Ranked #1 by Locals! #Shorts #Samurai"
     },
     {
-      "day": 184,
+      "day": 180,
       "ranking_id": "kagawa_castles_samurai_095",
       "scope_type": "都道府県×専門切り口 (香川県)",
       "category_type": "城・武家屋敷・古戦場",
@@ -2207,7 +2163,7 @@
       "short_title_en": "[No Promo] Real Samurai Fortress in Kagawa Japan Ranked #1 by Locals! #Shorts #Samurai"
     },
     {
-      "day": 185,
+      "day": 181,
       "ranking_id": "oita_castles_samurai_096",
       "scope_type": "都道府県×専門切り口 (大分県)",
       "category_type": "城・武家屋敷・古戦場",
@@ -2219,7 +2175,7 @@
       "short_title_en": "[No Promo] Real Samurai Fortress in Oita Japan Ranked #1 by Locals! #Shorts #Samurai"
     },
     {
-      "day": 186,
+      "day": 182,
       "ranking_id": "miyagi_castles_samurai_097",
       "scope_type": "都道府県×専門切り口 (宮城県)",
       "category_type": "城・武家屋敷・古戦場",
@@ -2231,7 +2187,7 @@
       "short_title_en": "[No Promo] Real Samurai Fortress in Miyagi Japan Ranked #1 by Locals! #Shorts #Samurai"
     },
     {
-      "day": 187,
+      "day": 183,
       "ranking_id": "saitama_castles_samurai_098",
       "scope_type": "都道府県×専門切り口 (埼玉県)",
       "category_type": "城・武家屋敷・古戦場",
@@ -2243,7 +2199,7 @@
       "short_title_en": "[No Promo] Real Samurai Fortress in Saitama Japan Ranked #1 by Locals! #Shorts #Samurai"
     },
     {
-      "day": 188,
+      "day": 184,
       "ranking_id": "fukui_castles_samurai_099",
       "scope_type": "都道府県×専門切り口 (福井県)",
       "category_type": "城・武家屋敷・古戦場",
@@ -2255,7 +2211,7 @@
       "short_title_en": "[No Promo] Real Samurai Fortress in Fukui Japan Ranked #1 by Locals! #Shorts #Samurai"
     },
     {
-      "day": 189,
+      "day": 185,
       "ranking_id": "shiga_castles_samurai_100",
       "scope_type": "都道府県×専門切り口 (滋賀県)",
       "category_type": "城・武家屋敷・古戦場",
@@ -2267,7 +2223,7 @@
       "short_title_en": "[No Promo] Real Samurai Fortress in Shiga Japan Ranked #1 by Locals! #Shorts #Samurai"
     },
     {
-      "day": 190,
+      "day": 186,
       "ranking_id": "shimane_castles_samurai_101",
       "scope_type": "都道府県×専門切り口 (島根県)",
       "category_type": "城・武家屋敷・古戦場",
@@ -2279,7 +2235,7 @@
       "short_title_en": "[No Promo] Real Samurai Fortress in Shimane Japan Ranked #1 by Locals! #Shorts #Samurai"
     },
     {
-      "day": 191,
+      "day": 187,
       "ranking_id": "kochi_castles_samurai_102",
       "scope_type": "都道府県×専門切り口 (高知県)",
       "category_type": "城・武家屋敷・古戦場",
@@ -2291,7 +2247,7 @@
       "short_title_en": "[No Promo] Real Samurai Fortress in Kochi Japan Ranked #1 by Locals! #Shorts #Samurai"
     },
     {
-      "day": 192,
+      "day": 188,
       "ranking_id": "kagoshima_castles_samurai_103",
       "scope_type": "都道府県×専門切り口 (鹿児島県)",
       "category_type": "城・武家屋敷・古戦場",
@@ -2303,7 +2259,7 @@
       "short_title_en": "[No Promo] Real Samurai Fortress in Kagoshima Japan Ranked #1 by Locals! #Shorts #Samurai"
     },
     {
-      "day": 193,
+      "day": 189,
       "ranking_id": "yamagata_castles_samurai_104",
       "scope_type": "都道府県×専門切り口 (山形県)",
       "category_type": "城・武家屋敷・古戦場",
@@ -2315,7 +2271,7 @@
       "short_title_en": "[No Promo] Real Samurai Fortress in Yamagata Japan Ranked #1 by Locals! #Shorts #Samurai"
     },
     {
-      "day": 194,
+      "day": 190,
       "ranking_id": "tokyo_castles_samurai_105",
       "scope_type": "都道府県×専門切り口 (東京都)",
       "category_type": "城・武家屋敷・古戦場",
@@ -2327,7 +2283,7 @@
       "short_title_en": "[No Promo] Real Samurai Fortress in Tokyo Japan Ranked #1 by Locals! #Shorts #Samurai"
     },
     {
-      "day": 195,
+      "day": 191,
       "ranking_id": "nagano_castles_samurai_106",
       "scope_type": "都道府県×専門切り口 (長野県)",
       "category_type": "城・武家屋敷・古戦場",
@@ -2339,7 +2295,7 @@
       "short_title_en": "[No Promo] Real Samurai Fortress in Nagano Japan Ranked #1 by Locals! #Shorts #Samurai"
     },
     {
-      "day": 196,
+      "day": 192,
       "ranking_id": "osaka_castles_samurai_107",
       "scope_type": "都道府県×専門切り口 (大阪府)",
       "category_type": "城・武家屋敷・古戦場",
@@ -2351,7 +2307,7 @@
       "short_title_en": "[No Promo] Real Samurai Fortress in Osaka Japan Ranked #1 by Locals! #Shorts #Samurai"
     },
     {
-      "day": 197,
+      "day": 193,
       "ranking_id": "hiroshima_castles_samurai_108",
       "scope_type": "都道府県×専門切り口 (広島県)",
       "category_type": "城・武家屋敷・古戦場",
@@ -2363,7 +2319,7 @@
       "short_title_en": "[No Promo] Real Samurai Fortress in Hiroshima Japan Ranked #1 by Locals! #Shorts #Samurai"
     },
     {
-      "day": 198,
+      "day": 194,
       "ranking_id": "saga_castles_samurai_109",
       "scope_type": "都道府県×専門切り口 (佐賀県)",
       "category_type": "城・武家屋敷・古戦場",
@@ -2375,7 +2331,7 @@
       "short_title_en": "[No Promo] Real Samurai Fortress in Saga Japan Ranked #1 by Locals! #Shorts #Samurai"
     },
     {
-      "day": 199,
+      "day": 195,
       "ranking_id": "fukushima_kominka_oldtown_157",
       "scope_type": "都道府県×専門切り口 (福島県)",
       "category_type": "古民家の街並み・宿場町・レトロ通り",
@@ -2387,7 +2343,7 @@
       "short_title_en": "[No Promo]  untouched 400-Yr Edo Street in Fukushima Japan! #Shorts #JapanTravel"
     },
     {
-      "day": 200,
+      "day": 196,
       "ranking_id": "kanagawa_kominka_oldtown_158",
       "scope_type": "都道府県×専門切り口 (神奈川県)",
       "category_type": "古民家の街並み・宿場町・レトロ通り",
@@ -2399,7 +2355,7 @@
       "short_title_en": "[No Promo]  untouched 400-Yr Edo Street in Kanagawa Japan! #Shorts #JapanTravel"
     },
     {
-      "day": 201,
+      "day": 197,
       "ranking_id": "gifu_kominka_oldtown_159",
       "scope_type": "都道府県×専門切り口 (岐阜県)",
       "category_type": "古民家の街並み・宿場町・レトロ通り",
@@ -2411,7 +2367,7 @@
       "short_title_en": "[No Promo]  untouched 400-Yr Edo Street in Gifu Japan! #Shorts #JapanTravel"
     },
     {
-      "day": 202,
+      "day": 198,
       "ranking_id": "hyogo_kominka_oldtown_160",
       "scope_type": "都道府県×専門切り口 (兵庫県)",
       "category_type": "古民家の街並み・宿場町・レトロ通り",
@@ -2423,7 +2379,7 @@
       "short_title_en": "[No Promo]  untouched 400-Yr Edo Street in Hyogo Japan! #Shorts #JapanTravel"
     },
     {
-      "day": 203,
+      "day": 199,
       "ranking_id": "yamaguchi_kominka_oldtown_161",
       "scope_type": "都道府県×専門切り口 (山口県)",
       "category_type": "古民家の街並み・宿場町・レトロ通り",
@@ -2435,7 +2391,7 @@
       "short_title_en": "[No Promo]  untouched 400-Yr Edo Street in Yamaguchi Japan! #Shorts #JapanTravel"
     },
     {
-      "day": 204,
+      "day": 200,
       "ranking_id": "nagasaki_kominka_oldtown_162",
       "scope_type": "都道府県×専門切り口 (長崎県)",
       "category_type": "古民家の街並み・宿場町・レトロ通り",
@@ -2447,7 +2403,7 @@
       "short_title_en": "[No Promo]  untouched 400-Yr Edo Street in Nagasaki Japan! #Shorts #JapanTravel"
     },
     {
-      "day": 205,
+      "day": 201,
       "ranking_id": "aomori_kominka_oldtown_163",
       "scope_type": "都道府県×専門切り口 (青森県)",
       "category_type": "古民家の街並み・宿場町・レトロ通り",
@@ -2459,7 +2415,7 @@
       "short_title_en": "[No Promo]  untouched 400-Yr Edo Street in Aomori Japan! #Shorts #JapanTravel"
     },
     {
-      "day": 206,
+      "day": 202,
       "ranking_id": "tochigi_kominka_oldtown_164",
       "scope_type": "都道府県×専門切り口 (栃木県)",
       "category_type": "古民家の街並み・宿場町・レトロ通り",
@@ -2471,7 +2427,7 @@
       "short_title_en": "[No Promo]  untouched 400-Yr Edo Street in Tochigi Japan! #Shorts #JapanTravel"
     },
     {
-      "day": 207,
+      "day": 203,
       "ranking_id": "toyama_kominka_oldtown_165",
       "scope_type": "都道府県×専門切り口 (富山県)",
       "category_type": "古民家の街並み・宿場町・レトロ通り",
@@ -2483,7 +2439,7 @@
       "short_title_en": "[No Promo]  untouched 400-Yr Edo Street in Toyama Japan! #Shorts #JapanTravel"
     },
     {
-      "day": 208,
+      "day": 204,
       "ranking_id": "aichi_kominka_oldtown_166",
       "scope_type": "都道府県×専門切り口 (愛知県)",
       "category_type": "古民家の街並み・宿場町・レトロ通り",
@@ -2495,7 +2451,7 @@
       "short_title_en": "[No Promo]  untouched 400-Yr Edo Street in Aichi Japan! #Shorts #JapanTravel"
     },
     {
-      "day": 209,
+      "day": 205,
       "ranking_id": "wakayama_kominka_oldtown_167",
       "scope_type": "都道府県×専門切り口 (和歌山県)",
       "category_type": "古民家の街並み・宿場町・レトロ通り",
@@ -2507,7 +2463,7 @@
       "short_title_en": "[No Promo]  untouched 400-Yr Edo Street in Wakayama Japan! #Shorts #JapanTravel"
     },
     {
-      "day": 210,
+      "day": 206,
       "ranking_id": "kagawa_kominka_oldtown_168",
       "scope_type": "都道府県×専門切り口 (香川県)",
       "category_type": "古民家の街並み・宿場町・レトロ通り",
@@ -2519,7 +2475,7 @@
       "short_title_en": "[No Promo]  untouched 400-Yr Edo Street in Kagawa Japan! #Shorts #JapanTravel"
     },
     {
-      "day": 211,
+      "day": 207,
       "ranking_id": "oita_kominka_oldtown_169",
       "scope_type": "都道府県×専門切り口 (大分県)",
       "category_type": "古民家の街並み・宿場町・レトロ通り",
@@ -2531,7 +2487,7 @@
       "short_title_en": "[No Promo]  untouched 400-Yr Edo Street in Oita Japan! #Shorts #JapanTravel"
     },
     {
-      "day": 212,
+      "day": 208,
       "ranking_id": "miyagi_kominka_oldtown_170",
       "scope_type": "都道府県×専門切り口 (宮城県)",
       "category_type": "古民家の街並み・宿場町・レトロ通り",
@@ -2543,7 +2499,7 @@
       "short_title_en": "[No Promo]  untouched 400-Yr Edo Street in Miyagi Japan! #Shorts #JapanTravel"
     },
     {
-      "day": 213,
+      "day": 209,
       "ranking_id": "saitama_kominka_oldtown_171",
       "scope_type": "都道府県×専門切り口 (埼玉県)",
       "category_type": "古民家の街並み・宿場町・レトロ通り",
@@ -2555,7 +2511,7 @@
       "short_title_en": "[No Promo]  untouched 400-Yr Edo Street in Saitama Japan! #Shorts #JapanTravel"
     },
     {
-      "day": 214,
+      "day": 210,
       "ranking_id": "fukui_kominka_oldtown_172",
       "scope_type": "都道府県×専門切り口 (福井県)",
       "category_type": "古民家の街並み・宿場町・レトロ通り",
@@ -2567,7 +2523,7 @@
       "short_title_en": "[No Promo]  untouched 400-Yr Edo Street in Fukui Japan! #Shorts #JapanTravel"
     },
     {
-      "day": 215,
+      "day": 211,
       "ranking_id": "shiga_kominka_oldtown_173",
       "scope_type": "都道府県×専門切り口 (滋賀県)",
       "category_type": "古民家の街並み・宿場町・レトロ通り",
@@ -2579,7 +2535,7 @@
       "short_title_en": "[No Promo]  untouched 400-Yr Edo Street in Shiga Japan! #Shorts #JapanTravel"
     },
     {
-      "day": 216,
+      "day": 212,
       "ranking_id": "shimane_kominka_oldtown_174",
       "scope_type": "都道府県×専門切り口 (島根県)",
       "category_type": "古民家の街並み・宿場町・レトロ通り",
@@ -2591,7 +2547,7 @@
       "short_title_en": "[No Promo]  untouched 400-Yr Edo Street in Shimane Japan! #Shorts #JapanTravel"
     },
     {
-      "day": 217,
+      "day": 213,
       "ranking_id": "kochi_kominka_oldtown_175",
       "scope_type": "都道府県×専門切り口 (高知県)",
       "category_type": "古民家の街並み・宿場町・レトロ通り",
@@ -2603,7 +2559,7 @@
       "short_title_en": "[No Promo]  untouched 400-Yr Edo Street in Kochi Japan! #Shorts #JapanTravel"
     },
     {
-      "day": 218,
+      "day": 214,
       "ranking_id": "kagoshima_kominka_oldtown_176",
       "scope_type": "都道府県×専門切り口 (鹿児島県)",
       "category_type": "古民家の街並み・宿場町・レトロ通り",
@@ -2615,7 +2571,7 @@
       "short_title_en": "[No Promo]  untouched 400-Yr Edo Street in Kagoshima Japan! #Shorts #JapanTravel"
     },
     {
-      "day": 219,
+      "day": 215,
       "ranking_id": "yamagata_kominka_oldtown_177",
       "scope_type": "都道府県×専門切り口 (山形県)",
       "category_type": "古民家の街並み・宿場町・レトロ通り",
@@ -2627,7 +2583,7 @@
       "short_title_en": "[No Promo]  untouched 400-Yr Edo Street in Yamagata Japan! #Shorts #JapanTravel"
     },
     {
-      "day": 220,
+      "day": 216,
       "ranking_id": "tokyo_kominka_oldtown_178",
       "scope_type": "都道府県×専門切り口 (東京都)",
       "category_type": "古民家の街並み・宿場町・レトロ通り",
@@ -2639,7 +2595,7 @@
       "short_title_en": "[No Promo]  untouched 400-Yr Edo Street in Tokyo Japan! #Shorts #JapanTravel"
     },
     {
-      "day": 221,
+      "day": 217,
       "ranking_id": "nagano_kominka_oldtown_179",
       "scope_type": "都道府県×専門切り口 (長野県)",
       "category_type": "古民家の街並み・宿場町・レトロ通り",
@@ -2651,7 +2607,7 @@
       "short_title_en": "[No Promo]  untouched 400-Yr Edo Street in Nagano Japan! #Shorts #JapanTravel"
     },
     {
-      "day": 222,
+      "day": 218,
       "ranking_id": "osaka_kominka_oldtown_180",
       "scope_type": "都道府県×専門切り口 (大阪府)",
       "category_type": "古民家の街並み・宿場町・レトロ通り",
@@ -2663,7 +2619,7 @@
       "short_title_en": "[No Promo]  untouched 400-Yr Edo Street in Osaka Japan! #Shorts #JapanTravel"
     },
     {
-      "day": 223,
+      "day": 219,
       "ranking_id": "hiroshima_kominka_oldtown_181",
       "scope_type": "都道府県×専門切り口 (広島県)",
       "category_type": "古民家の街並み・宿場町・レトロ通り",
@@ -2675,7 +2631,7 @@
       "short_title_en": "[No Promo]  untouched 400-Yr Edo Street in Hiroshima Japan! #Shorts #JapanTravel"
     },
     {
-      "day": 224,
+      "day": 220,
       "ranking_id": "saga_kominka_oldtown_182",
       "scope_type": "都道府県×専門切り口 (佐賀県)",
       "category_type": "古民家の街並み・宿場町・レトロ通り",
@@ -2687,7 +2643,7 @@
       "short_title_en": "[No Promo]  untouched 400-Yr Edo Street in Saga Japan! #Shorts #JapanTravel"
     },
     {
-      "day": 225,
+      "day": 221,
       "ranking_id": "hokkaido_kominka_oldtown_183",
       "scope_type": "都道府県×専門切り口 (北海道)",
       "category_type": "古民家の街並み・宿場町・レトロ通り",
@@ -2699,7 +2655,7 @@
       "short_title_en": "[No Promo]  untouched 400-Yr Edo Street in Hokkaido Japan! #Shorts #JapanTravel"
     },
     {
-      "day": 226,
+      "day": 222,
       "ranking_id": "ibaraki_kominka_oldtown_184",
       "scope_type": "都道府県×専門切り口 (茨城県)",
       "category_type": "古民家の街並み・宿場町・レトロ通り",
@@ -2711,7 +2667,7 @@
       "short_title_en": "[No Promo]  untouched 400-Yr Edo Street in Ibaraki Japan! #Shorts #JapanTravel"
     },
     {
-      "day": 227,
+      "day": 223,
       "ranking_id": "niigata_kominka_oldtown_185",
       "scope_type": "都道府県×専門切り口 (新潟県)",
       "category_type": "古民家の街並み・宿場町・レトロ通り",
@@ -2723,7 +2679,7 @@
       "short_title_en": "[No Promo]  untouched 400-Yr Edo Street in Niigata Japan! #Shorts #JapanTravel"
     },
     {
-      "day": 228,
+      "day": 224,
       "ranking_id": "shizuoka_kominka_oldtown_186",
       "scope_type": "都道府県×専門切り口 (静岡県)",
       "category_type": "古民家の街並み・宿場町・レトロ通り",
@@ -2735,7 +2691,7 @@
       "short_title_en": "[No Promo]  untouched 400-Yr Edo Street in Shizuoka Japan! #Shorts #JapanTravel"
     },
     {
-      "day": 229,
+      "day": 225,
       "ranking_id": "nara_kominka_oldtown_187",
       "scope_type": "都道府県×専門切り口 (奈良県)",
       "category_type": "古民家の街並み・宿場町・レトロ通り",
@@ -2747,7 +2703,7 @@
       "short_title_en": "[No Promo]  untouched 400-Yr Edo Street in Nara Japan! #Shorts #JapanTravel"
     },
     {
-      "day": 230,
+      "day": 226,
       "ranking_id": "tokushima_kominka_oldtown_188",
       "scope_type": "都道府県×専門切り口 (徳島県)",
       "category_type": "古民家の街並み・宿場町・レトロ通り",
@@ -2759,7 +2715,7 @@
       "short_title_en": "[No Promo]  untouched 400-Yr Edo Street in Tokushima Japan! #Shorts #JapanTravel"
     },
     {
-      "day": 231,
+      "day": 227,
       "ranking_id": "kumamoto_kominka_oldtown_189",
       "scope_type": "都道府県×専門切り口 (熊本県)",
       "category_type": "古民家の街並み・宿場町・レトロ通り",
@@ -2771,7 +2727,7 @@
       "short_title_en": "[No Promo]  untouched 400-Yr Edo Street in Kumamoto Japan! #Shorts #JapanTravel"
     },
     {
-      "day": 232,
+      "day": 228,
       "ranking_id": "iwate_kominka_oldtown_190",
       "scope_type": "都道府県×専門切り口 (岩手県)",
       "category_type": "古民家の街並み・宿場町・レトロ通り",
@@ -2783,7 +2739,7 @@
       "short_title_en": "[No Promo]  untouched 400-Yr Edo Street in Iwate Japan! #Shorts #JapanTravel"
     },
     {
-      "day": 233,
+      "day": 229,
       "ranking_id": "gunma_kominka_oldtown_191",
       "scope_type": "都道府県×専門切り口 (群馬県)",
       "category_type": "古民家の街並み・宿場町・レトロ通り",
@@ -2795,7 +2751,7 @@
       "short_title_en": "[No Promo]  untouched 400-Yr Edo Street in Gunma Japan! #Shorts #JapanTravel"
     },
     {
-      "day": 234,
+      "day": 230,
       "ranking_id": "ishikawa_kominka_oldtown_192",
       "scope_type": "都道府県×専門切り口 (石川県)",
       "category_type": "古民家の街並み・宿場町・レトロ通り",
@@ -2807,7 +2763,7 @@
       "short_title_en": "[No Promo]  untouched 400-Yr Edo Street in Ishikawa Japan! #Shorts #JapanTravel"
     },
     {
-      "day": 235,
+      "day": 231,
       "ranking_id": "mie_kominka_oldtown_193",
       "scope_type": "都道府県×専門切り口 (三重県)",
       "category_type": "古民家の街並み・宿場町・レトロ通り",
@@ -2819,7 +2775,7 @@
       "short_title_en": "[No Promo]  untouched 400-Yr Edo Street in Mie Japan! #Shorts #JapanTravel"
     },
     {
-      "day": 236,
+      "day": 232,
       "ranking_id": "tottori_kominka_oldtown_194",
       "scope_type": "都道府県×専門切り口 (鳥取県)",
       "category_type": "古民家の街並み・宿場町・レトロ通り",
@@ -2831,7 +2787,7 @@
       "short_title_en": "[No Promo]  untouched 400-Yr Edo Street in Tottori Japan! #Shorts #JapanTravel"
     },
     {
-      "day": 237,
+      "day": 233,
       "ranking_id": "ehime_kominka_oldtown_195",
       "scope_type": "都道府県×専門切り口 (愛媛県)",
       "category_type": "古民家の街並み・宿場町・レトロ通り",
@@ -2843,7 +2799,7 @@
       "short_title_en": "[No Promo]  untouched 400-Yr Edo Street in Ehime Japan! #Shorts #JapanTravel"
     },
     {
-      "day": 238,
+      "day": 234,
       "ranking_id": "miyazaki_kominka_oldtown_196",
       "scope_type": "都道府県×専門切り口 (宮崎県)",
       "category_type": "古民家の街並み・宿場町・レトロ通り",
@@ -2855,7 +2811,7 @@
       "short_title_en": "[No Promo]  untouched 400-Yr Edo Street in Miyazaki Japan! #Shorts #JapanTravel"
     },
     {
-      "day": 239,
+      "day": 235,
       "ranking_id": "akita_kominka_oldtown_197",
       "scope_type": "都道府県×専門切り口 (秋田県)",
       "category_type": "古民家の街並み・宿場町・レトロ通り",
@@ -2867,7 +2823,7 @@
       "short_title_en": "[No Promo]  untouched 400-Yr Edo Street in Akita Japan! #Shorts #JapanTravel"
     },
     {
-      "day": 240,
+      "day": 236,
       "ranking_id": "chiba_kominka_oldtown_198",
       "scope_type": "都道府県×専門切り口 (千葉県)",
       "category_type": "古民家の街並み・宿場町・レトロ通り",
@@ -2879,7 +2835,7 @@
       "short_title_en": "[No Promo]  untouched 400-Yr Edo Street in Chiba Japan! #Shorts #JapanTravel"
     },
     {
-      "day": 241,
+      "day": 237,
       "ranking_id": "yamanashi_kominka_oldtown_199",
       "scope_type": "都道府県×専門切り口 (山梨県)",
       "category_type": "古民家の街並み・宿場町・レトロ通り",
@@ -2891,7 +2847,7 @@
       "short_title_en": "[No Promo]  untouched 400-Yr Edo Street in Yamanashi Japan! #Shorts #JapanTravel"
     },
     {
-      "day": 242,
+      "day": 238,
       "ranking_id": "kyoto_kominka_oldtown_200",
       "scope_type": "都道府県×専門切り口 (京都府)",
       "category_type": "古民家の街並み・宿場町・レトロ通り",
@@ -2903,7 +2859,7 @@
       "short_title_en": "[No Promo]  untouched 400-Yr Edo Street in Kyoto Japan! #Shorts #JapanTravel"
     },
     {
-      "day": 243,
+      "day": 239,
       "ranking_id": "okayama_kominka_oldtown_201",
       "scope_type": "都道府県×専門切り口 (岡山県)",
       "category_type": "古民家の街並み・宿場町・レトロ通り",
@@ -2915,7 +2871,7 @@
       "short_title_en": "[No Promo]  untouched 400-Yr Edo Street in Okayama Japan! #Shorts #JapanTravel"
     },
     {
-      "day": 244,
+      "day": 240,
       "ranking_id": "fukuoka_kominka_oldtown_202",
       "scope_type": "都道府県×専門切り口 (福岡県)",
       "category_type": "古民家の街並み・宿場町・レトロ通り",
@@ -2927,7 +2883,7 @@
       "short_title_en": "[No Promo]  untouched 400-Yr Edo Street in Fukuoka Japan! #Shorts #JapanTravel"
     },
     {
-      "day": 245,
+      "day": 241,
       "ranking_id": "okinawa_kominka_oldtown_203",
       "scope_type": "都道府県×専門切り口 (沖縄県)",
       "category_type": "古民家の街並み・宿場町・レトロ通り",
@@ -2939,7 +2895,7 @@
       "short_title_en": "[No Promo]  untouched 400-Yr Edo Street in Okinawa Japan! #Shorts #JapanTravel"
     },
     {
-      "day": 246,
+      "day": 242,
       "ranking_id": "gunma_temples_shrines_204",
       "scope_type": "都道府県×専門切り口 (群馬県)",
       "category_type": "寺・神社・秘境霊場",
@@ -2951,7 +2907,7 @@
       "short_title_en": "[No Promo] 99% of Foreigners Miss Gunma's #1 Sacred Forest Shrine! #Shorts #JapanTravel"
     },
     {
-      "day": 247,
+      "day": 243,
       "ranking_id": "ishikawa_temples_shrines_205",
       "scope_type": "都道府県×専門切り口 (石川県)",
       "category_type": "寺・神社・秘境霊場",
@@ -2963,7 +2919,7 @@
       "short_title_en": "[No Promo] 99% of Foreigners Miss Ishikawa's #1 Sacred Forest Shrine! #Shorts #JapanTravel"
     },
     {
-      "day": 248,
+      "day": 244,
       "ranking_id": "mie_temples_shrines_206",
       "scope_type": "都道府県×専門切り口 (三重県)",
       "category_type": "寺・神社・秘境霊場",
@@ -2975,7 +2931,7 @@
       "short_title_en": "[No Promo] 99% of Foreigners Miss Mie's #1 Sacred Forest Shrine! #Shorts #JapanTravel"
     },
     {
-      "day": 249,
+      "day": 245,
       "ranking_id": "tottori_temples_shrines_207",
       "scope_type": "都道府県×専門切り口 (鳥取県)",
       "category_type": "寺・神社・秘境霊場",
@@ -2987,7 +2943,7 @@
       "short_title_en": "[No Promo] 99% of Foreigners Miss Tottori's #1 Sacred Forest Shrine! #Shorts #JapanTravel"
     },
     {
-      "day": 250,
+      "day": 246,
       "ranking_id": "ehime_temples_shrines_208",
       "scope_type": "都道府県×専門切り口 (愛媛県)",
       "category_type": "寺・神社・秘境霊場",
@@ -2999,7 +2955,7 @@
       "short_title_en": "[No Promo] 99% of Foreigners Miss Ehime's #1 Sacred Forest Shrine! #Shorts #JapanTravel"
     },
     {
-      "day": 251,
+      "day": 247,
       "ranking_id": "miyazaki_temples_shrines_209",
       "scope_type": "都道府県×専門切り口 (宮崎県)",
       "category_type": "寺・神社・秘境霊場",
@@ -3011,7 +2967,7 @@
       "short_title_en": "[No Promo] 99% of Foreigners Miss Miyazaki's #1 Sacred Forest Shrine! #Shorts #JapanTravel"
     },
     {
-      "day": 252,
+      "day": 248,
       "ranking_id": "akita_temples_shrines_210",
       "scope_type": "都道府県×専門切り口 (秋田県)",
       "category_type": "寺・神社・秘境霊場",
@@ -3023,7 +2979,7 @@
       "short_title_en": "[No Promo] 99% of Foreigners Miss Akita's #1 Sacred Forest Shrine! #Shorts #JapanTravel"
     },
     {
-      "day": 253,
+      "day": 249,
       "ranking_id": "chiba_temples_shrines_211",
       "scope_type": "都道府県×専門切り口 (千葉県)",
       "category_type": "寺・神社・秘境霊場",
@@ -3035,7 +2991,7 @@
       "short_title_en": "[No Promo] 99% of Foreigners Miss Chiba's #1 Sacred Forest Shrine! #Shorts #JapanTravel"
     },
     {
-      "day": 254,
+      "day": 250,
       "ranking_id": "yamanashi_temples_shrines_212",
       "scope_type": "都道府県×専門切り口 (山梨県)",
       "category_type": "寺・神社・秘境霊場",
@@ -3047,7 +3003,7 @@
       "short_title_en": "[No Promo] 99% of Foreigners Miss Yamanashi's #1 Sacred Forest Shrine! #Shorts #JapanTravel"
     },
     {
-      "day": 255,
+      "day": 251,
       "ranking_id": "kyoto_temples_shrines_213",
       "scope_type": "都道府県×専門切り口 (京都府)",
       "category_type": "寺・神社・秘境霊場",
@@ -3059,7 +3015,7 @@
       "short_title_en": "[No Promo] 99% of Foreigners Miss Kyoto's #1 Sacred Forest Shrine! #Shorts #JapanTravel"
     },
     {
-      "day": 256,
+      "day": 252,
       "ranking_id": "okayama_temples_shrines_214",
       "scope_type": "都道府県×専門切り口 (岡山県)",
       "category_type": "寺・神社・秘境霊場",
@@ -3071,7 +3027,7 @@
       "short_title_en": "[No Promo] 99% of Foreigners Miss Okayama's #1 Sacred Forest Shrine! #Shorts #JapanTravel"
     },
     {
-      "day": 257,
+      "day": 253,
       "ranking_id": "fukuoka_temples_shrines_215",
       "scope_type": "都道府県×専門切り口 (福岡県)",
       "category_type": "寺・神社・秘境霊場",
@@ -3083,7 +3039,7 @@
       "short_title_en": "[No Promo] 99% of Foreigners Miss Fukuoka's #1 Sacred Forest Shrine! #Shorts #JapanTravel"
     },
     {
-      "day": 258,
+      "day": 254,
       "ranking_id": "okinawa_temples_shrines_216",
       "scope_type": "都道府県×専門切り口 (沖縄県)",
       "category_type": "寺・神社・秘境霊場",
@@ -3095,7 +3051,7 @@
       "short_title_en": "[No Promo] 99% of Foreigners Miss Okinawa's #1 Sacred Forest Shrine! #Shorts #JapanTravel"
     },
     {
-      "day": 259,
+      "day": 255,
       "ranking_id": "fukushima_temples_shrines_217",
       "scope_type": "都道府県×専門切り口 (福島県)",
       "category_type": "寺・神社・秘境霊場",
@@ -3107,7 +3063,7 @@
       "short_title_en": "[No Promo] 99% of Foreigners Miss Fukushima's #1 Sacred Forest Shrine! #Shorts #JapanTravel"
     },
     {
-      "day": 260,
+      "day": 256,
       "ranking_id": "kanagawa_temples_shrines_218",
       "scope_type": "都道府県×専門切り口 (神奈川県)",
       "category_type": "寺・神社・秘境霊場",
@@ -3119,7 +3075,7 @@
       "short_title_en": "[No Promo] 99% of Foreigners Miss Kanagawa's #1 Sacred Forest Shrine! #Shorts #JapanTravel"
     },
     {
-      "day": 261,
+      "day": 257,
       "ranking_id": "gifu_temples_shrines_219",
       "scope_type": "都道府県×専門切り口 (岐阜県)",
       "category_type": "寺・神社・秘境霊場",
@@ -3131,7 +3087,7 @@
       "short_title_en": "[No Promo] 99% of Foreigners Miss Gifu's #1 Sacred Forest Shrine! #Shorts #JapanTravel"
     },
     {
-      "day": 262,
+      "day": 258,
       "ranking_id": "hyogo_temples_shrines_220",
       "scope_type": "都道府県×専門切り口 (兵庫県)",
       "category_type": "寺・神社・秘境霊場",
@@ -3143,7 +3099,7 @@
       "short_title_en": "[No Promo] 99% of Foreigners Miss Hyogo's #1 Sacred Forest Shrine! #Shorts #JapanTravel"
     },
     {
-      "day": 263,
+      "day": 259,
       "ranking_id": "yamaguchi_temples_shrines_221",
       "scope_type": "都道府県×専門切り口 (山口県)",
       "category_type": "寺・神社・秘境霊場",
@@ -3155,7 +3111,7 @@
       "short_title_en": "[No Promo] 99% of Foreigners Miss Yamaguchi's #1 Sacred Forest Shrine! #Shorts #JapanTravel"
     },
     {
-      "day": 264,
+      "day": 260,
       "ranking_id": "nagasaki_temples_shrines_222",
       "scope_type": "都道府県×専門切り口 (長崎県)",
       "category_type": "寺・神社・秘境霊場",
@@ -3167,7 +3123,7 @@
       "short_title_en": "[No Promo] 99% of Foreigners Miss Nagasaki's #1 Sacred Forest Shrine! #Shorts #JapanTravel"
     },
     {
-      "day": 265,
+      "day": 261,
       "ranking_id": "aomori_temples_shrines_223",
       "scope_type": "都道府県×専門切り口 (青森県)",
       "category_type": "寺・神社・秘境霊場",
@@ -3179,7 +3135,7 @@
       "short_title_en": "[No Promo] 99% of Foreigners Miss Aomori's #1 Sacred Forest Shrine! #Shorts #JapanTravel"
     },
     {
-      "day": 266,
+      "day": 262,
       "ranking_id": "tochigi_temples_shrines_224",
       "scope_type": "都道府県×専門切り口 (栃木県)",
       "category_type": "寺・神社・秘境霊場",
@@ -3191,7 +3147,7 @@
       "short_title_en": "[No Promo] 99% of Foreigners Miss Tochigi's #1 Sacred Forest Shrine! #Shorts #JapanTravel"
     },
     {
-      "day": 267,
+      "day": 263,
       "ranking_id": "toyama_temples_shrines_225",
       "scope_type": "都道府県×専門切り口 (富山県)",
       "category_type": "寺・神社・秘境霊場",
@@ -3203,7 +3159,7 @@
       "short_title_en": "[No Promo] 99% of Foreigners Miss Toyama's #1 Sacred Forest Shrine! #Shorts #JapanTravel"
     },
     {
-      "day": 268,
+      "day": 264,
       "ranking_id": "aichi_temples_shrines_226",
       "scope_type": "都道府県×専門切り口 (愛知県)",
       "category_type": "寺・神社・秘境霊場",
@@ -3215,7 +3171,7 @@
       "short_title_en": "[No Promo] 99% of Foreigners Miss Aichi's #1 Sacred Forest Shrine! #Shorts #JapanTravel"
     },
     {
-      "day": 269,
+      "day": 265,
       "ranking_id": "wakayama_temples_shrines_227",
       "scope_type": "都道府県×専門切り口 (和歌山県)",
       "category_type": "寺・神社・秘境霊場",
@@ -3227,7 +3183,7 @@
       "short_title_en": "[No Promo] 99% of Foreigners Miss Wakayama's #1 Sacred Forest Shrine! #Shorts #JapanTravel"
     },
     {
-      "day": 270,
+      "day": 266,
       "ranking_id": "kagawa_temples_shrines_228",
       "scope_type": "都道府県×専門切り口 (香川県)",
       "category_type": "寺・神社・秘境霊場",
@@ -3239,7 +3195,7 @@
       "short_title_en": "[No Promo] 99% of Foreigners Miss Kagawa's #1 Sacred Forest Shrine! #Shorts #JapanTravel"
     },
     {
-      "day": 271,
+      "day": 267,
       "ranking_id": "oita_temples_shrines_229",
       "scope_type": "都道府県×専門切り口 (大分県)",
       "category_type": "寺・神社・秘境霊場",
@@ -3251,7 +3207,7 @@
       "short_title_en": "[No Promo] 99% of Foreigners Miss Oita's #1 Sacred Forest Shrine! #Shorts #JapanTravel"
     },
     {
-      "day": 272,
+      "day": 268,
       "ranking_id": "miyagi_temples_shrines_230",
       "scope_type": "都道府県×専門切り口 (宮城県)",
       "category_type": "寺・神社・秘境霊場",
@@ -3263,7 +3219,7 @@
       "short_title_en": "[No Promo] 99% of Foreigners Miss Miyagi's #1 Sacred Forest Shrine! #Shorts #JapanTravel"
     },
     {
-      "day": 273,
+      "day": 269,
       "ranking_id": "saitama_temples_shrines_231",
       "scope_type": "都道府県×専門切り口 (埼玉県)",
       "category_type": "寺・神社・秘境霊場",
@@ -3275,7 +3231,7 @@
       "short_title_en": "[No Promo] 99% of Foreigners Miss Saitama's #1 Sacred Forest Shrine! #Shorts #JapanTravel"
     },
     {
-      "day": 274,
+      "day": 270,
       "ranking_id": "fukui_temples_shrines_232",
       "scope_type": "都道府県×専門切り口 (福井県)",
       "category_type": "寺・神社・秘境霊場",
@@ -3287,7 +3243,7 @@
       "short_title_en": "[No Promo] 99% of Foreigners Miss Fukui's #1 Sacred Forest Shrine! #Shorts #JapanTravel"
     },
     {
-      "day": 275,
+      "day": 271,
       "ranking_id": "shiga_temples_shrines_233",
       "scope_type": "都道府県×専門切り口 (滋賀県)",
       "category_type": "寺・神社・秘境霊場",
@@ -3299,7 +3255,7 @@
       "short_title_en": "[No Promo] 99% of Foreigners Miss Shiga's #1 Sacred Forest Shrine! #Shorts #JapanTravel"
     },
     {
-      "day": 276,
+      "day": 272,
       "ranking_id": "shimane_temples_shrines_234",
       "scope_type": "都道府県×専門切り口 (島根県)",
       "category_type": "寺・神社・秘境霊場",
@@ -3311,7 +3267,7 @@
       "short_title_en": "[No Promo] 99% of Foreigners Miss Shimane's #1 Sacred Forest Shrine! #Shorts #JapanTravel"
     },
     {
-      "day": 277,
+      "day": 273,
       "ranking_id": "kochi_temples_shrines_235",
       "scope_type": "都道府県×専門切り口 (高知県)",
       "category_type": "寺・神社・秘境霊場",
@@ -3323,7 +3279,7 @@
       "short_title_en": "[No Promo] 99% of Foreigners Miss Kochi's #1 Sacred Forest Shrine! #Shorts #JapanTravel"
     },
     {
-      "day": 278,
+      "day": 274,
       "ranking_id": "kagoshima_temples_shrines_236",
       "scope_type": "都道府県×専門切り口 (鹿児島県)",
       "category_type": "寺・神社・秘境霊場",
@@ -3335,7 +3291,7 @@
       "short_title_en": "[No Promo] 99% of Foreigners Miss Kagoshima's #1 Sacred Forest Shrine! #Shorts #JapanTravel"
     },
     {
-      "day": 279,
+      "day": 275,
       "ranking_id": "yamagata_temples_shrines_237",
       "scope_type": "都道府県×専門切り口 (山形県)",
       "category_type": "寺・神社・秘境霊場",
@@ -3347,7 +3303,7 @@
       "short_title_en": "[No Promo] 99% of Foreigners Miss Yamagata's #1 Sacred Forest Shrine! #Shorts #JapanTravel"
     },
     {
-      "day": 280,
+      "day": 276,
       "ranking_id": "tokyo_temples_shrines_238",
       "scope_type": "都道府県×専門切り口 (東京都)",
       "category_type": "寺・神社・秘境霊場",
@@ -3359,7 +3315,7 @@
       "short_title_en": "[No Promo] 99% of Foreigners Miss Tokyo's #1 Sacred Forest Shrine! #Shorts #JapanTravel"
     },
     {
-      "day": 281,
+      "day": 277,
       "ranking_id": "nagano_temples_shrines_239",
       "scope_type": "都道府県×専門切り口 (長野県)",
       "category_type": "寺・神社・秘境霊場",
@@ -3371,7 +3327,7 @@
       "short_title_en": "[No Promo] 99% of Foreigners Miss Nagano's #1 Sacred Forest Shrine! #Shorts #JapanTravel"
     },
     {
-      "day": 282,
+      "day": 278,
       "ranking_id": "osaka_temples_shrines_240",
       "scope_type": "都道府県×専門切り口 (大阪府)",
       "category_type": "寺・神社・秘境霊場",
@@ -3383,7 +3339,7 @@
       "short_title_en": "[No Promo] 99% of Foreigners Miss Osaka's #1 Sacred Forest Shrine! #Shorts #JapanTravel"
     },
     {
-      "day": 283,
+      "day": 279,
       "ranking_id": "hiroshima_temples_shrines_241",
       "scope_type": "都道府県×専門切り口 (広島県)",
       "category_type": "寺・神社・秘境霊場",
@@ -3395,7 +3351,7 @@
       "short_title_en": "[No Promo] 99% of Foreigners Miss Hiroshima's #1 Sacred Forest Shrine! #Shorts #JapanTravel"
     },
     {
-      "day": 284,
+      "day": 280,
       "ranking_id": "saga_temples_shrines_242",
       "scope_type": "都道府県×専門切り口 (佐賀県)",
       "category_type": "寺・神社・秘境霊場",
@@ -3407,7 +3363,7 @@
       "short_title_en": "[No Promo] 99% of Foreigners Miss Saga's #1 Sacred Forest Shrine! #Shorts #JapanTravel"
     },
     {
-      "day": 285,
+      "day": 281,
       "ranking_id": "hokkaido_temples_shrines_243",
       "scope_type": "都道府県×専門切り口 (北海道)",
       "category_type": "寺・神社・秘境霊場",
@@ -3419,7 +3375,7 @@
       "short_title_en": "[No Promo] 99% of Foreigners Miss Hokkaido's #1 Sacred Forest Shrine! #Shorts #JapanTravel"
     },
     {
-      "day": 286,
+      "day": 282,
       "ranking_id": "ibaraki_temples_shrines_244",
       "scope_type": "都道府県×専門切り口 (茨城県)",
       "category_type": "寺・神社・秘境霊場",
@@ -3431,7 +3387,7 @@
       "short_title_en": "[No Promo] 99% of Foreigners Miss Ibaraki's #1 Sacred Forest Shrine! #Shorts #JapanTravel"
     },
     {
-      "day": 287,
+      "day": 283,
       "ranking_id": "niigata_temples_shrines_245",
       "scope_type": "都道府県×専門切り口 (新潟県)",
       "category_type": "寺・神社・秘境霊場",
@@ -3443,7 +3399,7 @@
       "short_title_en": "[No Promo] 99% of Foreigners Miss Niigata's #1 Sacred Forest Shrine! #Shorts #JapanTravel"
     },
     {
-      "day": 288,
+      "day": 284,
       "ranking_id": "shizuoka_temples_shrines_246",
       "scope_type": "都道府県×専門切り口 (静岡県)",
       "category_type": "寺・神社・秘境霊場",
@@ -3455,7 +3411,7 @@
       "short_title_en": "[No Promo] 99% of Foreigners Miss Shizuoka's #1 Sacred Forest Shrine! #Shorts #JapanTravel"
     },
     {
-      "day": 289,
+      "day": 285,
       "ranking_id": "nara_temples_shrines_247",
       "scope_type": "都道府県×専門切り口 (奈良県)",
       "category_type": "寺・神社・秘境霊場",
@@ -3467,7 +3423,7 @@
       "short_title_en": "[No Promo] 99% of Foreigners Miss Nara's #1 Sacred Forest Shrine! #Shorts #JapanTravel"
     },
     {
-      "day": 290,
+      "day": 286,
       "ranking_id": "tokushima_temples_shrines_248",
       "scope_type": "都道府県×専門切り口 (徳島県)",
       "category_type": "寺・神社・秘境霊場",
@@ -3479,7 +3435,7 @@
       "short_title_en": "[No Promo] 99% of Foreigners Miss Tokushima's #1 Sacred Forest Shrine! #Shorts #JapanTravel"
     },
     {
-      "day": 291,
+      "day": 287,
       "ranking_id": "kumamoto_temples_shrines_249",
       "scope_type": "都道府県×専門切り口 (熊本県)",
       "category_type": "寺・神社・秘境霊場",
@@ -3491,7 +3447,7 @@
       "short_title_en": "[No Promo] 99% of Foreigners Miss Kumamoto's #1 Sacred Forest Shrine! #Shorts #JapanTravel"
     },
     {
-      "day": 292,
+      "day": 288,
       "ranking_id": "iwate_temples_shrines_250",
       "scope_type": "都道府県×専門切り口 (岩手県)",
       "category_type": "寺・神社・秘境霊場",
@@ -3503,7 +3459,7 @@
       "short_title_en": "[No Promo] 99% of Foreigners Miss Iwate's #1 Sacred Forest Shrine! #Shorts #JapanTravel"
     },
     {
-      "day": 293,
+      "day": 289,
       "ranking_id": "tokyo_scenic_nature_251",
       "scope_type": "都道府県×専門切り口 (東京都)",
       "category_type": "絶景・渓谷・滝・海岸",
@@ -3515,7 +3471,7 @@
       "short_title_en": "[No Promo] This Exists in Tokyo Japan?! Ranked #1 Scenic Wonder by Locals #Shorts #JapanTravel"
     },
     {
-      "day": 294,
+      "day": 290,
       "ranking_id": "nagano_scenic_nature_252",
       "scope_type": "都道府県×専門切り口 (長野県)",
       "category_type": "絶景・渓谷・滝・海岸",
@@ -3527,7 +3483,7 @@
       "short_title_en": "[No Promo] This Exists in Nagano Japan?! Ranked #1 Scenic Wonder by Locals #Shorts #JapanTravel"
     },
     {
-      "day": 295,
+      "day": 291,
       "ranking_id": "osaka_scenic_nature_253",
       "scope_type": "都道府県×専門切り口 (大阪府)",
       "category_type": "絶景・渓谷・滝・海岸",
@@ -3539,7 +3495,7 @@
       "short_title_en": "[No Promo] This Exists in Osaka Japan?! Ranked #1 Scenic Wonder by Locals #Shorts #JapanTravel"
     },
     {
-      "day": 296,
+      "day": 292,
       "ranking_id": "hiroshima_scenic_nature_254",
       "scope_type": "都道府県×専門切り口 (広島県)",
       "category_type": "絶景・渓谷・滝・海岸",
@@ -3551,7 +3507,7 @@
       "short_title_en": "[No Promo] This Exists in Hiroshima Japan?! Ranked #1 Scenic Wonder by Locals #Shorts #JapanTravel"
     },
     {
-      "day": 297,
+      "day": 293,
       "ranking_id": "saga_scenic_nature_255",
       "scope_type": "都道府県×専門切り口 (佐賀県)",
       "category_type": "絶景・渓谷・滝・海岸",
@@ -3563,7 +3519,7 @@
       "short_title_en": "[No Promo] This Exists in Saga Japan?! Ranked #1 Scenic Wonder by Locals #Shorts #JapanTravel"
     },
     {
-      "day": 298,
+      "day": 294,
       "ranking_id": "hokkaido_scenic_nature_256",
       "scope_type": "都道府県×専門切り口 (北海道)",
       "category_type": "絶景・渓谷・滝・海岸",
@@ -3575,7 +3531,7 @@
       "short_title_en": "[No Promo] This Exists in Hokkaido Japan?! Ranked #1 Scenic Wonder by Locals #Shorts #JapanTravel"
     },
     {
-      "day": 299,
+      "day": 295,
       "ranking_id": "ibaraki_scenic_nature_257",
       "scope_type": "都道府県×専門切り口 (茨城県)",
       "category_type": "絶景・渓谷・滝・海岸",
@@ -3587,7 +3543,7 @@
       "short_title_en": "[No Promo] This Exists in Ibaraki Japan?! Ranked #1 Scenic Wonder by Locals #Shorts #JapanTravel"
     },
     {
-      "day": 300,
+      "day": 296,
       "ranking_id": "niigata_scenic_nature_258",
       "scope_type": "都道府県×専門切り口 (新潟県)",
       "category_type": "絶景・渓谷・滝・海岸",
@@ -3599,7 +3555,7 @@
       "short_title_en": "[No Promo] This Exists in Niigata Japan?! Ranked #1 Scenic Wonder by Locals #Shorts #JapanTravel"
     },
     {
-      "day": 301,
+      "day": 297,
       "ranking_id": "shizuoka_scenic_nature_259",
       "scope_type": "都道府県×専門切り口 (静岡県)",
       "category_type": "絶景・渓谷・滝・海岸",
@@ -3611,7 +3567,7 @@
       "short_title_en": "[No Promo] This Exists in Shizuoka Japan?! Ranked #1 Scenic Wonder by Locals #Shorts #JapanTravel"
     },
     {
-      "day": 302,
+      "day": 298,
       "ranking_id": "nara_scenic_nature_260",
       "scope_type": "都道府県×専門切り口 (奈良県)",
       "category_type": "絶景・渓谷・滝・海岸",
@@ -3623,7 +3579,7 @@
       "short_title_en": "[No Promo] This Exists in Nara Japan?! Ranked #1 Scenic Wonder by Locals #Shorts #JapanTravel"
     },
     {
-      "day": 303,
+      "day": 299,
       "ranking_id": "tokushima_scenic_nature_261",
       "scope_type": "都道府県×専門切り口 (徳島県)",
       "category_type": "絶景・渓谷・滝・海岸",
@@ -3635,7 +3591,7 @@
       "short_title_en": "[No Promo] This Exists in Tokushima Japan?! Ranked #1 Scenic Wonder by Locals #Shorts #JapanTravel"
     },
     {
-      "day": 304,
+      "day": 300,
       "ranking_id": "kumamoto_scenic_nature_262",
       "scope_type": "都道府県×専門切り口 (熊本県)",
       "category_type": "絶景・渓谷・滝・海岸",
@@ -3647,7 +3603,7 @@
       "short_title_en": "[No Promo] This Exists in Kumamoto Japan?! Ranked #1 Scenic Wonder by Locals #Shorts #JapanTravel"
     },
     {
-      "day": 305,
+      "day": 301,
       "ranking_id": "iwate_scenic_nature_263",
       "scope_type": "都道府県×専門切り口 (岩手県)",
       "category_type": "絶景・渓谷・滝・海岸",
@@ -3659,7 +3615,7 @@
       "short_title_en": "[No Promo] This Exists in Iwate Japan?! Ranked #1 Scenic Wonder by Locals #Shorts #JapanTravel"
     },
     {
-      "day": 306,
+      "day": 302,
       "ranking_id": "gunma_scenic_nature_264",
       "scope_type": "都道府県×専門切り口 (群馬県)",
       "category_type": "絶景・渓谷・滝・海岸",
@@ -3671,7 +3627,7 @@
       "short_title_en": "[No Promo] This Exists in Gunma Japan?! Ranked #1 Scenic Wonder by Locals #Shorts #JapanTravel"
     },
     {
-      "day": 307,
+      "day": 303,
       "ranking_id": "ishikawa_scenic_nature_265",
       "scope_type": "都道府県×専門切り口 (石川県)",
       "category_type": "絶景・渓谷・滝・海岸",
@@ -3683,7 +3639,7 @@
       "short_title_en": "[No Promo] This Exists in Ishikawa Japan?! Ranked #1 Scenic Wonder by Locals #Shorts #JapanTravel"
     },
     {
-      "day": 308,
+      "day": 304,
       "ranking_id": "mie_scenic_nature_266",
       "scope_type": "都道府県×専門切り口 (三重県)",
       "category_type": "絶景・渓谷・滝・海岸",
@@ -3695,7 +3651,7 @@
       "short_title_en": "[No Promo] This Exists in Mie Japan?! Ranked #1 Scenic Wonder by Locals #Shorts #JapanTravel"
     },
     {
-      "day": 309,
+      "day": 305,
       "ranking_id": "tottori_scenic_nature_267",
       "scope_type": "都道府県×専門切り口 (鳥取県)",
       "category_type": "絶景・渓谷・滝・海岸",
@@ -3707,7 +3663,7 @@
       "short_title_en": "[No Promo] This Exists in Tottori Japan?! Ranked #1 Scenic Wonder by Locals #Shorts #JapanTravel"
     },
     {
-      "day": 310,
+      "day": 306,
       "ranking_id": "ehime_scenic_nature_268",
       "scope_type": "都道府県×専門切り口 (愛媛県)",
       "category_type": "絶景・渓谷・滝・海岸",
@@ -3719,7 +3675,7 @@
       "short_title_en": "[No Promo] This Exists in Ehime Japan?! Ranked #1 Scenic Wonder by Locals #Shorts #JapanTravel"
     },
     {
-      "day": 311,
+      "day": 307,
       "ranking_id": "miyazaki_scenic_nature_269",
       "scope_type": "都道府県×専門切り口 (宮崎県)",
       "category_type": "絶景・渓谷・滝・海岸",
@@ -3731,7 +3687,7 @@
       "short_title_en": "[No Promo] This Exists in Miyazaki Japan?! Ranked #1 Scenic Wonder by Locals #Shorts #JapanTravel"
     },
     {
-      "day": 312,
+      "day": 308,
       "ranking_id": "akita_scenic_nature_270",
       "scope_type": "都道府県×専門切り口 (秋田県)",
       "category_type": "絶景・渓谷・滝・海岸",
@@ -3743,7 +3699,7 @@
       "short_title_en": "[No Promo] This Exists in Akita Japan?! Ranked #1 Scenic Wonder by Locals #Shorts #JapanTravel"
     },
     {
-      "day": 313,
+      "day": 309,
       "ranking_id": "chiba_scenic_nature_271",
       "scope_type": "都道府県×専門切り口 (千葉県)",
       "category_type": "絶景・渓谷・滝・海岸",
@@ -3755,7 +3711,7 @@
       "short_title_en": "[No Promo] This Exists in Chiba Japan?! Ranked #1 Scenic Wonder by Locals #Shorts #JapanTravel"
     },
     {
-      "day": 314,
+      "day": 310,
       "ranking_id": "yamanashi_scenic_nature_272",
       "scope_type": "都道府県×専門切り口 (山梨県)",
       "category_type": "絶景・渓谷・滝・海岸",
@@ -3767,7 +3723,7 @@
       "short_title_en": "[No Promo] This Exists in Yamanashi Japan?! Ranked #1 Scenic Wonder by Locals #Shorts #JapanTravel"
     },
     {
-      "day": 315,
+      "day": 311,
       "ranking_id": "kyoto_scenic_nature_273",
       "scope_type": "都道府県×専門切り口 (京都府)",
       "category_type": "絶景・渓谷・滝・海岸",
@@ -3779,7 +3735,7 @@
       "short_title_en": "[No Promo] This Exists in Kyoto Japan?! Ranked #1 Scenic Wonder by Locals #Shorts #JapanTravel"
     },
     {
-      "day": 316,
+      "day": 312,
       "ranking_id": "okayama_scenic_nature_274",
       "scope_type": "都道府県×専門切り口 (岡山県)",
       "category_type": "絶景・渓谷・滝・海岸",
@@ -3791,7 +3747,7 @@
       "short_title_en": "[No Promo] This Exists in Okayama Japan?! Ranked #1 Scenic Wonder by Locals #Shorts #JapanTravel"
     },
     {
-      "day": 317,
+      "day": 313,
       "ranking_id": "fukuoka_scenic_nature_275",
       "scope_type": "都道府県×専門切り口 (福岡県)",
       "category_type": "絶景・渓谷・滝・海岸",
@@ -3803,7 +3759,7 @@
       "short_title_en": "[No Promo] This Exists in Fukuoka Japan?! Ranked #1 Scenic Wonder by Locals #Shorts #JapanTravel"
     },
     {
-      "day": 318,
+      "day": 314,
       "ranking_id": "okinawa_scenic_nature_276",
       "scope_type": "都道府県×専門切り口 (沖縄県)",
       "category_type": "絶景・渓谷・滝・海岸",
@@ -3815,7 +3771,7 @@
       "short_title_en": "[No Promo] This Exists in Okinawa Japan?! Ranked #1 Scenic Wonder by Locals #Shorts #JapanTravel"
     },
     {
-      "day": 319,
+      "day": 315,
       "ranking_id": "fukushima_scenic_nature_277",
       "scope_type": "都道府県×専門切り口 (福島県)",
       "category_type": "絶景・渓谷・滝・海岸",
@@ -3827,7 +3783,7 @@
       "short_title_en": "[No Promo] This Exists in Fukushima Japan?! Ranked #1 Scenic Wonder by Locals #Shorts #JapanTravel"
     },
     {
-      "day": 320,
+      "day": 316,
       "ranking_id": "kanagawa_scenic_nature_278",
       "scope_type": "都道府県×専門切り口 (神奈川県)",
       "category_type": "絶景・渓谷・滝・海岸",
@@ -3839,7 +3795,7 @@
       "short_title_en": "[No Promo] This Exists in Kanagawa Japan?! Ranked #1 Scenic Wonder by Locals #Shorts #JapanTravel"
     },
     {
-      "day": 321,
+      "day": 317,
       "ranking_id": "gifu_scenic_nature_279",
       "scope_type": "都道府県×専門切り口 (岐阜県)",
       "category_type": "絶景・渓谷・滝・海岸",
@@ -3851,7 +3807,7 @@
       "short_title_en": "[No Promo] This Exists in Gifu Japan?! Ranked #1 Scenic Wonder by Locals #Shorts #JapanTravel"
     },
     {
-      "day": 322,
+      "day": 318,
       "ranking_id": "hyogo_scenic_nature_280",
       "scope_type": "都道府県×専門切り口 (兵庫県)",
       "category_type": "絶景・渓谷・滝・海岸",
@@ -3863,7 +3819,7 @@
       "short_title_en": "[No Promo] This Exists in Hyogo Japan?! Ranked #1 Scenic Wonder by Locals #Shorts #JapanTravel"
     },
     {
-      "day": 323,
+      "day": 319,
       "ranking_id": "yamaguchi_scenic_nature_281",
       "scope_type": "都道府県×専門切り口 (山口県)",
       "category_type": "絶景・渓谷・滝・海岸",
@@ -3875,7 +3831,7 @@
       "short_title_en": "[No Promo] This Exists in Yamaguchi Japan?! Ranked #1 Scenic Wonder by Locals #Shorts #JapanTravel"
     },
     {
-      "day": 324,
+      "day": 320,
       "ranking_id": "nagasaki_scenic_nature_282",
       "scope_type": "都道府県×専門切り口 (長崎県)",
       "category_type": "絶景・渓谷・滝・海岸",
@@ -3887,7 +3843,7 @@
       "short_title_en": "[No Promo] This Exists in Nagasaki Japan?! Ranked #1 Scenic Wonder by Locals #Shorts #JapanTravel"
     },
     {
-      "day": 325,
+      "day": 321,
       "ranking_id": "aomori_scenic_nature_283",
       "scope_type": "都道府県×専門切り口 (青森県)",
       "category_type": "絶景・渓谷・滝・海岸",
@@ -3899,7 +3855,7 @@
       "short_title_en": "[No Promo] This Exists in Aomori Japan?! Ranked #1 Scenic Wonder by Locals #Shorts #JapanTravel"
     },
     {
-      "day": 326,
+      "day": 322,
       "ranking_id": "tochigi_scenic_nature_284",
       "scope_type": "都道府県×専門切り口 (栃木県)",
       "category_type": "絶景・渓谷・滝・海岸",
@@ -3911,7 +3867,7 @@
       "short_title_en": "[No Promo] This Exists in Tochigi Japan?! Ranked #1 Scenic Wonder by Locals #Shorts #JapanTravel"
     },
     {
-      "day": 327,
+      "day": 323,
       "ranking_id": "toyama_scenic_nature_285",
       "scope_type": "都道府県×専門切り口 (富山県)",
       "category_type": "絶景・渓谷・滝・海岸",
@@ -3923,7 +3879,7 @@
       "short_title_en": "[No Promo] This Exists in Toyama Japan?! Ranked #1 Scenic Wonder by Locals #Shorts #JapanTravel"
     },
     {
-      "day": 328,
+      "day": 324,
       "ranking_id": "aichi_scenic_nature_286",
       "scope_type": "都道府県×専門切り口 (愛知県)",
       "category_type": "絶景・渓谷・滝・海岸",
@@ -3935,7 +3891,7 @@
       "short_title_en": "[No Promo] This Exists in Aichi Japan?! Ranked #1 Scenic Wonder by Locals #Shorts #JapanTravel"
     },
     {
-      "day": 329,
+      "day": 325,
       "ranking_id": "wakayama_scenic_nature_287",
       "scope_type": "都道府県×専門切り口 (和歌山県)",
       "category_type": "絶景・渓谷・滝・海岸",
@@ -3947,7 +3903,7 @@
       "short_title_en": "[No Promo] This Exists in Wakayama Japan?! Ranked #1 Scenic Wonder by Locals #Shorts #JapanTravel"
     },
     {
-      "day": 330,
+      "day": 326,
       "ranking_id": "kagawa_scenic_nature_288",
       "scope_type": "都道府県×専門切り口 (香川県)",
       "category_type": "絶景・渓谷・滝・海岸",
@@ -3959,7 +3915,7 @@
       "short_title_en": "[No Promo] This Exists in Kagawa Japan?! Ranked #1 Scenic Wonder by Locals #Shorts #JapanTravel"
     },
     {
-      "day": 331,
+      "day": 327,
       "ranking_id": "oita_scenic_nature_289",
       "scope_type": "都道府県×専門切り口 (大分県)",
       "category_type": "絶景・渓谷・滝・海岸",
@@ -3971,7 +3927,7 @@
       "short_title_en": "[No Promo] This Exists in Oita Japan?! Ranked #1 Scenic Wonder by Locals #Shorts #JapanTravel"
     },
     {
-      "day": 332,
+      "day": 328,
       "ranking_id": "miyagi_scenic_nature_290",
       "scope_type": "都道府県×専門切り口 (宮城県)",
       "category_type": "絶景・渓谷・滝・海岸",
@@ -3983,7 +3939,7 @@
       "short_title_en": "[No Promo] This Exists in Miyagi Japan?! Ranked #1 Scenic Wonder by Locals #Shorts #JapanTravel"
     },
     {
-      "day": 333,
+      "day": 329,
       "ranking_id": "saitama_scenic_nature_291",
       "scope_type": "都道府県×専門切り口 (埼玉県)",
       "category_type": "絶景・渓谷・滝・海岸",
@@ -3995,7 +3951,7 @@
       "short_title_en": "[No Promo] This Exists in Saitama Japan?! Ranked #1 Scenic Wonder by Locals #Shorts #JapanTravel"
     },
     {
-      "day": 334,
+      "day": 330,
       "ranking_id": "fukui_scenic_nature_292",
       "scope_type": "都道府県×専門切り口 (福井県)",
       "category_type": "絶景・渓谷・滝・海岸",
@@ -4007,7 +3963,7 @@
       "short_title_en": "[No Promo] This Exists in Fukui Japan?! Ranked #1 Scenic Wonder by Locals #Shorts #JapanTravel"
     },
     {
-      "day": 335,
+      "day": 331,
       "ranking_id": "shiga_scenic_nature_293",
       "scope_type": "都道府県×専門切り口 (滋賀県)",
       "category_type": "絶景・渓谷・滝・海岸",
@@ -4019,7 +3975,7 @@
       "short_title_en": "[No Promo] This Exists in Shiga Japan?! Ranked #1 Scenic Wonder by Locals #Shorts #JapanTravel"
     },
     {
-      "day": 336,
+      "day": 332,
       "ranking_id": "shimane_scenic_nature_294",
       "scope_type": "都道府県×専門切り口 (島根県)",
       "category_type": "絶景・渓谷・滝・海岸",
@@ -4031,7 +3987,7 @@
       "short_title_en": "[No Promo] This Exists in Shimane Japan?! Ranked #1 Scenic Wonder by Locals #Shorts #JapanTravel"
     },
     {
-      "day": 337,
+      "day": 333,
       "ranking_id": "kochi_scenic_nature_295",
       "scope_type": "都道府県×専門切り口 (高知県)",
       "category_type": "絶景・渓谷・滝・海岸",
@@ -4043,7 +3999,7 @@
       "short_title_en": "[No Promo] This Exists in Kochi Japan?! Ranked #1 Scenic Wonder by Locals #Shorts #JapanTravel"
     },
     {
-      "day": 338,
+      "day": 334,
       "ranking_id": "kagoshima_scenic_nature_296",
       "scope_type": "都道府県×専門切り口 (鹿児島県)",
       "category_type": "絶景・渓谷・滝・海岸",
@@ -4055,7 +4011,7 @@
       "short_title_en": "[No Promo] This Exists in Kagoshima Japan?! Ranked #1 Scenic Wonder by Locals #Shorts #JapanTravel"
     },
     {
-      "day": 339,
+      "day": 335,
       "ranking_id": "yamagata_scenic_nature_297",
       "scope_type": "都道府県×専門切り口 (山形県)",
       "category_type": "絶景・渓谷・滝・海岸",
@@ -4067,7 +4023,7 @@
       "short_title_en": "[No Promo] This Exists in Yamagata Japan?! Ranked #1 Scenic Wonder by Locals #Shorts #JapanTravel"
     },
     {
-      "day": 340,
+      "day": 336,
       "ranking_id": "toyama_parks_gardens_298",
       "scope_type": "都道府県×専門切り口 (富山県)",
       "category_type": "公園・日本庭園・花の絶景",
@@ -4079,7 +4035,7 @@
       "short_title_en": "[No Promo] Toyama's #1 Japanese Zen Garden & Park Voted by Locals! #Shorts #JapanTravel"
     },
     {
-      "day": 341,
+      "day": 337,
       "ranking_id": "aichi_parks_gardens_299",
       "scope_type": "都道府県×専門切り口 (愛知県)",
       "category_type": "公園・日本庭園・花の絶景",
@@ -4091,7 +4047,7 @@
       "short_title_en": "[No Promo] Aichi's #1 Japanese Zen Garden & Park Voted by Locals! #Shorts #JapanTravel"
     },
     {
-      "day": 342,
+      "day": 338,
       "ranking_id": "wakayama_parks_gardens_300",
       "scope_type": "都道府県×専門切り口 (和歌山県)",
       "category_type": "公園・日本庭園・花の絶景",
@@ -4103,7 +4059,7 @@
       "short_title_en": "[No Promo] Wakayama's #1 Japanese Zen Garden & Park Voted by Locals! #Shorts #JapanTravel"
     },
     {
-      "day": 343,
+      "day": 339,
       "ranking_id": "kagawa_parks_gardens_301",
       "scope_type": "都道府県×専門切り口 (香川県)",
       "category_type": "公園・日本庭園・花の絶景",
@@ -4115,7 +4071,7 @@
       "short_title_en": "[No Promo] Kagawa's #1 Japanese Zen Garden & Park Voted by Locals! #Shorts #JapanTravel"
     },
     {
-      "day": 344,
+      "day": 340,
       "ranking_id": "oita_parks_gardens_302",
       "scope_type": "都道府県×専門切り口 (大分県)",
       "category_type": "公園・日本庭園・花の絶景",
@@ -4127,7 +4083,7 @@
       "short_title_en": "[No Promo] Oita's #1 Japanese Zen Garden & Park Voted by Locals! #Shorts #JapanTravel"
     },
     {
-      "day": 345,
+      "day": 341,
       "ranking_id": "miyagi_parks_gardens_303",
       "scope_type": "都道府県×専門切り口 (宮城県)",
       "category_type": "公園・日本庭園・花の絶景",
@@ -4139,7 +4095,7 @@
       "short_title_en": "[No Promo] Miyagi's #1 Japanese Zen Garden & Park Voted by Locals! #Shorts #JapanTravel"
     },
     {
-      "day": 346,
+      "day": 342,
       "ranking_id": "saitama_parks_gardens_304",
       "scope_type": "都道府県×専門切り口 (埼玉県)",
       "category_type": "公園・日本庭園・花の絶景",
@@ -4151,7 +4107,7 @@
       "short_title_en": "[No Promo] Saitama's #1 Japanese Zen Garden & Park Voted by Locals! #Shorts #JapanTravel"
     },
     {
-      "day": 347,
+      "day": 343,
       "ranking_id": "fukui_parks_gardens_305",
       "scope_type": "都道府県×専門切り口 (福井県)",
       "category_type": "公園・日本庭園・花の絶景",
@@ -4163,7 +4119,7 @@
       "short_title_en": "[No Promo] Fukui's #1 Japanese Zen Garden & Park Voted by Locals! #Shorts #JapanTravel"
     },
     {
-      "day": 348,
+      "day": 344,
       "ranking_id": "shiga_parks_gardens_306",
       "scope_type": "都道府県×専門切り口 (滋賀県)",
       "category_type": "公園・日本庭園・花の絶景",
@@ -4175,7 +4131,7 @@
       "short_title_en": "[No Promo] Shiga's #1 Japanese Zen Garden & Park Voted by Locals! #Shorts #JapanTravel"
     },
     {
-      "day": 349,
+      "day": 345,
       "ranking_id": "shimane_parks_gardens_307",
       "scope_type": "都道府県×専門切り口 (島根県)",
       "category_type": "公園・日本庭園・花の絶景",
@@ -4187,7 +4143,7 @@
       "short_title_en": "[No Promo] Shimane's #1 Japanese Zen Garden & Park Voted by Locals! #Shorts #JapanTravel"
     },
     {
-      "day": 350,
+      "day": 346,
       "ranking_id": "kochi_parks_gardens_308",
       "scope_type": "都道府県×専門切り口 (高知県)",
       "category_type": "公園・日本庭園・花の絶景",
@@ -4199,7 +4155,7 @@
       "short_title_en": "[No Promo] Kochi's #1 Japanese Zen Garden & Park Voted by Locals! #Shorts #JapanTravel"
     },
     {
-      "day": 351,
+      "day": 347,
       "ranking_id": "kagoshima_parks_gardens_309",
       "scope_type": "都道府県×専門切り口 (鹿児島県)",
       "category_type": "公園・日本庭園・花の絶景",
@@ -4211,7 +4167,7 @@
       "short_title_en": "[No Promo] Kagoshima's #1 Japanese Zen Garden & Park Voted by Locals! #Shorts #JapanTravel"
     },
     {
-      "day": 352,
+      "day": 348,
       "ranking_id": "yamagata_parks_gardens_310",
       "scope_type": "都道府県×専門切り口 (山形県)",
       "category_type": "公園・日本庭園・花の絶景",
@@ -4223,7 +4179,7 @@
       "short_title_en": "[No Promo] Yamagata's #1 Japanese Zen Garden & Park Voted by Locals! #Shorts #JapanTravel"
     },
     {
-      "day": 353,
+      "day": 349,
       "ranking_id": "tokyo_parks_gardens_311",
       "scope_type": "都道府県×専門切り口 (東京都)",
       "category_type": "公園・日本庭園・花の絶景",
@@ -4235,7 +4191,7 @@
       "short_title_en": "[No Promo] Tokyo's #1 Japanese Zen Garden & Park Voted by Locals! #Shorts #JapanTravel"
     },
     {
-      "day": 354,
+      "day": 350,
       "ranking_id": "nagano_parks_gardens_312",
       "scope_type": "都道府県×専門切り口 (長野県)",
       "category_type": "公園・日本庭園・花の絶景",
@@ -4247,7 +4203,7 @@
       "short_title_en": "[No Promo] Nagano's #1 Japanese Zen Garden & Park Voted by Locals! #Shorts #JapanTravel"
     },
     {
-      "day": 355,
+      "day": 351,
       "ranking_id": "osaka_parks_gardens_313",
       "scope_type": "都道府県×専門切り口 (大阪府)",
       "category_type": "公園・日本庭園・花の絶景",
@@ -4259,7 +4215,7 @@
       "short_title_en": "[No Promo] Osaka's #1 Japanese Zen Garden & Park Voted by Locals! #Shorts #JapanTravel"
     },
     {
-      "day": 356,
+      "day": 352,
       "ranking_id": "hiroshima_parks_gardens_314",
       "scope_type": "都道府県×専門切り口 (広島県)",
       "category_type": "公園・日本庭園・花の絶景",
@@ -4271,7 +4227,7 @@
       "short_title_en": "[No Promo] Hiroshima's #1 Japanese Zen Garden & Park Voted by Locals! #Shorts #JapanTravel"
     },
     {
-      "day": 357,
+      "day": 353,
       "ranking_id": "saga_parks_gardens_315",
       "scope_type": "都道府県×専門切り口 (佐賀県)",
       "category_type": "公園・日本庭園・花の絶景",
@@ -4283,7 +4239,7 @@
       "short_title_en": "[No Promo] Saga's #1 Japanese Zen Garden & Park Voted by Locals! #Shorts #JapanTravel"
     },
     {
-      "day": 358,
+      "day": 354,
       "ranking_id": "hokkaido_parks_gardens_316",
       "scope_type": "都道府県×専門切り口 (北海道)",
       "category_type": "公園・日本庭園・花の絶景",
@@ -4295,7 +4251,7 @@
       "short_title_en": "[No Promo] Hokkaido's #1 Japanese Zen Garden & Park Voted by Locals! #Shorts #JapanTravel"
     },
     {
-      "day": 359,
+      "day": 355,
       "ranking_id": "ibaraki_parks_gardens_317",
       "scope_type": "都道府県×専門切り口 (茨城県)",
       "category_type": "公園・日本庭園・花の絶景",
@@ -4307,7 +4263,7 @@
       "short_title_en": "[No Promo] Ibaraki's #1 Japanese Zen Garden & Park Voted by Locals! #Shorts #JapanTravel"
     },
     {
-      "day": 360,
+      "day": 356,
       "ranking_id": "niigata_parks_gardens_318",
       "scope_type": "都道府県×専門切り口 (新潟県)",
       "category_type": "公園・日本庭園・花の絶景",
@@ -4319,7 +4275,7 @@
       "short_title_en": "[No Promo] Niigata's #1 Japanese Zen Garden & Park Voted by Locals! #Shorts #JapanTravel"
     },
     {
-      "day": 361,
+      "day": 357,
       "ranking_id": "shizuoka_parks_gardens_319",
       "scope_type": "都道府県×専門切り口 (静岡県)",
       "category_type": "公園・日本庭園・花の絶景",
@@ -4331,7 +4287,7 @@
       "short_title_en": "[No Promo] Shizuoka's #1 Japanese Zen Garden & Park Voted by Locals! #Shorts #JapanTravel"
     },
     {
-      "day": 362,
+      "day": 358,
       "ranking_id": "nara_parks_gardens_320",
       "scope_type": "都道府県×専門切り口 (奈良県)",
       "category_type": "公園・日本庭園・花の絶景",
@@ -4343,7 +4299,7 @@
       "short_title_en": "[No Promo] Nara's #1 Japanese Zen Garden & Park Voted by Locals! #Shorts #JapanTravel"
     },
     {
-      "day": 363,
+      "day": 359,
       "ranking_id": "tokushima_parks_gardens_321",
       "scope_type": "都道府県×専門切り口 (徳島県)",
       "category_type": "公園・日本庭園・花の絶景",
@@ -4355,7 +4311,7 @@
       "short_title_en": "[No Promo] Tokushima's #1 Japanese Zen Garden & Park Voted by Locals! #Shorts #JapanTravel"
     },
     {
-      "day": 364,
+      "day": 360,
       "ranking_id": "kumamoto_parks_gardens_322",
       "scope_type": "都道府県×専門切り口 (熊本県)",
       "category_type": "公園・日本庭園・花の絶景",
@@ -4367,7 +4323,7 @@
       "short_title_en": "[No Promo] Kumamoto's #1 Japanese Zen Garden & Park Voted by Locals! #Shorts #JapanTravel"
     },
     {
-      "day": 365,
+      "day": 361,
       "ranking_id": "iwate_parks_gardens_323",
       "scope_type": "都道府県×専門切り口 (岩手県)",
       "category_type": "公園・日本庭園・花の絶景",
@@ -4379,7 +4335,7 @@
       "short_title_en": "[No Promo] Iwate's #1 Japanese Zen Garden & Park Voted by Locals! #Shorts #JapanTravel"
     },
     {
-      "day": 366,
+      "day": 362,
       "ranking_id": "gunma_parks_gardens_324",
       "scope_type": "都道府県×専門切り口 (群馬県)",
       "category_type": "公園・日本庭園・花の絶景",
@@ -4391,7 +4347,7 @@
       "short_title_en": "[No Promo] Gunma's #1 Japanese Zen Garden & Park Voted by Locals! #Shorts #JapanTravel"
     },
     {
-      "day": 367,
+      "day": 363,
       "ranking_id": "ishikawa_parks_gardens_325",
       "scope_type": "都道府県×専門切り口 (石川県)",
       "category_type": "公園・日本庭園・花の絶景",
@@ -4403,7 +4359,7 @@
       "short_title_en": "[No Promo] Ishikawa's #1 Japanese Zen Garden & Park Voted by Locals! #Shorts #JapanTravel"
     },
     {
-      "day": 368,
+      "day": 364,
       "ranking_id": "mie_parks_gardens_326",
       "scope_type": "都道府県×専門切り口 (三重県)",
       "category_type": "公園・日本庭園・花の絶景",
@@ -4415,7 +4371,7 @@
       "short_title_en": "[No Promo] Mie's #1 Japanese Zen Garden & Park Voted by Locals! #Shorts #JapanTravel"
     },
     {
-      "day": 369,
+      "day": 365,
       "ranking_id": "tottori_parks_gardens_327",
       "scope_type": "都道府県×専門切り口 (鳥取県)",
       "category_type": "公園・日本庭園・花の絶景",
@@ -4427,7 +4383,7 @@
       "short_title_en": "[No Promo] Tottori's #1 Japanese Zen Garden & Park Voted by Locals! #Shorts #JapanTravel"
     },
     {
-      "day": 370,
+      "day": 366,
       "ranking_id": "ehime_parks_gardens_328",
       "scope_type": "都道府県×専門切り口 (愛媛県)",
       "category_type": "公園・日本庭園・花の絶景",
@@ -4439,7 +4395,7 @@
       "short_title_en": "[No Promo] Ehime's #1 Japanese Zen Garden & Park Voted by Locals! #Shorts #JapanTravel"
     },
     {
-      "day": 371,
+      "day": 367,
       "ranking_id": "miyazaki_parks_gardens_329",
       "scope_type": "都道府県×専門切り口 (宮崎県)",
       "category_type": "公園・日本庭園・花の絶景",
@@ -4451,7 +4407,7 @@
       "short_title_en": "[No Promo] Miyazaki's #1 Japanese Zen Garden & Park Voted by Locals! #Shorts #JapanTravel"
     },
     {
-      "day": 372,
+      "day": 368,
       "ranking_id": "akita_parks_gardens_330",
       "scope_type": "都道府県×専門切り口 (秋田県)",
       "category_type": "公園・日本庭園・花の絶景",
@@ -4463,7 +4419,7 @@
       "short_title_en": "[No Promo] Akita's #1 Japanese Zen Garden & Park Voted by Locals! #Shorts #JapanTravel"
     },
     {
-      "day": 373,
+      "day": 369,
       "ranking_id": "chiba_parks_gardens_331",
       "scope_type": "都道府県×専門切り口 (千葉県)",
       "category_type": "公園・日本庭園・花の絶景",
@@ -4475,7 +4431,7 @@
       "short_title_en": "[No Promo] Chiba's #1 Japanese Zen Garden & Park Voted by Locals! #Shorts #JapanTravel"
     },
     {
-      "day": 374,
+      "day": 370,
       "ranking_id": "yamanashi_parks_gardens_332",
       "scope_type": "都道府県×専門切り口 (山梨県)",
       "category_type": "公園・日本庭園・花の絶景",
@@ -4487,7 +4443,7 @@
       "short_title_en": "[No Promo] Yamanashi's #1 Japanese Zen Garden & Park Voted by Locals! #Shorts #JapanTravel"
     },
     {
-      "day": 375,
+      "day": 371,
       "ranking_id": "kyoto_parks_gardens_333",
       "scope_type": "都道府県×専門切り口 (京都府)",
       "category_type": "公園・日本庭園・花の絶景",
@@ -4499,7 +4455,7 @@
       "short_title_en": "[No Promo] Kyoto's #1 Japanese Zen Garden & Park Voted by Locals! #Shorts #JapanTravel"
     },
     {
-      "day": 376,
+      "day": 372,
       "ranking_id": "okayama_parks_gardens_334",
       "scope_type": "都道府県×専門切り口 (岡山県)",
       "category_type": "公園・日本庭園・花の絶景",
@@ -4511,7 +4467,7 @@
       "short_title_en": "[No Promo] Okayama's #1 Japanese Zen Garden & Park Voted by Locals! #Shorts #JapanTravel"
     },
     {
-      "day": 377,
+      "day": 373,
       "ranking_id": "fukuoka_parks_gardens_335",
       "scope_type": "都道府県×専門切り口 (福岡県)",
       "category_type": "公園・日本庭園・花の絶景",
@@ -4523,7 +4479,7 @@
       "short_title_en": "[No Promo] Fukuoka's #1 Japanese Zen Garden & Park Voted by Locals! #Shorts #JapanTravel"
     },
     {
-      "day": 378,
+      "day": 374,
       "ranking_id": "okinawa_parks_gardens_336",
       "scope_type": "都道府県×専門切り口 (沖縄県)",
       "category_type": "公園・日本庭園・花の絶景",
@@ -4535,7 +4491,7 @@
       "short_title_en": "[No Promo] Okinawa's #1 Japanese Zen Garden & Park Voted by Locals! #Shorts #JapanTravel"
     },
     {
-      "day": 379,
+      "day": 375,
       "ranking_id": "fukushima_parks_gardens_337",
       "scope_type": "都道府県×専門切り口 (福島県)",
       "category_type": "公園・日本庭園・花の絶景",
@@ -4547,7 +4503,7 @@
       "short_title_en": "[No Promo] Fukushima's #1 Japanese Zen Garden & Park Voted by Locals! #Shorts #JapanTravel"
     },
     {
-      "day": 380,
+      "day": 376,
       "ranking_id": "kanagawa_parks_gardens_338",
       "scope_type": "都道府県×専門切り口 (神奈川県)",
       "category_type": "公園・日本庭園・花の絶景",
@@ -4559,7 +4515,7 @@
       "short_title_en": "[No Promo] Kanagawa's #1 Japanese Zen Garden & Park Voted by Locals! #Shorts #JapanTravel"
     },
     {
-      "day": 381,
+      "day": 377,
       "ranking_id": "gifu_parks_gardens_339",
       "scope_type": "都道府県×専門切り口 (岐阜県)",
       "category_type": "公園・日本庭園・花の絶景",
@@ -4571,7 +4527,7 @@
       "short_title_en": "[No Promo] Gifu's #1 Japanese Zen Garden & Park Voted by Locals! #Shorts #JapanTravel"
     },
     {
-      "day": 382,
+      "day": 378,
       "ranking_id": "hyogo_parks_gardens_340",
       "scope_type": "都道府県×専門切り口 (兵庫県)",
       "category_type": "公園・日本庭園・花の絶景",
@@ -4583,7 +4539,7 @@
       "short_title_en": "[No Promo] Hyogo's #1 Japanese Zen Garden & Park Voted by Locals! #Shorts #JapanTravel"
     },
     {
-      "day": 383,
+      "day": 379,
       "ranking_id": "yamaguchi_parks_gardens_341",
       "scope_type": "都道府県×専門切り口 (山口県)",
       "category_type": "公園・日本庭園・花の絶景",
@@ -4595,7 +4551,7 @@
       "short_title_en": "[No Promo] Yamaguchi's #1 Japanese Zen Garden & Park Voted by Locals! #Shorts #JapanTravel"
     },
     {
-      "day": 384,
+      "day": 380,
       "ranking_id": "nagasaki_parks_gardens_342",
       "scope_type": "都道府県×専門切り口 (長崎県)",
       "category_type": "公園・日本庭園・花の絶景",
@@ -4607,7 +4563,7 @@
       "short_title_en": "[No Promo] Nagasaki's #1 Japanese Zen Garden & Park Voted by Locals! #Shorts #JapanTravel"
     },
     {
-      "day": 385,
+      "day": 381,
       "ranking_id": "aomori_parks_gardens_343",
       "scope_type": "都道府県×専門切り口 (青森県)",
       "category_type": "公園・日本庭園・花の絶景",
@@ -4619,7 +4575,7 @@
       "short_title_en": "[No Promo] Aomori's #1 Japanese Zen Garden & Park Voted by Locals! #Shorts #JapanTravel"
     },
     {
-      "day": 386,
+      "day": 382,
       "ranking_id": "tochigi_parks_gardens_344",
       "scope_type": "都道府県×専門切り口 (栃木県)",
       "category_type": "公園・日本庭園・花の絶景",
@@ -4631,7 +4587,7 @@
       "short_title_en": "[No Promo] Tochigi's #1 Japanese Zen Garden & Park Voted by Locals! #Shorts #JapanTravel"
     },
     {
-      "day": 387,
+      "day": 383,
       "ranking_id": "yamanashi_secret_onsen_345",
       "scope_type": "都道府県×専門切り口 (山梨県)",
       "category_type": "温泉・秘湯・露天風呂",
@@ -4643,7 +4599,7 @@
       "short_title_en": "[No Promo] Skip Hakone! Yamanashi's #1 Secret Hot Spring Ranked by Japanese Locals #Shorts #Onsen"
     },
     {
-      "day": 388,
+      "day": 384,
       "ranking_id": "kyoto_secret_onsen_346",
       "scope_type": "都道府県×専門切り口 (京都府)",
       "category_type": "温泉・秘湯・露天風呂",
@@ -4655,7 +4611,7 @@
       "short_title_en": "[No Promo] Skip Hakone! Kyoto's #1 Secret Hot Spring Ranked by Japanese Locals #Shorts #Onsen"
     },
     {
-      "day": 389,
+      "day": 385,
       "ranking_id": "okayama_secret_onsen_347",
       "scope_type": "都道府県×専門切り口 (岡山県)",
       "category_type": "温泉・秘湯・露天風呂",
@@ -4667,7 +4623,7 @@
       "short_title_en": "[No Promo] Skip Hakone! Okayama's #1 Secret Hot Spring Ranked by Japanese Locals #Shorts #Onsen"
     },
     {
-      "day": 390,
+      "day": 386,
       "ranking_id": "fukuoka_secret_onsen_348",
       "scope_type": "都道府県×専門切り口 (福岡県)",
       "category_type": "温泉・秘湯・露天風呂",
@@ -4679,7 +4635,7 @@
       "short_title_en": "[No Promo] Skip Hakone! Fukuoka's #1 Secret Hot Spring Ranked by Japanese Locals #Shorts #Onsen"
     },
     {
-      "day": 391,
+      "day": 387,
       "ranking_id": "okinawa_secret_onsen_349",
       "scope_type": "都道府県×専門切り口 (沖縄県)",
       "category_type": "温泉・秘湯・露天風呂",
@@ -4691,7 +4647,7 @@
       "short_title_en": "[No Promo] Skip Hakone! Okinawa's #1 Secret Hot Spring Ranked by Japanese Locals #Shorts #Onsen"
     },
     {
-      "day": 392,
+      "day": 388,
       "ranking_id": "fukushima_secret_onsen_350",
       "scope_type": "都道府県×専門切り口 (福島県)",
       "category_type": "温泉・秘湯・露天風呂",
@@ -4703,7 +4659,7 @@
       "short_title_en": "[No Promo] Skip Hakone! Fukushima's #1 Secret Hot Spring Ranked by Japanese Locals #Shorts #Onsen"
     },
     {
-      "day": 393,
+      "day": 389,
       "ranking_id": "kanagawa_secret_onsen_351",
       "scope_type": "都道府県×専門切り口 (神奈川県)",
       "category_type": "温泉・秘湯・露天風呂",
@@ -4715,7 +4671,7 @@
       "short_title_en": "[No Promo] Skip Hakone! Kanagawa's #1 Secret Hot Spring Ranked by Japanese Locals #Shorts #Onsen"
     },
     {
-      "day": 394,
+      "day": 390,
       "ranking_id": "gifu_secret_onsen_352",
       "scope_type": "都道府県×専門切り口 (岐阜県)",
       "category_type": "温泉・秘湯・露天風呂",
@@ -4727,7 +4683,7 @@
       "short_title_en": "[No Promo] Skip Hakone! Gifu's #1 Secret Hot Spring Ranked by Japanese Locals #Shorts #Onsen"
     },
     {
-      "day": 395,
+      "day": 391,
       "ranking_id": "hyogo_secret_onsen_353",
       "scope_type": "都道府県×専門切り口 (兵庫県)",
       "category_type": "温泉・秘湯・露天風呂",
@@ -4739,7 +4695,7 @@
       "short_title_en": "[No Promo] Skip Hakone! Hyogo's #1 Secret Hot Spring Ranked by Japanese Locals #Shorts #Onsen"
     },
     {
-      "day": 396,
+      "day": 392,
       "ranking_id": "yamaguchi_secret_onsen_354",
       "scope_type": "都道府県×専門切り口 (山口県)",
       "category_type": "温泉・秘湯・露天風呂",
@@ -4751,7 +4707,7 @@
       "short_title_en": "[No Promo] Skip Hakone! Yamaguchi's #1 Secret Hot Spring Ranked by Japanese Locals #Shorts #Onsen"
     },
     {
-      "day": 397,
+      "day": 393,
       "ranking_id": "nagasaki_secret_onsen_355",
       "scope_type": "都道府県×専門切り口 (長崎県)",
       "category_type": "温泉・秘湯・露天風呂",
@@ -4763,7 +4719,7 @@
       "short_title_en": "[No Promo] Skip Hakone! Nagasaki's #1 Secret Hot Spring Ranked by Japanese Locals #Shorts #Onsen"
     },
     {
-      "day": 398,
+      "day": 394,
       "ranking_id": "aomori_secret_onsen_356",
       "scope_type": "都道府県×専門切り口 (青森県)",
       "category_type": "温泉・秘湯・露天風呂",
@@ -4775,7 +4731,7 @@
       "short_title_en": "[No Promo] Skip Hakone! Aomori's #1 Secret Hot Spring Ranked by Japanese Locals #Shorts #Onsen"
     },
     {
-      "day": 399,
+      "day": 395,
       "ranking_id": "tochigi_secret_onsen_357",
       "scope_type": "都道府県×専門切り口 (栃木県)",
       "category_type": "温泉・秘湯・露天風呂",
@@ -4787,7 +4743,7 @@
       "short_title_en": "[No Promo] Skip Hakone! Tochigi's #1 Secret Hot Spring Ranked by Japanese Locals #Shorts #Onsen"
     },
     {
-      "day": 400,
+      "day": 396,
       "ranking_id": "toyama_secret_onsen_358",
       "scope_type": "都道府県×専門切り口 (富山県)",
       "category_type": "温泉・秘湯・露天風呂",
@@ -4799,7 +4755,7 @@
       "short_title_en": "[No Promo] Skip Hakone! Toyama's #1 Secret Hot Spring Ranked by Japanese Locals #Shorts #Onsen"
     },
     {
-      "day": 401,
+      "day": 397,
       "ranking_id": "aichi_secret_onsen_359",
       "scope_type": "都道府県×専門切り口 (愛知県)",
       "category_type": "温泉・秘湯・露天風呂",
@@ -4811,7 +4767,7 @@
       "short_title_en": "[No Promo] Skip Hakone! Aichi's #1 Secret Hot Spring Ranked by Japanese Locals #Shorts #Onsen"
     },
     {
-      "day": 402,
+      "day": 398,
       "ranking_id": "wakayama_secret_onsen_360",
       "scope_type": "都道府県×専門切り口 (和歌山県)",
       "category_type": "温泉・秘湯・露天風呂",
@@ -4823,7 +4779,7 @@
       "short_title_en": "[No Promo] Skip Hakone! Wakayama's #1 Secret Hot Spring Ranked by Japanese Locals #Shorts #Onsen"
     },
     {
-      "day": 403,
+      "day": 399,
       "ranking_id": "kagawa_secret_onsen_361",
       "scope_type": "都道府県×専門切り口 (香川県)",
       "category_type": "温泉・秘湯・露天風呂",
@@ -4835,7 +4791,7 @@
       "short_title_en": "[No Promo] Skip Hakone! Kagawa's #1 Secret Hot Spring Ranked by Japanese Locals #Shorts #Onsen"
     },
     {
-      "day": 404,
+      "day": 400,
       "ranking_id": "oita_secret_onsen_362",
       "scope_type": "都道府県×専門切り口 (大分県)",
       "category_type": "温泉・秘湯・露天風呂",
@@ -4847,7 +4803,7 @@
       "short_title_en": "[No Promo] Skip Hakone! Oita's #1 Secret Hot Spring Ranked by Japanese Locals #Shorts #Onsen"
     },
     {
-      "day": 405,
+      "day": 401,
       "ranking_id": "miyagi_secret_onsen_363",
       "scope_type": "都道府県×専門切り口 (宮城県)",
       "category_type": "温泉・秘湯・露天風呂",
@@ -4859,7 +4815,7 @@
       "short_title_en": "[No Promo] Skip Hakone! Miyagi's #1 Secret Hot Spring Ranked by Japanese Locals #Shorts #Onsen"
     },
     {
-      "day": 406,
+      "day": 402,
       "ranking_id": "saitama_secret_onsen_364",
       "scope_type": "都道府県×専門切り口 (埼玉県)",
       "category_type": "温泉・秘湯・露天風呂",
@@ -4871,7 +4827,7 @@
       "short_title_en": "[No Promo] Skip Hakone! Saitama's #1 Secret Hot Spring Ranked by Japanese Locals #Shorts #Onsen"
     },
     {
-      "day": 407,
+      "day": 403,
       "ranking_id": "fukui_secret_onsen_365",
       "scope_type": "都道府県×専門切り口 (福井県)",
       "category_type": "温泉・秘湯・露天風呂",
@@ -4883,7 +4839,7 @@
       "short_title_en": "[No Promo] Skip Hakone! Fukui's #1 Secret Hot Spring Ranked by Japanese Locals #Shorts #Onsen"
     },
     {
-      "day": 408,
+      "day": 404,
       "ranking_id": "shiga_secret_onsen_366",
       "scope_type": "都道府県×専門切り口 (滋賀県)",
       "category_type": "温泉・秘湯・露天風呂",
@@ -4895,7 +4851,7 @@
       "short_title_en": "[No Promo] Skip Hakone! Shiga's #1 Secret Hot Spring Ranked by Japanese Locals #Shorts #Onsen"
     },
     {
-      "day": 409,
+      "day": 405,
       "ranking_id": "shimane_secret_onsen_367",
       "scope_type": "都道府県×専門切り口 (島根県)",
       "category_type": "温泉・秘湯・露天風呂",
@@ -4907,7 +4863,7 @@
       "short_title_en": "[No Promo] Skip Hakone! Shimane's #1 Secret Hot Spring Ranked by Japanese Locals #Shorts #Onsen"
     },
     {
-      "day": 410,
+      "day": 406,
       "ranking_id": "kochi_secret_onsen_368",
       "scope_type": "都道府県×専門切り口 (高知県)",
       "category_type": "温泉・秘湯・露天風呂",
@@ -4919,7 +4875,7 @@
       "short_title_en": "[No Promo] Skip Hakone! Kochi's #1 Secret Hot Spring Ranked by Japanese Locals #Shorts #Onsen"
     },
     {
-      "day": 411,
+      "day": 407,
       "ranking_id": "kagoshima_secret_onsen_369",
       "scope_type": "都道府県×専門切り口 (鹿児島県)",
       "category_type": "温泉・秘湯・露天風呂",
@@ -4931,7 +4887,7 @@
       "short_title_en": "[No Promo] Skip Hakone! Kagoshima's #1 Secret Hot Spring Ranked by Japanese Locals #Shorts #Onsen"
     },
     {
-      "day": 412,
+      "day": 408,
       "ranking_id": "yamagata_secret_onsen_370",
       "scope_type": "都道府県×専門切り口 (山形県)",
       "category_type": "温泉・秘湯・露天風呂",
@@ -4943,7 +4899,7 @@
       "short_title_en": "[No Promo] Skip Hakone! Yamagata's #1 Secret Hot Spring Ranked by Japanese Locals #Shorts #Onsen"
     },
     {
-      "day": 413,
+      "day": 409,
       "ranking_id": "tokyo_secret_onsen_371",
       "scope_type": "都道府県×専門切り口 (東京都)",
       "category_type": "温泉・秘湯・露天風呂",
@@ -4955,7 +4911,7 @@
       "short_title_en": "[No Promo] Skip Hakone! Tokyo's #1 Secret Hot Spring Ranked by Japanese Locals #Shorts #Onsen"
     },
     {
-      "day": 414,
+      "day": 410,
       "ranking_id": "nagano_secret_onsen_372",
       "scope_type": "都道府県×専門切り口 (長野県)",
       "category_type": "温泉・秘湯・露天風呂",
@@ -4967,7 +4923,7 @@
       "short_title_en": "[No Promo] Skip Hakone! Nagano's #1 Secret Hot Spring Ranked by Japanese Locals #Shorts #Onsen"
     },
     {
-      "day": 415,
+      "day": 411,
       "ranking_id": "osaka_secret_onsen_373",
       "scope_type": "都道府県×専門切り口 (大阪府)",
       "category_type": "温泉・秘湯・露天風呂",
@@ -4979,7 +4935,7 @@
       "short_title_en": "[No Promo] Skip Hakone! Osaka's #1 Secret Hot Spring Ranked by Japanese Locals #Shorts #Onsen"
     },
     {
-      "day": 416,
+      "day": 412,
       "ranking_id": "hiroshima_secret_onsen_374",
       "scope_type": "都道府県×専門切り口 (広島県)",
       "category_type": "温泉・秘湯・露天風呂",
@@ -4991,7 +4947,7 @@
       "short_title_en": "[No Promo] Skip Hakone! Hiroshima's #1 Secret Hot Spring Ranked by Japanese Locals #Shorts #Onsen"
     },
     {
-      "day": 417,
+      "day": 413,
       "ranking_id": "saga_secret_onsen_375",
       "scope_type": "都道府県×専門切り口 (佐賀県)",
       "category_type": "温泉・秘湯・露天風呂",
@@ -5003,7 +4959,7 @@
       "short_title_en": "[No Promo] Skip Hakone! Saga's #1 Secret Hot Spring Ranked by Japanese Locals #Shorts #Onsen"
     },
     {
-      "day": 418,
+      "day": 414,
       "ranking_id": "hokkaido_secret_onsen_376",
       "scope_type": "都道府県×専門切り口 (北海道)",
       "category_type": "温泉・秘湯・露天風呂",
@@ -5015,7 +4971,7 @@
       "short_title_en": "[No Promo] Skip Hakone! Hokkaido's #1 Secret Hot Spring Ranked by Japanese Locals #Shorts #Onsen"
     },
     {
-      "day": 419,
+      "day": 415,
       "ranking_id": "ibaraki_secret_onsen_377",
       "scope_type": "都道府県×専門切り口 (茨城県)",
       "category_type": "温泉・秘湯・露天風呂",
@@ -5027,7 +4983,7 @@
       "short_title_en": "[No Promo] Skip Hakone! Ibaraki's #1 Secret Hot Spring Ranked by Japanese Locals #Shorts #Onsen"
     },
     {
-      "day": 420,
+      "day": 416,
       "ranking_id": "niigata_secret_onsen_378",
       "scope_type": "都道府県×専門切り口 (新潟県)",
       "category_type": "温泉・秘湯・露天風呂",
@@ -5039,7 +4995,7 @@
       "short_title_en": "[No Promo] Skip Hakone! Niigata's #1 Secret Hot Spring Ranked by Japanese Locals #Shorts #Onsen"
     },
     {
-      "day": 421,
+      "day": 417,
       "ranking_id": "shizuoka_secret_onsen_379",
       "scope_type": "都道府県×専門切り口 (静岡県)",
       "category_type": "温泉・秘湯・露天風呂",
@@ -5051,7 +5007,7 @@
       "short_title_en": "[No Promo] Skip Hakone! Shizuoka's #1 Secret Hot Spring Ranked by Japanese Locals #Shorts #Onsen"
     },
     {
-      "day": 422,
+      "day": 418,
       "ranking_id": "nara_secret_onsen_380",
       "scope_type": "都道府県×専門切り口 (奈良県)",
       "category_type": "温泉・秘湯・露天風呂",
@@ -5063,7 +5019,7 @@
       "short_title_en": "[No Promo] Skip Hakone! Nara's #1 Secret Hot Spring Ranked by Japanese Locals #Shorts #Onsen"
     },
     {
-      "day": 423,
+      "day": 419,
       "ranking_id": "tokushima_secret_onsen_381",
       "scope_type": "都道府県×専門切り口 (徳島県)",
       "category_type": "温泉・秘湯・露天風呂",
@@ -5075,7 +5031,7 @@
       "short_title_en": "[No Promo] Skip Hakone! Tokushima's #1 Secret Hot Spring Ranked by Japanese Locals #Shorts #Onsen"
     },
     {
-      "day": 424,
+      "day": 420,
       "ranking_id": "kumamoto_secret_onsen_382",
       "scope_type": "都道府県×専門切り口 (熊本県)",
       "category_type": "温泉・秘湯・露天風呂",
@@ -5087,7 +5043,7 @@
       "short_title_en": "[No Promo] Skip Hakone! Kumamoto's #1 Secret Hot Spring Ranked by Japanese Locals #Shorts #Onsen"
     },
     {
-      "day": 425,
+      "day": 421,
       "ranking_id": "iwate_secret_onsen_383",
       "scope_type": "都道府県×専門切り口 (岩手県)",
       "category_type": "温泉・秘湯・露天風呂",
@@ -5099,7 +5055,7 @@
       "short_title_en": "[No Promo] Skip Hakone! Iwate's #1 Secret Hot Spring Ranked by Japanese Locals #Shorts #Onsen"
     },
     {
-      "day": 426,
+      "day": 422,
       "ranking_id": "gunma_secret_onsen_384",
       "scope_type": "都道府県×専門切り口 (群馬県)",
       "category_type": "温泉・秘湯・露天風呂",
@@ -5111,7 +5067,7 @@
       "short_title_en": "[No Promo] Skip Hakone! Gunma's #1 Secret Hot Spring Ranked by Japanese Locals #Shorts #Onsen"
     },
     {
-      "day": 427,
+      "day": 423,
       "ranking_id": "ishikawa_secret_onsen_385",
       "scope_type": "都道府県×専門切り口 (石川県)",
       "category_type": "温泉・秘湯・露天風呂",
@@ -5123,7 +5079,7 @@
       "short_title_en": "[No Promo] Skip Hakone! Ishikawa's #1 Secret Hot Spring Ranked by Japanese Locals #Shorts #Onsen"
     },
     {
-      "day": 428,
+      "day": 424,
       "ranking_id": "mie_secret_onsen_386",
       "scope_type": "都道府県×専門切り口 (三重県)",
       "category_type": "温泉・秘湯・露天風呂",
@@ -5135,7 +5091,7 @@
       "short_title_en": "[No Promo] Skip Hakone! Mie's #1 Secret Hot Spring Ranked by Japanese Locals #Shorts #Onsen"
     },
     {
-      "day": 429,
+      "day": 425,
       "ranking_id": "tottori_secret_onsen_387",
       "scope_type": "都道府県×専門切り口 (鳥取県)",
       "category_type": "温泉・秘湯・露天風呂",
@@ -5147,7 +5103,7 @@
       "short_title_en": "[No Promo] Skip Hakone! Tottori's #1 Secret Hot Spring Ranked by Japanese Locals #Shorts #Onsen"
     },
     {
-      "day": 430,
+      "day": 426,
       "ranking_id": "ehime_secret_onsen_388",
       "scope_type": "都道府県×専門切り口 (愛媛県)",
       "category_type": "温泉・秘湯・露天風呂",
@@ -5159,7 +5115,7 @@
       "short_title_en": "[No Promo] Skip Hakone! Ehime's #1 Secret Hot Spring Ranked by Japanese Locals #Shorts #Onsen"
     },
     {
-      "day": 431,
+      "day": 427,
       "ranking_id": "miyazaki_secret_onsen_389",
       "scope_type": "都道府県×専門切り口 (宮崎県)",
       "category_type": "温泉・秘湯・露天風呂",
@@ -5171,7 +5127,7 @@
       "short_title_en": "[No Promo] Skip Hakone! Miyazaki's #1 Secret Hot Spring Ranked by Japanese Locals #Shorts #Onsen"
     },
     {
-      "day": 432,
+      "day": 428,
       "ranking_id": "akita_secret_onsen_390",
       "scope_type": "都道府県×専門切り口 (秋田県)",
       "category_type": "温泉・秘湯・露天風呂",
@@ -5183,7 +5139,7 @@
       "short_title_en": "[No Promo] Skip Hakone! Akita's #1 Secret Hot Spring Ranked by Japanese Locals #Shorts #Onsen"
     },
     {
-      "day": 433,
+      "day": 429,
       "ranking_id": "chiba_secret_onsen_391",
       "scope_type": "都道府県×専門切り口 (千葉県)",
       "category_type": "温泉・秘湯・露天風呂",
