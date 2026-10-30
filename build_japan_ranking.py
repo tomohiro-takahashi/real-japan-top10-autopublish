@@ -97,8 +97,10 @@ PREF_EN_TO_JA = {
 
 
 def strip_cjk(text: str) -> str:
-    """Remove any Japanese/CJK characters and empty parentheses so all rendered slides stay 100% English."""
+    """Remove any Japanese/CJK characters and unsupported glyphs so all rendered slides stay 100% clean English."""
     cleaned = re.sub(r"[\u3000-\u9fff\uff00-\uffef]+", "", text or "")
+    cleaned = re.sub(r"★\s*(\d+(?:\.\d+)?)", r"\1/5.0", cleaned)
+    cleaned = cleaned.replace("★", "").replace("▶", "+").replace("🔔", "+")
     cleaned = re.sub(r"\(\s*\)", "", cleaned)
     cleaned = re.sub(r"\s{2,}", " ", cleaned).strip()
     return cleaned
@@ -802,9 +804,11 @@ def render_ranking_hud_png(
     draw.rectangle([(24, 12), (24 + bw, 46)], fill=badge_bg, outline=(255, 255, 255, 230), width=2)
     draw.text((40, 19), badge, font=f_tag, fill=(255, 255, 255, 255))
 
-    # Top-right Area & Budget Pill on Row 1
-    info_right = f"{seg['area']}  |  {seg['budget']}"
-    tb_r = draw.textbbox((0, 0), info_right, font=f_tag)
+    # Top-right Area & Budget Pill on Row 1 (strictly bounded to max 410px so center badge never collides)
+    info_right = strip_cjk(f"{seg['area']}  |  {seg['budget']}")
+    f_r_fit = fit_font_for_width(draw, info_right, font_path, 17, 13, 410)
+    info_right = smart_truncate(draw, info_right, f_r_fit, 410)
+    tb_r = draw.textbbox((0, 0), info_right, font=f_r_fit)
     rw = tb_r[2] - tb_r[0]
     right_box_x0 = W - rw - 44
 
@@ -814,17 +818,18 @@ def render_ranking_hud_png(
         outline=(148, 163, 184, 210),
         width=2,
     )
-    draw.text((W - rw - 32, 19), info_right, font=f_tag, fill=(253, 224, 71, 255))
+    draw.text((W - rw - 32, 19), info_right, font=f_r_fit, fill=(253, 224, 71, 255))
 
     # Top-Center Permanent "100% NO PAID PROMO • JAPANESE IG ANALYZED | SUBSCRIBE" Badge on Row 1
-    avail_mid_w = right_box_x0 - (24 + bw) - 24
-    if avail_mid_w >= 260:
-        f_np = ImageFont.truetype(font_path, 15)
+    left_edge = 24 + bw + 12
+    avail_mid_w = right_box_x0 - left_edge - 12
+    if avail_mid_w >= 220:
         np_txt = "100% NO PAID PROMO • JAPANESE IG ANALYZED  |  ▶ SUBSCRIBE"
-        f_np_fit = fit_font_for_width(draw, np_txt, font_path, 15, 11, avail_mid_w - 24)
-        tb_np = draw.textbbox((0, 0), np_txt, font=f_np_fit)
+        f_np_fit = fit_font_for_width(draw, np_txt, font_path, 15, 11, avail_mid_w - 20)
+        np_txt_fit = smart_truncate(draw, np_txt, f_np_fit, avail_mid_w - 20)
+        tb_np = draw.textbbox((0, 0), np_txt_fit, font=f_np_fit)
         np_w = (tb_np[2] - tb_np[0]) + 24
-        np_x0 = (24 + bw) + (avail_mid_w - np_w) // 2
+        np_x0 = left_edge + max(0, (avail_mid_w - np_w) // 2)
         draw.rounded_rectangle(
             (np_x0, 12, np_x0 + np_w, 46),
             radius=8,
@@ -832,11 +837,12 @@ def render_ranking_hud_png(
             outline=(16, 185, 129, 245),
             width=2,
         )
-        draw.text((np_x0 + 12, 20), np_txt, font=f_np_fit, fill=(167, 243, 208, 255))
+        draw.text((np_x0 + 12, 20), np_txt_fit, font=f_np_fit, fill=(167, 243, 208, 255))
 
     # Main English Place Title on Row 2 (Large 26px bold with dark stroke)
     title_en = strip_cjk(seg["place_en"].strip()).replace("What You Get in This 9-Min Guide", "100% UNSPONSORED TOP 10 — ANALYZED FROM JAPANESE IG!")
-    f_title_fit = fit_font_for_width(draw, title_en, font_path, 26, 18, W - 48)
+    f_title_fit = fit_font_for_width(draw, title_en, font_path, 26, 17, W - 48)
+    title_en = smart_truncate(draw, title_en, f_title_fit, W - 48)
     draw.text(
         (24, 56),
         title_en,
@@ -851,6 +857,7 @@ def render_ranking_hud_png(
         acc_y0, acc_y1 = 106, 146
         clean_acc = strip_cjk(seg["access_info"].replace("🚄", "").strip())
         f_acc_fit = fit_font_for_width(draw, clean_acc, font_path, 18, 13, W - 220)
+        clean_acc = smart_truncate(draw, clean_acc, f_acc_fit, W - 220)
         draw.rectangle([(0, acc_y0), (W, acc_y1)], fill=(8, 47, 73, 235))
         draw.rectangle([(0, acc_y0), (190, acc_y1)], fill=(2, 132, 199, 250))
         draw.text((18, acc_y0 + 10), "TRAIN & ACCESS", font=f_acc, fill=(255, 255, 255, 255))
@@ -875,6 +882,7 @@ def render_ranking_hud_png(
         l1_w = (tb_l1[2] - tb_l1[0]) + 28
         praise_txt = strip_cjk(seg["review_praise_en"])
         f_ren1 = fit_font_for_width(draw, praise_txt, font_path, 20, 14, max_rw)
+        praise_txt = smart_truncate(draw, praise_txt, f_ren1, max_rw)
         draw.rectangle([(card_x0, c1_y0), (card_x1, c1_y1)], fill=(12, 19, 34, 238), outline=(16, 185, 129, 250), width=2)
         draw.rectangle([(card_x0, c1_y0), (card_x0 + l1_w, c1_y0 + 32)], fill=(16, 185, 129, 250))
         draw.text((card_x0 + 14, c1_y0 + 7), lbl1, font=f_rhead, fill=(255, 255, 255, 255))
@@ -886,6 +894,7 @@ def render_ranking_hud_png(
         l2_w = (tb_l2[2] - tb_l2[0]) + 28
         warn_txt = strip_cjk(seg["review_warn_en"])
         f_ren2 = fit_font_for_width(draw, warn_txt, font_path, 20, 14, max_rw)
+        warn_txt = smart_truncate(draw, warn_txt, f_ren2, max_rw)
         draw.rectangle([(card_x0, c2_y0), (card_x1, c2_y1)], fill=(12, 19, 34, 238), outline=(245, 158, 11, 250), width=2)
         draw.rectangle([(card_x0, c2_y0), (card_x0 + l2_w, c2_y0 + 32)], fill=(217, 119, 6, 250))
         draw.text((card_x0 + 14, c2_y0 + 7), lbl2, font=f_rhead, fill=(255, 255, 255, 255))
@@ -901,7 +910,8 @@ def render_ranking_hud_png(
     tb_sec = draw.textbbox((0, 0), sec_label, font=f_tag)
     sec_w = (tb_sec[2] - tb_sec[0]) + 36
     tip_txt = strip_cjk(seg["insider_tip"])
-    f_tip_fit = fit_font_for_width(draw, tip_txt, font_path, 19, 14, W - sec_w - 32)
+    f_tip_fit = fit_font_for_width(draw, tip_txt, font_path, 19, 13, W - sec_w - 32)
+    tip_txt = smart_truncate(draw, tip_txt, f_tip_fit, W - sec_w - 32)
     draw.rectangle([(0, tip_y0), (W, sub_y0)], fill=(15, 23, 42, 238))
     draw.rectangle([(0, tip_y0), (sec_w, sub_y0)], fill=(16, 185, 129, 250))
     draw.text((18, tip_y0 + 12), sec_label, font=f_tag, fill=(255, 255, 255, 255), stroke_width=1, stroke_fill=(0, 0, 0, 180))
@@ -2435,8 +2445,8 @@ def render_custom_thumbnails(script_path: Path) -> Tuple[Path, Path, Path]:
         return base or strip_cjk(raw_name)
 
     def clean_short_dish(raw_dish: str) -> str:
-        """Strip parentheticals and score tags from dish/feature descriptions."""
-        base = strip_cjk(raw_dish).split("(")[0].split("|")[0].strip()
+        """Strip parentheticals, '+' secondary clauses, and score tags from dish/feature descriptions."""
+        base = strip_cjk(raw_dish).split("(")[0].split("|")[0].split(" + ")[0].strip()
         return base or strip_cjk(raw_dish)
 
     def make_polaroid_card(
@@ -2475,16 +2485,29 @@ def render_custom_thumbnails(script_path: Path) -> Tuple[Path, Path, Path]:
         sh.alpha_composite(rot, (12, 10))
         return sh
 
-    p1_path = img_dir / rows[0]["thumb"]
-    p2_path = img_dir / rows[1]["thumb"]
-    p3_path = img_dir / rows[2]["thumb"]
+    def _pick_thumb_photo(thumb_name: str) -> Path:
+        clean_cand = img_dir / thumb_name.replace(".jpg", "_clean.jpg")
+        return clean_cand if clean_cand.exists() else (img_dir / thumb_name)
+
+    p1_path = _pick_thumb_photo(rows[0]["thumb"])
+    p2_path = _pick_thumb_photo(rows[1]["thumb"])
+    p3_path = _pick_thumb_photo(rows[2]["thumb"])
 
     thumb_a = OUTPUT_DIR / f"overseas_japan_{rid}_thumb.jpg"
     thumb_b = OUTPUT_DIR / f"overseas_japan_{rid}_thumb_alt.jpg"
     thumb_s = OUTPUT_DIR / f"overseas_japan_{rid}_short_thumb.jpg"
 
     tc = data.get("thumb_config", {})
-    clean_pref = strip_cjk(data.get("prefecture", "JAPAN")).replace("TOP 10", "").replace("Sightseeing", "").strip().upper() or "JAPAN"
+    clean_pref = (
+        strip_cjk(data.get("prefecture", "JAPAN"))
+        .replace("TOP 10", "")
+        .replace("Sightseeing", "")
+        .replace("Real Sites", "")
+        .replace("Sacred Sites", "")
+        .strip()
+        .upper()
+        or "JAPAN"
+    )
     short_geo = clean_pref.split()[0] if clean_pref else "JAPAN"
 
     # Dynamically choose contextual hero_line1 so Tokyo Ramen never says "SKIP KYOTO!"
@@ -2497,8 +2520,9 @@ def render_custom_thumbnails(script_path: Path) -> Tuple[Path, Path, Path]:
 
     # Never chop region names mid-word (fixes 'TOKYO RAME TOP 10' -> 'TOKYO RAMEN TOP 10')
     banner_title = f"{clean_pref} TOP 10"
-    banner_sub = "REAL JAPANESE IG VOICES ONLY"
-    map_header = f"WHERE IS {short_geo}?"
+    banner_sub = tc.get("banner_sub", "REAL JAPANESE IG VOICES ONLY")
+    non_geo_words = {"YOUR", "REAL", "STEP", "ANIME", "DEMON", "SLAM", "ONE", "SPIRITED", "JUJUTSU", "STUDIO"}
+    map_header = "WHERE IN JAPAN?" if short_geo in non_geo_words else f"WHERE IS {short_geo}?"
     map_pill = tc.get("map_pill", "DIRECT")
     map_line1 = tc.get("map_line1", "Shinkansen / Train")
     map_line2 = tc.get("map_line2", "from Tokyo Station!")
@@ -2547,10 +2571,11 @@ def render_custom_thumbnails(script_path: Path) -> Tuple[Path, Path, Path]:
 
     # Top-left Red Verification Ribbon (x=28..516, y=20..76)
     d_a.rounded_rectangle((28, 20, 516, 76), radius=12, fill=(220, 38, 38, 255), outline=(253, 224, 71, 255), width=3)
-    rib_txt = "ZERO PAID PROMO • JAPANESE IG"
-    f_rib = fit_font_for_width(d_a, rib_txt, w9_path, 22, 16, 464)
-    tb_rb = d_a.textbbox((0, 0), rib_txt, font=f_rib)
-    d_a.text((28 + (488 - (tb_rb[2] - tb_rb[0])) // 2, 36), rib_txt, font=f_rib, fill=(255, 255, 255, 255))
+    rib_txt = tc.get("ribbon_text", "ZERO PAID PROMO • JAPANESE IG")
+    f_rib = fit_font_for_width(d_a, rib_txt, w9_path, 22, 15, 464)
+    rib_txt_fit = smart_truncate(d_a, rib_txt, f_rib, 464)
+    tb_rb = d_a.textbbox((0, 0), rib_txt_fit, font=f_rib)
+    d_a.text((28 + (488 - (tb_rb[2] - tb_rb[0])) // 2, 36), rib_txt_fit, font=f_rib, fill=(255, 255, 255, 255))
 
     # Top-right #1 Highlight Pill strictly bounded to x=566..1260 (never overlaps left ribbon!)
     bx0, bx1 = 566, 1260
@@ -2570,16 +2595,18 @@ def render_custom_thumbnails(script_path: Path) -> Tuple[Path, Path, Path]:
     d_a.text((bx0_dyn + 22, 39), t_no1, font=f_b1, fill=(255, 255, 255, 255))
     d_a.text((bx0_dyn + 8 + w_n1 + 14, 40), t_ph, font=f_b2, fill=(253, 224, 71, 255))
 
-    f_hero1 = fit_font_for_width(d_a, hero_line1, black_path, 72, 48, 490)
+    f_hero1 = fit_font_for_width(d_a, hero_line1, black_path, 72, 42, 490)
     f_hero2 = fit_font_for_width(d_a, hero_line2, black_path, 76, 48, 490)
     draw_pro_3d_text(canvas_a, (28, 88), hero_line1, f_hero1, (255, 255, 255), (218, 234, 255), stroke_w=9, depth=8)
     draw_pro_3d_text(canvas_a, (28, 178), hero_line2, f_hero2, (255, 248, 130), (245, 158, 11), stroke_w=10, depth=9)
 
     d_a.rounded_rectangle((28, 288, 502, 396), radius=18, fill=(14, 116, 144, 248), outline=(167, 243, 208, 255), width=3)
-    f_ak = fit_font_for_width(d_a, banner_title, w9_path, 40, 22, 446)
-    f_ak_sub = fit_font_for_width(d_a, banner_sub, w9_path, 19, 14, 446)
-    d_a.text((44, 302), banner_title, font=f_ak, fill=(255, 255, 255, 255), stroke_width=3, stroke_fill=(0, 0, 0, 240))
-    d_a.text((44, 356), banner_sub, font=f_ak_sub, fill=(253, 224, 71, 255), stroke_width=2, stroke_fill=(0, 0, 0, 230))
+    f_ak = fit_font_for_width(d_a, banner_title, w9_path, 38, 18, 444)
+    banner_title_fit = smart_truncate(d_a, banner_title, f_ak, 444)
+    f_ak_sub = fit_font_for_width(d_a, banner_sub, w9_path, 19, 14, 444)
+    banner_sub_fit = smart_truncate(d_a, banner_sub, f_ak_sub, 444)
+    d_a.text((44, 304), banner_title_fit, font=f_ak, fill=(255, 255, 255, 255), stroke_width=3, stroke_fill=(0, 0, 0, 240))
+    d_a.text((44, 356), banner_sub_fit, font=f_ak_sub, fill=(253, 224, 71, 255), stroke_width=2, stroke_fill=(0, 0, 0, 230))
 
     mx0, my0, mx1, my1 = 28, 414, 452, 696
     d_a.rounded_rectangle((mx0, my0, mx1, my1), radius=20, fill=(10, 18, 34, 245), outline=(56, 189, 248, 250), width=3)

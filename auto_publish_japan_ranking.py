@@ -604,26 +604,45 @@ def auto_generate_next_theme_script() -> Path:
             "budget": sp_info["budget"],
             "access_short": sp_info["access_short"],
             "hack": sp_info["hack"],
+            "nearby_spot": sp_info.get("nearby_spot", ""),
+            "anime_title": sp_info.get("anime_title", ""),
             "thumb": p1,
         })
 
+    is_anime = "anime" in rid or "ghibli" in rid or "anime" in cat_en.lower()
 
     segments: List[Dict[str, Any]] = [
         {
             "seg_type": "opening",
-            "rank_badge": "ZERO PAID PROMO!",
+            "rank_badge": "ANIME + NEARBY GUIDE!" if is_anime else "ZERO PAID PROMO!",
             "place_ja": chosen_theme["hook_title_en"],
-            "place_en": f"100% NO PAID PROMO! {region_en} TOP 10 {cat_en} (Japanese IG Analyzed)",
+            "place_en": (
+                f"REAL ANIME SACRED SITES + NEARBY SIGHTSEEING! {region_en} TOP 10"
+                if is_anime
+                else f"100% NO PAID PROMO! {region_en} TOP 10 {cat_en} (Japanese IG Analyzed)"
+            ),
             "area": f"{region_en}, Japan",
             "budget": "0% Sponsored",
-            "insider_tip": "100% NO PAID PROMOTION: Analyzed from 500,000+ real Japanese Instagram posts & local reviews!",
+            "insider_tip": (
+                "KILLER GUIDE: Real Anime Sacred Sites + Best Surrounding Sightseeing Spots & Local Food (500K Japanese IG Analyzed)!"
+                if is_anime
+                else "100% NO PAID PROMOTION: Analyzed from 500,000+ real Japanese Instagram posts & local reviews!"
+            ),
             "photos": [photos_list[0], photos_list[2]],
             "narration": (
-                f"Stop falling for paid influencer tourist traps! We analyzed over five hundred thousand real Japanese-language "
+                f"Want to step inside your favorite anime AND explore the best real sightseeing spots right around the corner? "
+                f"We analyzed over five hundred thousand real Japanese Instagram posts — with zero paid promotions — to rank the "
+                f"top ten {cat_en} in {region_en}, complete with the hidden shrines, hot springs, and local food just minutes from each sacred site!"
+                if is_anime
+                else f"Stop falling for paid influencer tourist traps! We analyzed over five hundred thousand real Japanese-language "
                 f"Instagram posts and domestic reviews — with zero paid promotions and zero sponsored spots — to bring you the "
                 f"top ten {cat_en} in {region_en} that Japanese locals actually love!"
             ),
-            "subtitle": f"100% NO PAID PROMO! We analyzed 500,000+ real Japanese Instagram posts\nto rank the {region_en} TOP 10 based only on honest local voices!",
+            "subtitle": (
+                f"REAL ANIME SACRED SITES + SURROUNDING SIGHTSEEING & LOCAL FOOD!\nRanked from 500,000+ unsponsored Japanese Instagram posts!"
+                if is_anime
+                else f"100% NO PAID PROMO! We analyzed 500,000+ real Japanese Instagram posts\nto rank the {region_en} TOP 10 based only on honest local voices!"
+            ),
         },
         {
             "seg_type": "area_guide",
@@ -663,40 +682,81 @@ def auto_generate_next_theme_script() -> Path:
         rk_str = row["rank"]
         p_a = photos_list[i * 2]
         p_b = photos_list[i * 2 + 1]
-        segments.append({
-            "seg_type": "spot",
-            "rank_badge": f"{rk_str}  {row['score']}",
-            "place_ja": row["name_en"],
-            "place_en": f"{rk_str} {row['name_en']} — {cat_en}",
-            "area": f"{region_en}, Japan",
-            "budget": row["budget"],
-            "access_info": f"Train Access: {row['access_short']} (IC Card / JR Line)",
-            "insider_tip": f"LOCAL HIGHLIGHT: {row['dish']} — {row['hack']}",
-            "photos": [p_a, p_b],
-            "narration": (
-                f"At rank {rk_str} with {row['score']} is {row['name_en']} in {region_en}. "
-                f"Japanese Instagram users ranked it high for {row['dish']}. Easy access via {row['access_short']}."
-            ),
-            "subtitle": f"{rk_str} {row['name_en']} ({row['score']}): {row['dish']}\nAccess: {row['access_short']} | Tip: {row['hack']}",
-        })
-        segments.append({
-            "seg_type": "review",
-            "rank_badge": f"{rk_str} REAL IG VOICE",
-            "place_ja": f"{row['name_en']} Reviews",
-            "place_en": f"Real Unsponsored Japanese Instagram Voices on {row['name_en']}",
-            "area": f"{region_en}, Japan",
-            "budget": "100% Unsponsored",
-            "access_info": f"Train Access: {row['access_short']}",
-            "insider_tip": f"PRO HACK: {row['hack']}",
-            "review_praise_en": f"\"Zero tourist hype—just unbeatable authentic quality in {region_en} that Japanese locals come back for!\"",
-            "review_warn_en": f"\"Weekends get busy with local fans after 11:30 AM, so arrive 15 minutes before opening for immediate entry!\"",
-            "photos": [p_b, p_a],
-            "narration": (
-                f"On Japanese Instagram, locals praise {row['name_en']} for its authentic atmosphere and unmatched local value. "
-                f"However, unsponsored reviews warn that weekends get crowded around noon, so arrive fifteen minutes before opening!"
-            ),
-            "subtitle": f"Real Japanese IG Voice: \"Unmatched authentic quality in {region_en}!\"\nLocal Warning: \"Arrive 15 mins before opening on weekends to skip the queue.\"",
-        })
+        nearby_txt = row.get("nearby_spot") or ""
+        anime_lbl = row.get("anime_title") or ""
+        base_name = row["name_en"].split("—")[0].split("(")[0].strip()
+
+        if is_anime and nearby_txt:
+            segments.append({
+                "seg_type": "spot",
+                "rank_badge": f"{rk_str}  {row['score']}",
+                "place_ja": row["name_en"],
+                "place_en": f"{rk_str} {row['name_en']}",
+                "area": f"{anime_lbl or region_en} Sacred Site",
+                "budget": row["budget"],
+                "access_info": f"Train Access: {row['access_short']}  |  Anime: {anime_lbl or 'Real Pilgrimage'}",
+                "insider_tip": f"SACRED SITE + NEARBY: {row['dish']}",
+                "photos": [p_a, p_b],
+                "narration": (
+                    f"At rank {rk_str} with {row['score']} is {row['name_en']}. "
+                    f"This iconic real-life location from {anime_lbl or 'hit Japanese anime'} is famous for {row['dish']}. "
+                    f"Easy access via {row['access_short']}."
+                ),
+                "subtitle": f"{rk_str} {row['name_en']} ({row['score']})\n{row['dish']}",
+            })
+            segments.append({
+                "seg_type": "review",
+                "rank_badge": f"{rk_str} NEARBY & IG",
+                "place_ja": f"Around {base_name}",
+                "place_en": f"Nearby Sightseeing, Food & Japanese IG Guide Around {base_name}",
+                "area": f"{region_en} Full-Day Route",
+                "budget": "Walk 5–15 Mins",
+                "access_info": f"Nearby Route: {nearby_txt}",
+                "insider_tip": f"PILGRIMAGE + SIGHTSEEING HACK: {row['hack']}",
+                "review_praise_en": f"\"SURROUNDING GEMS: {nearby_txt} — Don't just snap one photo; explore the whole neighborhood!\"",
+                "review_warn_en": f"\"LOCAL TIMING HACK: {row['hack']}\"",
+                "photos": [p_b, p_a],
+                "narration": (
+                    f"Don't just leave after taking your anime photo! Right around {base_name}, Japanese locals recommend visiting "
+                    f"{nearby_txt}. {row['hack']}!"
+                ),
+                "subtitle": f"Nearby Sightseeing & Food: {nearby_txt}\nInsider Route Tip: {row['hack']}",
+            })
+        else:
+            segments.append({
+                "seg_type": "spot",
+                "rank_badge": f"{rk_str}  {row['score']}",
+                "place_ja": row["name_en"],
+                "place_en": f"{rk_str} {row['name_en']} — {cat_en}",
+                "area": f"{region_en}, Japan",
+                "budget": row["budget"],
+                "access_info": f"Train Access: {row['access_short']} (IC Card / JR Line)",
+                "insider_tip": f"LOCAL HIGHLIGHT: {row['dish']} — {row['hack']}",
+                "photos": [p_a, p_b],
+                "narration": (
+                    f"At rank {rk_str} with {row['score']} is {row['name_en']} in {region_en}. "
+                    f"Japanese Instagram users ranked it high for {row['dish']}. Easy access via {row['access_short']}."
+                ),
+                "subtitle": f"{rk_str} {row['name_en']} ({row['score']}): {row['dish']}\nAccess: {row['access_short']} | Tip: {row['hack']}",
+            })
+            segments.append({
+                "seg_type": "review",
+                "rank_badge": f"{rk_str} REAL IG VOICE",
+                "place_ja": f"{row['name_en']} Reviews",
+                "place_en": f"Real Unsponsored Japanese Instagram Voices on {row['name_en']}",
+                "area": f"{region_en}, Japan",
+                "budget": "100% Unsponsored",
+                "access_info": f"Train Access: {row['access_short']}",
+                "insider_tip": f"PRO HACK: {row['hack']}",
+                "review_praise_en": f"\"Zero tourist hype—just unbeatable authentic quality in {region_en} that Japanese locals come back for!\"",
+                "review_warn_en": f"\"Weekends get busy with local fans after 11:30 AM, so arrive 15 minutes before opening for immediate entry!\"",
+                "photos": [p_b, p_a],
+                "narration": (
+                    f"On Japanese Instagram, locals praise {row['name_en']} for its authentic atmosphere and unmatched local value. "
+                    f"However, unsponsored reviews warn that weekends get crowded around noon, so arrive fifteen minutes before opening!"
+                ),
+                "subtitle": f"Real Japanese IG Voice: \"Unmatched authentic quality in {region_en}!\"\nLocal Warning: \"Arrive 15 mins before opening on weekends to skip the queue.\"",
+            })
 
     segments.append({
         "seg_type": "summary",
@@ -723,11 +783,11 @@ def auto_generate_next_theme_script() -> Path:
         "youtube_title_short": chosen_theme["short_title_en"],
         "voice": "en-US-ChristopherNeural",
         "thumb_config": {
-            "ribbon_text": "ZERO PAID PROMO • JAPANESE IG",
-            "hero_line1": "NO PROMO!",
+            "ribbon_text": "ANIME SACRED SITES + NEARBY GUIDE" if is_anime else "ZERO PAID PROMO • JAPANESE IG",
+            "hero_line1": "REAL ANIME SCENES!" if is_anime else "NO PROMO!",
             "hero_line2": "REAL JAPAN",
             "banner_title": f"{region_en.upper()} TOP 10",
-            "banner_sub": "REAL JAPANESE IG VOICES ONLY",
+            "banner_sub": "ANIME SPOTS + NEARBY SIGHTSEEING" if is_anime else "REAL JAPANESE IG VOICES ONLY",
             "map_header": f"WHERE IS {region_en.split()[0].upper()}?",
             "map_pill": "DIRECT",
             "map_line1": "Shinkansen / Train",

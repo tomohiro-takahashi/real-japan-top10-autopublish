@@ -368,50 +368,156 @@ def clean_wikipedia_description(snippet: str, title: str, category_en: str, clea
     return f"{text} ({rating})"
 
 
+def _fetch_bing_image_bytes(query: str) -> bytes:
+    """Search Bing Images for an anime scene or landmark still and return raw JPEG/PNG bytes."""
+    url = "https://www.bing.com/images/search?q=" + urllib.parse.quote(query) + "&form=HDRSC2&first=1"
+    headers = {
+        "User-Agent": (
+            "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
+            "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
+        )
+    }
+    try:
+        req = urllib.request.Request(url, headers=headers)
+        with urllib.request.urlopen(req, timeout=12) as resp:
+            html = resp.read().decode("utf-8", errors="ignore")
+        murls = re.findall(r'murl&quot;:&quot;(https?://[^&]+?\.(?:jpg|jpeg|png))&quot;', html)
+        for img_url in murls[:5]:
+            try:
+                ireq = urllib.request.Request(img_url, headers=headers)
+                with urllib.request.urlopen(ireq, timeout=10) as iresp:
+                    data = iresp.read()
+                if len(data) > 18000:
+                    return data
+            except Exception:
+                continue
+    except Exception:
+        pass
+    return b""
+
+
+def _composite_anime_scene_inset(real_photo_path: Path, anime_bytes: bytes, anime_label: str) -> None:
+    """
+    Composite a broadcast-style 'REAL SACRED SITE vs. ANIME SCENE' Picture-in-Picture comparison
+    onto `real_photo_path` (1600x900) inside the zoom-safe middle band so it never collides with HUD bars.
+    """
+    try:
+        import io
+        from PIL import Image, ImageDraw, ImageEnhance, ImageFont
+
+        base_im = Image.open(real_photo_path).convert("RGB")
+        tw, th = 1600, 900
+        scale = max(tw / base_im.width, th / base_im.height)
+        nw, nh = int(base_im.width * scale), int(base_im.height * scale)
+        base_im = base_im.resize((nw, nh), Image.Resampling.LANCZOS).crop(
+            ((nw - tw) // 2, (nh - th) // 2, (nw - tw) // 2 + tw, (nh - th) // 2 + th)
+        )
+
+        anime_im = Image.open(io.BytesIO(anime_bytes)).convert("RGB")
+        # Inset card in zoom-safe middle-right area (x=968..1488, y=268..558 on 1600x900 canvas -> y=214..446 on 1280x720)
+        iw, ih = 520, 290
+        ascale = max(iw / anime_im.width, ih / anime_im.height)
+        anw, anh = int(anime_im.width * ascale), int(anime_im.height * ascale)
+        anime_crop = anime_im.resize((anw, anh), Image.Resampling.LANCZOS).crop(
+            ((anw - iw) // 2, (anh - ih) // 2, (anw - iw) // 2 + iw, (anh - ih) // 2 + ih)
+        )
+        anime_crop = ImageEnhance.Contrast(anime_crop).enhance(1.08)
+
+        canvas = base_im.convert("RGBA")
+        draw = ImageDraw.Draw(canvas, "RGBA")
+
+        ix0, iy0 = 968, 268
+        ix1, iy1 = ix0 + iw, iy0 + ih
+        # Dark drop shadow + glowing gold frame
+        draw.rounded_rectangle((ix0 - 8, iy0 - 44, ix1 + 8, iy1 + 8), radius=14, fill=(8, 12, 24, 235), outline=(253, 224, 71, 255), width=4)
+        canvas.paste(anime_crop.convert("RGBA"), (ix0, iy0))
+
+        # Top pill above the anime inset
+        draw.rounded_rectangle((ix0, iy0 - 38, ix1, iy0 - 4), radius=8, fill=(220, 38, 38, 250))
+        font_p = None
+        for fp in (
+            "/System/Library/Fonts/Supplemental/Arial Bold.ttf",
+            "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",
+            "/usr/share/fonts/truetype/liberation/LiberationSans-Bold.ttf",
+        ):
+            if Path(fp).exists():
+                font_p = fp
+                break
+        f_lbl = ImageFont.truetype(font_p, 21) if font_p else ImageFont.load_default()
+        clean_lbl = f"ANIME SCENE: {anime_label.upper()}"[:38]
+        tb = draw.textbbox((0, 0), clean_lbl, font=f_lbl)
+        draw.text((ix0 + (iw - (tb[2] - tb[0])) // 2, iy0 - 33), clean_lbl, font=f_lbl, fill=(255, 255, 255, 255))
+
+        canvas.convert("RGB").save(real_photo_path, "JPEG", quality=95)
+    except Exception:
+        pass
+
+
+def _search_wikimedia_urls(query: str, seen_urls: set, limit: int = 2) -> List[str]:
+    found: List[str] = []
+    api_url = (
+        "https://commons.wikimedia.org/w/api.php?action=query&generator=search"
+        f"&gsrsearch={urllib.parse.quote('filetype:bitmap ' + query)}"
+        "&gsrnamespace=6&gsrlimit=12&prop=imageinfo&iiprop=url&iiurlwidth=1600&format=json"
+    )
+    try:
+        req = urllib.request.Request(api_url, headers={"User-Agent": "RealJapanTop10Bot/1.0"})
+        with urllib.request.urlopen(req, timeout=15) as resp:
+            pages = json.loads(resp.read().decode("utf-8")).get("query", {}).get("pages", {})
+        for pg in pages.values():
+            ii = (pg.get("imageinfo") or [{}])[0]
+            u = ii.get("thumburl") or ii.get("url") or ""
+            clean_u = u.split("?")[0].lower()
+            if clean_u.endswith((".jpg", ".jpeg")) and u not in seen_urls:
+                seen_urls.add(u)
+                found.append(u)
+                if len(found) >= limit:
+                    break
+    except Exception:
+        pass
+    return found
+
+
 def fetch_spot_specific_photos(spots: List[Dict[str, str]], region_en: str, out_dir: Path) -> List[str]:
     """
-    Download 2 high-res (1600px) Wikimedia Commons JPEG photos per spot (total 20 photos)
-    using each spot's specific `photo_query` or `name_en`.
+    Download 2 high-res (1600px) JPEG photos per spot (total 20 photos):
+    - `spot_XX_1.jpg`: The primary spot / Anime Sacred Site (plus optional Anime Scene PiP comparison if `anime_scene_query` is present).
+    - `spot_XX_2.jpg`: The surrounding sightseeing / local food photo (`nearby_photo_query` if present, else second angle of spot).
     """
     out_dir.mkdir(parents=True, exist_ok=True)
     saved_names: List[str] = []
-    seen_urls = set()
+    seen_urls: set = set()
 
     for i, sp in enumerate(spots[:10]):
         idx_s = i + 1
-        q_primary = sp.get("photo_query") or f"{sp['name_en'].split('(')[0].strip()} Japan"
+        q_primary = sp.get("photo_query") or f"{sp['name_en'].split('(')[0].split('—')[0].strip()} Japan"
+        q_nearby = sp.get("nearby_photo_query") or ""
         q_fallback = f"{region_en} Japan landmark"
 
-        spot_urls: List[str] = []
-        for q in [q_primary, q_fallback]:
-            if len(spot_urls) >= 2:
-                break
-            api_url = (
-                "https://commons.wikimedia.org/w/api.php?action=query&generator=search"
-                f"&gsrsearch={urllib.parse.quote('filetype:bitmap ' + q)}"
-                "&gsrnamespace=6&gsrlimit=12&prop=imageinfo&iiprop=url&iiurlwidth=1600&format=json"
-            )
-            try:
-                req = urllib.request.Request(api_url, headers={"User-Agent": "RealJapanTop10Bot/1.0"})
-                with urllib.request.urlopen(req, timeout=15) as resp:
-                    pages = json.loads(resp.read().decode("utf-8")).get("query", {}).get("pages", {})
-                for pg in pages.values():
-                    ii = (pg.get("imageinfo") or [{}])[0]
-                    u = ii.get("thumburl") or ii.get("url") or ""
-                    clean_u = u.split("?")[0].lower()
-                    if clean_u.endswith((".jpg", ".jpeg")) and u not in seen_urls:
-                        seen_urls.add(u)
-                        spot_urls.append(u)
-                        if len(spot_urls) >= 2:
-                            break
-            except Exception:
-                continue
+        spot_urls: List[str] = _search_wikimedia_urls(q_primary, seen_urls, limit=1 if q_nearby else 2)
+        if q_nearby:
+            nearby_urls = _search_wikimedia_urls(q_nearby, seen_urls, limit=1)
+            spot_urls.extend(nearby_urls)
+        if len(spot_urls) < 2:
+            more = _search_wikimedia_urls(q_primary, seen_urls, limit=2 - len(spot_urls))
+            spot_urls.extend(more)
+        if len(spot_urls) < 2:
+            fb = _search_wikimedia_urls(q_fallback, seen_urls, limit=2 - len(spot_urls))
+            spot_urls.extend(fb)
 
         for sub_idx in (1, 2):
             fname = f"spot_{idx_s:02d}_{sub_idx}.jpg"
             dest = out_dir / fname
             chosen_url = spot_urls[sub_idx - 1] if len(spot_urls) >= sub_idx else (spot_urls[0] if spot_urls else "")
-            if chosen_url:
+            wrote_ok = False
+            if sub_idx == 1 and sp.get("anime_scene_query"):
+                # Prefer exact sacred site photo via Bing Image Search so iconic stairs/crossings match the anime scene
+                b_real = _fetch_bing_image_bytes(f"{q_primary} real life photo Japan")
+                if b_real:
+                    dest.write_bytes(b_real)
+                    saved_names.append(fname)
+                    wrote_ok = True
+            if not wrote_ok and chosen_url:
                 try:
                     img_req = urllib.request.Request(chosen_url, headers={"User-Agent": "RealJapanTop10Bot/1.0"})
                     with urllib.request.urlopen(img_req, timeout=15) as r_img:
@@ -419,13 +525,22 @@ def fetch_spot_specific_photos(spots: List[Dict[str, str]], region_en: str, out_
                     if len(data) > 20000:
                         dest.write_bytes(data)
                         saved_names.append(fname)
-                        continue
+                        wrote_ok = True
                 except Exception:
                     pass
-            # Copy previous valid photo if download failed
-            if saved_names and (out_dir / saved_names[-1]).exists():
+            if not wrote_ok and saved_names and (out_dir / saved_names[-1]).exists():
                 dest.write_bytes((out_dir / saved_names[-1]).read_bytes())
                 saved_names.append(fname)
+                wrote_ok = True
+
+            # Save a clean copy for thumbnails before compositing the Anime Scene inset
+            if wrote_ok and sub_idx == 1 and sp.get("anime_scene_query"):
+                clean_copy = out_dir / f"spot_{idx_s:02d}_1_clean.jpg"
+                clean_copy.write_bytes(dest.read_bytes())
+                anime_bytes = _fetch_bing_image_bytes(sp["anime_scene_query"])
+                if anime_bytes:
+                    anime_lbl = sp.get("anime_title") or "ICONIC SCENE"
+                    _composite_anime_scene_inset(dest, anime_bytes, anime_lbl)
 
     return saved_names
 
