@@ -931,7 +931,36 @@ def run_daily_pipeline(
 
     logger.info(f"=== Starting Automated Pipeline for '{rid}' ({script_path.name}) ===")
 
-    if reuse_existing_media and long_mp4.exists() and short_mp4.exists() and thumb_a.exists():
+    # Pre-build Self-Healing Photo Quality Guard: verify all 20 spot photos are valid modern color landscape images
+    from real_spots_catalog import _is_valid_landscape_photo, discover_real_spots_via_wikipedia, fetch_spot_specific_photos
+    import hashlib
+    photo_dir = BASE_DIR / "assets" / "images" / rid
+    seen_md5 = set()
+    needs_photo_repair = False
+    for idx_s in range(1, 11):
+        for sub_s in (1, 2):
+            fp = photo_dir / f"spot_{idx_s:02d}_{sub_s}.jpg"
+            if not fp.exists():
+                needs_photo_repair = True
+                break
+            raw_b = fp.read_bytes()
+            h_md5 = hashlib.md5(raw_b).hexdigest()
+            if h_md5 in seen_md5 or not _is_valid_landscape_photo(raw_b):
+                logger.warning(f"Detected invalid/archival or duplicate photo {fp.name} in '{rid}'; scheduling auto-repair.")
+                try:
+                    fp.unlink()
+                except Exception:
+                    pass
+                needs_photo_repair = True
+            else:
+                seen_md5.add(h_md5)
+    if needs_photo_repair:
+        logger.info(f"Auto-repairing spot photos for '{rid}' before video build...")
+        pref_en = data.get("prefecture", "Japan")
+        real_spots = discover_real_spots_via_wikipedia(pref_en, "Local Spots", rid)
+        fetch_spot_specific_photos(real_spots, pref_en, photo_dir)
+
+    if reuse_existing_media and long_mp4.exists() and short_mp4.exists() and thumb_a.exists() and not needs_photo_repair:
         logger.info("Reusing existing rendered MP4s and custom thumbnails in output/...")
     else:
         logger.info("Step 1/3: Rendering 5 Custom Thumbnail Templates + Shorts Cover...")

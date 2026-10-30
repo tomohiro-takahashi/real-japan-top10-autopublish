@@ -1157,10 +1157,15 @@ def render_short_vertical_hud(
     meta: Dict[str, Any],
     out_vertical_hud_png: Path,
     font_path: str,
+    act_idx: int = 1,
 ) -> Path:
     """
-    Build the native 1080x1920 (9:16) RGBA overlay for `output_short.mp4` in a calm Japanese Mincho / Record-Jacket
-    layout with a transparent center window (`x=42..1038, y=423..1170`) where the 35mm film visual plays live!
+    Build the native 1080x1920 (9:16) RGBA overlay for `output_short.mp4`:
+    - Leaves top dead-zone (y=0..265) 100% clear of text so YouTube Shorts UI never covers titles.
+    - Places Era Tag, Catchphrase, and Main Title in the upper Eye-Level zone (y=268..490).
+    - Punches a transparent live 35mm film window at (x=42..1038, y=502..1068) with an integrated Now-Playing bar.
+    - Renders a high-impact 4-Act Dynamic Storytelling Card at center-lower Eye Level (y=1088..1482)
+      that changes every 7.5s (Act 1: Hook -> Act 2: Lyrics/Scene -> Act 3: Sound/Value -> Act 4: Full Mix CTA).
     """
     SW, SH = 1080, 1920
     raw = Image.open(bg_jpg).convert("RGB")
@@ -1177,126 +1182,208 @@ def render_short_vertical_hud(
     cjk_heavy_path = find_cjk_heavy_font() or cjk_reg_path
     cjk_mincho_path = find_cjk_mincho_font() or cjk_reg_path
 
-    era_label, catch_txt, main_txt, _ = _extract_ja_parts(meta)
+    era_label, catch_txt, main_txt, sub_txt = _extract_ja_parts(meta)
     draw = ImageDraw.Draw(bg_blur, "RGBA")
 
-    # 1. Top Japanese Editorial Header (y=114..387)
-    f_era = fit_font_for_width(draw, era_label, cjk_reg_path, 26, 20, SW - 144)
+    # 1. Eye-Level Upper Editorial Header (y=268..490 — completely below the top Shorts UI bar!)
+    f_era = fit_font_for_width(draw, era_label, cjk_reg_path, 26, 19, SW - 120)
     tb_e = draw.textbbox((0, 0), era_label, font=f_era)
-    ew = (tb_e[2] - tb_e[0]) + 54
+    ew = (tb_e[2] - tb_e[0]) + 56
     ex0 = (SW - ew) // 2
     draw.rounded_rectangle(
-        (ex0, 117, ex0 + ew, 168),
-        radius=26,
-        fill=(10, 14, 24, 195),
-        outline=(217, 179, 108, 160),
+        (ex0, 268, ex0 + ew, 322),
+        radius=27,
+        fill=(12, 16, 28, 225),
+        outline=(217, 179, 108, 195),
         width=2,
     )
-    draw.text(((SW - (tb_e[2] - tb_e[0])) // 2, 129), era_label, font=f_era, fill=(226, 214, 185, 245))
+    draw.text(((SW - (tb_e[2] - tb_e[0])) // 2, 281), era_label, font=f_era, fill=(235, 213, 160, 250))
 
-    # Catchphrase (Mincho)
-    f_catch = fit_font_for_width(draw, catch_txt, cjk_mincho_path, 33, 24, SW - 96)
+    # Catchphrase (Mincho in warm champagne gold at y=340)
+    f_catch = fit_font_for_width(draw, catch_txt, cjk_mincho_path, 34, 23, SW - 84)
     tb_c = draw.textbbox((0, 0), catch_txt, font=f_catch)
     _draw_soft_shadow_text(
         bg_blur,
-        ((SW - (tb_c[2] - tb_c[0])) // 2, 201),
+        ((SW - (tb_c[2] - tb_c[0])) // 2, 340),
         catch_txt,
         font=f_catch,
         fill=(235, 213, 160, 255),
         blur_radius=6,
     )
 
-    # Main Title (Mincho)
+    # Main Title (Large Mincho in warm ivory-white at y=400)
     draw = ImageDraw.Draw(bg_blur, "RGBA")
-    f_main = fit_font_for_width(draw, main_txt, cjk_mincho_path, 60, 36, SW - 84)
+    f_main = fit_font_for_width(draw, main_txt, cjk_mincho_path, 62, 36, SW - 72)
     tb_m = draw.textbbox((0, 0), main_txt, font=f_main)
     _draw_soft_shadow_text(
         bg_blur,
-        ((SW - (tb_m[2] - tb_m[0])) // 2, 267),
+        ((SW - (tb_m[2] - tb_m[0])) // 2, 400),
         main_txt,
         font=f_main,
         fill=(252, 250, 245, 255),
         blur_radius=9,
         stroke_width=2,
-        stroke_fill=(6, 8, 14, 225),
+        stroke_fill=(6, 8, 14, 235),
     )
 
-    # 2. Punch a transparent window at (x=42..1038, y=423..1170) where the live 35mm film visual plays
+    # 2. Transparent center window at (x=42..1038, y=496..1068) where live 35mm film visual plays
     draw = ImageDraw.Draw(bg_blur, "RGBA")
-    fx0, fy0, fx1, fy1 = 42, 423, SW - 42, 1170
+    fx0, fy0, fx1, fy1 = 42, 496, SW - 42, 1068
     draw.rounded_rectangle(
         (fx0, fy0, fx1, fy1),
         radius=24,
         fill=(0, 0, 0, 0),
-        outline=(217, 179, 108, 175),
-        width=2,
+        outline=(217, 179, 108, 195),
+        width=3,
     )
-
-    # 3. Understated Spectrum Equalizer Frame Box (y=1212..1542)
+    # Integrated bottom-of-video Now Playing / Genre Bar (y=988..1068)
     draw.rounded_rectangle(
-        (42, 1212, SW - 42, 1542),
-        radius=24,
-        fill=(6, 8, 16, 195),
-        outline=(217, 179, 108, 85),
+        (fx0 + 3, 988, fx1 - 3, fy1 - 3),
+        radius=20,
+        fill=(8, 12, 22, 218),
+    )
+    is_vocal = bool(meta.get("vocal_playlist") or "洋楽" in meta.get("title", "") or "歌詞" in meta.get("title", ""))
+    song_idx = hash(meta.get("id", "0")) % len(WESTERN_AOR_VOCAL_LYRICS) if WESTERN_AOR_VOCAL_LYRICS else 0
+    s_primary = WESTERN_AOR_VOCAL_LYRICS[song_idx] if WESTERN_AOR_VOCAL_LYRICS else {}
+    s_second = WESTERN_AOR_VOCAL_LYRICS[(song_idx + 1) % len(WESTERN_AOR_VOCAL_LYRICS)] if WESTERN_AOR_VOCAL_LYRICS else {}
+
+    if is_vocal and s_primary:
+        np_txt = f"♪ NOW PLAYING  ｜  {s_primary.get('title', '80s-90s West Coast AOR Ballad')}  •  歌詞・和訳付き"
+    else:
+        np_txt = f"♪ NOW PLAYING  ｜  {sub_txt}"
+    f_np = fit_font_for_width(draw, np_txt, cjk_reg_path, 24, 17, (fx1 - fx0) - 48)
+    tb_np = draw.textbbox((0, 0), np_txt, font=f_np)
+    draw.text((fx0 + ((fx1 - fx0) - (tb_np[2] - tb_np[0])) // 2, 1014), np_txt, font=f_np, fill=(235, 213, 160, 248))
+
+    # 3. Eye-Level 4-Act Dynamic Storytelling Card (y=1088..1482 — prime reading zone!)
+    cx0, cy0, cx1, cy1 = 42, 1088, SW - 42, 1482
+    draw.rounded_rectangle(
+        (cx0, cy0, cx1, cy1),
+        radius=26,
+        fill=(8, 12, 24, 238),
+        outline=(217, 179, 108, 215),
+        width=3,
+    )
+
+    if act_idx == 1:
+        badge_txt = "POINT 01 / 04  ｜  なぜ今、この曲が胸に刺さるのか"
+        badge_col = (180, 83, 9, 245)
+        if is_vocal:
+            line1 = "イントロ3秒で、あの頃の映画と青春がよみがえる"
+            line2 = f"“{s_primary.get('lyric_card_en', 'Breathe in deep, the weekend has finally begun...').strip()}”"
+            line3 = f"訳：{s_primary.get('lyric_card_ja', '深く息を吸い込んでごらん、ようやく週末が始まったから——')}"
+        else:
+            line1 = "イントロが流れた瞬間、あの頃の夜の空気へ——"
+            line2 = "カセットテープや夜のFMラジオで聴いた80s・90sサウンド"
+            line3 = "40代・50代の記憶に寄り添う、大人の深夜BGMアーカイブ"
+    elif act_idx == 2:
+        badge_txt = "POINT 02 / 04  ｜  歌詞と情景のイメージ"
+        badge_col = (14, 116, 144, 245)
+        if is_vocal and s_second:
+            line1 = f"“{s_second.get('lyric_card_en', 'City lights reflecting on the midnight bayshore...').strip()}”"
+            line2 = f"訳：{s_second.get('lyric_card_ja', '午前0時の湾岸線、街の灯りがフロントガラスに溶けていく——')}"
+            line3 = "英語詞の響きと日本語対訳で味わう、大人のAOR＆バラード"
+        else:
+            line1 = "午前0時の首都高、ナトリウム灯が流れていく——"
+            line2 = "誰にも邪魔されない、自分だけの夜のコックピット"
+            line3 = "サックスとアナログシンセが織りなす極上のナイト・グルーヴ"
+    elif act_idx == 3:
+        badge_txt = "POINT 03 / 04  ｜  本編メドレーの収録スペック"
+        badge_col = (15, 118, 110, 245)
+        line1 = "本編は『途中広告なし・高音質』ノンストップ収録"
+        line2 = "厳選した80年代・90年代スタイル名曲をフル尺で凝縮"
+        line3 = "深夜ドライブ・晩酌・読書・集中作業のBGMとしてそのまま流せます"
+    else:
+        badge_txt = "POINT 04 / 04  ｜  フル音源（本編）のご案内"
+        badge_col = (185, 28, 28, 245)
+        line1 = "続きのフル音源（長時間メドレー）は本編動画で公開中！"
+        line2 = "下の『▶ 関連動画リンク』から今すぐ本編へ移動できます"
+        line3 = "いつでも今夜の1曲に戻れるよう『高評価＆チャンネル登録』で保存"
+
+    # Draw Act Header Pill + Step Progress Dots
+    f_badge = fit_font_for_width(draw, badge_txt, cjk_heavy_path, 24, 18, (cx1 - cx0) - 220)
+    tb_b = draw.textbbox((0, 0), badge_txt, font=f_badge)
+    bw = (tb_b[2] - tb_b[0]) + 44
+    draw.rounded_rectangle((cx0 + 28, cy0 + 22, cx0 + 28 + bw, cy0 + 74), radius=14, fill=badge_col)
+    draw.text((cx0 + 50, cy0 + 34), badge_txt, font=f_badge, fill=(255, 255, 255, 255))
+
+    # 4 Step Indicator Dots on top-right of the card
+    for step_i in range(1, 5):
+        dx = cx1 - 156 + (step_i - 1) * 34
+        dy = cy0 + 48
+        r_dot = 9 if step_i == act_idx else 6
+        col_dot = (253, 224, 71, 255) if step_i == act_idx else (100, 116, 139, 180)
+        draw.ellipse((dx - r_dot, dy - r_dot, dx + r_dot, dy + r_dot), fill=col_dot)
+
+    draw.line([(cx0 + 28, cy0 + 92), (cx1 - 28, cy0 + 92)], fill=(217, 179, 108, 95), width=1)
+
+    # Render the 3 large storytelling lines inside the card (y=1198..1458)
+    max_cw = (cx1 - cx0) - 56
+    f_l1 = fit_font_for_width(draw, line1, cjk_heavy_path, 38, 24, max_cw)
+    f_l2 = fit_font_for_width(draw, line2, cjk_mincho_path, 33, 22, max_cw)
+    f_l3 = fit_font_for_width(draw, line3, cjk_reg_path, 27, 19, max_cw)
+
+    tb_1 = draw.textbbox((0, 0), line1, font=f_l1)
+    tb_2 = draw.textbbox((0, 0), line2, font=f_l2)
+    tb_3 = draw.textbbox((0, 0), line3, font=f_l3)
+
+    _draw_soft_shadow_text(
+        bg_blur,
+        (cx0 + ((cx1 - cx0) - (tb_1[2] - tb_1[0])) // 2, cy0 + 114),
+        line1,
+        font=f_l1,
+        fill=(253, 224, 71, 255),
+        blur_radius=5,
+    )
+    _draw_soft_shadow_text(
+        bg_blur,
+        (cx0 + ((cx1 - cx0) - (tb_2[2] - tb_2[0])) // 2, cy0 + 202),
+        line2,
+        font=f_l2,
+        fill=(252, 250, 245, 255),
+        blur_radius=5,
+    )
+    draw = ImageDraw.Draw(bg_blur, "RGBA")
+    draw.text(
+        (cx0 + ((cx1 - cx0) - (tb_3[2] - tb_3[0])) // 2, cy0 + 296),
+        line3,
+        font=f_l3,
+        fill=(167, 243, 208, 248) if act_idx >= 3 else (203, 213, 225, 245),
+    )
+
+    # 4. Spectrum Equalizer Frame Box (y=1500..1596) + Bottom CTA Pill (y=1614..1692)
+    draw.rounded_rectangle(
+        (42, 1500, SW - 42, 1596),
+        radius=20,
+        fill=(6, 8, 16, 205),
+        outline=(217, 179, 108, 95),
         width=2,
     )
 
-    is_vocal = bool(meta.get("vocal_playlist") or "洋楽" in meta.get("title", "") or "歌詞" in meta.get("title", ""))
-    if is_vocal and WESTERN_AOR_VOCAL_LYRICS:
-        song_idx = hash(meta.get("id", "0")) % len(WESTERN_AOR_VOCAL_LYRICS)
-        s_primary = WESTERN_AOR_VOCAL_LYRICS[song_idx]
-        f_len_s = fit_font_for_width(draw, s_primary["lyric_card_en"].strip(), font_path, 24, 18, SW - 140)
-        f_lja_s = fit_font_for_width(draw, s_primary["lyric_card_ja"], cjk_mincho_path, 23, 17, SW - 140)
-        tb_len = draw.textbbox((0, 0), s_primary["lyric_card_en"].strip(), font=f_len_s)
-        tb_lja = draw.textbbox((0, 0), s_primary["lyric_card_ja"], font=f_lja_s)
-        draw.text(
-            ((SW - (tb_len[2] - tb_len[0])) // 2, 1228),
-            s_primary["lyric_card_en"].strip(),
-            font=f_len_s,
-            fill=(248, 250, 252, 245),
-        )
-        draw.text(
-            ((SW - (tb_lja[2] - tb_lja[0])) // 2, 1492),
-            s_primary["lyric_card_ja"],
-            font=f_lja_s,
-            fill=(235, 213, 160, 245),
-        )
-
-    # 4. Bottom Japanese Spec & Channel CTA (y=1581..1752)
-    bot_spec = "毎晩20時に80s・90s名曲を追加中  ｜  チャンネル登録で保存"
-    f_bs = fit_font_for_width(draw, bot_spec, cjk_reg_path, 30, 22, SW - 84)
-    tb_bs = draw.textbbox((0, 0), bot_spec, font=f_bs)
-    draw.text(
-        ((SW - (tb_bs[2] - tb_bs[0])) // 2, 1587),
-        bot_spec,
-        font=f_bs,
-        fill=(226, 232, 240, 240),
-    )
-
-    cta_ja = "▼ 下のアイコンから本編フル音源＆登録へ"
-    f_cta = fit_font_for_width(draw, cta_ja, cjk_heavy_path, 30, 22, SW - 144)
+    cta_ja = "▼ 下の『関連動画』またはアイコンから本編フル音源へ"
+    f_cta = fit_font_for_width(draw, cta_ja, cjk_heavy_path, 29, 21, SW - 120)
     tb_cta = draw.textbbox((0, 0), cta_ja, font=f_cta)
     text_w = tb_cta[2] - tb_cta[0]
-    cw = text_w + 102
-    cx0 = (SW - cw) // 2
+    cw = text_w + 96
+    cx0_b = (SW - cw) // 2
     draw.rounded_rectangle(
-        (cx0, 1656, cx0 + cw, 1728),
-        radius=36,
-        fill=(12, 16, 28, 225),
-        outline=(217, 179, 108, 195),
+        (cx0_b, 1614, cx0_b + cw, 1688),
+        radius=37,
+        fill=(153, 27, 27, 238),
+        outline=(253, 224, 71, 225),
         width=2,
     )
-    tri_x = cx0 + 36
-    tri_cy = 1692
+    tri_x = cx0_b + 34
+    tri_cy = 1651
     draw.polygon(
         [(tri_x, tri_cy - 10), (tri_x, tri_cy + 10), (tri_x + 18, tri_cy)],
-        fill=(235, 213, 160, 255),
+        fill=(253, 224, 71, 255),
     )
     draw.text(
-        (tri_x + 33, 1675),
+        (tri_x + 30, 1634),
         cta_ja,
         font=f_cta,
-        fill=(235, 213, 160, 255),
+        fill=(255, 255, 255, 255),
     )
 
     bg_blur.save(out_vertical_hud_png, "PNG")
@@ -1314,31 +1401,43 @@ def build_short_video(
     """
     Synthesize `output_short.mp4` (Native 1080x1920 Full HD 9:16, 30 seconds):
     - Extracts the 30s..60s climax slice of `src_mp3`.
-    - Plays the native 1080p 35mm film motion video (`bg_loop_mp4`) inside the center window (`y=423..1170`).
-    - Overlays a refined warm champagne-gold audio waveform (`showwaves=s=954x210:mode=cline:colors=0xd9b36c`) at `y=1272`.
+    - Plays the native 1080p 35mm film motion video (`bg_loop_mp4`) inside the eye-level window (`y=496..1068`).
+    - Dynamically transitions through 4 Storytelling HUD Acts (`0-7.5s`, `7.5-15s`, `15-22.5s`, `22.5-30s`)
+      at center-lower eye level (`y=1088..1482`) so the viewer is continuously hooked!
+    - Overlays a refined warm champagne-gold audio waveform (`showwaves=s=954x76`) at `y=1510`.
     """
-    logger.info(f"Rendering native 9:16 1080p Full HD Shorts video (30s): {out_short_mp4} ...")
+    logger.info(f"Rendering native 9:16 1080p Full HD 4-Act Dynamic Shorts video (30s): {out_short_mp4} ...")
     mp3_dur = get_audio_duration(src_mp3)
     start_sec = 30.0 if mp3_dur >= 62.0 else max(0.0, mp3_dur * 0.2)
     clip_dur = min(30.0, max(10.0, mp3_dur - start_sec))
+    seg_d = clip_dur / 4.0
 
     with tempfile.TemporaryDirectory(prefix="music_short_") as tmp_s:
         tmp_dir = Path(tmp_s)
-        vert_hud_png = tmp_dir / "short_hud.png"
-        render_short_vertical_hud(bg_jpg, meta, vert_hud_png, font_path)
+        hud_paths = []
+        for act_i in range(1, 5):
+            hp = tmp_dir / f"short_hud_act{act_i}.png"
+            render_short_vertical_hud(bg_jpg, meta, hp, font_path, act_idx=act_i)
+            hud_paths.append(hp)
 
         fps = 24
+        t1 = seg_d
+        t2 = seg_d * 2.0
+        t3 = seg_d * 3.0
         filter_complex = (
             f"color=c=0x060810:s=1080x1920:r={fps}[base];"
-            f"[0:v]scale=1329:747:flags=lanczos,crop=996:747:(iw-996)/2:0,setpts=PTS-STARTPTS[vid];"
-            f"[base][vid]overlay=42:423:shortest=1[v1];"
-            f"[v1][1:v]overlay=0:0[v2];"
-            f"[2:a]atrim=start={start_sec:.2f}:duration={clip_dur:.2f},asetpts=PTS-STARTPTS,"
+            f"[0:v]scale=1020:574:flags=lanczos,crop=996:572:(iw-996)/2:0,setpts=PTS-STARTPTS[vid];"
+            f"[base][vid]overlay=42:496:shortest=1[v1];"
+            f"[v1][1:v]overlay=0:0:enable='lt(t,{t1:.2f})'[v_a1];"
+            f"[v_a1][2:v]overlay=0:0:enable=' between(t,{t1:.2f},{t2:.2f})'[v_a2];"
+            f"[v_a2][3:v]overlay=0:0:enable='between(t,{t2:.2f},{t3:.2f})'[v_a3];"
+            f"[v_a3][4:v]overlay=0:0:enable='gte(t,{t3:.2f})'[v2];"
+            f"[5:a]atrim=start={start_sec:.2f}:duration={clip_dur:.2f},asetpts=PTS-STARTPTS,"
             f"afade=t=in:st=0:d=1.0,afade=t=out:st={max(1.0, clip_dur - 1.5):.2f}:d=1.5[aud];"
             f"[aud]asplit=2[a_out][a_viz];"
-            f"[a_viz]showwaves=s=954x210:mode=cline:rate={fps}:scale=sqrt:colors=0xd9b36c,format=rgba,"
-            f"colorchannelmixer=aa=0.65[sw];"
-            f"[v2][sw]overlay=63:1272:shortest=1,noise=c0s=3:c0f=t+u,unsharp=3:3:0.45:3:3:0.0,format=yuv420p[vout]"
+            f"[a_viz]showwaves=s=954x76:mode=cline:rate={fps}:scale=sqrt:colors=0xd9b36c,format=rgba,"
+            f"colorchannelmixer=aa=0.72[sw];"
+            f"[v2][sw]overlay=63:1510:shortest=1,noise=c0s=3:c0f=t+u,unsharp=3:3:0.45:3:3:0.0,format=yuv420p[vout]"
         )
 
         cmd = [
@@ -1349,7 +1448,13 @@ def build_short_video(
             "-i",
             str(bg_loop_mp4),
             "-i",
-            str(vert_hud_png),
+            str(hud_paths[0]),
+            "-i",
+            str(hud_paths[1]),
+            "-i",
+            str(hud_paths[2]),
+            "-i",
+            str(hud_paths[3]),
             "-i",
             str(src_mp3),
             "-filter_complex",
@@ -1392,7 +1497,7 @@ def build_short_video(
         ]
         subprocess.run(cmd, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
-    logger.info(f"Completed 9:16 1080p Shorts video: {out_short_mp4} ({out_short_mp4.stat().st_size / (1024*1024):.1f} MB)")
+    logger.info(f"Completed 9:16 1080p 4-Act Shorts video: {out_short_mp4} ({out_short_mp4.stat().st_size / (1024*1024):.1f} MB)")
     return out_short_mp4
 
 

@@ -1572,8 +1572,8 @@ def render_short_promise_jpg(
     out_jpg: Path,
 ) -> None:
     """
-    Render Cut 1A of the Opening Hook (y=384..1418) — 100% English, High-Contrast Large Fonts:
-    Shows 'WHAT YOU GET IN THIS 60s VIDEO' with 3 large Value Promise Cards + real visitor thumbnails!
+    Render Cut 1A of the Opening Hook at Eye Level (y=474..1456, leaving y=0..265 100% clear of text):
+    Showcases this episode's actual #1, #2, #3 spots with large photos, signature appeal, exact access & yen prices!
     """
     cache_dir = BASE_DIR / "assets" / "images" / ranking_id
     from PIL import ImageFilter
@@ -1588,86 +1588,57 @@ def render_short_promise_jpg(
     canvas = bg.convert("RGBA")
     draw = ImageDraw.Draw(canvas, "RGBA")
 
-    # Header Banner inside Content Board (y=384..476)
-    draw.rounded_rectangle((36, 384, SW - 36, 474), radius=20, fill=(185, 28, 28, 248), outline=(253, 224, 71, 255), width=3)
-    f_hb_en = ImageFont.truetype(font_path, 30)
-    f_hb_sub = ImageFont.truetype(font_path, 21)
-    hb1 = "WHAT YOU GET IN THIS 60s GUIDE"
-    hb2 = "500K JAPANESE IG POSTS × LOCAL REVIEWS — ZERO TOURIST TRAPS"
-    tb1 = draw.textbbox((0, 0), hb1, font=f_hb_en)
-    tb2 = draw.textbbox((0, 0), hb2, font=f_hb_sub)
-    draw.text(((SW - (tb1[2] - tb1[0])) // 2, 394), hb1, font=f_hb_en, fill=(255, 255, 255, 255))
-    draw.text(((SW - (tb2[2] - tb2[0])) // 2, 436), hb2, font=f_hb_sub, fill=(253, 224, 71, 255))
+    f_tag = ImageFont.truetype(font_path, 21)
+    f_ten = ImageFont.truetype(font_path, 31)
+    f_sub = ImageFont.truetype(font_path, 24)
+    f_dsc = ImageFont.truetype(font_path, 22)
 
-    # 3 Large Content Promise Cards (y=494..1418, each 292px tall) — 100% English
-    promises = [
-        {
-            "badge": "CONTENT 01  |  REAL LOCAL RANKING",
-            "badge_col": (16, 185, 129, 255),
-            "border_col": (52, 211, 153, 245),
-            "title_en": "500,000 Japanese IG Posts Analyzed",
-            "sub_en": "Scored out of 100pt: IG Buzz (50pt) + Reviews (35pt)",
-            "desc1": "Ranked by real Japanese travelers & local historians",
-            "desc2": "Zero tourist traps — 100% authentic cultural landmarks!",
-            "thumb": summary_rows[0]["thumb"] if len(summary_rows) > 0 else "",
-            "thumb_tag": "#1 SPOT",
-        },
-        {
-            "badge": "CONTENT 02  |  EXACT ACCESS GUIDE",
-            "badge_col": (2, 132, 199, 255),
-            "border_col": (56, 189, 248, 245),
-            "title_en": "Shinkansen & Local Station Times",
-            "sub_en": "Direct Bullet Train Routes from Tokyo & Kyoto",
-            "desc1": "Exact JR Shinkansen & local train travel minutes",
-            "desc2": "Includes ticket combo hacks & best arrival times!",
-            "thumb": summary_rows[1]["thumb"] if len(summary_rows) > 1 else "",
-            "thumb_tag": "#2 SPOT",
-        },
-        {
-            "badge": "CONTENT 03  |  LOCAL HACKS & LIST",
-            "badge_col": (217, 119, 6, 255),
-            "border_col": (253, 224, 71, 245),
-            "title_en": "Honest Warnings + Full TOP 10 List",
-            "sub_en": "Real Visitor Praise, Warnings & Pro Tips",
-            "desc1": "Honest local warnings you must know before visiting!",
-            "desc2": "Plus a screenshot-ready TOP 10 Cheat-Sheet at the end!",
-            "thumb": summary_rows[2]["thumb"] if len(summary_rows) > 2 else "",
-            "thumb_tag": "#3 SPOT",
-        },
+    badge_cols = [
+        ((217, 119, 6, 255), (253, 224, 71, 245), "NO.1 MUST-VISIT SPOT"),
+        ((220, 38, 38, 255), (248, 113, 113, 245), "NO.2 LOCAL FAVORITE"),
+        ((2, 132, 199, 255), (56, 189, 248, 245), "NO.3 HIDDEN GEM"),
     ]
 
-    f_tag = ImageFont.truetype(font_path, 20)
-    f_ten = ImageFont.truetype(font_path, 28)
-    f_sub = ImageFont.truetype(font_path, 22)
-    f_dsc = ImageFont.truetype(font_path, 20)
+    for idx in range(min(3, len(summary_rows))):
+        row = summary_rows[idx]
+        b_col, border_col, rank_label = badge_cols[idx]
+        cy0 = 474 + idx * 330
+        cy1 = cy0 + 310
+        draw.rounded_rectangle((36, cy0, SW - 36, cy1), radius=22, fill=(10, 18, 34, 244), outline=border_col, width=3)
 
-    for idx, pr in enumerate(promises):
-        cy0 = 494 + idx * 310
-        cy1 = cy0 + 292
-        draw.rounded_rectangle((36, cy0, SW - 36, cy1), radius=22, fill=(12, 20, 36, 242), outline=pr["border_col"], width=3)
-
-        tw, th_h = 236, cy1 - cy0 - 28
+        tw, th_h = 256, cy1 - cy0 - 28
         tx0, ty0 = 50, cy0 + 14
-        p_path = cache_dir / pr["thumb"]
-        if pr["thumb"] and p_path.exists():
+        p_path = cache_dir / row.get("thumb", "")
+        if row.get("thumb") and p_path.exists():
             tile = fit_crop(Image.open(p_path), tw, th_h)
             mask = Image.new("L", (tw, th_h), 0)
             ImageDraw.Draw(mask).rounded_rectangle((0, 0, tw, th_h), radius=16, fill=255)
             canvas.paste(tile.convert("RGBA"), (tx0, ty0), mask)
-            draw.rounded_rectangle((tx0, ty0, tx0 + tw, ty0 + th_h), radius=16, fill=None, outline=(255, 255, 255, 220), width=2)
-            draw.rounded_rectangle((tx0 + 10, ty0 + 10, tx0 + 126, ty0 + 46), radius=8, fill=(10, 14, 24, 230), outline=pr["border_col"], width=1)
-            draw.text((tx0 + 22, ty0 + 18), pr["thumb_tag"], font=f_dsc, fill=(253, 224, 71, 255))
+            draw.rounded_rectangle((tx0, ty0, tx0 + tw, ty0 + th_h), radius=16, fill=None, outline=(255, 255, 255, 230), width=2)
+            draw.rounded_rectangle((tx0 + 10, ty0 + 10, tx0 + 146, ty0 + 48), radius=9, fill=b_col, outline=(255, 255, 255, 230), width=1)
+            draw.text((tx0 + 20, ty0 + 18), f"{row['rank']}  {row['score']}", font=f_tag, fill=(255, 255, 255, 255))
 
         rx = tx0 + tw + 24
-        tb_b = draw.textbbox((0, 0), pr["badge"], font=f_tag)
-        bw = (tb_b[2] - tb_b[0]) + 32
-        draw.rounded_rectangle((rx, cy0 + 18, rx + bw, cy0 + 62), radius=10, fill=pr["badge_col"])
-        draw.text((rx + 16, cy0 + 29), pr["badge"], font=f_tag, fill=(255, 255, 255, 255))
+        max_rw = (SW - 54) - rx
+        badge_str = f"{rank_label}  •  {row['score'].upper()}"
+        tb_b = draw.textbbox((0, 0), badge_str, font=f_tag)
+        bw = min(max_rw, (tb_b[2] - tb_b[0]) + 32)
+        draw.rounded_rectangle((rx, cy0 + 16, rx + bw, cy0 + 58), radius=10, fill=b_col)
+        draw.text((rx + 16, cy0 + 26), smart_truncate(draw, badge_str, f_tag, max_rw - 24), font=f_tag, fill=(255, 255, 255, 255))
 
-        draw.text((rx, cy0 + 78), pr["title_en"], font=f_ten, fill=(255, 255, 255, 255))
-        draw.text((rx, cy0 + 122), pr["sub_en"], font=f_sub, fill=(253, 224, 71, 255))
-        draw.text((rx, cy0 + 174), pr["desc1"], font=f_dsc, fill=(224, 242, 254, 255))
-        draw.text((rx, cy0 + 214), pr["desc2"], font=f_dsc, fill=(167, 243, 208, 255))
+        clean_nm = strip_cjk(row["name_en"].split("(")[0].strip())
+        f_nm = fit_font_for_width(draw, clean_nm, font_path, 32, 22, max_rw)
+        draw.text((rx, cy0 + 70), smart_truncate(draw, clean_nm, f_nm, max_rw), font=f_nm, fill=(255, 255, 255, 255))
+
+        clean_dish = strip_cjk(row["dish"].split("(")[0].strip())
+        dish_lines = wrap_text_lines(draw, clean_dish, f_sub, max_rw)
+        for d_i, dl in enumerate(dish_lines[:2]):
+            draw.text((rx, cy0 + 118 + d_i * 32), dl, font=f_sub, fill=(253, 224, 71, 255))
+
+        acc_txt = strip_cjk(f"ACCESS: {row.get('access_short', '')}  |  {row.get('budget', '')}".strip(" |"))
+        hack_txt = strip_cjk(f"TIP: {row.get('hack', '')}")
+        draw.text((rx, cy0 + 194), smart_truncate(draw, acc_txt, f_dsc, max_rw), font=f_dsc, fill=(125, 211, 252, 255))
+        draw.text((rx, cy0 + 236), smart_truncate(draw, hack_txt, f_dsc, max_rw), font=f_dsc, fill=(167, 243, 208, 255))
 
     canvas.convert("RGB").save(out_jpg, "JPEG", quality=95)
 
@@ -1679,7 +1650,7 @@ def render_short_hook_jpg(
     font_path: str,
     out_jpg: Path,
 ) -> None:
-    """Render a sleek mobile-first 1080x1920 Hook screen over a Gaussian-blurred ambient backdrop (100% English)."""
+    """Render a sleek mobile-first 1080x1920 Hook screen at Eye Level (y=474..1456) over a blurred backdrop."""
     cache_dir = BASE_DIR / "assets" / "images" / ranking_id
     from PIL import ImageFilter
 
@@ -1693,8 +1664,8 @@ def render_short_hook_jpg(
     canvas = bg.convert("RGBA")
     draw = ImageDraw.Draw(canvas, "RGBA")
 
-    # 1. Center Japan Map + Shinkansen Card (x=36..1044, y=384..940)
-    mx0, my0, mx1, my1 = 36, 384, SW - 36, 940
+    # 1. Center Japan Map + Shinkansen Card shifted to Eye Level (x=36..1044, y=474..980)
+    mx0, my0, mx1, my1 = 36, 474, SW - 36, 980
     draw.rounded_rectangle((mx0, my0, mx1, my1), radius=24, fill=(10, 18, 34, 240), outline=(56, 189, 248, 240), width=3)
 
     f_mhead = ImageFont.truetype(font_path, 21)
@@ -1707,7 +1678,7 @@ def render_short_hook_jpg(
     map_json = BASE_DIR / "assets" / "maps" / "japan_prefectures.json"
     lon_min, lon_max = 129.5, 145.8
     lat_min, lat_max = 31.0, 45.6
-    pad_x0, pad_y0, pad_x1, pad_y1 = mx0 + 28, my0 + 78, mx0 + 518, my1 - 24
+    pad_x0, pad_y0, pad_x1, pad_y1 = mx0 + 28, my0 + 74, mx0 + 518, my1 - 20
 
     def project(lon: float, lat: float) -> Tuple[int, int]:
         px = pad_x0 + (lon - lon_min) / (lon_max - lon_min) * (pad_x1 - pad_x0)
@@ -1744,33 +1715,35 @@ def render_short_hook_jpg(
     draw.ellipse([(tx_p - 7, ty_p - 7), (tx_p + 7, ty_p + 7)], fill=(56, 189, 248, 255), outline=(255, 255, 255, 255), width=2)
     draw.ellipse([(hx_p - 9, hy_p - 9), (hx_p + 9, hy_p + 9)], fill=(239, 68, 68, 255), outline=(253, 224, 71, 255), width=2)
 
-    f_big = ImageFont.truetype(font_path, 34)
+    f_big = ImageFont.truetype(font_path, 32)
     f_lbl = ImageFont.truetype(font_path, 20)
-    f_sub = ImageFont.truetype(font_path, 17)
+    f_sub = ImageFont.truetype(font_path, 18)
     sx0, sx1 = mx0 + 538, mx1 - 22
 
     top1_acc = smart_truncate(draw, summary_rows[0].get("access_short", "Direct Shinkansen").upper(), f_lbl, sx1 - sx0 - 36) if summary_rows else "DIRECT SHINKANSEN"
     top2_acc = smart_truncate(draw, summary_rows[1].get("access_short", "JR Express Train").upper(), f_lbl, sx1 - sx0 - 36) if len(summary_rows) > 1 else "JR EXPRESS TRAIN"
+    top1_bud = smart_truncate(draw, summary_rows[0].get("budget", "Easy Day Trip via JR Pass"), f_sub, sx1 - sx0 - 36) if summary_rows else "Easy Day Trip"
+    top2_bud = smart_truncate(draw, summary_rows[1].get("budget", "100% Authentic Local Spot"), f_sub, sx1 - sx0 - 36) if len(summary_rows) > 1 else "100% Local Data"
 
     stat_boxes = [
-        ("TOP #1", top1_acc, "Easy Day Trip via JR Pass", (16, 185, 129, 245)),
-        ("TOP #2", top2_acc, "100% Authentic Local Ranking", (217, 119, 6, 245)),
+        ("NO.1 SPOT ACCESS", top1_acc, top1_bud, (16, 185, 129, 245)),
+        ("NO.2 SPOT ACCESS", top2_acc, top2_bud, (217, 119, 6, 245)),
     ]
     for idx, (big_t, l1, l2, col) in enumerate(stat_boxes):
-        by0 = my0 + 82 + idx * 224
-        by1 = by0 + 204
+        by0 = my0 + 76 + idx * 206
+        by1 = by0 + 190
         draw.rounded_rectangle((sx0, by0, sx1, by1), radius=14, fill=(15, 23, 42, 240), outline=col, width=2)
-        draw.rounded_rectangle((sx0 + 16, by0 + 16, sx1 - 16, by0 + 88), radius=10, fill=col)
+        draw.rounded_rectangle((sx0 + 16, by0 + 14, sx1 - 16, by0 + 78), radius=10, fill=col)
         tb = draw.textbbox((0, 0), big_t, font=f_big)
-        draw.text((sx0 + ((sx1 - sx0) - (tb[2] - tb[0])) // 2, by0 + 30), big_t, font=f_big, fill=(255, 255, 255, 255))
-        draw.text((sx0 + 20, by0 + 108), l1, font=f_lbl, fill=(253, 224, 71, 255))
-        draw.text((sx0 + 20, by0 + 146), l2, font=f_sub, fill=(226, 232, 240, 255))
+        draw.text((sx0 + ((sx1 - sx0) - (tb[2] - tb[0])) // 2, by0 + 26), big_t, font=f_big, fill=(255, 255, 255, 255))
+        draw.text((sx0 + 20, by0 + 96), l1, font=f_lbl, fill=(253, 224, 71, 255))
+        draw.text((sx0 + 20, by0 + 136), l2, font=f_sub, fill=(226, 232, 240, 255))
 
-    # 2. Top 3 Visual Cards (x=36..1044, y=966..1418) — 100% English
-    gy0, gy1 = 966, 1418
+    # 2. Top 3 Visual Cards at Eye Level (x=36..1044, y=1002..1456)
+    gy0, gy1 = 1002, 1456
     col_w = (SW - 72 - 24) // 3
     f_rk = ImageFont.truetype(font_path, 23)
-    f_acc_sm = ImageFont.truetype(font_path, 16)
+    f_acc_sm = ImageFont.truetype(font_path, 17)
 
     top3 = [summary_rows[2], summary_rows[1], summary_rows[0]] if len(summary_rows) >= 3 else summary_rows
     for i, row in enumerate(top3):
@@ -1789,16 +1762,16 @@ def render_short_hook_jpg(
         tb_r = draw.textbbox((0, 0), r_lbl, font=f_rk)
         draw.text((cx0 + ((cx1 - cx0) - (tb_r[2] - tb_r[0])) // 2, gy0 + 22), r_lbl, font=f_rk, fill=(255, 255, 255, 255))
 
-        draw.rounded_rectangle((cx0 + 4, gy1 - 84, cx1 - 4, gy1 - 4), radius=12, fill=(8, 12, 22, 238))
+        draw.rounded_rectangle((cx0 + 4, gy1 - 92, cx1 - 4, gy1 - 4), radius=12, fill=(8, 12, 22, 242))
         raw_nm = strip_cjk(row["name_en"].split("(")[0].strip())
-        f_nm_fit = fit_font_for_width(draw, raw_nm, font_path, 21, 15, col_w - 20)
+        f_nm_fit = fit_font_for_width(draw, raw_nm, font_path, 22, 15, col_w - 20)
         clean_nm = smart_truncate(draw, raw_nm, f_nm_fit, col_w - 20)
         tb_n = draw.textbbox((0, 0), clean_nm, font=f_nm_fit)
-        draw.text((cx0 + ((cx1 - cx0) - (tb_n[2] - tb_n[0])) // 2, gy1 - 72), clean_nm, font=f_nm_fit, fill=(253, 224, 71, 255))
+        draw.text((cx0 + ((cx1 - cx0) - (tb_n[2] - tb_n[0])) // 2, gy1 - 80), clean_nm, font=f_nm_fit, fill=(253, 224, 71, 255))
 
         acc_short = smart_truncate(draw, row.get("access_short", row.get("budget", "")), f_acc_sm, col_w - 20)
         tb_j = draw.textbbox((0, 0), acc_short, font=f_acc_sm)
-        draw.text((cx0 + ((cx1 - cx0) - (tb_j[2] - tb_j[0])) // 2, gy1 - 36), acc_short, font=f_acc_sm, fill=(255, 255, 255, 255))
+        draw.text((cx0 + ((cx1 - cx0) - (tb_j[2] - tb_j[0])) // 2, gy1 - 40), acc_short, font=f_acc_sm, fill=(255, 255, 255, 255))
 
     canvas.convert("RGB").save(out_jpg, "JPEG", quality=95)
 
@@ -1810,7 +1783,7 @@ def render_short_outro_jpg(
     out_jpg: Path,
 ) -> None:
     """
-    Render a mobile-optimized TOP 5 Podium Cards + #6-#10 Compact Badges screen (100% English)
+    Render a mobile-optimized TOP 5 Podium Cards + #6-#10 Compact Badges screen at Eye Level (y=474..1456)
     so every word is large, legible, and screenshot-ready on a smartphone!
     """
     cache_dir = BASE_DIR / "assets" / "images" / ranking_id
@@ -1831,9 +1804,9 @@ def render_short_outro_jpg(
     f_sub = ImageFont.truetype(font_path, 19)
     f_mini = ImageFont.truetype(font_path, 18)
 
-    y0_base = 384
-    card_h = 156
-    gap = 10
+    y0_base = 474
+    card_h = 148
+    gap = 8
     for i, row in enumerate(summary_rows[:5]):
         ry0 = y0_base + i * (card_h + gap)
         ry1 = ry0 + card_h
@@ -1843,7 +1816,7 @@ def render_short_outro_jpg(
         draw.rounded_rectangle((36, ry0, SW - 36, ry1), radius=18, fill=(12, 20, 36, 242), outline=border_c, width=3)
 
         p_path = cache_dir / row["thumb"]
-        tw, th_h = 186, card_h - 16
+        tw, th_h = 180, card_h - 16
         if p_path.exists():
             th = fit_crop(Image.open(p_path), tw, th_h)
             mask = Image.new("L", (tw, th_h), 0)
@@ -1855,8 +1828,8 @@ def render_short_outro_jpg(
         r_txt = f"{row['rank']}  {row['score']}"
         tb_r = draw.textbbox((0, 0), r_txt, font=f_rk)
         badge_w = max(172, (tb_r[2] - tb_r[0]) + 28)
-        draw.rounded_rectangle((tx, ry0 + 12, tx + badge_w, ry0 + 54), radius=10, fill=b_col)
-        draw.text((tx + (badge_w - (tb_r[2] - tb_r[0])) // 2, ry0 + 21), r_txt, font=f_rk, fill=(255, 255, 255, 255))
+        draw.rounded_rectangle((tx, ry0 + 10, tx + badge_w, ry0 + 50), radius=10, fill=b_col)
+        draw.text((tx + (badge_w - (tb_r[2] - tb_r[0])) // 2, ry0 + 18), r_txt, font=f_rk, fill=(255, 255, 255, 255))
 
         max_title_w = (SW - 52) - (tx + badge_w + 14)
         full_title = smart_truncate(draw, row["name_en"], f_title, max_title_w)
@@ -1865,12 +1838,12 @@ def render_short_outro_jpg(
         max_line_w = (SW - 52) - tx
         acc_line = smart_truncate(draw, f"ACCESS: {row['budget']}  |  {clean_dish}", f_sub, max_line_w)
         hack_line = smart_truncate(draw, f"HACK: {clean_hack}", f_sub, max_line_w)
-        draw.text((tx + badge_w + 14, ry0 + 18), full_title, font=f_title, fill=(255, 255, 255, 255))
-        draw.text((tx, ry0 + 68), acc_line, font=f_sub, fill=(125, 211, 252, 255))
-        draw.text((tx, ry0 + 106), hack_line, font=f_sub, fill=(167, 243, 208, 255))
+        draw.text((tx + badge_w + 14, ry0 + 16), full_title, font=f_title, fill=(255, 255, 255, 255))
+        draw.text((tx, ry0 + 62), acc_line, font=f_sub, fill=(125, 211, 252, 255))
+        draw.text((tx, ry0 + 98), hack_line, font=f_sub, fill=(167, 243, 208, 255))
 
     if len(summary_rows) >= 10:
-        by0, by1 = 1226, 1418
+        by0, by1 = 1264, 1456
         draw.rounded_rectangle((36, by0, SW - 36, by1), radius=18, fill=(15, 23, 42, 242), outline=(148, 163, 184, 210), width=2)
         draw.text((58, by0 + 14), "RANKS #6 TO #10 (IN FULL 9-MIN VIDEO):", font=f_sub, fill=(253, 224, 71, 255))
         for j, r_row in enumerate(summary_rows[5:10]):
@@ -1889,7 +1862,7 @@ def render_short_cinema_frame_jpg(
     out_jpg: Path,
 ) -> None:
     """
-    Composite a 4:3 visitor photograph inside a razor-sharp centered Cinema Window (1008x756)
+    Composite a visitor photograph inside a razor-sharp Eye-Level Cinema Window (1008x562 at y=474..1036)
     over a dark Gaussian-blurred 1080x1920 ambient background!
     """
     from PIL import ImageFilter, ImageChops
@@ -1907,7 +1880,7 @@ def render_short_cinema_frame_jpg(
     canvas = bg.convert("RGBA")
     draw = ImageDraw.Draw(canvas, "RGBA")
 
-    fx0, fy0, fx1, fy1 = 36, 384, SW - 36, 1140
+    fx0, fy0, fx1, fy1 = 36, 474, SW - 36, 1036
     fw, fh = fx1 - fx0, fy1 - fy0
     sharp_photo = fit_crop(raw_im, fw, fh)
     sharp_photo = ImageEnhance.Contrast(sharp_photo).enhance(1.06)
@@ -1933,78 +1906,95 @@ def render_short_hud_png(
     out_png: Path,
 ) -> None:
     """
-    Render the sleek mobile-first floating HUD (100% English, High-Contrast Large Fonts, Zero Mid-Word Truncation).
+    Render the Eye-Level Centered Shorts HUD (100% English, High-Contrast Large Fonts, Zero Top Dead-Zone Clutter):
+    - Leaves y=0..265 100% clear so YouTube Shorts top UI never overlaps key text!
+    - Upper Eye-Level Header (y=268..462): Rank & Score Pill + Huge Spot Title + Gold Feature Highlight
+    - Integrated Bottom-of-Photo Bar (y=960..1034): Exact Station Access & Yen Price
+    - Center-Lower Eye-Level Storytelling & Insider Card (y=1052..1456):
+      2-Section structured card conveying (1) Why It's Famous / Key Appeal and (2) Local Insider Hack / Warning!
     """
     overlay = Image.new("RGBA", (SW, SH), (0, 0, 0, 0))
     draw = ImageDraw.Draw(overlay, "RGBA")
 
     f_pill = ImageFont.truetype(font_path, 25)
     f_rhead = ImageFont.truetype(font_path, 22)
-    f_ren = ImageFont.truetype(font_path, 26)
-    f_top_v = ImageFont.truetype(font_path, 20)
 
-    # 0. Permanent Top Verification Banner (y=52..106) — "100% NO PAID PROMO • JAPANESE IG ANALYZED"
-    top_v_txt = "100% NO PAID PROMO  •  JAPANESE IG ANALYZED"
-    tb_tv = draw.textbbox((0, 0), top_v_txt, font=f_top_v)
-    tv_w = (tb_tv[2] - tb_tv[0]) + 48
-    tv_x0 = (SW - tv_w) // 2
-    draw.rounded_rectangle((tv_x0, 52, tv_x0 + tv_w, 104), radius=26, fill=(15, 23, 42, 245), outline=(16, 185, 129, 250), width=3)
-    draw.text((tv_x0 + 24, 67), top_v_txt, font=f_top_v, fill=(167, 243, 208, 255))
-
-    # 1. Floating Centered Rank Pill (y=118..178)
+    # 1. Upper Eye-Level Rank & Verification Pill (y=268..326 — well below top Shorts UI bar!)
     pill_txt = strip_cjk(scene["badge"])
+    if "SCORE" not in pill_txt and "NO." in pill_txt:
+        pill_txt = f"{pill_txt}  •  REAL LOCAL DATA"
     is_gold = "NO.1" in pill_txt or "#1 " in pill_txt
     p_col = (217, 119, 6, 250) if is_gold else (220, 38, 38, 250)
-    tb_p = draw.textbbox((0, 0), pill_txt, font=f_pill)
+    f_pill_fit = fit_font_for_width(draw, pill_txt, font_path, 26, 18, SW - 96)
+    pill_txt_fit = smart_truncate(draw, pill_txt, f_pill_fit, SW - 96)
+    tb_p = draw.textbbox((0, 0), pill_txt_fit, font=f_pill_fit)
     pw = (tb_p[2] - tb_p[0]) + 56
     px0 = (SW - pw) // 2
-    draw.rounded_rectangle((px0, 118, px0 + pw, 178), radius=30, fill=p_col, outline=(254, 240, 138, 255), width=3)
-    draw.text((px0 + 28, 134), pill_txt, font=f_pill, fill=(255, 255, 255, 255))
+    draw.rounded_rectangle((px0, 268, px0 + pw, 326), radius=29, fill=p_col, outline=(254, 240, 138, 255), width=3)
+    draw.text((px0 + 28, 283), pill_txt_fit, font=f_pill_fit, fill=(255, 255, 255, 255))
 
-    # 2. Bold Centered English Title + English Sub-line (y=194..290)
+    # 2. Huge Eye-Level English Spot Title + Gold Feature Line (y=338..460)
     t_en = strip_cjk(scene["title_en"])
-    f_title = fit_font_for_width(draw, t_en, font_path, 42, 26, SW - 56)
-    t_en = smart_truncate(draw, t_en, f_title, SW - 56)
-    tb_t = draw.textbbox((0, 0), t_en, font=f_title)
-    draw.text(((SW - (tb_t[2] - tb_t[0])) // 2, 192), t_en, font=f_title, fill=(255, 255, 255, 255), stroke_width=4, stroke_fill=(0, 0, 0, 255))
+    f_title = fit_font_for_width(draw, t_en, font_path, 48, 28, SW - 52)
+    t_en_fit = smart_truncate(draw, t_en, f_title, SW - 52)
+    tb_t = draw.textbbox((0, 0), t_en_fit, font=f_title)
+    draw.text(((SW - (tb_t[2] - tb_t[0])) // 2, 338), t_en_fit, font=f_title, fill=(255, 255, 255, 255), stroke_width=5, stroke_fill=(0, 0, 0, 255))
 
     t_sub = strip_cjk(scene.get("sub_en", ""))
     if t_sub:
-        f_sub = fit_font_for_width(draw, t_sub, font_path, 24, 17, SW - 56)
-        t_sub = smart_truncate(draw, t_sub, f_sub, SW - 56)
-        tb_j = draw.textbbox((0, 0), t_sub, font=f_sub)
-        draw.text(((SW - (tb_j[2] - tb_j[0])) // 2, 252), t_sub, font=f_sub, fill=(253, 224, 71, 255), stroke_width=3, stroke_fill=(0, 0, 0, 240))
+        f_sub = fit_font_for_width(draw, t_sub, font_path, 27, 18, SW - 56)
+        t_sub_fit = smart_truncate(draw, t_sub, f_sub, SW - 56)
+        tb_j = draw.textbbox((0, 0), t_sub_fit, font=f_sub)
+        draw.text(((SW - (tb_j[2] - tb_j[0])) // 2, 406), t_sub_fit, font=f_sub, fill=(253, 224, 71, 255), stroke_width=4, stroke_fill=(0, 0, 0, 245))
 
-    # 3. Floating Centered Access Pill (y=302..356)
-    if scene.get("access"):
-        acc_txt = strip_cjk(scene["access"].replace("🚄", "").split("|")[0].strip())
-        f_acc = fit_font_for_width(draw, acc_txt, font_path, 22, 16, SW - 88)
-        acc_txt = smart_truncate(draw, acc_txt, f_acc, SW - 88)
-        tb_a = draw.textbbox((0, 0), acc_txt, font=f_acc)
-        aw = (tb_a[2] - tb_a[0]) + 48
-        ax0 = (SW - aw) // 2
-        draw.rounded_rectangle((ax0, 302, ax0 + aw, 356), radius=26, fill=(8, 47, 73, 238), outline=(56, 189, 248, 235), width=2)
-        draw.text((ax0 + 24, 316), acc_txt, font=f_acc, fill=(224, 242, 254, 255))
+    # 3. Integrated Bottom-of-Photo Access & Budget Bar (y=960..1034 inside the Cinema Window!)
+    if scene.get("access") and scene.get("mode") != "outro":
+        acc_txt = strip_cjk(scene["access"].replace("🚄", "").strip())
+        if not acc_txt.upper().startswith("ACCESS") and not acc_txt.upper().startswith("TIP"):
+            acc_txt = f"ACCESS & BUDGET:  {acc_txt}"
+        f_acc = fit_font_for_width(draw, acc_txt, font_path, 25, 17, SW - 112)
+        acc_txt_fit = smart_truncate(draw, acc_txt, f_acc, SW - 112)
+        tb_a = draw.textbbox((0, 0), acc_txt_fit, font=f_acc)
+        draw.rounded_rectangle((40, 962, SW - 40, 1032), radius=20, fill=(8, 15, 30, 236), outline=(56, 189, 248, 225), width=2)
+        draw.text(((SW - (tb_a[2] - tb_a[0])) // 2, 983), acc_txt_fit, font=f_acc, fill=(125, 211, 252, 255))
 
-    # 4. Single Sleek Social Card below Cinema Frame (y=1168..1418) — 100% English
+    # 4. Rich 2-Section Storytelling & Insider Value Card right at Center-Lower Eye Level (y=1052..1456)
     if scene.get("card_title") and scene.get("card_body_en"):
-        cx0, cy0, cx1, cy1 = 36, 1168, SW - 36, 1418
+        cx0, cy0, cx1, cy1 = 36, 1052, SW - 36, 1456
         is_warn = scene.get("card_style") == "warn"
         c_border = (245, 158, 11, 255) if is_warn else (16, 185, 129, 255)
         c_tag_bg = (217, 119, 6, 255) if is_warn else (16, 185, 129, 255)
 
-        draw.rounded_rectangle((cx0, cy0, cx1, cy1), radius=20, fill=(12, 20, 36, 242), outline=c_border, width=3)
-        ct_lbl = strip_cjk(scene["card_title"])
-        tb_ct = draw.textbbox((0, 0), ct_lbl, font=f_rhead)
+        draw.rounded_rectangle((cx0, cy0, cx1, cy1), radius=24, fill=(10, 18, 34, 246), outline=c_border, width=3)
+
+        # Top Section: Why You Must Visit / Signature Appeal
+        why_badge = "MUST-KNOW LOCAL RULE & TIP" if is_warn else "WHY LOCALS LOVE THIS SPOT  •  KEY APPEAL"
+        tb_ct = draw.textbbox((0, 0), why_badge, font=f_rhead)
         ct_w = (tb_ct[2] - tb_ct[0]) + 36
-        draw.rounded_rectangle((cx0 + 20, cy0 + 18, cx0 + 20 + ct_w, cy0 + 64), radius=10, fill=c_tag_bg)
-        draw.text((cx0 + 38, cy0 + 29), ct_lbl, font=f_rhead, fill=(255, 255, 255, 255))
+        draw.rounded_rectangle((cx0 + 22, cy0 + 18, cx0 + 22 + ct_w, cy0 + 62), radius=10, fill=c_tag_bg)
+        draw.text((cx0 + 40, cy0 + 28), why_badge, font=f_rhead, fill=(255, 255, 255, 255))
 
-        q_lines = wrap_text_lines(draw, strip_cjk(scene["card_body_en"]), f_ren, cx1 - cx0 - 56)
-        for li, ql in enumerate(q_lines[:3]):
-            draw.text((cx0 + 28, cy0 + 82 + li * 42), ql, font=f_ren, fill=(255, 255, 255, 255))
+        max_cw = (cx1 - cx0) - 52
+        f_why = ImageFont.truetype(font_path, 29)
+        f_body = ImageFont.truetype(font_path, 28)
 
-    # 5. CapCut / Hormozi-Style Floating Outline Pop Captions (y=1460..1655)
+        # Highlight 1: Spot's core feature / dish / anime setting (Gold)
+        highlight_str = strip_cjk(scene.get("sub_en") or scene.get("title_en", ""))
+        hl_lines = wrap_text_lines(draw, f"★ {highlight_str}", f_why, max_cw)
+        for li, hl_l in enumerate(hl_lines[:2]):
+            draw.text((cx0 + 26, cy0 + 78 + li * 38), hl_l, font=f_why, fill=(253, 224, 71, 255))
+
+        div_y = cy0 + 78 + min(2, len(hl_lines)) * 38 + 10
+        draw.line([(cx0 + 26, div_y), (cx1 - 26, div_y)], fill=(148, 163, 184, 110), width=2)
+
+        # Highlight 2: Local Review / Insider Hack (Crisp White & Emerald)
+        q_lines = wrap_text_lines(draw, strip_cjk(scene["card_body_en"]), f_body, max_cw)
+        for li, ql in enumerate(q_lines[:4]):
+            y_line = div_y + 14 + li * 39
+            if y_line + 34 <= cy1 - 10:
+                draw.text((cx0 + 26, y_line), ql, font=f_body, fill=(255, 255, 255, 255))
+
+    # 5. CapCut / Hormozi-Style Floating Outline Pop Captions (y=1474..1620)
     pop_lines = scene.get("pop_lines", [])
     for li, raw_pl in enumerate(pop_lines[:2]):
         pl = strip_cjk(raw_pl)
@@ -2012,7 +2002,7 @@ def render_short_hud_png(
         pl = smart_truncate(draw, pl, f_pop, SW - 56)
         tb_l = draw.textbbox((0, 0), pl, font=f_pop)
         lx = (SW - (tb_l[2] - tb_l[0])) // 2
-        ly = 1465 + li * 62
+        ly = 1476 + li * 60
         col = (253, 224, 71, 255) if li == 1 else (255, 255, 255, 255)
         draw.text((lx + 3, ly + 4), pl, font=f_pop, fill=(0, 0, 0, 230), stroke_width=7, stroke_fill=(0, 0, 0, 230))
         draw.text((lx, ly), pl, font=f_pop, fill=col, stroke_width=5, stroke_fill=(0, 0, 0, 255))
@@ -2218,21 +2208,9 @@ def build_shorts_video(script_path: Path) -> Path:
             p2 = work_dir / f"sp_{idx:02d}_b.jpg"
             short_flash: List[Path] = []
             if sc["mode"] == "hook":
-                # Rapid 4-Cut Visual Flash for the first ~8s of Shorts (zero text-table screen!)
-                pick_r = [4, 2, 1] if len(summary_rows) >= 5 else list(range(min(3, len(summary_rows))))
-                for sfi, r_i in enumerate(pick_r):
-                    sf_p = work_dir / f"shook_flash_{sfi}.jpg"
-                    r_row = summary_rows[r_i]
-                    render_short_cinema_frame_jpg(
-                        cache_dir / r_row["thumb"],
-                        f"RAPID PREVIEW: {r_row['rank']} {strip_cjk(r_row['name_en'])}",
-                        font_path,
-                        sf_p,
-                    )
-                    short_flash.append(sf_p)
+                render_short_promise_jpg(ranking_id, summary_rows, font_path, p1)
                 render_short_hook_jpg(ranking_id, area_guide, summary_rows, font_path, p2)
-                short_flash.append(p2)
-                shutil.copyfile(short_flash[0], p1)
+                short_flash = [p1, p2]
             elif sc["mode"] == "outro":
                 render_short_outro_jpg(ranking_id, summary_rows, font_path, p1)
                 shutil.copyfile(p1, p2)
