@@ -1014,8 +1014,10 @@ def main() -> None:
                     )
                     long_segs.append(q_seg)
 
-                for beat in block["beats"]:
+                for b_idx, beat in enumerate(block["beats"], start=1):
                     beat_counter += 1
+                    step_png = DIAG_DIR / f"{diag_id}_b{b_idx}.png"
+                    use_diag_png = step_png if step_png.exists() else diag_png
                     beat_wav = work_dir / f"beat_{beat_counter:03d}.wav"
                     dur = build_narration_beat_wav(
                         text=beat["narration"],
@@ -1024,12 +1026,12 @@ def main() -> None:
                         work_dir=work_dir,
                         beat_idx=beat_counter,
                     )
-                    print(f"Beat {beat_counter:02d} (DIAGRAM {diag_id}): {dur:.2f}s | {beat['sub_main']}", flush=True)
+                    print(f"Beat {beat_counter:02d} (DIAGRAM {use_diag_png.stem}): {dur:.2f}s | {beat['sub_main']}", flush=True)
                     ov_png = work_dir / f"ov_{beat_counter:03d}.png"
                     render_cinema_overlay_16x9(chapter, beat["sub_top"], beat["sub_main"], ov_png, is_diagram=True)
                     seg_mp4 = work_dir / f"seg_{beat_counter:03d}.mp4"
                     render_diagram_beat_segment(
-                        diagram_png=diag_png,
+                        diagram_png=use_diag_png,
                         overlay_png=ov_png,
                         beat_wav=beat_wav,
                         dur=dur,

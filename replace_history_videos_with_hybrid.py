@@ -340,25 +340,32 @@ def watch_all() -> None:
         meta_f = m_dir / "metadata.json"
         mp4_f = m_dir / "output_short_medley.mp4"
         if meta_f.exists() and mp4_f.exists():
-            m_data = json.loads(meta_f.read_text(encoding="utf-8"))
-            long_vid = st.get(f"{m_id}_long_id") or ""
-            s_desc = (
-                f"🎧 本編フル動画はこちら 👉 https://youtu.be/{long_vid}\n\n{m_data['description']}"
-                if long_vid
-                else m_data["description"]
-            )
-            vid = upload_one_video(
-                yt=yt_m,
-                mp4_path=mp4_f,
-                title=m_data["medley_short_title"],
-                description=s_desc,
-                tags=m_data["tags"] + ["Shorts", "YouTubeShorts", "サビメドレー"],
-                publish_at_iso=None,
-                category_id="10",
-            )
-            st["uploaded"][key] = vid
-            save_state(st)
-            print(f"[SUCCESS] Uploaded Music Short ({m_id}) -> https://youtube.com/shorts/{vid}", flush=True)
+            try:
+                import shutil, tempfile
+                m_data = json.loads(meta_f.read_text(encoding="utf-8"))
+                long_vid = st.get(f"{m_id}_long_id") or ""
+                s_desc = (
+                    f"🎧 本編フル動画はこちら 👉 https://youtu.be/{long_vid}\n\n{m_data['description']}"
+                    if long_vid
+                    else m_data["description"]
+                )
+                tmp_mp4 = Path(tempfile.gettempdir()) / f"tmp_{m_id}_short.mp4"
+                shutil.copy2(mp4_f, tmp_mp4)
+                vid = upload_one_video(
+                    yt=yt_m,
+                    mp4_path=tmp_mp4,
+                    title=m_data["medley_short_title"],
+                    description=s_desc,
+                    tags=m_data["tags"] + ["Shorts", "YouTubeShorts", "サビメドレー"],
+                    publish_at_iso=None,
+                    category_id="10",
+                )
+                tmp_mp4.unlink(missing_ok=True)
+                st["uploaded"][key] = vid
+                save_state(st)
+                print(f"[SUCCESS] Uploaded Music Short ({m_id}) -> https://youtube.com/shorts/{vid}", flush=True)
+            except Exception as e:
+                print(f"[WARN] Music Short ({m_id}) upload skipped/retried: {e}", flush=True)
 
     rome_p = OUTPUT_DIR / "history_rome_fall_complete_long.mp4"
     templar_p = OUTPUT_DIR / "history_templars_complete_long.mp4"
@@ -369,15 +376,18 @@ def watch_all() -> None:
     done_shorts = False
 
     while not (done_rome and done_templar and done_shorts):
-        if not done_rome and rome_p.exists() and rome_p.stat().st_mtime >= start_ts - 60 and rome_p.stat().st_size > 50_000_000:
-            replace_rome_long()
-            done_rome = True
-        if not done_templar and templar_p.exists() and templar_p.stat().st_mtime >= start_ts - 60 and templar_p.stat().st_size > 50_000_000:
-            replace_templar_long()
-            done_templar = True
-        if done_rome and done_templar and not done_shorts and last_short_p.exists() and last_short_p.stat().st_mtime >= start_ts - 60:
-            replace_shorts_and_music()
-            done_shorts = True
+        try:
+            if not done_rome and rome_p.exists() and rome_p.stat().st_mtime >= start_ts - 600 and rome_p.stat().st_size > 50_000_000:
+                replace_rome_long()
+                done_rome = True
+            if not done_templar and templar_p.exists() and templar_p.stat().st_mtime >= start_ts - 600 and templar_p.stat().st_size > 50_000_000:
+                replace_templar_long()
+                done_templar = True
+            if done_rome and done_templar and not done_shorts and last_short_p.exists() and last_short_p.stat().st_mtime >= start_ts - 600:
+                replace_shorts_and_music()
+                done_shorts = True
+        except Exception as e:
+            print(f"[WATCHER RETRY] {e}", flush=True)
         if not (done_rome and done_templar and done_shorts):
             time.sleep(15)
 
