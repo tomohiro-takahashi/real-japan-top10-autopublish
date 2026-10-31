@@ -293,18 +293,16 @@ def pick_mp3_and_metadata(
                 logger.error(f"Suno automatic generation failed: {exc}")
 
         if not mp3_files:
-            archive_root = QUEUE_DIR.parent / "archive"
-            pool_mp3s = sorted(
-                [p for p in archive_root.rglob("*.mp3") if p.is_file() and p.stat().st_size > 500_000]
-            )
-            if pool_mp3s:
-                meta_id = chosen_meta.get("id", "music_track")
-                offset = sum(ord(ch) for ch in meta_id) % len(pool_mp3s)
-                rotated = pool_mp3s[offset:] + pool_mp3s[:offset]
+            meta_id = chosen_meta.get("id", "music_track")
+            archive_dir = QUEUE_DIR.parent / "archive" / meta_id
+            own_mp3s = sorted(
+                [p for p in archive_dir.glob("*.mp3") if p.is_file() and p.stat().st_size > 500_000]
+            ) if archive_dir.exists() else []
+            if own_mp3s:
                 target_n = int(os.environ.get("SUNO_BATCHES_PER_VIDEO", "8")) * 2
-                tracks_to_use = [rotated[i % len(rotated)] for i in range(target_n)]
+                tracks_to_use = [own_mp3s[i % len(own_mp3s)] for i in range(target_n)]
                 logger.info(
-                    f"Assembling fallback {target_n}-track album master for {meta_id} from {len(pool_mp3s)} archived Suno Pro tracks..."
+                    f"Assembling {target_n}-track album master for {meta_id} strictly from its own verified archive ({len(own_mp3s)} tracks)..."
                 )
                 fallback_master = suno_client._assemble_album_master(chosen_meta, tracks_to_use, QUEUE_DIR)
                 if fallback_master and fallback_master.exists():

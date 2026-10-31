@@ -360,13 +360,25 @@
       "used": false,
       "genre": "90s Urban Mellow & Shibuya Groove",
       "artwork_file": "urban90s.jpg",
-      "title": "【ピアノが落ち着く洋楽】静かな夜に心が安らぐ70s・80s・90sピアノ名曲バラード決定版【2時間・全24曲フル】Billy Joel / Elton John / Carpenters / Chicago",
-      "short_title": "【ピアノが落ち着く洋楽】静かな夜に聴きたいピアノ名曲バラード全24曲 🎧本編2時間はチャンネルへ！ #Shorts #洋楽バラード",
-      "thumb_era_label": "40代・50代 永久保存版  ｜  MELLOW PIANO BALLADS — 2 HOURS / 24 SONGS",
-      "thumb_catch": "美しいピアノのイントロだけで、あの頃の記憶がよみがえる——",
-      "thumb_main": "ピアノが落ち着く洋楽バラード【2時間】",
-      "thumb_sub": "Billy Joel / Elton John / Carpenters / Chicago / Journey / Queen 他 全24曲",
+      "title": "【冬の夜に聴きたい洋楽】肌寒い季節に心が温まる80年代・90年代「冬の洋楽名曲＆極上バラード」【2時間・全24曲フル】Wham! / Mariah Carey / Billy Joel / Chicago",
+      "short_title": "【冬の夜に聴きたい洋楽】肌寒い季節に聴きたい80s-90s冬の名曲バラード24選 🎧本編2時間はチャンネルへ！ #Shorts #冬の洋楽",
+      "thumb_era_label": "40代・50代 永久保存版  ｜  80s-90s WINTER NIGHT BALLADS — 2 HOURS / 24 SONGS",
+      "thumb_catch": "冷たい夜風とイルミネーション、あの頃の冬の記憶がよみがえる——",
+      "thumb_main": "冬の夜に聴きたい洋楽名曲集【2時間】",
+      "thumb_sub": "Wham! / Mariah Carey / Billy Joel / Celine Dion / Chicago / Journey 他 全24曲",
       "tracks": [
+        {
+          "artist": "Wham!",
+          "title": "Last Christmas",
+          "ja_title": "ラスト・クリスマス",
+          "query": "Wham Last Christmas official audio"
+        },
+        {
+          "artist": "Vanessa Williams",
+          "title": "Save the Best for Last",
+          "ja_title": "セイヴ・ザ・ベスト・フォー・ラスト",
+          "query": "Vanessa Williams Save the Best for Last official audio"
+        },
         {
           "artist": "Billy Joel",
           "title": "Honesty",
@@ -374,10 +386,76 @@
           "query": "Billy Joel Honesty official audio"
         },
         {
-          "artist": "Billy Joel",
-          "title": "Piano Man",
-          "ja_title": "ピアノ・マン",
-          "query": "Billy Joel Piano Man official audio"
+          "artist": "Mariah Carey",
+          "title": "All I Want for Christmas Is You",
+          "ja_title": "恋人たちのクリスマス",
+          "query": "Mariah Carey All I Want for Christmas Is You official audio"
+        },
+        {
+          "artist": "Chicago",
+          "title": "Hard to Say I'm Sorry",
+          "ja_title": "素直になれなくて",
+          "query": "Chicago Hard to Say I'm Sorry official audio"
+        },
+        {
+          "artist": "Celine Dion",
+          "title": "My Heart Will Go On",
+          "ja_title": "マイ・ハート・ウィル・ゴー・オン",
+          "query": "Celine Dion My Heart Will Go On official audio"
+        },
+        {
+          "artist": "Whitney Houston",
+          "title": "I Will Always Love You",
+          "ja_title": "オールウェイズ・ラヴ・ユー",
+          "query": "Whitney Houston I Will Always Love You official audio"
+        },
+        {
+          "artist": "Journey",
+          "title": "Open Arms",
+          "ja_title": "オープン・アームズ",
+          "query": "Journey Open Arms official audio"
+        },
+        {
+          "artist": "Richard Marx",
+          "title": "Right Here Waiting",
+          "ja_title": "ライト・ヒア・ウェイティング",
+          "query": "Richard Marx Right Here Waiting official audio"
+        },
+        {
+          "artist": "John Lennon",
+          "title": "Happy Xmas (War Is Over)",
+          "ja_title": "ハッピー・クリスマス（戦争は終わった）",
+          "query": "John Lennon Happy Xmas War Is Over official audio"
+        },
+        {
+          "artist": "Boyz II Men",
+          "title": "End of the Road",
+          "ja_title": "エンド・オブ・ザ・ロード",
+          "query": "Boyz II Men End of the Road official audio"
+        },
+        {
+          "artist": "Roxette",
+          "title": "It Must Have Been Love",
+          "ja_title": "愛のぬくもり",
+          "query": "Roxette It Must Have Been Love official audio"
+        },
+        {
+          "artist": "Backstreet Boys",
+          "title": "I Want It That Way",
+          "ja_title": "アイ・ウォント・イット・ザット・ウェイ",
+          "query": "Backstreet Boys I Want It That Way official audio"
+        },
+        {
+          "artist": "Mariah Carey",
+          "title": "Hero",
+          "ja_title": "ヒーロー",
+          "query": "Mariah Carey Hero official audio"
+        },
+        {
+          "artist": "Cyndi Lauper",
+          "title": "Time After Time",
+          "ja_title": "タイム・アフター・タイム",
+          "query": "Cyndi Lauper Time After Time official audio"
         },
         {
           "artist": "Elton John",
@@ -387,80 +465,8 @@
         },
         {
           "artist": "Chicago",
-          "title": "Hard to Say I'm Sorry",
-          "ja_title": "素直になれなくて",
-          "query": "Chicago Hard to Say I'm Sorry official audio"
-        },
-        {
-          "artist": "Journey",
-          "title": "Open Arms",
-          "ja_title": "オープン・アームズ",
-          "query": "Journey Open Arms official audio"
-        },
-        {
-          "artist": "Christopher Cross",
-          "title": "Arthur's Theme (Best That You Can Do)",
-          "ja_title": "ニューヨーク・シティ・セレナーデ",
-          "query": "Christopher Cross Arthur's Theme Best That You Can Do official audio"
-        },
-        {
-          "artist": "Richard Marx",
-          "title": "Right Here Waiting",
-          "ja_title": "ライト・ヒア・ウェイティング",
-          "query": "Richard Marx Right Here Waiting official audio"
-        },
-        {
-          "artist": "Lionel Richie",
-          "title": "Hello",
-          "ja_title": "ハロー",
-          "query": "Lionel Richie Hello official audio"
-        },
-        {
-          "artist": "Phil Collins",
-          "title": "Against All Odds (Take a Look at Me Now)",
-          "ja_title": "みつめて欲しい",
-          "query": "Phil Collins Against All Odds official audio"
-        },
-        {
-          "artist": "Styx",
-          "title": "Babe",
-          "ja_title": "ベイブ",
-          "query": "Styx Babe official audio"
-        },
-        {
-          "artist": "Carpenters",
-          "title": "I Need to Be in Love",
-          "ja_title": "青春の輝き",
-          "query": "Carpenters I Need to Be in Love official audio"
-        },
-        {
-          "artist": "Billy Joel",
-          "title": "Just the Way You Are",
-          "ja_title": "素顔のままで",
-          "query": "Billy Joel Just the Way You Are official audio"
-        },
-        {
-          "artist": "Billy Joel",
-          "title": "New York State of Mind",
-          "ja_title": "ニューヨークの想い",
-          "query": "Billy Joel New York State of Mind official audio"
-        },
-        {
-          "artist": "Elton John",
-          "title": "Sorry Seems to Be the Hardest Word",
-          "ja_title": "悲しみのバラード",
-          "query": "Elton John Sorry Seems to Be the Hardest Word official audio"
-        },
-        {
-          "artist": "Carpenters",
-          "title": "Rainy Days and Mondays",
-          "ja_title": "雨の日と月曜日は",
-          "query": "Carpenters Rainy Days and Mondays official audio"
-        },
-        {
-          "artist": "Chicago",
           "title": "You're the Inspiration",
-          "ja_title": "유・アー・ジ・インスピレーション",
+          "ja_title": "ユー・アー・ジ・インスピレーション",
           "query": "Chicago You're the Inspiration official audio"
         },
         {
@@ -470,16 +476,28 @@
           "query": "Journey Faithfully official audio"
         },
         {
-          "artist": "Commodores",
-          "title": "Easy",
-          "ja_title": "イージー",
-          "query": "Commodores Easy official audio"
+          "artist": "Carpenters",
+          "title": "I Need to Be in Love",
+          "ja_title": "青春の輝き",
+          "query": "Carpenters I Need to Be in Love official audio"
         },
         {
-          "artist": "Gilbert O'Sullivan",
-          "title": "Alone Again (Naturally)",
-          "ja_title": "アローン・アゲイン",
-          "query": "Gilbert O'Sullivan Alone Again Naturally official audio"
+          "artist": "Band Aid",
+          "title": "Do They Know It's Christmas?",
+          "ja_title": "ドゥ・ゼイ・ノウ・イッツ・クリスマス",
+          "query": "Band Aid Do They Know It's Christmas official audio"
+        },
+        {
+          "artist": "Phil Collins",
+          "title": "Against All Odds (Take a Look at Me Now)",
+          "ja_title": "みつめて欲しい",
+          "query": "Phil Collins Against All Odds official audio"
+        },
+        {
+          "artist": "Lionel Richie",
+          "title": "Hello",
+          "ja_title": "ハロー",
+          "query": "Lionel Richie Hello official audio"
         },
         {
           "artist": "10cc",
@@ -488,45 +506,30 @@
           "query": "10cc I'm Not in Love official audio"
         },
         {
-          "artist": "Roberta Flack",
-          "title": "Killing Me Softly with His Song",
-          "ja_title": "やさしく歌って",
-          "query": "Roberta Flack Killing Me Softly with His Song official audio"
-        },
-        {
-          "artist": "Vanessa Williams",
-          "title": "Save the Best for Last",
-          "ja_title": "セイヴ・ザ・ベスト・フォー・ラスト",
-          "query": "Vanessa Williams Save the Best for Last official audio"
-        },
-        {
-          "artist": "Bruce Hornsby & The Range",
-          "title": "The Way It Is",
-          "ja_title": "ザ・ウェイ・イット・イズ",
-          "query": "Bruce Hornsby The Way It Is official audio"
-        },
-        {
           "artist": "Billy Joel",
-          "title": "She's Always a Woman",
-          "ja_title": "シーズ・オールウェイズ・ア・ウーマン",
-          "query": "Billy Joel She's Always a Woman official audio"
+          "title": "Piano Man",
+          "ja_title": "ピアノ・マン",
+          "query": "Billy Joel Piano Man official audio"
         }
       ],
       "tags": [
-        "ピアノが落ち着く",
+        "冬に聴きたい洋楽",
+        "冬の洋楽",
         "洋楽バラード",
         "80年代洋楽",
+        "90年代洋楽",
+        "Last Christmas",
+        "Wham",
+        "Mariah Carey",
         "Billy Joel",
-        "Honesty",
-        "Elton John",
+        "Celine Dion",
         "Chicago",
         "Journey",
-        "Carpenters",
         "40代",
         "50代",
+        "クリスマスソング",
         "夜に聴きたい洋楽",
-        "作業用BGM",
-        "睡眠用BGM"
+        "作業用BGM"
       ]
     },
     {

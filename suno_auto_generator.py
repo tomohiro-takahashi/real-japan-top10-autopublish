@@ -572,27 +572,16 @@ class SunoUnofficialClient:
                     all_batch_tracks.append(batch_downloaded[cid])
 
         target_track_count = target_batches * 2
-        if len(all_batch_tracks) < target_track_count:
-            archive_root = out_dir.parent / "archive"
-            pool_mp3s = sorted(
-                [p for p in archive_root.rglob("*.mp3") if p.is_file() and p.stat().st_size > 500_000]
+        if all_batch_tracks and len(all_batch_tracks) < target_track_count:
+            own_tracks = list(all_batch_tracks)
+            while len(all_batch_tracks) < target_track_count:
+                all_batch_tracks.append(own_tracks[len(all_batch_tracks) % len(own_tracks)])
+            logger.info(
+                f"Filled remaining album slots strictly using {len(own_tracks)} verified tracks from {meta_id} (never mixing other genres)."
             )
-            if pool_mp3s:
-                offset = sum(ord(ch) for ch in meta_id) % len(pool_mp3s)
-                rotated_pool = pool_mp3s[offset:] + pool_mp3s[:offset]
-                for cand in rotated_pool:
-                    if cand not in all_batch_tracks:
-                        all_batch_tracks.append(cand)
-                    if len(all_batch_tracks) >= target_track_count:
-                        break
-                while len(all_batch_tracks) < target_track_count:
-                    all_batch_tracks.append(rotated_pool[len(all_batch_tracks) % len(rotated_pool)])
-                logger.info(
-                    f"Supplemented album tracks from archive pool ({len(pool_mp3s)} unique archive tracks -> {len(all_batch_tracks)} total album tracks)."
-                )
 
         if not all_batch_tracks:
-            raise RuntimeError("No Suno tracks were generated or found in cache.")
+            raise RuntimeError(f"No Suno tracks were generated or found in {archive_dir} for {meta_id}.")
 
         return self._assemble_album_master(meta, all_batch_tracks, out_dir)
 
