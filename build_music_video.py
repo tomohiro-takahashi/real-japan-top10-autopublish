@@ -903,109 +903,150 @@ def render_16x9_hud_and_thumb(
     hud.save(hud_png, "PNG")
 
     # =========================================================================
-    # 2) 16:9 YOUTUBE THUMBNAIL (`thumb_jpg`) — Calm Adult 35mm Film / CD Jacket
+    # 2) 16:9 YOUTUBE THUMBNAIL (`thumb_jpg`) — High-CTR Retro 80s/90s Jacket
     # =========================================================================
-    base = Image.open(bg_jpg).convert("RGBA").resize((1280, 720), Image.Resampling.LANCZOS)
+    raw_bg = Image.open(bg_jpg).convert("RGB").resize((1280, 720), Image.Resampling.LANCZOS)
+    # Boost brightness, contrast, and saturation so the thumbnail pops on YouTube mobile/TV feeds
+    raw_bg = ImageEnhance.Brightness(raw_bg).enhance(1.22)
+    raw_bg = ImageEnhance.Contrast(raw_bg).enhance(1.18)
+    raw_bg = ImageEnhance.Color(raw_bg).enhance(1.30)
+    base = raw_bg.convert("RGBA")
 
+    # Warm amber/gold atmospheric spotlight on upper-center + smooth dark reading gradient at bottom
     grad = Image.new("RGBA", (1280, 720), (0, 0, 0, 0))
     g_draw = ImageDraw.Draw(grad, "RGBA")
 
-    # Subtle top vignette (y=0..105)
-    for y in range(0, 105):
-        u = 1.0 - (y / 105.0)
-        alpha = int(115 * (u ** 1.6))
-        g_draw.line([(0, y), (1280, y)], fill=(4, 6, 12, alpha))
+    for y in range(0, 130):
+        u = 1.0 - (y / 130.0)
+        alpha = int(145 * (u ** 1.4))
+        g_draw.line([(0, y), (1280, y)], fill=(6, 8, 16, alpha))
 
-    # Smooth bottom gradient (y=370..720) — zero boxy borders!
-    for y in range(370, 720):
-        u = (y - 370) / 350.0
-        alpha = int(238 * (u ** 1.35))
-        g_draw.line([(0, y), (1280, y)], fill=(4, 6, 12, alpha))
+    for y in range(320, 720):
+        u = (y - 320) / 400.0
+        alpha = int(242 * (u ** 1.15))
+        g_draw.line([(0, y), (1280, y)], fill=(4, 6, 14, alpha))
 
     base.alpha_composite(grad)
     t_draw = ImageDraw.Draw(base, "RGBA")
 
-    # A. Top-Left Understated Archive Tag (Warm Amber Vertical Bar + Crisp Text)
-    f_era = load_font(cjk_reg_path, 19)
-    t_draw.rectangle((48, 38, 52, 66), fill=(217, 179, 108, 245))
-    _draw_soft_shadow_text(
-        base,
-        (66, 40),
-        era_label,
-        font=f_era,
-        fill=(226, 214, 185, 245),
-        blur_radius=4,
-    )
+    # Split era_label on either ASCII '|' or full-width '｜'
+    era_parts = [p.strip() for p in era_label.replace("｜", "|").split("|") if p.strip()]
+    target_badge = era_parts[0] if era_parts else "40代・50代 永久保存版"
+    if len(target_badge) > 16:
+        target_badge = target_badge[:16]
+    if "必見" not in target_badge and "保存版" not in target_badge and "捧ぐ" not in target_badge:
+        target_badge = f"{target_badge} 永久保存版"
 
-    # B. Bottom-Left Mature Mincho Typography
-    t_draw = ImageDraw.Draw(base, "RGBA")
-    max_text_w = 1160
-
-    # 1. Emotional Catchphrase (Mincho in warm champagne gold)
-    f_catch = fit_font_for_width(t_draw, catch_txt, cjk_mincho_path, 28, 20, max_text_w)
-    _draw_soft_shadow_text(
-        base,
-        (48, 490),
-        catch_txt,
-        font=f_catch,
-        fill=(235, 213, 160, 255),
-        blur_radius=5,
-    )
-
-    # 2. Main Japanese Headline (Refined Mincho in warm ivory-white)
-    t_draw = ImageDraw.Draw(base, "RGBA")
-    f_main = fit_font_for_width(t_draw, main_txt, cjk_mincho_path, 58, 36, max_text_w)
-    _draw_soft_shadow_text(
-        base,
-        (46, 534),
-        main_txt,
-        font=f_main,
-        fill=(252, 250, 245, 255),
-        blur_radius=7,
-        stroke_width=1,
-        stroke_fill=(8, 10, 16, 225),
-    )
-
-    # 3. Thin Champagne-Gold Divider Line (y=622)
-    t_draw = ImageDraw.Draw(base, "RGBA")
-    t_draw.line([(48, 622), (880, 622)], fill=(217, 179, 108, 130), width=1)
-
-    # 4. Bottom Album Spec Line (Clean Gothic in warm silver)
-    f_sub = fit_font_for_width(t_draw, sub_txt, cjk_reg_path, 20, 15, 900)
-    _draw_soft_shadow_text(
-        base,
-        (48, 636),
-        sub_txt,
-        font=f_sub,
-        fill=(203, 213, 225, 238),
-        blur_radius=3,
-    )
-
-    # C. Bottom-Right Minimalist Spec Pill
-    t_draw = ImageDraw.Draw(base, "RGBA")
-    if is_vocal:
-        stamp_txt = "NO ADS  ｜  歌詞・和訳付き"
-    else:
-        stamp_txt = "NO ADS  ｜  NON-STOP MIX" if meta.get("_under_15m") else "NO ADS  ｜  60 MIN MIX"
-    f_stamp = load_font(cjk_reg_path, 15)
-    tb_st = t_draw.textbbox((0, 0), stamp_txt, font=f_stamp)
-    st_w = (tb_st[2] - tb_st[0]) + 36
-    st_x0 = 1280 - 48 - st_w
+    # A. Top-Left High-Impact Nostalgia Target Pill (Gold/Crimson)
+    f_target = load_font(cjk_reg_path, 30)
+    tb_tg = t_draw.textbbox((0, 0), f"★ {target_badge}", font=f_target)
+    tg_w = (tb_tg[2] - tb_tg[0]) + 44
     t_draw.rounded_rectangle(
-        (st_x0, 628, st_x0 + st_w, 664),
-        radius=18,
-        fill=(10, 12, 18, 175),
-        outline=(217, 179, 108, 145),
-        width=1,
+        (36, 28, 36 + tg_w, 86),
+        radius=14,
+        fill=(175, 22, 32, 248),
+        outline=(255, 218, 110, 255),
+        width=3,
     )
     t_draw.text(
-        (st_x0 + 18, 638),
-        stamp_txt,
-        font=f_stamp,
-        fill=(226, 214, 185, 240),
+        (58, 40),
+        f"★ {target_badge}",
+        font=f_target,
+        fill=(255, 248, 220, 255),
+        stroke_width=2,
+        stroke_fill=(60, 0, 0, 240),
+    )
+
+    # Top-Right Vibe / Spec Callout Pill (for non-setlist mixes; setlist mixes overwrite this area with track card)
+    right_pill_txt = "♪ 途中広告なし・高音質BGM" if not is_vocal else "♪ 途中広告なし・歌詞＆和訳付き"
+    f_rp = load_font(cjk_reg_path, 26)
+    tb_rp = t_draw.textbbox((0, 0), right_pill_txt, font=f_rp)
+    rp_w = (tb_rp[2] - tb_rp[0]) + 42
+    rp_x0 = 1280 - 36 - rp_w
+    t_draw.rounded_rectangle(
+        (rp_x0, 30, 1280 - 36, 84),
+        radius=14,
+        fill=(10, 16, 28, 225),
+        outline=(245, 198, 88, 235),
+        width=2,
+    )
+    t_draw.text(
+        (rp_x0 + 21, 43),
+        right_pill_txt,
+        font=f_rp,
+        fill=(255, 226, 130, 255),
+        stroke_width=2,
+        stroke_fill=(0, 0, 0, 230),
+    )
+
+    # B. Center-Left / Bottom Giant High-CTR Typography
+    # 1. Emotional Hook Banner (Glowing Gold with thick dark stroke)
+    clean_catch = catch_txt.replace("——", "").strip()
+    f_catch = fit_font_for_width(t_draw, f"「{clean_catch}」", cjk_reg_path, 38, 24, 1190)
+    t_draw.text(
+        (40, 412),
+        f"「{clean_catch}」",
+        font=f_catch,
+        fill=(255, 226, 96, 255),
+        stroke_width=7,
+        stroke_fill=(0, 0, 0, 250),
+    )
+
+    # 2. Split Main Title into Year Prefix (if present, e.g. "1987 ") + Giant Main Title
+    parts_main = main_txt.strip().split(" ", 1)
+    if len(parts_main) == 2 and parts_main[0][:4].isdigit():
+        year_str, title_body = parts_main[0], parts_main[1]
+        f_year = load_font(cjk_reg_path, 96)
+        tb_yr = t_draw.textbbox((0, 0), year_str, font=f_year)
+        yr_w = tb_yr[2] - tb_yr[0]
+        # Gold Year Stamp
+        t_draw.text(
+            (40, 478),
+            year_str,
+            font=f_year,
+            fill=(255, 204, 64, 255),
+            stroke_width=10,
+            stroke_fill=(0, 0, 0, 255),
+        )
+        # Giant White Headline next to Year
+        avail_w = 1200 - (yr_w + 26)
+        f_main = fit_font_for_width(t_draw, title_body, cjk_reg_path, 86, 44, avail_w)
+        tb_mb = t_draw.textbbox((0, 0), title_body, font=f_main)
+        mb_h = tb_mb[3] - tb_mb[1]
+        y_mb = 478 + max(0, (92 - mb_h) // 2)
+        t_draw.text(
+            (40 + yr_w + 24, y_mb),
+            title_body,
+            font=f_main,
+            fill=(255, 255, 255, 255),
+            stroke_width=10,
+            stroke_fill=(0, 0, 0, 255),
+        )
+    else:
+        f_main = fit_font_for_width(t_draw, main_txt, cjk_reg_path, 86, 46, 1200)
+        t_draw.text(
+            (40, 488),
+            main_txt,
+            font=f_main,
+            fill=(255, 255, 255, 255),
+            stroke_width=10,
+            stroke_fill=(0, 0, 0, 255),
+        )
+
+    # 3. Bottom-Left High-Contrast Spec Bar (kept left of x=1020 so YouTube duration timestamp never covers it)
+    t_draw.line([(40, 616), (1020, 616)], fill=(255, 208, 90, 210), width=3)
+    f_sub = fit_font_for_width(t_draw, sub_txt, cjk_reg_path, 29, 18, 980)
+    t_draw.text(
+        (42, 634),
+        sub_txt,
+        font=f_sub,
+        fill=(240, 248, 255, 255),
+        stroke_width=5,
+        stroke_fill=(0, 0, 0, 245),
     )
 
     base.convert("RGB").save(thumb_jpg, "JPEG", quality=96)
+
 
 
 def build_1hour_loop_audio(
@@ -1849,6 +1890,7 @@ def upload_video_to_youtube(
     status_dict: Dict[str, Any] = {
         "privacyStatus": "private" if (publish_at_iso and privacy_status == "public") else privacy_status,
         "selfDeclaredMadeForKids": False,
+        "containsSyntheticMedia": True,
     }
     if publish_at_iso and privacy_status == "public":
         status_dict["publishAt"] = publish_at_iso

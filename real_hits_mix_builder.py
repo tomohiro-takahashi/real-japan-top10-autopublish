@@ -658,6 +658,48 @@ def decorate_hud_and_thumb_with_setlist(
     draw.text((st_x0 + 32, 983), stamp_txt, font=f_stamp, fill=(226, 214, 185, 245))
     hud.save(hud_png, "PNG")
 
+    # Also decorate `thumb_jpg` (1280x720) with a High-CTR Featured Hit Songs Card on the upper-right!
+    if thumb_jpg.exists():
+        th = Image.open(thumb_jpg).convert("RGBA")
+        td = ImageDraw.Draw(th, "RGBA")
+        cx0, cy0, cx1, cy1 = 684, 24, 1248, 382
+        td.rounded_rectangle(
+            (cx0, cy0, cx1, cy1),
+            radius=18,
+            fill=(8, 12, 22, 232),
+            outline=(255, 212, 95, 250),
+            width=3,
+        )
+        # Header bar inside card
+        td.rounded_rectangle(
+            (cx0 + 3, cy0 + 3, cx1 - 3, cy0 + 54),
+            radius=15,
+            fill=(165, 22, 32, 245),
+        )
+        f_th_head = load_font(cjk_reg_path, 25)
+        td.text(
+            (cx0 + 20, cy0 + 13),
+            f"♪ 収録神曲ラインナップ（全{len(tracks)}曲フル）",
+            font=f_th_head,
+            fill=(255, 246, 210, 255),
+            stroke_width=2,
+            stroke_fill=(40, 0, 0, 240),
+        )
+        for i, tr in enumerate(tracks[:6]):
+            ry = cy0 + 68 + i * 48
+            song_line = f"★ {tr['artist']} / {tr['title']}"
+            f_tr = fit_font_for_width(td, song_line, cjk_reg_path, 25, 17, (cx1 - cx0) - 36)
+            td.text(
+                (cx0 + 18, ry),
+                song_line,
+                font=f_tr,
+                fill=(255, 232, 125, 255) if i < 2 else (255, 255, 255, 255),
+                stroke_width=3,
+                stroke_fill=(0, 0, 0, 245),
+            )
+        th.convert("RGB").save(thumb_jpg, "JPEG", quality=96)
+
+
 
 def build_real_hits_description(meta: Dict[str, Any], formatted_timestamps: str) -> str:
     tracks_summary = " / ".join([f"{t['artist']}「{t['title']}」" for t in meta["tracks"][:10]]) + f" ほか全{len(meta['tracks'])}曲フル尺収録"
