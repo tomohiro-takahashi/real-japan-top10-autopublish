@@ -1,9 +1,6 @@
-name: Daily Japan Ranking YouTube Auto Publish
+name: Daily Japan Ranking YouTube Auto Publish (Paused - Rebranded to World History)
 
 on:
-  schedule:
-    # 毎日 深夜 02:30 JST (17:30 UTC) にクラウド上で自動生成＆海外時間予約公開
-    - cron: "30 17 * * *"
   workflow_dispatch:
     inputs:
       script:
