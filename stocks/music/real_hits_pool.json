@@ -357,7 +357,7 @@
     },
     {
       "id": "real_mix_003",
-      "used": false,
+      "used": true,
       "genre": "90s Urban Mellow & Shibuya Groove",
       "artwork_file": "urban90s.jpg",
       "title": "【40代・50代必見】1988年バブル期の冬が蘇る！肌寒い夜に聴きたい80年代・90年代「冬の洋楽名曲＆極上バラード」【2時間・全24曲フル】Wham! / Mariah Carey / Billy Joel",
@@ -530,7 +530,11 @@
         "クリスマスソング",
         "夜に聴きたい洋楽",
         "作業用BGM"
-      ]
+      ],
+      "published_at": "2026-11-01T14:39:07.859792+00:00",
+      "youtube_long_id": "d_nXPzu_Fw4",
+      "youtube_short_id": "iBIuT1fMi7E",
+      "youtube_short_medley_id": "GDzmwJkRWpw"
     },
     {
       "id": "real_mix_004",
