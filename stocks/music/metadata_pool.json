@@ -198,14 +198,17 @@
         "広告なし",
         "1時間耐久"
       ],
-      "used": false,
+      "used": true,
       "description": "🎧 【広告なし】【50代必見】マハラジャ世代感涙！1987年 六本木バブル期ディスコ＆ハイエナジー・ファンク【1時間耐久】\n\n【広告なし・50代必見】1987年の六本木・マハラジャ世代の熱い夜がよみがえる、スラップベースとアナログシンセ・ブラスが弾ける80年代バブル期ディスコ＆ファンク・ノンストップ1時間耐久フルアルバムです。\nドライブ、作業用、気分を上げたい夜のお供にお楽しみください。\n\n⏱️ トラックリスト / チャプター:\n{TIMESTAMPS}\n\n#50代 #40代 #80年代ディスコ #バブル時代 #マハラジャ世代 #六本木 #ファンク #ドライブBGM #作業用BGM #広告なし",
       "thumb_era_label": "50代に捧ぐ  ｜  1987 ROPPONGI MAHARAJA ARCHIVE",
       "thumb_catch": "ミラーボールが回り出す瞬間、1987年の六本木へ——",
       "thumb_main": "1987 六本木マハラジャ・ディスコ",
       "thumb_sub": "広告なし・作業＆ドライブ用  ｜  80年代バブル期ディスコ＆ファンク（60分耐久）",
       "artwork_file": "disco.jpg",
-      "vocal_playlist": false
+      "vocal_playlist": false,
+      "published_at": "2026-11-02T17:31:03.712286+00:00",
+      "youtube_long_id": "5aC50B3AXDo",
+      "youtube_short_id": "ENfGkZb5BXo"
     },
     {
       "id": "music_005",
