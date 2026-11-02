@@ -538,7 +538,7 @@
     },
     {
       "id": "real_mix_004",
-      "used": false,
+      "used": true,
       "genre": "80s City Pop & Sax AOR",
       "artwork_file": "citypop80s.jpg",
       "title": "【50代必見】1986年バブル期の夜が蘇る！ウイスキー片手に聴きたい80s-90s洋楽サックス＆アーバンAOR名曲選【2時間・全24曲フル】Wham! / Sade / Grover Washington Jr.",
@@ -706,7 +706,11 @@
         "大人BGM",
         "バーBGM",
         "作業用BGM"
-      ]
+      ],
+      "published_at": "2026-11-02T17:31:53.338311+00:00",
+      "youtube_long_id": "9mArJWg-v3A",
+      "youtube_short_id": "P0cBOPM5hk4",
+      "youtube_short_medley_id": "UEnZ9KqRGiU"
     },
     {
       "id": "real_mix_005",
