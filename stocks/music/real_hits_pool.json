@@ -714,7 +714,7 @@
     },
     {
       "id": "real_mix_005",
-      "used": false,
+      "used": true,
       "genre": "90s Urban Mellow & Shibuya Groove",
       "artwork_file": "urban90s.jpg",
       "title": "【40代・50代必見】1985年カセットテープ世代感涙！深夜の湾岸ドライブで聴いた80s-90sウエストコースト洋楽＆AOR【2時間・全24曲フル】Toto / Eagles / Steely Dan",
@@ -883,7 +883,11 @@
         "カフェBGM",
         "作業用BGM",
         "2時間"
-      ]
+      ],
+      "published_at": "2026-11-03T15:36:47.088089+00:00",
+      "youtube_long_id": "SINbliVYlXY",
+      "youtube_short_id": "IWiUahcEWXk",
+      "youtube_short_medley_id": "BQPBMdnPVpI"
     },
     {
       "id": "real_mix_006",
