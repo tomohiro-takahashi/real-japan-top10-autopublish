@@ -891,7 +891,7 @@
     },
     {
       "id": "real_mix_006",
-      "used": false,
+      "used": true,
       "genre": "90s Urban Mellow & Shibuya Groove",
       "artwork_file": "urban90s.jpg",
       "title": "【50代必見】マハラジャ・六本木世代感涙！1987年バブル期ディスコ＆80sダンスクラシック洋楽メドレー【2時間・全24曲フル】Earth, Wind & Fire / Kool & The Gang / Madonna",
@@ -1058,7 +1058,11 @@
         "50代",
         "睡眠用BGM",
         "2時間"
-      ]
+      ],
+      "published_at": "2026-11-04T15:49:54.312143+00:00",
+      "youtube_long_id": "LNmoLEyAQfY",
+      "youtube_short_id": "2PgIezviZRc",
+      "youtube_short_medley_id": "GTtkntrQ5M8"
     },
     {
       "id": "real_mix_007",
