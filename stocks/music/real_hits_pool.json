@@ -1066,7 +1066,7 @@
     },
     {
       "id": "real_mix_007",
-      "used": false,
+      "used": true,
       "genre": "80s Japanese Boogie Disco",
       "artwork_file": "disco.jpg",
       "title": "【40代・50代必見】MTV全盛期世代感涙！イントロで1984年の青春が蘇る80年代ビルボードNo.1洋楽ロック＆ポップス【2時間・全24曲フル】Bon Jovi / Journey / Van Halen / Queen",
@@ -1234,7 +1234,11 @@
         "洋楽メドレー",
         "ドライブBGM",
         "2時間"
-      ]
+      ],
+      "published_at": "2026-11-05T15:51:14.842054+00:00",
+      "youtube_long_id": "Vy-WzQ4Vg68",
+      "youtube_short_id": "8TWlC7yQN_w",
+      "youtube_short_medley_id": "g3blE9OgXE4"
     },
     {
       "id": "real_mix_008",
