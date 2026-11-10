@@ -1242,7 +1242,7 @@
     },
     {
       "id": "real_mix_008",
-      "used": false,
+      "used": true,
       "genre": "90s Eurobeat",
       "artwork_file": "eurobeat.jpg",
       "title": "【40代・50代必見】90年代トレンディ世代感涙！1992年の夜に聴いた90s洋楽R&B＆極上スローバラード決定版【2時間・全24曲フル】Boyz II Men / Whitney Houston / Mariah Carey / Babyface",
@@ -1410,7 +1410,11 @@
         "高速道路BGM",
         "作業用BGM",
         "2時間"
-      ]
+      ],
+      "published_at": "2026-11-10T15:54:43.908441+00:00",
+      "youtube_long_id": "ZFfKCkOWI2M",
+      "youtube_short_id": "hhbrUJaT6jg",
+      "youtube_short_medley_id": "5qdhh1mreqE"
     }
   ]
 }
