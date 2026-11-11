@@ -357,7 +357,7 @@
     },
     {
       "id": "real_mix_003",
-      "used": false,
+      "used": true,
       "genre": "90s Urban Mellow & Shibuya Groove",
       "artwork_file": "urban90s.jpg",
       "title": "【40代・50代必見】1988年バブル期の冬が蘇る！肌寒い夜に聴きたい80年代・90年代「冬の洋楽名曲＆極上バラード」【2時間・全24曲フル】Wham! / Mariah Carey / Billy Joel",
@@ -386,10 +386,10 @@
           "query": "Billy Joel Honesty official audio"
         },
         {
-          "artist": "Mariah Carey",
-          "title": "All I Want for Christmas Is You",
-          "ja_title": "恋人たちのクリスマス",
-          "query": "Mariah Carey All I Want for Christmas Is You official audio"
+          "artist": "Boz Scaggs",
+          "title": "We're All Alone",
+          "ja_title": "ウィ・アー・オール・アローン",
+          "query": "Boz Scaggs Were All Alone official audio"
         },
         {
           "artist": "Chicago",
@@ -530,11 +530,15 @@
         "クリスマスソング",
         "夜に聴きたい洋楽",
         "作業用BGM"
-      ]
+      ],
+      "published_at": "2026-11-07T07:09:29.803148+00:00",
+      "youtube_long_id": "eiVOC52-MhE",
+      "youtube_short_id": "Yjlg_aoDJpw",
+      "youtube_short_medley_id": "8ACsGaTfplQ"
     },
     {
       "id": "real_mix_004",
-      "used": false,
+      "used": true,
       "genre": "80s City Pop & Sax AOR",
       "artwork_file": "citypop80s.jpg",
       "title": "【50代必見】1986年バブル期の夜が蘇る！ウイスキー片手に聴きたい80s-90s洋楽サックス＆アーバンAOR名曲選【2時間・全24曲フル】Wham! / Sade / Grover Washington Jr.",
@@ -702,11 +706,14 @@
         "大人BGM",
         "バーBGM",
         "作業用BGM"
-      ]
+      ],
+      "published_at": "2026-11-01T07:02:26.185733+00:00",
+      "youtube_long_id": "tLGfZmlYsws",
+      "youtube_short_id": "Ud1jSElvHbo"
     },
     {
       "id": "real_mix_005",
-      "used": false,
+      "used": true,
       "genre": "90s Urban Mellow & Shibuya Groove",
       "artwork_file": "urban90s.jpg",
       "title": "【40代・50代必見】1985年カセットテープ世代感涙！深夜の湾岸ドライブで聴いた80s-90sウエストコースト洋楽＆AOR【2時間・全24曲フル】Toto / Eagles / Steely Dan",
@@ -875,11 +882,14 @@
         "カフェBGM",
         "作業用BGM",
         "2時間"
-      ]
+      ],
+      "published_at": "2026-11-01T07:03:25.582047+00:00",
+      "youtube_long_id": "4xOwXIjIESU",
+      "youtube_short_id": "RkpUJ3EOa30"
     },
     {
       "id": "real_mix_006",
-      "used": false,
+      "used": true,
       "genre": "90s Urban Mellow & Shibuya Groove",
       "artwork_file": "urban90s.jpg",
       "title": "【50代必見】マハラジャ・六本木世代感涙！1987年バブル期ディスコ＆80sダンスクラシック洋楽メドレー【2時間・全24曲フル】Earth, Wind & Fire / Kool & The Gang / Madonna",
@@ -1046,11 +1056,14 @@
         "50代",
         "睡眠用BGM",
         "2時間"
-      ]
+      ],
+      "published_at": "2026-11-01T07:04:43.100907+00:00",
+      "youtube_long_id": "-mSlO_Di-Z4",
+      "youtube_short_id": "4e1HZEli8No"
     },
     {
       "id": "real_mix_007",
-      "used": false,
+      "used": true,
       "genre": "80s Japanese Boogie Disco",
       "artwork_file": "disco.jpg",
       "title": "【40代・50代必見】MTV全盛期世代感涙！イントロで1984年の青春が蘇る80年代ビルボードNo.1洋楽ロック＆ポップス【2時間・全24曲フル】Bon Jovi / Journey / Van Halen / Queen",
@@ -1218,18 +1231,22 @@
         "洋楽メドレー",
         "ドライブBGM",
         "2時間"
-      ]
+      ],
+      "published_at": "2026-11-08T08:20:31.571582+00:00",
+      "youtube_long_id": "Nlw4tjYmUTM",
+      "youtube_short_id": "CbpBoHWYYK8",
+      "youtube_short_medley_id": "qKfZQeLr_Cg"
     },
     {
       "id": "real_mix_008",
-      "used": false,
+      "used": true,
       "genre": "90s Eurobeat",
       "artwork_file": "eurobeat.jpg",
-      "title": "【40代・50代必見】90年代トレンディ世代感涙！1992年の夜に聴いた90s洋楽R&B＆極上スローバラード決定版【2時間・全24曲フル】Boyz II Men / Whitney Houston / Mariah Carey / Babyface",
-      "short_title": "【40代・50代必見】1992年の夜が蘇る！90s洋楽R&B＆極上バラード24選 🎧本編2時間はチャンネルへ！ #Shorts #90s洋楽",
+      "title": "【夜のハイウェイ洋楽】深夜の高速道路で聴いた80年代・90年代アメリカンロック名曲大全集【2時間・全24曲フル】Journey / Bon Jovi / Van Halen / Foreigner",
+      "short_title": "【夜のハイウェイ洋楽】夜の高速道路で聴いた80s-90sロック名曲24選 🎧本編2時間はチャンネルへ！ #Shorts #80s洋楽",
       "thumb_era_label": "40代・50代 永久保存版  ｜  1980s HIGHWAY ROCK — 2 HOURS / 24 SONGS",
       "thumb_catch": "アクセルを踏み込んだ瞬間、あの頃のハイウェイが蘇る——",
-      "thumb_main": "1992 夜の90s洋楽R&Bバラード",
+      "thumb_main": "夜のハイウェイ洋楽ロック【2時間】",
       "thumb_sub": "Journey / Bon Jovi / Van Halen / Foreigner / REO Speedwagon 他 全24曲",
       "tracks": [
         {
@@ -1390,7 +1407,11 @@
         "高速道路BGM",
         "作業用BGM",
         "2時間"
-      ]
+      ],
+      "published_at": "2026-11-10T00:15:39.038895+00:00",
+      "youtube_long_id": "OzOUH0Ngzvg",
+      "youtube_short_id": "GIpJiMXs3xw",
+      "youtube_short_medley_id": "hycn7HWXnxk"
     }
   ]
 }

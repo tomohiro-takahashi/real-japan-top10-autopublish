@@ -1,9 +1,7 @@
 name: Real 80s-90s Western Legend 2-Hour Full Mix Auto-Upload
 
 on:
-  schedule:
-    # Slot 2: Runs 1x daily at 07:30 UTC (16:30 JST) -> pre-builds 2-Hour Real Western Mix and auto-publishes at 19:30 JST Golden Time
-    - cron: '30 7 * * *'
+  # Schedule disabled: managed locally with verified tracklist/title parity
   workflow_dispatch:
     inputs:
       mix_id:

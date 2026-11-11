@@ -1,9 +1,7 @@
 name: Daily Retro Music 1-Hour & Shorts Auto-Upload
 
 on:
-  schedule:
-    # Runs 1x daily at 07:30 UTC (16:30 JST) -> pre-builds & auto-publishes at Golden Time
-    - cron: '30 7 * * *'
+  # Schedule disabled: managed locally via daily_music_autopilot & Virtual Singer releases
   workflow_dispatch:
     inputs:
       privacy:
