@@ -1,0 +1,136 @@
+{
+  "id": "music_004",
+  "track_count": 16,
+  "total_duration_sec": 3171.52,
+  "chapters": [
+    {
+      "index": 1,
+      "timestamp": "00:00",
+      "start_sec": 0.0,
+      "duration_sec": 218.16,
+      "title": "1987 Roppongi Maharaja Fever",
+      "line": "00:00 Track 01 — 1987 Roppongi Maharaja Fever"
+    },
+    {
+      "index": 2,
+      "timestamp": "03:38",
+      "start_sec": 218.16,
+      "duration_sec": 193.2,
+      "title": "Mirrorball & Slap Bass Groove",
+      "line": "03:38 Track 02 — Mirrorball & Slap Bass Groove"
+    },
+    {
+      "index": 3,
+      "timestamp": "06:51",
+      "start_sec": 411.36,
+      "duration_sec": 181.56,
+      "title": "Juno-106 Brass Midnight",
+      "line": "06:51 Track 03 — Juno-106 Brass Midnight"
+    },
+    {
+      "index": 4,
+      "timestamp": "09:52",
+      "start_sec": 592.92,
+      "duration_sec": 199.96,
+      "title": "VIP Champagne Boogie",
+      "line": "09:52 Track 04 — VIP Champagne Boogie"
+    },
+    {
+      "index": 5,
+      "timestamp": "13:12",
+      "start_sec": 792.88,
+      "duration_sec": 218.16,
+      "title": "Azabu-Juban Taxi Ride",
+      "line": "13:12 Track 05 — Azabu-Juban Taxi Ride"
+    },
+    {
+      "index": 6,
+      "timestamp": "16:51",
+      "start_sec": 1011.04,
+      "duration_sec": 193.2,
+      "title": "Talkbox Neon Wonderland",
+      "line": "16:51 Track 06 — Talkbox Neon Wonderland"
+    },
+    {
+      "index": 7,
+      "timestamp": "20:04",
+      "start_sec": 1204.24,
+      "duration_sec": 181.56,
+      "title": "High-Energy Euro-Boogie Climax",
+      "line": "20:04 Track 07 — High-Energy Euro-Boogie Climax"
+    },
+    {
+      "index": 8,
+      "timestamp": "23:05",
+      "start_sec": 1385.8,
+      "duration_sec": 199.96,
+      "title": "4AM Tokyo Tower Afterhours",
+      "line": "23:05 Track 08 — 4AM Tokyo Tower Afterhours"
+    },
+    {
+      "index": 9,
+      "timestamp": "26:25",
+      "start_sec": 1585.76,
+      "duration_sec": 218.16,
+      "title": "Midnight Groove Part 9",
+      "line": "26:25 Track 09 — Midnight Groove Part 9"
+    },
+    {
+      "index": 10,
+      "timestamp": "30:03",
+      "start_sec": 1803.92,
+      "duration_sec": 193.2,
+      "title": "Midnight Groove Part 10",
+      "line": "30:03 Track 10 — Midnight Groove Part 10"
+    },
+    {
+      "index": 11,
+      "timestamp": "33:17",
+      "start_sec": 1997.12,
+      "duration_sec": 181.56,
+      "title": "Midnight Groove Part 11",
+      "line": "33:17 Track 11 — Midnight Groove Part 11"
+    },
+    {
+      "index": 12,
+      "timestamp": "36:18",
+      "start_sec": 2178.68,
+      "duration_sec": 199.96,
+      "title": "Midnight Groove Part 12",
+      "line": "36:18 Track 12 — Midnight Groove Part 12"
+    },
+    {
+      "index": 13,
+      "timestamp": "39:38",
+      "start_sec": 2378.64,
+      "duration_sec": 218.16,
+      "title": "Midnight Groove Part 13",
+      "line": "39:38 Track 13 — Midnight Groove Part 13"
+    },
+    {
+      "index": 14,
+      "timestamp": "43:16",
+      "start_sec": 2596.8,
+      "duration_sec": 193.2,
+      "title": "Midnight Groove Part 14",
+      "line": "43:16 Track 14 — Midnight Groove Part 14"
+    },
+    {
+      "index": 15,
+      "timestamp": "46:30",
+      "start_sec": 2790.0,
+      "duration_sec": 181.56,
+      "title": "Midnight Groove Part 15",
+      "line": "46:30 Track 15 — Midnight Groove Part 15"
+    },
+    {
+      "index": 16,
+      "timestamp": "49:31",
+      "start_sec": 2971.56,
+      "duration_sec": 199.96,
+      "title": "Midnight Groove Part 16",
+      "line": "49:31 Track 16 — Midnight Groove Part 16"
+    }
+  ],
+  "formatted_timestamps": "00:00 Track 01 — 1987 Roppongi Maharaja Fever\n03:38 Track 02 — Mirrorball & Slap Bass Groove\n06:51 Track 03 — Juno-106 Brass Midnight\n09:52 Track 04 — VIP Champagne Boogie\n13:12 Track 05 — Azabu-Juban Taxi Ride\n16:51 Track 06 — Talkbox Neon Wonderland\n20:04 Track 07 — High-Energy Euro-Boogie Climax\n23:05 Track 08 — 4AM Tokyo Tower Afterhours\n26:25 Track 09 — Midnight Groove Part 9\n30:03 Track 10 — Midnight Groove Part 10\n33:17 Track 11 — Midnight Groove Part 11\n36:18 Track 12 — Midnight Groove Part 12\n39:38 Track 13 — Midnight Groove Part 13\n43:16 Track 14 — Midnight Groove Part 14\n46:30 Track 15 — Midnight Groove Part 15\n49:31 Track 16 — Midnight Groove Part 16"
+}
